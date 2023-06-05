@@ -1,9 +1,10 @@
 package com.fimi.kernel;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.kernel.language.LanguageModel;
 import com.fimi.kernel.store.shared.SPStoreManager;
 
-/* loaded from: classes.dex */
 public class GlobalConfig {
     static GlobalConfig config = new GlobalConfig();
     LanguageModel languageModel;
@@ -15,7 +16,7 @@ public class GlobalConfig {
         return config;
     }
 
-    public void init(Builder builder) {
+    public void init(@NonNull Builder builder) {
         this.languageModel = builder.languageModel;
     }
 
@@ -27,7 +28,6 @@ public class GlobalConfig {
         this.languageModel = languageModel;
     }
 
-    /* loaded from: classes.dex */
     public static class Builder {
         private LanguageModel languageModel;
 

@@ -3,6 +3,9 @@ package com.fimi.app.x8s.controls;
 import android.text.TextUtils;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.alibaba.fastjson.JSON;
 import com.fimi.TcpClient;
 import com.fimi.android.app.R;
@@ -20,6 +23,8 @@ import com.fimi.x8sdk.entity.ErrorCodeBean;
 import com.fimi.x8sdk.entity.X8ErrorCodeInfo;
 import com.fimi.x8sdk.modulestate.StateManager;
 
+import org.jetbrains.annotations.Contract;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -30,7 +35,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes.dex */
 public class X8ErrorCodeController extends AbsX8Controllers {
     public List<ErrorCodeBean.ActionBean> currentMap;
     private ErrorCodeBean bean;
@@ -39,20 +43,20 @@ public class X8ErrorCodeController extends AbsX8Controllers {
     private boolean isGetData;
     private List<X8ErrorCodeInfo> list;
     private X8ErrerCodeSpeakFlashManager mX8ErrerCodeSpeakFlashManager;
-    private List<ErrorCodeBean.ActionBean> mediumMap;
-    private List<ErrorCodeBean.ActionBean> seriousMap;
+    private final List<ErrorCodeBean.ActionBean> mediumMap;
+    private final List<ErrorCodeBean.ActionBean> seriousMap;
 
     public X8ErrorCodeController(View rootView) {
         super(rootView);
-        this.seriousMap = new ArrayList();
-        this.mediumMap = new ArrayList();
-        this.currentMap = new ArrayList();
-        this.errCodeDesc = new HashMap();
+        this.seriousMap = new ArrayList<>();
+        this.mediumMap = new ArrayList<>();
+        this.currentMap = new ArrayList<>();
+        this.errCodeDesc = new HashMap<>();
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
-    public void initViews(View rootView) {
-        this.errorCodeLayout = (X8ErrorCodeLayout) rootView.findViewById(R.id.v_error_code);
+    @Override
+    public void initViews(@NonNull View rootView) {
+        this.errorCodeLayout = rootView.findViewById(R.id.v_error_code);
         this.bean = getLocalError();
         this.mX8ErrerCodeSpeakFlashManager = new X8ErrerCodeSpeakFlashManager(rootView.getContext(), this);
     }
@@ -62,7 +66,11 @@ public class X8ErrorCodeController extends AbsX8Controllers {
         InputStreamReader inputStream = null;
         BufferedReader bufr = null;
         try {
-            inputStream = "cn".equalsIgnoreCase(model.getInternalCoutry()) ? new InputStreamReader(this.rootView.getContext().getResources().getAssets().open("zh.txt")) : "ko".equalsIgnoreCase(model.getInternalCoutry()) ? new InputStreamReader(this.rootView.getContext().getResources().getAssets().open("ko.txt")) : "es".equalsIgnoreCase(model.getInternalCoutry()) ? new InputStreamReader(this.rootView.getContext().getResources().getAssets().open("es.txt")) : new InputStreamReader(this.rootView.getContext().getResources().getAssets().open("en.txt"));
+            inputStream = "cn".equalsIgnoreCase(model.getInternalCoutry()) ? new InputStreamReader(this.rootView.getContext().getResources().getAssets().open("zh.txt")) :
+                    "ko".equalsIgnoreCase(model.getInternalCoutry()) ? new InputStreamReader(this.rootView.getContext().getResources().getAssets().open("ko.txt")) :
+                            "es".equalsIgnoreCase(model.getInternalCoutry()) ? new InputStreamReader(this.rootView.getContext().getResources().getAssets().open("es.txt")) :
+                                    "ru".equalsIgnoreCase(model.getInternalCoutry()) ? new InputStreamReader(this.rootView.getContext().getResources().getAssets().open("ru.txt")) :
+                                            new InputStreamReader(this.rootView.getContext().getResources().getAssets().open("en.txt"));
             BufferedReader bufr2 = new BufferedReader(inputStream);
             while (true) {
                 try {
@@ -70,10 +78,10 @@ public class X8ErrorCodeController extends AbsX8Controllers {
                     if (line == null) {
                         break;
                     } else if (!TextUtils.isEmpty(line) && line.matches("(\\d+)\\s*=\\s*(.*)\\s*")) {
-                        int key = Integer.valueOf(line.substring(0, line.indexOf("=")).trim()).intValue();
-                        String value = line.substring(line.indexOf("=") + 1, line.length()).replace("\"", "").replace(";", "");
+                        int key = Integer.parseInt(line.substring(0, line.indexOf("=")).trim());
+                        String value = line.substring(line.indexOf("=") + 1).replace("\"", "").replace(";", "");
                         if (this.errCodeDesc == null) {
-                            this.errCodeDesc = new HashMap();
+                            this.errCodeDesc = new HashMap<>();
                         }
                         this.errCodeDesc.put(key + "", value);
                     }
@@ -82,10 +90,10 @@ public class X8ErrorCodeController extends AbsX8Controllers {
                     bufr = bufr2;
                     e.printStackTrace();
                     if (inputStream != null) {
-                        IOUtils.closeQuietly((Reader) inputStream);
+                        IOUtils.closeQuietly(inputStream);
                     }
                     if (bufr != null) {
-                        IOUtils.closeQuietly((Reader) bufr);
+                        IOUtils.closeQuietly(bufr);
                         return;
                     }
                     return;
@@ -93,29 +101,29 @@ public class X8ErrorCodeController extends AbsX8Controllers {
                     th = th;
                     bufr = bufr2;
                     if (inputStream != null) {
-                        IOUtils.closeQuietly((Reader) inputStream);
+                        IOUtils.closeQuietly(inputStream);
                     }
                     if (bufr != null) {
-                        IOUtils.closeQuietly((Reader) bufr);
+                        IOUtils.closeQuietly(bufr);
                     }
                     throw th;
                 }
             }
             if (inputStream != null) {
-                IOUtils.closeQuietly((Reader) inputStream);
+                IOUtils.closeQuietly(inputStream);
             }
             if (bufr2 != null) {
-                IOUtils.closeQuietly((Reader) bufr2);
+                IOUtils.closeQuietly(bufr2);
             }
         } catch (Throwable th2) {
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
@@ -123,7 +131,7 @@ public class X8ErrorCodeController extends AbsX8Controllers {
         onDismissErrorCode();
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         if (!b) {
             onDismissErrorCode();
@@ -168,7 +176,7 @@ public class X8ErrorCodeController extends AbsX8Controllers {
         }
     }
 
-    public synchronized void onErrorCode3(List<X8ErrorCodeInfo> list) {
+    public synchronized void onErrorCode3(@NonNull List<X8ErrorCodeInfo> list) {
         this.isGetData = true;
         if (list.size() > 0) {
             this.currentMap.clear();
@@ -245,11 +253,12 @@ public class X8ErrorCodeController extends AbsX8Controllers {
         return this.errCodeDesc.get(key + "");
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public String getString(int id) {
         return this.rootView.getContext().getString(id);
     }
 
+    @Nullable
     private ErrorCodeBean getLocalError() {
         ErrorCodeBean errorCodeBean;
         String jsonStr = null;
@@ -258,55 +267,41 @@ public class X8ErrorCodeController extends AbsX8Controllers {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (jsonStr == null || (errorCodeBean = (ErrorCodeBean) JSON.parseObject(jsonStr, ErrorCodeBean.class)) == null) {
+        if (jsonStr == null || (errorCodeBean = JSON.parseObject(jsonStr, ErrorCodeBean.class)) == null) {
             return null;
         }
         return errorCodeBean;
     }
 
+    @NonNull
+    @Contract(pure = true)
     private String getErrorType(int type) {
-        switch (type) {
-            case 0:
-                return "FCS-A";
-            case 1:
-                return "FCS-B";
-            case 2:
-                return "FCS-C";
-            case 3:
-                return "MTC";
-            case 4:
-                return "ATC";
-            case 5:
-                return "RCS";
-            case 6:
-                return "NFZS";
-            default:
-                return "";
-        }
+        return switch (type) {
+            case 0 -> "FCS-A";
+            case 1 -> "FCS-B";
+            case 2 -> "FCS-C";
+            case 3 -> "MTC";
+            case 4 -> "ATC";
+            case 5 -> "RCS";
+            case 6 -> "NFZS";
+            default -> "";
+        };
     }
 
     public int getMacthType(int type) {
-        switch (type) {
-            case 0:
-                return 0;
-            case 1:
-                return 0;
-            case 2:
-                return 0;
-            case 3:
-                return 1;
-            case 4:
-                return 1;
-            case 5:
-                return 0;
-            case 6:
-                return 1;
-            default:
-                return -1;
-        }
+        return switch (type) {
+            case 0 -> 0;
+            case 1 -> 0;
+            case 2 -> 0;
+            case 3 -> 1;
+            case 4 -> 1;
+            case 5 -> 0;
+            case 6 -> 1;
+            default -> -1;
+        };
     }
 
-    public ErrorCodeBean.ActionBean getErrorDesBean(X8ErrorCodeInfo info, boolean isInSky, int ctrlMode, int flightPhasw, List<X8ErrorCodeInfo> list) {
+    public ErrorCodeBean.ActionBean getErrorDesBean(@NonNull X8ErrorCodeInfo info, boolean isInSky, int ctrlMode, int flightPhasw, List<X8ErrorCodeInfo> list) {
         ErrorCodeBean.ActionBean b = null;
         List<ErrorCodeBean.ActionBean> result = new ArrayList<>();
         int matchType = getMacthType(info.getType());
@@ -372,7 +367,7 @@ public class X8ErrorCodeController extends AbsX8Controllers {
         return b;
     }
 
-    private boolean checkConditionValueBeans(List<ErrorCodeBean.ConditionValuesBean> conditionValues, List<X8ErrorCodeInfo> list) {
+    private boolean checkConditionValueBeans(@NonNull List<ErrorCodeBean.ConditionValuesBean> conditionValues, List<X8ErrorCodeInfo> list) {
         int size = conditionValues.size();
         int k = 0;
         for (ErrorCodeBean.ConditionValuesBean m : conditionValues) {
@@ -391,13 +386,10 @@ public class X8ErrorCodeController extends AbsX8Controllers {
                 }
             }
         }
-        if (k != size) {
-            return false;
-        }
-        return true;
+        return k == size;
     }
 
-    public boolean checkCtrlModeNotEqual(List<ErrorCodeBean.CtrlModeBean> ctrlMode, int mode) {
+    public boolean checkCtrlModeNotEqual(@NonNull List<ErrorCodeBean.CtrlModeBean> ctrlMode, int mode) {
         for (ErrorCodeBean.CtrlModeBean m : ctrlMode) {
             if (mode == m.getValue()) {
                 return false;
@@ -406,7 +398,7 @@ public class X8ErrorCodeController extends AbsX8Controllers {
         return true;
     }
 
-    public boolean checkFlightPhaseNotEqual(List<ErrorCodeBean.FlightPhase> flightPhases, int flightPhasw) {
+    public boolean checkFlightPhaseNotEqual(@NonNull List<ErrorCodeBean.FlightPhase> flightPhases, int flightPhasw) {
         for (ErrorCodeBean.FlightPhase m : flightPhases) {
             if (flightPhasw == m.getValue()) {
                 return false;
@@ -415,7 +407,7 @@ public class X8ErrorCodeController extends AbsX8Controllers {
         return true;
     }
 
-    public boolean checkConstraintBitBeans(List<ErrorCodeBean.ConstraintBitBean> constraintBits, List<X8ErrorCodeInfo> list) {
+    public boolean checkConstraintBitBeans(@NonNull List<ErrorCodeBean.ConstraintBitBean> constraintBits, List<X8ErrorCodeInfo> list) {
         int k = 0;
         for (ErrorCodeBean.ConstraintBitBean m : constraintBits) {
             boolean isValue = m.isValue();
@@ -437,13 +429,10 @@ public class X8ErrorCodeController extends AbsX8Controllers {
                 k++;
             }
         }
-        if (k != constraintBits.size()) {
-            return false;
-        }
-        return true;
+        return k == constraintBits.size();
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public boolean onClickBackKey() {
         return false;
     }
@@ -471,21 +460,11 @@ public class X8ErrorCodeController extends AbsX8Controllers {
     }
 
     public List<ErrorCodeBean.ActionBean> getSeriousCode() {
-        List<ErrorCodeBean.ActionBean> actions = new ArrayList<>();
-        actions.clear();
-        for (ErrorCodeBean.ActionBean entry : this.seriousMap) {
-            actions.add(entry);
-        }
-        return actions;
+        return new ArrayList<>(this.seriousMap);
     }
 
     public List<ErrorCodeBean.ActionBean> getMediumCode() {
-        List<ErrorCodeBean.ActionBean> actions = new ArrayList<>();
-        actions.clear();
-        for (ErrorCodeBean.ActionBean entry : this.mediumMap) {
-            actions.add(entry);
-        }
-        return actions;
+        return new ArrayList<>(this.mediumMap);
     }
 
     public void showTextByCode(List<X8ErrorCode> codeList, IX8ErrorTextIsFinishShow isFinishShow) {

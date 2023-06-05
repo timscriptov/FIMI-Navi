@@ -1,5 +1,6 @@
 package com.fimi.libperson.ui.setting;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -29,14 +30,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-/* loaded from: classes.dex */
 public class LanguageSettingActivity extends BasePersonActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
     int currPosition;
     NetworkDialog mNetworkDialog;
     private LanguageAdapter adapter;
     private List<LanguageItem> languageItems;
-    private Handler mHandler = new Handler() { // from class: com.fimi.libperson.ui.setting.LanguageSettingActivity.1
-        @Override // android.os.Handler
+    @SuppressLint("HandlerLeak")
+    private final Handler mHandler = new Handler() {
+        @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == 0 && LanguageSettingActivity.this.mNetworkDialog != null) {
@@ -50,14 +51,14 @@ public class LanguageSettingActivity extends BasePersonActivity implements View.
     private TitleView mTitleView;
     private LanguageModel selectedLanguageModel;
 
-    @Override // com.fimi.libperson.BasePersonActivity, com.fimi.kernel.base.BaseActivity
+    @Override
     public void setStatusBarColor() {
         StatusBarUtil.StatusBarLightMode(this);
     }
 
     private void initView() {
-        this.mTitleView = (TitleView) findViewById(R.id.title_view);
-        this.mListView = (ListView) findViewById(R.id.lv_l_setting_setting);
+        this.mTitleView = findViewById(R.id.title_view);
+        this.mListView = findViewById(R.id.lv_l_setting_setting);
         PercentRelativeLayout.LayoutParams params = (PercentRelativeLayout.LayoutParams) this.mTitleView.getLayoutParams();
         params.setMargins(0, this.statusBarHeight + this.marginStatus, 0, 0);
         this.mTitleView.setLayoutParams(params);
@@ -70,19 +71,19 @@ public class LanguageSettingActivity extends BasePersonActivity implements View.
     private void initListener() {
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void initData() {
         initView();
         initListener();
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void doTrans() {
-        this.selectedLanguageModel = (LanguageModel) SPStoreManager.getInstance().getObject(Constants.LANGUAGETYPE, LanguageModel.class);
+        this.selectedLanguageModel = SPStoreManager.getInstance().getObject(Constants.LANGUAGETYPE, LanguageModel.class);
         if (this.selectedLanguageModel == null) {
             this.selectedLanguageModel = LanguageUtil.getLanguageModel(Locale.getDefault());
         }
-        this.languageItems = new ArrayList();
+        this.languageItems = new ArrayList<>();
         for (int i = 0; i < LanguageItem.languageModels.length; i++) {
             LanguageItem item = new LanguageItem();
             LanguageModel model = LanguageItem.languageModels[i];
@@ -95,11 +96,11 @@ public class LanguageSettingActivity extends BasePersonActivity implements View.
             this.languageItems.add(item);
         }
         this.adapter = new LanguageAdapter(this.languageItems, this);
-        this.mListView.setAdapter((ListAdapter) this.adapter);
+        this.mListView.setAdapter(this.adapter);
         this.mListView.setOnItemClickListener(this);
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     protected int getContentViewLayoutID() {
         return R.layout.activity_user_language_setting;
     }
@@ -121,14 +122,13 @@ public class LanguageSettingActivity extends BasePersonActivity implements View.
         finish();
     }
 
-    @Override // android.widget.AdapterView.OnItemClickListener
+    @Override
     @RequiresApi(api = 24)
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         onSelectLanguage(position);
     }
 
     @Override
-    // com.fimi.libperson.BasePersonActivity, com.fimi.kernel.base.BaseActivity, android.support.v7.app.AppCompatActivity, android.support.v4.app.FragmentActivity, android.app.Activity
     public void onDestroy() {
         super.onDestroy();
         if (this.mNetworkDialog != null && this.mNetworkDialog.isShowing()) {

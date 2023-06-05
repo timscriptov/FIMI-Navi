@@ -4,9 +4,13 @@ import com.fimi.android.app.R;
 
 import java.util.Locale;
 
-/* loaded from: classes.dex */
 public class LanguageItem {
-    public static final LanguageModel[] languageModels = {new LanguageModel(R.string.kernal_simplified_chinese, Locale.SIMPLIFIED_CHINESE, "cn"), new LanguageModel(R.string.kernal_english, Locale.US, "en"), new LanguageModel(R.string.kernal_korean, Locale.KOREA, "ko"), new LanguageModel(R.string.kernal_spanish, new Locale("es", "ES"), "es")};
+    public static final LanguageModel[] languageModels = {
+            new LanguageModel(R.string.kernal_russian, new Locale("ru", "RU"), "ru"),
+            new LanguageModel(R.string.kernal_simplified_chinese, Locale.SIMPLIFIED_CHINESE, "cn"),
+            new LanguageModel(R.string.kernal_english, Locale.US, "en"),
+            new LanguageModel(R.string.kernal_korean, Locale.KOREA, "ko"),
+            new LanguageModel(R.string.kernal_spanish, new Locale("es", "ES"), "es")};
     public static final LanguageModel defaultLanguage = new LanguageModel(R.string.kernal_english, Locale.US, "en");
     private String code;
     private int info;

@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.LocaleList;
 import android.util.DisplayMetrics;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
 import com.fimi.kernel.Constants;
@@ -19,12 +20,11 @@ import com.fimi.kernel.store.shared.SPStoreManager;
 
 import java.util.Locale;
 
-/* loaded from: classes.dex */
 public class LanguageUtil {
     public static final String[] ZH_SERVER = {"CN", ConstantLanguages.REGION_TW, "HK"};
 
     @RequiresApi(api = 24)
-    public static void changeAppLanguage(Context context, Locale setLocale) {
+    public static void changeAppLanguage(@NonNull Context context, Locale setLocale) {
         Resources resources = context.getApplicationContext().getResources();
         DisplayMetrics dm = resources.getDisplayMetrics();
         Configuration config = resources.getConfiguration();
@@ -80,7 +80,7 @@ public class LanguageUtil {
     }
 
     @TargetApi(24)
-    private static Context updateResources(Context context, Locale locale2) {
+    private static Context updateResources(@NonNull Context context, Locale locale2) {
         Resources resources = context.getResources();
         Locale locale = getLocaleByLanguage(locale2);
         Configuration configuration = resources.getConfiguration();
@@ -94,7 +94,7 @@ public class LanguageUtil {
     }
 
     public static LanguageModel getCurrentLanguage() {
-        LanguageModel model = (LanguageModel) SPStoreManager.getInstance().getObject(Constants.LANGUAGETYPE, LanguageModel.class);
+        LanguageModel model = SPStoreManager.getInstance().getObject(Constants.LANGUAGETYPE, LanguageModel.class);
         if (model == null) {
             return getLanguageModel(Locale.getDefault());
         }

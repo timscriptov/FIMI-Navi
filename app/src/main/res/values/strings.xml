@@ -14,7 +14,7 @@
     <string name="camera_sd_format">Format SD Card</string>
     <string name="device_slogn">Totally evolved</string>
     <string name="gaode_maps_key">49df229af3cf989a82112b9015f587b9</string>
-    <string name="google_maps_key">AIzaSyAJg2hNnkb9fNwMvUJ4C9C6128TZHrm9zo</string>
+    <string name="google_maps_key">AIzaSyDlJUirgTEoUOIf9Buqj7YL5gh-zZXtDwo</string>
     <string name="grid_lines">Grid Line</string>
     <string name="grid_lines_others">Others</string>
     <string name="height_tip">Flight altitude should be over 5m</string>
@@ -1346,6 +1346,7 @@
     <string name="kernal_gh2_guidebook">%1$s/guidebook/index.html</string>
     <string name="kernal_korean">한국어</string>
     <string name="kernal_simplified_chinese">简体中文</string>
+    <string name="kernal_russian">Русский</string>
     <string name="kernal_spanish">Español</string>
     <string name="kernel_faq">%1$s/faq/index.html</string>
     <string name="kernel_policy">file:///android_asset/web/%1$s/policy/%2$s/policy.html</string>
