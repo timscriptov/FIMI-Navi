@@ -6,12 +6,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.android.app.R;
 import com.fimi.app.x8s.X8Application;
 import com.fimi.app.x8s.interfaces.AbsX8AiController;
 import com.fimi.app.x8s.interfaces.IX8AiSarListener;
 import com.fimi.app.x8s.manager.X8ScreenShotManager;
+import com.fimi.app.x8s.tools.WGS84ToSK42;
 import com.fimi.app.x8s.ui.activity.X8sMainActivity;
+import com.fimi.app.x8s.widget.DeviceNorthView;
 import com.fimi.app.x8s.widget.X8AiTipWithCloseView;
 import com.fimi.app.x8s.widget.X8DoubleCustomDialog;
 import com.fimi.app.x8s.widget.X8VerticalSeekBarValueLayout;
@@ -24,12 +28,11 @@ import com.fimi.x8sdk.controller.FcCtrlManager;
 import com.fimi.x8sdk.modulestate.StateManager;
 import com.fimi.x8sdk.modulestate.X8CameraSettings;
 
-/* loaded from: classes.dex */
 public class X8AiSarExcuteController extends AbsX8AiController implements View.OnClickListener, X8DoubleCustomDialog.onDialogButtonClickListener {
     protected int MAX_WIDTH;
     protected boolean isShow;
     protected int width;
-    private X8sMainActivity activity;
+    private final X8sMainActivity activity;
     private X8DoubleCustomDialog dialog;
     private View flagSmall;
     private ImageView imgBack;
@@ -49,11 +52,11 @@ public class X8AiSarExcuteController extends AbsX8AiController implements View.O
         this.activity = activity;
     }
 
-    @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+    @Override
     public void onLeft() {
     }
 
-    @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+    @Override
     public void onRight() {
         taskExit();
     }
@@ -62,28 +65,28 @@ public class X8AiSarExcuteController extends AbsX8AiController implements View.O
         this.listener = listener;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
     }
 
     public void initViewStubViews(View view) {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public boolean onClickBackKey() {
         return false;
     }
 
-    @Override // android.view.View.OnClickListener
-    public void onClick(View v) {
+    @Override
+    public void onClick(@NonNull View v) {
         int id = v.getId();
         if (id == R.id.img_ai_follow_back) {
             showExitDialog();
@@ -101,41 +104,40 @@ public class X8AiSarExcuteController extends AbsX8AiController implements View.O
                 new X8ScreenShotManager().starThread(this.activity);
             }
         } else if (id == R.id.rl_flag_small) {
-            if (this.tvFlag.getVisibility() == 0) {
-                this.tvFlag.setVisibility(8);
+            if (this.tvFlag.getVisibility() == View.VISIBLE) {
+                this.tvFlag.setVisibility(View.GONE);
             } else {
-                this.tvFlag.setVisibility(0);
+                this.tvFlag.setVisibility(View.VISIBLE);
             }
         }
     }
 
     @Override
-    // com.fimi.app.x8s.interfaces.AbsX8AiController, com.fimi.app.x8s.interfaces.AbsX8Controllers, com.fimi.app.x8s.interfaces.IControllers
     public void openUi() {
         this.isShow = true;
         LayoutInflater inflater = LayoutInflater.from(this.rootView.getContext());
         this.handleView = inflater.inflate(R.layout.x8_ai_sar_excute_layout, (ViewGroup) this.rootView, true);
-        this.tvLatlng = (TextView) this.handleView.findViewById(R.id.tv_latlng);
-        this.tvTime = (TextView) this.handleView.findViewById(R.id.tv_time);
-        this.mContentTip = (X8AiTipWithCloseView) this.handleView.findViewById(R.id.v_sar_content_tip);
+        this.tvLatlng = this.handleView.findViewById(R.id.tv_latlng);
+        this.tvTime = this.handleView.findViewById(R.id.tv_time);
+        this.mContentTip = this.handleView.findViewById(R.id.v_sar_content_tip);
         this.mContentTip.setTipText(this.rootView.getContext().getString(R.string.x8_ai_fly_sar_content_tip));
-        this.imgBack = (ImageView) this.handleView.findViewById(R.id.img_ai_follow_back);
-        this.imgSwith = (ImageView) this.handleView.findViewById(R.id.img_ai_map_switch);
-        this.imgShot = (ImageView) this.handleView.findViewById(R.id.img_ai_screen_shot);
-        this.sbLayout = (X8VerticalSeekBarValueLayout) this.handleView.findViewById(R.id.sb_switch_focus);
+        this.imgBack = this.handleView.findViewById(R.id.img_ai_follow_back);
+        this.imgSwith = this.handleView.findViewById(R.id.img_ai_map_switch);
+        this.imgShot = this.handleView.findViewById(R.id.img_ai_screen_shot);
+        this.sbLayout = this.handleView.findViewById(R.id.sb_switch_focus);
         this.flagSmall = this.handleView.findViewById(R.id.rl_flag_small);
-        this.tvFlag = (TextView) this.handleView.findViewById(R.id.tv_task_tip);
+        this.tvFlag = this.handleView.findViewById(R.id.tv_task_tip);
         this.flagSmall.setOnClickListener(this);
         this.listener.onAiSarRunning();
         this.imgBack.setOnClickListener(this);
         this.imgSwith.setOnClickListener(this);
         this.imgShot.setOnClickListener(this);
         if (this.activity.getmMapVideoController().isFullVideo()) {
-            this.sbLayout.setVisibility(0);
-            this.imgSwith.setVisibility(8);
+            this.sbLayout.setVisibility(View.VISIBLE);
+            this.imgSwith.setVisibility(View.GONE);
         } else {
-            this.imgSwith.setVisibility(0);
-            this.sbLayout.setVisibility(8);
+            this.imgSwith.setVisibility(View.VISIBLE);
+            this.sbLayout.setVisibility(View.GONE);
         }
         this.sbLayout.setMinMax(X8CameraSettings.getMinMaxFocuse(), this.activity.getCameraManager());
         setProgress();
@@ -155,7 +157,6 @@ public class X8AiSarExcuteController extends AbsX8AiController implements View.O
     }
 
     @Override
-    // com.fimi.app.x8s.interfaces.AbsX8AiController, com.fimi.app.x8s.interfaces.AbsX8Controllers, com.fimi.app.x8s.interfaces.IControllers
     public void closeUi() {
         this.isShow = false;
         super.closeUi();
@@ -165,7 +166,7 @@ public class X8AiSarExcuteController extends AbsX8AiController implements View.O
         this.mFcCtrlManager = fcManager;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public boolean isShow() {
         if (StateManager.getInstance().getX8Drone().getCtrlMode() == 4) {
             return false;
@@ -184,12 +185,12 @@ public class X8AiSarExcuteController extends AbsX8AiController implements View.O
         onTaskComplete(true);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void cancleByModeChange() {
         onTaskComplete(false);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         double[] position;
         if (this.isShow) {
@@ -197,7 +198,20 @@ public class X8AiSarExcuteController extends AbsX8AiController implements View.O
                 ononDroneDisconnectedTaskComplete();
             }
             if (b && this.tvTime != null && (position = this.activity.getmMapVideoController().getFimiMap().getDevicePosition()) != null) {
-                this.tvLatlng.setText("" + position[0] + "," + position[1]);
+//                this.tvLatlng.setText("" + position[0] + "," + position[1]);
+                TextView textView = this.tvLatlng;
+                double[] skTarget = WGS84ToSK42.WGS84ToSK42Meters(position[0], position[1], 0.0d);
+                textView.setText("X:" + ((int) skTarget[0]) + ", Y:" + ((int) skTarget[1]));
+                DeviceNorthView deviceNorthView = this.activity.mX8MainDeviceNorthView;
+                if (deviceNorthView != null) {
+                    double[] skTarget2 = WGS84ToSK42.WGS84ToSK42MetersWithShift(position[0], position[1], 0.0d, deviceNorthView.aircraftAzimuth, deviceNorthView.distance);
+                    String oldText = textView.getText().toString();
+                    if (oldText.isEmpty()) {
+                        textView.setText("✜ X:" + ((int) skTarget2[0]) + ", Y:" + ((int) skTarget2[1]));
+                    } else {
+                        textView.setText(oldText + "\n✜ X:" + ((int) skTarget2[0]) + ", Y:" + ((int) skTarget2[1]));
+                    }
+                }
                 this.tvTime.setText(DateUtil.getStringByFormat(System.currentTimeMillis(), "yyyyMMdd HH:mm:ss"));
             }
         }
@@ -227,12 +241,9 @@ public class X8AiSarExcuteController extends AbsX8AiController implements View.O
     }
 
     public void setTypeEnable() {
-        this.mFcCtrlManager.setEnableTripod(0, new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiSarExcuteController.1
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                    X8AiSarExcuteController.this.taskExit();
-                }
+        this.mFcCtrlManager.setEnableTripod(0, (cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
+                taskExit();
             }
         });
     }
@@ -240,12 +251,12 @@ public class X8AiSarExcuteController extends AbsX8AiController implements View.O
     public void switchMapVideo(boolean sightFlag) {
         if (this.handleView != null && this.isShow) {
             if (!sightFlag) {
-                this.sbLayout.setVisibility(0);
-                this.imgSwith.setVisibility(8);
+                this.sbLayout.setVisibility(View.VISIBLE);
+                this.imgSwith.setVisibility(View.GONE);
                 return;
             }
-            this.imgSwith.setVisibility(0);
-            this.sbLayout.setVisibility(8);
+            this.imgSwith.setVisibility(View.VISIBLE);
+            this.sbLayout.setVisibility(View.GONE);
         }
     }
 

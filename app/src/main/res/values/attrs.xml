@@ -175,4 +175,12 @@
             <enum name="STROKE" value="0" />
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="DeviceNorthView">
+        <attr name="csb_max" format="integer" />
+        <attr name="csb_min" format="integer" />
+        <attr name="csb_thumbDrawable" format="reference" />
+        <attr name="csb_thumbSize" format="dimension" />
+    </declare-styleable>
+
 </resources>

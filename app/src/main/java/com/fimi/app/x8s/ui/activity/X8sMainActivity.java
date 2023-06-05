@@ -56,6 +56,7 @@ import com.fimi.app.x8s.manager.X8MapGetCityManager;
 import com.fimi.app.x8s.manager.X8PressureGpsManger;
 import com.fimi.app.x8s.manager.X8SensorManager;
 import com.fimi.app.x8s.ui.album.x8s.X8MediaActivity;
+import com.fimi.app.x8s.widget.DeviceNorthView;
 import com.fimi.kernel.Constants;
 import com.fimi.kernel.base.EventMessage;
 import com.fimi.kernel.connect.interfaces.IConnectResultListener;
@@ -138,6 +139,8 @@ public class X8sMainActivity extends X8BaseActivity implements ConnectListener, 
     private X8MainAiFollowConfirmController mX8MainAiFollowConfirmController;
     private X8MainBottomParameterController mX8MainBottomParameterController;
     private X8MainCameraSettingController mX8MainCameraSettingController;
+    public DeviceNorthView mX8MainDeviceNorthView;
+
     IRightRollerMoveListener rightRollerMoveListener = new IRightRollerMoveListener() {
         @Override
         public void onEvSuccess(String value) {
@@ -727,6 +730,7 @@ public class X8sMainActivity extends X8BaseActivity implements ConnectListener, 
         this.mainRootView = findViewById(R.id.x8s_main_view);
         this.mainAiExcuteView = findViewById(R.id.rl_x8_ai_excute);
         this.mainSettingShowView = findViewById(R.id.rl_x8_setting_show_view);
+        this.mX8MainDeviceNorthView = findViewById(R.id.device_north_view);
         this.mMapVideoController = new X8MapVideoController(this.mainRootView, savedInstanceState, this);
         this.mMapVideoController.setListener(this.mIX8MapVideoControllerListerner);
         this.mMapVideoController.setListener(this.mainTopBarListener);
@@ -1193,6 +1197,7 @@ public class X8sMainActivity extends X8BaseActivity implements ConnectListener, 
         if (this.mMapVideoController.getFimiMap().isMapInit()) {
             this.mMapVideoController.getFimiMap().onSensorChanged(degree);
         }
+        this.mX8MainDeviceNorthView.setNorthAngle(degree);
     }
 
     @Override
