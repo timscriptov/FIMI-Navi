@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fimi.kernel.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants">
+
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_marginTopPercent="2.5%h">
+
+        <View
+            android:id="@+id/cb_select"
+            android:layout_width="4.0dip"
+            android:layout_height="4.0dip"
+            android:layout_centerVertical="true"
+            android:background="@drawable/checkbox_fm_select_style" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8.0dip"
+            android:layout_toRightOf="@+id/cb_select"
+            android:text="title"
+            android:textColor="#e6000000"
+            android:textSize="@dimen/text_size_42" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_info"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_title"
+        android:layout_alignLeft="@+id/tv_title"
+        android:layout_marginLeft="12.0dip"
+        android:lineSpacingExtra="8.0dip"
+        android:text="info"
+        android:textColor="#66000000"
+        android:textSize="@dimen/text_size_36"
+        app:layout_marginTopPercent="1.6666%h" />
+
+    <View
+        android:id="@+id/v_lin_one"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/downfw_divide_height"
+        android:layout_below="@+id/tv_info"
+        android:layout_alignLeft="@+id/tv_title"
+        android:layout_marginTop="5.0dip"
+        android:background="#26000000"
+        android:visibility="gone" />
+</com.fimi.kernel.percent.PercentRelativeLayout>

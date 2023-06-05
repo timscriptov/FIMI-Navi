@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_item"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ff1f1f21"
+    android:orientation="vertical">
+
+    <me.relex.photodraweeview.PhotoDraweeView
+        android:id="@+id/photo_drawee_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:adjustViewBounds="true"
+        fresco:actualImageScaleType="centerCrop" />
+
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:indeterminateDrawable="@drawable/album_progress_load"
+        android:visibility="gone" />
+</RelativeLayout>

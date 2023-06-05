@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_bottom_bar"
+    android:layout_width="fill_parent"
+    android:layout_height="66.29999dip"
+    android:layout_alignParentBottom="true"
+    android:background="#ff020202"
+    android:gravity="center_horizontal"
+    android:visibility="invisible">
+
+    <RelativeLayout
+        android:id="@+id/rl_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent">
+
+        <ImageButton
+            android:id="@+id/ibtn_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12.0dip"
+            android:alpha="0.3"
+            android:background="@drawable/album_btn_delete_selector"
+            android:enabled="false" />
+
+        <TextView
+            android:id="@+id/tv_bottom_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ibtn_delete"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="6.0dip"
+            android:alpha="0.3"
+            android:enabled="false"
+            android:text="@string/media_delete"
+            android:textColor="#66ffffff"
+            android:textSize="9.299988dip" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_download"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_marginRight="41.299988dip"
+        android:layout_toLeftOf="@+id/rl_delete"
+        android:visibility="gone">
+
+        <ImageButton
+            android:id="@+id/ibtn_download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12.0dip"
+            android:alpha="0.3"
+            android:background="@drawable/album_btn_download_selector"
+            android:enabled="false" />
+
+        <TextView
+            android:id="@+id/tv_bottom_download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ibtn_download"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="6.0dip"
+            android:alpha="0.3"
+            android:enabled="false"
+            android:text="@string/album_download"
+            android:textColor="#66ffffff"
+            android:textSize="9.299988dip" />
+    </RelativeLayout>
+</RelativeLayout>

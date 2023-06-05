@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/x8_mode_setting_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <ViewStub
+        android:id="@+id/param_default_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout="@layout/x8_camera_sub_viewstub_defualt_layout" />
+
+    <ViewStub
+        android:id="@+id/sub_param_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout="@layout/x8_camera_sub_param_viewstub_layout" />
+
+</RelativeLayout>

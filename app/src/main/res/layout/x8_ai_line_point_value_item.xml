@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fimi.app.x8s.widget.RecyclerViewItemRelayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/v_item"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <Button
+        android:id="@+id/btn_item"
+        android:layout_width="40.0dip"
+        android:layout_height="20.0dip"
+        android:layout_centerInParent="true"
+        android:background="@drawable/x8_btn_fc_button_selector"
+        android:text="button"
+        android:textColor="@drawable/x8_btn_text_selector"
+        android:textSize="@dimen/textsize_36" />
+</com.fimi.app.x8s.widget.RecyclerViewItemRelayout>

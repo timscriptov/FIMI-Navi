@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/point_heightValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/x8_ai_follow_marker_info_bg"
+        android:paddingLeft="@dimen/x8s_map_custom_mark_view_x2"
+        android:paddingRight="@dimen/x8s_map_custom_mark_view_x2"
+        android:text="5m"
+        android:textColor="@color/white_100"
+        android:textSize="10.0dip" />
+
+    <ImageView
+        android:id="@+id/markerIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/point_heightValue"
+        android:layout_marginTop="@dimen/x8s_map_custom_mark_view_x1"
+        android:background="@drawable/x8_img_ai_follow_point2" />
+</RelativeLayout>

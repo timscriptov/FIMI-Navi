@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fimi.kernel.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/x8_rl_main_mdify_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <com.fimi.kernel.percent.PercentRelativeLayout
+        android:id="@+id/layout_top"
+        android:layout_width="fill_parent"
+        android:layout_height="0.0dip"
+        android:background="@color/white_5"
+        app:layout_heightPercent="14.814815%h"
+        app:layout_marginLeftPercent="1.478743%w"
+        app:layout_marginRightPercent="1.478743%w"
+        app:layout_marginTopPercent="1.478743%h">
+
+        <ImageView
+            android:id="@+id/btn_return"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/x8_img_return" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/x8_flightlog"
+            android:textColor="@color/white_100"
+            android:textSize="@dimen/textsize_45" />
+    </com.fimi.kernel.percent.PercentRelativeLayout>
+
+    <com.fimi.kernel.percent.PercentRelativeLayout
+        android:id="@+id/x8_flightlog_item_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_top"
+        app:layout_marginLeftPercent="1.478743%w"
+        app:layout_marginRightPercent="1.478743%w">
+
+        <RelativeLayout
+            android:id="@+id/x8_flightlog_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/x8s_main_general_item_modify_layout_x2"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@android:color/transparent"
+                android:gravity="center|left"
+                android:paddingLeft="@dimen/x8s_main_general_item_modify_layout_x1"
+                android:text="@string/x8_playback"
+                android:textColor="@color/white_100"
+                android:textSize="@dimen/textsize_39" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x8s_main_general_item_modify_layout_x1"
+                android:src="@drawable/x8_param_goto_icon_seletor" />
+        </RelativeLayout>
+    </com.fimi.kernel.percent.PercentRelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_next_content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_top"
+        app:layout_marginLeftPercent="1.478743%w"
+        app:layout_marginRightPercent="1.478743%w" />
+</com.fimi.kernel.percent.PercentRelativeLayout>

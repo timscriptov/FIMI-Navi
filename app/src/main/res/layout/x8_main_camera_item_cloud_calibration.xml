@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fimi.kernel.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/x8_rl_main_camera_calibaration_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_camera_calibration_title"
+        android:layout_width="fill_parent"
+        android:layout_height="0.0dip"
+        android:background="@color/white_5"
+        app:layout_heightPercent="14.814814%h"
+        app:layout_marginLeftPercent="1.478743%w"
+        app:layout_marginRightPercent="1.478743%w"
+        app:layout_marginTopPercent="1.478743%w">
+
+        <ImageView
+            android:id="@+id/img_return"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/x8_img_return" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/x8_cloud_gimbal"
+            android:textColor="@color/white_100"
+            android:textSize="@dimen/textsize_45" />
+    </RelativeLayout>
+
+    <com.fimi.kernel.percent.PercentRelativeLayout
+        android:id="@+id/rl_cloud_calibration_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/rl_camera_calibration_title"
+        android:background="@color/white_5"
+        android:visibility="visible"
+        app:layout_marginBottomPercent="1.478743%w"
+        app:layout_marginLeftPercent="1.478743%w"
+        app:layout_marginRightPercent="1.478743%w"
+        app:layout_marginTopPercent="1.11111%w">
+
+        <TextView
+            android:id="@+id/tv_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/x8_cloud_gimbal_error_1"
+            android:textColor="@color/white_100"
+            android:textSize="@dimen/textsize_36"
+            app:layout_marginTopPercent="3.317535%h" />
+
+        <TextView
+            android:id="@+id/tv_tip1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_tip"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white_100"
+            android:textSize="@dimen/textsize_36"
+            android:visibility="gone"
+            app:layout_marginTopPercent="1.895734%h" />
+
+        <ImageView
+            android:id="@+id/cloud_v"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_above="@+id/btn_compass_calibration"
+            android:layout_below="@+id/tv_tip1"
+            android:layout_centerHorizontal="true"
+            app:layout_heightPercent="66.350710%h"
+            app:layout_marginBottomPercent="3.3175355%h"
+            app:layout_marginTopPercent="1.895734%h"
+            app:layout_widthPercent="68.761904%w" />
+
+        <Button
+            android:id="@+id/btn_start_calibration"
+            android:layout_width="0.0dip"
+            android:layout_height="0.0dip"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/x8_btn_white_selector"
+            android:enabled="false"
+            android:text="@string/x8_cloud_gimbal_btn"
+            android:textAllCaps="false"
+            android:textColor="@color/black_90"
+            android:textSize="@dimen/textsize_36"
+            app:layout_heightPercent="12.7962085%h"
+            app:layout_marginBottomPercent="3.3175355%h"
+            app:layout_widthPercent="13.9047619%w" />
+    </com.fimi.kernel.percent.PercentRelativeLayout>
+
+    <com.fimi.kernel.percent.PercentRelativeLayout
+        android:id="@+id/rl_cloud_calibration_result"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/rl_camera_calibration_title"
+        android:background="@color/white_5"
+        android:visibility="gone"
+        app:layout_marginBottomPercent="1.478743%w"
+        app:layout_marginLeftPercent="1.478743%w"
+        app:layout_marginRightPercent="1.478743%w"
+        app:layout_marginTopPercent="1.11111%w">
+
+        <ImageView
+            android:id="@+id/img_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/x8_calibration_success_icon"
+            app:layout_marginTopPercent="8.53080%h" />
+
+        <TextView
+            android:id="@+id/tv_result_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img_result"
+            android:layout_centerHorizontal="true"
+            android:text="@string/x8_compass_result_success"
+            android:textColor="@color/white_100"
+            android:textSize="@dimen/textsize_36"
+            app:layout_marginTopPercent="9.957%h" />
+
+        <TextView
+            android:id="@+id/tv_result_tip2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_result_tip"
+            android:layout_centerHorizontal="true"
+            android:text="@string/x8_compass_result_failed_tip"
+            android:textColor="@color/white_100"
+            android:textSize="@dimen/textsize_36"
+            android:visibility="gone"
+            app:layout_marginTopPercent="3.317%h" />
+
+        <Button
+            android:id="@+id/btn_rt_confirm"
+            android:layout_width="0.0dip"
+            android:layout_height="0.0dip"
+            android:layout_below="@+id/tv_result_tip"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/x8_btn_white_selector"
+            android:text="@string/x8_compass_reuslt_success_confirm"
+            android:textAllCaps="false"
+            android:textColor="@color/black_90"
+            android:textSize="@dimen/textsize_36"
+            app:layout_heightPercent="12.7962085%h"
+            app:layout_marginTopPercent="14.691%h"
+            app:layout_widthPercent="14.9047619%w" />
+    </com.fimi.kernel.percent.PercentRelativeLayout>
+
+    <com.fimi.kernel.percent.PercentRelativeLayout
+        android:id="@+id/rl_calibration_progress_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/rl_camera_calibration_title"
+        android:background="@color/white_5"
+        android:visibility="gone"
+        app:layout_marginBottomPercent="1.478743%w"
+        app:layout_marginLeftPercent="1.478743%w"
+        app:layout_marginRightPercent="1.478743%w"
+        app:layout_marginTopPercent="1.11111%w">
+
+        <TextView
+            android:id="@+id/tv_check_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/x8_cloud_gimbal_tip_2"
+            android:textColor="@color/white_100"
+            android:textSize="@dimen/textsize_39"
+            app:layout_marginTopPercent="14.691%h" />
+
+        <ImageView
+            android:id="@+id/img_animation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_check_tip"
+            app:layout_marginLeftPercent="39.8%w"
+            app:layout_marginTopPercent="4.321%h" />
+
+        <ProgressBar
+            android:id="@+id/calibration_bar"
+            style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="1.0dip"
+            android:layout_below="@+id/tv_check_tip"
+            android:layout_centerHorizontal="true"
+            android:background="@color/white_20"
+            android:max="100"
+            android:progress="0"
+            app:layout_marginLeftPercent="25.9%w"
+            app:layout_marginRightPercent="25.9%w"
+            app:layout_marginTopPercent="23.222%h" />
+
+        <TextView
+            android:id="@+id/tv_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/calibration_bar"
+            android:layout_centerHorizontal="true"
+            android:text="23%"
+            android:textColor="@color/white_100"
+            android:textSize="@dimen/textsize_39"
+            app:layout_marginTopPercent="8.05%h" />
+    </com.fimi.kernel.percent.PercentRelativeLayout>
+</com.fimi.kernel.percent.PercentRelativeLayout>

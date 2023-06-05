@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/btn_sub"
+        android:layout_width="50.0dip"
+        android:layout_height="36.0dip"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:text="-"
+        android:textColor="@color/white_100"
+        android:textSize="14.0dip" />
+
+    <Button
+        android:id="@+id/btn_add"
+        android:layout_width="50.0dip"
+        android:layout_height="36.0dip"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="2.0dip"
+        android:layout_toLeftOf="@+id/btn_sub"
+        android:gravity="center"
+        android:text="+"
+        android:textColor="@color/white_100"
+        android:textSize="14.0dip" />
+
+    <EditText
+        android:id="@+id/etx_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="2.0dip"
+        android:layout_toLeftOf="@+id/btn_add"
+        android:enabled="false"
+        android:gravity="center"
+        android:text="0.00"
+        android:textColor="@color/white_100"
+        android:textSize="20.0dip" />
+
+    <TextView
+        android:id="@+id/tv_gimbal_model"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="2.0dip"
+        android:layout_toLeftOf="@+id/etx_value"
+        android:gravity="center"
+        android:text="Roll"
+        android:textColor="@color/black"
+        android:textSize="20.0dip" />
+</RelativeLayout>

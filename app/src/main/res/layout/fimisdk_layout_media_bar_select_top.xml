@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/media_select_top_rl"
+    android:layout_width="fill_parent"
+    android:layout_height="50.0dip"
+    android:layout_alignParentTop="true"
+    android:background="#ff15afcb"
+    android:visibility="gone">
+
+    <Button
+        android:id="@+id/all_select_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="28.0dip"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10.0dip"
+        android:gravity="center"
+        android:paddingLeft="10.0dip"
+        android:paddingRight="10.0dip"
+        android:textColor="#e6ffffff"
+        android:textSize="12.0sp" />
+
+    <Button
+        android:id="@+id/cancel_btn"
+        android:layout_width="48.0dip"
+        android:layout_height="28.0dip"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10.0dip"
+        android:gravity="center"
+        android:textColor="#e6ffffff"
+        android:textSize="12.0sp" />
+
+    <TextView
+        android:id="@+id/select_n_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textColor="#e6ffffff"
+        android:textSize="14.0sp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0.30000007dip"
+        android:layout_alignParentBottom="true"
+        android:background="#26ffffff" />
+</RelativeLayout>

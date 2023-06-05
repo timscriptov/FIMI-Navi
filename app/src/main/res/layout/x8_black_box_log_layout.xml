@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fimi.kernel.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_blackbox_title"
+        android:layout_width="fill_parent"
+        android:layout_height="0.0dip"
+        android:background="@color/white_5"
+        app:layout_heightPercent="14.814814%h"
+        app:layout_marginLeftPercent="1.478743%w"
+        app:layout_marginRightPercent="1.478743%w"
+        app:layout_marginTopPercent="1.478743%w">
+
+        <ImageView
+            android:id="@+id/img_return"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/x8_img_return" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/x8_modify_black_box"
+            android:textColor="@color/white_100"
+            android:textSize="@dimen/textsize_45" />
+
+        <ImageView
+            android:id="@+id/img_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/x8_img_delete_selector" />
+    </RelativeLayout>
+
+    <com.fimi.kernel.percent.PercentRelativeLayout
+        android:id="@+id/rl_blackbox_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/btn_upload_toggle"
+        android:layout_below="@+id/rl_blackbox_title"
+        android:background="@color/white_5"
+        app:layout_marginBottomPercent="1.478743%w"
+        app:layout_marginLeftPercent="1.478743%w"
+        app:layout_marginRightPercent="1.478743%w"
+        app:layout_marginTopPercent="1.11111%w">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ryv_black_box"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:fadingEdge="none"
+            android:orientation="horizontal"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            app:layout_marginBottomPercent="1.478743%w"
+            app:layout_marginLeftPercent="1.478743%w"
+            app:layout_marginRightPercent="1.478743%w"
+            app:layout_marginTopPercent="1.478743%w" />
+
+        <TextView
+            android:id="@+id/tv_no_files"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/x8_modify_black_box_no_files"
+            android:textColor="@color/white_50"
+            android:textSize="@dimen/textsize_45"
+            android:visibility="gone" />
+    </com.fimi.kernel.percent.PercentRelativeLayout>
+
+    <Button
+        android:id="@+id/btn_upload_toggle"
+        android:layout_width="93.0dip"
+        android:layout_height="27.0dip"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8.0dip"
+        android:background="@drawable/x8_btn_white_selector"
+        android:text="@string/x8_modify_black_box_upload_start_all"
+        android:textColor="@color/black_90"
+        android:textSize="@dimen/textsize_36"
+        android:visibility="gone" />
+
+    <com.fimi.kernel.percent.PercentRelativeLayout
+        android:id="@+id/x8_progress_loading"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/heardView"
+        android:background="@color/black_50"
+        android:clickable="false">
+
+        <ProgressBar
+            android:id="@+id/load_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:indeterminateDrawable="@drawable/play_back_loading" />
+    </com.fimi.kernel.percent.PercentRelativeLayout>
+</com.fimi.kernel.percent.PercentRelativeLayout>

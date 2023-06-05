@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fimi.kernel.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_main_camera_otherSetting_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_alignParentRight="true"
+    android:paddingLeft="@dimen/x8s_main_camera_other_setting_layout_x3"
+    app:layout_widthPercent="50%w">
+
+    <ViewStub
+        android:id="@+id/x8_lines_setting_stub"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout="@layout/x8_main_camera_other_setting_grid_layout" />
+
+    <RelativeLayout
+        android:id="@+id/x8_other_setting_main_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <RelativeLayout
+            android:id="@+id/x8_lines_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/x8s_main_camera_other_setting_layout_x8"
+            android:layout_marginLeft="@dimen/x8s_main_camera_other_setting_layout_x2"
+            android:layout_marginRight="@dimen/x8s_main_camera_other_setting_layout_x4">
+
+            <TextView
+                android:id="@+id/grid_lines_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_alignParentLeft="true"
+                android:gravity="center_vertical"
+                android:text="@string/x8_grid_lines"
+                android:textColor="@color/white_100"
+                android:textSize="13.0dip" />
+
+            <TextView
+                android:id="@+id/tv_current_lines_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x8s_main_camera_other_setting_layout_x3"
+                android:layout_toLeftOf="@+id/grid_goto_icon"
+                android:text="@string/x8_grid_nine"
+                android:textColor="@color/white_100"
+                android:textSize="12.0dip" />
+
+            <ImageView
+                android:id="@+id/grid_goto_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/x8_param_goto_icon_seletor" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/grid_split_line"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/x8s_main_camera_other_setting_layout_x1"
+            android:layout_below="@+id/x8_lines_layout"
+            android:background="@color/white_10" />
+
+        <RelativeLayout
+            android:id="@+id/x8_grade_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/x8s_main_camera_other_setting_layout_x8"
+            android:layout_below="@+id/grid_split_line"
+            android:layout_marginLeft="@dimen/x8s_main_camera_other_setting_layout_x2"
+            android:layout_marginRight="@dimen/x8s_main_camera_other_setting_layout_x4"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/x8_turn_grade"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_alignParentLeft="true"
+                android:gravity="center_vertical"
+                android:text="@string/x8_air_light_auto"
+                android:textColor="@color/white_100"
+                android:textSize="13.0dip" />
+
+            <com.fimi.widget.SwitchButton
+                android:id="@+id/x8_grade_switch"
+                android:layout_width="@dimen/x8s_main_camera_other_setting_layout_x7"
+                android:layout_height="@dimen/x8s_main_camera_other_setting_layout_x6"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                app:onColor="#ff09d9ff" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/grade_split_line"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/x8s_main_camera_other_setting_layout_x1"
+            android:layout_below="@+id/x8_grade_layout"
+            android:background="@color/white_10"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:id="@+id/x8_square_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/x8s_main_camera_other_setting_layout_x8"
+            android:layout_below="@+id/grade_split_line"
+            android:layout_marginLeft="@dimen/x8s_main_camera_other_setting_layout_x2"
+            android:layout_marginRight="@dimen/x8s_main_camera_other_setting_layout_x4"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/x8_square_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_alignParentLeft="true"
+                android:gravity="center_vertical"
+                android:text="@string/x8_square_image"
+                android:textColor="@color/white_100"
+                android:textSize="13.0dip" />
+
+            <com.fimi.widget.SwitchButton
+                android:id="@+id/x8_square_switch"
+                android:layout_width="@dimen/x8s_main_camera_other_setting_layout_x7"
+                android:layout_height="@dimen/x8s_main_camera_other_setting_layout_x6"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                app:onColor="#ff09d9ff" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/square_line"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/x8s_main_camera_other_setting_layout_x1"
+            android:layout_below="@+id/x8_square_layout"
+            android:background="@color/white_10"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:id="@+id/x8_warn_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/x8s_main_camera_other_setting_layout_x8"
+            android:layout_below="@+id/square_line"
+            android:layout_marginLeft="@dimen/x8s_main_camera_other_setting_layout_x2"
+            android:layout_marginRight="@dimen/x8s_main_camera_other_setting_layout_x4"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/x8_warn_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_alignParentLeft="true"
+                android:gravity="center_vertical"
+                android:text="@string/x8_warn_btn"
+                android:textColor="@color/white_100"
+                android:textSize="13.0dip" />
+
+            <com.fimi.widget.SwitchButton
+                android:id="@+id/x8_warn_switch"
+                android:layout_width="@dimen/x8s_main_camera_other_setting_layout_x7"
+                android:layout_height="@dimen/x8s_main_camera_other_setting_layout_x6"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                app:onColor="#ff09d9ff" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/warn_line"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/x8s_main_camera_other_setting_layout_x1"
+            android:layout_below="@+id/x8_warn_layout"
+            android:background="@color/white_10"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:id="@+id/sdcard_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/x8s_main_camera_other_setting_layout_x8"
+            android:layout_below="@+id/warn_line"
+            android:layout_marginLeft="@dimen/x8s_main_camera_other_setting_layout_x2"
+            android:layout_marginRight="@dimen/x8s_main_camera_other_setting_layout_x4">
+
+            <TextView
+                android:id="@+id/x8_sdcard_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_alignParentLeft="true"
+                android:gravity="center_vertical"
+                android:text="@string/x8_sdcard_status"
+                android:textColor="@color/white_100"
+                android:textSize="13.0dip" />
+
+            <TextView
+                android:id="@+id/sdcard_capacity_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x8s_main_camera_other_setting_layout_x5"
+                android:textColor="@color/white_100"
+                android:textSize="12.0dip" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/sdcard_free_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sdcard_layout"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x8s_main_camera_other_setting_layout_x2"
+            android:paddingBottom="@dimen/x8s_main_camera_other_setting_layout_x2"
+            android:textColor="#ffcccccc"
+            android:textSize="10.0dip"
+            android:visibility="gone" />
+
+        <com.fimi.app.x8s.widget.X8PieView
+            android:id="@+id/x8_pieView"
+            android:layout_width="@dimen/x8s_main_camera_other_setting_layout_x10"
+            android:layout_height="@dimen/x8s_main_camera_other_setting_layout_x9"
+            android:layout_below="@+id/sdcard_layout"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/sdcard_status_line"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/x8s_main_camera_other_setting_layout_x1"
+            android:layout_below="@+id/sdcard_free_tv"
+            android:background="@color/white_10" />
+
+        <RelativeLayout
+            android:id="@+id/x8_sdcard_format_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/x8s_main_camera_other_setting_layout_x8"
+            android:layout_below="@+id/sdcard_status_line"
+            android:layout_marginLeft="@dimen/x8s_main_camera_other_setting_layout_x2"
+            android:layout_marginRight="@dimen/x8s_main_camera_other_setting_layout_x4"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/sdcard_format_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_alignParentLeft="true"
+                android:gravity="center_vertical"
+                android:text="@string/x8_sdcard_format"
+                android:textColor="@drawable/x8_camera_set_enable_selector"
+                android:textSize="13.0dip" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/sdcard_format_line"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/x8s_main_camera_other_setting_layout_x1"
+            android:layout_below="@+id/x8_sdcard_format_layout"
+            android:background="@color/white_10" />
+
+        <RelativeLayout
+            android:id="@+id/x8_camera_reset_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/x8s_main_camera_other_setting_layout_x8"
+            android:layout_below="@+id/sdcard_format_line"
+            android:layout_marginLeft="@dimen/x8s_main_camera_other_setting_layout_x2"
+            android:layout_marginRight="@dimen/x8s_main_camera_other_setting_layout_x4"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/x8_camera_reset_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:gravity="center_vertical"
+                android:text="@string/x8_reset_camera"
+                android:textColor="@drawable/x8_camera_set_enable_selector"
+                android:textSize="13.0dip" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/reset_line"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/x8s_main_camera_other_setting_layout_x1"
+            android:layout_below="@+id/x8_camera_reset_layout"
+            android:background="@color/white_10" />
+    </RelativeLayout>
+</com.fimi.kernel.percent.PercentRelativeLayout>

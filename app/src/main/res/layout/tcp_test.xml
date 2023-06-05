@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_cmd_connect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_connect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="建立Cmd连接" />
+
+        <Button
+            android:id="@+id/btn_disconnect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cmd断开" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_cmd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_cmd_connect"
+        android:layout_marginTop="1.0dip"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_getversion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="获取版本" />
+
+        <Button
+            android:id="@+id/btn_start_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请求升级" />
+
+        <Button
+            android:id="@+id/btn_request_put_file"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请求传固件" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="fill_parent"
+        android:layout_height="1.0dip"
+        android:layout_below="@+id/ll_cmd"
+        android:layout_marginLeft="5.0dip"
+        android:layout_marginTop="10.0dip"
+        android:layout_marginRight="5.0dip"
+        android:background="#aa000000" />
+
+    <LinearLayout
+        android:id="@+id/ll_data_connect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view1"
+        android:layout_marginTop="10.0dip"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_data_connect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="建立Data连接" />
+
+        <Button
+            android:id="@+id/btn_data_disconnect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Data断开" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_file"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_data_connect"
+        android:layout_marginTop="1.0dip"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_file_merge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="固件合成" />
+
+        <Button
+            android:id="@+id/btn_file_upload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="固件上传" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_file"
+        android:layout_marginLeft="20.0dip"
+        android:layout_marginTop="80.0dip">
+
+        <TextView
+            android:id="@+id/tv_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+</RelativeLayout>

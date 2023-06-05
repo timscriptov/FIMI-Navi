@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fimi.kernel.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffffff"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_title_sub_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="33.299988dip"
+        android:text="@string/login_password_retrieval"
+        android:textColor="#cc000000"
+        android:textSize="18.0dip" />
+
+    <EditText
+        android:id="@+id/et_new_password"
+        android:layout_width="fill_parent"
+        android:layout_height="86.29999dip"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20.0dip"
+        android:layout_marginTop="84.29999dip"
+        android:layout_marginRight="20.0dip"
+        android:background="@drawable/shape_et_email_forget_pw"
+        android:digits="@string/person_password_digts"
+        android:gravity="center_vertical"
+        android:hint="@string/login_input_new_password"
+        android:inputType="textPassword"
+        android:maxLength="16"
+        android:textColor="#e6000000"
+        android:textColorHint="#33000000"
+        android:textCursorDrawable="@drawable/shape_login_cursor_color"
+        android:textSize="12.0dip"
+        android:visibility="invisible" />
+
+    <View
+        android:id="@+id/v_np_divider"
+        android:layout_width="1.0px"
+        android:layout_height="16.599976dip"
+        android:layout_above="@+id/et_new_password_again"
+        android:layout_alignTop="@+id/et_new_password"
+        android:layout_alignRight="@+id/et_new_password"
+        android:layout_marginTop="13.299988dip"
+        android:layout_marginRight="53.599976dip"
+        android:layout_marginBottom="13.299988dip"
+        android:background="#26000000" />
+
+    <ImageView
+        android:id="@+id/iv_show_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/et_new_password_again"
+        android:layout_alignTop="@+id/et_new_password"
+        android:layout_alignRight="@+id/et_new_password"
+        android:layout_marginRight="5.299988dip"
+        android:src="@drawable/iv_login_email_password" />
+
+    <ImageView
+        android:id="@+id/iv_new_password_unified"
+        android:layout_width="wrap_content"
+        android:layout_height="34.299988dip"
+        android:layout_above="@+id/et_new_password_again"
+        android:layout_alignTop="@+id/et_new_password"
+        android:layout_alignRight="@+id/et_new_password"
+        android:layout_marginRight="21.0dip"
+        android:src="@drawable/iv_fp_password_unified" />
+
+    <EditText
+        android:id="@+id/et_new_password_again"
+        android:layout_width="fill_parent"
+        android:layout_height="43.299988dip"
+        android:layout_alignBottom="@+id/et_new_password"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20.0dip"
+        android:layout_marginRight="20.0dip"
+        android:background="@drawable/shape_et_email_password_register"
+        android:digits="@string/person_password_digts"
+        android:hint="@string/login_input_new_password_again"
+        android:inputType="textPassword"
+        android:maxLength="16"
+        android:textColor="#e6000000"
+        android:textColorHint="#33000000"
+        android:textCursorDrawable="@drawable/shape_login_cursor_color"
+        android:textSize="12.0dip"
+        android:visibility="invisible" />
+
+    <View
+        android:id="@+id/v_np_again_divider"
+        android:layout_width="1.0px"
+        android:layout_height="16.599976dip"
+        android:layout_alignTop="@+id/et_new_password_again"
+        android:layout_alignRight="@+id/et_new_password_again"
+        android:layout_alignBottom="@+id/et_new_password_again"
+        android:layout_marginTop="13.299988dip"
+        android:layout_marginRight="53.599976dip"
+        android:layout_marginBottom="13.299988dip"
+        android:background="#26000000" />
+
+    <ImageView
+        android:id="@+id/iv_show_password_again"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/et_new_password_again"
+        android:layout_alignRight="@+id/et_new_password"
+        android:layout_alignBottom="@+id/et_new_password_again"
+        android:layout_marginRight="5.299988dip"
+        android:src="@drawable/iv_login_email_password" />
+
+    <ImageView
+        android:id="@+id/iv_new_password_again_unified"
+        android:layout_width="wrap_content"
+        android:layout_height="34.299988dip"
+        android:layout_alignTop="@+id/et_new_password_again"
+        android:layout_alignRight="@+id/et_new_password_again"
+        android:layout_alignBottom="@+id/et_new_password_again"
+        android:layout_marginRight="21.0dip"
+        android:src="@drawable/iv_fp_password_unified" />
+
+    <TextView
+        android:id="@+id/tv_emailaddress"
+        android:layout_width="fill_parent"
+        android:layout_height="86.29999dip"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20.0dip"
+        android:layout_marginTop="84.29999dip"
+        android:layout_marginRight="20.0dip"
+        android:background="@drawable/shape_et_email_forget_pw"
+        android:gravity="center_vertical"
+        android:textColor="#cc000000"
+        android:textSize="12.0dip"
+        android:visibility="invisible" />
+
+    <EditText
+        android:id="@+id/et_input_verfication_code"
+        android:layout_width="fill_parent"
+        android:layout_height="43.299988dip"
+        android:layout_alignBottom="@+id/tv_emailaddress"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20.0dip"
+        android:layout_marginRight="20.0dip"
+        android:background="@drawable/shape_et_email_password_register"
+        android:digits="\ 1234567890"
+        android:hint="@string/login_hint_input_verification"
+        android:inputType="number"
+        android:maxLength="6"
+        android:textColor="#e6000000"
+        android:textColorHint="#33000000"
+        android:textCursorDrawable="@drawable/shape_login_cursor_color"
+        android:textSize="12.0dip"
+        android:visibility="invisible" />
+
+    <EditText
+        android:id="@+id/et_fp_email_account"
+        android:layout_width="fill_parent"
+        android:layout_height="43.299988dip"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20.0dip"
+        android:layout_marginTop="84.29999dip"
+        android:layout_marginRight="20.0dip"
+        android:background="@drawable/shape_et_register"
+        android:hint="@string/login_input_email_account"
+        android:inputType="textEmailAddress"
+        android:textColor="#e6000000"
+        android:textColorHint="#33000000"
+        android:textCursorDrawable="@drawable/shape_login_cursor_color"
+        android:textSize="12.0dip"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tv_fp_hint"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_fp_email_account"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20.0dip"
+        android:layout_marginTop="11.299988dip"
+        android:layout_marginRight="20.0dip"
+        android:textColor="#66000000"
+        android:textSize="12.0dip" />
+
+    <TextView
+        android:id="@+id/tv_fp_verfication_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/et_input_verfication_code"
+        android:layout_marginTop="184.29999dip"
+        android:textColor="#66000000"
+        android:textSize="12.0dip" />
+
+    <View
+        android:id="@+id/v_divide"
+        android:layout_width="313.29688dip"
+        android:layout_height="1.0px"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="127.5dip"
+        android:background="#26000000" />
+
+    <Button
+        android:id="@+id/btn_send_email"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="198.0dip"
+        android:background="@drawable/fimi_person_btn_bottom__shape_enable"
+        android:text="@string/login_send_email"
+        android:textColor="@drawable/fimi_person_btn_butom_txcolor_select"
+        android:textSize="12.599976dip"
+        app:layout_heightPercent="11.2962%w"
+        app:layout_widthPercent="87.2222%w" />
+
+    <Button
+        android:id="@+id/btn_verfication"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="241.0dip"
+        android:background="@drawable/fimi_person_btn_bottom__shape_enable"
+        android:text="@string/login_send_email"
+        android:textColor="@drawable/fimi_person_btn_butom_txcolor_select"
+        android:textSize="12.599976dip"
+        android:visibility="gone"
+        app:layout_heightPercent="11.2962%w"
+        app:layout_widthPercent="87.2222%w" />
+</com.fimi.kernel.percent.PercentRelativeLayout>

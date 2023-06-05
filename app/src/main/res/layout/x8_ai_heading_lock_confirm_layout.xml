@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fimi.kernel.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/x8_ai_point_to_point_confirm_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_alignParentRight="true">
+
+    <com.fimi.kernel.percent.PercentRelativeLayout
+        android:id="@+id/rl_ai_follow_confirm"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        app:layout_marginTopPercent="2.7777%">
+
+        <ImageView
+            android:id="@+id/img_ai_follow_return"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/x8_img_return" />
+
+        <TextView
+            android:id="@+id/tv_ai_follow_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/x8_ai_heading_lock"
+            android:textColor="@color/white_90"
+            android:textSize="@dimen/textsize_39" />
+    </com.fimi.kernel.percent.PercentRelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/x8s_ai_point_to_point_confirm_layout_x1"
+        android:background="@color/white_10"
+        app:layout_marginTopPercent="11.11111%" />
+
+    <RelativeLayout
+        android:id="@+id/rl_head_lock_course"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_ai_follow_confirm_ok"
+        android:visibility="gone"
+        app:layout_marginTopPercent="13.666%">
+
+        <ImageView
+            android:id="@+id/img_heading_lock_flag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true" />
+
+        <ScrollView
+            android:id="@+id/sv_ai_items"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/img_heading_lock_flag"
+            android:layout_marginTop="10.0dip"
+            android:layout_marginBottom="10.0dip"
+            android:fadingEdge="none"
+            android:overScrollMode="never"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:paddingRight="18.0dip">
+
+                    <TextView
+                        android:id="@+id/tv_ai_follow_confirm_title1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="18.0dip"
+                        android:text="@string/x8_ai_heading_lock_tip1"
+                        android:textColor="@color/white_90"
+                        android:textSize="@dimen/textsize_36" />
+
+                    <TextView
+                        android:id="@+id/tv_ai_follow_confirm_title2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_ai_follow_confirm_title1"
+                        android:layout_marginLeft="18.0dip"
+                        android:layout_marginTop="10.0dip"
+                        android:text="@string/x8_ai_fixed_wing_tip2"
+                        android:textColor="@color/white_90"
+                        android:textSize="@dimen/textsize_36" />
+
+                    <CheckBox
+                        android:id="@+id/cb_ai_follow_confirm_ok"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_ai_follow_confirm_title2"
+                        android:layout_marginLeft="18.0dip"
+                        android:layout_marginTop="13.0dip"
+                        android:background="@android:color/transparent"
+                        android:button="@null"
+                        android:checked="false"
+                        android:drawableLeft="@drawable/checkbox_selector"
+                        android:drawablePadding="@dimen/x8s_ai_point_to_point_confirm_layout_x2"
+                        android:text="@string/x8_ai_fly_follow_tip3"
+                        android:textColor="@color/white_90"
+                        android:textSize="@dimen/textsize_36" />
+                </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_head_lock_setangle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        app:layout_marginTopPercent="13.666%">
+
+        <TextView
+            android:id="@+id/tv_lock_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18.0dip"
+            android:layout_marginTop="10.0dip"
+            android:layout_marginRight="18.0dip"
+            android:text="@string/x8_ai_heading_lock_tip2"
+            android:textColor="@color/white_90"
+            android:textSize="@dimen/textsize_36" />
+
+        <TextView
+            android:id="@+id/tv_lock_angle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_lock_tip"
+            android:layout_marginLeft="18.0dip"
+            android:layout_marginTop="10.0dip"
+            android:layout_marginRight="18.0dip"
+            android:text="@string/x8_ai_heading_lock_tip3"
+            android:textColor="@color/white_90"
+            android:textSize="@dimen/textsize_36" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_lock_angle"
+            android:layout_centerHorizontal="true">
+
+            <ImageView
+                android:id="@+id/img_lock_bg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" />
+
+            <ImageView
+                android:id="@+id/img_lock_angle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_ai_follow_confirm_ok"
+        android:layout_width="@dimen/x8s_ai_takeoff_layout_x4"
+        android:layout_height="@dimen/x8s_ai_takeoff_layout_x3"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/x8s_ai_takeoff_layout_x2"
+        android:background="@drawable/x8_btn_white_selector"
+        android:text="@string/x8_ai_fly_follow_ok"
+        android:textColor="@color/black_90"
+        android:textSize="@dimen/textsize_36" />
+</com.fimi.kernel.percent.PercentRelativeLayout>

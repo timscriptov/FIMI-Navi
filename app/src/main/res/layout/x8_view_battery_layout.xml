@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <com.fimi.app.x8s.widget.X8BatteryView
+        android:id="@+id/img_battery_core_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/x8_img_battery_setting_normal" />
+
+    <TextView
+        android:id="@+id/img_battery_core_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/img_battery_core_view"
+        android:layout_toRightOf="@+id/img_battery_core_view"
+        android:paddingLeft="9.0dip"
+        android:text="@string/x8_battery_setting_battery_core2"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/textsize_33" />
+</RelativeLayout>

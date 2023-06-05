@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fimi.kernel.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/x8_flightplayback_main"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <FrameLayout
+        android:id="@+id/mapFragment"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+    <include
+        android:id="@+id/x8s_flightplayback_top_layout"
+        layout="@layout/x8s_flightplayback_top_layout" />
+
+    <include layout="@layout/x8s_main_errorcode_power_pitchingangle_layout" />
+
+    <com.fimi.kernel.percent.PercentRelativeLayout
+        android:id="@+id/x8_dront_battery_rl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/x8_seebar_paly"
+        android:layout_centerVertical="true"
+        android:background="@drawable/drone_paly_back_status_bg"
+        android:gravity="center_vertical"
+        android:visibility="gone"
+        app:layout_marginBottomPercent="1.39%h"
+        app:layout_marginLeftPercent="0.83%w">
+
+        <TextView
+            android:id="@+id/x8_battery_tem_des"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginTop="10.0dip"
+            android:text="@string/x8_battery_temperature"
+            android:textColor="@color/white_100"
+            android:textSize="10.0dip" />
+
+        <TextView
+            android:id="@+id/x8_battery_tem_des_value"
+            android:layout_width="40.0dip"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/x8_battery_tem_des"
+            android:layout_marginLeft="30.0dip"
+            android:layout_marginTop="10.0dip"
+            android:layout_toRightOf="@+id/x8_battery_tem_des"
+            android:text="0ºC"
+            android:textColor="@color/white_100"
+            android:textSize="10.0dip" />
+
+        <TextView
+            android:id="@+id/x8_battery_electricity_des"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/x8_battery_tem_des"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginTop="3.0dip"
+            android:text="@string/x8_battery_electricity"
+            android:textColor="@color/white_100"
+            android:textSize="10.0dip" />
+
+        <TextView
+            android:id="@+id/x8_battery_electricity_des_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/x8_battery_tem_des"
+            android:layout_alignStart="@+id/x8_battery_tem_des_value"
+            android:layout_marginTop="3.0dip"
+            android:layout_toRightOf="@+id/x8_battery_electricity_des"
+            android:text="0A"
+            android:textColor="@color/white_100"
+            android:textSize="10.0dip" />
+
+        <TextView
+            android:id="@+id/x8_battery_voltage_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/x8_battery_electricity_des"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginTop="3.0dip"
+            android:text="@string/x8_battery_voltage_one"
+            android:textColor="@color/white_100"
+            android:textSize="10.0dip" />
+
+        <TextView
+            android:id="@+id/x8_battery_voltage_one_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/x8_battery_electricity_des"
+            android:layout_alignStart="@+id/x8_battery_tem_des_value"
+            android:layout_marginTop="3.0dip"
+            android:layout_toRightOf="@+id/x8_battery_voltage_one"
+            android:text="0.0V"
+            android:textColor="@color/white_100"
+            android:textSize="10.0dip" />
+
+        <TextView
+            android:id="@+id/x8_battery_voltage_sencond"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/x8_battery_voltage_one"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginTop="3.0dip"
+            android:text="@string/x8_battery_voltage_sencond"
+            android:textColor="@color/white_100"
+            android:textSize="10.0dip" />
+
+        <TextView
+            android:id="@+id/x8_battery_voltage_sencond_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/x8_battery_voltage_one"
+            android:layout_alignStart="@+id/x8_battery_tem_des_value"
+            android:layout_marginTop="3.0dip"
+            android:layout_toRightOf="@+id/x8_battery_voltage_sencond"
+            android:text="0.0V"
+            android:textColor="@color/white_100"
+            android:textSize="10.0dip" />
+
+        <TextView
+            android:id="@+id/x8_battery_voltage_three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/x8_battery_voltage_sencond"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginTop="3.0dip"
+            android:layout_marginBottom="10.0dip"
+            android:text="@string/x8_battery_voltage_three"
+            android:textColor="@color/white_100"
+            android:textSize="10.0dip" />
+
+        <TextView
+            android:id="@+id/x8_battery_voltage_three_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/x8_battery_voltage_sencond"
+            android:layout_alignStart="@+id/x8_battery_tem_des_value"
+            android:layout_marginTop="3.0dip"
+            android:layout_marginBottom="10.0dip"
+            android:layout_toRightOf="@+id/x8_battery_voltage_three"
+            android:text="0.0V"
+            android:textColor="@color/white_100"
+            android:textSize="10.0dip" />
+    </com.fimi.kernel.percent.PercentRelativeLayout>
+
+    <com.fimi.kernel.percent.PercentRelativeLayout
+        android:id="@+id/play_status"
+        android:layout_width="fill_parent"
+        android:layout_height="0.0dip"
+        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
+        android:alpha="0.65"
+        android:background="@color/black"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        app:layout_heightPercent="13.52%h">
+
+        <ImageView
+            android:id="@+id/x8_btn_paly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/x8_selector_flightlog_btn_play"
+            app:layout_marginLeftPercent="3.23%w" />
+
+        <TextView
+            android:id="@+id/x8_play_back_progress_fact"
+            android:layout_width="wrap_content"
+            android:layout_height="20.0dip"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="00:00"
+            android:textColor="@color/white_100"
+            android:textSize="12.0dip"
+            app:layout_marginLeftPercent="11.09%w" />
+
+        <TextView
+            android:id="@+id/x8_play_back_total_time"
+            android:layout_width="wrap_content"
+            android:layout_height="20.0dip"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/x8_play_back_progress_fact"
+            android:gravity="center"
+            android:text="00:00"
+            android:textColor="@color/white_100"
+            android:textSize="12.0dip" />
+
+        <ImageView
+            android:id="@+id/show_more_remote_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/play_back_remote_more_bg"
+            app:layout_marginRightPercent="0.63%w" />
+
+        <ImageView
+            android:id="@+id/show_more_gps_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/show_more_remote_status"
+            android:src="@drawable/play_back_gps_more_bg"
+            app:layout_marginRightPercent="0.63%w" />
+
+        <ImageView
+            android:id="@+id/show_more_battery_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/show_more_gps_status"
+            android:src="@drawable/play_back_battery_more_bg"
+            app:layout_marginRightPercent="0.63%w" />
+    </com.fimi.kernel.percent.PercentRelativeLayout>
+
+    <SeekBar
+        android:id="@+id/x8_seebar_paly"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:indeterminate="false"
+        android:maxHeight="3.0dip"
+        android:minHeight="3.0dip"
+        android:paddingStart="0.0dip"
+        android:paddingEnd="0.0dip"
+        android:progressDrawable="@drawable/drone_play_back_progress_vertical"
+        android:thumb="@drawable/drone_seebar_thum"
+        android:thumbOffset="-1.0dip"
+        app:layout_marginBottomPercent="11.9%h" />
+
+    <com.fimi.app.x8s.widget.RemotesimulatorView
+        android:id="@+id/x8_remote_simulator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/x8_seebar_paly"
+        android:layout_alignParentRight="true"
+        android:visibility="gone"
+        app:layout_marginBottomPercent="1.39%h"
+        app:layout_marginRightPercent="1.83%w" />
+
+    <com.fimi.kernel.percent.PercentRelativeLayout
+        android:id="@+id/x8_progress_loading"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/heardView"
+        android:background="@color/black_50"
+        android:clickable="true">
+
+        <ProgressBar
+            android:id="@+id/load_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:indeterminateDrawable="@drawable/play_back_loading" />
+    </com.fimi.kernel.percent.PercentRelativeLayout>
+</com.fimi.kernel.percent.PercentRelativeLayout>

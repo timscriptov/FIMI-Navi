@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fimi.kernel.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/x8_rl_main_gimbal_item"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fadingEdge="none"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_marginBottomPercent="1.478743%w"
+        app:layout_marginLeftPercent="1.478743%w"
+        app:layout_marginRightPercent="1.478743%w"
+        app:layout_marginTopPercent="1.478743%w">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <LinearLayout
+                android:id="@+id/x8_main_setting_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white_5"
+                android:orientation="vertical">
+
+                <com.fimi.kernel.percent.PercentRelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/x8s_main_gimbal_item_x2"
+                    android:paddingLeft="@dimen/x8s_main_gimbal_item_x1"
+                    android:paddingRight="@dimen/x8s_main_gimbal_item_x1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:text="@string/x8_gimbal_setting_calibration"
+                        android:textColor="@color/white_100" />
+
+                    <Button
+                        android:id="@+id/btn_gimbal_calibration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0.0dip"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/x8_btn_fc_button_selector"
+                        android:text="@string/x8_fc_item_calibration"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white_100"
+                        android:textSize="@dimen/textsize_36"
+                        app:layout_heightPercent="59.597765%h" />
+                </com.fimi.kernel.percent.PercentRelativeLayout>
+
+                <com.fimi.kernel.percent.PercentRelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/x8s_main_gimbal_item_x2"
+                    android:paddingLeft="@dimen/x8s_main_gimbal_item_x1"
+                    android:paddingRight="@dimen/x8s_main_gimbal_item_x1"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:text="@string/x8_gimbal_setting_horizontal_trim"
+                        android:textColor="@color/white_100" />
+
+                    <Button
+                        android:id="@+id/btn_horizontal_trim"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0.0dip"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/x8_btn_fc_button_selector"
+                        android:text="@string/x8_gimbal_setting_trim"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white_100"
+                        android:textSize="@dimen/textsize_36"
+                        app:layout_heightPercent="59.597765%h" />
+                </com.fimi.kernel.percent.PercentRelativeLayout>
+
+                <com.fimi.app.x8s.widget.X8ValueSeakBarView
+                    android:id="@+id/vsb_pitching_speed_limit"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    app:x8_value_close_color="@color/white_100"
+                    app:x8_value_open_color="@color/x8_fc_all_setting_blue"
+                    app:x8_value_seekbar_default="10.0"
+                    app:x8_value_seekbar_max="100.0"
+                    app:x8_value_seekbar_min="1.0"
+                    app:x8_value_suffix="%"
+                    app:x8_value_title="@string/x8_gimbal_setting_pitching_speed" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/x8_view_one"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/x8s_main_fc_item_x3"
+                android:layout_below="@+id/x8_main_setting_layout"
+                android:background="#00000000" />
+
+            <LinearLayout
+                android:id="@+id/x8_ll_advanced_setting"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/x8_view_one"
+                android:background="@color/white_5"
+                android:orientation="vertical">
+
+                <com.fimi.kernel.percent.PercentRelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/x8s_main_general_item_x8"
+                    android:paddingLeft="@dimen/x8s_main_general_item_x4"
+                    android:paddingRight="@dimen/x8s_main_general_item_x4">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/x8_ai_fly_gravitation_excute_advanced_setting"
+                        android:textColor="@color/white_100"
+                        android:textSize="@dimen/textsize_39" />
+
+                    <ImageView
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/x8s_main_fc_item_x6"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/x8s_main_fc_item_x4"
+                        android:paddingRight="@dimen/x8s_main_fc_item_x2"
+                        android:scaleType="fitEnd"
+                        android:src="@drawable/x8_param_goto_icon_seletor" />
+                </com.fimi.kernel.percent.PercentRelativeLayout>
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="fill_parent"
+                android:layout_height="20.0dip"
+                android:layout_below="@+id/x8_ll_advanced_setting"
+                android:background="#00000000" />
+
+            <Button
+                android:id="@+id/btn_rest_params"
+                android:layout_width="428.0dip"
+                android:layout_height="30.0dip"
+                android:layout_below="@+id/view2"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/x8_gimbal_gain_selector"
+                android:text="@string/x8_gimbal_setting_gimbal_reset_params"
+                android:textAllCaps="false"
+                android:textColor="@color/white_100"
+                android:textSize="@dimen/textsize_36" />
+
+            <ProgressBar
+                android:id="@+id/pb_restsystem_loading"
+                android:layout_width="0.0dip"
+                android:layout_height="0.0dip"
+                android:layout_below="@+id/view2"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:indeterminateDrawable="@drawable/x8_progress_load"
+                android:visibility="gone"
+                app:layout_heightPercent="59.597765%h"
+                app:layout_widthPercent="59.597765%h" />
+        </RelativeLayout>
+    </ScrollView>
+</com.fimi.kernel.percent.PercentRelativeLayout>

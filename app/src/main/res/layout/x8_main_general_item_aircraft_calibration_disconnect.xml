@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_calibration_disconnection_describe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/layout_top"
+        android:layout_centerHorizontal="true"
+        android:text="@string/x8_modify_start_calibration_describe2"
+        android:textAlignment="center"
+        android:textColor="@color/white_100"
+        android:textSize="@dimen/textsize_36" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_calibration_disconnection_describe"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/x8_calibrate_drone_disconnect" />
+
+    <Button
+        android:id="@+id/btn_calibration_disconnect_toggle"
+        android:layout_width="93.0dip"
+        android:layout_height="27.0dip"
+        android:layout_below="@+id/tv_calibration_disconnection_describe"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150.0dip"
+        android:background="@drawable/x8_btn_gray_selector"
+        android:text="@string/x8_cloud_gimbal_btn"
+        android:textColor="@color/black_90"
+        android:textSize="@dimen/textsize_36" />
+</RelativeLayout>

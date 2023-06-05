@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <com.fimi.kernel.percent.PercentRelativeLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/main_all_setting_five_key"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        app:layout_marginBottomPercent="6.66%">
+
+        <TextView
+            android:id="@+id/tv_five_key_show_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/x8_main_all_setting_five_tv_bg"
+            android:paddingLeft="7.0dip"
+            android:paddingTop="4.0dip"
+            android:paddingRight="7.0dip"
+            android:paddingBottom="4.0dip"
+            android:text="@string/x8_rc_setting_five_key_show_hint"
+            android:textColor="@color/white_100"
+            android:textSize="10.0dip" />
+
+        <com.fimi.kernel.percent.PercentRelativeLayout
+            android:id="@+id/x8_prl_five_key_parameter"
+            android:layout_width="267.0dip"
+            android:layout_height="33.0dip"
+            android:layout_above="@+id/tv_five_key_show_hint"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="3.0dip"
+            android:background="@drawable/x8_main_all_setting_five_tv_bg">
+
+            <TextView
+                android:id="@+id/tv_five_key_show_min"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/sbar_five_key"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="12.0dip"
+                android:gravity="center_vertical"
+                android:text="0"
+                android:textColor="@color/white_100"
+                android:textSize="14.0dip" />
+
+            <TextView
+                android:id="@+id/tv_five_key_show_max"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="12.0dip"
+                android:text="256"
+                android:textColor="@color/white_100"
+                android:textSize="14.0dip" />
+
+            <SeekBar
+                android:id="@+id/sbar_five_key"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/tv_five_key_show_max"
+                android:layout_toRightOf="@+id/tv_five_key_show_min"
+                android:max="256"
+                android:maxHeight="1.2999878dip"
+                android:minHeight="1.2999878dip"
+                android:paddingLeft="8.0dip"
+                android:paddingRight="8.0dip"
+                android:progressDrawable="@drawable/x8_progress_horizonl"
+                android:thumb="@drawable/x8_iocn_button_sliding" />
+
+        </com.fimi.kernel.percent.PercentRelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_five_key_show_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/x8_prl_five_key_parameter"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="3.0dip"
+            android:background="@drawable/x8_main_all_setting_five_tv_bg"
+            android:paddingLeft="7.0dip"
+            android:paddingTop="4.0dip"
+            android:paddingRight="7.0dip"
+            android:paddingBottom="4.0dip"
+            android:text="====="
+            android:textColor="@color/white_100"
+            android:textSize="13.0dip" />
+
+    </com.fimi.kernel.percent.PercentRelativeLayout>
+
+</merge>

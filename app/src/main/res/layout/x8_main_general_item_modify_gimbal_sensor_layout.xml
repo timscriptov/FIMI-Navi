@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fimi.kernel.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/x8_rl_main_mdify_gimbal_sensor_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <com.fimi.kernel.percent.PercentRelativeLayout
+        android:id="@+id/layout_top"
+        android:layout_width="fill_parent"
+        android:layout_height="0.0dip"
+        android:background="@color/white_5"
+        app:layout_heightPercent="14.814815%h"
+        app:layout_marginLeftPercent="1.478743%w"
+        app:layout_marginRightPercent="1.478743%w"
+        app:layout_marginTopPercent="1.478743%h">
+
+        <ImageView
+            android:id="@+id/btn_return"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/x8_img_return" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/x8_modify_gimbal_sensor"
+            android:textColor="@color/white_100"
+            android:textSize="@dimen/textsize_45" />
+    </com.fimi.kernel.percent.PercentRelativeLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_top"
+        android:animationCache="@null"
+        android:fadingEdge="none"
+        android:overScrollMode="never"
+        app:layout_marginLeftPercent="1.478743%w"
+        app:layout_marginRightPercent="1.478743%w">
+
+        <com.fimi.kernel.percent.PercentRelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/title_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/x8s_main_general_item_modify_sensor_layout_x3"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="@string/x8_modify_x"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="@string/x8_modify_y"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="@string/x8_modify_z"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="@string/x8_modify_k"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/title_line"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/x8s_main_general_item_modify_sensor_layout_x1"
+                android:layout_below="@+id/title_layout"
+                android:layout_marginLeft="@dimen/x8s_main_general_item_modify_sensor_layout_x2"
+                android:layout_marginRight="@dimen/x8s_main_general_item_modify_sensor_layout_x2"
+                android:background="@color/white_20" />
+
+            <LinearLayout
+                android:id="@+id/gimbal_gyro_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/x8s_main_general_item_modify_sensor_layout_x3"
+                android:layout_below="@+id/title_line"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/gimbal_gyro_title"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center|left"
+                    android:paddingLeft="@dimen/x8s_main_general_item_modify_sensor_layout_x2"
+                    android:text="@string/x8_gimbal_gyro"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+
+                <TextView
+                    android:id="@+id/gimbal_gyro_x"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="NA"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+
+                <TextView
+                    android:id="@+id/gimbal_gyro_y"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="NA"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+
+                <TextView
+                    android:id="@+id/gimbal_gyro_z"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="NA"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+
+                <TextView
+                    android:id="@+id/gimbal_gyro_k"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="NA"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/gimbal_gyro_line"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/x8s_main_general_item_modify_sensor_layout_x1"
+                android:layout_below="@+id/gimbal_gyro_layout"
+                android:layout_marginLeft="@dimen/x8s_main_general_item_modify_sensor_layout_x2"
+                android:layout_marginRight="@dimen/x8s_main_general_item_modify_sensor_layout_x2"
+                android:background="@color/white_20" />
+
+            <LinearLayout
+                android:id="@+id/gimbal_acceleration_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/x8s_main_general_item_modify_sensor_layout_x3"
+                android:layout_below="@+id/gimbal_gyro_line"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/gimbal_acceleration_title"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center|left"
+                    android:paddingLeft="@dimen/x8s_main_general_item_modify_sensor_layout_x2"
+                    android:text="@string/x8_gimbal_acceleration"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+
+                <TextView
+                    android:id="@+id/gimbal_acceleration_x"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="NA"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+
+                <TextView
+                    android:id="@+id/gimbal_acceleration_y"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="NA"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+
+                <TextView
+                    android:id="@+id/gimbal_acceleration_z"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="NA"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+
+                <TextView
+                    android:id="@+id/gimbal_acceleration_k"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="NA"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/gimbal_acceleration_line"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/x8s_main_general_item_modify_sensor_layout_x1"
+                android:layout_below="@+id/gimbal_acceleration_layout"
+                android:layout_marginLeft="@dimen/x8s_main_general_item_modify_sensor_layout_x2"
+                android:layout_marginRight="@dimen/x8s_main_general_item_modify_sensor_layout_x2"
+                android:background="@color/white_20" />
+
+            <LinearLayout
+                android:id="@+id/gimbal_gyro_variance_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/x8s_main_general_item_modify_sensor_layout_x3"
+                android:layout_below="@+id/gimbal_acceleration_line"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/gimbal_gyro_variance_title"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center|left"
+                    android:paddingLeft="@dimen/x8s_main_general_item_modify_sensor_layout_x2"
+                    android:text="@string/x8_gimbal_gyro_variance"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+
+                <TextView
+                    android:id="@+id/gimbal_gyro_variance_x"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="NA"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+
+                <TextView
+                    android:id="@+id/gimbal_gyro_variance_y"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="NA"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+
+                <TextView
+                    android:id="@+id/gimbal_gyro_variance_z"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="NA"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+
+                <TextView
+                    android:id="@+id/gimbal_gyro_variance_k"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="NA"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/gimbal_gyro_variance_line"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/x8s_main_general_item_modify_sensor_layout_x1"
+                android:layout_below="@+id/gimbal_gyro_variance_layout"
+                android:layout_marginLeft="@dimen/x8s_main_general_item_modify_sensor_layout_x2"
+                android:layout_marginRight="@dimen/x8s_main_general_item_modify_sensor_layout_x2"
+                android:background="@color/white_20" />
+
+            <LinearLayout
+                android:id="@+id/gimbal_electric_machinery1_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/x8s_main_general_item_modify_sensor_layout_x3"
+                android:layout_below="@+id/gimbal_gyro_variance_line"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/gimbal_electric_machinery1_title"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center|left"
+                    android:paddingLeft="@dimen/x8s_main_general_item_modify_sensor_layout_x2"
+                    android:text="@string/x8_gimbal_electric_machinery1"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+
+                <TextView
+                    android:id="@+id/gimbal_electric_machinery1_x"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="NA"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+
+                <TextView
+                    android:id="@+id/gimbal_electric_machinery1_y"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="NA"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+
+                <TextView
+                    android:id="@+id/gimbal_electric_machinery1_z"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="NA"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+
+                <TextView
+                    android:id="@+id/gimbal_electric_machinery1_k"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="NA"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/gimbal_electric_machinery1_line"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/x8s_main_general_item_modify_sensor_layout_x1"
+                android:layout_below="@+id/gimbal_electric_machinery1_layout"
+                android:layout_marginLeft="@dimen/x8s_main_general_item_modify_sensor_layout_x2"
+                android:layout_marginRight="@dimen/x8s_main_general_item_modify_sensor_layout_x2"
+                android:background="@color/white_20" />
+
+            <LinearLayout
+                android:id="@+id/gimbal_electric_machinery2_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/x8s_main_general_item_modify_sensor_layout_x3"
+                android:layout_below="@+id/gimbal_electric_machinery1_line"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/gimbal_electric_machinery2_title"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center|left"
+                    android:paddingLeft="@dimen/x8s_main_general_item_modify_sensor_layout_x2"
+                    android:text="@string/x8_gimbal_electric_machinery2"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+
+                <TextView
+                    android:id="@+id/gimbal_electric_machinery2_x"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="NA"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+
+                <TextView
+                    android:id="@+id/gimbal_electric_machinery2_y"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="NA"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+
+                <TextView
+                    android:id="@+id/gimbal_electric_machinery2_z"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="NA"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+
+                <TextView
+                    android:id="@+id/gimbal_electric_machinery2_k"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="NA"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/gimbal_electric_machinery2_line"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/x8s_main_general_item_modify_sensor_layout_x1"
+                android:layout_below="@+id/gimbal_electric_machinery2_layout"
+                android:layout_marginLeft="@dimen/x8s_main_general_item_modify_sensor_layout_x2"
+                android:layout_marginRight="@dimen/x8s_main_general_item_modify_sensor_layout_x2"
+                android:background="@color/white_20" />
+
+            <LinearLayout
+                android:id="@+id/gimbal_electric_machinery3_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/x8s_main_general_item_modify_sensor_layout_x3"
+                android:layout_below="@+id/gimbal_electric_machinery2_line"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/gimbal_electric_machinery3_title"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center|left"
+                    android:paddingLeft="@dimen/x8s_main_general_item_modify_sensor_layout_x2"
+                    android:text="@string/x8_gimbal_electric_machinery3"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+
+                <TextView
+                    android:id="@+id/gimbal_electric_machinery3_x"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="NA"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+
+                <TextView
+                    android:id="@+id/gimbal_electric_machinery3_y"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="NA"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+
+                <TextView
+                    android:id="@+id/gimbal_electric_machinery3_z"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="NA"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+
+                <TextView
+                    android:id="@+id/gimbal_electric_machinery3_k"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="NA"
+                    android:textColor="@color/white_100"
+                    android:textSize="12.0dip" />
+            </LinearLayout>
+        </com.fimi.kernel.percent.PercentRelativeLayout>
+    </ScrollView>
+</com.fimi.kernel.percent.PercentRelativeLayout>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fimi.kernel.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <com.fimi.kernel.percent.PercentRelativeLayout
+        android:id="@+id/layout_top"
+        android:layout_width="fill_parent"
+        android:layout_height="0.0dip"
+        android:background="@color/white_5"
+        app:layout_heightPercent="14.814815%h"
+        app:layout_marginLeftPercent="1.478743%w"
+        app:layout_marginRightPercent="1.478743%w"
+        app:layout_marginTopPercent="1.478743%h">
+
+        <ImageView
+            android:id="@+id/btn_return"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/x8_img_return" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/x8_ai_fly_gravitation_excute_advanced_setting"
+            android:textColor="@color/white_100"
+            android:textSize="@dimen/textsize_45" />
+    </com.fimi.kernel.percent.PercentRelativeLayout>
+
+    <com.fimi.kernel.percent.PercentLinearLayout
+        android:id="@+id/x8_advanced_seetup_item_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_top"
+        android:orientation="vertical"
+        app:layout_marginLeftPercent="1.478743%w"
+        app:layout_marginRightPercent="1.478743%w">
+
+        <com.fimi.app.x8s.widget.X8ValueSeakBarWithTip
+            android:id="@+id/vsb_gimbal_gain"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            app:x8_value_close_color="@color/white_100"
+            app:x8_value_open_color="@color/x8_fc_all_setting_blue"
+            app:x8_value_seekbar_default="0.0"
+            app:x8_value_seekbar_max="200.0"
+            app:x8_value_seekbar_min="1.0"
+            app:x8_value_suffix="%"
+            app:x8_value_title="@string/x8_gimbal_setting_gimbal_gain" />
+
+        <com.fimi.kernel.percent.PercentRelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="55.0dip"
+            android:paddingLeft="@dimen/x8s_main_gimbal_item_x1"
+            android:paddingRight="@dimen/x8s_main_gimbal_item_x1">
+
+            <TextView
+                android:id="@+id/x8_tv_three_axis_tuning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:text="@string/x8_gimbal_setting_three_axis_tuning"
+                android:textColor="@color/white_100"
+                android:textSize="13.0dip" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/x8_tv_three_axis_tuning"
+                android:layout_marginTop="6.0dip"
+                android:text="@string/x8_gimbal_setting_tuning_hint"
+                android:textColor="@color/white_100"
+                android:textSize="10.0dip" />
+
+            <Button
+                android:id="@+id/x8_btn_three_axis_tuning"
+                android:layout_width="wrap_content"
+                android:layout_height="27.0dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/x8_btn_fc_button_selector"
+                android:text="@string/x8_gimbal_setting_tuning"
+                android:textAllCaps="false"
+                android:textColor="@color/white_100"
+                android:textSize="@dimen/textsize_36" />
+        </com.fimi.kernel.percent.PercentRelativeLayout>
+    </com.fimi.kernel.percent.PercentLinearLayout>
+</com.fimi.kernel.percent.PercentRelativeLayout>

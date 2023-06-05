@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffffff"
+    android:fitsSystemWindows="true">
+
+    <com.fimi.libperson.widget.TitleView
+        android:id="@+id/title_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/et_cs_search"
+        android:layout_width="fill_parent"
+        android:layout_height="34.0dip"
+        android:layout_below="@+id/title_view"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="17.599976dip"
+        android:layout_marginTop="28.299988dip"
+        android:layout_marginRight="17.599976dip"
+        android:background="@drawable/shape_et_country_select_search"
+        android:hint="@string/country_select_search"
+        android:singleLine="true"
+        android:textColor="#cc000000"
+        android:textColorHint="#33000000"
+        android:textCursorDrawable="@drawable/shape_login_cursor_color"
+        android:textSize="13.299988dip" />
+
+    <ImageView
+        android:layout_width="34.0dip"
+        android:layout_height="34.0dip"
+        android:layout_alignLeft="@+id/et_cs_search"
+        android:layout_alignTop="@+id/et_cs_search"
+        android:scaleType="center"
+        android:src="@drawable/icon_country_select_search" />
+
+    <ImageButton
+        android:id="@+id/ibtn_delete_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/et_cs_search"
+        android:layout_alignRight="@+id/et_cs_search"
+        android:background="@drawable/iv_login_main_delete"
+        android:visibility="gone" />
+
+    <com.fimi.widget.sticklistview.util.StickyListHeadersListView
+        android:id="@+id/stickyList"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_cs_search"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@null"
+        android:overScrollMode="never" />
+
+    <com.fimi.widget.sticklistview.LetterSideBar
+        android:id="@+id/cs_letter_sb"
+        android:layout_width="20.0dip"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/et_cs_search"
+        android:layout_alignParentRight="true" />
+</RelativeLayout>

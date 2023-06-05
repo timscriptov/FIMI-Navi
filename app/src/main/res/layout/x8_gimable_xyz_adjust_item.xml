@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fimi.kernel.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <com.fimi.kernel.percent.PercentLinearLayout
+        android:id="@+id/x8_pll_gimbal_xyz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_marginLeftPercent="2.71%"
+        app:layout_marginTopPercent="3.61%">
+
+        <TextView
+            android:id="@+id/x8_tv_gimbal_xyz_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/x8_gimbal_xyz_adjust_p"
+            android:textColor="@color/white_100"
+            android:textSize="13.0dip" />
+
+        <TextView
+            android:id="@+id/x8_tv_gimbal_xyz_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="0.0"
+            android:textColor="@color/white_100"
+            android:textSize="13.0dip" />
+    </com.fimi.kernel.percent.PercentLinearLayout>
+
+    <com.fimi.kernel.percent.PercentLinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/x8_pll_gimbal_xyz"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10.0dip"
+        android:orientation="horizontal"
+        app:layout_marginRightPercent="4.34%">
+
+        <Button
+            android:id="@+id/x8_btn_gimbal_xyz_subtract"
+            android:layout_width="43.0dip"
+            android:layout_height="32.0dip"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginRight="33.0dip"
+            android:background="@color/transparent"
+            android:gravity="center"
+            android:text="-"
+            android:textColor="@color/white_100"
+            android:textSize="14.0dip" />
+
+        <Button
+            android:id="@+id/x8_btn_gimbal_xyz_add"
+            android:layout_width="43.0dip"
+            android:layout_height="32.0dip"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_toLeftOf="@+id/btn_sub"
+            android:background="@color/transparent"
+            android:text="+"
+            android:textColor="@color/white_100"
+            android:textSize="14.0dip" />
+    </com.fimi.kernel.percent.PercentLinearLayout>
+</com.fimi.kernel.percent.PercentRelativeLayout>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_general_setting"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <ImageButton
+        android:id="@+id/prev"
+        style="@android:style/MediaButton.Previous"
+        android:visibility="gone" />
+
+    <ImageButton
+        android:id="@+id/rew"
+        style="@android:style/MediaButton.Rew"
+        android:visibility="gone" />
+
+    <ImageButton
+        android:id="@+id/ffwd"
+        style="@android:style/MediaButton.Ffwd"
+        android:visibility="gone" />
+
+    <ImageButton
+        android:id="@+id/next"
+        style="@android:style/MediaButton.Next"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/process_play"
+        android:layout_width="fill_parent"
+        android:layout_height="67.0dip"
+        android:background="#cc1f1f21">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="0.33000004dip"
+            android:background="#26ffffff" />
+
+        <TextView
+            android:id="@+id/time_current"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20.0dip"
+            android:layout_marginTop="21.0dip"
+            android:textColor="#ffffffff"
+            android:textSize="12.0dip" />
+
+        <ImageButton
+            android:id="@+id/pause"
+            android:layout_width="40.0dip"
+            android:layout_height="40.0dip"
+            android:layout_centerVertical="true"
+            android:visibility="visible" />
+
+        <SeekBar
+            android:id="@+id/fmmediacontroller_progress"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/time_current"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginRight="11.0dip"
+            android:layout_toLeftOf="@+id/pause"
+            android:paddingLeft="10.0dip"
+            android:paddingRight="10.0dip"
+            android:paddingBottom="1.0dip" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/fmmediacontroller_progress"
+            android:layout_marginTop="21.0dip"
+            android:layout_marginRight="10.0dip"
+            android:textColor="#ffffffff"
+            android:textSize="12.0dip" />
+    </RelativeLayout>
+</RelativeLayout>

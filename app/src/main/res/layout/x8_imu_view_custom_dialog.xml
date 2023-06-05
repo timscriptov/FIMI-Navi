@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/x8s_view_custom_dialog_x7"
+    android:layout_height="wrap_content"
+    android:background="@drawable/x8_shape_dialog_content_bg"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <com.fimi.kernel.percent.PercentLinearLayout
+        android:id="@+id/layout_content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x8s_view_custom_dialog_x1"
+        android:layout_marginTop="@dimen/x8s_view_custom_dialog_x1"
+        android:layout_marginRight="@dimen/x8s_view_custom_dialog_x1"
+        android:background="@drawable/x8_img_double_dialog_content_bg"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x8s_view_custom_dialog_x4"
+            android:gravity="center"
+            android:text="Title"
+            android:textColor="@color/white_100"
+            android:textSize="@dimen/textsize_39" />
+
+        <ImageView
+            android:id="@+id/x8_imgv_imucheck_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/x8_calibration_fail_icon"
+            app:layout_marginTopPercent="5.19%h" />
+
+        <TextView
+            android:id="@+id/tv_message"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x8s_view_custom_dialog_x5"
+            android:layout_marginTop="@dimen/x8s_view_custom_dialog_x2"
+            android:layout_marginRight="@dimen/x8s_view_custom_dialog_x5"
+            android:ellipsize="none"
+            android:gravity="center"
+            android:maxLines="100"
+            android:text="Message"
+            android:textColor="@color/white_100"
+            android:textSize="@dimen/textsize_39" />
+
+        <TextView
+            android:id="@+id/tv_message_two"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x8s_view_custom_dialog_x5"
+            android:layout_marginTop="@dimen/x8s_view_custom_dialog_x2"
+            android:layout_marginRight="@dimen/x8s_view_custom_dialog_x5"
+            android:ellipsize="none"
+            android:gravity="center"
+            android:maxLines="100"
+            android:text="Message"
+            android:textColor="@color/white_100"
+            android:textSize="@dimen/textsize_36" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/x8s_view_custom_dialog_x3" />
+    </com.fimi.kernel.percent.PercentLinearLayout>
+
+    <View
+        android:id="@+id/img_divide"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/x8s_view_custom_dialog_x1"
+        android:layout_below="@+id/layout_content"
+        android:layout_marginLeft="@dimen/x8s_view_custom_dialog_x1"
+        android:layout_marginRight="@dimen/x8s_view_custom_dialog_x1"
+        android:background="#8000e8fd" />
+
+    <Button
+        android:id="@+id/tv_sure"
+        android:layout_width="@dimen/x8s_view_custom_dialog_x7"
+        android:layout_height="@dimen/x8s_view_custom_dialog_x6"
+        android:layout_below="@+id/img_divide"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/x8s_view_custom_dialog_x1"
+        android:layout_marginRight="@dimen/x8s_view_custom_dialog_x1"
+        android:layout_marginBottom="@dimen/x8s_view_custom_dialog_x1"
+        android:background="@drawable/x8_img_double_dialog_single_selector"
+        android:text="@string/x8_setting_fc_loastaction_tips_content_confirm"
+        android:textColor="@color/white_100"
+        android:textSize="14.0dip" />
+</RelativeLayout>

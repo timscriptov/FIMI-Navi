@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ff1f1f21">
+
+    <ImageView
+        android:id="@+id/img_splash"
+        android:layout_width="62.0dip"
+        android:layout_height="62.0dip"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150.0dip"
+        android:scaleType="center" />
+
+    <com.fimi.widget.LetterSpacingTextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/img_splash"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18.0dip"
+        android:text="@string/device_slogn"
+        android:textColor="#b2ffffff"
+        android:textSize="14.0dip" />
+
+    <TextView
+        android:id="@+id/tv_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15.599976dip"
+        android:text="@string/splash_copyright_2017_2018fimi_all_rights_reserved"
+        android:textColor="#99ffffff"
+        android:textSize="10.599976dip" />
+</RelativeLayout>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/seek_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x8s_camera_awb_sub_layout_x2"
+        android:layout_marginTop="@dimen/x8s_camera_awb_sub_layout_x2"
+        android:layout_marginRight="@dimen/x8s_camera_awb_sub_layout_x5"
+        android:layout_marginBottom="@dimen/x8s_camera_awb_sub_layout_x6">
+
+        <TextView
+            android:id="@+id/awb_reduce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="-"
+            android:textColor="@color/white_100"
+            android:textSize="12.0dip" />
+
+        <SeekBar
+            android:id="@+id/awb_seekBar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x8s_camera_awb_sub_layout_x2"
+            android:layout_marginRight="@dimen/x8s_camera_awb_sub_layout_x2"
+            android:layout_toLeftOf="@+id/awb_add"
+            android:layout_toRightOf="@+id/awb_reduce"
+            android:focusable="true"
+            android:max="10000"
+            android:maxHeight="@dimen/x8s_camera_awb_sub_layout_x1"
+            android:minHeight="@dimen/x8s_camera_awb_sub_layout_x1"
+            android:paddingLeft="@dimen/x8s_camera_awb_sub_layout_x4"
+            android:paddingRight="@dimen/x8s_camera_awb_sub_layout_x4"
+            android:progressDrawable="@drawable/x8_img_seekbar_bg"
+            android:thumb="@drawable/x8_img_seekbar_thum" />
+
+        <TextView
+            android:id="@+id/awb_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="+"
+            android:textColor="@color/white_100"
+            android:textSize="12.0dip" />
+
+        <TextView
+            android:id="@+id/awb_min"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/awb_seekBar"
+            android:layout_marginLeft="@dimen/x8s_camera_awb_sub_layout_x5"
+            android:layout_marginTop="@dimen/x8s_camera_awb_sub_layout_x3"
+            android:layout_toRightOf="@+id/awb_reduce"
+            android:text="1000"
+            android:textColor="@color/white_100"
+            android:textSize="11.0dip" />
+
+        <TextView
+            android:id="@+id/awb_max"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/awb_seekBar"
+            android:layout_marginTop="@dimen/x8s_camera_awb_sub_layout_x3"
+            android:layout_marginRight="@dimen/x8s_camera_awb_sub_layout_x5"
+            android:layout_toLeftOf="@+id/awb_add"
+            android:text="8000"
+            android:textColor="@color/white_100"
+            android:textSize="11.0dip" />
+    </RelativeLayout>
+</RelativeLayout>

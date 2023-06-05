@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fimi.kernel.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/x8_rl_main_rc_item"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fadingEdge="none"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_marginBottomPercent="1.478743%w"
+        app:layout_marginLeftPercent="1.478743%w"
+        app:layout_marginRightPercent="1.478743%w"
+        app:layout_marginTopPercent="1.478743%w">
+
+        <com.fimi.kernel.percent.PercentLinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white_5"
+                android:orientation="vertical">
+
+                <com.fimi.kernel.percent.PercentRelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/x8s_main_rc_item_x5"
+                    android:paddingLeft="@dimen/x8s_main_rc_item_x3"
+                    android:paddingRight="@dimen/x8s_main_rc_item_x3">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:text="@string/x8_rc_setting_rc_calibration"
+                        android:textColor="@color/white_100" />
+
+                    <Button
+                        android:id="@+id/btn_rc_calibration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0.0dip"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/x8_btn_fc_button_selector"
+                        android:text="@string/x8_rc_setting_calibration"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white_100"
+                        android:textSize="@dimen/textsize_36"
+                        app:layout_heightPercent="59.597765%h" />
+                </com.fimi.kernel.percent.PercentRelativeLayout>
+
+                <com.fimi.kernel.percent.PercentRelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/x8s_main_rc_item_x5"
+                    android:paddingLeft="@dimen/x8s_main_rc_item_x3"
+                    android:paddingRight="@dimen/x8s_main_rc_item_x3">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:text="@string/x8_rc_setting_rocker_mode"
+                        android:textColor="@color/white_100" />
+
+                    <Button
+                        android:id="@+id/btn_rocker_mode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0.0dip"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/x8_btn_fc_button_selector"
+                        android:text="@string/x8_rc_setting_america_rocker"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white_100"
+                        android:textSize="@dimen/textsize_36"
+                        app:layout_heightPercent="59.597765%h" />
+                </com.fimi.kernel.percent.PercentRelativeLayout>
+
+                <com.fimi.kernel.percent.PercentRelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/x8s_main_rc_item_x5"
+                    android:paddingLeft="@dimen/x8s_main_rc_item_x3"
+                    android:paddingRight="@dimen/x8s_main_rc_item_x3"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:text="@string/x8_rc_setting_rc_code"
+                        android:textColor="@color/white_100" />
+
+                    <Button
+                        android:id="@+id/btn_rc_code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0.0dip"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/x8_btn_fc_button_selector"
+                        android:text="@string/x8_rc_setting_code"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white_100"
+                        android:textSize="@dimen/textsize_36"
+                        app:layout_heightPercent="59.597765%h" />
+                </com.fimi.kernel.percent.PercentRelativeLayout>
+            </LinearLayout>
+
+            <com.fimi.kernel.percent.PercentRelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/x8s_main_rc_item_x5"
+                android:background="@color/white_5"
+                android:paddingLeft="@dimen/x8s_main_rc_item_x3"
+                android:paddingRight="@dimen/x8s_main_rc_item_x3"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:text="@string/x8_rc_setting_rc_ap_mode"
+                    android:textColor="@color/white_100" />
+
+                <com.fimi.app.x8s.widget.X8TabItem
+                    android:id="@+id/th_ap_module"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/x8s_main_rc_item_x4"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:padding="@dimen/x8s_main_rc_item_x1"
+                    app:bg="#00000000"
+                    app:default_index="1"
+                    app:lineColor="@color/white_25"
+                    app:lineStroke="@dimen/x8s_main_rc_item_x1"
+                    app:radiusC="@dimen/x8s_main_rc_item_x2"
+                    app:src="@array/x8_fc_ap_module_state_option"
+                    app:tab_select_color="@color/tabradio_attr_unselected_color"
+                    app:tab_space="@dimen/x8s_main_rc_item_x1"
+                    app:tab_unselect_color="@color/tabradio_attr_unselected_color"
+                    app:text_select_color="@color/tabradio_attr_selected_text_color"
+                    app:text_sizeC="@dimen/textsize_36"
+                    app:text_unselect_color="@color/tabradio_attr_unselected_text_color" />
+            </com.fimi.kernel.percent.PercentRelativeLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/x8s_main_fc_item_x3"
+                android:background="#00000000" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white_5"
+                android:orientation="vertical">
+
+                <com.fimi.kernel.percent.PercentRelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/x8s_main_rc_item_x5"
+                    android:paddingLeft="@dimen/x8s_main_rc_item_x3"
+                    android:paddingRight="@dimen/x8s_main_rc_item_x3">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:text="@string/x8_rc_setting_five_key_up"
+                        android:textColor="@color/white_100" />
+
+                    <Button
+                        android:id="@+id/btn_five_key_up"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0.0dip"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/x8_btn_fc_button_selector"
+                        android:text="@string/x8_rc_setting_map_fpv"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white_100"
+                        android:textSize="@dimen/textsize_36"
+                        app:layout_heightPercent="59.597765%h" />
+                </com.fimi.kernel.percent.PercentRelativeLayout>
+
+                <com.fimi.kernel.percent.PercentRelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/x8s_main_rc_item_x5"
+                    android:paddingLeft="@dimen/x8s_main_rc_item_x3"
+                    android:paddingRight="@dimen/x8s_main_rc_item_x3">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:text="@string/x8_rc_setting_five_key_down"
+                        android:textColor="@color/white_100" />
+
+                    <Button
+                        android:id="@+id/btn_five_key_down"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0.0dip"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/x8_btn_fc_button_selector"
+                        android:text="@string/x8_rc_setting_back_center_down"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white_100"
+                        android:textSize="@dimen/textsize_36"
+                        app:layout_heightPercent="59.597765%h" />
+                </com.fimi.kernel.percent.PercentRelativeLayout>
+
+                <com.fimi.kernel.percent.PercentRelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/x8s_main_rc_item_x5"
+                    android:paddingLeft="@dimen/x8s_main_rc_item_x3"
+                    android:paddingRight="@dimen/x8s_main_rc_item_x3">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:text="@string/x8_rc_setting_five_key_left"
+                        android:textColor="@color/white_100" />
+
+                    <Button
+                        android:id="@+id/btn_five_key_left"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0.0dip"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/x8_btn_fc_button_selector"
+                        android:text="@string/x8_rc_setting_battery_frame"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white_100"
+                        android:textSize="@dimen/textsize_36"
+                        app:layout_heightPercent="59.597765%h" />
+                </com.fimi.kernel.percent.PercentRelativeLayout>
+
+                <com.fimi.kernel.percent.PercentRelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/x8s_main_rc_item_x5"
+                    android:paddingLeft="@dimen/x8s_main_rc_item_x3"
+                    android:paddingRight="@dimen/x8s_main_rc_item_x3">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:text="@string/x8_rc_setting_five_key_right"
+                        android:textColor="@color/white_100" />
+
+                    <Button
+                        android:id="@+id/btn_five_key_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0.0dip"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/x8_btn_fc_button_selector"
+                        android:text="@string/x8_rc_setting_self_check_frame"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white_100"
+                        android:textSize="@dimen/textsize_36"
+                        app:layout_heightPercent="59.597765%h" />
+                </com.fimi.kernel.percent.PercentRelativeLayout>
+
+                <com.fimi.kernel.percent.PercentRelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/x8s_main_rc_item_x5"
+                    android:paddingLeft="@dimen/x8s_main_rc_item_x3"
+                    android:paddingRight="@dimen/x8s_main_rc_item_x3">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:text="@string/x8_rc_setting_five_key_center"
+                        android:textColor="@color/white_100" />
+
+                    <Button
+                        android:id="@+id/btn_five_key_center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0.0dip"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/x8_btn_fc_button_selector"
+                        android:text="@string/x8_rc_setting_media_frame"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white_100"
+                        android:textSize="@dimen/textsize_36"
+                        app:layout_heightPercent="59.597765%h" />
+                </com.fimi.kernel.percent.PercentRelativeLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="20.0dip"
+                android:background="#00000000" />
+
+            <Button
+                android:id="@+id/x8_rc_btn_rest_params"
+                android:layout_width="428.0dip"
+                android:layout_height="30.0dip"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/x8_gimbal_gain_selector"
+                android:text="@string/x8_rc_reset_params"
+                android:textAllCaps="false"
+                android:textColor="@color/white_100"
+                android:textSize="@dimen/textsize_36" />
+        </com.fimi.kernel.percent.PercentLinearLayout>
+    </ScrollView>
+</com.fimi.kernel.percent.PercentRelativeLayout>

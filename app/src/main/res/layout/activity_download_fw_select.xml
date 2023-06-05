@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fimi.kernel.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/head"
+        android:layout_width="fill_parent"
+        android:layout_height="0.0dip"
+        app:layout_heightPercent="7.2395%h">
+
+        <ImageButton
+            android:id="@+id/iv_return"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="11.0dip"
+            android:background="@drawable/fimisdk_img_return_selector" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/host_downed_firmware"
+            android:textColor="@color/down_update_title"
+            android:textSize="@dimen/text_size_42" />
+
+        <View
+            android:id="@+id/v_lin_zore"
+            android:layout_width="fill_parent"
+            android:layout_height="1.0px"
+            android:layout_alignParentBottom="true"
+            android:background="#26000000" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_title2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/head"
+        android:text="@string/host_select_downed_firmware"
+        android:textColor="@color/downfw_title_bg"
+        android:textSize="@dimen/text_size_42"
+        app:layout_marginLeftPercent="7.4074%w"
+        app:layout_marginTopPercent="1.7187%h" />
+
+    <View
+        android:id="@+id/v_lin_one"
+        android:layout_width="fill_parent"
+        android:layout_height="1.0px"
+        android:layout_below="@+id/tv_title2"
+        android:background="#26000000"
+        app:layout_marginLeftPercent="7.4074%w"
+        app:layout_marginTopPercent="1.5104%h" />
+
+    <ListView
+        android:id="@+id/lv_select_fw"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_hardSize"
+        android:layout_below="@+id/v_lin_one"
+        android:cacheColorHint="#00000000"
+        android:divider="@drawable/downfw_setting_list_divide"
+        android:gravity="center_horizontal"
+        android:listSelector="@android:color/transparent"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_marginLeftPercent="4.7916674%h"
+        app:layout_marginTopPercent="1.04167%h" />
+
+    <TextView
+        android:id="@+id/tv_hardSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_down"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="9.659973dip"
+        android:textColor="#80000000"
+        android:textSize="@dimen/text_size_30" />
+
+    <Button
+        android:id="@+id/btn_down"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="26.599976dip"
+        android:background="@drawable/fimi_sdk_btn_bottom__shape_enable"
+        android:gravity="center"
+        android:text="@string/host_downed_firmware"
+        android:textColor="@drawable/fimi_sdk_btn_butom_txcolor_select"
+        android:textSize="@dimen/text_size_36"
+        app:layout_heightPercent="11.2962%w"
+        app:layout_widthPercent="87.2222%w" />
+</com.fimi.kernel.percent.PercentRelativeLayout>

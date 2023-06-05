@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fimi.kernel.percent.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_main_camera_otherSetting_layout_grid"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_alignParentRight="true"
+    android:orientation="vertical"
+    android:visibility="visible">
+
+    <RelativeLayout
+        android:id="@+id/x8_lines_layout_top"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/x8s_main_camera_other_setting_grid_layout_x4"
+        android:layout_marginRight="@dimen/x8s_main_camera_other_setting_grid_layout_x3">
+
+        <ImageView
+            android:id="@+id/img_return"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x8s_main_camera_other_setting_grid_layout_x2"
+            android:src="@drawable/x8_recycler_item_back_selector" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/x8_grid_lines"
+            android:textColor="@color/white_100"
+            android:textSize="@dimen/textsize_39" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1.0dip"
+        android:layout_below="@+id/x8_lines_layout"
+        android:background="@color/white_10" />
+
+    <TextView
+        android:id="@+id/x8_lines_layout_none"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/x8s_main_camera_other_setting_grid_layout_x4"
+        android:layout_marginLeft="@dimen/x8s_main_camera_other_setting_grid_layout_x2"
+        android:layout_marginRight="@dimen/x8s_main_camera_other_setting_grid_layout_x3"
+        android:gravity="center|left"
+        android:text="@string/x8_general_grid_line_nothing"
+        android:textColor="@color/white_100"
+        android:textSize="@dimen/textsize_39" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/x8s_main_camera_other_setting_grid_layout_x1"
+        android:layout_below="@+id/x8_lines_layout"
+        android:background="@color/white_10" />
+
+    <TextView
+        android:id="@+id/x8_lines_layout_center_point"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/x8s_main_camera_other_setting_grid_layout_x4"
+        android:layout_marginLeft="@dimen/x8s_main_camera_other_setting_grid_layout_x2"
+        android:layout_marginRight="@dimen/x8s_main_camera_other_setting_grid_layout_x3"
+        android:gravity="center|left"
+        android:text="@string/x8_center_point"
+        android:textColor="@color/white_100"
+        android:textSize="@dimen/textsize_39"
+        android:visibility="gone" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/x8s_main_camera_other_setting_grid_layout_x1"
+        android:layout_below="@+id/x8_lines_layout"
+        android:background="@color/white_10"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/x8_lines_layout_nine_lines"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/x8s_main_camera_other_setting_grid_layout_x4"
+        android:layout_marginLeft="@dimen/x8s_main_camera_other_setting_grid_layout_x2"
+        android:layout_marginRight="@dimen/x8s_main_camera_other_setting_grid_layout_x3"
+        android:gravity="center|left"
+        android:text="@string/x8_grid_nine"
+        android:textColor="@color/white_100"
+        android:textSize="@dimen/textsize_39" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/x8s_main_camera_other_setting_grid_layout_x1"
+        android:layout_below="@+id/x8_lines_layout"
+        android:background="@color/white_10" />
+
+    <TextView
+        android:id="@+id/x8_lines_layout_diagonal_and_nine"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/x8s_main_camera_other_setting_grid_layout_x4"
+        android:layout_marginLeft="@dimen/x8s_main_camera_other_setting_grid_layout_x2"
+        android:layout_marginRight="@dimen/x8s_main_camera_other_setting_grid_layout_x3"
+        android:gravity="center|left"
+        android:text="@string/x8_grid_nine_and_diagonal"
+        android:textColor="@color/white_100"
+        android:textSize="@dimen/textsize_39" />
+</com.fimi.kernel.percent.PercentLinearLayout>

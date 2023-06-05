@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="72.599976dip"
+    android:background="@drawable/dialog_background_inset"
+    android:orientation="vertical">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="15.299988dip"
+        android:layout_height="15.299988dip"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="27.299988dip"
+        android:indeterminate="true"
+        android:indeterminateDrawable="@drawable/progress_dialog_rotate" />
+
+    <ImageView
+        android:id="@+id/img_show"
+        android:layout_width="15.299988dip"
+        android:layout_height="15.299988dip"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="27.299988dip"
+        android:background="@drawable/img_dialog_ok"
+        android:indeterminate="true"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/progress_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="13.299988dip"
+        android:layout_toRightOf="@+id/progressBar"
+        android:text="正在检查更新..."
+        android:textColor="@color/black_70"
+        android:textSize="14.0sp" />
+</RelativeLayout>

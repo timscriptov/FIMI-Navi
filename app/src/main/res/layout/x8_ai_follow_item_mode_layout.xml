@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/rl_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/img_item3"
+        android:layout_marginBottom="22.0dip">
+
+        <ImageView
+            android:id="@+id/img_open_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/x8_btn_ai_follow_mode_close"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/img_item1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img_open_close"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12.0dip"
+            android:background="@drawable/x8_btn_ai_follow_lockup" />
+
+        <ImageView
+            android:id="@+id/img_item2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img_item1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="22.0dip"
+            android:background="@drawable/x8_btn_ai_follow_parallel" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/img_item3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/x8_btn_ai_follow_normal" />
+</RelativeLayout>

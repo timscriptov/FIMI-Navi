@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/custom_video_rl"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <TextureView
+        android:id="@+id/play_video_textureview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <ProgressBar
+        android:id="@+id/load_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminateDrawable="@drawable/album_progress_load"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btn_play_max"
+        android:layout_width="67.0dip"
+        android:layout_height="67.0dip"
+        android:layout_centerInParent="true"
+        android:background="@drawable/album_btn_media_play_big_selector" />
+
+    <include layout="@layout/x8_layout_bottom_play_bar" />
+</RelativeLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <Button
+        android:id="@+id/btn_item"
+        android:layout_width="wrap_content"
+        android:layout_height="27.0dip"
+        android:layout_margin="18.0dip"
+        android:background="@drawable/x8_btn_fc_button_selector"
+        android:text="button"
+        android:textAllCaps="false"
+        android:textColor="@color/white_100"
+        android:textSize="@dimen/textsize_36" />
+</LinearLayout>

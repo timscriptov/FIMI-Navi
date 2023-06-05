@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fimi.kernel.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/x8s_main_general_fw_upgrade_item_normal_x5"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_version_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/x8s_main_general_fw_upgrade_item_normal_x4"
+        android:gravity="center"
+        android:text="XX版本"
+        android:textColor="@color/white_100"
+        android:textSize="@dimen/textsize_39" />
+
+    <TextView
+        android:id="@+id/tv_version_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/x8s_main_general_fw_upgrade_item_normal_x4"
+        android:gravity="center"
+        android:text="1.0.0"
+        android:textColor="@color/white_100"
+        android:textSize="@dimen/textsize_39" />
+
+    <TextView
+        android:id="@+id/tv_update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/x8s_main_general_fw_upgrade_item_normal_x3"
+        android:layout_toLeftOf="@+id/tv_version_code"
+        android:background="@drawable/x8_update_surround_tx_blue_bg"
+        android:clickable="false"
+        android:gravity="center"
+        android:paddingLeft="@dimen/x8s_main_general_fw_upgrade_item_normal_x2"
+        android:paddingRight="@dimen/x8s_main_general_fw_upgrade_item_normal_x2"
+        android:text="@string/x8_general_version_update"
+        android:textColor="@color/black"
+        android:textSize="@dimen/textsize_33"
+        android:visibility="gone" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/x8s_main_general_fw_upgrade_item_normal_x1"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/x8s_main_general_fw_upgrade_item_normal_x4"
+        android:layout_marginRight="@dimen/x8s_main_general_fw_upgrade_item_normal_x4"
+        android:background="@color/white_30" />
+</com.fimi.kernel.percent.PercentRelativeLayout>

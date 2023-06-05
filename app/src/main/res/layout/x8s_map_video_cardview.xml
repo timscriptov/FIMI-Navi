@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <com.fimi.kernel.percent.PercentRelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/rl_cv_map_video"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <com.fimi.app.x8s.widget.X8MapVideoCardView
+            android:id="@+id/cv_map_video"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <RelativeLayout
+                android:id="@+id/rl_fullscreen"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#00000000" />
+
+            <RelativeLayout
+                android:id="@+id/rl_smallscreen"
+                android:layout_width="0.0dip"
+                android:layout_height="0.0dip"
+                android:background="#00000000" />
+
+        </com.fimi.app.x8s.widget.X8MapVideoCardView>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="Cursor"
+            android:src="@drawable/ic_cursor_background" />
+
+        <RelativeLayout
+            android:id="@+id/rl_fullscreen_shot"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+
+        <RelativeLayout
+            android:id="@+id/rl_switchscreen"
+            android:layout_width="0.0dip"
+            android:layout_height="0.0dip"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/x8_switch_screen_bg"
+            app:layout_heightPercent="17.5%h"
+            app:layout_marginBottomPercent="0.46875%w"
+            app:layout_marginLeftPercent="0.46875%w"
+            app:layout_widthPercent="17.5%w" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="帧率:"
+                android:textColor="@color/white_90"
+                android:textSize="18.0dip" />
+
+            <TextView
+                android:id="@+id/tv_vedio_frame"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="N/A"
+                android:textColor="@android:color/holo_green_light"
+                android:textSize="20.0dip" />
+
+        </LinearLayout>
+
+    </com.fimi.kernel.percent.PercentRelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_gc_calibrate"
+        android:layout_width="240.0dip"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="50.0dip"
+        android:layout_marginRight="56.0dip"
+        android:background="@color/white_30"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_step"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.fimi.app.x8s.widget.GimbalAdjustRelayout
+                android:id="@+id/rl_pitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" />
+
+            <com.fimi.app.x8s.widget.GimbalAdjustRelayout
+                android:id="@+id/rl_roll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" />
+
+            <com.fimi.app.x8s.widget.GimbalAdjustRelayout
+                android:id="@+id/rl_yaw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_step"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_get"
+                android:layout_width="60.0dip"
+                android:layout_height="36.0dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="获取"
+                android:textColor="@color/white_100"
+                android:textSize="14.0dip" />
+
+            <Button
+                android:id="@+id/btn_save"
+                android:layout_width="60.0dip"
+                android:layout_height="36.0dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="保存"
+                android:textColor="@color/white_100"
+                android:textSize="14.0dip" />
+
+            <Button
+                android:id="@+id/btn_calibrate"
+                android:layout_width="60.0dip"
+                android:layout_height="36.0dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="校准"
+                android:textColor="@color/white_100"
+                android:textSize="14.0dip" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</merge>

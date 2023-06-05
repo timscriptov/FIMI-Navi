@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fimi.app.x8s.widget.X8MapPointMarkerViewGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/myview"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:margin1="1.0dip"
+    app:margin2="1.0dip"
+    app:type="4">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/x8_map_event_bg" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/x8_ai_follow_marker_info_bg"
+        android:paddingLeft="4.0dip"
+        android:paddingRight="4.0dip"
+        android:text="5m"
+        android:textColor="#ffffffff"
+        android:textSize="10.0dip" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/x8_ai_line_point_no_angle1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5"
+        android:textColor="#ffffffff" />
+</com.fimi.app.x8s.widget.X8MapPointMarkerViewGroup>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_media_download"
+    android:layout_width="fill_parent"
+    android:layout_height="67.0dip"
+    android:layout_alignParentBottom="true"
+    android:background="#99000000">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0.30000007dip"
+        android:background="#26ffffff" />
+
+    <TextView
+        android:id="@+id/tv_file_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="21.0dip"
+        android:layout_marginTop="20.299988dip"
+        android:textColor="#80ffffff"
+        android:textSize="12.0dip" />
+
+    <TextView
+        android:id="@+id/tv_percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20.299988dip"
+        android:layout_marginRight="86.0dip"
+        android:textColor="#80ffffff"
+        android:textSize="12.0dip" />
+
+    <com.fimi.album.widget.MediaDownloadProgressView
+        android:id="@+id/pv_progress"
+        android:layout_width="fill_parent"
+        android:layout_height="2.0dip"
+        android:layout_below="@+id/tv_file_name"
+        android:layout_marginLeft="21.0dip"
+        android:layout_marginTop="10.0dip"
+        android:layout_marginRight="86.0dip" />
+
+    <Button
+        android:id="@+id/btn_start"
+        android:layout_width="47.599976dip"
+        android:layout_height="27.299988dip"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="18.599976dip"
+        android:background="@drawable/album_btn_start_shape"
+        android:gravity="center"
+        android:textColor="#e6ffffff"
+        android:textSize="12.0dip" />
+</RelativeLayout>

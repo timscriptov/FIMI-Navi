@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_bg1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <ImageView
+        android:id="@+id/img_bg"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/x8_error_code_type5" />
+
+    <ImageView
+        android:id="@+id/iv_arrow1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/x8s_main_errorcode_power_pitchingangle_layout_x1"
+        android:background="@drawable/x8_error_code_type3_icon" />
+
+    <com.fimi.app.x8s.widget.X8ErrorTextSwitchView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/x8s_main_errorcode_power_pitchingangle_layout_x4"
+        android:layout_toRightOf="@+id/iv_arrow1"
+        android:singleLine="true"
+        android:textColor="@color/white_100"
+        android:textSize="@dimen/x8s_main_errorcode_power_pitchingangle_layout_x7" />
+
+    <com.fimi.app.x8s.widget.X8ErrorTextSwitchView1
+        android:id="@+id/tv_title1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/x8s_main_errorcode_power_pitchingangle_layout_x4"
+        android:layout_toRightOf="@+id/iv_arrow1"
+        android:singleLine="true"
+        android:textColor="@color/white_100"
+        android:textSize="@dimen/x8s_main_errorcode_power_pitchingangle_layout_x7" />
+</RelativeLayout>

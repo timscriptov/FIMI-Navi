@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fimi.kernel.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rlRootView"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/x8s_ai_line_history_item_layout_x1"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tvItme1"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:text="@string/x8_ai_fly_take_off"
+        android:textColor="@color/white_90"
+        android:textSize="@dimen/textsize_39"
+        app:layout_widthPercent="4.45%" />
+
+    <TextView
+        android:id="@+id/tvItme2"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/tvItme1"
+        android:text="乌鲁木齐"
+        android:textColor="@color/white_90"
+        android:textSize="@dimen/textsize_39"
+        app:layout_widthPercent="16.13%" />
+
+    <TextView
+        android:id="@+id/tvItme3"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/tvItme2"
+        android:text="2018/09/21 17:20"
+        android:textColor="@color/white_90"
+        android:textSize="@dimen/textsize_39"
+        app:layout_widthPercent="26.71%" />
+
+    <TextView
+        android:id="@+id/tvItme4"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/tvItme3"
+        android:text="1.2km"
+        android:textColor="@color/white_90"
+        android:textSize="@dimen/textsize_39"
+        app:layout_widthPercent="13.35%" />
+
+    <TextView
+        android:id="@+id/tvItme5"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/tvItme4"
+        android:text="400s"
+        android:textColor="@color/white_90"
+        android:textSize="@dimen/textsize_39"
+        app:layout_widthPercent="12.75%" />
+
+    <TextView
+        android:id="@+id/tvItme6"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/tvItme5"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="飞行测试"
+        android:textColor="@color/white_90"
+        android:textSize="@dimen/textsize_39"
+        app:layout_widthPercent="18.64%" />
+
+    <RelativeLayout
+        android:id="@+id/rlSaveFlag"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/tvItme6"
+        app:layout_widthPercent="10.59%">
+
+        <ImageView
+            android:id="@+id/img_save_flag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/x8_btn_unsave_flag_selector" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/x8s_main_general_fw_upgrade_item_normal_x1"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white_30" />
+</com.fimi.kernel.percent.PercentRelativeLayout>

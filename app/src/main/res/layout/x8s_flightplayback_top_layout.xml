@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/flight_top_bars"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true">
+
+        <com.fimi.kernel.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/x8_top_view">
+
+            <View
+                android:id="@+id/x8_drone_info_state"
+                android:layout_width="90.0dip"
+                android:layout_height="30.0dip"
+                android:layout_centerHorizontal="true" />
+
+            <com.fimi.app.x8s.widget.X8MainElectricView
+                android:id="@+id/electric_view"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/x8s_main_top_layout_x1"
+                android:layout_marginTop="@dimen/x8s_main_top_layout_x13"
+                app:hightElectric="#ffffffff"
+                app:lowElectric="#fff22121"
+                app:middleElectric="#ffffba00" />
+
+            <com.fimi.app.x8s.widget.X8BatteryReturnLandingView
+                android:id="@+id/v_landing_return_view"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x8s_main_top_layout_x13" />
+
+            <com.fimi.app.x8s.widget.X8MainPowerView
+                android:id="@+id/power_view"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                app:image="@drawable/x8_top_power"
+                app:layout_widthPercent="20.9375%w" />
+
+            <ImageButton
+                android:id="@+id/x8_ibtn_return"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x8s_main_top_layout_x2"
+                android:layout_marginTop="@dimen/x8s_main_top_layout_x3"
+                android:background="@drawable/x8_selector_return_btn" />
+
+            <ImageButton
+                android:id="@+id/x8_ibtn_flightlog_collect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="@dimen/x8s_main_top_layout_x2"
+                android:layout_marginRight="@dimen/x8s_main_top_layout_x3"
+                android:background="@drawable/x8_selector_flightlog_btn_collect" />
+
+            <ImageView
+                android:id="@+id/iv_fly_hight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x8s_main_top_layout_x2"
+                android:background="@drawable/x8_main_fly_hight"
+                app:layout_marginLeftPercent="7.5%" />
+
+            <TextView
+                android:id="@+id/tv_hight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x8s_main_top_layout_x2"
+                android:layout_marginTop="@dimen/x8s_main_top_layout_x4"
+                android:layout_toRightOf="@+id/iv_fly_hight"
+                android:text="@string/x8_na"
+                android:textColor="#ffffffff"
+                android:textSize="13.0dip" />
+
+            <TextView
+                android:id="@+id/tv_height_lable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2.0dip"
+                android:layout_marginTop="@dimen/x8s_main_top_layout_x4"
+                android:layout_toRightOf="@+id/tv_hight"
+                android:textColor="#ffffffff"
+                android:textSize="13.0dip" />
+
+            <ImageView
+                android:id="@+id/iv_fly_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x8s_main_top_layout_x2"
+                android:background="@drawable/x8_main_fly_distance"
+                app:layout_marginLeftPercent="18.5%" />
+
+            <TextView
+                android:id="@+id/tv_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x8s_main_top_layout_x2"
+                android:layout_marginTop="@dimen/x8s_main_top_layout_x4"
+                android:layout_toRightOf="@+id/iv_fly_distance"
+                android:text="@string/x8_na"
+                android:textColor="#ffffffff"
+                android:textSize="13.0dip" />
+
+            <TextView
+                android:id="@+id/tv_distance_lable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2.0dip"
+                android:layout_marginTop="@dimen/x8s_main_top_layout_x4"
+                android:layout_toRightOf="@+id/tv_distance"
+                android:textColor="#ffffffff"
+                android:textSize="13.0dip" />
+
+            <TextView
+                android:id="@+id/tv_hs_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x8s_main_top_layout_x5"
+                android:text="VS"
+                android:textColor="#ffffffff"
+                android:textSize="6.0dip"
+                app:layout_marginLeftPercent="30.5%" />
+
+            <TextView
+                android:id="@+id/tv_hs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x8s_main_top_layout_x1"
+                android:layout_marginTop="@dimen/x8s_main_top_layout_x2"
+                android:layout_toRightOf="@+id/tv_hs_label"
+                android:text="@string/x8_na"
+                android:textColor="#ffffffff"
+                android:textSize="9.0dip" />
+
+            <TextView
+                android:id="@+id/tv_vs_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x8s_main_top_layout_x10"
+                android:text="HS"
+                android:textColor="#ffffffff"
+                android:textSize="6.0dip"
+                app:layout_marginLeftPercent="30.5%" />
+
+            <TextView
+                android:id="@+id/tv_vs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x8s_main_top_layout_x1"
+                android:layout_marginTop="@dimen/x8s_main_top_layout_x8"
+                android:layout_toRightOf="@+id/tv_vs_label"
+                android:text="@string/x8_na"
+                android:textColor="#ffffffff"
+                android:textSize="9.0dip" />
+
+            <TextView
+                android:id="@+id/tv_vs_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2.0dip"
+                android:layout_marginTop="@dimen/x8s_main_top_layout_x8"
+                android:layout_toRightOf="@+id/tv_vs"
+                android:textColor="#ffffffff"
+                android:textSize="9.0dip" />
+
+            <com.fimi.app.x8s.widget.X8MainTopRightFlightPlaybackView
+                android:id="@+id/x8main_top_center_view"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/x8_ibtn_flightlog_collect"
+                android:layout_toRightOf="@+id/tv_connect_state"
+                app:layout_marginLeftPercent="8%"
+                app:layout_marginRightPercent="1%" />
+
+            <TextView
+                android:id="@+id/tv_connect_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/x8s_main_top_layout_x1"
+                android:text="@string/x8_fly_status_unconnect"
+                android:textColor="#ffffffff"
+                android:textSize="@dimen/x8s_main_top_layout_x7" />
+
+            <ImageView
+                android:id="@+id/iv_fly_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/x8s_main_top_layout_x9" />
+        </com.fimi.kernel.percent.PercentRelativeLayout>
+
+        <com.fimi.app.x8s.widget.X8MainReturnTimeTextView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/x8_return_time_text_view"
+            android:layout_width="@dimen/x8s_main_top_layout_x19"
+            android:layout_height="@dimen/x8s_main_top_layout_x6"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/x8s_main_top_layout_x12"
+            app:fontSize="@dimen/x8s_main_top_layout_x4"
+            app:width="@dimen/x8s_main_top_layout_x11" />
+    </RelativeLayout>
+</merge>

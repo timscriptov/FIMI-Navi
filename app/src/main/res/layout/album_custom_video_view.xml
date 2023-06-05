@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/custom_video_rl"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <TextureView
+        android:id="@+id/play_video_textureview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <ProgressBar
+        android:id="@+id/load_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminateDrawable="@drawable/album_progress_load" />
+
+    <include layout="@layout/album_layout_photo_media_top" />
+
+    <include layout="@layout/album_layout_bottom_play_bar" />
+</RelativeLayout>

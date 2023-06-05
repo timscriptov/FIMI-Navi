@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fimi.kernel.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffffff"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <com.fimi.libperson.widget.TitleView
+        android:id="@+id/title_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <include
+        android:id="@+id/rl_iphone"
+        layout="@layout/sub_iphone_register_account"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_view"
+        android:layout_marginLeft="20.0dip"
+        android:layout_marginRight="20.0dip"
+        android:visibility="invisible" />
+
+    <include
+        android:id="@+id/rl_email"
+        layout="@layout/sub_email_account"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_view"
+        android:layout_marginLeft="20.0dip"
+        android:layout_marginRight="20.0dip"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tv_title_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="77.29999dip"
+        android:textColor="#ff000000"
+        android:textSize="18.0dip" />
+
+    <Button
+        android:id="@+id/btn_register_phone"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:layout_below="@+id/rl_iphone"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40.0dip"
+        android:background="@drawable/fimi_person_btn_bottom__shape_enable"
+        android:text="@string/login_register_btn"
+        android:textColor="@drawable/fimi_person_btn_butom_txcolor_select"
+        android:textSize="13.299988dip"
+        app:layout_heightPercent="11.2962%w"
+        app:layout_widthPercent="87.2222%w" />
+
+    <Button
+        android:id="@+id/btn_register_email"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:layout_below="@+id/rl_email"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60.0dip"
+        android:background="@drawable/fimi_person_btn_bottom__shape_enable"
+        android:text="@string/login_register_btn"
+        android:textColor="@drawable/fimi_person_btn_butom_txcolor_select"
+        android:textSize="13.299988dip"
+        android:visibility="gone"
+        app:layout_heightPercent="11.2962%w"
+        app:layout_widthPercent="87.2222%w" />
+</com.fimi.kernel.percent.PercentRelativeLayout>

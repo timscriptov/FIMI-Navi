@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/x8s_photo_param_list_item_x4">
+
+    <TextView
+        android:id="@+id/item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/x8s_photo_param_list_item_x1"
+        android:text="@string/x8_camera_shutter_value_0"
+        android:textColor="@drawable/x8_camera_set_enable_selector"
+        android:textSize="13.0dip" />
+
+    <TextView
+        android:id="@+id/item_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/x8s_photo_param_list_item_x2"
+        android:layout_toLeftOf="@+id/goto_icon"
+        android:text="@string/x8_camera_shutter"
+        android:textColor="@drawable/x8_camera_set_enable_selector"
+        android:textSize="12.0dip" />
+
+    <ImageView
+        android:id="@+id/goto_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/x8s_photo_param_list_item_x3"
+        android:src="@drawable/x8_param_goto_icon_seletor" />
+</RelativeLayout>

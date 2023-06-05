@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_content"
+        android:layout_width="345.0dip"
+        android:layout_height="181.0dip"
+        android:background="@drawable/fimisdk_shape_dialog_content_bg">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="251.6dip"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12.299988dip"
+            android:gravity="center"
+            android:textColor="#ff3a3a3a"
+            android:textSize="14.0dip" />
+
+        <TextView
+            android:id="@+id/tv_sub_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="7.299988dip"
+            android:textColor="#663a3a3a"
+            android:textSize="12.599976dip" />
+
+        <TextView
+            android:id="@+id/tv_delcare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_sub_title"
+            android:layout_alignLeft="@+id/tv_sub_title"
+            android:textColor="#cc3a3a3a"
+            android:textSize="12.599976dip" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_delcare"
+            android:layout_alignLeft="@+id/tv_sub_title"
+            android:layout_marginLeft="20.0dip"
+            android:layout_marginRight="20.0dip"
+            android:layout_marginBottom="14.0dip"
+            android:scrollbars="vertical"
+            android:textColor="#cc3a3a3a"
+            android:textSize="10.599976dip" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_double"
+        android:layout_width="345.0dip"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_content"
+        android:layout_marginTop="6.5999756dip">
+
+        <View
+            android:id="@+id/v_divider"
+            android:layout_width="2.0px"
+            android:layout_height="45.299988dip"
+            android:layout_centerHorizontal="true"
+            android:background="#ffffffff" />
+
+        <Button
+            android:id="@+id/btn_left"
+            android:layout_width="wrap_content"
+            android:layout_height="45.299988dip"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/v_divider"
+            android:background="@drawable/fimisdk_selector_dialog_btn_left"
+            android:textColor="#ccffffff"
+            android:textSize="14.0dip" />
+
+        <Button
+            android:id="@+id/btn_right"
+            android:layout_width="wrap_content"
+            android:layout_height="45.299988dip"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/v_divider"
+            android:background="@drawable/fimisdk_selector_dialog_btn_right"
+            android:textColor="#fff36705"
+            android:textSize="14.0dip" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_single"
+        android:layout_width="345.0dip"
+        android:layout_height="45.299988dip"
+        android:layout_below="@+id/rl_content"
+        android:layout_marginTop="6.5999756dip"
+        android:background="@drawable/fimisdk_selector_dialog_btn_single"
+        android:textColor="#fff36705"
+        android:textSize="14.0dip"
+        android:visibility="invisible" />
+</RelativeLayout>

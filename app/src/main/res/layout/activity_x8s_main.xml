@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fimi.kernel.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/x8s_main_view"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <include layout="@layout/x8s_map_video_cardview" />
+
+    <include layout="@layout/x8_camera_interest_merering_contering" />
+
+    <include
+        android:id="@+id/x8s_main_top_layout"
+        layout="@layout/x8s_main_top_layout" />
+
+    <RelativeLayout
+        android:id="@+id/rl_x8_ai_excute"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="gone" />
+
+    <include layout="@layout/x8s_main_bottom_parameter_layout" />
+
+    <include layout="@layout/x8_main_all_setting_five_key_show" />
+
+    <include layout="@layout/x8s_main_right_menu_layout" />
+
+    <include layout="@layout/x8_right_icon_for_map_layout" />
+
+    <include layout="@layout/x8s_main_errorcode_power_pitchingangle_layout" />
+
+    <include layout="@layout/x8_main_ai_fly" />
+
+    <include layout="@layout/x8_main_fc_all_setting" />
+
+    <include
+        layout="@layout/x8_main_camera_setting"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_toLeftOf="@+id/main_right_menu" />
+
+    <include layout="@layout/x8_main_ai_follow_confirm_main_layout" />
+
+    <RelativeLayout
+        android:id="@+id/rl_x8_setting_show_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/rl_cover"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/white_20"
+        android:clickable="true"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/rl_error_codeTest"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/tv_pow"
+            android:layout_width="100.0dip"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="#ff000000"
+            android:digits="\ 0123456789"
+            android:ellipsize="none"
+            android:gravity="center"
+            android:imeOptions="flagNoExtractUi"
+            android:maxLength="50"
+            android:text="0"
+            android:textColor="@color/white_100"
+            android:textSize="@dimen/textsize_39" />
+
+        <Button
+            android:id="@+id/btn_errorcode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_pow"
+            android:onClick="onTestErrorCode"
+            android:text="Test ErrorCode" />
+
+    </RelativeLayout>
+
+    <com.fimi.app.x8s.widget.X8AiTipWithCloseView
+        android:id="@+id/v_accurate_landing_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="50.0dip"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_marginBottomPercent="4.722222%" />
+
+</com.fimi.kernel.percent.PercentRelativeLayout>

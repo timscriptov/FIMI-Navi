@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fimi.kernel.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/x8_ai_point_to_point_confirm_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_alignParentRight="true"
+    android:clickable="true">
+
+    <com.fimi.kernel.percent.PercentRelativeLayout
+        android:id="@+id/rl_ai_follow_confirm"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        app:layout_heightPercent="11%">
+
+        <ImageView
+            android:id="@+id/img_ai_follow_return"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/x8_img_return" />
+
+        <TextView
+            android:id="@+id/tv_ai_follow_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/x8_ai_fly_surround_to_point"
+            android:textColor="@color/white_90"
+            android:textSize="@dimen/textsize_45" />
+    </com.fimi.kernel.percent.PercentRelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/x8s_ai_surround_to_point__excute_confirm_layout_x1"
+        android:background="@color/white_10"
+        app:layout_marginTopPercent="11.11111%" />
+
+    <TextView
+        android:id="@+id/tv_ai_follow_confirm_title1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/x8_ai_fly_follow_surround_time"
+        android:textColor="@color/white_90"
+        android:textSize="@dimen/textsize_39"
+        app:layout_marginLeftPercent="5.8333333%"
+        app:layout_marginTopPercent="14.4444%" />
+
+    <TextView
+        android:id="@+id/tv_ai_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x8s_ai_surround_to_point__excute_confirm_layout_x5"
+        android:layout_toRightOf="@+id/tv_ai_follow_confirm_title1"
+        android:text="30S"
+        android:textColor="@color/white_90"
+        android:textSize="@dimen/textsize_39"
+        app:layout_marginTopPercent="14.4444%" />
+
+    <TextView
+        android:id="@+id/tv_ai_follow_confirm_title3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_ai_follow_confirm_title1"
+        android:text="@string/x8_ai_fly_follow_point_to_point_tip6"
+        android:textColor="@color/white_90"
+        android:textSize="@dimen/textsize_39"
+        app:layout_marginLeftPercent="5.8333333%"
+        app:layout_marginTopPercent="2.222%" />
+
+    <TextView
+        android:id="@+id/tv_ai_follow_speed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_ai_follow_confirm_title1"
+        android:layout_marginLeft="@dimen/x8s_ai_surround_to_point__excute_confirm_layout_x5"
+        android:layout_toRightOf="@+id/tv_ai_follow_confirm_title3"
+        android:text="3M/S"
+        android:textColor="@color/white_90"
+        android:textSize="@dimen/textsize_39"
+        app:layout_marginTopPercent="2.222%" />
+
+    <RelativeLayout
+        android:id="@+id/rl_seekbar"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/x8s_ai_surround_to_point__excute_confirm_layout_x10"
+        android:layout_below="@+id/tv_ai_follow_confirm_title3"
+        app:layout_marginTopPercent="2.777777%">
+
+        <RelativeLayout
+            android:id="@+id/rl_minus"
+            android:layout_width="@dimen/x8s_ai_surround_to_point__excute_confirm_layout_x7"
+            android:layout_height="@dimen/x8s_ai_surround_to_point__excute_confirm_layout_x7"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x8s_ai_surround_to_point__excute_confirm_layout_x8">
+
+            <View
+                android:id="@+id/view_minus"
+                android:layout_width="@dimen/x8s_ai_surround_to_point__excute_confirm_layout_x4"
+                android:layout_height="@dimen/x8s_ai_surround_to_point__excute_confirm_layout_x2"
+                android:layout_centerInParent="true"
+                android:background="@drawable/x8_btn_minus_bg" />
+        </RelativeLayout>
+
+        <SeekBar
+            android:id="@+id/sb_value"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x8s_ai_surround_to_point__excute_confirm_layout_x6"
+            android:layout_marginRight="@dimen/x8s_ai_surround_to_point__excute_confirm_layout_x6"
+            android:layout_toLeftOf="@+id/rl_plus"
+            android:layout_toRightOf="@+id/rl_minus"
+            android:background="@null"
+            android:focusable="true"
+            android:maxHeight="@dimen/x8s_ai_surround_to_point__excute_confirm_layout_x3"
+            android:minHeight="@dimen/x8s_ai_surround_to_point__excute_confirm_layout_x3"
+            android:progressDrawable="@drawable/x8_img_seekbar_bg"
+            android:thumb="@drawable/x8_img_seekbar_thum" />
+
+        <RelativeLayout
+            android:id="@+id/rl_plus"
+            android:layout_width="@dimen/x8s_ai_surround_to_point__excute_confirm_layout_x7"
+            android:layout_height="@dimen/x8s_ai_surround_to_point__excute_confirm_layout_x7"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x8s_ai_surround_to_point__excute_confirm_layout_x8">
+
+            <View
+                android:id="@+id/view_plus"
+                android:layout_width="@dimen/x8s_ai_surround_to_point__excute_confirm_layout_x6"
+                android:layout_height="@dimen/x8s_ai_surround_to_point__excute_confirm_layout_x6"
+                android:layout_centerInParent="true"
+                android:background="@drawable/x8_btn_plus_bg" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_ai_rotation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_seekbar"
+        android:text="@string/x8_ai_fly_follow_surround_rotation"
+        android:textColor="@color/white_90"
+        android:textSize="@dimen/textsize_39"
+        app:layout_marginLeftPercent="5.8333333%"
+        app:layout_marginTopPercent="2.222%" />
+
+    <TextView
+        android:id="@+id/tv_ai_rotation1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_ai_rotation"
+        android:text="@string/x8_ai_fly_follow_surround_rotation1"
+        android:textColor="@drawable/x8_surround_textcolor_selector"
+        android:textSize="@dimen/textsize_36"
+        app:layout_marginLeftPercent="6.875%"
+        app:layout_marginTopPercent="2.222%" />
+
+    <TextView
+        android:id="@+id/tv_ai_rotation2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_ai_rotation"
+        android:layout_marginLeft="@dimen/x8s_ai_surround_to_point__excute_confirm_layout_x5"
+        android:layout_toRightOf="@+id/tv_ai_rotation1"
+        android:text="@string/x8_ai_fly_follow_surround_rotation2"
+        android:textColor="@drawable/x8_surround_textcolor_selector"
+        android:textSize="@dimen/textsize_36"
+        app:layout_marginTopPercent="2.222%" />
+
+    <TextView
+        android:id="@+id/tv_ai_orientation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_ai_rotation2"
+        android:text="@string/x8_ai_fly_follow_surround_orientation"
+        android:textColor="@color/white_90"
+        android:textSize="@dimen/textsize_39"
+        app:layout_marginLeftPercent="5.8333333%"
+        app:layout_marginTopPercent="2.222%" />
+
+    <TextView
+        android:id="@+id/tv_ai_orientation1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_ai_orientation"
+        android:text="@string/x8_ai_fly_follow_surround_orientation1"
+        android:textColor="@drawable/x8_surround_textcolor_selector"
+        android:textSize="@dimen/textsize_36"
+        app:layout_marginLeftPercent="6.875%"
+        app:layout_marginTopPercent="2.222%" />
+
+    <TextView
+        android:id="@+id/tv_ai_orientation2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_ai_orientation"
+        android:layout_marginLeft="@dimen/x8s_ai_surround_to_point__excute_confirm_layout_x5"
+        android:layout_toRightOf="@+id/tv_ai_orientation1"
+        android:text="@string/x8_ai_fly_follow_surround_orientation2"
+        android:textColor="@drawable/x8_surround_textcolor_selector"
+        android:textSize="@dimen/textsize_36"
+        app:layout_marginTopPercent="2.222%" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_ai_orientation2"
+        android:text="@string/x8_ai_fly_follow_surround_tip"
+        android:textColor="@color/white_90"
+        android:textSize="@dimen/x8s_ai_surround_to_point__excute_confirm_layout_x6"
+        android:visibility="gone"
+        app:layout_marginLeftPercent="5.8333333%"
+        app:layout_marginTopPercent="2.222%" />
+
+    <Button
+        android:id="@+id/btn_ai_follow_confirm_ok"
+        android:layout_width="@dimen/x8s_ai_surround_to_point__excute_confirm_layout_x11"
+        android:layout_height="@dimen/x8s_ai_surround_to_point__excute_confirm_layout_x9"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/x8_btn_white_selector"
+        android:text="@string/x8_ai_fly_follow_go"
+        android:textColor="@color/black_90"
+        android:textSize="@dimen/textsize_39"
+        app:layout_marginBottomPercent="2.777777%" />
+</com.fimi.kernel.percent.PercentRelativeLayout>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="183.0dip"
+    android:layout_height="wrap_content"
+    android:background="@drawable/x8_shape_dialog_content_bg"
+    android:gravity="center">
+
+    <com.fimi.kernel.percent.PercentLinearLayout
+        android:id="@+id/layout_content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x8s_view_custom_dialog_x1"
+        android:layout_marginRight="@dimen/x8s_view_custom_dialog_x1"
+        android:background="@drawable/x8_img_double_dialog_content_bg"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/x8_view_imu_checking_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/x8_ai_auto_phto_loding_icon"
+            app:layout_marginTopPercent="7.33%h" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x8s_view_custom_dialog_x5"
+            android:layout_marginRight="@dimen/x8s_view_custom_dialog_x5"
+            android:ellipsize="none"
+            android:gravity="center"
+            android:maxLines="100"
+            android:text="@string/x8_fc_item_imu_checking"
+            android:textColor="@color/white_100"
+            android:textSize="11.0dip"
+            app:layout_marginTopPercent="2.78%h" />
+
+        <TextView
+            android:id="@+id/tv_message_two"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x8s_view_custom_dialog_x5"
+            android:layout_marginRight="@dimen/x8s_view_custom_dialog_x5"
+            android:ellipsize="none"
+            android:gravity="center"
+            android:maxLines="100"
+            android:text="@string/x8_fc_item_imu_hint"
+            android:textColor="@color/white_100"
+            android:textSize="8.0dip"
+            app:layout_marginTopPercent="2.13%h" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/x8s_view_custom_dialog_x3" />
+    </com.fimi.kernel.percent.PercentLinearLayout>
+</RelativeLayout>

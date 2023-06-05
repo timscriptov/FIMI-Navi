@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fimi.kernel.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/white"
+    android:fitsSystemWindows="true">
+
+    <TextView
+        android:id="@+id/tv_update_titlt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/x8_update_fw_title"
+        android:textColor="#cb000000"
+        android:textSize="14.0dip"
+        app:layout_marginTopPercent="8.24%" />
+
+    <RelativeLayout
+        android:id="@+id/rl_status_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:layout_marginTopPercent="23.12%">
+
+        <ImageView
+            android:id="@+id/img_update_result"
+            android:layout_width="121.0dip"
+            android:layout_height="121.0dip"
+            android:layout_centerInParent="true"
+            android:src="@drawable/x8_img_updating"
+            android:visibility="gone" />
+
+        <com.fimi.widget.DownRoundProgress
+            android:id="@+id/rpb_update_progress"
+            android:layout_width="121.0dip"
+            android:layout_height="121.0dip"
+            android:layout_centerHorizontal="true"
+            app:roundColor="#4d000000"
+            app:roundProgressColor="#ff000000"
+            app:roundProgressWidth="1.0dip"
+            app:roundWidth="0.3333dip" />
+
+        <TextView
+            android:id="@+id/x8s_tv_updating_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="0%"
+            android:textColor="#ff000000"
+            android:textSize="15.0dip" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_updating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_status_layout"
+        android:layout_centerHorizontal="true"
+        android:textColor="#cb000000"
+        android:textSize="15.0dip"
+        app:layout_marginLeftPercent="3.9%w"
+        app:layout_marginRightPercent="3.9%w"
+        app:layout_marginTopPercent="3.9%" />
+
+    <TextView
+        android:id="@+id/tv_update_warnming"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_updating"
+        android:layout_centerHorizontal="true"
+        android:gravity="left"
+        android:text="@string/x8_update_warning"
+        android:textColor="#71000000"
+        android:textSize="10.0dip"
+        app:layout_marginLeftPercent="3.9%w"
+        app:layout_marginRightPercent="3.9%w"
+        app:layout_marginTopPercent="3.56%" />
+
+    <Button
+        android:id="@+id/btn_reconnect"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/x8_update_btn_bottom__shape_enable"
+        android:gravity="center"
+        android:text="@string/x8_update_connect"
+        android:textColor="@drawable/x8_update_btn_butom_txcolor_select"
+        android:textSize="13.329987dip"
+        android:visibility="gone"
+        app:layout_heightPercent="6.3541%w"
+        app:layout_marginBottomPercent="10.83%"
+        app:layout_widthPercent="25%w" />
+
+    <TextView
+        android:id="@+id/x8_tv_update_failure_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/x8_update_hint_two"
+        android:textColor="@color/x8_update_failure_hint"
+        android:textSize="12.0dip"
+        android:visibility="gone"
+        app:layout_marginBottomPercent="3.61%" />
+</com.fimi.kernel.percent.PercentRelativeLayout>

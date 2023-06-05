@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/view_group"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ff141719">
+
+    <RelativeLayout
+        android:id="@+id/rl_head"
+        android:layout_width="fill_parent"
+        android:layout_height="50.0dip"
+        android:background="#ff000000">
+
+        <ImageButton
+            android:id="@+id/ibtn_return"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20.0dip"
+            android:background="@drawable/x8_selector_return_btn" />
+
+        <Button
+            android:id="@+id/tv_media_select"
+            android:layout_width="55.0dip"
+            android:layout_height="55.0dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5.0dip"
+            android:background="@drawable/x8_ablum_top_select"
+            android:gravity="center"
+            android:text="@string/media_select"
+            android:textColor="#0000ffff" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tl_title_categoly"
+            android:layout_width="400.0dip"
+            android:layout_height="fill_parent"
+            android:layout_centerInParent="true"
+            app:tabBackground="@null"
+            app:tabGravity="center"
+            app:tabIndicatorHeight="0.0dip"
+            app:tabPaddingEnd="15.0dip"
+            app:tabSelectedTextColor="@android:color/black"
+            app:tabTextColor="@android:color/holo_blue_light" />
+    </RelativeLayout>
+
+    <com.fimi.album.widget.HackyViewPager
+        android:id="@+id/viewpaper"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/rl_head" />
+
+    <include layout="@layout/x8_media_top_bar" />
+
+    <include layout="@layout/x8_media_bottonm_bar" />
+</RelativeLayout>

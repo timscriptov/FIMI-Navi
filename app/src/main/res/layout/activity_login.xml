@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fimi.kernel.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_login"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:keepScreenOn="true"
+    android:orientation="vertical"
+    android:scaleType="centerCrop">
+
+    <com.fimi.libperson.widget.LargeView
+        android:id="@+id/large_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/login_mask" />
+
+    <ImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="114.0dip"
+        android:background="@drawable/login_logo"
+        app:layout_marginTopPercent="24.8%w" />
+
+    <TextView
+        android:id="@+id/tv_region"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="17.0dip"
+        android:padding="5.0dip"
+        android:textColor="#fff70404"
+        android:textSize="12.0dip" />
+
+    <RelativeLayout
+        android:id="@+id/rl_third_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_region"
+        android:layout_marginBottom="23.599976dip">
+
+        <ImageView
+            android:id="@+id/iv_twitter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="113.599976dip"
+            android:background="@drawable/selector_img_login_twitter"
+            android:clickable="true" />
+
+        <ImageView
+            android:id="@+id/iv_facebook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="113.599976dip"
+            android:background="@drawable/selector_img_login_facebook"
+            android:clickable="true"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/iv_mi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="113.599976dip"
+            android:background="@drawable/selector_img_login_mi" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_no_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="125.0dip"
+        android:text="@string/login_no_login"
+        android:textColor="#ffffffff"
+        android:textSize="12.0dip" />
+
+    <RelativeLayout
+        android:id="@+id/rl_fimi_login"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20.0dip"
+        android:layout_marginRight="20.0dip"
+        android:layout_marginBottom="172.0dip">
+
+        <Button
+            android:id="@+id/btn_login"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="39.0dip"
+            android:background="@drawable/fimi_sdk_btn_shape_enable"
+            android:text="@string/login_login"
+            android:textColor="#ffffffff"
+            android:textSize="12.0dip" />
+
+        <Button
+            android:id="@+id/btn_register"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="39.0dip"
+            android:layout_below="@+id/btn_login"
+            android:layout_marginTop="20.0dip"
+            android:background="@drawable/fimi_sdk_btn_white_shape_enable"
+            android:gravity="center"
+            android:text="@string/login_register"
+            android:textColor="#ffffffff"
+            android:textSize="12.0dip" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_user_security"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_login"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:textSize="12.0dip"
+        app:layout_marginBottomPercent="4.7%w"
+        app:layout_widthPercent="87.03%w" />
+</com.fimi.kernel.percent.PercentRelativeLayout>

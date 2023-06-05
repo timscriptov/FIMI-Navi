@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fimi.kernel.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/x8_rc_main_calibration_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/black_80">
+
+    <RelativeLayout
+        android:id="@+id/rl_rc_calibration_title"
+        android:layout_width="fill_parent"
+        android:layout_height="0.0dip"
+        android:background="@color/white_5"
+        app:layout_heightPercent="14.814814%h"
+        app:layout_marginLeftPercent="1.478743%w"
+        app:layout_marginRightPercent="1.478743%w"
+        app:layout_marginTopPercent="1.478743%w">
+
+        <ImageView
+            android:id="@+id/img_return"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/x8_img_return" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/x8_rc_calibration"
+            android:textColor="@color/white_100"
+            android:textSize="@dimen/textsize_45" />
+    </RelativeLayout>
+
+    <com.fimi.kernel.percent.PercentRelativeLayout
+        android:id="@+id/rc_calibration_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/rl_rc_calibration_title"
+        android:background="@color/white_5"
+        android:visibility="visible"
+        app:layout_marginBottomPercent="1.478743%w"
+        app:layout_marginLeftPercent="1.478743%w"
+        app:layout_marginRightPercent="1.478743%w"
+        app:layout_marginTopPercent="1.11111%w">
+
+        <TextView
+            android:id="@+id/tv_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/x8_rc_no_connect_tip"
+            android:textColor="@color/white_100"
+            android:textSize="@dimen/textsize_36"
+            app:layout_marginTopPercent="3.317535%h" />
+
+        <RelativeLayout
+            android:id="@+id/rc_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_tip"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="62.0dip"
+            android:layout_marginTop="5.0dip"
+            android:layout_marginRight="62.0dip"
+            android:layout_marginBottom="20.0dip"
+            android:background="@drawable/x8_rc_base_bg">
+
+            <RelativeLayout
+                android:id="@+id/control_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/x8_rc_normal_bg">
+
+                <com.fimi.app.x8s.widget.RcRollerView
+                    android:id="@+id/left_up"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="28.0dip"
+                    android:layout_marginTop="6.0dip"
+                    app:rollerSrc="@drawable/x8_arrow_left_up_empty"
+                    app:viewType="0" />
+
+                <RelativeLayout
+                    android:id="@+id/left_mid_layout"
+                    android:layout_width="85.0dip"
+                    android:layout_height="85.0dip"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="10.0dip"
+                    android:layout_marginTop="30.0dip">
+
+                    <com.fimi.app.x8s.widget.MidView
+                        android:id="@+id/mid_left"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        app:midType="1" />
+
+                    <ImageView
+                        android:id="@+id/left_top_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:alpha="0.6"
+                        android:background="@drawable/x8_joy_dir_top_selector" />
+
+                    <ImageView
+                        android:id="@+id/left_bottom_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:alpha="0.6"
+                        android:background="@drawable/x8_joy_dir_bottom_selector" />
+
+                    <ImageView
+                        android:id="@+id/left_right_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:alpha="0.6"
+                        android:background="@drawable/x8_joy_dir_right_selector" />
+
+                    <ImageView
+                        android:id="@+id/left_left_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:alpha="0.6"
+                        android:background="@drawable/x8_joy_dir_left_selector" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/right_mid_layout"
+                    android:layout_width="85.0dip"
+                    android:layout_height="85.0dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="30.0dip"
+                    android:layout_marginRight="10.0dip">
+
+                    <com.fimi.app.x8s.widget.MidView
+                        android:id="@+id/mid_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        app:midType="1" />
+
+                    <ImageView
+                        android:id="@+id/right_top_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:alpha="0.6"
+                        android:background="@drawable/x8_joy_dir_top_selector" />
+
+                    <ImageView
+                        android:id="@+id/right_bottom_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:alpha="0.6"
+                        android:background="@drawable/x8_joy_dir_bottom_selector" />
+
+                    <ImageView
+                        android:id="@+id/right_right_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:alpha="0.6"
+                        android:background="@drawable/x8_joy_dir_right_selector" />
+
+                    <ImageView
+                        android:id="@+id/right_left_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:alpha="0.6"
+                        android:background="@drawable/x8_joy_dir_left_selector" />
+                </RelativeLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btn_calibration"
+            android:layout_width="93.0dip"
+            android:layout_height="27.0dip"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="31.0dip"
+            android:alpha="0.9"
+            android:background="@drawable/x8_btn_white_selector"
+            android:enabled="false"
+            android:text="@string/x8_cloud_gimbal_btn"
+            android:textColor="@color/black_90"
+            android:textSize="@dimen/textsize_39"
+            android:visibility="visible" />
+
+        <com.fimi.app.x8s.widget.RcRollerView
+            android:id="@+id/left_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/rc_layout"
+            android:layout_alignTop="@+id/rc_layout"
+            android:layout_marginTop="6.0dip"
+            app:rollerSrc="@drawable/x8_arrow_left_down_empty2"
+            app:viewType="1" />
+    </com.fimi.kernel.percent.PercentRelativeLayout>
+
+    <com.fimi.kernel.percent.PercentRelativeLayout
+        android:id="@+id/rl_rc_calibration_result"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/rl_rc_calibration_title"
+        android:background="@color/white_5"
+        android:visibility="gone"
+        app:layout_marginBottomPercent="1.478743%w"
+        app:layout_marginLeftPercent="1.478743%w"
+        app:layout_marginRightPercent="1.478743%w"
+        app:layout_marginTopPercent="1.11111%w">
+
+        <ImageView
+            android:id="@+id/img_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/x8_calibration_success_icon"
+            app:layout_marginTopPercent="8.53080%h" />
+
+        <TextView
+            android:id="@+id/tv_result_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img_result"
+            android:layout_centerHorizontal="true"
+            android:text="@string/x8_compass_result_success"
+            android:textColor="@color/white_100"
+            android:textSize="@dimen/textsize_36"
+            app:layout_marginTopPercent="9.957%h" />
+
+        <TextView
+            android:id="@+id/tv_error_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_result_tip"
+            android:layout_centerHorizontal="true"
+            android:text="@string/x8_compass_result_failed_tip"
+            android:textColor="@color/white_100"
+            android:textSize="@dimen/textsize_36"
+            android:visibility="gone"
+            app:layout_marginTopPercent="3.317%h" />
+
+        <Button
+            android:id="@+id/btn_rt"
+            android:layout_width="0.0dip"
+            android:layout_height="0.0dip"
+            android:layout_below="@+id/tv_result_tip"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/x8_btn_white_selector"
+            android:text="@string/x8_compass_reuslt_success_confirm"
+            android:textColor="@color/black_90"
+            android:textSize="@dimen/textsize_39"
+            app:layout_heightPercent="12.7962085%h"
+            app:layout_marginTopPercent="14.691%h"
+            app:layout_widthPercent="13.9047619%w" />
+    </com.fimi.kernel.percent.PercentRelativeLayout>
+</com.fimi.kernel.percent.PercentRelativeLayout>

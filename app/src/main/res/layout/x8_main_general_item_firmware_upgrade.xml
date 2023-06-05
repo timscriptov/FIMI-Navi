@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fimi.kernel.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/x8_rl_main_firmware_upgrade_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fadingEdge="none"
+    android:orientation="vertical"
+    android:overScrollMode="never"
+    android:scrollbars="none">
+
+    <com.fimi.kernel.percent.PercentRelativeLayout
+        android:id="@+id/layout_top"
+        android:layout_width="fill_parent"
+        android:layout_height="0.0dip"
+        android:background="@color/white_5"
+        app:layout_heightPercent="14.814815%h"
+        app:layout_marginLeftPercent="1.478743%w"
+        app:layout_marginRightPercent="1.478743%w"
+        app:layout_marginTopPercent="1.478743%h">
+
+        <ImageView
+            android:id="@+id/btn_return"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/x8_img_return" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/x8_general_version_firmware_upgrade"
+            android:textColor="@color/white_100"
+            android:textSize="@dimen/textsize_45" />
+    </com.fimi.kernel.percent.PercentRelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_version_list"
+        android:layout_width="fill_parent"
+        android:layout_height="0.0dip"
+        android:layout_below="@+id/layout_top"
+        android:background="@color/white_5"
+        android:fadingEdge="none"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_heightPercent="65.185184%h"
+        app:layout_marginLeftPercent="1.478743%w"
+        app:layout_marginRightPercent="1.478743%w"
+        app:layout_marginTopPercent="1.111110%h" />
+
+    <TextView
+        android:id="@+id/tv_firmware_upgrade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/recycler_version_list"
+        android:layout_centerHorizontal="true"
+        android:alpha="0.6"
+        android:background="@drawable/x8_ai_surround_tx_white_bg"
+        android:enabled="false"
+        android:gravity="center"
+        android:text="@string/x8_general_version_upgrade"
+        android:textColor="@color/black"
+        app:layout_heightPercent="10%h"
+        app:layout_marginBottomPercent="1.478743%h"
+        app:layout_marginTopPercent="1.478743%h"
+        app:layout_widthPercent="17.93125%w" />
+</com.fimi.kernel.percent.PercentRelativeLayout>

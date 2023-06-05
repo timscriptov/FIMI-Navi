@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fimi.kernel.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50.0dip">
+
+        <ImageButton
+            android:id="@+id/ibtn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="11.0dip"
+            android:background="@null"
+            android:src="@drawable/fimisdk_img_return_selector" />
+
+        <TextView
+            android:id="@+id/tv_setting_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/host_downed_firmware"
+            android:textColor="#e6000000"
+            android:textSize="14.0dip" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_status_uploading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="169.66dip">
+
+        <TextView
+            android:id="@+id/tv_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="0%"
+            android:textColor="#e6000000"
+            android:textSize="14.0dip"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/host_down_result"
+            android:layout_width="150.0dip"
+            android:layout_height="150.0dip"
+            android:layout_centerInParent="true"
+            android:src="@drawable/icon_firmware_down"
+            android:visibility="visible" />
+
+        <com.fimi.widget.RoundProgressBar
+            android:id="@+id/rpb_down_progress"
+            android:layout_width="150.0dip"
+            android:layout_height="150.0dip"
+            android:layout_centerHorizontal="true"
+            app:roundColor="#4d000000"
+            app:roundProgressColor="#ff000000"
+            app:roundProgressWidth="1.0dip"
+            app:roundWidth="0.3333dip"
+            app:textColor="@color/transparent"
+            app:textIsDisplayable="false" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_downing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_status_uploading"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="52.0dip"
+        android:textColor="#ff3a3a3a"
+        android:textSize="14.0dip" />
+
+    <LinearLayout
+        android:id="@+id/rt_layout"
+        android:layout_width="240.0dip"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_downing"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8.0dip"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_down_fail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:maxWidth="240.0dip"
+            android:textColor="#e6000000"
+            android:textSize="14.0dip" />
+
+        <TextView
+            android:id="@+id/tv_down_success"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_down_fail"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8.0dip"
+            android:gravity="center"
+            android:maxWidth="240.0dip"
+            android:textColor="#ff3a3a3a"
+            android:textSize="14.0dip" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_down_again"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="26.599976dip"
+        android:background="@drawable/fimi_sdk_btn_bottom__shape_enable"
+        android:gravity="center"
+        android:text="@string/host_down_fwname_finish"
+        android:textAllCaps="false"
+        android:textColor="@drawable/fimi_sdk_btn_butom_txcolor_select"
+        android:textSize="12.0dip"
+        app:layout_heightPercent="11.2962%w"
+        app:layout_widthPercent="87.2222%w" />
+
+    <TextView
+        android:id="@+id/tv_downing_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rt_layout"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:maxWidth="240.0dip"
+        android:textColor="#ff3a3a3a"
+        android:textSize="10.0dip" />
+</com.fimi.kernel.percent.PercentRelativeLayout>

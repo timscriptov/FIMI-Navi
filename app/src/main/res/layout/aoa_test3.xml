@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/media_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <include layout="@layout/oao_test" />
+
+    <Button
+        android:id="@+id/btn_send2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="发命令" />
+
+    <TextView
+        android:id="@+id/textttt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <com.fimi.soul.media.player.widget.FimiVideoView
+        android:id="@+id/fimi_video"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+    <ImageView
+        android:id="@+id/player_btn"
+        android:layout_width="67.0dip"
+        android:layout_height="67.0dip"
+        android:layout_centerInParent="true"
+        android:background="@drawable/ic_launcher" />
+
+    <include
+        android:id="@+id/media_contoller"
+        layout="@layout/activity_x9_fimi_media_control"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+</RelativeLayout>

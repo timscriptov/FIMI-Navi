@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fimi.kernel.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/country_select_bg">
+
+    <com.fimi.libperson.widget.TitleView
+        android:id="@+id/title_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        app:layout_marginTopPercent="3.65%" />
+
+    <com.fimi.kernel.percent.PercentRelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/title_view"
+        android:background="@color/person_setting_bg">
+
+        <TextView
+            android:id="@+id/libperson_tv_versions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/libperson_rights_reserved"
+            android:textSize="12.299988dip"
+            app:layout_marginTopPercent="89.43%" />
+
+        <TextView
+            android:id="@+id/libperson_tv_rights_reserved"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/libperson_tv_versions"
+            android:layout_centerHorizontal="true"
+            android:text="@string/splash_copyright_2017_2018fimi_all_rights_reserved"
+            android:textColor="@color/libperson_rights_reserved"
+            android:textSize="10.0dip"
+            app:layout_marginTopPercent="0.8854%" />
+    </com.fimi.kernel.percent.PercentRelativeLayout>
+
+    <View
+        android:id="@+id/v_one"
+        android:layout_width="fill_parent"
+        android:layout_height="0.0dip"
+        android:layout_below="@+id/title_view"
+        app:layout_heightPercent="2.34%" />
+
+    <ListView
+        android:id="@+id/lv_main_setting"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/v_one"
+        android:background="@color/country_select_bg"
+        android:divider="@drawable/person_setting_list_divide"
+        android:dividerHeight="1.0px"
+        android:headerDividersEnabled="false"
+        android:visibility="visible" />
+
+    <View
+        android:id="@+id/v_two"
+        android:layout_width="fill_parent"
+        android:layout_height="0.30000007dip"
+        android:layout_below="@+id/lv_main_setting" />
+
+    <Button
+        android:id="@+id/libperson_btn_repeal"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/v_two"
+        android:background="@drawable/person_setting_list_selector"
+        android:text="@string/libperson_repeal_accredit"
+        android:textColor="#ffdc0a0a"
+        android:textSize="15.0dip"
+        app:layout_marginTopPercent="2.34%" />
+</com.fimi.kernel.percent.PercentRelativeLayout>

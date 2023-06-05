@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/x8_camera_setting_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <com.fimi.kernel.percent.PercentRelativeLayout
+        android:id="@+id/x8_rl_main_camera_setting"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="gone">
+
+        <View
+            android:id="@+id/x8_rl_main_camera_setting_blank"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_toLeftOf="@+id/rl_main_camera_setting_content"
+            android:visibility="gone" />
+
+        <com.fimi.kernel.percent.PercentRelativeLayout
+            android:id="@+id/rl_main_camera_setting_content"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_toLeftOf="@+id/right_split_line"
+            android:background="@color/black_80"
+            app:layout_widthPercent="45%w">
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_toRightOf="@+id/left_split_line"
+                android:gravity="center_horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/camera_setting_title"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/x8s_main_camera_setting_x2"
+                    android:clickable="true">
+
+                    <ImageView
+                        android:id="@+id/camera_setting_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/x8s_main_camera_setting_x3"
+                        android:src="@drawable/x8_btn_camera_set_selector" />
+
+                    <ImageView
+                        android:id="@+id/record_setting_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/x8s_main_camera_setting_x4"
+                        android:layout_toRightOf="@+id/camera_setting_btn"
+                        android:src="@drawable/x8_btn_photo_set_selector" />
+
+                    <ImageView
+                        android:id="@+id/other_setting_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/x8s_main_camera_setting_x5"
+                        android:layout_toRightOf="@+id/record_setting_btn"
+                        android:src="@drawable/x8_btn_camera_other_setting_selector" />
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/split_line"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/x8s_main_camera_setting_x1"
+                    android:layout_below="@+id/camera_setting_title"
+                    android:background="@color/white_10"
+                    android:clickable="true" />
+
+                <ViewStub
+                    android:id="@+id/stub_camera_iso_setting"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_below="@+id/split_line"
+                    android:layout="@layout/x8_main_camera_iso_setting" />
+
+                <ViewStub
+                    android:id="@+id/stub_camera_other_setting"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_below="@+id/split_line"
+                    android:layout="@layout/x8_main_camera_other_setting_layout" />
+
+                <ViewStub
+                    android:id="@+id/stub_camera_mode_setting"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_below="@+id/split_line"
+                    android:layout="@layout/x8_camera_mode_setting" />
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/left_split_line"
+                android:layout_width="@dimen/x8s_main_camera_setting_x1"
+                android:layout_height="fill_parent"
+                android:layout_alignParentLeft="true"
+                android:src="@color/white_10" />
+
+        </com.fimi.kernel.percent.PercentRelativeLayout>
+
+        <ImageView
+            android:id="@+id/right_split_line"
+            android:layout_width="@dimen/x8s_main_camera_setting_x1"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:background="@color/black_80"
+            android:src="@color/white_10" />
+
+    </com.fimi.kernel.percent.PercentRelativeLayout>
+
+</RelativeLayout>

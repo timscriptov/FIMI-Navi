@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fimi.kernel.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_calibration_failure_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/x8_img_drone_calibartion_failed" />
+
+    <TextView
+        android:id="@+id/tv_calibration_failure_describe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_calibration_failure_picture"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20.0dip"
+        android:text="@string/x8_modify_aircraft_calibration1_failure"
+        android:textAlignment="center"
+        android:textColor="@color/x8_fc_imu_check_exception"
+        android:textSize="@dimen/textsize_36" />
+
+    <Button
+        android:id="@+id/btn_failure_calibration_toggle"
+        android:layout_width="93.0dip"
+        android:layout_height="27.0dip"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="165.0dip"
+        android:background="@drawable/x8_btn_white_selector"
+        android:text="@string/x8_modify_aircraft_calibration_renew"
+        android:textColor="@color/black_90"
+        android:textSize="@dimen/textsize_36" />
+</com.fimi.kernel.percent.PercentRelativeLayout>

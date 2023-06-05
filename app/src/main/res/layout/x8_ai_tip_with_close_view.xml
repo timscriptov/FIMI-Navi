@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fimi.kernel.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:background="@drawable/x8_img_ai_suround_tip_bg">
+
+        <TextView
+            android:id="@+id/tv_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:paddingLeft="@dimen/x8s_ai_surround_layout_x1"
+            android:paddingRight="@dimen/x8s_ai_surround_layout_x2"
+            android:text="@string/x8_ai_surround_select_point"
+            android:textColor="@color/white_100"
+            android:textSize="12.0sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/tl_close"
+        android:layout_width="@dimen/x8s_ai_surround_layout_x7"
+        android:layout_height="@dimen/x8s_ai_surround_layout_x9"
+        android:layout_alignRight="@+id/rl_tip"
+        android:background="#00ff4c31">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/x8s_ai_surround_layout_x4"
+            android:layout_marginRight="@dimen/x8s_ai_surround_layout_x4"
+            android:background="@drawable/x8_btn_ai_follow_tip_close"
+            android:scaleType="fitCenter" />
+    </RelativeLayout>
+</com.fimi.kernel.percent.PercentRelativeLayout>

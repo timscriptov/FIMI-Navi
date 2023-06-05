@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fimi.kernel.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_sysname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_marginTopPercent="4.4444%h">
+
+        <TextView
+            android:id="@+id/tv_sysname_flag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textColor="#e6000000"
+            android:textSize="@dimen/text_size_42" />
+
+        <TextView
+            android:id="@+id/tv_sysname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18.181793dip"
+            android:layout_toRightOf="@+id/tv_sysname_flag"
+            android:textColor="#e6000000"
+            android:textSize="@dimen/text_size_42" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_sys_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_sysname"
+        android:layout_marginLeft="23.272675dip"
+        android:lineSpacingExtra="2.0dip"
+        android:textColor="#e6000000"
+        android:textSize="@dimen/text_size_30"
+        app:layout_marginTopPercent="1.7592%h" />
+</com.fimi.kernel.percent.PercentRelativeLayout>

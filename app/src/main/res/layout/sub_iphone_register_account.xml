@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffffff"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_select_country"
+        android:layout_width="324.0dip"
+        android:layout_height="43.299988dip"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="84.29999dip"
+        android:background="@drawable/shape_et_register"
+        android:gravity="center|left"
+        android:inputType="number"
+        android:textColor="#cc000000"
+        android:textSize="12.0dip" />
+
+    <EditText
+        android:id="@+id/et_account"
+        android:layout_width="324.0dip"
+        android:layout_height="43.299988dip"
+        android:layout_below="@+id/tv_select_country"
+        android:layout_alignStart="@+id/tv_select_country"
+        android:layout_marginTop="9.0dip"
+        android:background="@drawable/shape_et_login_main_account"
+        android:digits="\ 1234567890"
+        android:hint="@string/login_hint_iphone"
+        android:inputType="number"
+        android:maxLength="11"
+        android:textColor="#e6000000"
+        android:textColorHint="#33000000"
+        android:textCursorDrawable="@drawable/shape_login_cursor_color"
+        android:textSize="12.0dip" />
+
+    <View
+        android:layout_width="0.30000007dip"
+        android:layout_height="16.599976dip"
+        android:layout_alignTop="@+id/et_account"
+        android:layout_alignBottom="@+id/et_account"
+        android:layout_marginTop="13.299988dip"
+        android:layout_marginBottom="13.299988dip"
+        android:layout_toEndOf="@+id/tv_area_code"
+        android:background="#26000000" />
+
+    <TextView
+        android:id="@+id/tv_area_code"
+        android:layout_width="53.599976dip"
+        android:layout_height="43.299988dip"
+        android:layout_alignStart="@+id/et_account"
+        android:layout_alignTop="@+id/et_account"
+        android:gravity="center"
+        android:text="+86"
+        android:textColor="#cc000000"
+        android:textSize="13.299988dip" />
+
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="324.0dip"
+        android:layout_height="43.299988dip"
+        android:layout_alignLeft="@+id/et_account"
+        android:layout_marginTop="191.0dip"
+        android:background="@drawable/shape_et_get_verfication"
+        android:digits="@string/person_password_digts"
+        android:hint="@string/login_inpput_password"
+        android:inputType="textPassword"
+        android:maxLength="16"
+        android:textColor="#e6000000"
+        android:textColorHint="#33000000"
+        android:textCursorDrawable="@drawable/shape_login_cursor_color"
+        android:textSize="12.0dip" />
+
+    <EditText
+        android:id="@+id/et_verification"
+        android:layout_width="324.0dip"
+        android:layout_height="43.299988dip"
+        android:layout_below="@+id/et_password"
+        android:layout_alignLeft="@+id/et_account"
+        android:layout_marginTop="9.0dip"
+        android:background="@drawable/shape_et_get_verfication"
+        android:digits="\ 1234567890"
+        android:hint="@string/login_hint_input_verification"
+        android:inputType="number"
+        android:maxLength="4"
+        android:textColor="#e6000000"
+        android:textColorHint="#33000000"
+        android:textCursorDrawable="@drawable/shape_login_cursor_color"
+        android:textSize="12.0dip" />
+
+    <View
+        android:layout_width="1.0px"
+        android:layout_height="fill_parent"
+        android:layout_alignTop="@+id/et_password"
+        android:layout_alignRight="@+id/et_password"
+        android:layout_alignBottom="@+id/et_password"
+        android:layout_marginTop="13.299988dip"
+        android:layout_marginRight="53.599976dip"
+        android:layout_marginBottom="13.299988dip"
+        android:background="#26000000" />
+
+    <ImageView
+        android:id="@+id/iv_show_iphone_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/et_password"
+        android:layout_alignRight="@+id/et_password"
+        android:layout_marginRight="5.299988dip"
+        android:background="@drawable/iv_login_email_password" />
+
+    <View
+        android:layout_width="0.30000007dip"
+        android:layout_height="16.599976dip"
+        android:layout_alignTop="@+id/et_verification"
+        android:layout_alignRight="@+id/et_verification"
+        android:layout_alignBottom="@+id/et_verification"
+        android:layout_marginTop="13.299988dip"
+        android:layout_marginRight="87.0dip"
+        android:layout_marginBottom="13.299988dip"
+        android:background="#44000000" />
+
+    <TextView
+        android:id="@+id/btn_get_validation_code"
+        android:layout_width="87.0dip"
+        android:layout_height="43.299988dip"
+        android:layout_alignTop="@+id/et_verification"
+        android:layout_alignRight="@+id/et_verification"
+        android:layout_marginLeft="14.599976dip"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="@string/login_btn_verification"
+        android:textColor="@color/selector_btn_register_get_verfication_code"
+        android:textSize="13.0dip" />
+
+    <TextView
+        android:id="@+id/tv_error_hint"
+        android:layout_width="324.0dip"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_verification"
+        android:layout_alignLeft="@+id/et_verification"
+        android:layout_marginTop="11.299988dip"
+        android:text="@string/login_verfication_error"
+        android:textColor="#ffff4a1a"
+        android:textSize="12.659973dip"
+        android:visibility="gone" />
+
+    <CheckBox
+        android:id="@+id/cb_iphone_select_service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="37.299988dip"
+        android:layout_marginTop="328.29688dip"
+        android:button="@drawable/cb_register_selector"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/tv_iphone_select_service"
+        android:layout_width="259.0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="9.599976dip"
+        android:layout_marginTop="329.0dip"
+        android:layout_toRightOf="@+id/cb_iphone_select_service"
+        android:textSize="12.0dip"
+        android:visibility="invisible" />
+</RelativeLayout>

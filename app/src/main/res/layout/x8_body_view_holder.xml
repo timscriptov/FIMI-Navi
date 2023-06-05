@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/body_viewgroup"
+    android:layout_width="fill_parent"
+    android:layout_height="86.599976dip">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/simpledraweeview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/album_photo_loading" />
+
+    <ImageView
+        android:id="@+id/iv_download_mask"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#a5000000"
+        android:visibility="gone" />
+
+    <com.fimi.album.widget.DownloadStateView
+        android:id="@+id/download_state_view"
+        android:layout_width="28.599976dip"
+        android:layout_height="28.599976dip"
+        android:layout_above="@+id/tv_download_state"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="28.299988dip"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/tv_download_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="14.5dip"
+        android:textColor="#66ffffff"
+        android:textSize="12.0dip" />
+
+    <ImageView
+        android:id="@+id/iv_select_mask"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#a5000000"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="5.0dip"
+        android:layout_marginBottom="5.0dip">
+
+        <ImageView
+            android:id="@+id/iv_video_flag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true" />
+
+        <com.fimi.album.widget.MediaStrokeTextView
+            android:id="@+id/duringdate_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="6.0dip"
+            android:layout_toRightOf="@+id/iv_video_flag"
+            android:textColor="#ffffffff"
+            android:textSize="12.0dip"
+            android:textStyle="bold"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_filesize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="6.0dip"
+        android:layout_marginBottom="5.0dip"
+        android:textColor="#ffffffff"
+        android:textSize="12.0dip"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/iv_downloaded"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="5.0dip"
+        android:layout_marginRight="5.0dip"
+        android:background="@drawable/album_media_downloaded"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/selected_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="10.0dip"
+        android:layout_marginBottom="10.0dip"
+        android:background="@drawable/x8_ablum_select"
+        android:visibility="gone" />
+</RelativeLayout>

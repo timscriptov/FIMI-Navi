@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fimi.kernel.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/country_select_bg">
+
+    <com.fimi.libperson.widget.TitleView
+        android:id="@+id/title_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        app:layout_marginTopPercent="3.65%" />
+
+    <com.fimi.kernel.percent.PercentRelativeLayout
+        android:id="@+id/libperson_rl_centre"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_view"
+        app:layout_marginLeftPercent="3.645%"
+        app:layout_marginRightPercent="3.645%"
+        app:layout_marginTopPercent="2.34%">
+
+        <EditText
+            android:id="@+id/libperson_et_email"
+            android:layout_width="fill_parent"
+            android:layout_height="43.299988dip"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/shape_et_email_register"
+            android:gravity="top"
+            android:hint="@string/login_input_email_account"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/login_forget_password"
+            android:textColorHint="@color/login_get_verfication_unclick"
+            android:textCursorDrawable="@drawable/shape_login_cursor_color"
+            android:textSize="12.0dip" />
+
+        <TextView
+            android:id="@+id/libperson_tv_apply_hint"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/libperson_et_email"
+            android:layout_alignLeft="@+id/libperson_et_email"
+            android:text="@string/libperson_user_right_hint"
+            android:textColor="@color/libperson_right_apply_hint"
+            android:textSize="12.0dip"
+            app:layout_marginTopPercent="2.6%" />
+
+        <Button
+            android:id="@+id/libperson_btn_apply_send"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="0.0dip"
+            android:layout_below="@+id/libperson_tv_apply_hint"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/fimi_person_btn_bottom__shape_enable"
+            android:text="@string/libperson_apply_send"
+            android:textColor="@drawable/fimi_person_btn_butom_txcolor_select"
+            android:textSize="13.299988dip"
+            app:layout_heightPercent="11.2962%w"
+            app:layout_marginTopPercent="6.56%" />
+    </com.fimi.kernel.percent.PercentRelativeLayout>
+</com.fimi.kernel.percent.PercentRelativeLayout>

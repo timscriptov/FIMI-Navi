@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/fimisdk_shape_dialog_content_bg">
+
+        <RelativeLayout
+            android:id="@+id/rl_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="251.6dip"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="20.0dip"
+                android:layout_marginTop="12.299988dip"
+                android:layout_marginRight="20.0dip"
+                android:gravity="center"
+                android:textColor="#e6000000"
+                android:textSize="13.0dip" />
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="251.6dip"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_title"
+                android:layout_marginLeft="20.0dip"
+                android:layout_marginTop="15.0dip"
+                android:layout_marginRight="20.0dip"
+                android:layout_marginBottom="15.0dip"
+                android:gravity="center"
+                android:textColor="#99000000"
+                android:textSize="12.0dip" />
+
+            <TextView
+                android:id="@+id/tv_content_sigle"
+                android:layout_width="250.0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20.0dip"
+                android:layout_marginTop="27.299988dip"
+                android:layout_marginRight="20.0dip"
+                android:layout_marginBottom="15.0dip"
+                android:gravity="center"
+                android:textColor="#99000000"
+                android:textSize="12.0dip"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/rl_double"
+            android:layout_width="251.6dip"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_content"
+            android:layout_alignLeft="@+id/rl_content"
+            android:layout_alignRight="@+id/rl_content">
+
+            <Button
+                android:id="@+id/btn_left"
+                android:layout_width="fill_parent"
+                android:layout_height="52.0dip"
+                android:layout_alignParentLeft="true"
+                android:layout_weight="1.0"
+                android:background="@drawable/fimisdk_btn_dialog_left_bg"
+                android:gravity="center"
+                android:text="@string/cancel"
+                android:textColor="#e6000000"
+                android:textSize="13.0sp" />
+
+            <Button
+                android:id="@+id/btn_right"
+                android:layout_width="fill_parent"
+                android:layout_height="52.0dip"
+                android:layout_toRightOf="@+id/left_btn"
+                android:layout_weight="1.0"
+                android:background="@drawable/fimisdk_btn_dialog_right_bg"
+                android:gravity="center"
+                android:text="@string/ensure"
+                android:textColor="#e6000000"
+                android:textSize="13.0sp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_single"
+            android:layout_width="wrap_content"
+            android:layout_height="52.0dip"
+            android:layout_below="@+id/rl_content"
+            android:layout_alignLeft="@+id/rl_content"
+            android:layout_alignRight="@+id/rl_content"
+            android:background="@drawable/fimisdk_btn_dialog_sigle_bg_selector"
+            android:textColor="#e6000000"
+            android:textSize="13.0dip" />
+    </RelativeLayout>
+</RelativeLayout>

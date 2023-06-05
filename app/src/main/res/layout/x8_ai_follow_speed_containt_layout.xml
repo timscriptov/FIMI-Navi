@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_speed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/x8_ai_follow_speed_bg"
+        android:paddingLeft="8.0dip"
+        android:paddingRight="8.0dip"
+        android:text="3.0m/s"
+        android:textColor="#ffffffff"
+        android:textSize="14.0dip" />
+
+    <RelativeLayout
+        android:id="@+id/rl_more"
+        android:layout_width="267.0dip"
+        android:layout_height="33.0dip"
+        android:layout_below="@+id/tv_speed"
+        android:layout_marginTop="3.0dip"
+        android:background="@drawable/x8_ai_follow_speed_bg"
+        android:paddingLeft="11.0dip"
+        android:paddingRight="11.0dip">
+
+        <ImageView
+            android:id="@+id/img_anti_clockwise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8.0dip"
+            android:layout_toLeftOf="@+id/v_speed"
+            android:background="@drawable/x8_btn_follow_speed_anti_clockwise" />
+
+        <com.fimi.app.x8s.widget.X8FollowSpeedView
+            android:id="@+id/v_speed"
+            android:layout_width="200.0dip"
+            android:layout_height="33.0dip"
+            android:layout_centerInParent="true" />
+
+        <ImageView
+            android:id="@+id/img_clockwise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8.0dip"
+            android:layout_toRightOf="@+id/v_speed"
+            android:background="@drawable/x8_btn_follow_speed_clockwise" />
+    </RelativeLayout>
+</RelativeLayout>

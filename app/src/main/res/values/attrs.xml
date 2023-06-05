@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="X8MainElectric">
+        <attr name="lowElectric" format="color" />
+        <attr name="middleElectric" format="color" />
+        <attr name="hightElectric" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="X8MainPower">
+        <attr name="image" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="X8MainPitching">
+        <attr name="bg_color" format="color" />
+        <attr name="radius" format="dimension" />
+        <attr name="progress_color" format="color" />
+        <attr name="progress_bar_width" format="dimension" />
+        <attr name="progress_projection_color" format="color" />
+        <attr name="progress_margin_left" format="dimension" />
+        <attr name="rectangle_left" format="dimension" />
+        <attr name="rectangle_width" format="dimension" />
+        <attr name="rectangle_height" format="dimension" />
+        <attr name="rectangle_color" format="color" />
+        <attr name="text_size" format="dimension" />
+        <attr name="text_color" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="RcRoller">
+        <attr name="viewType" format="integer" />
+        <attr name="rollerSrc" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="PercentLayout">
+        <attr name="layout_widthPercent" format="string" />
+        <attr name="layout_heightPercent" format="string" />
+        <attr name="layout_marginPercent" format="string" />
+        <attr name="layout_marginLeftPercent" format="string" />
+        <attr name="layout_marginTopPercent" format="string" />
+        <attr name="layout_marginRightPercent" format="string" />
+        <attr name="layout_marginBottomPercent" format="string" />
+        <attr name="layout_marginStartPercent" format="string" />
+        <attr name="layout_marginEndPercent" format="string" />
+        <attr name="layout_textSizePercent" format="string" />
+        <attr name="layout_maxWidthPercent" format="string" />
+        <attr name="layout_maxHeightPercent" format="string" />
+        <attr name="layout_minWidthPercent" format="string" />
+        <attr name="layout_minHeightPercent" format="string" />
+        <attr name="layout_paddingPercent" format="string" />
+        <attr name="layout_paddingTopPercent" format="string" />
+        <attr name="layout_paddingBottomPercent" format="string" />
+        <attr name="layout_paddingLeftPercent" format="string" />
+        <attr name="layout_paddingRightPercent" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="X8MainTopReturnTime">
+        <attr name="empty_image" format="reference" />
+        <attr name="middle_image" format="reference" />
+        <attr name="full_image" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="X8MapPointMarker">
+        <attr name="type" format="integer" />
+        <attr name="margin1" format="dimension" />
+        <attr name="margin2" format="dimension" />
+        <attr name="margin3" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="X8ValueSeakBar">
+        <attr name="x8_value_title" format="string" />
+        <attr name="x8_value_suffix" format="string" />
+        <attr name="x8_value_close_color" format="color" />
+        <attr name="x8_value_open_color" format="color" />
+        <attr name="x8_value_seekbar_max" format="float" />
+        <attr name="x8_value_seekbar_default" format="float" />
+        <attr name="x8_value_seekbar_min" format="float" />
+        <attr name="x8_value_seekbar_float" format="boolean" />
+        <attr name="x8_value_accuracy" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="X8MainReturnTimeText">
+        <attr name="width" format="dimension" />
+        <attr name="fontSize" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="X8Tab">
+        <attr name="src" format="reference" />
+        <attr name="radiusC" format="dimension" />
+        <attr name="text_sizeC" format="dimension" />
+        <attr name="text_select_color" format="color" />
+        <attr name="text_unselect_color" format="color" />
+        <attr name="tab_select_color" format="color" />
+        <attr name="tab_unselect_color" format="color" />
+        <attr name="tab_space" format="dimension" />
+        <attr name="tab_width" format="dimension" />
+        <attr name="tab_height" format="dimension" />
+        <attr name="bg" format="color" />
+        <attr name="lineStroke" format="dimension" />
+        <attr name="lineColor" format="color" />
+        <attr name="default_index" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="LabelsView">
+        <attr name="selectType" format="enum">
+            <enum name="MULTI" value="4" />
+            <enum name="NONE" value="1" />
+            <enum name="SINGLE" value="2" />
+            <enum name="SINGLE_IRREVOCABLY" value="3" />
+        </attr>
+        <attr name="maxSelect" format="integer" />
+        <attr name="labelTextColor" format="reference|color" />
+        <attr name="labelTextSize" format="dimension" />
+        <attr name="labelTextPaddingLeft" format="dimension" />
+        <attr name="labelTextPaddingTop" format="dimension" />
+        <attr name="labelTextPaddingRight" format="dimension" />
+        <attr name="labelTextPaddingBottom" format="dimension" />
+        <attr name="lineMargin" format="dimension" />
+        <attr name="wordMargin" format="dimension" />
+        <attr name="labelBackground" format="reference|color" />
+    </declare-styleable>
+
+    <declare-styleable name="SwitchButton">
+        <attr name="borderWidth" format="dimension" />
+        <attr name="borderColor" format="color" />
+        <attr name="offBorderColor" format="reference|color" />
+        <attr name="offColor" format="reference|color" />
+        <attr name="onColor" format="reference|color" />
+        <attr name="spotColor" format="reference|color" />
+        <attr name="animate" format="reference|boolean" />
+        <attr name="onSpotColor" format="reference|boolean" />
+        <attr name="onToggle" format="reference|boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="X8DoubleWaySeekBar">
+        <attr name="pointerBackground" format="reference" />
+        <attr name="backgroundColor" format="color" />
+        <attr name="progressColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="MidView">
+        <attr name="midType" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="X8BatteryView">
+        <attr name="batteryColor" format="color" />
+        <attr name="batteryPower" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="X8PieView">
+        <attr name="dataTextSize" format="dimension" />
+        <attr name="dataTextColor" format="color" />
+        <attr name="circleWidth" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="X8BatteryLayout">
+        <attr name="coreName" format="string" />
+        <attr name="defaultValue" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="StrokeTextView">
+        <attr name="outerColor" format="reference|color" />
+        <attr name="innnerColor" format="reference|color" />
+    </declare-styleable>
+
+    <declare-styleable name="DownRoundProgress">
+        <attr name="roundColor" format="color" />
+        <attr name="roundProgressColor" format="color" />
+        <attr name="roundWidth" format="dimension" />
+        <attr name="roundProgressWidth" format="dimension" />
+        <attr name="textColor" format="color" />
+        <attr name="textSize" format="dimension" />
+        <attr name="max" format="integer" />
+        <attr name="textIsDisplayable" format="boolean" />
+        <attr name="style" format="enum">
+            <enum name="FILL" value="1" />
+            <enum name="STROKE" value="0" />
+        </attr>
+    </declare-styleable>
+</resources>
