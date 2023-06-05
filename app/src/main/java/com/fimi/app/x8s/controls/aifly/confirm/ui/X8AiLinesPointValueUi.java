@@ -29,14 +29,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class X8AiLinesPointValueUi implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
     int count = 0;
     private X8AiLinePointValueAdapter adapter;
     private Button btnAll;
     private Button btnOk;
-    private View contentView;
-    private X8AiLineExcuteController controller;
+    private final View contentView;
+    private final X8AiLineExcuteController controller;
     private ImageView img4xSlow;
     private ImageView img5sPhoto;
     private ImageView imgHover;
@@ -44,17 +44,17 @@ public class X8AiLinesPointValueUi implements View.OnClickListener, SeekBar.OnSe
     private ImageView imgOnePhoto;
     private ImageView imgRecord;
     private ImageView imgThreePhoto;
-    private boolean isShowMetric;
+    private final boolean isShowMetric;
     private List<X8AiLinePointEntity> mEntityList;
     private RecyclerView mRecyclerView;
-    private MapPointLatLng mapPointLatLng;
-    private X8MapVideoController mapVideoController;
+    private final MapPointLatLng mapPointLatLng;
+    private final X8MapVideoController mapVideoController;
     private View minus;
-    private int mode;
+    private final int mode;
     private View plus;
     private TextView pos;
     private SeekBar sbValue;
-    private String suffix;
+    private final String suffix;
     private X8TabHost tabRorate;
     private TextView tvBindPoint;
     private TextView tvDvOrientation;
@@ -67,11 +67,11 @@ public class X8AiLinesPointValueUi implements View.OnClickListener, SeekBar.OnSe
     private View vOnePhoto;
     private View vRecord;
     private View vThreePhoto;
-    private View[] arraysView = new View[7];
+    private final View[] arraysView = new View[7];
     private int index = 0;
-    private int MAX = 120;
-    private int MIN = 5;
-    private int SB_MAX = this.MAX - this.MIN;
+    private final int MAX = 120;
+    private final int MIN = 5;
+    private final int SB_MAX = this.MAX - this.MIN;
 
     public X8AiLinesPointValueUi(Activity activity, View rootView, int mode, MapPointLatLng mpl, X8MapVideoController mapVideoController, X8AiLineExcuteController controller) {
         this.mode = mode;
@@ -117,49 +117,49 @@ public class X8AiLinesPointValueUi implements View.OnClickListener, SeekBar.OnSe
     }
 
     private void initView(View view, boolean isIntertestPoint) {
-        this.btnOk = (Button) view.findViewById(R.id.btn_ai_follow_confirm_ok);
-        this.pos = (TextView) view.findViewById(R.id.tv_ai_follow_pos);
-        this.tvHeight = (TextView) view.findViewById(R.id.tv_height);
+        this.btnOk = view.findViewById(R.id.btn_ai_follow_confirm_ok);
+        this.pos = view.findViewById(R.id.tv_ai_follow_pos);
+        this.tvHeight = view.findViewById(R.id.tv_height);
         this.minus = view.findViewById(R.id.rl_minus);
         this.plus = view.findViewById(R.id.rl_plus);
-        this.sbValue = (SeekBar) view.findViewById(R.id.sb_value);
+        this.sbValue = view.findViewById(R.id.sb_value);
         this.sbValue.setMax(this.SB_MAX);
         if (!isIntertestPoint) {
             this.vNa = view.findViewById(R.id.rl_ai_item1);
-            this.imgNa = (ImageView) view.findViewById(R.id.img_ai_line_action_na);
-            int i = 0 + 1;
+            this.imgNa = view.findViewById(R.id.img_ai_line_action_na);
+            int i = 1;
             this.arraysView[0] = this.imgNa;
             this.vHover = view.findViewById(R.id.rl_ai_item2);
-            this.imgHover = (ImageView) view.findViewById(R.id.img_ai_line_action_hover);
+            this.imgHover = view.findViewById(R.id.img_ai_line_action_hover);
             int i2 = i + 1;
             this.arraysView[i] = this.imgHover;
             this.vRecord = view.findViewById(R.id.rl_ai_item3);
-            this.imgRecord = (ImageView) view.findViewById(R.id.img_ai_line_action_record);
+            this.imgRecord = view.findViewById(R.id.img_ai_line_action_record);
             int i3 = i2 + 1;
             this.arraysView[i2] = this.imgRecord;
             this.v4xSlow = view.findViewById(R.id.rl_ai_item4);
-            this.img4xSlow = (ImageView) view.findViewById(R.id.img_ai_lind_action_4xslow);
+            this.img4xSlow = view.findViewById(R.id.img_ai_lind_action_4xslow);
             int i4 = i3 + 1;
             this.arraysView[i3] = this.img4xSlow;
             this.vOnePhoto = view.findViewById(R.id.rl_ai_item5);
-            this.imgOnePhoto = (ImageView) view.findViewById(R.id.img_ai_lind_action_one_photo);
+            this.imgOnePhoto = view.findViewById(R.id.img_ai_lind_action_one_photo);
             int i5 = i4 + 1;
             this.arraysView[i4] = this.imgOnePhoto;
             this.v5sPhoto = view.findViewById(R.id.rl_ai_item6);
-            this.img5sPhoto = (ImageView) view.findViewById(R.id.img_ai_lind_action_5s_photo);
+            this.img5sPhoto = view.findViewById(R.id.img_ai_lind_action_5s_photo);
             int i6 = i5 + 1;
             this.arraysView[i5] = this.img5sPhoto;
             this.vThreePhoto = view.findViewById(R.id.rl_ai_item7);
-            this.imgThreePhoto = (ImageView) view.findViewById(R.id.img_ai_lind_three_photo);
+            this.imgThreePhoto = view.findViewById(R.id.img_ai_lind_three_photo);
             int i7 = i6 + 1;
             this.arraysView[i6] = this.imgThreePhoto;
             if (this.mode == 1) {
-                this.tvDvOrientation = (TextView) view.findViewById(R.id.tv_ai_line_dv_orientation_value);
-                this.tvGbOrientation = (TextView) view.findViewById(R.id.tv_ai_line_gb_orientation_value);
-                this.tabRorate = (X8TabHost) view.findViewById(R.id.x8_ai_line_rorate);
+                this.tvDvOrientation = view.findViewById(R.id.tv_ai_line_dv_orientation_value);
+                this.tvGbOrientation = view.findViewById(R.id.tv_ai_line_gb_orientation_value);
+                this.tabRorate = view.findViewById(R.id.x8_ai_line_rorate);
                 this.tabRorate.setSelect(this.mapPointLatLng.roration);
-                this.tabRorate.setOnSelectListener(new X8TabHost.OnSelectListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiLinesPointValueUi.1
-                    @Override // com.fimi.app.x8s.widget.X8TabHost.OnSelectListener
+                this.tabRorate.setOnSelectListener(new X8TabHost.OnSelectListener() {
+                    @Override
                     public void onSelect(int index, String text, int last) {
                         if (index != last) {
                             X8AiLinesPointValueUi.this.mapPointLatLng.roration = index;
@@ -175,8 +175,8 @@ public class X8AiLinesPointValueUi implements View.OnClickListener, SeekBar.OnSe
                     return;
                 }
             } else if (this.mode == 3) {
-                this.tvBindPoint = (TextView) view.findViewById(R.id.x8_ai_line_bind_point);
-                this.mRecyclerView = (RecyclerView) view.findViewById(R.id.ryv_ai_line_point);
+                this.tvBindPoint = view.findViewById(R.id.x8_ai_line_bind_point);
+                this.mRecyclerView = view.findViewById(R.id.ryv_ai_line_point);
                 RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this.contentView.getContext(), 5);
                 this.mRecyclerView.setLayoutManager(layoutManager);
                 this.mRecyclerView.addItemDecoration(new DividerGridItemDecoration(this.contentView.getContext()));
@@ -184,16 +184,16 @@ public class X8AiLinesPointValueUi implements View.OnClickListener, SeekBar.OnSe
                 lablesPointEvent();
                 return;
             } else {
-                this.tvBindPoint = (TextView) view.findViewById(R.id.x8_ai_line_bind_point);
-                this.mRecyclerView = (RecyclerView) view.findViewById(R.id.ryv_ai_line_point);
+                this.tvBindPoint = view.findViewById(R.id.x8_ai_line_bind_point);
+                this.mRecyclerView = view.findViewById(R.id.ryv_ai_line_point);
                 RecyclerView.LayoutManager layoutManager2 = new GridLayoutManager(this.contentView.getContext(), 5);
                 this.mRecyclerView.setLayoutManager(layoutManager2);
                 this.mRecyclerView.addItemDecoration(new DividerGridItemDecoration(this.contentView.getContext()));
                 ((SimpleItemAnimator) this.mRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
-                this.tabRorate = (X8TabHost) view.findViewById(R.id.x8_ai_line_rorate);
+                this.tabRorate = view.findViewById(R.id.x8_ai_line_rorate);
                 this.tabRorate.setSelect(this.mapPointLatLng.roration);
-                this.tabRorate.setOnSelectListener(new X8TabHost.OnSelectListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiLinesPointValueUi.2
-                    @Override // com.fimi.app.x8s.widget.X8TabHost.OnSelectListener
+                this.tabRorate.setOnSelectListener(new X8TabHost.OnSelectListener() {
+                    @Override
                     public void onSelect(int index, String text, int last) {
                     }
                 });
@@ -201,10 +201,10 @@ public class X8AiLinesPointValueUi implements View.OnClickListener, SeekBar.OnSe
                 return;
             }
         }
-        this.btnAll = (Button) view.findViewById(R.id.btn_x8_ai_line_bind_point);
+        this.btnAll = view.findViewById(R.id.btn_x8_ai_line_bind_point);
         this.btnAll.setOnClickListener(this);
-        this.tvBindPoint = (TextView) view.findViewById(R.id.x8_ai_line_bind_point);
-        this.mRecyclerView = (RecyclerView) view.findViewById(R.id.ryv_ai_line_point);
+        this.tvBindPoint = view.findViewById(R.id.x8_ai_line_bind_point);
+        this.mRecyclerView = view.findViewById(R.id.ryv_ai_line_point);
         RecyclerView.LayoutManager layoutManager3 = new GridLayoutManager(this.contentView.getContext(), 5);
         this.mRecyclerView.setLayoutManager(layoutManager3);
         this.mRecyclerView.addItemDecoration(new DividerGridItemDecoration(this.contentView.getContext()));
@@ -213,7 +213,7 @@ public class X8AiLinesPointValueUi implements View.OnClickListener, SeekBar.OnSe
         lablesInterestEvent();
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.rl_ai_item1) {
@@ -268,11 +268,7 @@ public class X8AiLinesPointValueUi implements View.OnClickListener, SeekBar.OnSe
             this.controller.onChangeMarkerAltitude(this.mapPointLatLng.altitude);
             this.controller.closeNextUi(true);
         } else if (id == R.id.btn_x8_ai_line_bind_point) {
-            if (this.adapter.isAll()) {
-                onSelectAll(false);
-            } else {
-                onSelectAll(true);
-            }
+            onSelectAll(!this.adapter.isAll());
         }
     }
 
@@ -295,24 +291,20 @@ public class X8AiLinesPointValueUi implements View.OnClickListener, SeekBar.OnSe
 
     public void setSelect(int index) {
         for (int i = 0; i < this.arraysView.length; i++) {
-            if (index == i) {
-                this.arraysView[i].setSelected(true);
-            } else {
-                this.arraysView[i].setSelected(false);
-            }
+            this.arraysView[i].setSelected(index == i);
         }
     }
 
-    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+    @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         this.tvHeight.setText(getProgressString(this.MIN + progress));
     }
 
-    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+    @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
     }
 
-    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+    @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
     }
 
@@ -376,18 +368,18 @@ public class X8AiLinesPointValueUi implements View.OnClickListener, SeekBar.OnSe
             this.mEntityList.add(entity);
         }
         this.adapter = new X8AiLinePointValueAdapter(this.contentView.getContext(), this.mEntityList, 1);
-        this.adapter.setOnItemClickListener(new X8AiLinePointValueAdapter.OnItemClickListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiLinesPointValueUi.3
-            @Override // com.fimi.app.x8s.adapter.X8AiLinePointValueAdapter.OnItemClickListener
+        this.adapter.setOnItemClickListener(new X8AiLinePointValueAdapter.OnItemClickListener() {
+            @Override
             public void onItemClicked(int index, int last, boolean isSelect) {
                 if (isSelect) {
-                    ((X8AiLinePointEntity) X8AiLinesPointValueUi.this.mEntityList.get(index)).setState(1);
+                    X8AiLinesPointValueUi.this.mEntityList.get(index).setState(1);
                 } else {
-                    ((X8AiLinePointEntity) X8AiLinesPointValueUi.this.mEntityList.get(index)).setState(0);
+                    X8AiLinesPointValueUi.this.mEntityList.get(index).setState(0);
                 }
                 X8AiLinesPointValueUi.this.adapter.notifyItemChanged(index);
                 int selectCount2 = 0;
                 for (int i2 = 0; i2 < X8AiLinesPointValueUi.this.mEntityList.size(); i2++) {
-                    if (((X8AiLinePointEntity) X8AiLinesPointValueUi.this.mEntityList.get(i2)).getState() == 1) {
+                    if (X8AiLinesPointValueUi.this.mEntityList.get(i2).getState() == 1) {
                         selectCount2++;
                     }
                 }
@@ -454,19 +446,19 @@ public class X8AiLinesPointValueUi implements View.OnClickListener, SeekBar.OnSe
         if (selectIndex != -1) {
             this.adapter.setSelectIndex(selectIndex);
         }
-        this.adapter.setOnItemClickListener(new X8AiLinePointValueAdapter.OnItemClickListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiLinesPointValueUi.4
-            @Override // com.fimi.app.x8s.adapter.X8AiLinePointValueAdapter.OnItemClickListener
+        this.adapter.setOnItemClickListener(new X8AiLinePointValueAdapter.OnItemClickListener() {
+            @Override
             public void onItemClicked(int index, int last, boolean isSelect) {
                 if (isSelect) {
-                    ((X8AiLinePointEntity) X8AiLinesPointValueUi.this.mEntityList.get(index)).setState(1);
+                    X8AiLinesPointValueUi.this.mEntityList.get(index).setState(1);
                     if (last != -1) {
-                        ((X8AiLinePointEntity) X8AiLinesPointValueUi.this.mEntityList.get(last)).setState(0);
+                        X8AiLinesPointValueUi.this.mEntityList.get(last).setState(0);
                         X8AiLinesPointValueUi.this.adapter.notifyItemChanged(last);
                     }
                     X8AiLinesPointValueUi.this.adapter.notifyItemChanged(index);
                     return;
                 }
-                ((X8AiLinePointEntity) X8AiLinesPointValueUi.this.mEntityList.get(index)).setState(0);
+                X8AiLinesPointValueUi.this.mEntityList.get(index).setState(0);
                 X8AiLinesPointValueUi.this.adapter.notifyItemChanged(index);
             }
         });
@@ -510,10 +502,6 @@ public class X8AiLinesPointValueUi implements View.OnClickListener, SeekBar.OnSe
     }
 
     public void setFcHeart(boolean isInSky, boolean isLowPower) {
-        if (isInSky && isLowPower) {
-            this.btnOk.setEnabled(true);
-        } else {
-            this.btnOk.setEnabled(false);
-        }
+        this.btnOk.setEnabled(isInSky && isLowPower);
     }
 }

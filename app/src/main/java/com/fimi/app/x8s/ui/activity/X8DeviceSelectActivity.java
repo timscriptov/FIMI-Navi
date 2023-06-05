@@ -11,9 +11,9 @@ import com.fimi.x8sdk.common.Constants;
 import com.fimi.x8sdk.common.GlobalConfig;
 import com.fimi.x8sdk.map.MapType;
 
-/* loaded from: classes.dex */
+
 public class X8DeviceSelectActivity extends Activity {
-    @Override // android.app.Activity
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(1);

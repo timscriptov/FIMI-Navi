@@ -13,7 +13,7 @@ import com.fimi.app.x8s.entity.VersionEntity;
 
 import java.util.ArrayList;
 
-/* loaded from: classes.dex */
+
 public class FirmwareUpgradeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final int VIEW_TYPE_NORMAL = 0;
     private final int VIEW_TYPE_END = 1;
@@ -30,7 +30,7 @@ public class FirmwareUpgradeAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         notifyDataSetChanged();
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         this.context = parent.getContext();
         View view = LayoutInflater.from(this.context).inflate(viewType == 0 ? R.layout.x8_main_general_fw_upgrade_item_normal : R.layout.x8_main_general_fw_upgrade_item_end, parent, false);
@@ -40,11 +40,10 @@ public class FirmwareUpgradeAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         return new FmEndViewHolder(view);
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof FmNormalViewHolder) {
+        if (holder instanceof FmNormalViewHolder holder1) {
             VersionEntity item = this.list.get(position);
-            FmNormalViewHolder holder1 = (FmNormalViewHolder) holder;
             if (item.getVersionName() != null) {
                 holder1.tvVersionName.setText(item.getVersionName());
             }
@@ -56,12 +55,12 @@ public class FirmwareUpgradeAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         }
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public int getItemCount() {
         return this.list.size() + 1;
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public int getItemViewType(int position) {
         return position == this.list.size() ? 1 : 0;
     }
@@ -70,12 +69,12 @@ public class FirmwareUpgradeAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         this.listener = listener;
     }
 
-    /* loaded from: classes.dex */
+
     public interface OnUpdateItemClickListener {
         void onUpdateItemClick(int i);
     }
 
-    /* loaded from: classes.dex */
+
     static class FmNormalViewHolder extends RecyclerView.ViewHolder {
         TextView tvUpdate;
         TextView tvVersionCode;
@@ -83,13 +82,13 @@ public class FirmwareUpgradeAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
         public FmNormalViewHolder(View itemView) {
             super(itemView);
-            this.tvVersionName = (TextView) itemView.findViewById(R.id.tv_version_name);
-            this.tvVersionCode = (TextView) itemView.findViewById(R.id.tv_version_code);
-            this.tvUpdate = (TextView) itemView.findViewById(R.id.tv_update);
+            this.tvVersionName = itemView.findViewById(R.id.tv_version_name);
+            this.tvVersionCode = itemView.findViewById(R.id.tv_version_code);
+            this.tvUpdate = itemView.findViewById(R.id.tv_update);
         }
     }
 
-    /* loaded from: classes.dex */
+
     static class FmEndViewHolder extends RecyclerView.ViewHolder {
         TextView tvStatementLine1;
         TextView tvStatementLine2;
@@ -97,9 +96,9 @@ public class FirmwareUpgradeAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
         public FmEndViewHolder(View itemView) {
             super(itemView);
-            this.tvStatementLine1 = (TextView) itemView.findViewById(R.id.tv_statement_line1);
-            this.tvStatementLine2 = (TextView) itemView.findViewById(R.id.tv_statement_line2);
-            this.tvStatementLine3 = (TextView) itemView.findViewById(R.id.tv_statement_line3);
+            this.tvStatementLine1 = itemView.findViewById(R.id.tv_statement_line1);
+            this.tvStatementLine2 = itemView.findViewById(R.id.tv_statement_line2);
+            this.tvStatementLine3 = itemView.findViewById(R.id.tv_statement_line3);
         }
     }
 }

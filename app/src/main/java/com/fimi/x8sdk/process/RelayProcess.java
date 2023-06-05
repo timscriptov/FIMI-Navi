@@ -27,7 +27,7 @@ import com.fimi.x8sdk.modulestate.StateManager;
 import com.fimi.x8sdk.modulestate.VersionState;
 import com.fimi.x8sdk.rtp.X8Rtp;
 
-/* loaded from: classes2.dex */
+
 public class RelayProcess implements JsonListener {
     private static volatile RelayProcess relayProcess = null;
     DeviceMonitorThread monitorThread;
@@ -36,8 +36,8 @@ public class RelayProcess implements JsonListener {
     private long curTime;
     private FcManager fcManager;
     private boolean getSetting;
-    private int countFw = 0;
-    private int MAXFW = 11;
+    private final int countFw = 0;
+    private final int MAXFW = 11;
     private boolean isShowUpdateView = true;
 
     public static RelayProcess getRelayProcess() {
@@ -101,10 +101,10 @@ public class RelayProcess implements JsonListener {
         getAllSetting();
     }
 
-    @Override // com.fimi.kernel.connect.session.JsonListener
+    @Override
     public void onProcess(int msgId, JSONObject json) {
         if (json != null) {
-            AckCamJsonInfo jsonInfo = (AckCamJsonInfo) JSON.parseObject(json.toJSONString(), AckCamJsonInfo.class);
+            AckCamJsonInfo jsonInfo = JSON.parseObject(json.toJSONString(), AckCamJsonInfo.class);
             int retVal = jsonInfo.getRval();
             jsonInfo.getType();
             String param = jsonInfo.getParam();
@@ -130,8 +130,8 @@ public class RelayProcess implements JsonListener {
     public void getAllVersion() {
         if (this.fcManager != null) {
             if (StateManager.getInstance().getVersionState().getModuleRepeaterRcVersion() == null) {
-                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_REPEATER_RC.ordinal(), (byte) 11, new UiCallBackListener<AckVersion>() { // from class: com.fimi.x8sdk.process.RelayProcess.1
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_REPEATER_RC.ordinal(), (byte) 11, new UiCallBackListener<AckVersion>() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, AckVersion o) {
                         if (cmdResult.isSuccess()) {
                             StateManager.getInstance().getVersionState().setModuleRepeaterRcVersion(o);
@@ -143,8 +143,8 @@ public class RelayProcess implements JsonListener {
                 });
             }
             if (StateManager.getInstance().getVersionState().getModuleRcVersion() == null) {
-                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_RC.ordinal(), (byte) 1, new UiCallBackListener<AckVersion>() { // from class: com.fimi.x8sdk.process.RelayProcess.2
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_RC.ordinal(), (byte) 1, new UiCallBackListener<AckVersion>() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, AckVersion o) {
                         if (cmdResult.isSuccess()) {
                             StateManager.getInstance().getVersionState().setModuleRcVersion(o);
@@ -158,8 +158,8 @@ public class RelayProcess implements JsonListener {
                 });
             }
             if (StateManager.getInstance().getVersionState().getModuleRepeaterVehicleVersion() == null) {
-                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_REPEATER_VEHICLE.ordinal(), (byte) 12, new UiCallBackListener<AckVersion>() { // from class: com.fimi.x8sdk.process.RelayProcess.3
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_REPEATER_VEHICLE.ordinal(), (byte) 12, new UiCallBackListener<AckVersion>() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, AckVersion o) {
                         if (cmdResult.isSuccess()) {
                             StateManager.getInstance().getVersionState().setModuleRepeaterVehicleVersion(o);
@@ -171,8 +171,8 @@ public class RelayProcess implements JsonListener {
                 });
             }
             if (StateManager.getInstance().getVersionState().getModuleEscVersion() == null) {
-                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_ESC.ordinal(), (byte) 14, new UiCallBackListener<AckVersion>() { // from class: com.fimi.x8sdk.process.RelayProcess.4
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_ESC.ordinal(), (byte) 14, new UiCallBackListener<AckVersion>() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, AckVersion o) {
                         if (cmdResult.isSuccess()) {
                             StateManager.getInstance().getVersionState().setModuleEscVersion(o);
@@ -184,8 +184,8 @@ public class RelayProcess implements JsonListener {
                 });
             }
             if (StateManager.getInstance().getVersionState().getModuleGimbalVersion() == null) {
-                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_GIMBAL.ordinal(), (byte) 3, new UiCallBackListener<AckVersion>() { // from class: com.fimi.x8sdk.process.RelayProcess.5
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_GIMBAL.ordinal(), (byte) 3, new UiCallBackListener<AckVersion>() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, AckVersion o) {
                         if (cmdResult.isSuccess()) {
                             StateManager.getInstance().getVersionState().setModuleGimbalVersion(o);
@@ -197,8 +197,8 @@ public class RelayProcess implements JsonListener {
                 });
             }
             if (StateManager.getInstance().getVersionState().getModuleBatteryVersion() == null) {
-                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_BATTERY.ordinal(), (byte) 5, new UiCallBackListener<AckVersion>() { // from class: com.fimi.x8sdk.process.RelayProcess.6
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_BATTERY.ordinal(), (byte) 5, new UiCallBackListener<AckVersion>() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, AckVersion o) {
                         if (cmdResult.isSuccess()) {
                             StateManager.getInstance().getVersionState().setModuleBatteryVersion(o);
@@ -211,8 +211,8 @@ public class RelayProcess implements JsonListener {
                 });
             }
             if (StateManager.getInstance().getVersionState().getModuleNfzVersion() == null) {
-                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_NFZ.ordinal(), (byte) 10, new UiCallBackListener<AckVersion>() { // from class: com.fimi.x8sdk.process.RelayProcess.7
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_NFZ.ordinal(), (byte) 10, new UiCallBackListener<AckVersion>() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, AckVersion o) {
                         if (cmdResult.isSuccess()) {
                             StateManager.getInstance().getVersionState().setModuleNfzVersion(o);
@@ -224,8 +224,8 @@ public class RelayProcess implements JsonListener {
                 });
             }
             if (StateManager.getInstance().getVersionState().getModuleUltrasonic() == null) {
-                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_ULTRASONIC.ordinal(), (byte) 13, new UiCallBackListener<AckVersion>() { // from class: com.fimi.x8sdk.process.RelayProcess.8
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_ULTRASONIC.ordinal(), (byte) 13, new UiCallBackListener<AckVersion>() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, AckVersion o) {
                         if (cmdResult.isSuccess()) {
                             StateManager.getInstance().getVersionState().setModuleUltrasonic(o);
@@ -237,8 +237,8 @@ public class RelayProcess implements JsonListener {
                 });
             }
             if (!X8Rtp.simulationTest) {
-                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal(), (byte) 0, new UiCallBackListener<AckVersion>() { // from class: com.fimi.x8sdk.process.RelayProcess.9
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal(), (byte) 0, new UiCallBackListener<AckVersion>() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, AckVersion o) {
                         if (cmdResult.isSuccess()) {
                             StateManager.getInstance().getVersionState().setModuleFcAckVersion(o);
@@ -255,8 +255,8 @@ public class RelayProcess implements JsonListener {
     void getCameraVersion() {
         if (this.fcManager != null) {
             if (StateManager.getInstance().getVersionState().getModuleCameraVersion() == null) {
-                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_CAMERA.ordinal(), (byte) 4, new UiCallBackListener<AckVersion>() { // from class: com.fimi.x8sdk.process.RelayProcess.10
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_CAMERA.ordinal(), (byte) 4, new UiCallBackListener<AckVersion>() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, AckVersion o) {
                         if (cmdResult.isSuccess()) {
                             StateManager.getInstance().getVersionState().setModuleCameraVersion(o);
@@ -268,8 +268,8 @@ public class RelayProcess implements JsonListener {
                 });
             }
             if (StateManager.getInstance().getVersionState().getModuleCvVersion() == null) {
-                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_CV.ordinal(), (byte) 9, new UiCallBackListener<AckVersion>() { // from class: com.fimi.x8sdk.process.RelayProcess.11
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_CV.ordinal(), (byte) 9, new UiCallBackListener<AckVersion>() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, AckVersion o) {
                         if (cmdResult.isSuccess()) {
                             StateManager.getInstance().getVersionState().setModuleCvVersion(o);

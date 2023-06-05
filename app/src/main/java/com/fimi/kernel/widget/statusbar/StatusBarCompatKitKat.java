@@ -18,7 +18,7 @@ import com.twitter.sdk.android.core.internal.scribe.SyndicatedSdkImpressionEvent
 import org.apache.mina.proxy.handlers.http.ntlm.NTLMConstants;
 
 @TargetApi(19)
-/* loaded from: classes.dex */
+
 public class StatusBarCompatKitKat {
     private static final String TAG_FAKE_STATUS_BAR_VIEW = "statusBarView";
     private static final String TAG_MARGIN_ADDED = "marginAdded";
@@ -75,7 +75,7 @@ public class StatusBarCompatKitKat {
     public static void setStatusBarColor(Activity activity, int statusColor) {
         Window window = activity.getWindow();
         window.addFlags(NTLMConstants.FLAG_UNIDENTIFIED_9);
-        ViewGroup mContentView = (ViewGroup) window.findViewById(16908290);
+        ViewGroup mContentView = window.findViewById(16908290);
         View mContentChild = mContentView.getChildAt(0);
         int statusBarHeight = getStatusBarHeight(activity);
         removeFakeStatusBarViewIfExist(activity);
@@ -89,7 +89,7 @@ public class StatusBarCompatKitKat {
     public static void translucentStatusBar(Activity activity) {
         Window window = activity.getWindow();
         window.addFlags(NTLMConstants.FLAG_UNIDENTIFIED_9);
-        ViewGroup mContentView = (ViewGroup) activity.findViewById(16908290);
+        ViewGroup mContentView = activity.findViewById(16908290);
         View mContentChild = mContentView.getChildAt(0);
         removeFakeStatusBarViewIfExist(activity);
         removeMarginTopOfContentChild(mContentChild, getStatusBarHeight(activity));
@@ -101,7 +101,7 @@ public class StatusBarCompatKitKat {
     public static void setStatusBarColorForCollapsingToolbar(Activity activity, AppBarLayout appBarLayout, CollapsingToolbarLayout collapsingToolbarLayout, Toolbar toolbar, int statusColor) {
         Window window = activity.getWindow();
         window.addFlags(NTLMConstants.FLAG_UNIDENTIFIED_9);
-        ViewGroup mContentView = (ViewGroup) window.findViewById(16908290);
+        ViewGroup mContentView = window.findViewById(16908290);
         View mContentChild = mContentView.getChildAt(0);
         mContentChild.setFitsSystemWindows(false);
         ((View) appBarLayout.getParent()).setFitsSystemWindows(false);

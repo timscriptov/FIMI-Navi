@@ -22,7 +22,7 @@ import com.fimi.x8sdk.controller.FcCtrlManager;
 import com.fimi.x8sdk.dataparser.AckGetCaliState;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes.dex */
+
 public class X8AircraftCalibrationController extends AbsX8MenuBoxControllers implements X8DoubleCustomDialog.onDialogButtonClickListener {
     private final int FIFTH_DIR_STEP;
     private final int FOURTH_DIR_STEP;
@@ -33,7 +33,7 @@ public class X8AircraftCalibrationController extends AbsX8MenuBoxControllers imp
     private ImageView back_btn;
     private X8DoubleCustomDialog dialog;
     private FcCtrlManager fcManager;
-    private boolean[] indicatorArray;
+    private final boolean[] indicatorArray;
     private boolean isCaltAccSixPoint;
     private boolean isResetCalit;
     private boolean isShowCalibrationStart;
@@ -49,7 +49,7 @@ public class X8AircraftCalibrationController extends AbsX8MenuBoxControllers imp
     private ViewStub mDisconnectViewStub;
     private ViewStub mFailureViewStub;
     private GaliStete mGaliStete;
-    private Handler mHandler;
+    private final Handler mHandler;
     private ImageView mIvCalibrationStepPicture;
     private ViewStub mPreViewStub;
     private ViewStub mSuccessedViewStub;
@@ -75,8 +75,8 @@ public class X8AircraftCalibrationController extends AbsX8MenuBoxControllers imp
         this.isResetCalit = false;
         this.mGaliStete = GaliStete.IDLE;
         this.timeoutCounter = 0;
-        this.mHandler = new Handler() { // from class: com.fimi.app.x8s.controls.fcsettting.X8AircraftCalibrationController.1
-            @Override // android.os.Handler
+        this.mHandler = new Handler() {
+            @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 if (!StateManager.getInstance().getX8Drone().isConnect()) {
@@ -129,7 +129,6 @@ public class X8AircraftCalibrationController extends AbsX8MenuBoxControllers imp
                 return;
             case SEND_RESTART_CALI_SIX_POINT:
                 reStartCalibration();
-                return;
         }
     }
 
@@ -243,8 +242,8 @@ public class X8AircraftCalibrationController extends AbsX8MenuBoxControllers imp
     private void getSixPointData() {
         this.isCaltAccSixPoint = false;
         this.timeoutCounter++;
-        this.fcManager.getAircrftCalibrationState(X8Cali.SensorType.IMUM.ordinal(), X8Cali.CaliType.CALI_ACC_SIX_POINT.ordinal(), new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8AircraftCalibrationController.2
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.getAircrftCalibrationState(X8Cali.SensorType.IMUM.ordinal(), X8Cali.CaliType.CALI_ACC_SIX_POINT.ordinal(), new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 X8AircraftCalibrationController.this.timeoutCounter = 0;
                 if (!cmdResult.isSuccess) {
@@ -264,8 +263,8 @@ public class X8AircraftCalibrationController extends AbsX8MenuBoxControllers imp
 
     private void getHorizonalData() {
         this.timeoutCounter++;
-        this.fcManager.getAircrftCalibrationState(X8Cali.SensorType.IMUM.ordinal(), X8Cali.CaliType.CALI_IMU_ORTH.ordinal(), new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8AircraftCalibrationController.3
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.getAircrftCalibrationState(X8Cali.SensorType.IMUM.ordinal(), X8Cali.CaliType.CALI_IMU_ORTH.ordinal(), new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 X8AircraftCalibrationController.this.timeoutCounter = 0;
                 if (!cmdResult.isSuccess) {
@@ -302,8 +301,8 @@ public class X8AircraftCalibrationController extends AbsX8MenuBoxControllers imp
         quitHorizonalCalibration();
         quitCalibration();
         this.timeoutCounter++;
-        this.fcManager.setAircrftCalibrationStart(X8Cali.CaliType.CALI_ACC_SIX_POINT.ordinal(), X8Cali.CaliCmd.CALI_CMD_START.ordinal(), X8Cali.CaliMode.CALI_MODE_MANUALLY.ordinal(), new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8AircraftCalibrationController.4
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.setAircrftCalibrationStart(X8Cali.CaliType.CALI_ACC_SIX_POINT.ordinal(), X8Cali.CaliCmd.CALI_CMD_START.ordinal(), X8Cali.CaliMode.CALI_MODE_MANUALLY.ordinal(), new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 X8AircraftCalibrationController.this.timeoutCounter = 0;
                 if (!cmdResult.isSuccess) {
@@ -322,8 +321,8 @@ public class X8AircraftCalibrationController extends AbsX8MenuBoxControllers imp
     }
 
     public void quitHorizonalCalibration() {
-        this.fcManager.setAircrftCalibrationStart(X8Cali.CaliType.CALI_IMU_ORTH.ordinal(), X8Cali.CaliCmd.CALI_CMD_QUIT.ordinal(), X8Cali.CaliMode.CALI_MODE_MANUALLY.ordinal(), new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8AircraftCalibrationController.5
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.setAircrftCalibrationStart(X8Cali.CaliType.CALI_IMU_ORTH.ordinal(), X8Cali.CaliCmd.CALI_CMD_QUIT.ordinal(), X8Cali.CaliMode.CALI_MODE_MANUALLY.ordinal(), new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
             }
         });
@@ -332,8 +331,8 @@ public class X8AircraftCalibrationController extends AbsX8MenuBoxControllers imp
     private void startHorizonalCalibration() {
         quitCalibration();
         this.timeoutCounter++;
-        this.fcManager.setAircrftCalibrationStart(X8Cali.CaliType.CALI_IMU_ORTH.ordinal(), X8Cali.CaliCmd.CALI_CMD_START.ordinal(), X8Cali.CaliMode.CALI_MODE_MANUALLY.ordinal(), new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8AircraftCalibrationController.6
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.setAircrftCalibrationStart(X8Cali.CaliType.CALI_IMU_ORTH.ordinal(), X8Cali.CaliCmd.CALI_CMD_START.ordinal(), X8Cali.CaliMode.CALI_MODE_MANUALLY.ordinal(), new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 X8AircraftCalibrationController.this.timeoutCounter = 0;
                 if (!cmdResult.isSuccess) {
@@ -351,8 +350,8 @@ public class X8AircraftCalibrationController extends AbsX8MenuBoxControllers imp
     }
 
     public void quitCalibration() {
-        this.fcManager.setAircrftCalibrationStart(X8Cali.CaliType.CALI_ACC_SIX_POINT.ordinal(), X8Cali.CaliCmd.CALI_CMD_QUIT.ordinal(), X8Cali.CaliMode.CALI_MODE_MANUALLY.ordinal(), new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8AircraftCalibrationController.7
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.setAircrftCalibrationStart(X8Cali.CaliType.CALI_ACC_SIX_POINT.ordinal(), X8Cali.CaliCmd.CALI_CMD_QUIT.ordinal(), X8Cali.CaliMode.CALI_MODE_MANUALLY.ordinal(), new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 X8AircraftCalibrationController.this.isCaltAccSixPoint = false;
             }
@@ -369,8 +368,8 @@ public class X8AircraftCalibrationController extends AbsX8MenuBoxControllers imp
         handleCalibrationStep6();
         this.mGaliStete = GaliStete.SEND_RESTART_CALI_SIX_POINT;
         this.timeoutCounter++;
-        this.fcManager.setAircrftCalibrationStart(X8Cali.CaliType.CALI_ACC_SIX_POINT.ordinal(), X8Cali.CaliCmd.CALI_CMD_RESTART.ordinal(), X8Cali.CaliMode.CALI_MODE_MANUALLY.ordinal(), new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8AircraftCalibrationController.8
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.setAircrftCalibrationStart(X8Cali.CaliType.CALI_ACC_SIX_POINT.ordinal(), X8Cali.CaliCmd.CALI_CMD_RESTART.ordinal(), X8Cali.CaliMode.CALI_MODE_MANUALLY.ordinal(), new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 X8AircraftCalibrationController.this.timeoutCounter = 0;
                 if (cmdResult.isSuccess) {
@@ -386,40 +385,40 @@ public class X8AircraftCalibrationController extends AbsX8MenuBoxControllers imp
         });
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
         this.handleView = rootView.findViewById(R.id.x8_rl_main_mdify_calibration_layout);
-        this.back_btn = (ImageView) this.handleView.findViewById(R.id.btn_calibration_return);
-        this.mTvCalibrationTitle = (TextView) this.handleView.findViewById(R.id.tv_calibration_title);
-        this.mPreViewStub = (ViewStub) this.handleView.findViewById(R.id.vs_aircraft_calibration_pre);
+        this.back_btn = this.handleView.findViewById(R.id.btn_calibration_return);
+        this.mTvCalibrationTitle = this.handleView.findViewById(R.id.tv_calibration_title);
+        this.mPreViewStub = this.handleView.findViewById(R.id.vs_aircraft_calibration_pre);
         this.mCalibrationPreView = this.mPreViewStub.inflate();
         this.mCalibrationPreView.setVisibility(8);
-        this.mDisconnectViewStub = (ViewStub) this.handleView.findViewById(R.id.vs_aircraft_calibration_disconnect);
+        this.mDisconnectViewStub = this.handleView.findViewById(R.id.vs_aircraft_calibration_disconnect);
         this.mCalibrationDisconnectView = this.mDisconnectViewStub.inflate();
         this.mCalibrationDisconnectView.setVisibility(0);
-        this.mViewStepStub = (ViewStub) this.handleView.findViewById(R.id.vs_aircraft_calibration_step);
+        this.mViewStepStub = this.handleView.findViewById(R.id.vs_aircraft_calibration_step);
         this.mCalibrationStepView = this.mViewStepStub.inflate();
         this.mCalibrationStepView.setVisibility(8);
-        this.mFailureViewStub = (ViewStub) this.handleView.findViewById(R.id.vs_aircraft_calibration_failure);
+        this.mFailureViewStub = this.handleView.findViewById(R.id.vs_aircraft_calibration_failure);
         this.mCalibrationFailureView = this.mFailureViewStub.inflate();
         this.mCalibrationFailureView.setVisibility(8);
-        this.mSuccessedViewStub = (ViewStub) this.handleView.findViewById(R.id.vs_aircraft_calibration_successed);
+        this.mSuccessedViewStub = this.handleView.findViewById(R.id.vs_aircraft_calibration_successed);
         this.mCalibrationSuccessedView = this.mSuccessedViewStub.inflate();
         this.mCalibrationSuccessedView.setVisibility(8);
-        this.mBtnStartCalibration = (Button) this.handleView.findViewById(R.id.btn_start_calibration_toggle);
-        this.mBtnFailureCalibration = (Button) this.handleView.findViewById(R.id.btn_failure_calibration_toggle);
-        this.mBtnSuccessCalibration = (Button) this.handleView.findViewById(R.id.btn_success_calibration_toggle);
-        this.mIvCalibrationStepPicture = (ImageView) this.handleView.findViewById(R.id.iv_calibration_step_picture);
-        this.mTvCalibrationStepDescribe = (TextView) this.handleView.findViewById(R.id.tv_calibration_step1_describe);
-        this.mCalibrationIndicator = (X8AircrftCalibrationIndicatorView) this.handleView.findViewById(R.id.view_aircrft_Calibration_Indicator);
-        this.mTvCalibrationFailureDescribe = (TextView) this.handleView.findViewById(R.id.tv_calibration_failure_describe);
-        this.mTvCalibrationDisconnectionDescribe = (TextView) this.handleView.findViewById(R.id.tv_calibration_disconnection_describe);
+        this.mBtnStartCalibration = this.handleView.findViewById(R.id.btn_start_calibration_toggle);
+        this.mBtnFailureCalibration = this.handleView.findViewById(R.id.btn_failure_calibration_toggle);
+        this.mBtnSuccessCalibration = this.handleView.findViewById(R.id.btn_success_calibration_toggle);
+        this.mIvCalibrationStepPicture = this.handleView.findViewById(R.id.iv_calibration_step_picture);
+        this.mTvCalibrationStepDescribe = this.handleView.findViewById(R.id.tv_calibration_step1_describe);
+        this.mCalibrationIndicator = this.handleView.findViewById(R.id.view_aircrft_Calibration_Indicator);
+        this.mTvCalibrationFailureDescribe = this.handleView.findViewById(R.id.tv_calibration_failure_describe);
+        this.mTvCalibrationDisconnectionDescribe = this.handleView.findViewById(R.id.tv_calibration_disconnection_describe);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
-        this.back_btn.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8AircraftCalibrationController.9
-            @Override // android.view.View.OnClickListener
+        this.back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 if (X8AircraftCalibrationController.this.isCaltAccSixPoint) {
                     if (X8AircraftCalibrationController.this.dialog == null) {
@@ -433,8 +432,8 @@ public class X8AircraftCalibrationController extends AbsX8MenuBoxControllers imp
                 X8AircraftCalibrationController.this.quitItem();
             }
         });
-        this.mBtnStartCalibration.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8AircraftCalibrationController.10
-            @Override // android.view.View.OnClickListener
+        this.mBtnStartCalibration.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 X8AircraftCalibrationController.this.timeoutCounter = 0;
                 if (X8AircraftCalibrationController.this.isResetCalit) {
@@ -446,33 +445,33 @@ public class X8AircraftCalibrationController extends AbsX8MenuBoxControllers imp
                 X8AircraftCalibrationController.this.startCalibration();
             }
         });
-        this.mBtnFailureCalibration.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8AircraftCalibrationController.11
-            @Override // android.view.View.OnClickListener
+        this.mBtnFailureCalibration.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 X8AircraftCalibrationController.this.mGaliStete = GaliStete.SEND_RESTART_CALI_SIX_POINT;
                 X8AircraftCalibrationController.this.reStartCalibration();
             }
         });
-        this.mBtnSuccessCalibration.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8AircraftCalibrationController.12
-            @Override // android.view.View.OnClickListener
+        this.mBtnSuccessCalibration.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 X8AircraftCalibrationController.this.quitItem();
             }
         });
     }
 
-    @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+    @Override
     public void onLeft() {
     }
 
-    @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+    @Override
     public void onRight() {
         this.mGaliStete = GaliStete.IDLE;
         quitCalibration();
         quitItem();
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         super.onDroneConnected(b);
         if (!this.isInSky) {
@@ -487,11 +486,11 @@ public class X8AircraftCalibrationController extends AbsX8MenuBoxControllers imp
         handleInsky();
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void showItem() {
         super.showItem();
         this.handleView.setVisibility(0);
@@ -704,7 +703,7 @@ public class X8AircraftCalibrationController extends AbsX8MenuBoxControllers imp
         return this.handleView.getContext().getString(id);
     }
 
-    /* loaded from: classes.dex */
+
     public enum GaliStete {
         IDLE,
         SEND_CALI_SIX_POINT,

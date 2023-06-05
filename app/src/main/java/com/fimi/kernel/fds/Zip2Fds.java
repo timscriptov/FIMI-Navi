@@ -10,7 +10,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class Zip2Fds {
     public static final int EXIST_UNZIPFILE = 2;
     public static final int EXIST_ZIPFILE = 4;
@@ -30,10 +30,7 @@ public class Zip2Fds {
             return false;
         }
         int code = zip2(file.getAbsolutePath(), zipName, list);
-        if (code != 3 && code != 4) {
-            return false;
-        }
-        return true;
+        return code == 3 || code == 4;
     }
 
     private void zipEachFile(ZipOutputStream zos, File zipFile, String baseDir) {

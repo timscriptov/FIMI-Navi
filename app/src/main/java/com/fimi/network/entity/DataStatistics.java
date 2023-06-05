@@ -1,8 +1,6 @@
 package com.fimi.network.entity;
 
 
-
-/* loaded from: classes.dex */
 public class DataStatistics {
     private String appType;
     private String createTime;

@@ -17,12 +17,12 @@ import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/* loaded from: classes.dex */
+
 public class MediaOriginalDownloadTask implements Runnable {
     private MediaDownloadInfo downloadInfo;
     private long finished = 0;
-    private OnDownloadListener listener;
-    private MediaModel model;
+    private final OnDownloadListener listener;
+    private final MediaModel model;
 
     public MediaOriginalDownloadTask(MediaModel model, OnDownloadListener listener) {
         this.model = model;
@@ -32,7 +32,7 @@ public class MediaOriginalDownloadTask implements Runnable {
         model.setDownloading(true);
     }
 
-    @Override // java.lang.Runnable
+    @Override
     public void run() {
         startDownload();
     }

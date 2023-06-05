@@ -20,7 +20,7 @@ import com.fimi.libperson.presenter.LibPersonRightApplyPresenter;
 import com.fimi.libperson.widget.TitleView;
 import com.fimi.widget.NetworkLoadManage;
 
-/* loaded from: classes.dex */
+
 public class LibPersonRightApplyActivity extends BasePersonActivity implements ILibpersonRightApplyView {
     private LibPersonRightApplyPresenter libPersonRightApplyPresenter;
     private Button libpersonBtnApplySend;
@@ -28,54 +28,50 @@ public class LibPersonRightApplyActivity extends BasePersonActivity implements I
     private TextView libpersonTvApplyHint;
     private TitleView mTitleView;
 
-    @Override // com.fimi.libperson.BasePersonActivity, com.fimi.kernel.base.BaseActivity
+    @Override
     public void setStatusBarColor() {
         StatusBarUtil.StatusBarLightMode(this);
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     protected int getContentViewLayoutID() {
         return R.layout.libperson_activity_right_apply;
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void initData() {
         initView();
     }
 
     private void initView() {
         this.libPersonRightApplyPresenter = new LibPersonRightApplyPresenter(this, this);
-        this.mTitleView = (TitleView) findViewById(R.id.title_view);
+        this.mTitleView = findViewById(R.id.title_view);
         this.mTitleView.setTvTitle(getResources().getString(R.string.libperson_user_right));
-        this.libpersonTvApplyHint = (TextView) findViewById(R.id.libperson_tv_apply_hint);
+        this.libpersonTvApplyHint = findViewById(R.id.libperson_tv_apply_hint);
         FontUtil.changeFontLanTing(getAssets(), this.libpersonTvApplyHint);
-        this.libpersonEtEmail = (EditText) findViewById(R.id.libperson_et_email);
-        this.libpersonBtnApplySend = (Button) findViewById(R.id.libperson_btn_apply_send);
+        this.libpersonEtEmail = findViewById(R.id.libperson_et_email);
+        this.libpersonBtnApplySend = findViewById(R.id.libperson_btn_apply_send);
         sendBtnIsClick(false);
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void doTrans() {
-        this.libpersonEtEmail.addTextChangedListener(new TextWatcher() { // from class: com.fimi.libperson.ui.setting.LibPersonRightApplyActivity.1
-            @Override // android.text.TextWatcher
+        this.libpersonEtEmail.addTextChangedListener(new TextWatcher() {
+            @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
 
-            @Override // android.text.TextWatcher
+            @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
 
-            @Override // android.text.TextWatcher
+            @Override
             public void afterTextChanged(Editable editable) {
-                if (DataValidatorUtil.isEmail(LibPersonRightApplyActivity.this.libpersonEtEmail.getText().toString().trim())) {
-                    LibPersonRightApplyActivity.this.sendBtnIsClick(true);
-                } else {
-                    LibPersonRightApplyActivity.this.sendBtnIsClick(false);
-                }
+                LibPersonRightApplyActivity.this.sendBtnIsClick(DataValidatorUtil.isEmail(LibPersonRightApplyActivity.this.libpersonEtEmail.getText().toString().trim()));
             }
         });
-        this.libpersonBtnApplySend.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.libperson.ui.setting.LibPersonRightApplyActivity.2
-            @Override // android.view.View.OnClickListener
+        this.libpersonBtnApplySend.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 NetworkLoadManage.show(LibPersonRightApplyActivity.this);
                 LibPersonRightApplyActivity.this.libPersonRightApplyPresenter.sendEmail(LibPersonRightApplyActivity.this.libpersonEtEmail.getText().toString(), LanguageUtil.getCurrentLanguage().getInternalCoutry(), Constants.productType.name().toLowerCase());
@@ -90,20 +86,16 @@ public class LibPersonRightApplyActivity extends BasePersonActivity implements I
     }
 
     public void sendBtnIsClick(boolean isClick) {
-        if (isClick) {
-            this.libpersonBtnApplySend.setEnabled(true);
-        } else {
-            this.libpersonBtnApplySend.setEnabled(false);
-        }
+        this.libpersonBtnApplySend.setEnabled(isClick);
     }
 
-    @Override // com.fimi.libperson.ivew.ILibpersonRightApplyView
+    @Override
     public void sendSuccess(String hint) {
         ToastUtil.showToast(this, hint, 1);
         NetworkLoadManage.dismiss();
     }
 
-    @Override // com.fimi.libperson.ivew.ILibpersonRightApplyView
+    @Override
     public void sendFailure(String hint) {
         ToastUtil.showToast(this, hint, 1);
         NetworkLoadManage.dismiss();

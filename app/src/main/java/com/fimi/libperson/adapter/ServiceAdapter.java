@@ -14,7 +14,7 @@ import com.fimi.kernel.utils.FontUtil;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class ServiceAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater inflater;
@@ -29,22 +29,22 @@ public class ServiceAdapter extends BaseAdapter {
         this.inflater = LayoutInflater.from(context);
     }
 
-    @Override // android.widget.Adapter
+    @Override
     public int getCount() {
         return this.list.size();
     }
 
-    @Override // android.widget.Adapter
+    @Override
     public ServiceItem getItem(int position) {
         return this.list.get(position);
     }
 
-    @Override // android.widget.Adapter
+    @Override
     public long getItemId(int position) {
         return position;
     }
 
-    @Override // android.widget.Adapter
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
@@ -66,7 +66,7 @@ public class ServiceAdapter extends BaseAdapter {
         return convertView;
     }
 
-    /* loaded from: classes.dex */
+
     private class ViewHolder {
         ImageView mIvArrow;
         TextView mTvItemTitle;
@@ -77,8 +77,8 @@ public class ServiceAdapter extends BaseAdapter {
         public View initView(ViewGroup parent) {
             LayoutInflater inflater = LayoutInflater.from(ServiceAdapter.this.context);
             View view = inflater.inflate(R.layout.adapt_language_setting, parent, false);
-            this.mTvItemTitle = (TextView) view.findViewById(R.id.tv_item_title);
-            this.mIvArrow = (ImageView) view.findViewById(R.id.iv_arrow);
+            this.mTvItemTitle = view.findViewById(R.id.tv_item_title);
+            this.mIvArrow = view.findViewById(R.id.iv_arrow);
             FontUtil.changeFontLanTing(ServiceAdapter.this.context.getAssets(), this.mTvItemTitle);
             return view;
         }

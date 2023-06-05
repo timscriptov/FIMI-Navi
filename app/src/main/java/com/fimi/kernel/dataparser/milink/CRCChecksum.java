@@ -1,6 +1,6 @@
 package com.fimi.kernel.dataparser.milink;
 
-/* loaded from: classes.dex */
+
 public class CRCChecksum {
     public static final int X25_INIT_CRC = 65535;
 

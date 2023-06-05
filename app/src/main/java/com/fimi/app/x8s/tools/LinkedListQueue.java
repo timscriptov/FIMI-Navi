@@ -4,9 +4,9 @@ import android.annotation.SuppressLint;
 
 import java.util.LinkedList;
 
-/* loaded from: classes.dex */
+
 public class LinkedListQueue<T> {
-    private int LINK_SIZE = 50;
+    private final int LINK_SIZE = 50;
     private LinkedList<T> linkedList = new LinkedList<>();
 
     public void add(T obj) {

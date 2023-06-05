@@ -3,7 +3,7 @@ package com.fimi.app.x8s.map.interfaces;
 import com.fimi.app.x8s.interfaces.IX8MarkerListener;
 import com.fimi.app.x8s.map.model.MapPointLatLng;
 
-/* loaded from: classes.dex */
+
 public abstract class AbsAiPoint2PointManager extends AbsBaseManager {
     public abstract void calcDistance();
 

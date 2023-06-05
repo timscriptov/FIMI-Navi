@@ -4,7 +4,7 @@ import com.fimi.app.x8s.entity.X8B2oxFile;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class X8B2oxSection extends AbsSection {
     private List<X8B2oxFile> list;
     private String title;
@@ -31,7 +31,7 @@ public class X8B2oxSection extends AbsSection {
         this.list = list;
     }
 
-    @Override // com.fimi.app.x8s.adapter.section.AbsSection
+    @Override
     public int getContentItemsTotal() {
         return this.list.size();
     }

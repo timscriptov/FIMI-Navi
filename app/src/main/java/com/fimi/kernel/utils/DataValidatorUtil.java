@@ -2,7 +2,7 @@ package com.fimi.kernel.utils;
 
 import java.util.regex.Pattern;
 
-/* loaded from: classes.dex */
+
 public class DataValidatorUtil {
     public static final String REGEX_CHINESE = "^[一-龥],{0,}$";
     public static final String REGEX_EMAIL = "^\\w+((-\\w+)|(\\.\\w+))*\\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z0-9]{2,6}+$";

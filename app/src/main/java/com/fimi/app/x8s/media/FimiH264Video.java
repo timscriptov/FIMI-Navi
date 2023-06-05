@@ -27,7 +27,7 @@ import com.fimi.x8sdk.modulestate.StateManager;
 
 import java.nio.ByteBuffer;
 
-/* loaded from: classes.dex */
+
 public class FimiH264Video extends RelativeLayout implements IFrameDataListener, OnX8VideoFrameBufferListener {
     private static final int STATE_ERROR = -1;
     private static final int STATE_IDLE = 0;
@@ -36,15 +36,15 @@ public class FimiH264Video extends RelativeLayout implements IFrameDataListener,
     private static final int STATE_PLAYING = 3;
     private static final int STATE_PREPARED = 2;
     private static final int STATE_PREPARING = 1;
-    private static int VIDEO_WIDTH = FimiAppContext.UI_HEIGHT;
-    private static int VIDEO_HEIGHT = FimiAppContext.UI_WIDTH;
-    private int FrameRate;
+    private static final int VIDEO_WIDTH = FimiAppContext.UI_HEIGHT;
+    private static final int VIDEO_HEIGHT = FimiAppContext.UI_WIDTH;
+    private final int FrameRate;
     private View blackView;
     private IFimiFpvShot fpvShotCallback;
     private int mCurrentState;
     private H264Decoder mH264Decoder;
     private IFrameDataListener mIFrameDataListener;
-    private SurfaceCallback mSurfaceCallback;
+    private final SurfaceCallback mSurfaceCallback;
     private int mTargetState;
     private int mVideoHeight;
     private int mVideoWidth;
@@ -163,7 +163,7 @@ public class FimiH264Video extends RelativeLayout implements IFrameDataListener,
         this.x8VideoFrameBufferListener = x8VideoFrameBufferListener;
     }
 
-    @Override // com.fimi.app.x8s.media.OnX8VideoFrameBufferListener
+    @Override
     public void onFrameBuffer(byte[] rgb) {
         if (this.x8VideoFrameBufferListener != null) {
             this.x8VideoFrameBufferListener.onFrameBuffer(rgb);
@@ -173,7 +173,7 @@ public class FimiH264Video extends RelativeLayout implements IFrameDataListener,
         }
     }
 
-    @Override // com.fimi.app.x8s.media.OnX8VideoFrameBufferListener
+    @Override
     public void onH264Frame(ByteBuffer buffer) {
     }
 
@@ -221,12 +221,12 @@ public class FimiH264Video extends RelativeLayout implements IFrameDataListener,
         }
     }
 
-    @Override // android.view.ViewGroup, android.view.View
+    @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
     }
 
-    @Override // android.view.ViewGroup, android.view.View
+    @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         if (this.mH264Decoder != null) {
@@ -241,7 +241,7 @@ public class FimiH264Video extends RelativeLayout implements IFrameDataListener,
         }
     }
 
-    @Override // com.fimi.app.x8s.media.IFrameDataListener
+    @Override
     public void onCountFrame(int count, int remainder, int fpvSize) {
         if (this.mIFrameDataListener != null) {
             this.mIFrameDataListener.onCountFrame(count, remainder, fpvSize);
@@ -272,29 +272,29 @@ public class FimiH264Video extends RelativeLayout implements IFrameDataListener,
         this.fpvShotCallback = null;
     }
 
-    /* loaded from: classes.dex */
+
     public class SurfaceCallback implements TextureView.SurfaceTextureListener {
         private SurfaceCallback() {
         }
 
-        @Override // android.view.TextureView.SurfaceTextureListener
+        @Override
         public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
             Log.i("istep", ".....surfaceCreated......." + surface.hashCode());
             FimiH264Video.this.openVideo(surface);
         }
 
-        @Override // android.view.TextureView.SurfaceTextureListener
+        @Override
         public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
         }
 
-        @Override // android.view.TextureView.SurfaceTextureListener
+        @Override
         public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
             Log.i("istep", ".....surfaceDestroyed.......");
             FimiH264Video.this.release(true);
             return false;
         }
 
-        @Override // android.view.TextureView.SurfaceTextureListener
+        @Override
         public void onSurfaceTextureUpdated(SurfaceTexture surface) {
         }
     }

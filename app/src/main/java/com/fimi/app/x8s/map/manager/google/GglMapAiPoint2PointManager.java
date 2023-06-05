@@ -27,13 +27,13 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class GglMapAiPoint2PointManager extends AbsAiPoint2PointManager implements GoogleMap.OnMapClickListener, GoogleMap.OnMarkerClickListener {
     boolean isFollow;
     List<LatLng> latLngs = new ArrayList();
-    private Context context;
-    private GglMapLocationManager gglMapLocationManager;
-    private GoogleMap googleMap;
+    private final Context context;
+    private final GglMapLocationManager gglMapLocationManager;
+    private final GoogleMap googleMap;
     private Circle limitCircle;
     private MapPointLatLng mp;
     private IX8MarkerListener point2PointMarkerSelectListener;
@@ -46,7 +46,7 @@ public class GglMapAiPoint2PointManager extends AbsAiPoint2PointManager implemen
         this.gglMapLocationManager = gglMapLocationManager;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsBaseManager
+    @Override
     public void setMarkerViewInfo(float height) {
         int res;
         if (this.pointMarker != null) {
@@ -62,29 +62,29 @@ public class GglMapAiPoint2PointManager extends AbsAiPoint2PointManager implemen
         }
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsBaseManager
+    @Override
     public float getLineAngleByMapBealing(float angle) {
         return 0.0f;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsBaseManager
+    @Override
     public void setOnMapClickListener() {
         setOnMarkerListener();
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsBaseManager
+    @Override
     public void removeMapClickListener() {
         this.googleMap.setOnMapClickListener(null);
         this.googleMap.setOnMarkerClickListener(null);
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsBaseManager
+    @Override
     public void resetMapEvent() {
         this.googleMap.setOnMapClickListener(null);
         this.googleMap.setOnMarkerClickListener(null);
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsBaseManager
+    @Override
     public void drawAiLimit(double lat, double lng, double radiu) {
         if (this.limitCircle == null) {
             CircleOptions circle = new CircleOptions().center(new LatLng(lat, lng)).radius(radiu).strokeColor(this.lineLimitColor).fillColor(this.fillColor).strokeWidth(this.strokeWidth);
@@ -94,7 +94,7 @@ public class GglMapAiPoint2PointManager extends AbsAiPoint2PointManager implemen
         this.limitCircle.setCenter(new LatLng(lat, lng));
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiPoint2PointManager
+    @Override
     public MapPointLatLng getMapPointLatLng() {
         if (this.pointMarker != null) {
             FLatLng mFlatlng = GpsCorrect.Mars_To_Earth0(this.pointMarker.getPosition().latitude, this.pointMarker.getPosition().longitude);
@@ -104,12 +104,12 @@ public class GglMapAiPoint2PointManager extends AbsAiPoint2PointManager implemen
         return this.mp;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiPoint2PointManager
+    @Override
     public void setPoint2PointMarkerSelectListener(IX8MarkerListener listener) {
         this.point2PointMarkerSelectListener = listener;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiPoint2PointManager
+    @Override
     public void clearPoint2PointMarker() {
         clearPointMark();
         this.isFollow = false;
@@ -143,7 +143,7 @@ public class GglMapAiPoint2PointManager extends AbsAiPoint2PointManager implemen
         this.gglMapLocationManager.clearFlyPolyLine();
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiPoint2PointManager
+    @Override
     public void setMarkerByDevice(double latitude, double logitude, int altitude) {
         if (this.gglMapLocationManager.getHomeLocation() != null) {
             LatLng latlng = new LatLng(latitude, logitude);
@@ -152,14 +152,14 @@ public class GglMapAiPoint2PointManager extends AbsAiPoint2PointManager implemen
         }
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiPoint2PointManager
+    @Override
     public void changeLine() {
         if (this.isFollow && this.polyline != null) {
             changeDeviceLocation(this.gglMapLocationManager.getDevLocation());
         }
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiPoint2PointManager
+    @Override
     public void setRunning() {
         this.isFollow = false;
     }
@@ -169,7 +169,7 @@ public class GglMapAiPoint2PointManager extends AbsAiPoint2PointManager implemen
         this.googleMap.setOnMarkerClickListener(this);
     }
 
-    @Override // com.google.android.gms.maps.GoogleMap.OnMapClickListener
+    @Override
     public void onMapClick(LatLng latLng) {
         onMapClickForAiP2P(latLng);
     }
@@ -187,7 +187,7 @@ public class GglMapAiPoint2PointManager extends AbsAiPoint2PointManager implemen
         }
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiPoint2PointManager
+    @Override
     public void calcDistance() {
         if (this.pointMarker != null) {
             LatLng des = this.gglMapLocationManager.getDevLocation();
@@ -249,7 +249,7 @@ public class GglMapAiPoint2PointManager extends AbsAiPoint2PointManager implemen
         drawPointLine(latLngDevice);
     }
 
-    @Override // com.google.android.gms.maps.GoogleMap.OnMarkerClickListener
+    @Override
     public boolean onMarkerClick(Marker marker) {
         return true;
     }

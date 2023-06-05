@@ -1,6 +1,6 @@
 package com.fimi.x8sdk.appsetting;
 
-/* loaded from: classes2.dex */
+
 public class ValueBooleanChange {
     private boolean newValue;
     private boolean oldValue;

@@ -4,7 +4,7 @@ import org.apache.mina.core.filterchain.IoFilter;
 import org.apache.mina.core.filterchain.IoFilterAdapter;
 import org.apache.mina.core.session.IoSession;
 
-/* loaded from: classes.dex */
+
 public abstract class BaseIoFilterAdapter extends IoFilterAdapter {
     @Override
     // org.apache.mina.core.filterchain.IoFilterAdapter, org.apache.mina.core.filterchain.IoFilter

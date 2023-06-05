@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 
-/* loaded from: classes.dex */
+
 public class MediaPlayerService extends Service {
     private static IMediaPlayer sMediaPlayer;
 
@@ -39,7 +39,7 @@ public class MediaPlayerService extends Service {
         sMediaPlayer = mp;
     }
 
-    @Override // android.app.Service
+    @Override
     public IBinder onBind(Intent intent) {
         return null;
     }

@@ -6,11 +6,11 @@ import android.content.Intent;
 
 import com.fimi.album.iview.IBroadcastPreform;
 
-/* loaded from: classes.dex */
+
 public class DeleteItemReceiver extends BroadcastReceiver {
     private IBroadcastPreform mIBroadcastPreform;
 
-    @Override // android.content.BroadcastReceiver
+    @Override
     public void onReceive(Context context, Intent intent) {
         if (this.mIBroadcastPreform != null) {
             this.mIBroadcastPreform.onReceive(context, intent);

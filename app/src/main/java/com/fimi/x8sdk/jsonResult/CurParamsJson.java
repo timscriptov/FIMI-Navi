@@ -3,8 +3,6 @@ package com.fimi.x8sdk.jsonResult;
 import java.io.Serializable;
 
 
-
-/* loaded from: classes2.dex */
 public class CurParamsJson implements Serializable {
     private String ae_bias;
     private String awb;

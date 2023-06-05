@@ -6,7 +6,7 @@ import android.view.Surface;
 
 import com.fimi.media.FimiMediaPlayer;
 
-/* loaded from: classes.dex */
+
 public class H264Player {
     private static final int FPS = 60;
     private static final int VIDEO_HEIGHT = 720;
@@ -15,9 +15,9 @@ public class H264Player {
     private int currentStartIndex;
     private Thread mDecodeThread;
     private H264StreamParseThread mH264StreamParseThread;
-    private IFrameDataListener mIFrameDataListener;
+    private final IFrameDataListener mIFrameDataListener;
     private boolean mStopFlag;
-    private FimiMediaPlayer mFimiMediaPlayer = new FimiMediaPlayer();
+    private final FimiMediaPlayer mFimiMediaPlayer = new FimiMediaPlayer();
 
     public H264Player(IFrameDataListener listener) {
         this.mIFrameDataListener = listener;
@@ -28,24 +28,21 @@ public class H264Player {
 
     public void setSurface(Surface surface) {
         this.mFimiMediaPlayer.setSurfaceView(surface);
-    }    Handler mHandler = new Handler() { // from class: com.fimi.app.x8s.media.H264Player.2
-        @Override // android.os.Handler
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case 0:
-                    H264Player.this.countFps();
-                    H264Player.this.mHandler.sendEmptyMessageDelayed(0, 1000L);
-                    return;
-                default:
-                    return;
-            }
-        }
-    };
+    }
 
     public void decodeBuffer(byte[] data, int length) {
         this.mFimiMediaPlayer.decodeBuffer(data, length);
-    }
+    }    Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == 0) {
+                H264Player.this.countFps();
+                H264Player.this.mHandler.sendEmptyMessageDelayed(0, 1000L);
+                return;
+            }
+        }
+    };
 
     public void deInitDecode() {
         this.mFimiMediaPlayer.deInitDecode();
@@ -56,8 +53,8 @@ public class H264Player {
         this.mFimiMediaPlayer.setTddMode(1);
         this.mFimiMediaPlayer.start();
         this.count = this.mFimiMediaPlayer.getFpsIndex();
-        this.mH264StreamParseThread = new H264StreamParseThread(new IH264DataListener() { // from class: com.fimi.app.x8s.media.H264Player.1
-            @Override // com.fimi.app.x8s.media.IH264DataListener
+        this.mH264StreamParseThread = new H264StreamParseThread(new IH264DataListener() {
+            @Override
             public void onH264Frame(byte[] data) {
                 H264Player.this.mFimiMediaPlayer.addBufferData(data, 0, data.length);
             }

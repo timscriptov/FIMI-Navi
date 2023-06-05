@@ -26,7 +26,7 @@ import com.fimi.x8sdk.modulestate.StateManager;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class X8MainBottomParameterController extends AbsX8Controllers {
     public final String VALUE_VIDEO_RESOLUTION_1080P;
     public final String VALUE_VIDEO_RESOLUTION_2K;
@@ -37,7 +37,7 @@ public class X8MainBottomParameterController extends AbsX8Controllers {
     Handler mHandler;
     PercentRelativeLayout root_layout;
     String tfCardCapt;
-    private X8sMainActivity activity;
+    private final X8sMainActivity activity;
     private Context context;
     private ImageView mImgColor;
     private ImageView mIvCloud;
@@ -53,14 +53,14 @@ public class X8MainBottomParameterController extends AbsX8Controllers {
     private TextView mTvRecord;
     private TextView mTvSDK;
     private TextView mTvShutter;
-    private CurParamsJson paramsValue;
+    private final CurParamsJson paramsValue;
 
     public X8MainBottomParameterController(View rootView, X8sMainActivity activity) {
         super(rootView);
         this.tfCardCapt = "";
         this.changeShowStatus = 0;
-        this.mHandler = new Handler() { // from class: com.fimi.app.x8s.controls.X8MainBottomParameterController.1
-            @Override // android.os.Handler
+        this.mHandler = new Handler() {
+            @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 if (X8MainBottomParameterController.this.changeShowStatus == 0) {
@@ -150,7 +150,7 @@ public class X8MainBottomParameterController extends AbsX8Controllers {
         this.mTvSDK.setText(text);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
     }
 
@@ -162,7 +162,7 @@ public class X8MainBottomParameterController extends AbsX8Controllers {
         this.mIvCloud.setBackgroundResource(R.drawable.x8_main_cloud_angle);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
         this.mIvCloud.setBackgroundResource(R.drawable.x8_main_cloud_angle_unconnect);
         this.mIvEv.setBackgroundResource(R.drawable.x8_main_ev_unconnect);
@@ -181,25 +181,25 @@ public class X8MainBottomParameterController extends AbsX8Controllers {
         this.mTvRecord.setText(R.string.x8_na);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
         this.context = rootView.getContext();
         this.handleView = rootView.findViewById(R.id.main_bottom_parameter);
         this.root_layout = (PercentRelativeLayout) this.handleView;
-        this.mIvCloud = (ImageView) rootView.findViewById(R.id.iv_bottom_cloud);
-        this.mTvCloud = (TextView) rootView.findViewById(R.id.tv_bottom_cloud);
-        this.mIvEv = (ImageView) rootView.findViewById(R.id.iv_bottom_ev);
-        this.mTvEv = (TextView) rootView.findViewById(R.id.tv_bottom_ev);
-        this.mIvISO = (ImageView) rootView.findViewById(R.id.iv_bottom_iso);
-        this.mTvISO = (TextView) rootView.findViewById(R.id.tv_bottom_iso);
-        this.mIvShutter = (ImageView) rootView.findViewById(R.id.iv_bottom_shutter);
-        this.mTvShutter = (TextView) rootView.findViewById(R.id.tv_bottom_shutter);
-        this.mImgColor = (ImageView) rootView.findViewById(R.id.iv_bottom_color);
-        this.mTvColor = (TextView) rootView.findViewById(R.id.tv_bottom_color);
-        this.mIvSDK = (ImageView) rootView.findViewById(R.id.iv_bottom_sdk);
-        this.mTvSDK = (TextView) rootView.findViewById(R.id.tv_bottom_sdk);
-        this.mIvRecord = (ImageView) rootView.findViewById(R.id.iv_bottom_record);
-        this.mTvRecord = (TextView) rootView.findViewById(R.id.tv_bottom_record);
+        this.mIvCloud = rootView.findViewById(R.id.iv_bottom_cloud);
+        this.mTvCloud = rootView.findViewById(R.id.tv_bottom_cloud);
+        this.mIvEv = rootView.findViewById(R.id.iv_bottom_ev);
+        this.mTvEv = rootView.findViewById(R.id.tv_bottom_ev);
+        this.mIvISO = rootView.findViewById(R.id.iv_bottom_iso);
+        this.mTvISO = rootView.findViewById(R.id.tv_bottom_iso);
+        this.mIvShutter = rootView.findViewById(R.id.iv_bottom_shutter);
+        this.mTvShutter = rootView.findViewById(R.id.tv_bottom_shutter);
+        this.mImgColor = rootView.findViewById(R.id.iv_bottom_color);
+        this.mTvColor = rootView.findViewById(R.id.tv_bottom_color);
+        this.mIvSDK = rootView.findViewById(R.id.iv_bottom_sdk);
+        this.mTvSDK = rootView.findViewById(R.id.tv_bottom_sdk);
+        this.mIvRecord = rootView.findViewById(R.id.iv_bottom_record);
+        this.mTvRecord = rootView.findViewById(R.id.tv_bottom_record);
     }
 
     public void showCameraStatus(AutoCameraStateADV cameraStateADV) {
@@ -358,7 +358,7 @@ public class X8MainBottomParameterController extends AbsX8Controllers {
         this.mTvRecord.setText(modelValue);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         super.onDroneConnected(b);
         updateViewEnable(b, this.root_layout);
@@ -383,7 +383,7 @@ public class X8MainBottomParameterController extends AbsX8Controllers {
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public boolean onClickBackKey() {
         return false;
     }

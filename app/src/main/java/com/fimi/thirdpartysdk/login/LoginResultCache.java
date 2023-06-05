@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.fimi.kernel.store.shared.SPStoreManager;
 
-/* loaded from: classes.dex */
+
 public class LoginResultCache {
     public static String getMacAlgorithm(Context context, int scope) {
         return SPStoreManager.getInstance().getString("macAlgorithm");

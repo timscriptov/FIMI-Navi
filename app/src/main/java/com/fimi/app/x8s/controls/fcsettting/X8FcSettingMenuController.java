@@ -21,7 +21,7 @@ import com.fimi.x8sdk.controller.FcManager;
 import com.fimi.x8sdk.controller.X8GimbalManager;
 import com.fimi.x8sdk.dataparser.AutoFcBattery;
 
-/* loaded from: classes.dex */
+
 public class X8FcSettingMenuController extends AbsX8MenuBoxControllers implements View.OnClickListener {
     X8MapVideoController mapVideoController;
     private ImageView imgBattery;
@@ -29,7 +29,7 @@ public class X8FcSettingMenuController extends AbsX8MenuBoxControllers implement
     private ImageView imgGenneal;
     private ImageView imgGimbal;
     private ImageView imgRc;
-    private AbsX8Controllers[] itemControllers;
+    private final AbsX8Controllers[] itemControllers;
     private X8BatteryItemController mX8BatteryItemController;
     private X8FcItemController mX8FcItemController;
     private X8GeneralItemController mX8GeneralItemController;
@@ -53,24 +53,24 @@ public class X8FcSettingMenuController extends AbsX8MenuBoxControllers implement
         return this.menu;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
         LayoutInflater inflater = LayoutInflater.from(rootView.getContext());
         this.parentView = inflater.inflate(R.layout.x8_main_fc_setting_items, (ViewGroup) rootView, true);
-        this.imgFc = (ImageView) this.parentView.findViewById(R.id.img_fc);
-        this.imgRc = (ImageView) this.parentView.findViewById(R.id.img_rc);
-        this.imgGimbal = (ImageView) this.parentView.findViewById(R.id.img_gimbal);
-        this.imgBattery = (ImageView) this.parentView.findViewById(R.id.img_battery);
-        this.imgGenneal = (ImageView) this.parentView.findViewById(R.id.img_general);
-        this.rlFc = (RelativeLayout) this.parentView.findViewById(R.id.rl_fc);
-        this.rlRc = (RelativeLayout) this.parentView.findViewById(R.id.rl_rc);
-        this.rlGimbal = (RelativeLayout) this.parentView.findViewById(R.id.rl_gimbal);
-        this.rlBattery = (RelativeLayout) this.parentView.findViewById(R.id.rl_battery);
-        this.rlGenneal = (RelativeLayout) this.parentView.findViewById(R.id.rl_general);
+        this.imgFc = this.parentView.findViewById(R.id.img_fc);
+        this.imgRc = this.parentView.findViewById(R.id.img_rc);
+        this.imgGimbal = this.parentView.findViewById(R.id.img_gimbal);
+        this.imgBattery = this.parentView.findViewById(R.id.img_battery);
+        this.imgGenneal = this.parentView.findViewById(R.id.img_general);
+        this.rlFc = this.parentView.findViewById(R.id.rl_fc);
+        this.rlRc = this.parentView.findViewById(R.id.rl_rc);
+        this.rlGimbal = this.parentView.findViewById(R.id.rl_gimbal);
+        this.rlBattery = this.parentView.findViewById(R.id.rl_battery);
+        this.rlGenneal = this.parentView.findViewById(R.id.rl_general);
         initItemsControler(this.parentView);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
         this.rlFc.setOnClickListener(this);
         this.rlRc.setOnClickListener(this);
@@ -79,11 +79,11 @@ public class X8FcSettingMenuController extends AbsX8MenuBoxControllers implement
         this.rlGenneal.setOnClickListener(this);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void closeItem() {
         super.closeItem();
         if (this.mX8FcItemController != null) {
@@ -91,7 +91,7 @@ public class X8FcSettingMenuController extends AbsX8MenuBoxControllers implement
         }
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.rl_fc) {
@@ -194,7 +194,6 @@ public class X8FcSettingMenuController extends AbsX8MenuBoxControllers implement
                 switchItemShow(false, false, false, false, true);
                 return;
             default:
-                return;
         }
     }
 
@@ -208,7 +207,7 @@ public class X8FcSettingMenuController extends AbsX8MenuBoxControllers implement
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         if (this.mX8FcItemController != null) {
             this.mX8FcItemController.onDroneConnected(b);

@@ -4,7 +4,7 @@ import com.fimi.album.adapter.BodyRecycleViewHolder;
 
 import java.io.Serializable;
 
-/* loaded from: classes.dex */
+
 public class VideoDurationTion implements Serializable {
     String formateVideoTime;
     BodyRecycleViewHolder holder;

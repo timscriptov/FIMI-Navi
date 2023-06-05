@@ -24,7 +24,7 @@ import com.fimi.x8sdk.update.UpdateUtil;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/* loaded from: classes2.dex */
+
 public class X8UpdateCheckPresenter extends BasePresenter {
     private static final int CHECK_UPDATE = 1;
     private static final int CHECK_UPDATE_ERR = 2;
@@ -32,8 +32,8 @@ public class X8UpdateCheckPresenter extends BasePresenter {
     private AckUpdateSystemStatus ackUpdateSystemStatus;
     private Context context;
     private IUpdateCheckAction iUpdateCheckAction;
-    Handler handler = new Handler() { // from class: com.fimi.x8sdk.presenter.X8UpdateCheckPresenter.3
-        @Override // android.os.Handler
+    Handler handler = new Handler() {
+        @Override
         public void handleMessage(Message msg) {
             if (msg.what == 2) {
                 X8UpdateCheckPresenter.this.iUpdateCheckAction.showIsUpdate(msg.arg1 == 0, msg.arg1);
@@ -46,7 +46,7 @@ public class X8UpdateCheckPresenter extends BasePresenter {
     private boolean haveLockMotor = false;
     private Timer checkTimer = new Timer();
     private UpdateCheckState updateCheckState = UpdateCheckState.updateInit;
-    private byte[] updateStates = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+    private final byte[] updateStates = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
 
     public X8UpdateCheckPresenter() {
         addNoticeListener();
@@ -62,8 +62,8 @@ public class X8UpdateCheckPresenter extends BasePresenter {
         if (this.checkTimer == null) {
             this.checkTimer = new Timer();
         }
-        this.checkTimer.schedule(new TimerTask() { // from class: com.fimi.x8sdk.presenter.X8UpdateCheckPresenter.1
-            @Override // java.util.TimerTask, java.lang.Runnable
+        this.checkTimer.schedule(new TimerTask() {
+            @Override
             public void run() {
                 if (X8UpdateCheckPresenter.this.updateCheckState != UpdateCheckState.updating) {
                     X8UpdateCheckPresenter.this.queryCurSystemStatus();
@@ -79,7 +79,7 @@ public class X8UpdateCheckPresenter extends BasePresenter {
         reponseCmd(true, groupId, msgId, packet, null);
     }
 
-    @Override // com.fimi.x8sdk.common.BasePresenter
+    @Override
     public void reponseCmd(boolean isAck, int group, int msgId, ILinkMessage packet, BaseCommand bcd) {
         super.reponseCmd(isAck, group, msgId, packet, bcd);
         if (group == 16) {
@@ -154,15 +154,11 @@ public class X8UpdateCheckPresenter extends BasePresenter {
     }
 
     public void setPresenterLockMotor(final int lock) {
-        FcCollection fcCollection = new FcCollection(this, new UiCallBackListener() { // from class: com.fimi.x8sdk.presenter.X8UpdateCheckPresenter.2
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        FcCollection fcCollection = new FcCollection(this, new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
-                    if (lock == 0) {
-                        X8UpdateCheckPresenter.this.haveLockMotor = false;
-                    } else {
-                        X8UpdateCheckPresenter.this.haveLockMotor = true;
-                    }
+                    X8UpdateCheckPresenter.this.haveLockMotor = lock != 0;
                 }
             }
         });
@@ -181,7 +177,7 @@ public class X8UpdateCheckPresenter extends BasePresenter {
         return isUpdateState;
     }
 
-    /* loaded from: classes2.dex */
+
     public enum UpdateCheckState {
         updateInit,
         readyUpgrade,

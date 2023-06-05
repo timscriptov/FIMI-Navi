@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.fimi.android.app.R;
 
-/* loaded from: classes.dex */
+
 public class X8CameraFragment extends X8MediaBaseFragment {
     public static X8CameraFragment obtaion() {
         return obtaion(null);
@@ -31,7 +31,7 @@ public class X8CameraFragment extends X8MediaBaseFragment {
         return true;
     }
 
-    @Override // android.support.v4.app.Fragment
+    @Override
     public void onResume() {
         super.onResume();
         this.mBaseFragmentPresenter.registerDownloadListerner();

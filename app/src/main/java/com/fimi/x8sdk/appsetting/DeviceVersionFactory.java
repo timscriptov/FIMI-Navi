@@ -13,7 +13,7 @@ import com.github.moduth.blockcanary.internal.BlockInfo;
 
 import org.json.JSONException;
 
-/* loaded from: classes2.dex */
+
 public class DeviceVersionFactory {
     public static Describe getFc() {
         VersionState v = StateManager.getInstance().getVersionState();
@@ -240,37 +240,37 @@ public class DeviceVersionFactory {
             System.out.println(getAllDataJsonString());
         } catch (JSONException e) {
             e.printStackTrace();
-            System.out.println(e.toString());
+            System.out.println(e);
         }
     }
 
     public static String getAllDataJsonString() throws JSONException {
         JSONObject allObjcet = new JSONObject();
-        allObjcet.put("speedLimit", (Object) new ValueFloat(X8AppSettingLog.speedLimit));
-        allObjcet.put("distanceLimit", (Object) new ValueFloat(X8AppSettingLog.distanceLimit));
-        allObjcet.put("heightLimit", (Object) new ValueFloat(X8AppSettingLog.heightLimit));
-        allObjcet.put("returnHeight", (Object) new ValueFloat(X8AppSettingLog.returnHeight));
-        allObjcet.put("pilotMode", (Object) new ValueBoolean(X8AppSettingLog.pilotMode));
-        allObjcet.put("sportMode", (Object) new ValueBoolean(X8AppSettingLog.sportMode));
-        allObjcet.put("lostAction", (Object) new ValueFloat(X8AppSettingLog.lostAction));
-        allObjcet.put("accLand", (Object) new ValueBoolean(X8AppSettingLog.accurateLanding));
-        allObjcet.put("followRP", (Object) new ValueBoolean(X8AppSettingLog.followRP));
-        allObjcet.put("followAB", (Object) new ValueBoolean(X8AppSettingLog.followAB));
-        allObjcet.put("lowPower", (Object) new ValueFloat(X8AppSettingLog.lowPower));
-        allObjcet.put("feelSensitivity", (Object) new SensityJson(new ValueSensity(X8AppSettingLog.FS_pitch, X8AppSettingLog.FS_roll, X8AppSettingLog.FS_thro, X8AppSettingLog.FS_yaw)));
-        allObjcet.put("feelBrake", (Object) new SensityJson(new ValueSensity(X8AppSettingLog.FB_pitch, X8AppSettingLog.FB_roll, X8AppSettingLog.FB_thro, X8AppSettingLog.FB_yaw)));
-        allObjcet.put("feelYawTrip", (Object) new SensityJson(new ValueSensity(X8AppSettingLog.FY_pitch, X8AppSettingLog.FY_roll, X8AppSettingLog.FY_thro, X8AppSettingLog.FY_yaw)));
-        allObjcet.put("feelExp", (Object) new SensityJson(new ValueSensity(X8AppSettingLog.FE_pitch, X8AppSettingLog.FE_roll, X8AppSettingLog.FE_thro, X8AppSettingLog.FE_yaw)));
-        allObjcet.put("cc", (Object) new ValueFloat(X8AppSettingLog.CC));
-        allObjcet.put("uvc", (Object) new ValueFloat(X8AppSettingLog.UVC));
-        allObjcet.put("totalCapacity", (Object) new ValueFloat(X8AppSettingLog.TOTALCAPACITY));
-        allObjcet.put("rcNotUpdateCnt", (Object) new ValueFloat(X8AppSettingLog.RCNOTUPDATECNT));
-        allObjcet.put("sysErrorCode", (Object) new ValueFloat(X8AppSettingLog.SYSERRORCODE));
-        allObjcet.put("sysState", (Object) new ValueFloat(X8AppSettingLog.SYSSTATE));
+        allObjcet.put("speedLimit", new ValueFloat(X8AppSettingLog.speedLimit));
+        allObjcet.put("distanceLimit", new ValueFloat(X8AppSettingLog.distanceLimit));
+        allObjcet.put("heightLimit", new ValueFloat(X8AppSettingLog.heightLimit));
+        allObjcet.put("returnHeight", new ValueFloat(X8AppSettingLog.returnHeight));
+        allObjcet.put("pilotMode", new ValueBoolean(X8AppSettingLog.pilotMode));
+        allObjcet.put("sportMode", new ValueBoolean(X8AppSettingLog.sportMode));
+        allObjcet.put("lostAction", new ValueFloat(X8AppSettingLog.lostAction));
+        allObjcet.put("accLand", new ValueBoolean(X8AppSettingLog.accurateLanding));
+        allObjcet.put("followRP", new ValueBoolean(X8AppSettingLog.followRP));
+        allObjcet.put("followAB", new ValueBoolean(X8AppSettingLog.followAB));
+        allObjcet.put("lowPower", new ValueFloat(X8AppSettingLog.lowPower));
+        allObjcet.put("feelSensitivity", new SensityJson(new ValueSensity(X8AppSettingLog.FS_pitch, X8AppSettingLog.FS_roll, X8AppSettingLog.FS_thro, X8AppSettingLog.FS_yaw)));
+        allObjcet.put("feelBrake", new SensityJson(new ValueSensity(X8AppSettingLog.FB_pitch, X8AppSettingLog.FB_roll, X8AppSettingLog.FB_thro, X8AppSettingLog.FB_yaw)));
+        allObjcet.put("feelYawTrip", new SensityJson(new ValueSensity(X8AppSettingLog.FY_pitch, X8AppSettingLog.FY_roll, X8AppSettingLog.FY_thro, X8AppSettingLog.FY_yaw)));
+        allObjcet.put("feelExp", new SensityJson(new ValueSensity(X8AppSettingLog.FE_pitch, X8AppSettingLog.FE_roll, X8AppSettingLog.FE_thro, X8AppSettingLog.FE_yaw)));
+        allObjcet.put("cc", new ValueFloat(X8AppSettingLog.CC));
+        allObjcet.put("uvc", new ValueFloat(X8AppSettingLog.UVC));
+        allObjcet.put("totalCapacity", new ValueFloat(X8AppSettingLog.TOTALCAPACITY));
+        allObjcet.put("rcNotUpdateCnt", new ValueFloat(X8AppSettingLog.RCNOTUPDATECNT));
+        allObjcet.put("sysErrorCode", new ValueFloat(X8AppSettingLog.SYSERRORCODE));
+        allObjcet.put("sysState", new ValueFloat(X8AppSettingLog.SYSSTATE));
         JSONObject dataObject = new JSONObject();
-        dataObject.put("data", (Object) allObjcet);
-        dataObject.put("startupTime", (Object) new ValueFloat(X8AppSettingLog.STARTUPTIME));
-        dataObject.put(BlockInfo.KEY_TIME_COST, (Object) DateUtil.getStringByFormat(System.currentTimeMillis(), HostConstants.FORMATDATE));
+        dataObject.put("data", allObjcet);
+        dataObject.put("startupTime", new ValueFloat(X8AppSettingLog.STARTUPTIME));
+        dataObject.put(BlockInfo.KEY_TIME_COST, DateUtil.getStringByFormat(System.currentTimeMillis(), HostConstants.FORMATDATE));
         String json = JSON.toJSONString(dataObject, SerializerFeature.PrettyFormat);
         return json;
     }

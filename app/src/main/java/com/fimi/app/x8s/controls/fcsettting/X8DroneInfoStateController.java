@@ -19,7 +19,7 @@ import com.fimi.x8sdk.modulestate.StateManager;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class X8DroneInfoStateController extends AbsX8MenuBoxControllers implements X8DroneInfoStateAdapter.OnEventClickListener {
     List<X8DroneInfoState> list;
     private X8DroneInfoStateAdapter adapter;
@@ -38,12 +38,12 @@ public class X8DroneInfoStateController extends AbsX8MenuBoxControllers implemen
         this.listener = listener;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
         this.list = new ArrayList();
         LayoutInflater inflater = LayoutInflater.from(rootView.getContext());
         this.parentView = inflater.inflate(R.layout.x8_main_all_setting_drone_info_state, (ViewGroup) rootView, true);
-        RecyclerView recyclerView = (RecyclerView) this.parentView.findViewById(R.id.ryv_drone_state);
+        RecyclerView recyclerView = this.parentView.findViewById(R.id.ryv_drone_state);
         LinearLayoutManager layoutManager = new LinearLayoutManager(rootView.getContext());
         recyclerView.setLayoutManager(layoutManager);
         Resources res = rootView.getContext().getResources();
@@ -63,11 +63,11 @@ public class X8DroneInfoStateController extends AbsX8MenuBoxControllers implemen
         initActions();
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
@@ -157,26 +157,21 @@ public class X8DroneInfoStateController extends AbsX8MenuBoxControllers implemen
     }
 
     public int getEvent(Mode mode) {
-        switch (mode) {
-            case CAMP:
-                return 1;
-            default:
-                return 0;
+        if (mode == Mode.CAMP) {
+            return 1;
         }
+        return 0;
     }
 
-    @Override // com.fimi.app.x8s.adapter.X8DroneInfoStateAdapter.OnEventClickListener
+    @Override
     public void onItemClick(int index, X8DroneInfoState obj) {
-        switch (obj.getMode()) {
-            case CAMP:
-                this.listener.onCalibrationItemClick();
-                return;
-            default:
-                return;
+        if (obj.getMode() == Mode.CAMP) {
+            this.listener.onCalibrationItemClick();
+            return;
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         if (b) {
             for (X8DroneInfoState state : this.list) {
@@ -214,7 +209,7 @@ public class X8DroneInfoStateController extends AbsX8MenuBoxControllers implemen
         }
     }
 
-    /* loaded from: classes.dex */
+
     public enum Mode {
         GPS,
         CAMP,
@@ -224,7 +219,7 @@ public class X8DroneInfoStateController extends AbsX8MenuBoxControllers implemen
         GIMBAL
     }
 
-    /* loaded from: classes.dex */
+
     public enum State {
         NA,
         NORMAL,

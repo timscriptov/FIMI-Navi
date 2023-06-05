@@ -23,7 +23,7 @@ import com.fimi.x8sdk.controller.X8GimbalManager;
 import com.fimi.x8sdk.dataparser.AckGetPitchSpeed;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes.dex */
+
 public class X8GimbalItemController extends AbsX8Controllers implements View.OnClickListener {
     Button btnRestParams;
     ProgressBar pbRestsystemLoading;
@@ -36,7 +36,7 @@ public class X8GimbalItemController extends AbsX8Controllers implements View.OnC
     private boolean isConnected;
     private boolean isRequested;
     private IX8GimbalSettingListener listener;
-    private Context mContext;
+    private final Context mContext;
     private View rlFcItem;
     private X8ValueSeakBarView sbPitchSpeed;
     private ViewStub stubFcItem;
@@ -48,20 +48,20 @@ public class X8GimbalItemController extends AbsX8Controllers implements View.OnC
         this.mContext = rootView.getContext();
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
-        this.stubFcItem = (ViewStub) rootView.findViewById(R.id.stub_gimbal_item);
+        this.stubFcItem = rootView.findViewById(R.id.stub_gimbal_item);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
         if (this.gimbalManager != null && this.sbPitchSpeed != null) {
-            this.sbPitchSpeed.setConfirmListener(new X8ValueSeakBarView.OnProgressConfirmListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GimbalItemController.1
-                @Override // com.fimi.app.x8s.widget.X8ValueSeakBarView.OnProgressConfirmListener
+            this.sbPitchSpeed.setConfirmListener(new X8ValueSeakBarView.OnProgressConfirmListener() {
+                @Override
                 public void onConfirm(float value) {
                     if (X8GimbalItemController.this.gimbalManager != null && StateManager.getInstance().getX8Drone().isConnect()) {
-                        X8GimbalItemController.this.gimbalManager.setPitchSpeed((int) X8GimbalItemController.this.sbPitchSpeed.getCurrentValue(), new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GimbalItemController.1.1
-                            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                        X8GimbalItemController.this.gimbalManager.setPitchSpeed((int) X8GimbalItemController.this.sbPitchSpeed.getCurrentValue(), new UiCallBackListener() {
+                            @Override
                             public void onComplete(CmdResult cmdResult, Object o) {
                                 ILinkMessage packet;
                                 if (o != null && (packet = (ILinkMessage) o) != null && packet.getMsgRpt() != 16) {
@@ -75,11 +75,11 @@ public class X8GimbalItemController extends AbsX8Controllers implements View.OnC
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         if (this.isConnected != b) {
             this.isConnected = b;
@@ -93,17 +93,17 @@ public class X8GimbalItemController extends AbsX8Controllers implements View.OnC
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void showItem() {
         if (this.rlFcItem == null) {
             View view = this.stubFcItem.inflate();
             this.rlFcItem = view.findViewById(R.id.x8_rl_main_gimbal_item);
-            this.btnGimbalCalibration = (Button) view.findViewById(R.id.btn_gimbal_calibration);
-            this.btnHorizontalTrim = (Button) view.findViewById(R.id.btn_horizontal_trim);
-            this.sbPitchSpeed = (X8ValueSeakBarView) view.findViewById(R.id.vsb_pitching_speed_limit);
-            this.btnRestParams = (Button) view.findViewById(R.id.btn_rest_params);
-            this.pbRestsystemLoading = (ProgressBar) view.findViewById(R.id.pb_restsystem_loading);
-            this.x8LlAdvancedSetting = (LinearLayout) view.findViewById(R.id.x8_ll_advanced_setting);
+            this.btnGimbalCalibration = view.findViewById(R.id.btn_gimbal_calibration);
+            this.btnHorizontalTrim = view.findViewById(R.id.btn_horizontal_trim);
+            this.sbPitchSpeed = view.findViewById(R.id.vsb_pitching_speed_limit);
+            this.btnRestParams = view.findViewById(R.id.btn_rest_params);
+            this.pbRestsystemLoading = view.findViewById(R.id.pb_restsystem_loading);
+            this.x8LlAdvancedSetting = view.findViewById(R.id.x8_ll_advanced_setting);
             this.btnRestParams.setOnClickListener(this);
             this.btnGimbalCalibration.setOnClickListener(this);
             this.btnHorizontalTrim.setOnClickListener(this);
@@ -119,8 +119,8 @@ public class X8GimbalItemController extends AbsX8Controllers implements View.OnC
         boolean isConnect = StateManager.getInstance().getX8Drone().isConnect();
         setViewEnabled(isConnect);
         if (isConnect && this.gimbalManager != null) {
-            this.gimbalManager.getPitchSpeed(new UiCallBackListener<AckGetPitchSpeed>() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GimbalItemController.2
-                @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+            this.gimbalManager.getPitchSpeed(new UiCallBackListener<AckGetPitchSpeed>() {
+                @Override
                 public void onComplete(CmdResult cmdResult, AckGetPitchSpeed obj) {
                     if (cmdResult.isSuccess()) {
                         X8GimbalItemController.this.sbPitchSpeed.setProgress(obj.getSpeed());
@@ -146,7 +146,7 @@ public class X8GimbalItemController extends AbsX8Controllers implements View.OnC
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void closeItem() {
         if (this.rlFcItem != null) {
             this.rlFcItem.setVisibility(8);
@@ -154,7 +154,7 @@ public class X8GimbalItemController extends AbsX8Controllers implements View.OnC
         }
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.btn_gimbal_calibration) {
@@ -186,7 +186,7 @@ public class X8GimbalItemController extends AbsX8Controllers implements View.OnC
 
     public void showRestParamDialog() {
         if (this.x8DoubleCustomDialog == null) {
-            this.x8DoubleCustomDialog = new X8DoubleCustomDialog(this.mContext, this.mContext.getString(R.string.x8_gimbal_setting_gimbal_reset_params), this.mContext.getString(R.string.x8_gimbale_settting_rest_params_content), this.mContext.getString(R.string.x8_general_rest), new X8DoubleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GimbalItemController.3
+            this.x8DoubleCustomDialog = new X8DoubleCustomDialog(this.mContext, this.mContext.getString(R.string.x8_gimbal_setting_gimbal_reset_params), this.mContext.getString(R.string.x8_gimbale_settting_rest_params_content), this.mContext.getString(R.string.x8_general_rest), new X8DoubleCustomDialog.onDialogButtonClickListener() {
                 @Override
                 // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
                 public void onLeft() {
@@ -204,8 +204,8 @@ public class X8GimbalItemController extends AbsX8Controllers implements View.OnC
     }
 
     public void resetGimbalSystemParams() {
-        this.gimbalManager.resetGCParams(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GimbalItemController.4
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.gimbalManager.resetGCParams(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8ToastUtil.showToast(X8GimbalItemController.this.mContext, X8GimbalItemController.this.getString(R.string.x8_gimbale_settting_rest_params_result_success), 0);
@@ -217,7 +217,7 @@ public class X8GimbalItemController extends AbsX8Controllers implements View.OnC
         });
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public boolean onClickBackKey() {
         return false;
     }

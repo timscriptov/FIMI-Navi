@@ -40,7 +40,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* loaded from: classes.dex */
+
 public class PlayBackMapFragment extends SupportMapFragment implements GoogleMap.InfoWindowAdapter, GoogleMapSyncReady, OnMapReadyCallback {
     private static final PatternItem DASH = new Dash(20.0f);
     private static final PatternItem GAP = new Gap(20.0f);
@@ -53,25 +53,25 @@ public class PlayBackMapFragment extends SupportMapFragment implements GoogleMap
     private Polyline dronePolyline;
     private Marker homeMarker;
     private boolean isChangeCamera = true;
-    private List<Circle> listCircle = new CopyOnWriteArrayList();
+    private final List<Circle> listCircle = new CopyOnWriteArrayList();
     private volatile List<LatLng> listDronePoint;
     private UpdateChangeMapTypeInterface mUpdateChangeMapTypeInterface;
     private SharedPreferences sharepre;
     private Marker textMarker;
 
-    @Override // com.google.android.gms.maps.SupportMapFragment, android.support.v4.app.Fragment
+    @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         this.mUpdateChangeMapTypeInterface = (UpdateChangeMapTypeInterface) activity;
     }
 
-    @Override // com.google.android.gms.maps.SupportMapFragment, android.support.v4.app.Fragment
+    @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         this.sharepre = PreferenceManager.getDefaultSharedPreferences(getActivity());
     }
 
-    @Override // com.google.android.gms.maps.SupportMapFragment, android.support.v4.app.Fragment
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup viewGroup, Bundle bundle) {
         View view = super.onCreateView(inflater, viewGroup, bundle);
         getMapAsync(this);
@@ -90,8 +90,8 @@ public class PlayBackMapFragment extends SupportMapFragment implements GoogleMap
         UiSettings mUiSettings = this.mMap.getUiSettings();
         mUiSettings.setZoomControlsEnabled(false);
         mUiSettings.setTiltGesturesEnabled(false);
-        this.mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.flightlog.PlayBackMapFragment.1
-            @Override // com.google.android.gms.maps.GoogleMap.OnMapClickListener
+        this.mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
             public void onMapClick(LatLng latLng) {
                 if (PlayBackMapFragment.this.textMarker != null) {
                     PlayBackMapFragment.this.textMarker.showInfoWindow();
@@ -101,7 +101,7 @@ public class PlayBackMapFragment extends SupportMapFragment implements GoogleMap
         this.mMap.setInfoWindowAdapter(this);
     }
 
-    @Override // com.google.android.gms.maps.SupportMapFragment, android.support.v4.app.Fragment
+    @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
     }
@@ -121,7 +121,7 @@ public class PlayBackMapFragment extends SupportMapFragment implements GoogleMap
         return valuetype;
     }
 
-    @Override // com.google.android.gms.maps.SupportMapFragment, android.support.v4.app.Fragment
+    @Override
     public void onDestroy() {
         if (this.mUpdateChangeMapTypeInterface != null) {
             this.mUpdateChangeMapTypeInterface = null;
@@ -276,15 +276,15 @@ public class PlayBackMapFragment extends SupportMapFragment implements GoogleMap
         }
     }
 
-    @Override // com.google.android.gms.maps.GoogleMap.InfoWindowAdapter
+    @Override
     public View getInfoWindow(Marker marker) {
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.play_back_inforwindow, (ViewGroup) null);
-        TextView droneLocation = (TextView) view.findViewById(R.id.drone_location);
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.play_back_inforwindow, null);
+        TextView droneLocation = view.findViewById(R.id.drone_location);
         droneLocation.setText(marker.getTitle());
         return view;
     }
 
-    @Override // com.google.android.gms.maps.GoogleMap.InfoWindowAdapter
+    @Override
     public View getInfoContents(Marker marker) {
         return null;
     }
@@ -325,11 +325,11 @@ public class PlayBackMapFragment extends SupportMapFragment implements GoogleMap
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.GoogleMapSyncReady
+    @Override
     public void isReady(GoogleMap googleMap) {
     }
 
-    @Override // com.google.android.gms.maps.OnMapReadyCallback
+    @Override
     public void onMapReady(GoogleMap googleMap) {
         if (googleMap != null) {
             this.mMap = googleMap;

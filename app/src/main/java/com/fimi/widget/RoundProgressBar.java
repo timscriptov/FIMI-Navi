@@ -20,7 +20,7 @@ public class RoundProgressBar extends View {
     private final int style;
     private final boolean textIsDisplayable;
     private int max;
-    private Paint paint;
+    private final Paint paint;
     private int progress;
     private int roundColor;
     private int roundProgressColor;
@@ -91,7 +91,6 @@ public class RoundProgressBar extends View {
                 }
                 return;
             default:
-                return;
         }
     }
 

@@ -4,7 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/* loaded from: classes.dex */
+
 public class Base64 {
     private static final char[] legalChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".toCharArray();
 
@@ -28,13 +28,13 @@ public class Base64 {
             }
             n = n2;
         }
-        if (i == (0 + len) - 2) {
+        if (i == (len) - 2) {
             int d2 = ((data[i] & 255) << 16) | ((data[i + 1] & 255) << 8);
             buf.append(legalChars[(d2 >> 18) & 63]);
             buf.append(legalChars[(d2 >> 12) & 63]);
             buf.append(legalChars[(d2 >> 6) & 63]);
             buf.append("=");
-        } else if (i == (0 + len) - 1) {
+        } else if (i == (len) - 1) {
             int d3 = (data[i] & 255) << 16;
             buf.append(legalChars[(d3 >> 18) & 63]);
             buf.append(legalChars[(d3 >> 12) & 63]);
@@ -73,7 +73,7 @@ public class Base64 {
             try {
                 bos.close();
             } catch (IOException ex) {
-                System.err.println("Error while decoding BASE64: " + ex.toString());
+                System.err.println("Error while decoding BASE64: " + ex);
             }
             return decodedBytes;
         } catch (IOException e) {

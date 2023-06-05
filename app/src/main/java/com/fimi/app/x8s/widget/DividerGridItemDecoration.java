@@ -84,18 +84,12 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
     private boolean isLastColum(@NonNull RecyclerView parent, int pos, int spanCount, int childCount) {
         RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
         if (layoutManager instanceof GridLayoutManager) {
-            if ((pos + 1) % spanCount == 0 && pos >= spanCount - 1) {
-                return true;
-            }
+            return (pos + 1) % spanCount == 0 && pos >= spanCount - 1;
         } else if (layoutManager instanceof StaggeredGridLayoutManager) {
             int orientation = ((StaggeredGridLayoutManager) layoutManager).getOrientation();
             if (orientation == 1) {
-                if ((pos + 1) % spanCount == 0) {
-                    return true;
-                }
-            } else if (pos >= childCount - (childCount % spanCount)) {
-                return true;
-            }
+                return (pos + 1) % spanCount == 0;
+            } else return pos >= childCount - (childCount % spanCount);
         }
         return false;
     }
@@ -103,18 +97,12 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
     private boolean isLastRaw(@NonNull RecyclerView parent, int pos, int spanCount, int childCount) {
         RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
         if (layoutManager instanceof GridLayoutManager) {
-            if (pos >= childCount - (childCount % spanCount)) {
-                return true;
-            }
+            return pos >= childCount - (childCount % spanCount);
         } else if (layoutManager instanceof StaggeredGridLayoutManager) {
             int orientation = ((StaggeredGridLayoutManager) layoutManager).getOrientation();
             if (orientation == 1) {
-                if (pos >= childCount - (childCount % spanCount)) {
-                    return true;
-                }
-            } else if ((pos + 1) % spanCount == 0) {
-                return true;
-            }
+                return pos >= childCount - (childCount % spanCount);
+            } else return (pos + 1) % spanCount == 0;
         }
         return false;
     }

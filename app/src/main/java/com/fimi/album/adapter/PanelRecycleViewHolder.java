@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.fimi.android.app.R;
 import com.fimi.kernel.utils.FontUtil;
 
-/* loaded from: classes.dex */
+
 public class PanelRecycleViewHolder extends RecyclerView.ViewHolder {
     public ImageView ivIconSelect;
     public RelativeLayout rlRightSelect;
@@ -19,10 +19,10 @@ public class PanelRecycleViewHolder extends RecyclerView.ViewHolder {
 
     public PanelRecycleViewHolder(View itemView) {
         super(itemView);
-        this.tvTitleDescription = (TextView) itemView.findViewById(R.id.title_description);
-        this.rlRightSelect = (RelativeLayout) itemView.findViewById(R.id.right_select);
-        this.tvAllSelect = (TextView) itemView.findViewById(R.id.all_select);
-        this.ivIconSelect = (ImageView) itemView.findViewById(R.id.icon_select);
+        this.tvTitleDescription = itemView.findViewById(R.id.title_description);
+        this.rlRightSelect = itemView.findViewById(R.id.right_select);
+        this.tvAllSelect = itemView.findViewById(R.id.all_select);
+        this.ivIconSelect = itemView.findViewById(R.id.icon_select);
         FontUtil.changeFontLanTing(itemView.getContext().getAssets(), this.tvTitleDescription, this.tvAllSelect);
     }
 }

@@ -34,7 +34,7 @@ import com.fimi.x8sdk.entity.ConectState;
 import com.fimi.x8sdk.modulestate.DroneState;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes.dex */
+
 public class X8MainTopBarController extends AbsX8Controllers implements View.OnClickListener {
     private int ctrlType;
     private ImageButton ibtnReturn;
@@ -79,34 +79,34 @@ public class X8MainTopBarController extends AbsX8Controllers implements View.OnC
         this.ctrlType = 0;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
         this.handleView = rootView.findViewById(R.id.main_top_bars);
-        this.mX8MainReturnTimeTextView = (X8MainReturnTimeTextView) rootView.findViewById(R.id.x8_return_time_text_view);
-        this.mX8MainElectricView = (X8MainElectricView) rootView.findViewById(R.id.electric_view);
-        this.mX8MainPowerView = (X8MainPowerView) rootView.findViewById(R.id.power_view);
-        this.ibtnSetting = (ImageButton) rootView.findViewById(R.id.x8_ibtn_setting);
-        this.ibtnReturn = (ImageButton) rootView.findViewById(R.id.x8_ibtn_return);
-        this.mTvHight = (TextView) rootView.findViewById(R.id.tv_hight);
-        this.mIvHight = (ImageView) rootView.findViewById(R.id.iv_fly_hight);
-        this.mTvDistance = (TextView) rootView.findViewById(R.id.tv_distance);
-        this.mIvDistance = (ImageView) rootView.findViewById(R.id.iv_fly_distance);
-        this.mTvVs = (TextView) rootView.findViewById(R.id.tv_vs);
-        this.mTvHs = (TextView) rootView.findViewById(R.id.tv_hs);
-        this.tvConnectState = (TextView) rootView.findViewById(R.id.tv_connect_state);
-        this.mIvFlyState = (ImageView) rootView.findViewById(R.id.iv_fly_state);
-        this.mX8MainTopCenterView = (X8MainTopRightView) rootView.findViewById(R.id.x8main_top_center_view);
-        this.mTvHightUnit = (TextView) rootView.findViewById(R.id.tv_height_lable);
-        this.mTvDistanceUnit = (TextView) rootView.findViewById(R.id.tv_distance_lable);
-        this.mTvSpeedUnit = (TextView) rootView.findViewById(R.id.tv_vs_unit);
+        this.mX8MainReturnTimeTextView = rootView.findViewById(R.id.x8_return_time_text_view);
+        this.mX8MainElectricView = rootView.findViewById(R.id.electric_view);
+        this.mX8MainPowerView = rootView.findViewById(R.id.power_view);
+        this.ibtnSetting = rootView.findViewById(R.id.x8_ibtn_setting);
+        this.ibtnReturn = rootView.findViewById(R.id.x8_ibtn_return);
+        this.mTvHight = rootView.findViewById(R.id.tv_hight);
+        this.mIvHight = rootView.findViewById(R.id.iv_fly_hight);
+        this.mTvDistance = rootView.findViewById(R.id.tv_distance);
+        this.mIvDistance = rootView.findViewById(R.id.iv_fly_distance);
+        this.mTvVs = rootView.findViewById(R.id.tv_vs);
+        this.mTvHs = rootView.findViewById(R.id.tv_hs);
+        this.tvConnectState = rootView.findViewById(R.id.tv_connect_state);
+        this.mIvFlyState = rootView.findViewById(R.id.iv_fly_state);
+        this.mX8MainTopCenterView = rootView.findViewById(R.id.x8main_top_center_view);
+        this.mTvHightUnit = rootView.findViewById(R.id.tv_height_lable);
+        this.mTvDistanceUnit = rootView.findViewById(R.id.tv_distance_lable);
+        this.mTvSpeedUnit = rootView.findViewById(R.id.tv_vs_unit);
         this.vDroneInfoState = rootView.findViewById(R.id.x8_drone_info_state);
-        this.vLandingReturnView = (X8BatteryReturnLandingView) rootView.findViewById(R.id.v_landing_return_view);
-        this.mTvDisconnectLatlng = (TextView) rootView.findViewById(R.id.tv_top_disconnect_latlng);
-        this.mIvCenterHighightView = (ImageView) rootView.findViewById(R.id.iv_top_center_highight_view);
-        this.mIvCenterHighightHelp = (ImageView) rootView.findViewById(R.id.iv_top_center_highight_help);
+        this.vLandingReturnView = rootView.findViewById(R.id.v_landing_return_view);
+        this.mTvDisconnectLatlng = rootView.findViewById(R.id.tv_top_disconnect_latlng);
+        this.mIvCenterHighightView = rootView.findViewById(R.id.iv_top_center_highight_view);
+        this.mIvCenterHighightHelp = rootView.findViewById(R.id.iv_top_center_highight_help);
         this.mIvCenterHighightHelpInfo = rootView.findViewById(R.id.iv_top_center_highight_help_info);
-        this.mIvTopCenterModeHelp = (ImageView) rootView.findViewById(R.id.iv_top_center_mode_help);
-        this.mIvTopCenterMode = (ImageView) rootView.findViewById(R.id.iv_top_center_mode);
+        this.mIvTopCenterModeHelp = rootView.findViewById(R.id.iv_top_center_mode_help);
+        this.mIvTopCenterMode = rootView.findViewById(R.id.iv_top_center_mode);
     }
 
     public void setX8sMainActivity(X8sMainActivity activity) {
@@ -114,7 +114,7 @@ public class X8MainTopBarController extends AbsX8Controllers implements View.OnC
         this.mX8sMainActivity = activity;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
         this.ibtnSetting.setOnClickListener(this);
         this.ibtnReturn.setOnClickListener(this);
@@ -123,7 +123,7 @@ public class X8MainTopBarController extends AbsX8Controllers implements View.OnC
         this.mIvCenterHighightHelpInfo.setOnClickListener(this);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
         if (this.isShowDisconnectLatlng) {
             this.mTvDisconnectLatlng.setText(this.mCurrentLat + "," + this.mCurrentLng);
@@ -186,7 +186,7 @@ public class X8MainTopBarController extends AbsX8Controllers implements View.OnC
         this.ctrlType = 0;
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.x8_ibtn_setting) {
@@ -361,14 +361,14 @@ public class X8MainTopBarController extends AbsX8Controllers implements View.OnC
         this.mX8MainTopCenterView.setRelayHeart(autoRelayHeart);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public boolean onClickBackKey() {
         return false;
     }
 
     private void showDiaLog() {
         if (this.ctrlType == 1) {
-            this.x8SingleCustomDialog = new X8SingleCustomDialog(this.handleView.getContext(), getString(R.string.x8_fly_status_atti_title), getString(R.string.x8_fly_status_atti_message), getString(R.string.x8_fly_status_atti_comfire), false, new X8SingleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.X8MainTopBarController.1
+            this.x8SingleCustomDialog = new X8SingleCustomDialog(this.handleView.getContext(), getString(R.string.x8_fly_status_atti_title), getString(R.string.x8_fly_status_atti_message), getString(R.string.x8_fly_status_atti_comfire), false, new X8SingleCustomDialog.onDialogButtonClickListener() {
                 @Override
                 // com.fimi.app.x8s.widget.X8SingleCustomDialog.onDialogButtonClickListener
                 public void onSingleButtonClick() {
@@ -377,7 +377,7 @@ public class X8MainTopBarController extends AbsX8Controllers implements View.OnC
             this.x8SingleCustomDialog.setCanceledOnTouchOutside(false);
             this.x8SingleCustomDialog.show();
         } else if (this.ctrlType == 3) {
-            this.x8SingleCustomDialog = new X8SingleCustomDialog(this.handleView.getContext(), getString(R.string.x8_fly_status_vpu_title), getString(R.string.x8_fly_status_vpu_message), getString(R.string.x8_fly_status_vpu_comfire), false, new X8SingleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.X8MainTopBarController.2
+            this.x8SingleCustomDialog = new X8SingleCustomDialog(this.handleView.getContext(), getString(R.string.x8_fly_status_vpu_title), getString(R.string.x8_fly_status_vpu_message), getString(R.string.x8_fly_status_vpu_comfire), false, new X8SingleCustomDialog.onDialogButtonClickListener() {
                 @Override
                 // com.fimi.app.x8s.widget.X8SingleCustomDialog.onDialogButtonClickListener
                 public void onSingleButtonClick() {

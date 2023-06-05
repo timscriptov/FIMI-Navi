@@ -5,7 +5,7 @@ import android.graphics.Canvas;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 
-/* loaded from: classes.dex */
+
 public class X8StaticCharEditText extends androidx.appcompat.widget.AppCompatEditText {
     private String fixedText;
     private int rightPadding;

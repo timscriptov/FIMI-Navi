@@ -2,7 +2,7 @@ package com.fimi.kernel.fds;
 
 import com.fimi.kernel.store.shared.SPStoreManager;
 
-/* loaded from: classes.dex */
+
 public class ResultCache {
     public static String getMacAlgorithm(int scope) {
         return SPStoreManager.getInstance().getString("macAlgorithm");

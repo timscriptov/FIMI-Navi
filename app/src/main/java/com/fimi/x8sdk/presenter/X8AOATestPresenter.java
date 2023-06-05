@@ -8,14 +8,14 @@ import com.fimi.x8sdk.command.AoaTestColletion;
 import com.fimi.x8sdk.common.BasePresenter;
 import com.fimi.x8sdk.ivew.IAOATestView;
 
-/* loaded from: classes2.dex */
+
 public class X8AOATestPresenter extends BasePresenter {
     IAOATestView iaoaTestView;
     private boolean isInterrupt;
     private boolean isRunning;
     private long recvDataLen = 0;
-    VideodDataListener videodDataListener = new VideodDataListener() { // from class: com.fimi.x8sdk.presenter.X8AOATestPresenter.1
-        @Override // com.fimi.kernel.connect.session.VideodDataListener
+    VideodDataListener videodDataListener = new VideodDataListener() {
+        @Override
         public void onRawdataCallBack(byte[] bytes) {
             if (X8AOATestPresenter.this.iaoaTestView != null) {
                 X8AOATestPresenter.this.recvDataLen += bytes.length;
@@ -39,8 +39,12 @@ public class X8AOATestPresenter extends BasePresenter {
     public void killDataChanel() {
         this.isInterrupt = false;
         this.isRunning = false;
-    }    Handler mHandler = new Handler() { // from class: com.fimi.x8sdk.presenter.X8AOATestPresenter.2
-        @Override // android.os.Handler
+    }
+
+    public boolean isRunning() {
+        return this.isRunning;
+    }    Handler mHandler = new Handler() {
+        @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == 0) {
@@ -50,10 +54,6 @@ public class X8AOATestPresenter extends BasePresenter {
             }
         }
     };
-
-    public boolean isRunning() {
-        return this.isRunning;
-    }
 
     public void startReceivedData() {
         byte[] data = {-1, -1, -1, -1, 0, 0, 0, 10, 0, 1};
@@ -65,8 +65,8 @@ public class X8AOATestPresenter extends BasePresenter {
         if (isLoop) {
             this.isRunning = true;
         }
-        new Thread(new Runnable() { // from class: com.fimi.x8sdk.presenter.X8AOATestPresenter.3
-            @Override // java.lang.Runnable
+        new Thread(new Runnable() {
+            @Override
             public void run() {
                 do {
                     X8AOATestPresenter.this.sendCmd(new AoaTestColletion().getTestContent(content));

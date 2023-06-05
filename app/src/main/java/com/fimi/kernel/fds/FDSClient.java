@@ -29,11 +29,11 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-/* loaded from: classes.dex */
+
 public class FDSClient extends BaseManager {
     private Call call;
     private Zip2Fds mZip2Fds;
-    private Object object = new Object();
+    private final Object object = new Object();
     private Call postFdsUrlCall;
     private Call reqeuestFdsUrlCall;
 
@@ -74,10 +74,10 @@ public class FDSClient extends BaseManager {
         }
         requestParams.put("objectName", name);
         String url = HostConstants.QUESET_FDS_URL + "getGeneratePresignedUri";
-        this.reqeuestFdsUrlCall = CommonOkHttpClient.get(CommonRequest.createGetRequest(url, getRequestParams(requestParams)), new DisposeDataHandle(new DisposeDataListener() { // from class: com.fimi.kernel.fds.FDSClient.1
-            @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+        this.reqeuestFdsUrlCall = CommonOkHttpClient.get(CommonRequest.createGetRequest(url, getRequestParams(requestParams)), new DisposeDataHandle(new DisposeDataListener() {
+            @Override
             public void onSuccess(Object responseObj) {
-                NetModel netModel = (NetModel) JSON.parseObject(responseObj.toString(), NetModel.class);
+                NetModel netModel = JSON.parseObject(responseObj.toString(), NetModel.class);
                 if (netModel.isSuccess()) {
                     String url2 = netModel.getData().toString();
                     model.setFileFdsUrl(url2);
@@ -85,7 +85,7 @@ public class FDSClient extends BaseManager {
                 FDSClient.this.releaseLocked();
             }
 
-            @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+            @Override
             public void onFailure(Object reasonObj) {
                 FDSClient.this.releaseLocked();
             }
@@ -110,7 +110,7 @@ public class FDSClient extends BaseManager {
             model.setState(FdsUploadState.FAILED);
             return;
         }
-        Log.i("istep", "ResponseBody " + response.toString() + " " + model.getFile().getName());
+        Log.i("istep", "ResponseBody " + response + " " + model.getFile().getName());
     }
 
     public void lockedModel() {
@@ -129,7 +129,7 @@ public class FDSClient extends BaseManager {
                 this.object.notify();
             } catch (Exception e) {
                 e.printStackTrace();
-                Log.i("istep", "Exception   " + e.toString());
+                Log.i("istep", "Exception   " + e);
             }
         }
     }
@@ -149,10 +149,10 @@ public class FDSClient extends BaseManager {
         }
         requestParams.put("createFileTime", name);
         String url = HostConstants.SAVE_FDS_URL_2_FIMI_URL + "uploadFlyLog";
-        this.postFdsUrlCall = CommonOkHttpClient.post(CommonRequest.createPostRequest(url, getRequestParams(requestParams)), new DisposeDataHandle(new DisposeDataListener() { // from class: com.fimi.kernel.fds.FDSClient.2
-            @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+        this.postFdsUrlCall = CommonOkHttpClient.post(CommonRequest.createPostRequest(url, getRequestParams(requestParams)), new DisposeDataHandle(new DisposeDataListener() {
+            @Override
             public void onSuccess(Object responseObj) {
-                NetModel netModel = (NetModel) JSON.parseObject(responseObj.toString(), NetModel.class);
+                NetModel netModel = JSON.parseObject(responseObj.toString(), NetModel.class);
                 Log.i("istep", "createFileTime " + netModel.toString());
                 if (netModel.isSuccess()) {
                     model.setState(FdsUploadState.SUCCESS);
@@ -163,7 +163,7 @@ public class FDSClient extends BaseManager {
                 FDSClient.this.releaseLocked();
             }
 
-            @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+            @Override
             public void onFailure(Object reasonObj) {
                 Log.i("istep", "onFailure " + reasonObj.toString());
                 model.setState(FdsUploadState.FAILED);
@@ -197,10 +197,10 @@ public class FDSClient extends BaseManager {
         }
         requestParams.put("flightTime", fileName);
         String url = HostConstants.SAVE_FDS_URL_2_FIMI_URL_PLAYBACK + "record/upload_flyrecord";
-        this.postFdsUrlCall = CommonOkHttpClient.post(CommonRequest.createPostRequest(url, getRequestParams(requestParams)), new DisposeDataHandle(new DisposeDataListener() { // from class: com.fimi.kernel.fds.FDSClient.3
-            @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+        this.postFdsUrlCall = CommonOkHttpClient.post(CommonRequest.createPostRequest(url, getRequestParams(requestParams)), new DisposeDataHandle(new DisposeDataListener() {
+            @Override
             public void onSuccess(Object responseObj) {
-                NetModel netModel = (NetModel) JSON.parseObject(responseObj.toString(), NetModel.class);
+                NetModel netModel = JSON.parseObject(responseObj.toString(), NetModel.class);
                 Log.i("istep", "createFileTime " + netModel.toString());
                 if (netModel.isSuccess()) {
                     model.setState(FdsUploadState.SUCCESS);
@@ -211,7 +211,7 @@ public class FDSClient extends BaseManager {
                 FDSClient.this.releaseLocked();
             }
 
-            @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+            @Override
             public void onFailure(Object reasonObj) {
                 Log.i("istep", "onFailure " + reasonObj.toString());
                 model.setState(FdsUploadState.FAILED);

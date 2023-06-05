@@ -27,7 +27,7 @@ import com.fimi.x8sdk.dataparser.AckGetLowPowerOpt;
 import com.fimi.x8sdk.dataparser.AutoFcBattery;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes.dex */
+
 public class X8BatteryItemController extends AbsX8Controllers implements View.OnClickListener {
     private static final int SERIOUS_LOWPOWER_VALUE = 15;
     private static final String SP_UPDATE_CAP_TIP = "sp_update_cap_tip";
@@ -46,7 +46,7 @@ public class X8BatteryItemController extends AbsX8Controllers implements View.On
     private View rlItem;
     private X8ValueSeakBarView sbLowPowerWarning;
     private X8ValueSeakBarView sbLowPowerWarningSerious;
-    private ViewStub stubItem;
+    private final ViewStub stubItem;
     private SwitchButton swbLowLanding;
     private SwitchButton swbLowReturn;
     private X8TabHost tbLowPowerOperation;
@@ -66,18 +66,18 @@ public class X8BatteryItemController extends AbsX8Controllers implements View.On
         this.COLOR_NORMAL_WHITE = 0;
         this.COLOR_ABNORMAL_YELLOW = 0;
         this.COLOR_SERIOUS_RED = 0;
-        this.stubItem = (ViewStub) rootView.findViewById(R.id.stub_battery_item);
+        this.stubItem = rootView.findViewById(R.id.stub_battery_item);
         this.COLOR_LOW_TEMP_BLUE = rootView.getContext().getResources().getColor(R.color.x8_battery_state_low_temperature_blue);
         this.COLOR_NORMAL_WHITE = rootView.getContext().getResources().getColor(R.color.x8_battery_state_normal);
         this.COLOR_ABNORMAL_YELLOW = rootView.getContext().getResources().getColor(R.color.x8_battery_state_abnormal);
         this.COLOR_SERIOUS_RED = rootView.getContext().getResources().getColor(R.color.x8_battery_state_serious);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
     }
 
@@ -85,11 +85,11 @@ public class X8BatteryItemController extends AbsX8Controllers implements View.On
         return !SPStoreManager.getInstance().getBoolean(SP_UPDATE_CAP_TIP);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         boolean z = true;
         if (this.isShow && this.rlItem != null) {
@@ -118,8 +118,8 @@ public class X8BatteryItemController extends AbsX8Controllers implements View.On
 
     private void requestValue() {
         if (this.fcCtrlManager != null) {
-            this.fcCtrlManager.getLowPowerOpt(new UiCallBackListener<AckGetLowPowerOpt>() { // from class: com.fimi.app.x8s.controls.fcsettting.X8BatteryItemController.1
-                @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+            this.fcCtrlManager.getLowPowerOpt(new UiCallBackListener<AckGetLowPowerOpt>() {
+                @Override
                 public void onComplete(CmdResult cmdResult, AckGetLowPowerOpt lowPowerOpt) {
                     if (cmdResult.isSuccess()) {
                         X8BatteryItemController.this.sbLowPowerWarning.setProgress(lowPowerOpt.getLowPowerValue());
@@ -149,32 +149,32 @@ public class X8BatteryItemController extends AbsX8Controllers implements View.On
         this.swbLowLanding.setAlpha(b ? 1.0f : 0.4f);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void showItem() {
         this.isShow = true;
         if (this.rlItem == null) {
             View view = this.stubItem.inflate();
             this.rlItem = view.findViewById(R.id.x8_rl_main_battery_item);
             this.context = this.rootView.getContext();
-            this.batteryLayout1 = (X8BatteryLayout) this.rootView.findViewById(R.id.layout_battery_core1);
-            this.batteryLayout2 = (X8BatteryLayout) this.rootView.findViewById(R.id.layout_battery_core2);
-            this.batteryLayout3 = (X8BatteryLayout) this.rootView.findViewById(R.id.layout_battery_core3);
-            this.tvRemainElectric = (TextView) this.rootView.findViewById(R.id.tv_remain_electric);
-            this.tvRemainCapacity = (TextView) this.rootView.findViewById(R.id.tv_remain_capacity);
-            this.btnCapacityNotUpdate = (ImageButton) this.rootView.findViewById(R.id.btn_capacity_not_update);
-            this.tvRecycleTimes = (TextView) this.rootView.findViewById(R.id.tv_recycle_times);
-            this.tvTemperature = (TextView) this.rootView.findViewById(R.id.tv_temperature);
-            this.tvOverReleaseTimes = (TextView) this.rootView.findViewById(R.id.tv_over_release_times);
-            this.sbLowPowerWarning = (X8ValueSeakBarView) this.rootView.findViewById(R.id.vsb_low_power_warning);
-            this.sbLowPowerWarningSerious = (X8ValueSeakBarView) this.rootView.findViewById(R.id.vsb_low_power_serious_warning);
-            this.tbLowPowerOperation = (X8TabHost) this.rootView.findViewById(R.id.th_low_power_operation);
-            this.tbLowPowerSeriousOperation = (X8TabHost) this.rootView.findViewById(R.id.th_low_power_operation_serious);
-            this.swbLowReturn = (SwitchButton) this.rootView.findViewById(R.id.swb_low_power_return);
-            this.swbLowLanding = (SwitchButton) this.rootView.findViewById(R.id.swb_low_power_landing);
-            this.x8BatteryBtnRestParams = (Button) this.rootView.findViewById(R.id.x8_battery_btn_rest_params);
+            this.batteryLayout1 = this.rootView.findViewById(R.id.layout_battery_core1);
+            this.batteryLayout2 = this.rootView.findViewById(R.id.layout_battery_core2);
+            this.batteryLayout3 = this.rootView.findViewById(R.id.layout_battery_core3);
+            this.tvRemainElectric = this.rootView.findViewById(R.id.tv_remain_electric);
+            this.tvRemainCapacity = this.rootView.findViewById(R.id.tv_remain_capacity);
+            this.btnCapacityNotUpdate = this.rootView.findViewById(R.id.btn_capacity_not_update);
+            this.tvRecycleTimes = this.rootView.findViewById(R.id.tv_recycle_times);
+            this.tvTemperature = this.rootView.findViewById(R.id.tv_temperature);
+            this.tvOverReleaseTimes = this.rootView.findViewById(R.id.tv_over_release_times);
+            this.sbLowPowerWarning = this.rootView.findViewById(R.id.vsb_low_power_warning);
+            this.sbLowPowerWarningSerious = this.rootView.findViewById(R.id.vsb_low_power_serious_warning);
+            this.tbLowPowerOperation = this.rootView.findViewById(R.id.th_low_power_operation);
+            this.tbLowPowerSeriousOperation = this.rootView.findViewById(R.id.th_low_power_operation_serious);
+            this.swbLowReturn = this.rootView.findViewById(R.id.swb_low_power_return);
+            this.swbLowLanding = this.rootView.findViewById(R.id.swb_low_power_landing);
+            this.x8BatteryBtnRestParams = this.rootView.findViewById(R.id.x8_battery_btn_rest_params);
             this.x8BatteryBtnRestParams.setOnClickListener(this);
-            this.swbLowReturn.setOnSwitchListener(new SwitchButton.OnSwitchListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8BatteryItemController.2
-                @Override // com.fimi.widget.SwitchButton.OnSwitchListener
+            this.swbLowReturn.setOnSwitchListener(new SwitchButton.OnSwitchListener() {
+                @Override
                 public void onSwitch(View view2, boolean on) {
                     if (on) {
                         GlobalConfig.getInstance().setLowReturn(false);
@@ -185,8 +185,8 @@ public class X8BatteryItemController extends AbsX8Controllers implements View.On
                     X8BatteryItemController.this.swbLowReturn.onSwitch(true);
                 }
             });
-            this.swbLowLanding.setOnSwitchListener(new SwitchButton.OnSwitchListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8BatteryItemController.3
-                @Override // com.fimi.widget.SwitchButton.OnSwitchListener
+            this.swbLowLanding.setOnSwitchListener(new SwitchButton.OnSwitchListener() {
+                @Override
                 public void onSwitch(View view2, boolean on) {
                     if (on) {
                         GlobalConfig.getInstance().setLowLanding(false);
@@ -198,14 +198,14 @@ public class X8BatteryItemController extends AbsX8Controllers implements View.On
                 }
             });
             this.btnCapacityNotUpdate.setOnClickListener(this);
-            this.sbLowPowerWarning.setListener(new IX8ValueSeakBarViewListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8BatteryItemController.4
-                @Override // com.fimi.app.x8s.interfaces.IX8ValueSeakBarViewListener
+            this.sbLowPowerWarning.setListener(new IX8ValueSeakBarViewListener() {
+                @Override
                 public void onSelect(boolean b) {
                     X8BatteryItemController.this.sbLowPowerWarningSerious.onOtherSelect();
                 }
             });
-            this.sbLowPowerWarning.setConfirmListener(new X8ValueSeakBarView.OnProgressConfirmListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8BatteryItemController.5
-                @Override // com.fimi.app.x8s.widget.X8ValueSeakBarView.OnProgressConfirmListener
+            this.sbLowPowerWarning.setConfirmListener(new X8ValueSeakBarView.OnProgressConfirmListener() {
+                @Override
                 public void onConfirm(float value) {
                     if (value <= X8BatteryItemController.this.sbLowPowerWarningSerious.getCurrentValue()) {
                         X8ToastUtil.showToast(X8BatteryItemController.this.context, X8BatteryItemController.this.context.getString(R.string.x8_battery_setting_must_less_than_serious), 1);
@@ -214,8 +214,8 @@ public class X8BatteryItemController extends AbsX8Controllers implements View.On
                     }
                 }
             });
-            this.sbLowPowerWarningSerious.setConfirmListener(new X8ValueSeakBarView.OnProgressConfirmListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8BatteryItemController.6
-                @Override // com.fimi.app.x8s.widget.X8ValueSeakBarView.OnProgressConfirmListener
+            this.sbLowPowerWarningSerious.setConfirmListener(new X8ValueSeakBarView.OnProgressConfirmListener() {
+                @Override
                 public void onConfirm(float value) {
                     if (value >= X8BatteryItemController.this.sbLowPowerWarning.getCurrentValue()) {
                         X8ToastUtil.showToast(X8BatteryItemController.this.context, X8BatteryItemController.this.context.getString(R.string.x8_battery_setting_must_large_than_low), 1);
@@ -224,20 +224,20 @@ public class X8BatteryItemController extends AbsX8Controllers implements View.On
                     }
                 }
             });
-            this.sbLowPowerWarningSerious.setListener(new IX8ValueSeakBarViewListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8BatteryItemController.7
-                @Override // com.fimi.app.x8s.interfaces.IX8ValueSeakBarViewListener
+            this.sbLowPowerWarningSerious.setListener(new IX8ValueSeakBarViewListener() {
+                @Override
                 public void onSelect(boolean b) {
                     X8BatteryItemController.this.sbLowPowerWarning.onOtherSelect();
                 }
             });
-            this.tbLowPowerOperation.setOnSelectListener(new X8TabHost.OnSelectListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8BatteryItemController.8
-                @Override // com.fimi.app.x8s.widget.X8TabHost.OnSelectListener
+            this.tbLowPowerOperation.setOnSelectListener(new X8TabHost.OnSelectListener() {
+                @Override
                 public void onSelect(int index, String text, int last) {
                     X8BatteryItemController.this.setLowPowerOpt(2, false);
                 }
             });
-            this.tbLowPowerSeriousOperation.setOnSelectListener(new X8TabHost.OnSelectListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8BatteryItemController.9
-                @Override // com.fimi.app.x8s.widget.X8TabHost.OnSelectListener
+            this.tbLowPowerSeriousOperation.setOnSelectListener(new X8TabHost.OnSelectListener() {
+                @Override
                 public void onSelect(int index, String text, int last) {
                     X8BatteryItemController.this.setLowPowerOpt(3, false);
                 }
@@ -253,8 +253,8 @@ public class X8BatteryItemController extends AbsX8Controllers implements View.On
         int seriousLowPowerValue = (int) this.sbLowPowerWarningSerious.getCurrentValue();
         int lowPowerOpt = this.tbLowPowerOperation.getSelectIndex();
         int seriousLowPowerOpt = this.tbLowPowerSeriousOperation.getSelectIndex();
-        this.fcCtrlManager.setLowPowerOpt(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8BatteryItemController.10
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcCtrlManager.setLowPowerOpt(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     switch (type) {
@@ -271,7 +271,6 @@ public class X8BatteryItemController extends AbsX8Controllers implements View.On
                             return;
                         case 2:
                         default:
-                            return;
                     }
                 } else if (type == 0 && isReset) {
                     X8ToastUtil.showToast(X8BatteryItemController.this.context, X8BatteryItemController.this.context.getString(R.string.x8_battery_reset_params_hint_failed), 1);
@@ -300,7 +299,7 @@ public class X8BatteryItemController extends AbsX8Controllers implements View.On
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void closeItem() {
         this.isShow = false;
         if (this.rlItem != null) {
@@ -376,7 +375,7 @@ public class X8BatteryItemController extends AbsX8Controllers implements View.On
 
     private void showUpdateDialog() {
         if (this.updateDialog == null) {
-            this.updateDialog = new X8SingleCustomDialog(this.context, getString(R.string.x8_battery_setting_update_capacity_tittle), getString(R.string.x8_battery_setting_update_capacity_content), new X8SingleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8BatteryItemController.11
+            this.updateDialog = new X8SingleCustomDialog(this.context, getString(R.string.x8_battery_setting_update_capacity_tittle), getString(R.string.x8_battery_setting_update_capacity_content), new X8SingleCustomDialog.onDialogButtonClickListener() {
                 @Override
                 // com.fimi.app.x8s.widget.X8SingleCustomDialog.onDialogButtonClickListener
                 public void onSingleButtonClick() {
@@ -387,7 +386,7 @@ public class X8BatteryItemController extends AbsX8Controllers implements View.On
         this.updateDialog.show();
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.btn_capacity_not_update) {
@@ -399,7 +398,7 @@ public class X8BatteryItemController extends AbsX8Controllers implements View.On
 
     public void showRestParamDialog() {
         if (this.x8DoubleCustomDialog == null) {
-            this.x8DoubleCustomDialog = new X8DoubleCustomDialog(this.rootView.getContext(), this.rootView.getContext().getString(R.string.x8_battery_reset_params), this.rootView.getContext().getString(R.string.x8_battery_reset_params_hint), this.rootView.getContext().getString(R.string.x8_general_rest), new X8DoubleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8BatteryItemController.12
+            this.x8DoubleCustomDialog = new X8DoubleCustomDialog(this.rootView.getContext(), this.rootView.getContext().getString(R.string.x8_battery_reset_params), this.rootView.getContext().getString(R.string.x8_battery_reset_params_hint), this.rootView.getContext().getString(R.string.x8_general_rest), new X8DoubleCustomDialog.onDialogButtonClickListener() {
                 @Override
                 // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
                 public void onLeft() {
@@ -432,7 +431,7 @@ public class X8BatteryItemController extends AbsX8Controllers implements View.On
         this.fcCtrlManager = fcCtrlManager;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public boolean onClickBackKey() {
         return false;
     }

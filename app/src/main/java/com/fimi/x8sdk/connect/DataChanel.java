@@ -55,7 +55,6 @@ public class DataChanel implements ResultListener {
                     return;
                 case 6:
                     this.fwUploadDataChanel.forwardData(data);
-                    return;
             }
         }
     }

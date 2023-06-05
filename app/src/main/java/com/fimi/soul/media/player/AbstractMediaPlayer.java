@@ -1,6 +1,6 @@
 package com.fimi.soul.media.player;
 
-/* loaded from: classes.dex */
+
 public abstract class AbstractMediaPlayer implements IMediaPlayer {
     private IMediaPlayer.OnBufferingUpdateListener mOnBufferingUpdateListener;
     private IMediaPlayer.OnCompletionListener mOnCompletionListener;
@@ -10,37 +10,37 @@ public abstract class AbstractMediaPlayer implements IMediaPlayer {
     private IMediaPlayer.OnSeekCompleteListener mOnSeekCompleteListener;
     private IMediaPlayer.OnVideoSizeChangedListener mOnVideoSizeChangedListener;
 
-    @Override // com.fimi.soul.media.player.IMediaPlayer
+    @Override
     public final void setOnPreparedListener(IMediaPlayer.OnPreparedListener listener) {
         this.mOnPreparedListener = listener;
     }
 
-    @Override // com.fimi.soul.media.player.IMediaPlayer
+    @Override
     public final void setOnCompletionListener(IMediaPlayer.OnCompletionListener listener) {
         this.mOnCompletionListener = listener;
     }
 
-    @Override // com.fimi.soul.media.player.IMediaPlayer
+    @Override
     public final void setOnBufferingUpdateListener(IMediaPlayer.OnBufferingUpdateListener listener) {
         this.mOnBufferingUpdateListener = listener;
     }
 
-    @Override // com.fimi.soul.media.player.IMediaPlayer
+    @Override
     public final void setOnSeekCompleteListener(IMediaPlayer.OnSeekCompleteListener listener) {
         this.mOnSeekCompleteListener = listener;
     }
 
-    @Override // com.fimi.soul.media.player.IMediaPlayer
+    @Override
     public final void setOnVideoSizeChangedListener(IMediaPlayer.OnVideoSizeChangedListener listener) {
         this.mOnVideoSizeChangedListener = listener;
     }
 
-    @Override // com.fimi.soul.media.player.IMediaPlayer
+    @Override
     public final void setOnErrorListener(IMediaPlayer.OnErrorListener listener) {
         this.mOnErrorListener = listener;
     }
 
-    @Override // com.fimi.soul.media.player.IMediaPlayer
+    @Override
     public final void setOnInfoListener(IMediaPlayer.OnInfoListener listener) {
         this.mOnInfoListener = listener;
     }

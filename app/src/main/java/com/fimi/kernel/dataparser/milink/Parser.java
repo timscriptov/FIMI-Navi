@@ -2,7 +2,7 @@ package com.fimi.kernel.dataparser.milink;
 
 import androidx.core.view.ViewCompat;
 
-/* loaded from: classes.dex */
+
 public class Parser {
     static boolean msg_received;
     State state = State.UNINIT;
@@ -159,7 +159,6 @@ public class Parser {
                     String str = " h " + this.m.getHeader().getPayloadLen() + " p " + this.m.payload.size();
                     ByteHexHelper.bytesToHexString(this.m.encodePacket());
                     String x = null;
-                    x.toString();
                     break;
                 }
                 break;
@@ -185,7 +184,7 @@ public class Parser {
         this.index = 0;
     }
 
-    /* loaded from: classes.dex */
+
     public enum State {
         UNINIT,
         IDLE,

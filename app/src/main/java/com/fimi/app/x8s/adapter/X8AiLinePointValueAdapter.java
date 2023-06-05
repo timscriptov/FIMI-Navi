@@ -13,14 +13,14 @@ import com.fimi.app.x8s.entity.X8AiLinePointEntity;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class X8AiLinePointValueAdapter extends RecyclerView.Adapter<X8AiLinePointValueAdapter.X8AiPointValueViewHolder> {
-    private LayoutInflater inflater;
+    private final LayoutInflater inflater;
     private boolean isAll;
-    private List<X8AiLinePointEntity> list;
+    private final List<X8AiLinePointEntity> list;
     private OnItemClickListener listener;
     private int selectIndex = -1;
-    private int type;
+    private final int type;
 
     public X8AiLinePointValueAdapter(Context context, List<X8AiLinePointEntity> list, int type) {
         this.list = list;
@@ -36,14 +36,14 @@ public class X8AiLinePointValueAdapter extends RecyclerView.Adapter<X8AiLinePoin
         this.isAll = all;
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public X8AiPointValueViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = this.inflater.inflate(R.layout.x8_ai_line_point_value_item, parent, false);
         X8AiPointValueViewHolder holder = new X8AiPointValueViewHolder(view);
         return holder;
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public void onBindViewHolder(X8AiPointValueViewHolder holder, int position) {
         if (this.type == 0) {
             onSigleSelect(holder, position);
@@ -53,7 +53,7 @@ public class X8AiLinePointValueAdapter extends RecyclerView.Adapter<X8AiLinePoin
         }
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public int getItemCount() {
         return this.list.size();
     }
@@ -68,8 +68,8 @@ public class X8AiLinePointValueAdapter extends RecyclerView.Adapter<X8AiLinePoin
 
     public void setSigleListener(X8AiPointValueViewHolder holder) {
         if (this.listener != null) {
-            holder.root.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.adapter.X8AiLinePointValueAdapter.1
-                @Override // android.view.View.OnClickListener
+            holder.root.setOnClickListener(new View.OnClickListener() {
+                @Override
                 public void onClick(View v) {
                     boolean isSelect = true;
                     int pos = ((Integer) v.getTag()).intValue();
@@ -119,8 +119,8 @@ public class X8AiLinePointValueAdapter extends RecyclerView.Adapter<X8AiLinePoin
 
     public void setMulListener(X8AiPointValueViewHolder holder, final int state) {
         if (this.listener != null) {
-            holder.root.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.adapter.X8AiLinePointValueAdapter.2
-                @Override // android.view.View.OnClickListener
+            holder.root.setOnClickListener(new View.OnClickListener() {
+                @Override
                 public void onClick(View v) {
                     boolean isSelect = true;
                     int pos = ((Integer) v.getTag()).intValue();
@@ -133,19 +133,19 @@ public class X8AiLinePointValueAdapter extends RecyclerView.Adapter<X8AiLinePoin
         }
     }
 
-    /* loaded from: classes.dex */
+
     public interface OnItemClickListener {
         void onItemClicked(int i, int i2, boolean z);
     }
 
-    /* loaded from: classes.dex */
+
     public static class X8AiPointValueViewHolder extends RecyclerView.ViewHolder {
         Button btn;
         View root;
 
         public X8AiPointValueViewHolder(View itemView) {
             super(itemView);
-            this.btn = (Button) itemView.findViewById(R.id.btn_item);
+            this.btn = itemView.findViewById(R.id.btn_item);
             this.root = itemView.findViewById(R.id.btn_item);
         }
     }

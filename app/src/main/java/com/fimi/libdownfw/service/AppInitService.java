@@ -17,30 +17,30 @@ import com.fimi.network.oauth2.OauthConstant;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class AppInitService extends Service {
     private static final int PROGRESS_MAX = 100;
     List<UpfirewareDto> needDownDto;
     OauthPresenter oauthPresenter;
     FwManager x9FwManager = new FwManager();
     DownloadManager downloadManager = new DownloadManager();
-    private volatile int checkingTaskCount = 0;
+    private final int checkingTaskCount = 0;
 
-    @Override // android.app.Service
+    @Override
     public void onCreate() {
         super.onCreate();
     }
 
-    @Override // android.app.Service
+    @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        ThreadUtils.execute(new Runnable() { // from class: com.fimi.libdownfw.service.AppInitService.1
-            @Override // java.lang.Runnable
+        ThreadUtils.execute(new Runnable() {
+            @Override
             public void run() {
                 SPStoreManager.getInstance();
             }
         });
-        ThreadUtils.execute(new Runnable() { // from class: com.fimi.libdownfw.service.AppInitService.2
-            @Override // java.lang.Runnable
+        ThreadUtils.execute(new Runnable() {
+            @Override
             public void run() {
                 AppInitService.this.getOuthVerification();
             }
@@ -48,7 +48,7 @@ public class AppInitService extends Service {
         return super.onStartCommand(intent, flags, startId);
     }
 
-    @Override // android.app.Service
+    @Override
     @Nullable
     public IBinder onBind(Intent intent) {
         return null;

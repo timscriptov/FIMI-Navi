@@ -7,7 +7,7 @@ import com.fimi.kernel.utils.NumberUtil;
 import com.fimi.x8sdk.common.GlobalConfig;
 import com.fimi.x8sdk.util.UnityUtil;
 
-/* loaded from: classes.dex */
+
 public class X8NumberUtil {
     private static String prexDistance;
     private static String prexSpeed;

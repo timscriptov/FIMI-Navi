@@ -16,7 +16,7 @@ import com.fimi.x8sdk.map.MapType;
 
 import java.io.File;
 
-/* loaded from: classes.dex */
+
 public class X8Application {
     public static int ANIMATION_WIDTH;
     public static int SCREEN_HEIGHT;

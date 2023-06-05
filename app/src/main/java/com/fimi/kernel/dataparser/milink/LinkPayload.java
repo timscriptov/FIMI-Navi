@@ -3,7 +3,7 @@ package com.fimi.kernel.dataparser.milink;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 
-/* loaded from: classes.dex */
+
 public class LinkPayload {
     public static final int MAX_PAYLOAD_SIZE = 1024;
     public int index;
@@ -27,35 +27,35 @@ public class LinkPayload {
     }
 
     public byte getByte() {
-        byte result = (byte) ((this.payload.get(this.index + 0) & 255) | 0);
+        byte result = (byte) ((this.payload.get(this.index) & 255) | 0);
         this.index++;
         return result;
     }
 
     public short getShort() {
         short result = (short) (((this.payload.get(this.index + 1) & 255) << 8) | 0);
-        short result2 = (short) ((this.payload.get(this.index + 0) & 255) | result);
+        short result2 = (short) ((this.payload.get(this.index) & 255) | result);
         this.index += 2;
         return result2;
     }
 
     public int getInt() {
         int result = 0 | ((this.payload.get(this.index + 3) & 255) << 24);
-        int result2 = result | ((this.payload.get(this.index + 2) & 255) << 16) | ((this.payload.get(this.index + 1) & 255) << 8) | (this.payload.get(this.index + 0) & 255);
+        int result2 = result | ((this.payload.get(this.index + 2) & 255) << 16) | ((this.payload.get(this.index + 1) & 255) << 8) | (this.payload.get(this.index) & 255);
         this.index += 4;
         return result2;
     }
 
     public long getLong() {
-        long result = 0 | ((this.payload.get(this.index + 7) & 255) << 56);
-        long result2 = result | ((this.payload.get(this.index + 6) & 255) << 48) | ((this.payload.get(this.index + 5) & 255) << 40) | ((this.payload.get(this.index + 4) & 255) << 32) | ((this.payload.get(this.index + 3) & 255) << 24) | ((this.payload.get(this.index + 2) & 255) << 16) | ((this.payload.get(this.index + 1) & 255) << 8) | (this.payload.get(this.index + 0) & 255);
+        long result = 0 | ((long) (this.payload.get(this.index + 7) & 255) << 56);
+        long result2 = result | ((long) (this.payload.get(this.index + 6) & 255) << 48) | ((long) (this.payload.get(this.index + 5) & 255) << 40) | ((long) (this.payload.get(this.index + 4) & 255) << 32) | ((long) (this.payload.get(this.index + 3) & 255) << 24) | ((this.payload.get(this.index + 2) & 255) << 16) | ((this.payload.get(this.index + 1) & 255) << 8) | (this.payload.get(this.index) & 255);
         this.index += 8;
         return result2;
     }
 
     public long getLongReverse() {
-        long result = 0 | ((this.payload.get(this.index + 0) & 255) << 56);
-        long result2 = result | ((this.payload.get(this.index + 1) & 255) << 48) | ((this.payload.get(this.index + 2) & 255) << 40) | ((this.payload.get(this.index + 3) & 255) << 32) | ((this.payload.get(this.index + 4) & 255) << 24) | ((this.payload.get(this.index + 5) & 255) << 16) | ((this.payload.get(this.index + 6) & 255) << 8) | (this.payload.get(this.index + 7) & 255);
+        long result = 0 | ((long) (this.payload.get(this.index) & 255) << 56);
+        long result2 = result | ((long) (this.payload.get(this.index + 1) & 255) << 48) | ((long) (this.payload.get(this.index + 2) & 255) << 40) | ((long) (this.payload.get(this.index + 3) & 255) << 32) | ((long) (this.payload.get(this.index + 4) & 255) << 24) | ((this.payload.get(this.index + 5) & 255) << 16) | ((this.payload.get(this.index + 6) & 255) << 8) | (this.payload.get(this.index + 7) & 255);
         this.index += 8;
         return result2;
     }
@@ -67,7 +67,7 @@ public class LinkPayload {
     public float getThreeFloat() {
         byte result = (byte) ((this.payload.get(this.index + 2) & 255) | 0);
         byte result2 = (byte) ((this.payload.get(this.index + 1) & 255) | 0);
-        byte result3 = (byte) ((this.payload.get(this.index + 0) & 255) | 0);
+        byte result3 = (byte) ((this.payload.get(this.index) & 255) | 0);
         byte[] value = {result, result2, result3};
         BigInteger bigInteger = new BigInteger(1, value);
         this.index += 3;
@@ -94,7 +94,7 @@ public class LinkPayload {
 
     public char getChar() {
         char result = (char) (((this.payload.get(this.index + 1) & 255) << 8) | 0);
-        char result2 = (char) ((this.payload.get(this.index + 0) & 255) | result);
+        char result2 = (char) ((this.payload.get(this.index) & 255) | result);
         this.index += 2;
         return result2;
     }
@@ -107,8 +107,8 @@ public class LinkPayload {
     }
 
     public long getuInt32() {
-        long result = 0 | ((this.payload.get(this.index + 3) & 255) << 24);
-        long result2 = result | ((this.payload.get(this.index + 2) & 255) << 16) | ((this.payload.get(this.index + 1) & 255) << 8) | (this.payload.get(this.index + 0) & 255);
+        long result = 0 | ((long) (this.payload.get(this.index + 3) & 255) << 24);
+        long result2 = result | ((this.payload.get(this.index + 2) & 255) << 16) | ((this.payload.get(this.index + 1) & 255) << 8) | (this.payload.get(this.index) & 255);
         this.index += 4;
         return result2;
     }

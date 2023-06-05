@@ -2,7 +2,7 @@ package com.fimi.app.x8s.entity;
 
 import com.coremedia.iso.boxes.FreeBox;
 
-/* loaded from: classes.dex */
+
 public class X11CmdConstants {
     public static final int CAMERA_1080P = 65;
     public static final int CAMERA_4K = 66;
@@ -212,7 +212,7 @@ public class X11CmdConstants {
     public static String CAMERA_STATUS_IDLE = OPTION_APPSTATUS_IDLE;
     public static String CAMERA_STATUS_RECORD = OPTION_APPSTATUS_RECORD;
 
-    /* loaded from: classes.dex */
+
     public enum State {
         StartRecord,
         TakePhote,

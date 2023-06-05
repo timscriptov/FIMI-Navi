@@ -8,7 +8,7 @@ import com.fimi.x8sdk.entity.GpsInfoCmd;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/* loaded from: classes.dex */
+
 public class X8PressureGpsManger {
     Task task;
     Timer timer;
@@ -57,12 +57,12 @@ public class X8PressureGpsManger {
         }
     }
 
-    /* loaded from: classes.dex */
+
     public class Task extends TimerTask {
         public Task() {
         }
 
-        @Override // java.util.TimerTask, java.lang.Runnable
+        @Override
         public void run() {
             TcpClient.getIntance().sendLog("定时任务执行" + X8PressureGpsInfo.getInstance().toString() + X8PressureGpsManger.this.fcManager);
             if (X8PressureGpsManger.this.fcManager != null) {

@@ -1,6 +1,6 @@
 package com.fimi.app.x8s.adapter.section;
 
-/* loaded from: classes.dex */
+
 public abstract class AbsSection {
     private boolean hasHeader;
 

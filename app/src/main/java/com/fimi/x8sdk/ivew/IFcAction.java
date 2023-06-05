@@ -8,7 +8,7 @@ import com.fimi.x8sdk.dataparser.cmd.CmdAiLinePoints;
 import com.fimi.x8sdk.dataparser.cmd.CmdAiLinePointsAction;
 import com.fimi.x8sdk.entity.GpsInfoCmd;
 
-/* loaded from: classes2.dex */
+
 public interface IFcAction {
     void getAiFollowModle(UiCallBackListener uiCallBackListener);
 

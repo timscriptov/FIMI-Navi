@@ -14,7 +14,7 @@ import androidx.core.internal.view.SupportMenu;
 import com.fimi.kernel.FimiAppContext;
 
 @SuppressLint({"WrongCall"})
-/* loaded from: classes.dex */
+
 public class Overlay extends View {
     private final String TAG;
     private int MAX_HEIGHT;
@@ -26,8 +26,8 @@ public class Overlay extends View {
     private boolean isTracking;
     private OverlayListener listener;
     private int lostColor;
-    private int previewH;
-    private int previewW;
+    private final int previewH;
+    private final int previewW;
     private int selectedColor;
     private int startX;
     private int startY;
@@ -157,7 +157,7 @@ public class Overlay extends View {
         postInvalidate();
     }
 
-    @Override // android.view.View
+    @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == 0) {
             this.listener.onTouchActionDown();
@@ -182,7 +182,7 @@ public class Overlay extends View {
         return true;
     }
 
-    @Override // android.view.View
+    @Override
     protected void onDraw(Canvas canvas) {
         if (!this.enableCustomOverlay) {
             Paint p = new Paint();
@@ -233,7 +233,7 @@ public class Overlay extends View {
         }
     }
 
-    @Override // android.view.View
+    @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         if (w != oldw || h != oldh) {
@@ -250,7 +250,7 @@ public class Overlay extends View {
         return this.MAX_HEIGHT;
     }
 
-    /* loaded from: classes.dex */
+
     public interface OverlayListener {
         void onDraw(Canvas canvas, Rect rect, boolean z);
 

@@ -23,19 +23,19 @@ import com.fimi.x8sdk.update.fwpack.FirmwareBuildPack;
 
 import java.io.FileInputStream;
 
-/* loaded from: classes2.dex */
+
 public class X8TestPresenter extends BasePresenter {
     IAOATestView iaoaTestView;
     ICameraTestUpdateView updateView;
-    VideodDataListener listener = new VideodDataListener() { // from class: com.fimi.x8sdk.presenter.X8TestPresenter.1
-        @Override // com.fimi.kernel.connect.session.VideodDataListener
+    VideodDataListener listener = new VideodDataListener() {
+        @Override
         public void onRawdataCallBack(byte[] str) {
             if (X8TestPresenter.this.iaoaTestView != null) {
             }
         }
     };
-    Handler mHandler = new Handler() { // from class: com.fimi.x8sdk.presenter.X8TestPresenter.2
-        @Override // android.os.Handler
+    Handler mHandler = new Handler() {
+        @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == 0) {

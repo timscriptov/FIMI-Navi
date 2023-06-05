@@ -3,8 +3,6 @@ package com.fimi.kernel.dataparser.usb;
 import com.fimi.kernel.FimiAppContext;
 
 
-
-/* loaded from: classes.dex */
 public class CmdResult {
     public boolean isSuccess;
     private int descption;

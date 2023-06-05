@@ -2,7 +2,7 @@ package com.fimi.app.x8s.tools;
 
 import java.lang.reflect.Array;
 
-/* loaded from: classes.dex */
+
 public class GpsPointTools {
     public double getDistance2D(double lat0, double lng0, double lat1, double lng1) {
         double dLat = lat0 - lat1;

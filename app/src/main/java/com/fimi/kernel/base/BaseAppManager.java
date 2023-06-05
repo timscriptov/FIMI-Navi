@@ -5,11 +5,11 @@ import android.app.Activity;
 import java.util.LinkedList;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class BaseAppManager {
     private static final String TAG = BaseAppManager.class.getSimpleName();
     private static BaseAppManager instance = null;
-    private static List<Activity> mActivities = new LinkedList();
+    private static final List<Activity> mActivities = new LinkedList();
 
     public static BaseAppManager getInstance() {
         if (instance == null) {
@@ -35,9 +35,7 @@ public class BaseAppManager {
     }
 
     public synchronized void removeActivity(Activity activity) {
-        if (mActivities.contains(activity)) {
-            mActivities.remove(activity);
-        }
+        mActivities.remove(activity);
     }
 
     public synchronized void clear() {

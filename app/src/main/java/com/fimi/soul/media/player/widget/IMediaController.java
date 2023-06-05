@@ -2,7 +2,7 @@ package com.fimi.soul.media.player.widget;
 
 import android.view.View;
 
-/* loaded from: classes.dex */
+
 public interface IMediaController {
     void hide();
 

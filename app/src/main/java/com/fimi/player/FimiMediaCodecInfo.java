@@ -16,8 +16,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 
-
-/* loaded from: classes.dex */
 public class FimiMediaCodecInfo {
     private static final String TAG = "FimiMediaCodecInfo";
     public static int RANK_MAX = 1000;

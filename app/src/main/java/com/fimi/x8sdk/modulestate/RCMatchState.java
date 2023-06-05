@@ -4,8 +4,6 @@ import com.fimi.x8sdk.dataparser.AckRightRoller;
 import com.fimi.x8sdk.dataparser.AutoRCMatchRt;
 
 
-
-/* loaded from: classes2.dex */
 public class RCMatchState extends BaseState {
     private AckRightRoller ackRightRoller;
     private AutoRCMatchRt matchRt;
@@ -18,7 +16,7 @@ public class RCMatchState extends BaseState {
         this.ackRightRoller = ackRightRoller;
     }
 
-    @Override // com.fimi.x8sdk.modulestate.BaseState
+    @Override
     public boolean isAvailable() {
         return false;
     }

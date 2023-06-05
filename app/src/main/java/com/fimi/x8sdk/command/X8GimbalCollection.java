@@ -7,7 +7,7 @@ import com.fimi.kernel.dataparser.milink.ByteHexHelper;
 import com.fimi.kernel.dataparser.usb.UiCallBackListener;
 import com.fimi.kernel.utils.ByteUtil;
 
-/* loaded from: classes2.dex */
+
 public class X8GimbalCollection extends X8BaseCmd {
     public static final int MSG_GET_GIMBAL_SENSOR = 96;
     public static final byte MSG_GROUP_FC_GIMBAL = 9;
@@ -38,7 +38,7 @@ public class X8GimbalCollection extends X8BaseCmd {
     public X8SendCmd getGimbalSensorInfoCmd() {
         X8SendCmd sendCmd = getBase((byte) X8BaseCmd.X8S_Module.MODULE_GIMBAL.ordinal());
         byte[] payload = new byte[4];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 9;
         int i2 = i + 1;
         payload[i] = FcCollection.MSG_SET_FOLLOW_OPEN;
@@ -67,7 +67,7 @@ public class X8GimbalCollection extends X8BaseCmd {
     public X8SendCmd setAiAutoPhotoPitchAngle(int aiAutoPhotoPitchAngle) {
         X8SendCmd sendCmd = getBase((byte) X8BaseCmd.X8S_Module.MODULE_GIMBAL.ordinal());
         byte[] payload = new byte[17];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 9;
         int i2 = i + 1;
         payload[i] = 6;
@@ -110,7 +110,7 @@ public class X8GimbalCollection extends X8BaseCmd {
     public X8SendCmd setHorizontalAdjust(float angle) {
         X8SendCmd sendCmd = getBase((byte) X8BaseCmd.X8S_Module.MODULE_GIMBAL.ordinal());
         byte[] payload = new byte[8];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 9;
         int i2 = i + 1;
         payload[i] = FcCollection.MSG_ID_SET_DISABLE_TRIPOD;
@@ -136,7 +136,7 @@ public class X8GimbalCollection extends X8BaseCmd {
     public X8SendCmd getHorizontalAdjust() {
         X8SendCmd sendCmd = getBase((byte) X8BaseCmd.X8S_Module.MODULE_GIMBAL.ordinal());
         byte[] payload = new byte[4];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 9;
         int i2 = i + 1;
         payload[i] = FcCollection.MSG_ID_SET_ENABLE_AERAILSHOT;
@@ -153,7 +153,7 @@ public class X8GimbalCollection extends X8BaseCmd {
     public X8SendCmd setPitchSpeed(int speed) {
         X8SendCmd sendCmd = getBase((byte) X8BaseCmd.X8S_Module.MODULE_GIMBAL.ordinal());
         byte[] payload = new byte[5];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 9;
         int i2 = i + 1;
         payload[i] = FcCollection.MSG_ID_GET_AUTO_HOME;
@@ -171,7 +171,7 @@ public class X8GimbalCollection extends X8BaseCmd {
     public X8SendCmd getPitchSpeed() {
         X8SendCmd sendCmd = getBase((byte) X8BaseCmd.X8S_Module.MODULE_GIMBAL.ordinal());
         byte[] payload = new byte[4];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 9;
         int i2 = i + 1;
         payload[i] = FcCollection.MSG_ID_SET_ENABLE_TRIPOD;
@@ -188,7 +188,7 @@ public class X8GimbalCollection extends X8BaseCmd {
     public X8SendCmd restGcParams() {
         X8SendCmd sendCmd = getBase((byte) X8BaseCmd.X8S_Module.MODULE_GIMBAL.ordinal());
         byte[] payload = new byte[4];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 9;
         int i2 = i + 1;
         payload[i] = FcCollection.MSG_SET_ENABLE_FIXWING;
@@ -200,7 +200,7 @@ public class X8GimbalCollection extends X8BaseCmd {
     public X8SendCmd getGcParams() {
         X8SendCmd sendCmd = getBase((byte) X8BaseCmd.X8S_Module.MODULE_GIMBAL.ordinal());
         byte[] payload = new byte[5];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 9;
         int i2 = i + 1;
         payload[i] = FcCollection.MSG_ID_AUTOSEND_PANORAMA_PHOTOGRAPH;
@@ -212,7 +212,7 @@ public class X8GimbalCollection extends X8BaseCmd {
     public X8SendCmd setGcParams(int model, float param) {
         X8SendCmd sendCmd = getBase((byte) X8BaseCmd.X8S_Module.MODULE_GIMBAL.ordinal());
         byte[] payload = new byte[9];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 9;
         int i2 = i + 1;
         payload[i] = FcCollection.MSG_ID_SET_PANORAMA_PHOTOGRAPH;
@@ -239,7 +239,7 @@ public class X8GimbalCollection extends X8BaseCmd {
     public X8SendCmd getGcParamsNew() {
         X8SendCmd sendCmd = getBase((byte) X8BaseCmd.X8S_Module.MODULE_GIMBAL.ordinal());
         byte[] payload = new byte[4];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 9;
         int i2 = i + 1;
         payload[i] = FcCollection.MSG_SET_FC_RETURE_HOME_EXITE;
@@ -251,7 +251,7 @@ public class X8GimbalCollection extends X8BaseCmd {
     public X8SendCmd setGcParamsNew(int model, float param1, float param2, float param3) {
         X8SendCmd sendCmd = getBase((byte) X8BaseCmd.X8S_Module.MODULE_GIMBAL.ordinal());
         byte[] payload = new byte[8];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 9;
         int i2 = i + 1;
         payload[i] = FcCollection.MSG_SET_FC_RETURE_HOME_RESUME;

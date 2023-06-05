@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/* loaded from: classes.dex */
+
 public class X8RCCalibrationController extends AbsX8MenuBoxControllers implements View.OnClickListener, UiCallBackListener {
     private final int centerValue;
     private final int exitCmd;
@@ -97,7 +97,7 @@ public class X8RCCalibrationController extends AbsX8MenuBoxControllers implement
         this.ix8CalibrationListener = ix8CalibrationListener;
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.btn_calibration) {
@@ -129,13 +129,13 @@ public class X8RCCalibrationController extends AbsX8MenuBoxControllers implement
     }
 
     private void breakOutDone() {
-        this.dialog = new X8DoubleCustomDialog(this.context, this.context.getString(R.string.x8_rc_exit_calibration), this.context.getString(R.string.x8_rc_exit_tip), new X8DoubleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8RCCalibrationController.1
-            @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+        this.dialog = new X8DoubleCustomDialog(this.context, this.context.getString(R.string.x8_rc_exit_calibration), this.context.getString(R.string.x8_rc_exit_tip), new X8DoubleCustomDialog.onDialogButtonClickListener() {
+            @Override
             public void onLeft() {
                 X8RCCalibrationController.this.dialog.dismiss();
             }
 
-            @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+            @Override
             public void onRight() {
                 if (X8RCCalibrationController.this.fcCtrlManager != null) {
                     X8RCCalibrationController.this.fcCtrlManager.rcCalibration(4, X8RCCalibrationController.this);
@@ -155,7 +155,7 @@ public class X8RCCalibrationController extends AbsX8MenuBoxControllers implement
         }
     }
 
-    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+    @Override
     public void onComplete(CmdResult cmdResult, Object o) {
         if (cmdResult.isSuccess() && o != null) {
             AckRcCalibrationState caliState = (AckRcCalibrationState) o;
@@ -389,46 +389,46 @@ public class X8RCCalibrationController extends AbsX8MenuBoxControllers implement
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
         this.context = rootView.getContext();
         LayoutInflater inflater = LayoutInflater.from(rootView.getContext());
         this.handleView = inflater.inflate(R.layout.x8_rc_calibration_layout, (ViewGroup) rootView, true);
-        this.leftUpRoller = (RcRollerView) this.handleView.findViewById(R.id.left_up);
-        this.leftDownRoller = (RcRollerView) this.handleView.findViewById(R.id.left_down);
-        this.lefMidView = (MidView) this.handleView.findViewById(R.id.mid_left);
-        this.rightMidView = (MidView) this.handleView.findViewById(R.id.mid_right);
+        this.leftUpRoller = this.handleView.findViewById(R.id.left_up);
+        this.leftDownRoller = this.handleView.findViewById(R.id.left_down);
+        this.lefMidView = this.handleView.findViewById(R.id.mid_left);
+        this.rightMidView = this.handleView.findViewById(R.id.mid_right);
         this.lefMidView.setAlpha(0.4f);
         this.rightMidView.setAlpha(0.4f);
-        this.cali_btn = (Button) this.handleView.findViewById(R.id.btn_calibration);
+        this.cali_btn = this.handleView.findViewById(R.id.btn_calibration);
         this.cali_btn.setOnClickListener(this);
-        this.leftMidTop = (ImageView) this.handleView.findViewById(R.id.left_top_icon);
-        this.leftMidBottom = (ImageView) this.handleView.findViewById(R.id.left_bottom_icon);
-        this.leftMidLeft = (ImageView) this.handleView.findViewById(R.id.left_left_icon);
-        this.leftMidRight = (ImageView) this.handleView.findViewById(R.id.left_right_icon);
-        this.rightMidTop = (ImageView) this.handleView.findViewById(R.id.right_top_icon);
-        this.rightMidBottom = (ImageView) this.handleView.findViewById(R.id.right_bottom_icon);
-        this.rightMidLeft = (ImageView) this.handleView.findViewById(R.id.right_left_icon);
-        this.rightMidRight = (ImageView) this.handleView.findViewById(R.id.right_right_icon);
-        this.backBtn = (ImageView) this.handleView.findViewById(R.id.img_return);
+        this.leftMidTop = this.handleView.findViewById(R.id.left_top_icon);
+        this.leftMidBottom = this.handleView.findViewById(R.id.left_bottom_icon);
+        this.leftMidLeft = this.handleView.findViewById(R.id.left_left_icon);
+        this.leftMidRight = this.handleView.findViewById(R.id.left_right_icon);
+        this.rightMidTop = this.handleView.findViewById(R.id.right_top_icon);
+        this.rightMidBottom = this.handleView.findViewById(R.id.right_bottom_icon);
+        this.rightMidLeft = this.handleView.findViewById(R.id.right_left_icon);
+        this.rightMidRight = this.handleView.findViewById(R.id.right_right_icon);
+        this.backBtn = this.handleView.findViewById(R.id.img_return);
         this.backBtn.setOnClickListener(this);
-        this.tipTV = (TextView) this.handleView.findViewById(R.id.tv_tip);
-        this.rt_layout = (RelativeLayout) this.handleView.findViewById(R.id.rl_rc_calibration_result);
-        this.errorTip = (TextView) this.handleView.findViewById(R.id.tv_error_tip);
-        this.rtTip = (TextView) this.handleView.findViewById(R.id.tv_result_tip);
-        this.rtBtn = (Button) this.handleView.findViewById(R.id.btn_rt);
+        this.tipTV = this.handleView.findViewById(R.id.tv_tip);
+        this.rt_layout = this.handleView.findViewById(R.id.rl_rc_calibration_result);
+        this.errorTip = this.handleView.findViewById(R.id.tv_error_tip);
+        this.rtTip = this.handleView.findViewById(R.id.tv_result_tip);
+        this.rtBtn = this.handleView.findViewById(R.id.btn_rt);
         this.rtBtn.setOnClickListener(this);
-        this.rc_layout = (RelativeLayout) this.handleView.findViewById(R.id.rc_calibration_content);
-        this.control_layout = (RelativeLayout) this.handleView.findViewById(R.id.control_layout);
+        this.rc_layout = this.handleView.findViewById(R.id.rc_calibration_content);
+        this.control_layout = this.handleView.findViewById(R.id.control_layout);
         this.leftDownRoller.setOnClickListener(this);
-        this.rtImage = (ImageView) rootView.findViewById(R.id.img_result);
+        this.rtImage = rootView.findViewById(R.id.img_result);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
@@ -450,7 +450,7 @@ public class X8RCCalibrationController extends AbsX8MenuBoxControllers implement
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         super.onDroneConnected(b);
         if (b && StateManager.getInstance().getX8Drone().isInSky()) {
@@ -576,7 +576,7 @@ public class X8RCCalibrationController extends AbsX8MenuBoxControllers implement
         return true;
     }
 
-    /* loaded from: classes.dex */
+
     public enum RcStatus {
         ideal,
         midModel,
@@ -588,12 +588,12 @@ public class X8RCCalibrationController extends AbsX8MenuBoxControllers implement
         error
     }
 
-    /* loaded from: classes.dex */
+
     public class CheckTask extends TimerTask {
         CheckTask() {
         }
 
-        @Override // java.util.TimerTask, java.lang.Runnable
+        @Override
         public void run() {
             if (X8RCCalibrationController.this.fcCtrlManager != null) {
                 X8RCCalibrationController.this.fcCtrlManager.checkRcCalibrationProgress(X8RCCalibrationController.this);

@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 
-
-/* loaded from: classes2.dex */
 public class CameraCurParamsJson implements Serializable {
     private int msg_id;
     private List<CurParamsJson> param;

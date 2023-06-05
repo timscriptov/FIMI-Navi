@@ -1,6 +1,6 @@
 package com.fimi.kernel.upgrade;
 
-/* loaded from: classes.dex */
+
 public class UpgradeResult {
     private String errorInfo;
     private int model;

@@ -1,6 +1,6 @@
 package com.fimi.kernel.utils;
 
-/* loaded from: classes.dex */
+
 public class CaCrc {
     public static long CRC16calc(int[] ptr, int len) {
         long crc = -1;

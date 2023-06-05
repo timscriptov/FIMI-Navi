@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 
 import com.fimi.android.app.R;
 
-/* loaded from: classes.dex */
+
 public class X8IMUCustomDialog extends X8sBaseDialog {
     private final DialogInterface.OnKeyListener keyListener;
 

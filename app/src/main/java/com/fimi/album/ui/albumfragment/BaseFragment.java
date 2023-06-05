@@ -31,7 +31,7 @@ import com.fimi.kernel.utils.SizeTool;
 
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes.dex */
+
 public abstract class BaseFragment extends Fragment implements INodataTip {
     protected WeakReference<Context> contextWeakReference;
     protected BaseFragmentPresenter mBaseFragmentPresenter;
@@ -45,7 +45,7 @@ public abstract class BaseFragment extends Fragment implements INodataTip {
 
     abstract int getContentID();
 
-    @Override // android.support.v4.app.Fragment
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.deleteItemReceiver = new DeleteItemReceiver();
@@ -53,11 +53,11 @@ public abstract class BaseFragment extends Fragment implements INodataTip {
         LocalBroadcastManager.getInstance(this.contextWeakReference.get().getApplicationContext()).registerReceiver(this.deleteItemReceiver, intentFilter);
     }
 
-    @Override // android.support.v4.app.Fragment
+    @Override
     @Nullable
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         int layoutID = getContentID();
-        View view = inflater.inflate(layoutID, (ViewGroup) null);
+        View view = inflater.inflate(layoutID, null);
         initView(view);
         initData();
         initTrans();
@@ -65,8 +65,8 @@ public abstract class BaseFragment extends Fragment implements INodataTip {
     }
 
     private void initTrans() {
-        this.lbBottomDelect.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.album.ui.albumfragment.BaseFragment.1
-            @Override // android.view.View.OnClickListener
+        this.lbBottomDelect.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 if (BaseFragment.this.mBaseFragmentPresenter != null) {
                     if (BaseFragment.this.mBaseFragmentPresenter.querySelectSize() > 0) {
@@ -80,10 +80,10 @@ public abstract class BaseFragment extends Fragment implements INodataTip {
     }
 
     void initView(View view) {
-        this.rlMediaNoDataTip = (RelativeLayout) view.findViewById(R.id.media_no_data_tip);
-        this.lbBottomDelect = (ImageButton) view.findViewById(R.id.bottom_delete_ibtn);
-        this.rlMediaSelectBottom = (RelativeLayout) view.findViewById(R.id.media_select_bottom_rl);
-        this.mRecyclerView = (RecyclerView) view.findViewById(R.id.recycleview);
+        this.rlMediaNoDataTip = view.findViewById(R.id.media_no_data_tip);
+        this.lbBottomDelect = view.findViewById(R.id.bottom_delete_ibtn);
+        this.rlMediaSelectBottom = view.findViewById(R.id.media_select_bottom_rl);
+        this.mRecyclerView = view.findViewById(R.id.recycleview);
         FontUtil.changeFontLanTing(this.contextWeakReference.get().getAssets(), this.lbBottomDelect);
     }
 
@@ -108,7 +108,7 @@ public abstract class BaseFragment extends Fragment implements INodataTip {
         }
     }
 
-    @Override // android.support.v4.app.Fragment
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         this.contextWeakReference = new WeakReference<>(context);
@@ -117,7 +117,7 @@ public abstract class BaseFragment extends Fragment implements INodataTip {
         }
     }
 
-    @Override // android.support.v4.app.Fragment
+    @Override
     public void onDestroy() {
         super.onDestroy();
         this.mISelectData = null;
@@ -164,7 +164,7 @@ public abstract class BaseFragment extends Fragment implements INodataTip {
         }
     }
 
-    @Override // com.fimi.album.iview.INodataTip
+    @Override
     public void noDataTipCallback(boolean isNodata) {
         if (isNodata) {
             this.rlMediaNoDataTip.setVisibility(0);

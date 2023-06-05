@@ -14,7 +14,7 @@ import com.fimi.x8sdk.modulestate.DroneStateFlightPlayback;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
+
 public interface IFlightPlayBackAction {
     void parseFileDateEnd(int i, boolean z);
 

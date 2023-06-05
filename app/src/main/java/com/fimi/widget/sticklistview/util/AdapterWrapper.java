@@ -21,7 +21,7 @@ public class AdapterWrapper extends BaseAdapter implements StickyListHeadersAdap
     private Drawable mDivider;
     private int mDividerHeight;
     private OnHeaderClickListener mOnHeaderClickListener;
-    private DataSetObserver mDataSetObserver = new DataSetObserver() {
+    private final DataSetObserver mDataSetObserver = new DataSetObserver() {
         @Override
         public void onInvalidated() {
             AdapterWrapper.this.mHeaderCache.clear();

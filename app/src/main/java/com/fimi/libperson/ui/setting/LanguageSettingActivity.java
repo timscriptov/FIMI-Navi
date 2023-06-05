@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import androidx.annotation.RequiresApi;
@@ -33,8 +32,6 @@ import java.util.Locale;
 public class LanguageSettingActivity extends BasePersonActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
     int currPosition;
     NetworkDialog mNetworkDialog;
-    private LanguageAdapter adapter;
-    private List<LanguageItem> languageItems;
     @SuppressLint("HandlerLeak")
     private final Handler mHandler = new Handler() {
         @Override
@@ -47,6 +44,8 @@ public class LanguageSettingActivity extends BasePersonActivity implements View.
             }
         }
     };
+    private LanguageAdapter adapter;
+    private List<LanguageItem> languageItems;
     private ListView mListView;
     private TitleView mTitleView;
     private LanguageModel selectedLanguageModel;

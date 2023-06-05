@@ -6,11 +6,11 @@ import android.view.View;
 import com.fimi.app.x8s.controls.X8MainAiFlyController;
 import com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiFollowConfirmUi;
 
-/* loaded from: classes.dex */
+
 public class X8AiFollowConfirmModule extends X8BaseModule {
     private X8AiFollowConfirmUi mUi;
 
-    @Override // com.fimi.app.x8s.controls.aifly.confirm.module.X8BaseModule
+    @Override
     public void init(Activity activity, View rootView) {
         this.mUi = new X8AiFollowConfirmUi(activity, rootView);
     }
@@ -19,7 +19,7 @@ public class X8AiFollowConfirmModule extends X8BaseModule {
         this.mUi.setX8MainAiFlyController(mX8MainAiFlyController);
     }
 
-    @Override // com.fimi.app.x8s.controls.aifly.confirm.module.X8BaseModule
+    @Override
     public void setFcHeart(boolean isInSky, boolean isLowPower) {
         this.mUi.setFcHeart(isInSky, isLowPower);
     }

@@ -18,7 +18,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* loaded from: classes.dex */
+
 public abstract class BaseRecycleAdapter<T extends MediaModel> extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements IHandlerCallback {
     public static final int ITEMBODYTYPE = 32;
     public static final int ITEMHEADTYPE = 16;
@@ -30,10 +30,10 @@ public abstract class BaseRecycleAdapter<T extends MediaModel> extends RecyclerV
     private CopyOnWriteArrayList<T> modelList;
     private CopyOnWriteArrayList<T> modelNoHeadList;
     private HashMap<String, CopyOnWriteArrayList<T>> stateHashMap;
-    private DataManager mdataManager = DataManager.obtain();
-    private int headSpanCount = 4;
-    private int bodySpanCount = 1;
-    private int internalListBound = 2;
+    private final DataManager mdataManager = DataManager.obtain();
+    private final int headSpanCount = 4;
+    private final int bodySpanCount = 1;
+    private final int internalListBound = 2;
 
     public BaseRecycleAdapter(Context context, INodataTip mINodataTip) {
         initData();
@@ -49,14 +49,13 @@ public abstract class BaseRecycleAdapter<T extends MediaModel> extends RecyclerV
         this.modelNoHeadList = this.mdataManager.getLocalDataNoHeadList();
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
         RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
-        if (manager instanceof GridLayoutManager) {
-            GridLayoutManager mGridLayoutManager = (GridLayoutManager) manager;
-            mGridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() { // from class: com.fimi.album.adapter.BaseRecycleAdapter.1
-                @Override // android.support.v7.widget.GridLayoutManager.SpanSizeLookup
+        if (manager instanceof GridLayoutManager mGridLayoutManager) {
+            mGridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
                 public int getSpanSize(int position) {
                     boolean isCategory = BaseRecycleAdapter.this.isCategoryType(position);
                     return isCategory ? BaseRecycleAdapter.this.headSpanCount : BaseRecycleAdapter.this.bodySpanCount;
@@ -133,7 +132,7 @@ public abstract class BaseRecycleAdapter<T extends MediaModel> extends RecyclerV
         this.otherHandler.sendMessage(message);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
+
     public void addItemReally(T mediaModel) {
         int inserterPosition = 0;
         if (mediaModel != null) {
@@ -183,7 +182,7 @@ public abstract class BaseRecycleAdapter<T extends MediaModel> extends RecyclerV
         this.mainHandler.sendMessage(message);
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public int getItemViewType(int position) {
         return isCategoryType(position) ? 16 : 32;
     }
@@ -196,7 +195,7 @@ public abstract class BaseRecycleAdapter<T extends MediaModel> extends RecyclerV
         return model.isCategory();
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public int getItemCount() {
         judgeIsNoData();
         if (this.modelList == null) {
@@ -224,8 +223,8 @@ public abstract class BaseRecycleAdapter<T extends MediaModel> extends RecyclerV
         this.mainHandler.sendEmptyMessage(5);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    @Override // com.fimi.album.iview.IHandlerCallback, android.os.Handler.Callback
+
+    @Override
     public boolean handleMessage(Message message) {
         if (message.what == 5) {
             notifyDataSetChanged();

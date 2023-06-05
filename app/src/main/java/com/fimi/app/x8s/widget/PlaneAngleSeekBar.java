@@ -16,27 +16,17 @@ import androidx.core.content.ContextCompat;
 import com.fimi.android.app.R;
 
 public class PlaneAngleSeekBar extends View {
+    Drawable k;
     private int a;
     private int b;
-
     private int c;
-
     private float d;
-
-    private RectF e;
-
+    private final RectF e;
     private Paint f;
-
     private float g;
-
     private int h;
-
     private int i;
-
     private float j;
-
-    Drawable k;
-
     private int l;
     private int m;
     private double n;
@@ -50,7 +40,17 @@ public class PlaneAngleSeekBar extends View {
         this.c = 100;
         this.d = 1.0f;
         this.e = new RectF();
-        a(context, (AttributeSet) null);
+        a(context, null);
+    }
+
+    public PlaneAngleSeekBar(Context context, AttributeSet attributeSet) {
+        super(context, attributeSet);
+        this.a = 0;
+        this.b = 0;
+        this.c = 100;
+        this.d = 1.0f;
+        this.e = new RectF();
+        a(context, attributeSet);
     }
 
     private void a(Context context, AttributeSet attributeSet) {
@@ -166,16 +166,6 @@ public class PlaneAngleSeekBar extends View {
             this.o = f3 + 360.0f;
         }
         invalidate();
-    }
-
-    public PlaneAngleSeekBar(Context context, AttributeSet attributeSet) {
-        super(context, attributeSet);
-        this.a = 0;
-        this.b = 0;
-        this.c = 100;
-        this.d = 1.0f;
-        this.e = new RectF();
-        a(context, attributeSet);
     }
 
     private float a() {

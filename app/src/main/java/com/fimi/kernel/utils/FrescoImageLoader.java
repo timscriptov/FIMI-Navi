@@ -21,7 +21,7 @@ import com.facebook.imagepipeline.listener.RequestLoggingListener;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
-/* loaded from: classes.dex */
+
 public class FrescoImageLoader {
     private static final String IMAGE_PIPELINE_CACHE_DIR = "imagepipeline_cache";
     private static final int MAX_DISK_CACHE_SIZE = 41943040;

@@ -1,6 +1,6 @@
 package com.fimi.x8sdk.appsetting;
 
-/* loaded from: classes2.dex */
+
 public class Describe {
     private String describe;
     private IdInfoJson idInfo;

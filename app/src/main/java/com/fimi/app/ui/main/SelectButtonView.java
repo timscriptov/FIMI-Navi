@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import com.fimi.android.app.R;
 import com.fimi.kernel.utils.DensityUtil;
 
-/* loaded from: classes.dex */
+
 public class SelectButtonView extends FrameLayout {
     Button[] buttons;
     int length;

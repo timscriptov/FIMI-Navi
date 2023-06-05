@@ -8,16 +8,16 @@ import com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiReturnConfirmUi;
 import com.fimi.x8sdk.controller.FcCtrlManager;
 import com.fimi.x8sdk.dataparser.AutoFcSportState;
 
-/* loaded from: classes.dex */
+
 public class X8AiReturnConfirmModule extends X8BaseModule {
     private X8AiReturnConfirmUi mUi;
 
-    @Override // com.fimi.app.x8s.controls.aifly.confirm.module.X8BaseModule
+    @Override
     public void init(Activity activity, View rootView) {
         this.mUi = new X8AiReturnConfirmUi(activity, rootView);
     }
 
-    @Override // com.fimi.app.x8s.controls.aifly.confirm.module.X8BaseModule
+    @Override
     public void setFcHeart(boolean isInSky, boolean isLowPower) {
     }
 

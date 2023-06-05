@@ -272,7 +272,7 @@ public class X8TabHost extends LinearLayout implements View.OnClickListener {
                 float nPos = with * i;
                 r1.left = nPos - (this.space / 2.0f);
                 r1.right = (this.space / 2.0f) + nPos;
-                r1.top = this.lineStroke + 0;
+                r1.top = this.lineStroke;
                 r1.bottom = getHeight() - this.lineStroke;
                 canvas.drawRect(r1, p);
             }

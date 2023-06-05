@@ -1,6 +1,6 @@
 package com.fimi.kernel.network.okhttp.listener;
 
-/* loaded from: classes.dex */
+
 public class DisposeDataHandle {
     public static boolean isStop = false;
     public boolean isArray;

@@ -1,6 +1,6 @@
 package com.fimi.gh;
 
-/* loaded from: classes.dex */
+
 public class GhDeviceTypeId {
     public static final byte APP = 7;
     public static final byte DRIVER_Z = 8;

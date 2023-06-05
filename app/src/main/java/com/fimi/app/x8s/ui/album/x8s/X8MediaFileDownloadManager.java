@@ -18,7 +18,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-/* loaded from: classes.dex */
+
 public class X8MediaFileDownloadManager<T extends MediaModel> implements OnDownloadListener, IMediaDownload, IMediaFileDownloadObserverable {
     private static final int DOWNLOAD_FAIL = 2;
     private static final int DOWNLOAD_PROGRESS = 0;
@@ -26,19 +26,19 @@ public class X8MediaFileDownloadManager<T extends MediaModel> implements OnDownl
     private static final int DOWNLOAD_STOP_TIME_OUT = 4;
     private static final int DOWNLOAD_SUCCESS = 1;
     private static final String TAG = "MediaFileDownloadManage";
-    private static X8MediaFileDownloadManager mMediaFileDownloadManager = new X8MediaFileDownloadManager();
+    private static final X8MediaFileDownloadManager mMediaFileDownloadManager = new X8MediaFileDownloadManager();
     public HashMap<String, X8MediaOriginalDownloadTask> taskHashMap = new HashMap<>();
     private int index;
     private boolean isDownload;
     private OnDownloadUiListener mUiDownloadListener;
     private IMediaFileDownloadObserver observer;
-    private List<MediaModel> data = new ArrayList();
-    private List<MediaModel> dataAll = new ArrayList();
-    private List<MediaModel> dataResult = new ArrayList();
+    private final List<MediaModel> data = new ArrayList();
+    private final List<MediaModel> dataAll = new ArrayList();
+    private final List<MediaModel> dataResult = new ArrayList();
     private int mLastPos = -1;
-    private ExecutorService executorService = Executors.newFixedThreadPool(1);
-    private Handler mHanler = new Handler() { // from class: com.fimi.app.x8s.ui.album.x8s.X8MediaFileDownloadManager.1
-        @Override // android.os.Handler
+    private final ExecutorService executorService = Executors.newFixedThreadPool(1);
+    private final Handler mHanler = new Handler() {
+        @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (X8MediaFileDownloadManager.this.mUiDownloadListener != null) {
@@ -60,7 +60,6 @@ public class X8MediaFileDownloadManager<T extends MediaModel> implements OnDownl
                         return;
                     case 4:
                     default:
-                        return;
                 }
             }
         }
@@ -84,15 +83,15 @@ public class X8MediaFileDownloadManager<T extends MediaModel> implements OnDownl
         }
     }
 
-    @Override // com.fimi.album.interfaces.IMediaDownload
+    @Override
     public void addData(MediaModel m) {
         if (!m.isDownLoadOriginalFile() && !m.isDownloading() && !this.data.contains(m)) {
-            HostLogBack.getInstance().writeLog("Alanqiu  =================addData:" + m.toString());
+            HostLogBack.getInstance().writeLog("Alanqiu  =================addData:" + m);
             this.data.add(m);
         }
     }
 
-    @Override // com.fimi.album.interfaces.IMediaDownload
+    @Override
     public void stopDownload() {
         this.isDownload = false;
         this.index = 0;
@@ -100,7 +99,7 @@ public class X8MediaFileDownloadManager<T extends MediaModel> implements OnDownl
         this.taskHashMap.clear();
     }
 
-    @Override // com.fimi.album.interfaces.IMediaDownload
+    @Override
     public void startDownload() {
     }
 
@@ -145,7 +144,7 @@ public class X8MediaFileDownloadManager<T extends MediaModel> implements OnDownl
                 this.isDownload = true;
                 Future<?> task = this.executorService.submit(this.taskHashMap.get(model.getMd5()));
                 model.setTaskFutrue(task);
-                HostLogBack.getInstance().writeLog("Alanqiu  ===================downloadFile:" + model.toString() + "index:" + this.index);
+                HostLogBack.getInstance().writeLog("Alanqiu  ===================downloadFile:" + model + "index:" + this.index);
             }
         }
     }
@@ -182,7 +181,7 @@ public class X8MediaFileDownloadManager<T extends MediaModel> implements OnDownl
         return false;
     }
 
-    @Override // com.fimi.album.download.interfaces.OnDownloadListener
+    @Override
     public void onProgress(Object responseObj, long progrss, long currentLength) {
         int pos = (int) (progrss / (currentLength / 100));
         if (this.mLastPos != pos) {
@@ -191,7 +190,7 @@ public class X8MediaFileDownloadManager<T extends MediaModel> implements OnDownl
         }
     }
 
-    @Override // com.fimi.album.download.interfaces.OnDownloadListener
+    @Override
     public void onSuccess(Object responseObj) {
         this.mLastPos = -1;
         this.dataResult.add((MediaModel) responseObj);
@@ -199,25 +198,25 @@ public class X8MediaFileDownloadManager<T extends MediaModel> implements OnDownl
         next();
     }
 
-    @Override // com.fimi.album.download.interfaces.OnDownloadListener
+    @Override
     public void onFailure(Object reasonObj) {
         this.mLastPos = -1;
         this.mHanler.obtainMessage(2, reasonObj).sendToTarget();
         next();
     }
 
-    @Override // com.fimi.album.download.interfaces.OnDownloadListener
+    @Override
     public void onStop(MediaModel reasonObj) {
         this.mLastPos = -1;
         this.mHanler.obtainMessage(3, reasonObj).sendToTarget();
     }
 
-    @Override // com.fimi.album.interfaces.IMediaFileDownloadObserverable
+    @Override
     public void addObserver(IMediaFileDownloadObserver observer) {
         this.observer = observer;
     }
 
-    @Override // com.fimi.album.interfaces.IMediaFileDownloadObserverable
+    @Override
     public void notityObserver(int count, int downloadSize) {
         if (this.observer != null) {
             this.observer.onMediaFileDownloadUpdate(count, downloadSize);

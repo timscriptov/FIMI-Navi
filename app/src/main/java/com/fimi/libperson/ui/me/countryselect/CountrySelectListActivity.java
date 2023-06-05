@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class CountrySelectListActivity extends BaseActivity implements StickyListHeadersListView.OnHeaderClickListener, AdapterView.OnItemClickListener, StickyListHeadersListView.OnLoadingMoreLinstener, CountryLetterSortAdapter.OnShowLetterChangedListener {
     public static final byte LOGIN_REQUEST_CODE = 1;
     public static final byte REGISTER_REQUEST_CODE = 2;
@@ -36,11 +36,11 @@ public class CountrySelectListActivity extends BaseActivity implements StickyLis
     private EditText mEtSearch;
     private ImageButton mIbtnDeleteSearch;
     private LetterSideBar mLetterSideBar;
-    private List<SortModel> mSourceDateFilterList = new ArrayList();
+    private final List<SortModel> mSourceDateFilterList = new ArrayList();
     private List<SortModel> mSourceDateList;
     private TitleView mTitleView;
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     protected void setStatusBarColor() {
         StatusBarUtil.StatusBarLightMode(this);
     }
@@ -51,22 +51,22 @@ public class CountrySelectListActivity extends BaseActivity implements StickyLis
         super.onCreate(savedInstanceState);
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     protected int getContentViewLayoutID() {
         return R.layout.activity_country_select;
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void initData() {
         initView();
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void doTrans() {
-        this.mIbtnDeleteSearch.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.libperson.ui.me.countryselect.CountrySelectListActivity.1
-            @Override // android.view.View.OnClickListener
+        this.mIbtnDeleteSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
-                CountrySelectListActivity.this.mEtSearch.setText((CharSequence) null);
+                CountrySelectListActivity.this.mEtSearch.setText(null);
             }
         });
     }
@@ -95,27 +95,27 @@ public class CountrySelectListActivity extends BaseActivity implements StickyLis
         }
         this.mAdapter = new CountryLetterSortAdapter(this, this.mSourceDateList);
         this.mAdapter.setOnShowLetterChangedListener(this);
-        this.mStickyLV = (StickyListHeadersListView) findViewById(R.id.stickyList);
-        this.mStickyLV.setAdapter((ListAdapter) this.mAdapter);
+        this.mStickyLV = findViewById(R.id.stickyList);
+        this.mStickyLV.setAdapter(this.mAdapter);
         this.mStickyLV.setOnItemClickListener(this);
         this.mStickyLV.setOnHeaderClickListener(this);
         this.mStickyLV.setLoadingMoreListener(this);
-        this.mLetterSideBar = (LetterSideBar) findViewById(R.id.cs_letter_sb);
-        this.mLetterSideBar.setOnTouchingLetterChangedListener(new LetterSideBar.OnTouchingLetterChangedListener() { // from class: com.fimi.libperson.ui.me.countryselect.CountrySelectListActivity.2
-            @Override // com.fimi.widget.sticklistview.LetterSideBar.OnTouchingLetterChangedListener
+        this.mLetterSideBar = findViewById(R.id.cs_letter_sb);
+        this.mLetterSideBar.setOnTouchingLetterChangedListener(new LetterSideBar.OnTouchingLetterChangedListener() {
+            @Override
             public void onTouchingLetterChanged(String letter) {
                 int jumpPos = CountrySelectListActivity.this.mAdapter.getPositionForSection(letter.charAt(0));
                 CountrySelectListActivity.this.mStickyLV.setSelection(jumpPos);
             }
         });
-        this.mEtSearch = (EditText) findViewById(R.id.et_cs_search);
+        this.mEtSearch = findViewById(R.id.et_cs_search);
         this.mEtSearch.setVisibility(0);
-        this.mEtSearch.addTextChangedListener(new TextWatcher() { // from class: com.fimi.libperson.ui.me.countryselect.CountrySelectListActivity.3
-            @Override // android.text.TextWatcher
+        this.mEtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
             public void beforeTextChanged(CharSequence charSequence, int i2, int i1, int i22) {
             }
 
-            @Override // android.text.TextWatcher
+            @Override
             public void onTextChanged(CharSequence charSequence, int i2, int i1, int i22) {
                 if (charSequence.toString().length() == 0) {
                     CountrySelectListActivity.this.mAdapter.updateListView(CountrySelectListActivity.this.mSourceDateList);
@@ -125,7 +125,7 @@ public class CountrySelectListActivity extends BaseActivity implements StickyLis
                 String searchText = CountrySelectListActivity.this.mEtSearch.getText().toString();
                 CountrySelectListActivity.this.mSourceDateFilterList.clear();
                 for (int h = 0; h < CountrySelectListActivity.this.mSourceDateList.size(); h++) {
-                    if (((SortModel) CountrySelectListActivity.this.mSourceDateList.get(h)).getName().contains(searchText)) {
+                    if (CountrySelectListActivity.this.mSourceDateList.get(h).getName().contains(searchText)) {
                         CountrySelectListActivity.this.mSourceDateFilterList.add(CountrySelectListActivity.this.mSourceDateList.get(h));
                     }
                 }
@@ -135,7 +135,7 @@ public class CountrySelectListActivity extends BaseActivity implements StickyLis
                 }
             }
 
-            @Override // android.text.TextWatcher
+            @Override
             public void afterTextChanged(Editable editable) {
                 if (editable.length() > 0) {
                     if (R.id.et_cs_search == CountrySelectListActivity.this.mEtSearch.getId()) {
@@ -146,9 +146,9 @@ public class CountrySelectListActivity extends BaseActivity implements StickyLis
                 }
             }
         });
-        this.mTitleView = (TitleView) findViewById(R.id.title_view);
+        this.mTitleView = findViewById(R.id.title_view);
         this.mTitleView.setTvTitle(this.mContext.getResources().getString(R.string.country_select_title));
-        this.mIbtnDeleteSearch = (ImageButton) findViewById(R.id.ibtn_delete_search);
+        this.mIbtnDeleteSearch = findViewById(R.id.ibtn_delete_search);
     }
 
     private List<SortModel> filledData(String[] date) {
@@ -170,22 +170,22 @@ public class CountrySelectListActivity extends BaseActivity implements StickyLis
         return mSortList;
     }
 
-    @Override // com.fimi.widget.sticklistview.util.StickyListHeadersListView.OnLoadingMoreLinstener
+    @Override
     public void OnLoadingMore() {
     }
 
-    @Override // com.fimi.widget.sticklistview.util.StickyListHeadersListView.OnHeaderClickListener
+    @Override
     public void onHeaderClick(StickyListHeadersListView l, View header, int itemPosition, long headerId, boolean currentlySticky) {
     }
 
-    @Override // android.widget.AdapterView.OnItemClickListener
+    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String country = ((SortModel) this.mAdapter.getItem(position)).getName();
         setResult(-1, getIntent().putExtra(SELECT_COUNTRY_AREO_CODE, country));
         finish();
     }
 
-    @Override // com.fimi.libperson.adapter.CountryLetterSortAdapter.OnShowLetterChangedListener
+    @Override
     public void onShowLetterChanged(String letter) {
         this.mLetterSideBar.updateLetter(letter);
     }

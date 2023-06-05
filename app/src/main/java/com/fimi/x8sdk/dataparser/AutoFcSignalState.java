@@ -4,7 +4,7 @@ import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 import com.fimi.x8sdk.cmdsenum.X8GpsNumState;
 import com.fimi.x8sdk.cmdsenum.X8HandleSignalState;
 
-/* loaded from: classes2.dex */
+
 public class AutoFcSignalState extends X8BaseMessage {
     public static final int REMOTESIGN_LOW = 30;
     public static final int REMOTESIGN_MID = 80;
@@ -17,7 +17,7 @@ public class AutoFcSignalState extends X8BaseMessage {
     int rptsRec;
     int satelliteNumber;
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         this.satelliteNumber = packet.getPayLoad4().getByte();

@@ -9,13 +9,13 @@ import com.fimi.android.app.R;
 
 import java.util.Map;
 
-/* loaded from: classes.dex */
+
 public class CameraArrayParamsViewHolder extends RecyclerView.ViewHolder {
-    private TextView paramView;
+    private final TextView paramView;
 
     public CameraArrayParamsViewHolder(View itemView) {
         super(itemView);
-        this.paramView = (TextView) itemView.findViewById(R.id.item_value);
+        this.paramView = itemView.findViewById(R.id.item_value);
     }
 
     public void initView(String params, Map<String, String> paramMap) {

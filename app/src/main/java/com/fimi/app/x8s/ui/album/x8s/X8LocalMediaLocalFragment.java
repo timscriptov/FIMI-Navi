@@ -4,7 +4,7 @@ import android.view.View;
 
 import com.fimi.android.app.R;
 
-/* loaded from: classes.dex */
+
 public class X8LocalMediaLocalFragment extends X8MediaBaseFragment {
     @Override
         // com.fimi.app.x8s.ui.album.x8s.X8MediaBaseFragment

@@ -7,8 +7,8 @@ import org.slf4j.LoggerFactory;
 
 public class CmdLogBack {
     private static final CmdLogBack hostLogBack = new CmdLogBack();
-    Logger logger = LoggerFactory.getLogger("x8s_cmd_log");
     private final boolean isLog = true;
+    Logger logger = LoggerFactory.getLogger("x8s_cmd_log");
 
     public static CmdLogBack getInstance() {
         return hostLogBack;

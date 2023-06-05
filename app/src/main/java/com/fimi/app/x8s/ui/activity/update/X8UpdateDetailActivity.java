@@ -21,7 +21,7 @@ import com.fimi.x8sdk.update.UpdateUtil;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class X8UpdateDetailActivity extends BaseActivity implements IUpdateCheckAction {
     Button btnStartUpdate;
     UpdateContentAdapter contentAdapter;
@@ -33,7 +33,7 @@ public class X8UpdateDetailActivity extends BaseActivity implements IUpdateCheck
     ImageView x8IvUpdateDetailReturn;
     private boolean isCanUpdate;
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     protected void setStatusBarColor() {
         requestWindowFeature(1);
         getWindow().setFlags(1024, 1024);
@@ -41,25 +41,25 @@ public class X8UpdateDetailActivity extends BaseActivity implements IUpdateCheck
         StatusBarUtil.StatusBarLightMode(this);
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void initData() {
-        this.imgLogo = (ImageView) findViewById(R.id.img_update_firmware);
+        this.imgLogo = findViewById(R.id.img_update_firmware);
         this.imgLogo.setImageResource(R.drawable.x8_update_wait);
-        this.tvReason = (TextView) findViewById(R.id.tv_reason);
-        this.imgUpdateFirmware = (ImageView) findViewById(R.id.img_update_firmware);
-        this.x8IvUpdateDetailReturn = (ImageView) findViewById(R.id.x8_iv_update_detail_return);
+        this.tvReason = findViewById(R.id.tv_reason);
+        this.imgUpdateFirmware = findViewById(R.id.img_update_firmware);
+        this.x8IvUpdateDetailReturn = findViewById(R.id.x8_iv_update_detail_return);
         this.upfirewareDtos = UpdateUtil.getUpfireDtos();
         if (this.upfirewareDtos.size() > 0) {
             this.tvReason.setText(R.string.x8_update_ready);
         } else {
             this.tvReason.setText(R.string.x8_update_err_connect);
         }
-        this.listviewUpdateContent = (ListView) findViewById(R.id.listview_update_content);
+        this.listviewUpdateContent = findViewById(R.id.listview_update_content);
         this.contentAdapter = new UpdateContentAdapter(this.upfirewareDtos, this);
-        this.listviewUpdateContent.setAdapter((ListAdapter) this.contentAdapter);
-        this.btnStartUpdate = (Button) findViewById(R.id.btn_start_update);
-        this.btnStartUpdate.setOnClickListener(new NoDoubleClickListener(800) { // from class: com.fimi.app.x8s.ui.activity.update.X8UpdateDetailActivity.1
-            @Override // com.fimi.widget.impl.NoDoubleClickListener
+        this.listviewUpdateContent.setAdapter(this.contentAdapter);
+        this.btnStartUpdate = findViewById(R.id.btn_start_update);
+        this.btnStartUpdate.setOnClickListener(new NoDoubleClickListener(800) {
+            @Override
             protected void onNoDoubleClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putBoolean(Constants.UPDATING_KEY, false);
@@ -76,17 +76,17 @@ public class X8UpdateDetailActivity extends BaseActivity implements IUpdateCheck
         X8UpdateCheckManager.getInstance().queryCurSystemStatus();
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void doTrans() {
-        this.x8IvUpdateDetailReturn.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.ui.activity.update.X8UpdateDetailActivity.2
-            @Override // android.view.View.OnClickListener
+        this.x8IvUpdateDetailReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 X8UpdateDetailActivity.this.finish();
             }
         });
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     protected int getContentViewLayoutID() {
         return R.layout.x8_activity_update_detail;
     }
@@ -97,7 +97,7 @@ public class X8UpdateDetailActivity extends BaseActivity implements IUpdateCheck
         super.onDestroy();
     }
 
-    @Override // com.fimi.x8sdk.ivew.IUpdateCheckAction
+    @Override
     public void showIsUpdate(boolean isUpdate, int reason) {
         if (!isUpdate) {
             this.isCanUpdate = false;
@@ -128,7 +128,7 @@ public class X8UpdateDetailActivity extends BaseActivity implements IUpdateCheck
         this.imgUpdateFirmware.setImageResource(R.drawable.fimisdk_update_wait);
     }
 
-    @Override // com.fimi.x8sdk.ivew.IUpdateCheckAction
+    @Override
     public void checkUpdate() {
     }
 }

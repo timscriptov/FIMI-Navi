@@ -1,6 +1,6 @@
 package com.fimi.app.x8s.enums;
 
-/* loaded from: classes.dex */
+
 public enum X8VcErrorCode {
     TRACKER_NO_ERROR(1),
     TRACKER_INVALID_ARGUMET(2),
@@ -16,7 +16,7 @@ public enum X8VcErrorCode {
     TARGET_IS_PERSON(4096),
     TRACKER_BUSY(Integer.MIN_VALUE);
 
-    private int value;
+    private final int value;
 
     X8VcErrorCode(int value) {
         this.value = value;

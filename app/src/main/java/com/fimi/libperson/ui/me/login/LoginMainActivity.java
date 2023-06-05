@@ -32,7 +32,7 @@ import com.fimi.libperson.widget.TitleView;
 
 import router.Router;
 
-/* loaded from: classes.dex */
+
 public class LoginMainActivity extends BasePersonActivity implements ILoginView, ForgetPasswordFragment.OnResetPasswordListerner, ForgetIphonePasswordFragment.OnResetIphonePasswordListerner {
     LoginPresenter loginPresenter;
     Button mBtnLoginEmail;
@@ -62,8 +62,8 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
     private boolean isShowPassword = false;
     private boolean isShowIphonePassword = false;
     private boolean isMainLand = true;
-    private TextView.OnEditorActionListener mOnEditorActionListener = new TextView.OnEditorActionListener() { // from class: com.fimi.libperson.ui.me.login.LoginMainActivity.10
-        @Override // android.widget.TextView.OnEditorActionListener
+    private final TextView.OnEditorActionListener mOnEditorActionListener = new TextView.OnEditorActionListener() {
+        @Override
         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
             if (actionId == 4 || actionId == 6 || (event != null && 66 == event.getKeyCode() && event.getAction() == 0)) {
                 AbAppUtil.closeSoftInput(LoginMainActivity.this.mContext);
@@ -73,22 +73,22 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
         }
     };
 
-    @Override // com.fimi.libperson.BasePersonActivity, com.fimi.kernel.base.BaseActivity
+    @Override
     public void setStatusBarColor() {
         super.setStatusBarColor();
         StatusBarUtil.StatusBarLightMode(this);
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     protected int getContentViewLayoutID() {
         return R.layout.activity_login_main;
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void initData() {
         initView();
         String isEmailStr = SPStoreManager.getInstance().getString(HostConstants.SP_KEY_USER_INFO_FLAG);
-        ServiceItem serviceItem = (ServiceItem) SPStoreManager.getInstance().getObject(Constants.SERVICE_ITEM_KEY, ServiceItem.class);
+        ServiceItem serviceItem = SPStoreManager.getInstance().getObject(Constants.SERVICE_ITEM_KEY, ServiceItem.class);
         if (serviceItem == null || serviceItem.getInfo() == R.string.region_Mainland_China) {
             this.isMainLand = true;
             if (isEmailStr != null) {
@@ -116,26 +116,26 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
     }
 
     private void initView() {
-        this.mIvReturn = (ImageView) findViewById(R.id.iv_return);
-        this.mTitleView = (TitleView) findViewById(R.id.title_view);
-        this.mTvSelectCountry = (TextView) findViewById(R.id.tv_select_country);
-        this.mTvAreaCode = (TextView) findViewById(R.id.tv_area_code);
-        this.mEtAccount = (EditText) findViewById(R.id.et_account);
-        this.mEtPassword = (EditText) findViewById(R.id.et_password);
-        this.mTvErrorHint = (TextView) findViewById(R.id.tv_error_hint);
-        this.mCbSelectService = (CheckBox) findViewById(R.id.cb_iphone_select_service);
-        this.mEtEmailAccount = (EditText) findViewById(R.id.et_email_account);
-        this.mEtEmailPassword = (EditText) findViewById(R.id.et_email_password);
-        this.mTvEmailErrorHint = (TextView) findViewById(R.id.tv_email_error_hint);
-        this.mTvForgetHint = (TextView) findViewById(R.id.tv_forget_hint);
-        this.mTvForgetIphoneHint = (TextView) findViewById(R.id.tv_forget_iphone_hint);
-        this.mBtnLoginIphone = (Button) findViewById(R.id.btn_login_phone);
-        this.mBtnLoginEmail = (Button) findViewById(R.id.btn_login_email);
-        this.mRlIphone = (RelativeLayout) findViewById(R.id.rl_iphone);
-        this.mRlEmail = (RelativeLayout) findViewById(R.id.rl_email);
-        this.mIvShowPassword = (ImageView) findViewById(R.id.iv_show_password);
-        this.mIvShowIphonePassword = (ImageView) findViewById(R.id.iv_show_iphone_password);
-        this.mTvTitleNmae = (TextView) findViewById(R.id.tv_title_name);
+        this.mIvReturn = findViewById(R.id.iv_return);
+        this.mTitleView = findViewById(R.id.title_view);
+        this.mTvSelectCountry = findViewById(R.id.tv_select_country);
+        this.mTvAreaCode = findViewById(R.id.tv_area_code);
+        this.mEtAccount = findViewById(R.id.et_account);
+        this.mEtPassword = findViewById(R.id.et_password);
+        this.mTvErrorHint = findViewById(R.id.tv_error_hint);
+        this.mCbSelectService = findViewById(R.id.cb_iphone_select_service);
+        this.mEtEmailAccount = findViewById(R.id.et_email_account);
+        this.mEtEmailPassword = findViewById(R.id.et_email_password);
+        this.mTvEmailErrorHint = findViewById(R.id.tv_email_error_hint);
+        this.mTvForgetHint = findViewById(R.id.tv_forget_hint);
+        this.mTvForgetIphoneHint = findViewById(R.id.tv_forget_iphone_hint);
+        this.mBtnLoginIphone = findViewById(R.id.btn_login_phone);
+        this.mBtnLoginEmail = findViewById(R.id.btn_login_email);
+        this.mRlIphone = findViewById(R.id.rl_iphone);
+        this.mRlEmail = findViewById(R.id.rl_email);
+        this.mIvShowPassword = findViewById(R.id.iv_show_password);
+        this.mIvShowIphonePassword = findViewById(R.id.iv_show_iphone_password);
+        this.mTvTitleNmae = findViewById(R.id.tv_title_name);
         loginBtnIsClick(false);
         this.mTvTitleNmae.setText(getString(R.string.login_login_main_phone_title));
         this.mTitleView.setTvRightVisible(0);
@@ -151,7 +151,7 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
         FontUtil.changeViewLanTing(getAssets(), getWindow().getDecorView());
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void doTrans() {
         OnClickListerner();
         this.fragmentManager = getSupportFragmentManager();
@@ -172,19 +172,15 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
     }
 
     private void OnClickListerner() {
-        this.mTitleView.setTvRightListener(new View.OnClickListener() { // from class: com.fimi.libperson.ui.me.login.LoginMainActivity.1
-            @Override // android.view.View.OnClickListener
+        this.mTitleView.setTvRightListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 AbAppUtil.closeSoftInput(LoginMainActivity.this.mContext);
-                if (LoginMainActivity.this.mRlEmail.isShown()) {
-                    LoginMainActivity.this.showEmail(false);
-                } else {
-                    LoginMainActivity.this.showEmail(true);
-                }
+                LoginMainActivity.this.showEmail(!LoginMainActivity.this.mRlEmail.isShown());
             }
         });
-        this.mIvShowPassword.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.libperson.ui.me.login.LoginMainActivity.2
-            @Override // android.view.View.OnClickListener
+        this.mIvShowPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 if (LoginMainActivity.this.isShowPassword) {
                     LoginMainActivity.this.isShowPassword = false;
@@ -199,8 +195,8 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
                 LoginMainActivity.this.mEtEmailPassword.setSelection(LoginMainActivity.this.mEtEmailPassword.getText().length());
             }
         });
-        this.mIvShowIphonePassword.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.libperson.ui.me.login.LoginMainActivity.3
-            @Override // android.view.View.OnClickListener
+        this.mIvShowIphonePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 if (LoginMainActivity.this.isShowIphonePassword) {
                     LoginMainActivity.this.isShowIphonePassword = false;
@@ -215,22 +211,22 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
                 LoginMainActivity.this.mEtPassword.setSelection(LoginMainActivity.this.mEtPassword.getText().length());
             }
         });
-        this.mBtnLoginIphone.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.libperson.ui.me.login.LoginMainActivity.4
-            @Override // android.view.View.OnClickListener
+        this.mBtnLoginIphone.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 AbAppUtil.closeSoftInput(LoginMainActivity.this.mContext);
                 LoginMainActivity.this.loginPresenter.loginByPhone(LoginMainActivity.this.mEtAccount.getText().toString(), LoginMainActivity.this.mEtPassword.getText().toString());
             }
         });
-        this.mBtnLoginEmail.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.libperson.ui.me.login.LoginMainActivity.5
-            @Override // android.view.View.OnClickListener
+        this.mBtnLoginEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 AbAppUtil.closeSoftInput(LoginMainActivity.this.mContext);
                 LoginMainActivity.this.loginPresenter.loginByEmail(LoginMainActivity.this.mEtEmailAccount.getText().toString(), LoginMainActivity.this.mEtEmailPassword.getText().toString());
             }
         });
-        this.mTvForgetHint.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.libperson.ui.me.login.LoginMainActivity.6
-            @Override // android.view.View.OnClickListener
+        this.mTvForgetHint.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 LoginMainActivity.this.fragmentManager.beginTransaction().show(LoginMainActivity.this.mForgetPasswordFragment).commitAllowingStateLoss();
                 LoginMainActivity.this.mForgetPasswordFragment.setEmailAddress(LoginMainActivity.this.mEtEmailAccount.getText().toString().trim());
@@ -242,8 +238,8 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
                 AbAppUtil.closeSoftInput(LoginMainActivity.this.mContext);
             }
         });
-        this.mTvForgetIphoneHint.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.libperson.ui.me.login.LoginMainActivity.7
-            @Override // android.view.View.OnClickListener
+        this.mTvForgetIphoneHint.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 LoginMainActivity.this.fragmentManager.beginTransaction().show(LoginMainActivity.this.mForgetIphonePasswordFragment).commitAllowingStateLoss();
                 LoginMainActivity.this.mForgetIphonePasswordFragment.setIphone(LoginMainActivity.this.mEtAccount.getText().toString().trim());
@@ -255,8 +251,8 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
                 AbAppUtil.closeSoftInput(LoginMainActivity.this.mContext);
             }
         });
-        this.mIvReturn.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.libperson.ui.me.login.LoginMainActivity.8
-            @Override // android.view.View.OnClickListener
+        this.mIvReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 if (LoginMainActivity.this.mForgetPasswordFragment == null || !LoginMainActivity.this.mForgetPasswordFragment.isVisible()) {
                     if (LoginMainActivity.this.mForgetIphonePasswordFragment != null && LoginMainActivity.this.mForgetIphonePasswordFragment.isVisible()) {
@@ -289,8 +285,8 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
                 }
             }
         });
-        this.mTvSelectCountry.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.libperson.ui.me.login.LoginMainActivity.9
-            @Override // android.view.View.OnClickListener
+        this.mTvSelectCountry.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
             }
         });
@@ -301,11 +297,7 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
     }
 
     public void judgeEmailIsClick() {
-        if (DataValidatorUtil.isEmail(this.mEtEmailAccount.getText().toString().trim()) && this.mEtEmailPassword.getText().length() >= 8 && this.mEtEmailPassword.getText().length() <= 16) {
-            loginBtnIsClick(true);
-        } else {
-            loginBtnIsClick(false);
-        }
+        loginBtnIsClick(DataValidatorUtil.isEmail(this.mEtEmailAccount.getText().toString().trim()) && this.mEtEmailPassword.getText().length() >= 8 && this.mEtEmailPassword.getText().length() <= 16);
     }
 
     @Override
@@ -349,7 +341,7 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
         return mEditText.getSelectionStart();
     }
 
-    @Override // com.fimi.libperson.ui.me.login.ForgetPasswordFragment.OnResetPasswordListerner
+    @Override
     public void resetSuccess() {
         this.fragmentManager.beginTransaction().hide(this.mForgetPasswordFragment).commit();
         this.mForgetPasswordFragment.setState(ForgetPasswordFragment.State.EMAIL);
@@ -374,7 +366,7 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
         this.mEtPassword.setVisibility(0);
     }
 
-    @Override // com.fimi.libperson.ivew.ILoginView
+    @Override
     public void getCodeResult(boolean isSuccess, String errMsg) {
         if (!isSuccess) {
             this.mTvErrorHint.setVisibility(0);
@@ -382,10 +374,10 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
         }
     }
 
-    @Override // com.fimi.libperson.ivew.ILoginView
+    @Override
     public void iphoneLoginResult(boolean isSuccess, String errMsg) {
         if (isSuccess) {
-            Intent it = (Intent) Router.invoke(this, "activity://app.main");
+            Intent it = Router.invoke(this, "activity://app.main");
             readyGoThenKillAllActivity(it);
         } else if (errMsg != null) {
             this.mTvErrorHint.setVisibility(0);
@@ -393,11 +385,11 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
         }
     }
 
-    @Override // com.fimi.libperson.ivew.ILoginView
+    @Override
     public void emailLoginResult(boolean isSuccess, String errMsg) {
         if (isSuccess) {
             Constants.isRefreshMainView = true;
-            Intent it = (Intent) Router.invoke(this, "activity://app.main");
+            Intent it = Router.invoke(this, "activity://app.main");
             readyGoThenKillAllActivity(it);
         } else if (errMsg != null) {
             this.mTvEmailErrorHint.setVisibility(0);
@@ -405,11 +397,11 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
         }
     }
 
-    @Override // com.fimi.libperson.ivew.ILoginView
+    @Override
     public void updateSeconds(boolean isComplete, int seconds) {
     }
 
-    @Override // com.fimi.libperson.ivew.ILoginView
+    @Override
     public void freorgottenPasswords(boolean isFrequently) {
         if (isFrequently) {
             this.mTvForgetHint.setTextColor(getResources().getColor(R.color.login_forget_password_frequently));
@@ -418,10 +410,10 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
         }
     }
 
-    @Override // com.fimi.libperson.ivew.ILoginView
+    @Override
     public void loginSuccess() {
         Constants.isRefreshMainView = true;
-        Intent it = (Intent) Router.invoke(this, "activity://app.main");
+        Intent it = Router.invoke(this, "activity://app.main");
         readyGoThenKillAllActivity(it);
     }
 
@@ -464,30 +456,26 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
         this.mTvForgetHint.setVisibility(8);
         this.mTvForgetIphoneHint.setVisibility(0);
         this.mTvForgetHint.setTextColor(getResources().getColor(R.color.login_forget_password));
-        if (this.mEtPassword.getText().length() == 4) {
-            loginBtnIsClick(true);
-        } else {
-            loginBtnIsClick(false);
-        }
+        loginBtnIsClick(this.mEtPassword.getText().length() == 4);
     }
 
-    /* loaded from: classes.dex */
+
     public class EditTextWatcher implements TextWatcher {
-        private EditText mEditText;
+        private final EditText mEditText;
 
         public EditTextWatcher(EditText editText) {
             this.mEditText = editText;
         }
 
-        @Override // android.text.TextWatcher
+        @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         }
 
-        @Override // android.text.TextWatcher
+        @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
         }
 
-        @Override // android.text.TextWatcher
+        @Override
         public void afterTextChanged(Editable s) {
             if (s.length() > 0) {
                 if (R.id.et_account == this.mEditText.getId()) {
@@ -512,18 +500,10 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
                 LoginMainActivity.this.mTvErrorHint.setText("");
             }
             if (R.id.et_account == this.mEditText.getId()) {
-                if (!DataValidatorUtil.isMobile(s.toString().trim()) || LoginMainActivity.this.mEtPassword.getText().length() < 8) {
-                    LoginMainActivity.this.loginBtnIsClick(false);
-                } else {
-                    LoginMainActivity.this.loginBtnIsClick(true);
-                }
+                LoginMainActivity.this.loginBtnIsClick(DataValidatorUtil.isMobile(s.toString().trim()) && LoginMainActivity.this.mEtPassword.getText().length() >= 8);
             }
             if (R.id.et_password == this.mEditText.getId()) {
-                if (s.length() < 8 || !DataValidatorUtil.isMobile(LoginMainActivity.this.mEtAccount.getText().toString().trim())) {
-                    LoginMainActivity.this.loginBtnIsClick(false);
-                } else {
-                    LoginMainActivity.this.loginBtnIsClick(true);
-                }
+                LoginMainActivity.this.loginBtnIsClick(s.length() >= 8 && DataValidatorUtil.isMobile(LoginMainActivity.this.mEtAccount.getText().toString().trim()));
             }
         }
     }

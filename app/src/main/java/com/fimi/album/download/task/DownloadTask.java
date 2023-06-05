@@ -18,11 +18,11 @@ import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/* loaded from: classes.dex */
+
 public class DownloadTask implements Runnable {
     private int finished = 0;
-    private FileInfo info;
-    private OnDownloadListener listener;
+    private final FileInfo info;
+    private final OnDownloadListener listener;
 
     public DownloadTask(FileInfo info, OnDownloadListener listener) {
         this.info = info;
@@ -30,7 +30,7 @@ public class DownloadTask implements Runnable {
         info.setDownloading(true);
     }
 
-    @Override // java.lang.Runnable
+    @Override
     public void run() {
         startDownload();
     }

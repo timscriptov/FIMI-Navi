@@ -22,7 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class X9MediaFileLoad<T extends MediaModel> implements IMediaFileLoad {
     String urlThumPrex = "http://192.168.40.1:8000/FIMI_PHOTO/.thumbnails/";
     String urlPrex = "http://192.168.40.1:8000/FIMI_PHOTO/";
@@ -30,10 +30,10 @@ public class X9MediaFileLoad<T extends MediaModel> implements IMediaFileLoad {
     String imagePath = DirectoryPath.getX9LocalMedia();
     String xmlUrl = "http://192.168.40.1:8000/FIMI_PHOTO/MediaFileList.xml";
     String xmlPath = Environment.getExternalStorageDirectory().getPath() + "/MiDroneMini";
-    private List<MediaModel> listData;
-    private OnX9MediaFileListener listener;
-    private Handler mHandler = new Handler() { // from class: com.fimi.album.x9.X9MediaFileLoad.1
-        @Override // android.os.Handler
+    private final List<MediaModel> listData;
+    private final OnX9MediaFileListener listener;
+    private final Handler mHandler = new Handler() {
+        @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
@@ -44,13 +44,12 @@ public class X9MediaFileLoad<T extends MediaModel> implements IMediaFileLoad {
                     X9MediaFileLoad.this.listener.onComplete(true);
                     return;
                 default:
-                    return;
             }
         }
     };
-    private FileLoader mFileLoader = new FileLoader();
-    private Dom4jManager mDom4jManager = new Dom4jManager();
-    private FileInfo info = new FileInfo();
+    private final FileLoader mFileLoader = new FileLoader();
+    private final Dom4jManager mDom4jManager = new Dom4jManager();
+    private final FileInfo info = new FileInfo();
 
     public X9MediaFileLoad(OnX9MediaFileListener listener, List<MediaModel> listData) {
         this.listener = listener;
@@ -66,28 +65,28 @@ public class X9MediaFileLoad<T extends MediaModel> implements IMediaFileLoad {
         return date.getTime();
     }
 
-    @Override // com.fimi.album.download.interfaces.IMediaFileLoad
+    @Override
     public void startLoad() {
         this.info.setPath(this.xmlPath);
         this.info.setUrl(this.xmlUrl);
         this.info.setFileName("mini.mfl");
-        this.mFileLoader.queueDownload(this.info, new OnDownloadListener() { // from class: com.fimi.album.x9.X9MediaFileLoad.2
-            @Override // com.fimi.album.download.interfaces.OnDownloadListener
+        this.mFileLoader.queueDownload(this.info, new OnDownloadListener() {
+            @Override
             public void onProgress(Object responseObj, long progrss, long currentLength) {
             }
 
-            @Override // com.fimi.album.download.interfaces.OnDownloadListener
+            @Override
             public void onSuccess(Object responseObj) {
                 X9MediaFileLoad.this.parseXml(X9MediaFileLoad.this.info);
                 X9MediaFileLoad.this.mHandler.obtainMessage(1).sendToTarget();
             }
 
-            @Override // com.fimi.album.download.interfaces.OnDownloadListener
+            @Override
             public void onFailure(Object reasonObj) {
                 X9MediaFileLoad.this.mHandler.obtainMessage(0).sendToTarget();
             }
 
-            @Override // com.fimi.album.download.interfaces.OnDownloadListener
+            @Override
             public void onStop(MediaModel reasonObj) {
             }
         });
@@ -162,7 +161,7 @@ public class X9MediaFileLoad<T extends MediaModel> implements IMediaFileLoad {
         return strTime;
     }
 
-    @Override // com.fimi.album.download.interfaces.IMediaFileLoad
+    @Override
     public void stopLoad() {
         this.info.setStop(true);
     }
@@ -173,9 +172,6 @@ public class X9MediaFileLoad<T extends MediaModel> implements IMediaFileLoad {
 
     public boolean isExits(String path, String name) {
         File file = new File(path, name);
-        if (!file.exists()) {
-            return false;
-        }
-        return true;
+        return file.exists();
     }
 }

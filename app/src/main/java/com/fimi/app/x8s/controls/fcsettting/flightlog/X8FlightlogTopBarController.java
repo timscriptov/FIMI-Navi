@@ -34,13 +34,13 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-/* loaded from: classes.dex */
+
 public class X8FlightlogTopBarController extends AbsX8Controllers implements View.OnClickListener {
     private ImageButton ibtnReturn;
     private boolean isCollect;
     private AutoFcSportStatePlayback lastState;
     private IX8FlightLogTopBarListener listener;
-    private Activity mActivity;
+    private final Activity mActivity;
     private CustomLoadManage mCustomLoadManage;
     private ImageView mIvDistance;
     private ImageView mIvFlyState;
@@ -74,39 +74,39 @@ public class X8FlightlogTopBarController extends AbsX8Controllers implements Vie
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
         this.handleView = rootView.findViewById(R.id.flight_top_bars);
-        this.mX8MainReturnTimeTextView = (X8MainReturnTimeTextView) rootView.findViewById(R.id.x8_return_time_text_view);
-        this.mX8MainElectricView = (X8MainElectricView) rootView.findViewById(R.id.electric_view);
-        this.mX8MainPowerView = (X8MainPowerView) rootView.findViewById(R.id.power_view);
-        this.x8IbtnFlightlogCollect = (ImageButton) rootView.findViewById(R.id.x8_ibtn_flightlog_collect);
-        this.ibtnReturn = (ImageButton) rootView.findViewById(R.id.x8_ibtn_return);
-        this.mTvHight = (TextView) rootView.findViewById(R.id.tv_hight);
-        this.mIvHight = (ImageView) rootView.findViewById(R.id.iv_fly_hight);
-        this.mTvDistance = (TextView) rootView.findViewById(R.id.tv_distance);
-        this.mIvDistance = (ImageView) rootView.findViewById(R.id.iv_fly_distance);
-        this.mTvVs = (TextView) rootView.findViewById(R.id.tv_vs);
-        this.mTvHs = (TextView) rootView.findViewById(R.id.tv_hs);
-        this.tvConnectState = (TextView) rootView.findViewById(R.id.tv_connect_state);
-        this.mIvFlyState = (ImageView) rootView.findViewById(R.id.iv_fly_state);
-        this.mX8MainTopCenterView = (X8MainTopRightFlightPlaybackView) rootView.findViewById(R.id.x8main_top_center_view);
-        this.mTvHightUnit = (TextView) rootView.findViewById(R.id.tv_height_lable);
-        this.mTvDistanceUnit = (TextView) rootView.findViewById(R.id.tv_distance_lable);
-        this.mTvSpeedUnit = (TextView) rootView.findViewById(R.id.tv_vs_unit);
+        this.mX8MainReturnTimeTextView = rootView.findViewById(R.id.x8_return_time_text_view);
+        this.mX8MainElectricView = rootView.findViewById(R.id.electric_view);
+        this.mX8MainPowerView = rootView.findViewById(R.id.power_view);
+        this.x8IbtnFlightlogCollect = rootView.findViewById(R.id.x8_ibtn_flightlog_collect);
+        this.ibtnReturn = rootView.findViewById(R.id.x8_ibtn_return);
+        this.mTvHight = rootView.findViewById(R.id.tv_hight);
+        this.mIvHight = rootView.findViewById(R.id.iv_fly_hight);
+        this.mTvDistance = rootView.findViewById(R.id.tv_distance);
+        this.mIvDistance = rootView.findViewById(R.id.iv_fly_distance);
+        this.mTvVs = rootView.findViewById(R.id.tv_vs);
+        this.mTvHs = rootView.findViewById(R.id.tv_hs);
+        this.tvConnectState = rootView.findViewById(R.id.tv_connect_state);
+        this.mIvFlyState = rootView.findViewById(R.id.iv_fly_state);
+        this.mX8MainTopCenterView = rootView.findViewById(R.id.x8main_top_center_view);
+        this.mTvHightUnit = rootView.findViewById(R.id.tv_height_lable);
+        this.mTvDistanceUnit = rootView.findViewById(R.id.tv_distance_lable);
+        this.mTvSpeedUnit = rootView.findViewById(R.id.tv_vs_unit);
         this.vDroneInfoState = rootView.findViewById(R.id.x8_drone_info_state);
-        this.vLandingReturnView = (X8BatteryReturnLandingView) rootView.findViewById(R.id.v_landing_return_view);
+        this.vLandingReturnView = rootView.findViewById(R.id.v_landing_return_view);
     }
 
     public void setX8sMainActivity(X8sMainActivity activity) {
         this.vLandingReturnView.setX8sMainActivity(activity);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
         this.x8IbtnFlightlogCollect.setOnClickListener(this);
-        this.x8IbtnFlightlogCollect.setOnClickListener(new NoDoubleClickListener(500) { // from class: com.fimi.app.x8s.controls.fcsettting.flightlog.X8FlightlogTopBarController.1
-            @Override // com.fimi.widget.impl.NoDoubleClickListener
+        this.x8IbtnFlightlogCollect.setOnClickListener(new NoDoubleClickListener(500) {
+            @Override
             protected void onNoDoubleClick(View v) {
                 if (X8FlightlogTopBarController.this.mCustomLoadManage == null) {
                     X8FlightlogTopBarController.this.mCustomLoadManage = new CustomLoadManage();
@@ -127,7 +127,7 @@ public class X8FlightlogTopBarController extends AbsX8Controllers implements Vie
         this.vDroneInfoState.setOnClickListener(this);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
         this.mX8MainTopCenterView.defaultVal();
         this.mX8MainElectricView.setPercent(0);
@@ -166,7 +166,7 @@ public class X8FlightlogTopBarController extends AbsX8Controllers implements Vie
         this.mTvSpeedUnit.setText("");
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.x8_ibtn_return) {
@@ -272,7 +272,7 @@ public class X8FlightlogTopBarController extends AbsX8Controllers implements Vie
         this.mX8MainTopCenterView.setRelayHeart(autoRelayHeart);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public boolean onClickBackKey() {
         return false;
     }

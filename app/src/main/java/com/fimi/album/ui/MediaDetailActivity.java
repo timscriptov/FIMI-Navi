@@ -17,7 +17,7 @@ import com.fimi.android.app.R;
 import com.fimi.kernel.base.BaseActivity;
 import com.fimi.kernel.utils.FontUtil;
 
-/* loaded from: classes.dex */
+
 public class MediaDetailActivity extends BaseActivity {
     private int currentSelectPosition;
     private ImageButton ibBottomDelete;
@@ -30,20 +30,20 @@ public class MediaDetailActivity extends BaseActivity {
     private TextView tvPhotoName;
     private ViewPager viewpaper;
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     protected void setStatusBarColor() {
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void initData() {
-        this.llHeadViewGroup = (LinearLayout) findViewById(R.id.shoto_top_tab_ll);
-        this.rlHeadDirection = (RelativeLayout) findViewById(R.id.media_select_bottom_rl);
+        this.llHeadViewGroup = findViewById(R.id.shoto_top_tab_ll);
+        this.rlHeadDirection = findViewById(R.id.media_select_bottom_rl);
         this.rlHeadDirection.setVisibility(0);
-        this.viewpaper = (ViewPager) findViewById(R.id.viewpaper);
-        this.ibMediaBack = (ImageButton) findViewById(R.id.media_back_btn);
-        this.ibBottomDelete = (ImageButton) findViewById(R.id.bottom_delete_ibtn);
-        this.tvDeleteTip = (TextView) findViewById(R.id.delete_tv);
-        this.tvPhotoName = (TextView) findViewById(R.id.photo_name_tv);
+        this.viewpaper = findViewById(R.id.viewpaper);
+        this.ibMediaBack = findViewById(R.id.media_back_btn);
+        this.ibBottomDelete = findViewById(R.id.bottom_delete_ibtn);
+        this.tvDeleteTip = findViewById(R.id.delete_tv);
+        this.tvPhotoName = findViewById(R.id.photo_name_tv);
         FontUtil.changeFontLanTing(getAssets(), this.tvDeleteTip, this.tvPhotoName);
         Intent intent = getIntent();
         if (intent != null) {
@@ -60,37 +60,37 @@ public class MediaDetailActivity extends BaseActivity {
         }
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void doTrans() {
-        this.ibMediaBack.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.album.ui.MediaDetailActivity.1
-            @Override // android.view.View.OnClickListener
+        this.ibMediaBack.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 MediaDetailActivity.this.finish();
             }
         });
-        this.ibBottomDelete.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.album.ui.MediaDetailActivity.2
-            @Override // android.view.View.OnClickListener
+        this.ibBottomDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 MediaDetailActivity.this.mMediaDetailPresenter.deleteItem(MediaDetailActivity.this.viewpaper.getCurrentItem());
             }
         });
-        this.viewpaper.addOnPageChangeListener(new ViewPager.OnPageChangeListener() { // from class: com.fimi.album.ui.MediaDetailActivity.3
-            @Override // android.support.v4.view.ViewPager.OnPageChangeListener
+        this.viewpaper.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }
 
-            @Override // android.support.v4.view.ViewPager.OnPageChangeListener
+            @Override
             public void onPageSelected(int position) {
                 MediaDetailActivity.this.mMediaDetailPresenter.updateItem(position);
             }
 
-            @Override // android.support.v4.view.ViewPager.OnPageChangeListener
+            @Override
             public void onPageScrollStateChanged(int state) {
             }
         });
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     protected int getContentViewLayoutID() {
         return R.layout.album_activity_media_detial;
     }

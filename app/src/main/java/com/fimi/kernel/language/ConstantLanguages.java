@@ -1,6 +1,6 @@
 package com.fimi.kernel.language;
 
-/* loaded from: classes.dex */
+
 public class ConstantLanguages {
     public static final String ENGLISH = "en";
     public static final String FRANCE = "fr";

@@ -31,15 +31,15 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes.dex */
+
 public class CrashHandler implements Thread.UncaughtExceptionHandler {
     public static final String TAG = "CrashHandler";
-    private static String CRASH_LOG_FILEPATH = "/FimiLogger/CrashLogger/";
+    private static final String CRASH_LOG_FILEPATH = "/FimiLogger/CrashLogger/";
     private static CrashHandler instance;
     private Context mContext;
     private Thread.UncaughtExceptionHandler mDefaultHandler;
-    private Map<String, String> infos = new HashMap();
-    private DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+    private final Map<String, String> infos = new HashMap();
+    private final DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
 
     private CrashHandler() {
     }
@@ -57,7 +57,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         Thread.setDefaultUncaughtExceptionHandler(this);
     }
 
-    @Override // java.lang.Thread.UncaughtExceptionHandler
+    @Override
     public void uncaughtException(Thread thread, Throwable ex) {
         if (!handleException(ex) && this.mDefaultHandler != null) {
             this.mDefaultHandler.uncaughtException(thread, ex);
@@ -73,14 +73,14 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.fimi.kernel.exception.CrashHandler$1] */
+
     private boolean handleException(Throwable ex) {
         if (ex == null) {
             return false;
         }
         collectDeviceInfo(this.mContext);
-        new Thread() { // from class: com.fimi.kernel.exception.CrashHandler.1
-            @Override // java.lang.Thread, java.lang.Runnable
+        new Thread() {
+            @Override
             public void run() {
                 Looper.prepare();
                 Toast.makeText(CrashHandler.this.mContext, CrashHandler.this.mContext.getString(R.string.app_exception_hint), Toast.LENGTH_SHORT).show();
@@ -184,7 +184,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
                             if (s == null) {
                                 break;
                             } else {
-                                Log.i("info", s.toString());
+                                Log.i("info", s);
                             }
                         } catch (FileNotFoundException e2) {
                             reader = reader2;

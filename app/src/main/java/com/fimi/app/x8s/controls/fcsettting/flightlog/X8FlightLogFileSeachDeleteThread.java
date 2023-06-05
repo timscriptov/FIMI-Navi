@@ -22,16 +22,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-
-/* loaded from: classes.dex */
 public class X8FlightLogFileSeachDeleteThread extends Thread {
-    private boolean deleteAll;
+    private final boolean deleteAll;
     private int flightDurationNumber;
     private float flightMileageNumber;
-    private Handler handler;
-    private boolean isSeach;
-    private boolean uploadSuccessfulAll;
-    private X8FlightLogAdapter x8FlightLogAdapter;
+    private final Handler handler;
+    private final boolean isSeach;
+    private final boolean uploadSuccessfulAll;
+    private final X8FlightLogAdapter x8FlightLogAdapter;
 
     public X8FlightLogFileSeachDeleteThread(X8FlightLogAdapter x8FlightLogAdapter, Handler handler, boolean seachOrDelete, boolean deleteAll, boolean uploadSuccessfulAll) {
         this.x8FlightLogAdapter = x8FlightLogAdapter;
@@ -41,7 +39,7 @@ public class X8FlightLogFileSeachDeleteThread extends Thread {
         this.uploadSuccessfulAll = uploadSuccessfulAll;
     }
 
-    @Override // java.lang.Thread, java.lang.Runnable
+    @Override
     public void run() {
         super.run();
         if (this.isSeach) {
@@ -169,8 +167,8 @@ public class X8FlightLogFileSeachDeleteThread extends Thread {
     }
 
     public void sort(List<X8FlightLogFile> list) {
-        Collections.sort(list, new Comparator<X8FlightLogFile>() { // from class: com.fimi.app.x8s.controls.fcsettting.flightlog.X8FlightLogFileSeachDeleteThread.1
-            @Override // java.util.Comparator
+        Collections.sort(list, new Comparator<X8FlightLogFile>() {
+            @Override
             public int compare(X8FlightLogFile arg0, X8FlightLogFile arg1) {
                 int a = Integer.parseInt(arg1.getFileLogCollectState()) - Integer.parseInt(arg0.getFileLogCollectState());
                 if (a != 0) {
@@ -183,8 +181,8 @@ public class X8FlightLogFileSeachDeleteThread extends Thread {
     }
 
     public void sortGroup(List<String> list) {
-        Collections.sort(list, new Comparator<String>() { // from class: com.fimi.app.x8s.controls.fcsettting.flightlog.X8FlightLogFileSeachDeleteThread.2
-            @Override // java.util.Comparator
+        Collections.sort(list, new Comparator<String>() {
+            @Override
             public int compare(String arg0, String arg1) {
                 int mark = arg1.compareTo(arg0);
                 return mark;

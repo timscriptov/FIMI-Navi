@@ -199,7 +199,7 @@ public class AesCbcWithIntegrity {
         return result;
     }
 
-    /* loaded from: classes.dex */
+
     public static class SecretKeys {
         private SecretKey confidentialityKey;
         private SecretKey integrityKey;
@@ -246,7 +246,7 @@ public class AesCbcWithIntegrity {
         }
     }
 
-    /* loaded from: classes.dex */
+
     public static class CipherTextIvMac {
         private final byte[] cipherText;
         private final byte[] iv;
@@ -294,7 +294,7 @@ public class AesCbcWithIntegrity {
             String ivString = Base64.encodeToString(this.iv, 2);
             String cipherTextString = Base64.encodeToString(this.cipherText, 2);
             String macString = Base64.encodeToString(this.mac, 2);
-            return String.format(ivString + ":" + macString + ":" + cipherTextString, new Object[0]);
+            return String.format(ivString + ":" + macString + ":" + cipherTextString);
         }
 
         public int hashCode() {
@@ -314,7 +314,7 @@ public class AesCbcWithIntegrity {
         }
     }
 
-    /* loaded from: classes.dex */
+
     public static final class PrngFixes {
         private static final byte[] BUILD_FINGERPRINT_AND_DEVICE_SERIAL = getBuildFingerprintAndDeviceSerial();
         private static final int VERSION_CODE_JELLY_BEAN = 16;
@@ -413,7 +413,7 @@ public class AesCbcWithIntegrity {
             }
         }
 
-        /* loaded from: classes.dex */
+
         public static class LinuxPRNGSecureRandomProvider extends Provider {
             public LinuxPRNGSecureRandomProvider() {
                 super("LinuxPRNG", 1.0d, "A Linux-specific random number provider that uses /dev/urandom");
@@ -422,7 +422,7 @@ public class AesCbcWithIntegrity {
             }
         }
 
-        /* loaded from: classes.dex */
+
         public static class LinuxPRNGSecureRandom extends SecureRandomSpi {
             private static final File URANDOM_FILE = new File("/dev/urandom");
             private static final Object sLock = new Object();
@@ -430,7 +430,7 @@ public class AesCbcWithIntegrity {
             private static OutputStream sUrandomOut;
             private boolean mSeeded;
 
-            @Override // java.security.SecureRandomSpi
+            @Override
             protected void engineSetSeed(byte[] bytes) {
                 OutputStream out;
                 try {
@@ -446,7 +446,7 @@ public class AesCbcWithIntegrity {
                 }
             }
 
-            @Override // java.security.SecureRandomSpi
+            @Override
             protected void engineNextBytes(byte[] bytes) {
                 DataInputStream in;
                 if (!this.mSeeded) {
@@ -464,7 +464,7 @@ public class AesCbcWithIntegrity {
                 }
             }
 
-            @Override // java.security.SecureRandomSpi
+            @Override
             protected byte[] engineGenerateSeed(int size) {
                 byte[] seed = new byte[size];
                 engineNextBytes(seed);

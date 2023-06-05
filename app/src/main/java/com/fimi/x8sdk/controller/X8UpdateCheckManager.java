@@ -5,9 +5,9 @@ import android.content.Context;
 import com.fimi.x8sdk.ivew.IUpdateCheckAction;
 import com.fimi.x8sdk.presenter.X8UpdateCheckPresenter;
 
-/* loaded from: classes2.dex */
+
 public class X8UpdateCheckManager {
-    private static X8UpdateCheckManager x8UpdateCheckManager = new X8UpdateCheckManager();
+    private static final X8UpdateCheckManager x8UpdateCheckManager = new X8UpdateCheckManager();
     private static X8UpdateCheckPresenter x8UpdateCheckPresenter;
 
     public X8UpdateCheckManager() {

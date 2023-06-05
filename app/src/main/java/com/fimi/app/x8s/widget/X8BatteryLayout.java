@@ -56,16 +56,16 @@ public class X8BatteryLayout extends RelativeLayout {
         String tip = "";
         switch (state) {
             case 1:
-                tip = String.format(getContext().getString(R.string.x8_battery_setting_format), String.valueOf(X8BatteryView.COLOR_ABNORMAL_YELLOW), getContext().getString(R.string.x8_battery_setting_over_pressure));
+                tip = String.format(getContext().getString(R.string.x8_battery_setting_format), X8BatteryView.COLOR_ABNORMAL_YELLOW, getContext().getString(R.string.x8_battery_setting_over_pressure));
                 break;
             case 2:
-                tip = String.format(getContext().getString(R.string.x8_battery_setting_format), String.valueOf(X8BatteryView.COLOR_SERIOUS_RED), getContext().getString(R.string.x8_battery_setting_corrupted));
+                tip = String.format(getContext().getString(R.string.x8_battery_setting_format), X8BatteryView.COLOR_SERIOUS_RED, getContext().getString(R.string.x8_battery_setting_corrupted));
                 break;
             case 3:
-                tip = String.format(getContext().getString(R.string.x8_battery_setting_format), String.valueOf(X8BatteryView.COLOR_ABNORMAL_YELLOW), getContext().getString(R.string.x8_battery_setting_over_release));
+                tip = String.format(getContext().getString(R.string.x8_battery_setting_format), X8BatteryView.COLOR_ABNORMAL_YELLOW, getContext().getString(R.string.x8_battery_setting_over_release));
                 break;
             case 4:
-                tip = String.format(getContext().getString(R.string.x8_battery_setting_format), String.valueOf(X8BatteryView.COLOR_SERIOUS_RED), getContext().getString(R.string.x8_battery_setting_over_release_serious));
+                tip = String.format(getContext().getString(R.string.x8_battery_setting_format), X8BatteryView.COLOR_SERIOUS_RED, getContext().getString(R.string.x8_battery_setting_over_release_serious));
                 break;
         }
         String text = this.batteryName + "<br/>" + NumberUtil.decimalPointStr(curVoltage, 2) + "V" + tip;

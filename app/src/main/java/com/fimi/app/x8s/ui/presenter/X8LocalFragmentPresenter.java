@@ -33,15 +33,15 @@ import java.io.File;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* loaded from: classes.dex */
+
 public class X8LocalFragmentPresenter<T extends MediaModel> extends X8BaseMediaFragmentPresenter {
     public static final String UPDATELOCALITEM = "UPDATELOCALITEM";
     public static final String UPDATELOCALITEMRECEIVER = "UPDATELOCALITEMRECEIVER";
     private static final String TAG = "X9LocalFragmentPresente";
-    private int defaultBound;
-    private Handler durationHandler;
+    private final int defaultBound;
+    private final Handler durationHandler;
     private X8LocalFragmentPresenter<T>.UpdateLocalItemReceiver mUpdateLocalItemReceiver;
-    private Handler mainHandler;
+    private final Handler mainHandler;
 
     public X8LocalFragmentPresenter(RecyclerView mRecyclerView, X8sPanelRecycleAdapter mPanelRecycleAdapter, ISelectData mISelectData, Context context) {
         super(mRecyclerView, mPanelRecycleAdapter, mISelectData, context, false);
@@ -57,25 +57,24 @@ public class X8LocalFragmentPresenter<T extends MediaModel> extends X8BaseMediaF
     }
 
     private void doTrans() {
-        this.mRecyclerView.setRecyclerListener(new RecyclerView.RecyclerListener() { // from class: com.fimi.app.x8s.ui.presenter.X8LocalFragmentPresenter.1
-            @Override // android.support.v7.widget.RecyclerView.RecyclerListener
+        this.mRecyclerView.setRecyclerListener(new RecyclerView.RecyclerListener() {
+            @Override
             public void onViewRecycled(RecyclerView.ViewHolder holder) {
-                if (holder instanceof BodyRecycleViewHolder) {
-                    BodyRecycleViewHolder mBodyRecycleViewHolder = (BodyRecycleViewHolder) holder;
+                if (holder instanceof BodyRecycleViewHolder mBodyRecycleViewHolder) {
                     mBodyRecycleViewHolder.tvDuringdate.setVisibility(4);
                     mBodyRecycleViewHolder.ivSelect.setVisibility(8);
                 }
             }
         });
-        this.mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() { // from class: com.fimi.app.x8s.ui.presenter.X8LocalFragmentPresenter.2
-            @Override // android.support.v7.widget.RecyclerView.OnScrollListener
+        this.mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 X8LocalFragmentPresenter.this.isScrollRecycle = false;
                 X8LocalFragmentPresenter.this.durationHandler.sendEmptyMessage(1);
             }
 
-            @Override // android.support.v7.widget.RecyclerView.OnScrollListener
+            @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 if (Math.abs(dy) <= X8LocalFragmentPresenter.this.defaultBound) {
@@ -88,7 +87,7 @@ public class X8LocalFragmentPresenter<T extends MediaModel> extends X8BaseMediaF
         });
     }
 
-    @Override // com.fimi.album.iview.IHandlerCallback, android.os.Handler.Callback
+    @Override
     public boolean handleMessage(Message message) {
         try {
             if (message.what == 1 && this.modelList.size() > 0 && this.mGridLayoutManager != null) {
@@ -126,7 +125,7 @@ public class X8LocalFragmentPresenter<T extends MediaModel> extends X8BaseMediaF
         return true;
     }
 
-    @Override // com.fimi.album.iview.IRecycleAdapter
+    @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof HeadRecyleViewHolder) {
             doHeadTrans((HeadRecyleViewHolder) holder, position);
@@ -152,8 +151,8 @@ public class X8LocalFragmentPresenter<T extends MediaModel> extends X8BaseMediaF
                 holder.mBtnAllSelect.setSelected(false);
             }
         }
-        holder.mBtnAllSelect.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.ui.presenter.X8LocalFragmentPresenter.3
-            @Override // android.view.View.OnClickListener
+        holder.mBtnAllSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 X8LocalFragmentPresenter.this.onItemCategoryClick(holder, position, mediaModel);
             }
@@ -170,15 +169,11 @@ public class X8LocalFragmentPresenter<T extends MediaModel> extends X8BaseMediaF
             String formatDate = mediaModel.getFormatDate().split(" ")[0];
             CopyOnWriteArrayList<MediaModel> internalList = (CopyOnWriteArrayList<MediaModel>) this.stateHashMap.get(formatDate);
             Log.i("moweiru", "(mediaModel.isSelect():" + mediaModel.isSelect());
-            if (mediaModel.isSelect()) {
-                perfomSelectCategory(internalList, false);
-            } else {
-                perfomSelectCategory(internalList, true);
-            }
+            perfomSelectCategory(internalList, !mediaModel.isSelect());
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
+
     private void perfomSelectCategory(CopyOnWriteArrayList<MediaModel> internalList, boolean isSelect) {
         Iterator<MediaModel> it = internalList.iterator();
         while (it.hasNext()) {
@@ -195,11 +190,7 @@ public class X8LocalFragmentPresenter<T extends MediaModel> extends X8BaseMediaF
         }
         notifyAllVisible();
         callBackSelectSize(this.selectList.size());
-        if (this.selectList.size() == (this.modelList.size() - this.stateHashMap.size()) - 1) {
-            callAllSelectMode(true);
-        } else {
-            callAllSelectMode(false);
-        }
+        callAllSelectMode(this.selectList.size() == (this.modelList.size() - this.stateHashMap.size()) - 1);
     }
 
     private void doBodyTrans(final BodyRecycleViewHolder holder, final int position) {
@@ -257,14 +248,14 @@ public class X8LocalFragmentPresenter<T extends MediaModel> extends X8BaseMediaF
                 } else {
                     changeSelectViewState(mediaModel, holder, 8);
                 }
-                holder.sdvImageView.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.ui.presenter.X8LocalFragmentPresenter.4
-                    @Override // android.view.View.OnClickListener
+                holder.sdvImageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
                     public void onClick(View view) {
                         X8LocalFragmentPresenter.this.onItemClick(holder, view, position);
                     }
                 });
-                holder.sdvImageView.setOnLongClickListener(new View.OnLongClickListener() { // from class: com.fimi.app.x8s.ui.presenter.X8LocalFragmentPresenter.5
-                    @Override // android.view.View.OnLongClickListener
+                holder.sdvImageView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
                     public boolean onLongClick(View view) {
                         X8LocalFragmentPresenter.this.onItemLongClick(holder, view, position);
                         return true;
@@ -293,7 +284,7 @@ public class X8LocalFragmentPresenter<T extends MediaModel> extends X8BaseMediaF
         goMediaDetailActivity(this.modelList.indexOf(model));
     }
 
-    @Override // com.fimi.app.x8s.ui.album.x8s.X8BaseMediaFragmentPresenter
+    @Override
     public void showCategorySelectView(boolean state) {
         int firstVisibleItem = this.mGridLayoutManager.findFirstVisibleItemPosition();
         int lastVisibleItem = this.mGridLayoutManager.findLastVisibleItemPosition();
@@ -308,7 +299,7 @@ public class X8LocalFragmentPresenter<T extends MediaModel> extends X8BaseMediaF
         }
     }
 
-    @Override // com.fimi.app.x8s.ui.album.x8s.X8BaseMediaFragmentPresenter
+    @Override
     public void registerReciver() {
         this.mUpdateLocalItemReceiver = new UpdateLocalItemReceiver();
         IntentFilter intentFilter = new IntentFilter();
@@ -316,22 +307,22 @@ public class X8LocalFragmentPresenter<T extends MediaModel> extends X8BaseMediaF
         LocalBroadcastManager.getInstance(this.context).registerReceiver(this.mUpdateLocalItemReceiver, intentFilter);
     }
 
-    @Override // com.fimi.app.x8s.ui.album.x8s.X8BaseMediaFragmentPresenter
+    @Override
     public void registerDownloadListerner() {
     }
 
-    @Override // com.fimi.app.x8s.ui.album.x8s.X8BaseMediaFragmentPresenter
+    @Override
     public void unRegisterReciver() {
         LocalBroadcastManager.getInstance(this.context).unregisterReceiver(this.mUpdateLocalItemReceiver);
     }
 
-    /* loaded from: classes.dex */
+
     public class UpdateLocalItemReceiver extends BroadcastReceiver {
         public UpdateLocalItemReceiver() {
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        @Override // android.content.BroadcastReceiver
+
+        @Override
         public void onReceive(Context context, Intent intent) {
             MediaModel mediaModel;
             String action = intent.getAction();

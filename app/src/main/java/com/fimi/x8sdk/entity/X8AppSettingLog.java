@@ -3,7 +3,7 @@ package com.fimi.x8sdk.entity;
 import com.fimi.x8sdk.X8FcLogManager;
 import com.fimi.x8sdk.appsetting.ValueSensity;
 
-/* loaded from: classes2.dex */
+
 public class X8AppSettingLog {
     public static int CC;
     public static int FB_pitch;

@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class UpgradeFileData {
     public static final int PACKETLENGHT = 176;
     byte[] ida_crc;
@@ -24,7 +24,7 @@ public class UpgradeFileData {
     private long currentLen;
     private int index;
     private long totalLen;
-    private List<BufferData> mList = new ArrayList();
+    private final List<BufferData> mList = new ArrayList();
 
     public int getIndex() {
         return this.index;
@@ -187,8 +187,6 @@ public class UpgradeFileData {
     }
 
     public void arrayCopy(int srcPos, byte[] dst, byte[] readfile) {
-        for (int i = 0; i < 4; i++) {
-            readfile[srcPos + i] = dst[i];
-        }
+        System.arraycopy(dst, 0, readfile, srcPos + 0, 4);
     }
 }

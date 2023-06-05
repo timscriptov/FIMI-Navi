@@ -10,15 +10,15 @@ import com.fimi.x8sdk.listener.ErrcodeListener;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes2.dex */
+
 public class FcErrProcess {
     private static final int WHATID_SEND_ERRCODE = 0;
     private static final int WHATID_SEND_VC_ERRCODE = 1;
-    private static FcErrProcess fcErrProcess = new FcErrProcess();
+    private static final FcErrProcess fcErrProcess = new FcErrProcess();
     List<ErrcodeListener> listenerList = new ArrayList();
     List<ErrCodeEntity> errCodeEntities = new ArrayList();
-    private Handler mHandler = new Handler(Looper.getMainLooper()) { // from class: com.fimi.x8sdk.process.FcErrProcess.1
-        @Override // android.os.Handler
+    private final Handler mHandler = new Handler(Looper.getMainLooper()) {
+        @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
@@ -39,7 +39,6 @@ public class FcErrProcess {
                     }
                     return;
                 default:
-                    return;
             }
         }
     };
@@ -55,7 +54,7 @@ public class FcErrProcess {
     }
 
     public void removeErrListener(ErrcodeListener listener) {
-        if (listener != null && this.listenerList.contains(listener)) {
+        if (listener != null) {
             this.listenerList.remove(listener);
         }
     }

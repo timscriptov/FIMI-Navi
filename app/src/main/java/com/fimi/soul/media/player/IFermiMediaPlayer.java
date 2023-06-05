@@ -3,7 +3,7 @@ package com.fimi.soul.media.player;
 import android.view.SurfaceView;
 import android.widget.SeekBar;
 
-/* loaded from: classes.dex */
+
 public interface IFermiMediaPlayer {
 
     void addOnPlayerStateChangedListener(OnPlayerStateChangedListener onPlayerStateChangedListener);
@@ -44,8 +44,8 @@ public interface IFermiMediaPlayer {
 
     void stop();
 
-    /* loaded from: classes.dex */
-    public enum FermiPlyaerState {
+
+    enum FermiPlyaerState {
         Playing,
         Pause,
         Stop,

@@ -2,7 +2,7 @@ package com.fimi.kernel.upgrade.version;
 
 import com.fimi.kernel.upgrade.interfaces.IReqFimwareBean;
 
-/* loaded from: classes.dex */
+
 public class FirmwareBean implements IReqFimwareBean {
     private int hardwareVersion;
     private byte[] idA;
@@ -29,62 +29,62 @@ public class FirmwareBean implements IReqFimwareBean {
         this.idD = idD == null ? new byte[4] : idD;
     }
 
-    @Override // com.fimi.kernel.upgrade.interfaces.IReqFimwareBean
+    @Override
     public String getVersion() {
         return this.version;
     }
 
-    @Override // com.fimi.kernel.upgrade.interfaces.IReqFimwareBean
+    @Override
     public void setVersion(String version) {
         this.version = version;
     }
 
-    @Override // com.fimi.kernel.upgrade.interfaces.IReqFimwareBean
+    @Override
     public int getSysId() {
         return this.sysId;
     }
 
-    @Override // com.fimi.kernel.upgrade.interfaces.IReqFimwareBean
+    @Override
     public void setSysId(int sysId) {
         this.sysId = sysId;
     }
 
-    @Override // com.fimi.kernel.upgrade.interfaces.IReqFimwareBean
+    @Override
     public byte getType() {
         return (byte) this.type;
     }
 
-    @Override // com.fimi.kernel.upgrade.interfaces.IReqFimwareBean
+    @Override
     public int getModel() {
         return this.model;
     }
 
-    @Override // com.fimi.kernel.upgrade.interfaces.IReqFimwareBean
+    @Override
     public int getHardwareVersion() {
         return this.hardwareVersion;
     }
 
-    @Override // com.fimi.kernel.upgrade.interfaces.IReqFimwareBean
+    @Override
     public int getSoftwareVersion() {
         return this.softwareVersion;
     }
 
-    @Override // com.fimi.kernel.upgrade.interfaces.IReqFimwareBean
+    @Override
     public byte[] getIdA() {
         return this.idA;
     }
 
-    @Override // com.fimi.kernel.upgrade.interfaces.IReqFimwareBean
+    @Override
     public byte[] getIdB() {
         return this.idB;
     }
 
-    @Override // com.fimi.kernel.upgrade.interfaces.IReqFimwareBean
+    @Override
     public byte[] getIdC() {
         return this.idC;
     }
 
-    @Override // com.fimi.kernel.upgrade.interfaces.IReqFimwareBean
+    @Override
     public byte[] getIdD() {
         return this.idD;
     }

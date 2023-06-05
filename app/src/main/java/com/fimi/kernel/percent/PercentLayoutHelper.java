@@ -21,7 +21,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-
 public class PercentLayoutHelper {
     private static final String REGEX_PERCENT = "^(([0-9]+)([.]([0-9]+))?|([.]([0-9]+))?)%([wh]?)$";
     private static final String TAG = "PercentLayout";
@@ -397,7 +396,7 @@ public class PercentLayoutHelper {
         PercentLayoutInfo getPercentLayoutInfo();
     }
 
-    /* loaded from: classes.dex */
+
     public static class PercentLayoutInfo {
         final ViewGroup.MarginLayoutParams mPreservedParams = new ViewGroup.MarginLayoutParams(0, 0);
         public PercentVal bottomMarginPercent;
@@ -487,7 +486,7 @@ public class PercentLayoutHelper {
             params.height = this.mPreservedParams.height;
         }
 
-        /* loaded from: classes.dex */
+
         public static class PercentVal {
             public boolean isBaseWidth;
             public float percent;

@@ -30,12 +30,12 @@ import com.fimi.x8sdk.cmdsenum.X8Task;
 import com.fimi.x8sdk.modulestate.GimbalState;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes.dex */
+
 public class X8AiAutoPhototExcuteController extends AbsX8AiController implements View.OnClickListener, X8DoubleCustomDialog.onDialogButtonClickListener, X8AiTrackController.OnAiTrackControllerListener, IX8AiAutoPhototExcuteListener {
     protected boolean isNextShow;
     protected boolean isShow;
     protected int width;
-    private X8sMainActivity activity;
+    private final X8sMainActivity activity;
     private View blank;
     private int count;
     private X8DoubleCustomDialog dialog;
@@ -46,8 +46,8 @@ public class X8AiAutoPhototExcuteController extends AbsX8AiController implements
     private ImageView imgNext;
     private IX8AiAutoPhotoExcuteControllerListener listener;
     private View mAngle;
-    private IX8NextViewListener mIX8NextViewListener;
-    private TimeHandler mTimeHandler;
+    private final IX8NextViewListener mIX8NextViewListener;
+    private final TimeHandler mTimeHandler;
     private X8AiAutoPhotoExcuteConfirmModule mX8AiAutoPhotoExcuteConfirmModule;
     private View nextRootView;
     private int pitchAngle;
@@ -57,7 +57,7 @@ public class X8AiAutoPhototExcuteController extends AbsX8AiController implements
     private TextView tvP2PTip;
     private TextView tvTime;
     private X8AiTipWithCloseView tvTip;
-    private int type;
+    private final int type;
 
     public X8AiAutoPhototExcuteController(X8sMainActivity activity, View rootView, X8AiAutoPhotoState state, int type) {
         super(rootView);
@@ -66,19 +66,19 @@ public class X8AiAutoPhototExcuteController extends AbsX8AiController implements
         this.mTimeHandler = new TimeHandler();
         this.count = 3;
         this.timeSend = 0;
-        this.mIX8NextViewListener = new IX8NextViewListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiAutoPhototExcuteController.2
-            @Override // com.fimi.app.x8s.interfaces.IX8NextViewListener
+        this.mIX8NextViewListener = new IX8NextViewListener() {
+            @Override
             public void onBackClick() {
                 X8AiAutoPhototExcuteController.this.closeNextUi(true);
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8NextViewListener
+            @Override
             public void onExcuteClick() {
                 X8AiAutoPhototExcuteController.this.closeNextUi(false);
                 X8AiAutoPhototExcuteController.this.mX8AiAutoPhotoExcuteConfirmModule.startAiAutoPhoto(X8AiAutoPhototExcuteController.this);
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8NextViewListener
+            @Override
             public void onSaveClick() {
             }
         };
@@ -93,14 +93,14 @@ public class X8AiAutoPhototExcuteController extends AbsX8AiController implements
         return i;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
     }
 
     public void initViewStubViews(View view) {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
         if (this.handleView != null) {
             this.imgNext.setOnClickListener(this);
@@ -109,15 +109,15 @@ public class X8AiAutoPhototExcuteController extends AbsX8AiController implements
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
-    @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+    @Override
     public void onLeft() {
     }
 
-    @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+    @Override
     public void onRight() {
         if (this.state == X8AiAutoPhotoState.RUNNING) {
             stopAutoPhoto();
@@ -135,7 +135,7 @@ public class X8AiAutoPhototExcuteController extends AbsX8AiController implements
         this.dialog.show();
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.img_ai_follow_back) {
@@ -164,17 +164,17 @@ public class X8AiAutoPhototExcuteController extends AbsX8AiController implements
         this.isShow = true;
         LayoutInflater inflater = LayoutInflater.from(this.rootView.getContext());
         this.handleView = inflater.inflate(R.layout.x8_ai_auto_photo_layout, (ViewGroup) this.rootView, true);
-        this.tvP2PTip = (TextView) this.handleView.findViewById(R.id.img_ai_p2p_tip);
+        this.tvP2PTip = this.handleView.findViewById(R.id.img_ai_p2p_tip);
         this.flagSmall = this.handleView.findViewById(R.id.rl_flag_small);
         this.flagSmall.setOnClickListener(this);
-        this.imgNext = (ImageView) this.handleView.findViewById(R.id.img_ai_follow_next);
-        this.imgBack = (ImageView) this.handleView.findViewById(R.id.img_ai_follow_back);
-        this.tvTip = (X8AiTipWithCloseView) this.handleView.findViewById(R.id.v_content_tip);
-        this.imgAutoBg = (ImageView) this.handleView.findViewById(R.id.img_ai_auto_photo_bg);
+        this.imgNext = this.handleView.findViewById(R.id.img_ai_follow_next);
+        this.imgBack = this.handleView.findViewById(R.id.img_ai_follow_back);
+        this.tvTip = this.handleView.findViewById(R.id.v_content_tip);
+        this.imgAutoBg = this.handleView.findViewById(R.id.img_ai_auto_photo_bg);
         this.mAngle = this.handleView.findViewById(R.id.rl_angle);
-        this.imgCloud = (ImageView) this.handleView.findViewById(R.id.img_cloud);
-        this.tvCloud = (TextView) this.handleView.findViewById(R.id.tv_cloud);
-        this.tvTime = (TextView) this.handleView.findViewById(R.id.img_ai_time);
+        this.imgCloud = this.handleView.findViewById(R.id.img_cloud);
+        this.tvCloud = this.handleView.findViewById(R.id.tv_cloud);
+        this.tvTime = this.handleView.findViewById(R.id.img_ai_time);
         this.nextRootView = this.rootView.findViewById(R.id.x8_main_ai_auto_photo_next_content);
         this.blank = this.rootView.findViewById(R.id.x8_main_ai_auto_photo_next_blank);
         this.mX8AiAutoPhotoExcuteConfirmModule = new X8AiAutoPhotoExcuteConfirmModule();
@@ -243,7 +243,7 @@ public class X8AiAutoPhototExcuteController extends AbsX8AiController implements
             ObjectAnimator translationRight = ObjectAnimator.ofFloat(this.nextRootView, "translationX", 0.0f, this.width);
             translationRight.setDuration(300L);
             translationRight.start();
-            translationRight.addListener(new AnimatorListenerAdapter() { // from class: com.fimi.app.x8s.controls.aifly.X8AiAutoPhototExcuteController.1
+            translationRight.addListener(new AnimatorListenerAdapter() {
                 @Override
                 // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationEnd(Animator animation) {
@@ -280,8 +280,8 @@ public class X8AiAutoPhototExcuteController extends AbsX8AiController implements
 
     public void stopAutoPhoto() {
         this.state = X8AiAutoPhotoState.STOP;
-        this.activity.getFcManager().setAiAutoPhotoExit(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiAutoPhototExcuteController.3
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.activity.getFcManager().setAiAutoPhotoExit(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8AiAutoPhototExcuteController.this.taskExit();
@@ -291,8 +291,8 @@ public class X8AiAutoPhototExcuteController extends AbsX8AiController implements
     }
 
     public void setAiVcClose() {
-        this.activity.getFcManager().setAiVcClose(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiAutoPhototExcuteController.4
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.activity.getFcManager().setAiVcClose(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8AiAutoPhototExcuteController.this.activity.getmX8AiTrackController().closeUi();
@@ -302,8 +302,8 @@ public class X8AiAutoPhototExcuteController extends AbsX8AiController implements
     }
 
     public void setAiVcNotityFc() {
-        this.activity.getFcManager().setAiVcNotityFc(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiAutoPhototExcuteController.5
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.activity.getFcManager().setAiVcNotityFc(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                 }
@@ -311,7 +311,7 @@ public class X8AiAutoPhototExcuteController extends AbsX8AiController implements
         });
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IX8AiAutoPhototExcuteListener
+    @Override
     public void autoPhototExcute(boolean isExcute) {
         if (isExcute) {
             this.imgAutoBg.setVisibility(8);
@@ -327,11 +327,11 @@ public class X8AiAutoPhototExcuteController extends AbsX8AiController implements
         taskExit();
     }
 
-    @Override // com.fimi.app.x8s.controls.X8AiTrackController.OnAiTrackControllerListener
+    @Override
     public void onChangeGoLocation(float left, float right, float top, float bottom, int w, int h) {
     }
 
-    @Override // com.fimi.app.x8s.controls.X8AiTrackController.OnAiTrackControllerListener
+    @Override
     public void setGoEnabled(boolean b) {
         if (b) {
             this.imgNext.setEnabled(true);
@@ -339,19 +339,19 @@ public class X8AiAutoPhototExcuteController extends AbsX8AiController implements
         }
     }
 
-    @Override // com.fimi.app.x8s.controls.X8AiTrackController.OnAiTrackControllerListener
+    @Override
     public void onTouchActionDown() {
     }
 
-    @Override // com.fimi.app.x8s.controls.X8AiTrackController.OnAiTrackControllerListener
+    @Override
     public void onTouchActionUp() {
     }
 
-    @Override // com.fimi.app.x8s.controls.X8AiTrackController.OnAiTrackControllerListener
+    @Override
     public void onTracking() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         if (this.isShow) {
             if (!b) {
@@ -388,7 +388,7 @@ public class X8AiAutoPhototExcuteController extends AbsX8AiController implements
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public boolean onClickBackKey() {
         return false;
     }
@@ -413,8 +413,8 @@ public class X8AiAutoPhototExcuteController extends AbsX8AiController implements
         if (this.state == X8AiAutoPhotoState.IDLE) {
             if (this.timeSend == 0) {
                 this.timeSend = 1;
-                this.activity.getFcManager().sysCtrlMode2AiVc(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiAutoPhototExcuteController.6
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                this.activity.getFcManager().sysCtrlMode2AiVc(new UiCallBackListener() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, Object o) {
                     }
                 }, X8Task.VCM_SELFIE.ordinal());
@@ -424,30 +424,27 @@ public class X8AiAutoPhototExcuteController extends AbsX8AiController implements
         }
     }
 
-    /* loaded from: classes.dex */
+
     public class TimeHandler extends Handler {
         private TimeHandler() {
         }
 
-        @Override // android.os.Handler
+        @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            switch (msg.what) {
-                case 1:
-                    if (X8AiAutoPhototExcuteController.this.count >= 0) {
-                        if (X8AiAutoPhototExcuteController.this.count != 0) {
-                            X8AiAutoPhototExcuteController.this.tvTime.setText("" + X8AiAutoPhototExcuteController.access$110(X8AiAutoPhototExcuteController.this));
-                        } else {
-                            X8AiAutoPhototExcuteController.access$110(X8AiAutoPhototExcuteController.this);
-                            X8AiAutoPhototExcuteController.this.tvTime.setText("GO");
-                        }
-                        sendEmptyMessageDelayed(1, 1000L);
-                        return;
+            if (msg.what == 1) {
+                if (X8AiAutoPhototExcuteController.this.count >= 0) {
+                    if (X8AiAutoPhototExcuteController.this.count != 0) {
+                        X8AiAutoPhototExcuteController.this.tvTime.setText("" + X8AiAutoPhototExcuteController.access$110(X8AiAutoPhototExcuteController.this));
+                    } else {
+                        X8AiAutoPhototExcuteController.access$110(X8AiAutoPhototExcuteController.this);
+                        X8AiAutoPhototExcuteController.this.tvTime.setText("GO");
                     }
-                    X8AiAutoPhototExcuteController.this.tvTime.setVisibility(8);
+                    sendEmptyMessageDelayed(1, 1000L);
                     return;
-                default:
-                    return;
+                }
+                X8AiAutoPhototExcuteController.this.tvTime.setVisibility(8);
+                return;
             }
         }
     }

@@ -6,7 +6,7 @@ import com.fimi.kernel.dataparser.milink.LinkPayload;
 import com.fimi.kernel.dataparser.usb.UsbLinkPacket;
 import com.fimi.x8sdk.common.GlobalConfig;
 
-/* loaded from: classes2.dex */
+
 public class X8BaseCamJsonData extends BaseCommand {
     public static final int GROUP_JSON = 238;
     byte[] payLoad;
@@ -31,7 +31,7 @@ public class X8BaseCamJsonData extends BaseCommand {
         return packet.packCmd();
     }
 
-    @Override // com.fimi.kernel.dataparser.milink.LinkMessage
+    @Override
     public void unpack(LinkPayload payload) {
     }
 }

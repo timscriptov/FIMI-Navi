@@ -11,10 +11,10 @@ import org.greenrobot.greendao.query.WhereCondition;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class GH2DataStasicInfoHelper {
-    private static GH2DataStasicInfoHelper sDataStasicInfoHelper = new GH2DataStasicInfoHelper();
-    private GH2DataStaticInfoDao gh2DataStaticInfoDao = DbCore.getDaoSession().getGH2DataStaticInfoDao();
+    private static final GH2DataStasicInfoHelper sDataStasicInfoHelper = new GH2DataStasicInfoHelper();
+    private final GH2DataStaticInfoDao gh2DataStaticInfoDao = DbCore.getDaoSession().getGH2DataStaticInfoDao();
 
     public static GH2DataStasicInfoHelper getInstance() {
         return sDataStasicInfoHelper;

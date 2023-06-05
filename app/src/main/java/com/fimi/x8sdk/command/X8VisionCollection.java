@@ -4,7 +4,7 @@ import com.fimi.kernel.connect.interfaces.IPersonalDataCallBack;
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 import com.fimi.kernel.dataparser.usb.UiCallBackListener;
 
-/* loaded from: classes2.dex */
+
 public class X8VisionCollection extends X8BaseCmd {
     public static final byte MSG_GROUP_VISION_0F = 15;
     public static final byte MSG_SET_FPV_LOST_SEQ = 17;
@@ -38,7 +38,7 @@ public class X8VisionCollection extends X8BaseCmd {
     public X8SendCmd setVcRectF(int x, int y, int w, int h, int classfier) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_CV.ordinal());
         byte[] payload = new byte[14];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 15;
         int i2 = i + 1;
         payload[i] = 3;
@@ -74,7 +74,7 @@ public class X8VisionCollection extends X8BaseCmd {
     public X8SendCmd setVcFpvMode(int vcFpvMode) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_CV.ordinal());
         byte[] payload = new byte[5];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 15;
         int i2 = i + 1;
         payload[i] = 16;
@@ -92,7 +92,7 @@ public class X8VisionCollection extends X8BaseCmd {
     public X8SendCmd setVcFpvLostSeq(int seq) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_CV.ordinal());
         byte[] payload = new byte[8];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 15;
         int i2 = i + 1;
         payload[i] = 17;

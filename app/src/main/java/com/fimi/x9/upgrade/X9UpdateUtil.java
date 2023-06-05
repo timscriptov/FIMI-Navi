@@ -118,7 +118,7 @@ public class X9UpdateUtil {
     @NonNull
     public static String getFirmwareSiZe() {
         double allFileSizeM = ((getUpdateFirmwareSize() * 1.0d) / 1024.0d) / 1024.0d;
-        return String.valueOf(NumberUtil.decimalPointStr(allFileSizeM, 2)) + "M";
+        return NumberUtil.decimalPointStr(allFileSizeM, 2) + "M";
     }
 
     public static long getUpdateFirmwareSize() {

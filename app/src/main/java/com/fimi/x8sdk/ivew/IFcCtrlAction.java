@@ -4,7 +4,7 @@ import com.fimi.kernel.dataparser.usb.UiCallBackListener;
 import com.fimi.x8sdk.dataparser.AckGetFcParam;
 import com.fimi.x8sdk.dataparser.AckGetRetHeight;
 
-/* loaded from: classes2.dex */
+
 public interface IFcCtrlAction {
     void checkCloudCalibrationProgress(UiCallBackListener uiCallBackListener);
 

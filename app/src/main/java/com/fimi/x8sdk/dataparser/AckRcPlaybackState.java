@@ -3,8 +3,6 @@ package com.fimi.x8sdk.dataparser;
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 
 
-
-/* loaded from: classes2.dex */
 public class AckRcPlaybackState extends X8BaseMessage {
     private int buttonState;
     private short rc0;
@@ -42,7 +40,7 @@ public class AckRcPlaybackState extends X8BaseMessage {
         return this.rc5;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         this.rc0 = packet.getPayLoad4().getShort();
@@ -54,7 +52,7 @@ public class AckRcPlaybackState extends X8BaseMessage {
         this.buttonState = packet.getPayLoad4().getShort();
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public String toString() {
         return "AckRcCilbrationState{, status=" + this.buttonState + ", rc0=" + ((int) this.rc0) + ", rc1=" + ((int) this.rc1) + ", rc2=" + ((int) this.rc2) + ", rc3=" + ((int) this.rc3) + ", rc4=" + ((int) this.rc4) + ", rc5=" + ((int) this.rc5) + '}';
     }

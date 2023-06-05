@@ -2,7 +2,7 @@ package com.fimi.app.x8s.test;
 
 import androidx.core.view.ViewCompat;
 
-/* loaded from: classes.dex */
+
 public class TestJava {
     public static void main(String[] args) {
         byte[] arr = {51, 51, -64, -64};
@@ -17,12 +17,12 @@ public class TestJava {
     }
 
     public static float byteToFloat(byte[] arr, int index) {
-        int i = ((-16777216) & (arr[index + 0] << 24)) | (16711680 & (arr[index + 1] << 16)) | (65280 & (arr[index + 2] << 8)) | (arr[index + 3] & 255);
+        int i = ((-16777216) & (arr[index] << 24)) | (16711680 & (arr[index + 1] << 16)) | (65280 & (arr[index + 2] << 8)) | (arr[index + 3] & 255);
         return Float.intBitsToFloat(i);
     }
 
     public static float byte2float(byte[] b, int index) {
-        int l = b[index + 0];
-        return Float.intBitsToFloat((int) ((((int) ((((int) ((l & 255) | (b[index + 1] << 8))) & 65535) | (b[index + 2] << 16))) & ViewCompat.MEASURED_SIZE_MASK) | (b[index + 3] << 24)));
+        int l = b[index];
+        return Float.intBitsToFloat((((((l & 255) | (b[index + 1] << 8)) & 65535) | (b[index + 2] << 16)) & ViewCompat.MEASURED_SIZE_MASK) | (b[index + 3] << 24));
     }
 }

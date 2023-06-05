@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class ByteArrayOutputStream extends OutputStream {
     private static final byte[] EMPTY_BYTE_ARRAY = new byte[0];
     private final List<byte[]> buffers;
@@ -59,7 +59,7 @@ public class ByteArrayOutputStream extends OutputStream {
         this.buffers.add(this.currentBuffer);
     }
 
-    @Override // java.io.OutputStream
+    @Override
     public void write(byte[] b, int off, int len) {
         if (off < 0 || off > b.length || len < 0 || off + len > b.length || off + len < 0) {
             throw new IndexOutOfBoundsException();
@@ -83,7 +83,7 @@ public class ByteArrayOutputStream extends OutputStream {
         }
     }
 
-    @Override // java.io.OutputStream
+    @Override
     public synchronized void write(int b) {
         int inBufferPos = this.count - this.filledBufferSum;
         if (inBufferPos == this.currentBuffer.length) {
@@ -116,7 +116,7 @@ public class ByteArrayOutputStream extends OutputStream {
         return this.count;
     }
 
-    @Override // java.io.OutputStream, java.io.Closeable, java.lang.AutoCloseable
+    @Override
     public void close() throws IOException {
     }
 

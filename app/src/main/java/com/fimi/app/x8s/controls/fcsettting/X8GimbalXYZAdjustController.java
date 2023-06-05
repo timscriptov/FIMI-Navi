@@ -24,7 +24,7 @@ import com.fimi.widget.X8ToastUtil;
 import com.fimi.x8sdk.controller.X8GimbalManager;
 import com.fimi.x8sdk.dataparser.AckCloudParamsNew;
 
-/* loaded from: classes.dex */
+
 public class X8GimbalXYZAdjustController extends AbsX8MenuBoxControllers implements View.OnClickListener {
     private final X8sMainActivity activity;
     Button btnCalibrate;
@@ -32,14 +32,14 @@ public class X8GimbalXYZAdjustController extends AbsX8MenuBoxControllers impleme
     Button x8BtnXyzAdjustSave;
     private Button btnGet;
     private Button btnSave;
-    private String defaultUnit;
+    private final String defaultUnit;
     private IX8MainTopBarListener ix8MainTopBarListener;
     private IX8GimbalXYZAdjustListener listener;
     private Context mContext;
     private X8GimbalManager mX8GimbalManager;
-    private float maxDefaultAdjustValue;
-    private float minDefaultAdjustValue;
-    private float valueOnFoot;
+    private final float maxDefaultAdjustValue;
+    private final float minDefaultAdjustValue;
+    private final float valueOnFoot;
     private X8DoubleCustomDialog x8DoubleCustomDialog;
     private X8AiTipWithCloseView x8GimbalXYZAdiustTip;
     private X8SingleCustomDialog x8SingleCustomDialog;
@@ -64,13 +64,13 @@ public class X8GimbalXYZAdjustController extends AbsX8MenuBoxControllers impleme
         LayoutInflater layoutInflater = LayoutInflater.from(this.rootView.getContext());
         this.handleView = layoutInflater.inflate(R.layout.x8_gimbal_xyz_adjust_layout, (ViewGroup) this.rootView, true);
         this.mContext = this.handleView.getContext();
-        this.x8GimbalXYZAdiustTip = (X8AiTipWithCloseView) this.handleView.findViewById(R.id.x8_gimbal_xyz_adiust_tip);
+        this.x8GimbalXYZAdiustTip = this.handleView.findViewById(R.id.x8_gimbal_xyz_adiust_tip);
         this.x8GimbalXYZAdiustTip.setTipText(getString(R.string.x8_gimbal_xyz_adjust_hint));
-        this.x8BtnXyzAdjustExit = (Button) this.handleView.findViewById(R.id.x8_btn_xyz_adjust_exit);
-        this.x8BtnXyzAdjustSave = (Button) this.handleView.findViewById(R.id.x8_btn_xyz_adjust_save);
-        this.x8ViewGimbalP = (X8GimbalXYZAdjustRelayout) this.handleView.findViewById(R.id.x8_view_gimbal_p);
-        this.x8ViewGimbalR = (X8GimbalXYZAdjustRelayout) this.handleView.findViewById(R.id.x8_view_gimbal_r);
-        this.x8ViewGimbalY = (X8GimbalXYZAdjustRelayout) this.handleView.findViewById(R.id.x8_view_gimbal_y);
+        this.x8BtnXyzAdjustExit = this.handleView.findViewById(R.id.x8_btn_xyz_adjust_exit);
+        this.x8BtnXyzAdjustSave = this.handleView.findViewById(R.id.x8_btn_xyz_adjust_save);
+        this.x8ViewGimbalP = this.handleView.findViewById(R.id.x8_view_gimbal_p);
+        this.x8ViewGimbalR = this.handleView.findViewById(R.id.x8_view_gimbal_r);
+        this.x8ViewGimbalY = this.handleView.findViewById(R.id.x8_view_gimbal_y);
         this.x8ViewGimbalR.getTvGimbalXyzName().setText(getString(R.string.x8_gimbal_xyz_adjust_r));
         this.x8ViewGimbalP.getTvGimbalXyzName().setText(getString(R.string.x8_gimbal_xyz_adjust_p));
         this.x8ViewGimbalY.getTvGimbalXyzName().setText(getString(R.string.x8_gimbal_xyz_adjust_y));
@@ -86,8 +86,8 @@ public class X8GimbalXYZAdjustController extends AbsX8MenuBoxControllers impleme
     private void initClickAction() {
         this.x8BtnXyzAdjustExit.setOnClickListener(this);
         this.x8BtnXyzAdjustSave.setOnClickListener(this);
-        this.mX8GimbalManager.getGcParamsNew(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GimbalXYZAdjustController.1
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.mX8GimbalManager.getGcParamsNew(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     AckCloudParamsNew params = (AckCloudParamsNew) o;
@@ -101,16 +101,16 @@ public class X8GimbalXYZAdjustController extends AbsX8MenuBoxControllers impleme
                 }
             }
         });
-        this.x8ViewGimbalR.getBtnGimbalXyzAdd().setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GimbalXYZAdjustController.2
-            @Override // android.view.View.OnClickListener
+        this.x8ViewGimbalR.getBtnGimbalXyzAdd().setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 X8GimbalXYZAdjustController.this.xyzValue = X8GimbalXYZAdjustController.this.getTxtValue();
                 final float newValue = X8GimbalXYZAdjustController.this.xyzValue[0] + X8GimbalXYZAdjustController.this.valueOnFoot;
                 if (X8GimbalXYZAdjustController.this.gimbalXyzAdjustMaxHint(newValue)) {
                     X8ToastUtil.showToast(X8GimbalXYZAdjustController.this.mContext, X8GimbalXYZAdjustController.this.getString(R.string.x8_gimbal_xyz_adjust_max_hint), 1);
                 } else {
-                    X8GimbalXYZAdjustController.this.mX8GimbalManager.setGcParamsNew(2, newValue, X8GimbalXYZAdjustController.this.xyzValue[1], X8GimbalXYZAdjustController.this.xyzValue[2], new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GimbalXYZAdjustController.2.1
-                        @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                    X8GimbalXYZAdjustController.this.mX8GimbalManager.setGcParamsNew(2, newValue, X8GimbalXYZAdjustController.this.xyzValue[1], X8GimbalXYZAdjustController.this.xyzValue[2], new UiCallBackListener() {
+                        @Override
                         public void onComplete(CmdResult cmdResult, Object o) {
                             if (cmdResult.isSuccess()) {
                                 X8GimbalXYZAdjustController.this.x8ViewGimbalR.getTvGimbalXyzValue().setText(NumberUtil.decimalPointStr(newValue, 1));
@@ -122,16 +122,16 @@ public class X8GimbalXYZAdjustController extends AbsX8MenuBoxControllers impleme
                 }
             }
         });
-        this.x8ViewGimbalR.getBtnGimbalXyzSubtract().setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GimbalXYZAdjustController.3
-            @Override // android.view.View.OnClickListener
+        this.x8ViewGimbalR.getBtnGimbalXyzSubtract().setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 X8GimbalXYZAdjustController.this.xyzValue = X8GimbalXYZAdjustController.this.getTxtValue();
                 final float newValue = X8GimbalXYZAdjustController.this.xyzValue[0] - X8GimbalXYZAdjustController.this.valueOnFoot;
                 if (X8GimbalXYZAdjustController.this.gimbalXyzAdjustMaxHint(newValue)) {
                     X8ToastUtil.showToast(X8GimbalXYZAdjustController.this.mContext, X8GimbalXYZAdjustController.this.getString(R.string.x8_gimbal_xyz_adjust_max_hint), 1);
                 } else {
-                    X8GimbalXYZAdjustController.this.mX8GimbalManager.setGcParamsNew(2, newValue, X8GimbalXYZAdjustController.this.xyzValue[1], X8GimbalXYZAdjustController.this.xyzValue[2], new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GimbalXYZAdjustController.3.1
-                        @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                    X8GimbalXYZAdjustController.this.mX8GimbalManager.setGcParamsNew(2, newValue, X8GimbalXYZAdjustController.this.xyzValue[1], X8GimbalXYZAdjustController.this.xyzValue[2], new UiCallBackListener() {
+                        @Override
                         public void onComplete(CmdResult cmdResult, Object o) {
                             if (cmdResult.isSuccess()) {
                                 X8GimbalXYZAdjustController.this.x8ViewGimbalR.getTvGimbalXyzValue().setText(NumberUtil.decimalPointStr(newValue, 1));
@@ -143,16 +143,16 @@ public class X8GimbalXYZAdjustController extends AbsX8MenuBoxControllers impleme
                 }
             }
         });
-        this.x8ViewGimbalP.getBtnGimbalXyzAdd().setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GimbalXYZAdjustController.4
-            @Override // android.view.View.OnClickListener
+        this.x8ViewGimbalP.getBtnGimbalXyzAdd().setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 X8GimbalXYZAdjustController.this.xyzValue = X8GimbalXYZAdjustController.this.getTxtValue();
                 final float newValue = X8GimbalXYZAdjustController.this.xyzValue[1] + X8GimbalXYZAdjustController.this.valueOnFoot;
                 if (X8GimbalXYZAdjustController.this.gimbalXyzAdjustMaxHint(newValue)) {
                     X8ToastUtil.showToast(X8GimbalXYZAdjustController.this.mContext, X8GimbalXYZAdjustController.this.getString(R.string.x8_gimbal_xyz_adjust_max_hint), 1);
                 } else {
-                    X8GimbalXYZAdjustController.this.mX8GimbalManager.setGcParamsNew(2, X8GimbalXYZAdjustController.this.xyzValue[0], newValue, X8GimbalXYZAdjustController.this.xyzValue[2], new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GimbalXYZAdjustController.4.1
-                        @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                    X8GimbalXYZAdjustController.this.mX8GimbalManager.setGcParamsNew(2, X8GimbalXYZAdjustController.this.xyzValue[0], newValue, X8GimbalXYZAdjustController.this.xyzValue[2], new UiCallBackListener() {
+                        @Override
                         public void onComplete(CmdResult cmdResult, Object o) {
                             if (cmdResult.isSuccess()) {
                                 X8GimbalXYZAdjustController.this.x8ViewGimbalP.getTvGimbalXyzValue().setText(NumberUtil.decimalPointStr(newValue, 1) + X8GimbalXYZAdjustController.this.defaultUnit);
@@ -164,16 +164,16 @@ public class X8GimbalXYZAdjustController extends AbsX8MenuBoxControllers impleme
                 }
             }
         });
-        this.x8ViewGimbalP.getBtnGimbalXyzSubtract().setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GimbalXYZAdjustController.5
-            @Override // android.view.View.OnClickListener
+        this.x8ViewGimbalP.getBtnGimbalXyzSubtract().setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 X8GimbalXYZAdjustController.this.xyzValue = X8GimbalXYZAdjustController.this.getTxtValue();
                 final float newValue = X8GimbalXYZAdjustController.this.xyzValue[1] - X8GimbalXYZAdjustController.this.valueOnFoot;
                 if (X8GimbalXYZAdjustController.this.gimbalXyzAdjustMaxHint(newValue)) {
                     X8ToastUtil.showToast(X8GimbalXYZAdjustController.this.mContext, X8GimbalXYZAdjustController.this.getString(R.string.x8_gimbal_xyz_adjust_max_hint), 1);
                 } else {
-                    X8GimbalXYZAdjustController.this.mX8GimbalManager.setGcParamsNew(2, X8GimbalXYZAdjustController.this.xyzValue[0], newValue, X8GimbalXYZAdjustController.this.xyzValue[2], new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GimbalXYZAdjustController.5.1
-                        @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                    X8GimbalXYZAdjustController.this.mX8GimbalManager.setGcParamsNew(2, X8GimbalXYZAdjustController.this.xyzValue[0], newValue, X8GimbalXYZAdjustController.this.xyzValue[2], new UiCallBackListener() {
+                        @Override
                         public void onComplete(CmdResult cmdResult, Object o) {
                             if (cmdResult.isSuccess()) {
                                 X8GimbalXYZAdjustController.this.x8ViewGimbalP.getTvGimbalXyzValue().setText(NumberUtil.decimalPointStr(newValue, 1) + X8GimbalXYZAdjustController.this.defaultUnit);
@@ -185,16 +185,16 @@ public class X8GimbalXYZAdjustController extends AbsX8MenuBoxControllers impleme
                 }
             }
         });
-        this.x8ViewGimbalY.getBtnGimbalXyzAdd().setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GimbalXYZAdjustController.6
-            @Override // android.view.View.OnClickListener
+        this.x8ViewGimbalY.getBtnGimbalXyzAdd().setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 X8GimbalXYZAdjustController.this.xyzValue = X8GimbalXYZAdjustController.this.getTxtValue();
                 final float newValue = X8GimbalXYZAdjustController.this.xyzValue[2] + X8GimbalXYZAdjustController.this.valueOnFoot;
                 if (X8GimbalXYZAdjustController.this.gimbalXyzAdjustMaxHint(newValue)) {
                     X8ToastUtil.showToast(X8GimbalXYZAdjustController.this.mContext, X8GimbalXYZAdjustController.this.getString(R.string.x8_gimbal_xyz_adjust_max_hint), 1);
                 } else {
-                    X8GimbalXYZAdjustController.this.mX8GimbalManager.setGcParamsNew(2, X8GimbalXYZAdjustController.this.xyzValue[0], X8GimbalXYZAdjustController.this.xyzValue[1], newValue, new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GimbalXYZAdjustController.6.1
-                        @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                    X8GimbalXYZAdjustController.this.mX8GimbalManager.setGcParamsNew(2, X8GimbalXYZAdjustController.this.xyzValue[0], X8GimbalXYZAdjustController.this.xyzValue[1], newValue, new UiCallBackListener() {
+                        @Override
                         public void onComplete(CmdResult cmdResult, Object o) {
                             if (cmdResult.isSuccess()) {
                                 X8GimbalXYZAdjustController.this.x8ViewGimbalY.getTvGimbalXyzValue().setText(NumberUtil.decimalPointStr(newValue, 1));
@@ -206,16 +206,16 @@ public class X8GimbalXYZAdjustController extends AbsX8MenuBoxControllers impleme
                 }
             }
         });
-        this.x8ViewGimbalY.getBtnGimbalXyzSubtract().setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GimbalXYZAdjustController.7
-            @Override // android.view.View.OnClickListener
+        this.x8ViewGimbalY.getBtnGimbalXyzSubtract().setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 X8GimbalXYZAdjustController.this.xyzValue = X8GimbalXYZAdjustController.this.getTxtValue();
                 final float newValue = X8GimbalXYZAdjustController.this.xyzValue[2] - X8GimbalXYZAdjustController.this.valueOnFoot;
                 if (X8GimbalXYZAdjustController.this.gimbalXyzAdjustMaxHint(newValue)) {
                     X8ToastUtil.showToast(X8GimbalXYZAdjustController.this.mContext, X8GimbalXYZAdjustController.this.getString(R.string.x8_gimbal_xyz_adjust_max_hint), 1);
                 } else {
-                    X8GimbalXYZAdjustController.this.mX8GimbalManager.setGcParamsNew(2, X8GimbalXYZAdjustController.this.xyzValue[0], X8GimbalXYZAdjustController.this.xyzValue[1], newValue, new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GimbalXYZAdjustController.7.1
-                        @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                    X8GimbalXYZAdjustController.this.mX8GimbalManager.setGcParamsNew(2, X8GimbalXYZAdjustController.this.xyzValue[0], X8GimbalXYZAdjustController.this.xyzValue[1], newValue, new UiCallBackListener() {
+                        @Override
                         public void onComplete(CmdResult cmdResult, Object o) {
                             if (cmdResult.isSuccess()) {
                                 X8GimbalXYZAdjustController.this.x8ViewGimbalY.getTvGimbalXyzValue().setText(NumberUtil.decimalPointStr(newValue, 1));
@@ -233,15 +233,15 @@ public class X8GimbalXYZAdjustController extends AbsX8MenuBoxControllers impleme
         this.mX8GimbalManager = mX8GimbalManager;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
@@ -254,11 +254,11 @@ public class X8GimbalXYZAdjustController extends AbsX8MenuBoxControllers impleme
         return currentValue > this.maxDefaultAdjustValue || currentValue < this.minDefaultAdjustValue;
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View view) {
         int vid = view.getId();
         if (vid == R.id.x8_btn_xyz_adjust_exit) {
-            this.x8DoubleCustomDialog = new X8DoubleCustomDialog(this.handleView.getContext(), getString(R.string.x8_gimbal_xyz_adjust_signout), getString(R.string.x8_gimbal_xyz_adjust_exit_hint), new X8DoubleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GimbalXYZAdjustController.8
+            this.x8DoubleCustomDialog = new X8DoubleCustomDialog(this.handleView.getContext(), getString(R.string.x8_gimbal_xyz_adjust_signout), getString(R.string.x8_gimbal_xyz_adjust_exit_hint), new X8DoubleCustomDialog.onDialogButtonClickListener() {
                 @Override
                 // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
                 public void onLeft() {
@@ -268,8 +268,8 @@ public class X8GimbalXYZAdjustController extends AbsX8MenuBoxControllers impleme
                 @Override
                 // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
                 public void onRight() {
-                    X8GimbalXYZAdjustController.this.mX8GimbalManager.setGcParamsNew(1, 0.0f, 0.0f, 0.0f, new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GimbalXYZAdjustController.8.1
-                        @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                    X8GimbalXYZAdjustController.this.mX8GimbalManager.setGcParamsNew(1, 0.0f, 0.0f, 0.0f, new UiCallBackListener() {
+                        @Override
                         public void onComplete(CmdResult cmdResult, Object o) {
                         }
                     });
@@ -281,8 +281,8 @@ public class X8GimbalXYZAdjustController extends AbsX8MenuBoxControllers impleme
         } else if (vid == R.id.x8_btn_xyz_adjust_save) {
             if (SPStoreManager.getInstance().getBoolean(HostConstants.SP_KEY_NOT_TIPS, false)) {
                 if (this.listener != null) {
-                    this.mX8GimbalManager.setGcParamsNew(3, 0.0f, 0.0f, 0.0f, new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GimbalXYZAdjustController.9
-                        @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                    this.mX8GimbalManager.setGcParamsNew(3, 0.0f, 0.0f, 0.0f, new UiCallBackListener() {
+                        @Override
                         public void onComplete(CmdResult cmdResult, Object o) {
                             X8GimbalXYZAdjustController.this.ix8MainTopBarListener.onGcClick();
                         }
@@ -291,14 +291,14 @@ public class X8GimbalXYZAdjustController extends AbsX8MenuBoxControllers impleme
                 }
                 return;
             }
-            this.x8SingleCustomDialog = new X8SingleCustomDialog(this.handleView.getContext(), getString(R.string.x8_save), getString(R.string.x8_gimbal_xyz_adjust_save_hint), getString(R.string.x8_gimbal_xyz_adjust_promptly), true, new X8SingleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GimbalXYZAdjustController.10
+            this.x8SingleCustomDialog = new X8SingleCustomDialog(this.handleView.getContext(), getString(R.string.x8_save), getString(R.string.x8_gimbal_xyz_adjust_save_hint), getString(R.string.x8_gimbal_xyz_adjust_promptly), true, new X8SingleCustomDialog.onDialogButtonClickListener() {
                 @Override
                 // com.fimi.app.x8s.widget.X8SingleCustomDialog.onDialogButtonClickListener
                 public void onSingleButtonClick() {
                     X8GimbalXYZAdjustController.this.x8SingleCustomDialog.dismiss();
                     if (X8GimbalXYZAdjustController.this.listener != null) {
-                        X8GimbalXYZAdjustController.this.mX8GimbalManager.setGcParamsNew(3, 0.0f, 0.0f, 0.0f, new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GimbalXYZAdjustController.10.1
-                            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                        X8GimbalXYZAdjustController.this.mX8GimbalManager.setGcParamsNew(3, 0.0f, 0.0f, 0.0f, new UiCallBackListener() {
+                            @Override
                             public void onComplete(CmdResult cmdResult, Object o) {
                                 X8GimbalXYZAdjustController.this.ix8MainTopBarListener.onGcClick();
                             }

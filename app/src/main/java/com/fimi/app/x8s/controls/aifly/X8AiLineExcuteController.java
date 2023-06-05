@@ -57,14 +57,14 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class X8AiLineExcuteController extends AbsX8AiController implements View.OnClickListener, IX8MarkerListener, X8DoubleCustomDialog.onDialogButtonClickListener, X8AiTrackController.OnAiTrackControllerListener {
     protected int MAX_WIDTH;
     protected boolean isNextShow;
     protected boolean isShow;
     protected int width;
     int i;
-    private X8sMainActivity activity;
+    private final X8sMainActivity activity;
     private View blank;
     private int count;
     private int countAction;
@@ -86,17 +86,17 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
     private AiLineGetPointState mAiLineGetPointState;
     private CameraManager mCameraManager;
     private X8BaseModule mCurrentModule;
-    private IX8NextViewListener mIX8NextViewListener;
-    private List<AckGetAiLinePoint> mInterestList;
-    private List<AckGetAiLinePoint> mList;
-    private List<AckGetAiLinePointsAction> mListAtions;
+    private final IX8NextViewListener mIX8NextViewListener;
+    private final List<AckGetAiLinePoint> mInterestList;
+    private final List<AckGetAiLinePoint> mList;
+    private final List<AckGetAiLinePointsAction> mListAtions;
     private X8AiTipWithCloseView mTipBgView;
     private X8AiLineInterestPointController mX8AiLineInterestPointController;
     private X8AiLinesExcuteConfirmModule mX8AiLinesExcuteConfirmModule;
     private X8AiLinesPointValueModule mX8AiLinesPointValueModule;
-    private X8AilinePrameter mX8AilinePrameter;
+    private final X8AilinePrameter mX8AilinePrameter;
     private X8AiLineState mX8LineState;
-    private int mode;
+    private final int mode;
     private LineModel model;
     private View nextRootView;
     private View rlAdd;
@@ -119,13 +119,13 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
         this.timeSend = 0;
         this.mAiLineGetPointState = AiLineGetPointState.IDLE;
         this.i = 0;
-        this.mIX8NextViewListener = new IX8NextViewListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiLineExcuteController.6
-            @Override // com.fimi.app.x8s.interfaces.IX8NextViewListener
+        this.mIX8NextViewListener = new IX8NextViewListener() {
+            @Override
             public void onBackClick() {
                 X8AiLineExcuteController.this.closeNextUiFromNext(true);
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8NextViewListener
+            @Override
             public void onExcuteClick() {
                 X8AiLineExcuteController.this.closeNextUi(false);
                 X8AiLineExcuteController.this.imgEdit.setVisibility(8);
@@ -145,7 +145,7 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
                 X8AiLineExcuteController.this.activity.getmMapVideoController().getFimiMap().getAiLineManager().removeInterstPointByRunning();
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8NextViewListener
+            @Override
             public void onSaveClick() {
                 X8AiLineExcuteController.this.closeNextUiFromNext(true);
                 X8AiLineExcuteController.this.closeAiLine();
@@ -169,11 +169,11 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
         return i;
     }
 
-    @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+    @Override
     public void onLeft() {
     }
 
-    @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+    @Override
     public void onRight() {
         if (this.mX8LineState == X8AiLineState.RUNNING || this.mX8LineState == X8AiLineState.RUNNING2) {
             lineTaskExite();
@@ -184,14 +184,14 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
         this.activity.getmMapVideoController().getFimiMap().getAiLineManager().setMarkerViewInfo(altitude);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IX8MarkerListener
+    @Override
     public void onMarkerSelect(boolean onSelect, float altitude, MapPointLatLng mpl, boolean isClick) {
         if (onSelect && !isClick) {
             openPointValue(mpl);
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IX8MarkerListener
+    @Override
     public void onMarkerSizeChange(int size) {
         if (size > 0) {
             this.imgEdit.setEnabled(true);
@@ -232,12 +232,12 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
         return this.mX8AiLineInterestPointController;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IX8MarkerListener
+    @Override
     public void onInterestSizeEnable(boolean b) {
         this.mX8AiLineInterestPointController.setInterestEnable(b);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IX8MarkerListener
+    @Override
     public Rect getDeletePosition() {
         Rect viewRect = new Rect();
         int[] location = new int[2];
@@ -249,7 +249,7 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
         return viewRect;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IX8MarkerListener
+    @Override
     public void onRunIndex(int index, int action) {
         String msg = "";
         if (!((action == -1) | SPStoreManager.getInstance().getBoolean("isExecuteCurveProcess", false))) {
@@ -279,7 +279,7 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IX8MarkerListener
+    @Override
     public int getOration() {
         return this.mX8AilinePrameter.getOrientation();
     }
@@ -292,7 +292,7 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
         this.model = model;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
     }
 
@@ -302,15 +302,15 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
     public void addInreterstMarker() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public boolean onClickBackKey() {
         return false;
     }
@@ -325,12 +325,12 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
     }
 
     public void showNoSaveExit() {
-        X8DoubleCustomDialog dialogExiteNoSave = new X8DoubleCustomDialog(this.rootView.getContext(), getString(R.string.x8_ai_fly_point_no_save_exit_title), returnTipString(), new X8DoubleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiLineExcuteController.1
-            @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+        X8DoubleCustomDialog dialogExiteNoSave = new X8DoubleCustomDialog(this.rootView.getContext(), getString(R.string.x8_ai_fly_point_no_save_exit_title), returnTipString(), new X8DoubleCustomDialog.onDialogButtonClickListener() {
+            @Override
             public void onLeft() {
             }
 
-            @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+            @Override
             public void onRight() {
                 X8AiLineExcuteController.this.closeAiLine();
             }
@@ -354,7 +354,7 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
         }
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.img_ai_follow_back) {
@@ -409,7 +409,7 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
         if (this.deleteDialoag == null) {
             String t = this.rootView.getContext().getString(R.string.x8_ai_fly_lines_delete_title);
             String m = this.rootView.getContext().getString(R.string.x8_ai_fly_lines_delete_content);
-            this.deleteDialoag = new X8DoubleCustomDialog(this.rootView.getContext(), t, m, new X8DoubleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiLineExcuteController.2
+            this.deleteDialoag = new X8DoubleCustomDialog(this.rootView.getContext(), t, m, new X8DoubleCustomDialog.onDialogButtonClickListener() {
                 @Override
                 // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
                 public void onLeft() {
@@ -469,30 +469,30 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
     }
 
     public void initView2(View view) {
-        this.imgBack = (ImageView) view.findViewById(R.id.img_ai_follow_back);
-        this.tvP2PTip = (TextView) view.findViewById(R.id.img_ai_p2p_tip);
-        this.mTipBgView = (X8AiTipWithCloseView) view.findViewById(R.id.v_content_tip);
-        this.imgNext = (ImageView) view.findViewById(R.id.img_ai_follow_next);
-        this.imgHistory = (ImageView) view.findViewById(R.id.img_ai_line_history);
-        this.imgEdit = (ImageView) view.findViewById(R.id.img_ai_line_edit);
-        this.imgAdd = (ImageView) view.findViewById(R.id.img_ai_line_add);
+        this.imgBack = view.findViewById(R.id.img_ai_follow_back);
+        this.tvP2PTip = view.findViewById(R.id.img_ai_p2p_tip);
+        this.mTipBgView = view.findViewById(R.id.v_content_tip);
+        this.imgNext = view.findViewById(R.id.img_ai_follow_next);
+        this.imgHistory = view.findViewById(R.id.img_ai_line_history);
+        this.imgEdit = view.findViewById(R.id.img_ai_line_edit);
+        this.imgAdd = view.findViewById(R.id.img_ai_line_add);
         this.rlAdd = view.findViewById(R.id.rl_ai_line_add);
-        this.tvAdd = (TextView) view.findViewById(R.id.tv_ai_line_index);
-        this.tvActionTip = (TextView) view.findViewById(R.id.rl_action_tip1);
-        this.imgDelete = (ImageView) view.findViewById(R.id.img_ai_line_delete);
-        this.imgVcToggle = (ImageView) view.findViewById(R.id.img_vc_targgle);
+        this.tvAdd = view.findViewById(R.id.tv_ai_line_index);
+        this.tvActionTip = view.findViewById(R.id.rl_action_tip1);
+        this.imgDelete = view.findViewById(R.id.img_ai_line_delete);
+        this.imgVcToggle = view.findViewById(R.id.img_vc_targgle);
         this.imgVcToggle.setSelected(true);
         this.imgVcToggle.setOnClickListener(this);
         this.flagSmall = this.handleView.findViewById(R.id.rl_flag_small);
-        this.tvFlag = (TextView) this.handleView.findViewById(R.id.tv_task_tip);
+        this.tvFlag = this.handleView.findViewById(R.id.tv_task_tip);
         this.flagSmall.setOnClickListener(this);
         this.flagSmall.setVisibility(8);
         this.nextRootView = this.rootView.findViewById(R.id.x8_main_ai_line_point_value_content);
         this.blank = this.rootView.findViewById(R.id.x8_main_ai_line_next_blank);
         this.mX8AiLinesExcuteConfirmModule = new X8AiLinesExcuteConfirmModule();
         this.mX8AiLinesPointValueModule = new X8AiLinesPointValueModule();
-        this.mX8AiLineInterestPointController = new X8AiLineInterestPointController((RelativeLayout) view.findViewById(R.id.rl_x8_ai_surround), (ImageView) view.findViewById(R.id.img_interest_point), (TextView) view.findViewById(R.id.tv_tip));
-        this.mX8AiLineInterestPointController.setListener(new X8AiLineInterestPointController.OnInterestTouchUp() { // from class: com.fimi.app.x8s.controls.aifly.X8AiLineExcuteController.3
+        this.mX8AiLineInterestPointController = new X8AiLineInterestPointController(view.findViewById(R.id.rl_x8_ai_surround), view.findViewById(R.id.img_interest_point), view.findViewById(R.id.tv_tip));
+        this.mX8AiLineInterestPointController.setListener(new X8AiLineInterestPointController.OnInterestTouchUp() {
             @Override
             // com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiLineInterestPointController.OnInterestTouchUp
             public void onUp(int x, int y) {
@@ -594,8 +594,8 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
         this.imgDelete.setOnClickListener(this);
         this.imgNext.setOnClickListener(this);
         this.imgHistory.setOnClickListener(this);
-        this.activity.getmMapVideoController().getFimiMap().setmX8AiItemMapListener(new IX8AiItemMapListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiLineExcuteController.4
-            @Override // com.fimi.app.x8s.interfaces.IX8AiItemMapListener
+        this.activity.getmMapVideoController().getFimiMap().setmX8AiItemMapListener(new IX8AiItemMapListener() {
+            @Override
             public X8AiMapItem getCurrentItem() {
                 return X8AiMapItem.AI_LINE;
             }
@@ -697,7 +697,7 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
             ObjectAnimator translationRight = ObjectAnimator.ofFloat(this.nextRootView, "translationX", 0.0f, this.width);
             translationRight.setDuration(300L);
             translationRight.start();
-            translationRight.addListener(new AnimatorListenerAdapter() { // from class: com.fimi.app.x8s.controls.aifly.X8AiLineExcuteController.5
+            translationRight.addListener(new AnimatorListenerAdapter() {
                 @Override
                 // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationEnd(Animator animation) {
@@ -730,8 +730,8 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
     }
 
     private void stopVideo() {
-        this.mCameraManager.stopVideo(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiLineExcuteController.7
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.mCameraManager.stopVideo(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (!cmdResult.isSuccess) {
                     String rtpCamera = X8Rtp.getRtpStringCamera(X8AiLineExcuteController.this.rootView.getContext(), cmdResult.getmMsgRpt());
@@ -743,7 +743,7 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
         });
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public boolean isShow() {
         return this.isShow;
     }
@@ -768,8 +768,8 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
 
     public void lineTaskExite() {
         this.mX8LineState = X8AiLineState.STOP;
-        this.fcManager.setAiLineExite(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiLineExcuteController.8
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.setAiLineExite(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8AiLineExcuteController.this.closeAiLine();
@@ -799,8 +799,8 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
         this.mList.clear();
         this.mListAtions.clear();
         this.mInterestList.clear();
-        this.fcManager.getAiLinePoint(0, new UiCallBackListener<AckGetAiLinePoint>() { // from class: com.fimi.app.x8s.controls.aifly.X8AiLineExcuteController.9
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.getAiLinePoint(0, new UiCallBackListener<AckGetAiLinePoint>() {
+            @Override
             public void onComplete(CmdResult cmdResult, AckGetAiLinePoint o) {
                 if (cmdResult.isSuccess()) {
                     X8AiLineExcuteController.access$1808(X8AiLineExcuteController.this);
@@ -842,8 +842,8 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
 
     public void getAllPoint(final int number) {
         for (int i = 1; i < number; i++) {
-            this.fcManager.getAiLinePoint(i, new UiCallBackListener<AckGetAiLinePoint>() { // from class: com.fimi.app.x8s.controls.aifly.X8AiLineExcuteController.10
-                @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+            this.fcManager.getAiLinePoint(i, new UiCallBackListener<AckGetAiLinePoint>() {
+                @Override
                 public void onComplete(CmdResult cmdResult, AckGetAiLinePoint o) {
                     X8AiLineExcuteController.access$1808(X8AiLineExcuteController.this);
                     if (cmdResult.isSuccess()) {
@@ -871,8 +871,8 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
 
     public void getAllPointValue() {
         for (int i = 0; i < this.totalPoint; i++) {
-            this.fcManager.getAiLinePointValue(i, new UiCallBackListener<AckGetAiLinePointsAction>() { // from class: com.fimi.app.x8s.controls.aifly.X8AiLineExcuteController.11
-                @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+            this.fcManager.getAiLinePointValue(i, new UiCallBackListener<AckGetAiLinePointsAction>() {
+                @Override
                 public void onComplete(CmdResult cmdResult, AckGetAiLinePointsAction o) {
                     X8AiLineExcuteController.access$2308(X8AiLineExcuteController.this);
                     if (cmdResult.isSuccess()) {
@@ -936,7 +936,7 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
         onTaskComplete(taskMode == 1);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         if (this.isShow) {
             if (!b) {
@@ -967,8 +967,8 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
     }
 
     public void setAiVcOpen() {
-        this.fcManager.setAiVcOpen(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiLineExcuteController.12
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.setAiVcOpen(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8AiLineExcuteController.this.imgVcToggle.setSelected(true);
@@ -979,8 +979,8 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
     }
 
     public void setAiVcClose() {
-        this.fcManager.setAiVcClose(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiLineExcuteController.13
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.setAiVcClose(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8AiLineExcuteController.this.imgVcToggle.setSelected(false);
@@ -991,8 +991,8 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
     }
 
     public void setAiVcNotityFc() {
-        this.fcManager.setAiVcNotityFc(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiLineExcuteController.14
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.setAiVcNotityFc(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                 }
@@ -1000,26 +1000,26 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
         });
     }
 
-    @Override // com.fimi.app.x8s.controls.X8AiTrackController.OnAiTrackControllerListener
+    @Override
     public void onChangeGoLocation(float left, float right, float top, float bottom, int w, int h) {
     }
 
-    @Override // com.fimi.app.x8s.controls.X8AiTrackController.OnAiTrackControllerListener
+    @Override
     public void setGoEnabled(boolean b) {
         if (b) {
             setAiVcNotityFc();
         }
     }
 
-    @Override // com.fimi.app.x8s.controls.X8AiTrackController.OnAiTrackControllerListener
+    @Override
     public void onTouchActionDown() {
     }
 
-    @Override // com.fimi.app.x8s.controls.X8AiTrackController.OnAiTrackControllerListener
+    @Override
     public void onTouchActionUp() {
     }
 
-    @Override // com.fimi.app.x8s.controls.X8AiTrackController.OnAiTrackControllerListener
+    @Override
     public void onTracking() {
         this.imgVcToggle.setEnabled(true);
     }
@@ -1141,8 +1141,8 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
         String t = getString(R.string.x8_ai_line_history_disable_excute);
         String m = getString(R.string.x8_ai_line_history_disable_excute_message);
         String str1 = X8NumberUtil.getDistanceNumberString(1000.0f, 1, false);
-        X8SingleCustomDialog farHomeDialog = new X8SingleCustomDialog(this.activity, t, String.format(m, str1), new X8SingleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiLineExcuteController.15
-            @Override // com.fimi.app.x8s.widget.X8SingleCustomDialog.onDialogButtonClickListener
+        X8SingleCustomDialog farHomeDialog = new X8SingleCustomDialog(this.activity, t, String.format(m, str1), new X8SingleCustomDialog.onDialogButtonClickListener() {
+            @Override
             public void onSingleButtonClick() {
             }
         });
@@ -1153,8 +1153,8 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
         if (this.mX8LineState == X8AiLineState.IDLE) {
             if (this.timeSend == 0) {
                 this.timeSend = 1;
-                this.activity.getFcManager().sysCtrlMode2AiVc(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiLineExcuteController.16
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                this.activity.getFcManager().sysCtrlMode2AiVc(new UiCallBackListener() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, Object o) {
                     }
                 }, X8Task.VCM_MISSION.ordinal());
@@ -1168,7 +1168,7 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
         this.mCameraManager = cameraManager;
     }
 
-    /* loaded from: classes.dex */
+
     public enum AiLineGetPointState {
         IDLE,
         FIRST,
@@ -1177,7 +1177,7 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
         END
     }
 
-    /* loaded from: classes.dex */
+
     public enum LineModel {
         MAP,
         VEDIO,

@@ -5,8 +5,6 @@ import com.fimi.x8sdk.entity.FLatLng;
 import com.fimi.x8sdk.util.GpsCorrect;
 
 
-
-/* loaded from: classes2.dex */
 public class AckGetAiSurroundPoint extends X8BaseMessage {
     private float altitude;
     private float altitudeTakeoff;
@@ -17,7 +15,7 @@ public class AckGetAiSurroundPoint extends X8BaseMessage {
     private double longitude;
     private double longitudeTakeoff;
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         this.longitude = packet.getPayLoad4().getDouble().doubleValue();
@@ -66,7 +64,7 @@ public class AckGetAiSurroundPoint extends X8BaseMessage {
         return this.fLatLngTakeoff.latitude;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public String toString() {
         return "AckGetAiSurroundPoint{longitude=" + this.longitude + ", latitude=" + this.latitude + ", altitude=" + this.altitude + ", fLatLng=" + this.fLatLng + ", longitudeTakeoff=" + this.longitudeTakeoff + ", latitudeTakeoff=" + this.latitudeTakeoff + ", altitudeTakeoff=" + this.altitudeTakeoff + ", fLatLngTakeoff=" + this.fLatLngTakeoff + '}';
     }

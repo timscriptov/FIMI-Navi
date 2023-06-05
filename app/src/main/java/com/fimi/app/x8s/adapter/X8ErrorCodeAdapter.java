@@ -13,32 +13,32 @@ import com.fimi.app.x8s.entity.X8ErrorCode;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class X8ErrorCodeAdapter extends BaseAdapter {
-    private Context context;
-    private List<X8ErrorCode> mList;
+    private final Context context;
+    private final List<X8ErrorCode> mList;
 
     public X8ErrorCodeAdapter(Context context, List<X8ErrorCode> mList) {
         this.context = context;
         this.mList = mList;
     }
 
-    @Override // android.widget.Adapter
+    @Override
     public int getCount() {
         return this.mList.size();
     }
 
-    @Override // android.widget.Adapter
+    @Override
     public Object getItem(int position) {
         return this.mList.get(position);
     }
 
-    @Override // android.widget.Adapter
+    @Override
     public long getItemId(int position) {
         return position;
     }
 
-    @Override // android.widget.Adapter
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
@@ -70,7 +70,7 @@ public class X8ErrorCodeAdapter extends BaseAdapter {
         return convertView;
     }
 
-    /* loaded from: classes.dex */
+
     public class ViewHolder {
         public ImageView mImgBg;
         public ImageView mIvArrow;
@@ -82,9 +82,9 @@ public class X8ErrorCodeAdapter extends BaseAdapter {
         public View initView(ViewGroup parent) {
             LayoutInflater inflater = LayoutInflater.from(X8ErrorCodeAdapter.this.context);
             View view = inflater.inflate(R.layout.x8_adapt_error_code, parent, false);
-            this.mTvItemTitle = (TextView) view.findViewById(R.id.tv_item_title);
-            this.mIvArrow = (ImageView) view.findViewById(R.id.iv_arrow);
-            this.mImgBg = (ImageView) view.findViewById(R.id.iv_bg);
+            this.mTvItemTitle = view.findViewById(R.id.tv_item_title);
+            this.mIvArrow = view.findViewById(R.id.iv_arrow);
+            this.mImgBg = view.findViewById(R.id.iv_bg);
             return view;
         }
     }

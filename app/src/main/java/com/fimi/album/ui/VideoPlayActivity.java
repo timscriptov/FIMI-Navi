@@ -10,20 +10,20 @@ import com.fimi.album.widget.CustomVideoView;
 import com.fimi.android.app.R;
 import com.fimi.kernel.base.BaseActivity;
 
-/* loaded from: classes.dex */
+
 public class VideoPlayActivity extends BaseActivity implements CustomVideoView.VideoPlayerListener, IVideoPlayer {
     private CustomVideoView mCustomVideoView;
     private RelativeLayout mRl;
     private String mUrl;
     private VideoPlayerPresneter mVideoPlayerPresneter;
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     protected void setStatusBarColor() {
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void initData() {
-        this.mRl = (RelativeLayout) findViewById(R.id.activity_video_play);
+        this.mRl = findViewById(R.id.activity_video_play);
         this.mUrl = getIntent().getStringExtra(AlbumConstant.VIDEOPLARURL);
         this.mVideoPlayerPresneter = new VideoPlayerPresneter(this);
         this.mCustomVideoView = new CustomVideoView(this, this.mRl);
@@ -32,11 +32,11 @@ public class VideoPlayActivity extends BaseActivity implements CustomVideoView.V
         this.mRl.addView(this.mCustomVideoView);
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void doTrans() {
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     protected int getContentViewLayoutID() {
         return R.layout.album_activity_video_play;
     }
@@ -76,41 +76,41 @@ public class VideoPlayActivity extends BaseActivity implements CustomVideoView.V
         return super.onKeyDown(keyCode, event);
     }
 
-    @Override // com.fimi.album.widget.CustomVideoView.VideoPlayerListener
+    @Override
     public void onBufferUpdate(int time) {
     }
 
-    @Override // com.fimi.album.widget.CustomVideoView.VideoPlayerListener
+    @Override
     public void onClickFullScreenBtn() {
     }
 
-    @Override // com.fimi.album.widget.CustomVideoView.VideoPlayerListener
+    @Override
     public void onClickVideo() {
     }
 
-    @Override // com.fimi.album.widget.CustomVideoView.VideoPlayerListener
+    @Override
     public void onClickBackBtn() {
         finish();
     }
 
-    @Override // com.fimi.album.widget.CustomVideoView.VideoPlayerListener
+    @Override
     public void onClickPlay() {
     }
 
-    @Override // com.fimi.album.widget.CustomVideoView.VideoPlayerListener
+    @Override
     public void onAdVideoLoadSuccess() {
     }
 
-    @Override // com.fimi.album.widget.CustomVideoView.VideoPlayerListener
+    @Override
     public void onAdVideoLoadFailed() {
     }
 
-    @Override // com.fimi.album.widget.CustomVideoView.VideoPlayerListener
+    @Override
     public void onAdVideoLoadComplete() {
         finish();
     }
 
-    @Override // com.fimi.album.iview.IVideoPlayer
+    @Override
     public void timeFunction() {
         if (this.mCustomVideoView != null) {
             this.mCustomVideoView.timeFunction();

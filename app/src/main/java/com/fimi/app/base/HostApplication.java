@@ -11,9 +11,9 @@ import com.fimi.kernel.utils.MediaSDK;
 import com.fimi.libperson.PersonRouter;
 import com.fimi.thirdpartysdk.ThirdLoginManager;
 
-/* loaded from: classes.dex */
+
 public class HostApplication extends BaseApplication {
-    @Override // com.fimi.kernel.base.BaseApplication, android.app.Application
+    @Override
     public void onCreate() {
         super.onCreate();
         HostConstants.initUrl();
@@ -31,7 +31,7 @@ public class HostApplication extends BaseApplication {
         X8sRouter.register(this);
     }
 
-    @Override // android.app.Application
+    @Override
     public void onTerminate() {
         super.onTerminate();
         MediaSDK.getInstance().shutdown();

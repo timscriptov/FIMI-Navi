@@ -6,7 +6,7 @@ import android.view.MotionEvent;
 
 import com.fimi.app.x8s.interfaces.IX8GestureListener;
 
-/* loaded from: classes.dex */
+
 public class X8GestureDetector {
     protected float FLIP_DISTANCE = 50.0f;
     boolean isOnFling = false;
@@ -14,26 +14,26 @@ public class X8GestureDetector {
     private IX8GestureListener x8GestureListener;
 
     public X8GestureDetector(Context activity) {
-        this.mDetector = new GestureDetector(activity, new GestureDetector.OnGestureListener() { // from class: com.fimi.app.x8s.tensortfloow.X8GestureDetector.1
-            @Override // android.view.GestureDetector.OnGestureListener
+        this.mDetector = new GestureDetector(activity, new GestureDetector.OnGestureListener() {
+            @Override
             public boolean onSingleTapUp(MotionEvent e) {
                 return false;
             }
 
-            @Override // android.view.GestureDetector.OnGestureListener
+            @Override
             public void onShowPress(MotionEvent e) {
             }
 
-            @Override // android.view.GestureDetector.OnGestureListener
+            @Override
             public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
                 return false;
             }
 
-            @Override // android.view.GestureDetector.OnGestureListener
+            @Override
             public void onLongPress(MotionEvent e) {
             }
 
-            @Override // android.view.GestureDetector.OnGestureListener
+            @Override
             public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
                 if (e1 == null && e2 == null) {
                     return false;
@@ -67,7 +67,7 @@ public class X8GestureDetector {
                 }
             }
 
-            @Override // android.view.GestureDetector.OnGestureListener
+            @Override
             public boolean onDown(MotionEvent e) {
                 return false;
             }

@@ -3,7 +3,7 @@ package com.fimi.kernel.fds;
 import java.io.File;
 import java.util.concurrent.Future;
 
-/* loaded from: classes.dex */
+
 public interface IFdsFileModel {
     File getFile();
 

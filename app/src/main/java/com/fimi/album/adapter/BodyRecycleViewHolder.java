@@ -21,11 +21,11 @@ public class BodyRecycleViewHolder extends RecyclerView.ViewHolder {
 
     public BodyRecycleViewHolder(View itemView) {
         super(itemView);
-        this.sdvImageView = (SimpleDraweeView) itemView.findViewById(R.id.simpledraweeview);
+        this.sdvImageView = itemView.findViewById(R.id.simpledraweeview);
         initSimpleDraweeViewParams(itemView.getContext(), this.sdvImageView);
-        this.ivSelect = (ImageView) itemView.findViewById(R.id.selected_iv);
+        this.ivSelect = itemView.findViewById(R.id.selected_iv);
         initImageViewParams(itemView.getContext(), itemView, this.ivSelect);
-        this.tvDuringdate = (TextView) itemView.findViewById(R.id.duringdate_tv);
+        this.tvDuringdate = itemView.findViewById(R.id.duringdate_tv);
         initTextViewParams(itemView.getContext(), itemView, this.tvDuringdate);
         FontUtil.changeViewLanTing(itemView.getContext().getAssets(), this.tvDuringdate);
     }

@@ -16,9 +16,9 @@ import com.fimi.kernel.dataparser.JsonMessage;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* loaded from: classes.dex */
+
 public class NoticeManager implements IDataCallBack {
-    private static NoticeManager mNoticeManager = new NoticeManager();
+    private static final NoticeManager mNoticeManager = new NoticeManager();
     private final int personMsg = 0;
     private final int outMsg = 1;
     private final int jsonMsg = 3;
@@ -26,12 +26,12 @@ public class NoticeManager implements IDataCallBack {
     VideodDataListener listener;
     UpdateDateListener updateDateListener;
     private MediaDataListener mediaDataListener;
-    private CopyOnWriteArrayList<IDataCallBack> list = new CopyOnWriteArrayList<>();
-    private CopyOnWriteArrayList<MediaDataListener> mediaIist = new CopyOnWriteArrayList<>();
-    private CopyOnWriteArrayList<JsonListener> jsonListeners = new CopyOnWriteArrayList<>();
-    private DataUiHanler mDataUiHanler = new DataUiHanler();
-    private Handler mHanlder = new Handler() { // from class: com.fimi.kernel.connect.session.NoticeManager.1
-        @Override // android.os.Handler
+    private final CopyOnWriteArrayList<IDataCallBack> list = new CopyOnWriteArrayList<>();
+    private final CopyOnWriteArrayList<MediaDataListener> mediaIist = new CopyOnWriteArrayList<>();
+    private final CopyOnWriteArrayList<JsonListener> jsonListeners = new CopyOnWriteArrayList<>();
+    private final DataUiHanler mDataUiHanler = new DataUiHanler();
+    private final Handler mHanlder = new Handler() {
+        @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
@@ -66,7 +66,6 @@ public class NoticeManager implements IDataCallBack {
                     }
                     return;
                 default:
-                    return;
             }
         }
     };
@@ -86,9 +85,7 @@ public class NoticeManager implements IDataCallBack {
     }
 
     public void removeMediaListener(MediaDataListener listener) {
-        if (this.mediaIist.contains(listener)) {
-            this.mediaIist.remove(listener);
-        }
+        this.mediaIist.remove(listener);
     }
 
     public void removeALLMediaListener() {
@@ -197,12 +194,12 @@ public class NoticeManager implements IDataCallBack {
         }
     }
 
-    @Override // com.fimi.kernel.connect.interfaces.IDataCallBack
+    @Override
     public void onDataCallBack(int groupId, int cmdId, ILinkMessage packet) {
         this.mHanlder.obtainMessage(0, groupId, cmdId, packet).sendToTarget();
     }
 
-    @Override // com.fimi.kernel.connect.interfaces.IDataCallBack
+    @Override
     public void onSendTimeOut(int groupId, int cmdId, BaseCommand bcd) {
         this.mHanlder.obtainMessage(1, groupId, cmdId, bcd).sendToTarget();
     }

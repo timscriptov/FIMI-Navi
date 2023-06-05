@@ -12,7 +12,7 @@ import com.fimi.network.entity.RestPswDto;
 import com.fimi.network.entity.ThirdAcountDto;
 import com.umeng.commonsdk.proguard.g;
 
-/* loaded from: classes.dex */
+
 public class UserManager extends BaseManager {
     private static UserManager mUserManager;
 

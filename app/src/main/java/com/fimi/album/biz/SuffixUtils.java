@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class SuffixUtils {
     private static SuffixUtils mSuffixUtils;
     public String fileFormatRlv = ".RLV";
@@ -13,9 +13,9 @@ public class SuffixUtils {
     public String fileFormatThm = ".THM";
     String[] videoStrings = {this.fileFormatThm};
     String[] photoStrings = {".jpg", this.fileFormatJpg, ".png", "PNG"};
-    private List<String> videoSuffixList = new ArrayList();
-    private List<String> photoSuffixList = new ArrayList();
-    private List<String> videoThumSuffixList = new ArrayList();
+    private final List<String> videoSuffixList = new ArrayList();
+    private final List<String> photoSuffixList = new ArrayList();
+    private final List<String> videoThumSuffixList = new ArrayList();
 
     private SuffixUtils() {
         this.videoSuffixList.addAll(Arrays.asList(this.videoStrings));
@@ -35,7 +35,7 @@ public class SuffixUtils {
 
     public boolean judgeFileType(String filePathSuffix) {
         if (filePathSuffix.contains(".")) {
-            String filePathSuffix2 = filePathSuffix.substring(filePathSuffix.lastIndexOf("."), filePathSuffix.length());
+            String filePathSuffix2 = filePathSuffix.substring(filePathSuffix.lastIndexOf("."));
             if (this.videoSuffixList.contains(filePathSuffix2)) {
                 return true;
             }
@@ -48,14 +48,14 @@ public class SuffixUtils {
 
     public boolean judgeVideo(String filePathSuffix) {
         if (filePathSuffix.contains(".")) {
-            return this.videoSuffixList.contains(filePathSuffix.substring(filePathSuffix.lastIndexOf("."), filePathSuffix.length()));
+            return this.videoSuffixList.contains(filePathSuffix.substring(filePathSuffix.lastIndexOf(".")));
         }
         return false;
     }
 
     public boolean judgePhotho(String filePathSuffix) {
         if (filePathSuffix.contains(".")) {
-            return this.photoSuffixList.contains(filePathSuffix.substring(filePathSuffix.lastIndexOf("."), filePathSuffix.length()));
+            return this.photoSuffixList.contains(filePathSuffix.substring(filePathSuffix.lastIndexOf(".")));
         }
         return false;
     }

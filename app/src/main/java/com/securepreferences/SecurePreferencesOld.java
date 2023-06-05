@@ -280,7 +280,7 @@ public class SecurePreferencesOld implements SharedPreferences {
             registerOnSharedPreferenceChangeListener(listener);
             return;
         }
-        SharedPreferences.OnSharedPreferenceChangeListener secureListener = new SharedPreferences.OnSharedPreferenceChangeListener() { // from class: com.securepreferences.SecurePreferencesOld.1
+        SharedPreferences.OnSharedPreferenceChangeListener secureListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             private final SharedPreferences.OnSharedPreferenceChangeListener mInsecureListener;
 
             {
@@ -314,7 +314,7 @@ public class SecurePreferencesOld implements SharedPreferences {
     }
 
     public static class Editor implements SharedPreferences.Editor {
-        private SharedPreferences.Editor mEditor;
+        private final SharedPreferences.Editor mEditor;
 
         private Editor() {
             this.mEditor = SecurePreferencesOld.sFile.edit();

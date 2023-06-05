@@ -6,7 +6,7 @@ import com.fimi.x8sdk.entity.X8ErrorCodeInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes2.dex */
+
 public class ErrorCodeState {
     public static boolean appTest = false;
     public static long a = 0;
@@ -135,10 +135,7 @@ public class ErrorCodeState {
         }
         int n2 = (int) Math.pow(2.0d, 11.0d);
         long code2 = this.lastSystemStatusCodB & n2;
-        if ((code2 >> 11) != 1) {
-            return true;
-        }
-        return false;
+        return (code2 >> 11) != 1;
     }
 
     public boolean isGpsError() {
@@ -148,19 +145,13 @@ public class ErrorCodeState {
             return true;
         }
         long code2 = this.lastSystemStatusCodB & n;
-        if (code2 != 1) {
-            return false;
-        }
-        return true;
+        return code2 == 1;
     }
 
     public boolean isMagneticError() {
         int n = (int) Math.pow(2.0d, 20.0d);
         long code = this.lastSystemStatusCodA & n;
-        if ((code >> 20) != 1) {
-            return false;
-        }
-        return true;
+        return (code >> 20) == 1;
     }
 
     public boolean isCampError() {

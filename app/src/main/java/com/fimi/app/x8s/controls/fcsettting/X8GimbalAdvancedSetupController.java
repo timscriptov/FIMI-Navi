@@ -17,7 +17,7 @@ import com.fimi.x8sdk.controller.X8GimbalManager;
 import com.fimi.x8sdk.dataparser.AckGetGimbalGain;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes.dex */
+
 public class X8GimbalAdvancedSetupController extends AbsX8MenuBoxControllers {
     X8ValueSeakBarWithTip vsbGimbalGain;
     private ImageView btnReturn;
@@ -42,29 +42,29 @@ public class X8GimbalAdvancedSetupController extends AbsX8MenuBoxControllers {
         this.ix8GimbalSettingListener = ix8GimbalSettingListener;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
         LayoutInflater inflater = LayoutInflater.from(rootView.getContext());
         this.handleView = inflater.inflate(R.layout.x8_main_general_item_advanced_setup_layout, (ViewGroup) rootView, true);
-        this.btnReturn = (ImageView) this.handleView.findViewById(R.id.btn_return);
-        this.vsbGimbalGain = (X8ValueSeakBarWithTip) this.handleView.findViewById(R.id.vsb_gimbal_gain);
-        this.x8BtnThreeAxisTuning = (Button) this.handleView.findViewById(R.id.x8_btn_three_axis_tuning);
+        this.btnReturn = this.handleView.findViewById(R.id.btn_return);
+        this.vsbGimbalGain = this.handleView.findViewById(R.id.vsb_gimbal_gain);
+        this.x8BtnThreeAxisTuning = this.handleView.findViewById(R.id.x8_btn_three_axis_tuning);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
-        this.btnReturn.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GimbalAdvancedSetupController.1
-            @Override // android.view.View.OnClickListener
+        this.btnReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 X8GimbalAdvancedSetupController.this.handleView.setVisibility(8);
                 X8GimbalAdvancedSetupController.this.modeControllerListener.returnBack();
             }
         });
-        this.x8BtnThreeAxisTuning.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GimbalAdvancedSetupController.2
-            @Override // android.view.View.OnClickListener
+        this.x8BtnThreeAxisTuning.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
-                X8GimbalAdvancedSetupController.this.gimbalManager.setGcParamsNew(0, 0.0f, 0.0f, 0.0f, new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GimbalAdvancedSetupController.2.1
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                X8GimbalAdvancedSetupController.this.gimbalManager.setGcParamsNew(0, 0.0f, 0.0f, 0.0f, new UiCallBackListener() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, Object o) {
                         if (cmdResult.isSuccess) {
                             X8GimbalAdvancedSetupController.this.handleView.setVisibility(8);
@@ -74,12 +74,12 @@ public class X8GimbalAdvancedSetupController extends AbsX8MenuBoxControllers {
                 });
             }
         });
-        this.vsbGimbalGain.setConfirmListener(new X8ValueSeakBarWithTip.OnProgressConfirmListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GimbalAdvancedSetupController.3
-            @Override // com.fimi.app.x8s.widget.X8ValueSeakBarWithTip.OnProgressConfirmListener
+        this.vsbGimbalGain.setConfirmListener(new X8ValueSeakBarWithTip.OnProgressConfirmListener() {
+            @Override
             public void onConfirm(float value) {
                 if (StateManager.getInstance().getX8Drone().isConnect()) {
-                    X8GimbalAdvancedSetupController.this.gimbalManager.setGcGain((int) X8GimbalAdvancedSetupController.this.vsbGimbalGain.getCurrentValue(), new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GimbalAdvancedSetupController.3.1
-                        @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                    X8GimbalAdvancedSetupController.this.gimbalManager.setGcGain((int) X8GimbalAdvancedSetupController.this.vsbGimbalGain.getCurrentValue(), new UiCallBackListener() {
+                        @Override
                         public void onComplete(CmdResult cmdResult, Object o) {
                             if (cmdResult.isSuccess()) {
                                 X8GimbalAdvancedSetupController.this.vsbGimbalGain.setImbConfirmEnable(false);
@@ -91,11 +91,11 @@ public class X8GimbalAdvancedSetupController extends AbsX8MenuBoxControllers {
         });
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         if (this.isConnected != b) {
             this.isConnected = b;
@@ -109,13 +109,13 @@ public class X8GimbalAdvancedSetupController extends AbsX8MenuBoxControllers {
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void closeItem() {
         super.closeItem();
         this.isShow = false;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void showItem() {
         super.showItem();
         this.isShow = true;
@@ -142,8 +142,8 @@ public class X8GimbalAdvancedSetupController extends AbsX8MenuBoxControllers {
         boolean isConnect = StateManager.getInstance().getX8Drone().isConnect();
         setViewEnabled(isConnect);
         if (isConnect && this.gimbalManager != null) {
-            this.gimbalManager.getGcGain(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GimbalAdvancedSetupController.4
-                @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+            this.gimbalManager.getGcGain(new UiCallBackListener() {
+                @Override
                 public void onComplete(CmdResult cmdResult, Object o) {
                     if (cmdResult.isSuccess()) {
                         AckGetGimbalGain ackGetGimbalGain = (AckGetGimbalGain) o;

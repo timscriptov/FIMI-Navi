@@ -3,7 +3,7 @@ package com.fimi.kernel.connect.ble.scanner;
 import android.content.Context;
 import android.os.Build;
 
-/* loaded from: classes.dex */
+
 public class BleScanner {
     private static final String TAG = BleScanner.class.getName();
     public BaseBleScanner bleScanner;

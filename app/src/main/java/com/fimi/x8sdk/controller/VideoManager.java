@@ -4,7 +4,7 @@ import com.fimi.kernel.connect.session.VideodDataListener;
 import com.fimi.x8sdk.common.BasePresenter;
 import com.fimi.x8sdk.presenter.VideoPresenter;
 
-/* loaded from: classes2.dex */
+
 public class VideoManager extends BasePresenter {
     VideoPresenter presenter;
 

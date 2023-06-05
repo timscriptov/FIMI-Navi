@@ -15,27 +15,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SuppressLint({"WrongCall"})
-/* loaded from: classes.dex */
+
 public class TestOverlay extends View {
     private final String TAG;
     RectF rf;
-    private boolean enableCustomTestOverlay;
-    private int endX;
-    private int endY;
-    private boolean isLost;
-    private boolean isTracking;
-    private TestOverlayListener listener;
-    private int lostColor;
-    private List<RectF> mRectF;
-    private int selectedColor;
-    private int startX;
-    private int startY;
+    private final boolean enableCustomTestOverlay;
+    private final int endX;
+    private final int endY;
+    private final boolean isLost;
+    private final boolean isTracking;
+    private final TestOverlayListener listener;
+    private final int lostColor;
+    private final List<RectF> mRectF;
+    private final int selectedColor;
+    private final int startX;
+    private final int startY;
     private int viewH;
     private int viewW;
-    private int x1;
-    private int x2;
-    private int y1;
-    private int y2;
+    private final int x1;
+    private final int x2;
+    private final int y1;
+    private final int y2;
 
     public TestOverlay(Context context) {
         super(context);
@@ -108,7 +108,7 @@ public class TestOverlay extends View {
         this.rf = new RectF();
     }
 
-    @Override // android.view.View
+    @Override
     protected void onDraw(Canvas canvas) {
         if (this.rf != null) {
             Paint p = new Paint();
@@ -133,7 +133,7 @@ public class TestOverlay extends View {
         this.rf.bottom = r.bottom;
     }
 
-    /* loaded from: classes.dex */
+
     public interface TestOverlayListener {
         void onDraw(Canvas canvas, Rect rect, boolean z);
 

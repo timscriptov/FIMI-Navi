@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
-/* loaded from: classes2.dex */
 public class ErrorCodeBean implements Serializable {
     private List<ActionBean> Configs = new ArrayList();
     private VersionBean Version;
@@ -31,7 +29,7 @@ public class ErrorCodeBean implements Serializable {
         return "ErrorCodeBean{Version=" + this.Version + ", Configs=" + this.Configs + '}';
     }
 
-    /* loaded from: classes2.dex */
+
     public static class ConstraintBitBean {
         private int BitOffset;
         private String GroupID;
@@ -77,7 +75,7 @@ public class ErrorCodeBean implements Serializable {
         }
     }
 
-    /* loaded from: classes2.dex */
+
     public static class FlightPhase {
         private boolean IsEqual;
         private int Value;
@@ -110,7 +108,7 @@ public class ErrorCodeBean implements Serializable {
         }
     }
 
-    /* loaded from: classes2.dex */
+
     public static class CtrlModeBean {
         private boolean IsEqual;
         private int Value;
@@ -143,7 +141,7 @@ public class ErrorCodeBean implements Serializable {
         }
     }
 
-    /* loaded from: classes2.dex */
+
     public static class ConditionValuesBean {
         private String GroupID;
         private boolean IsEqual;
@@ -185,7 +183,7 @@ public class ErrorCodeBean implements Serializable {
         }
     }
 
-    /* loaded from: classes2.dex */
+
     public class VersionBean {
         private String Content;
         private String Format;
@@ -214,7 +212,7 @@ public class ErrorCodeBean implements Serializable {
         }
     }
 
-    /* loaded from: classes2.dex */
+
     public class ActionBean {
         private int Display;
         private String GroupID;
@@ -404,10 +402,7 @@ public class ErrorCodeBean implements Serializable {
             if (isCheckConditionValuesBean) {
                 isCheckConditionValuesBean = getConditionValues().containsAll(b.getConditionValues());
             }
-            if (!isGroup || !isOffSetBit || !isSeverity || !isText || !isSpeak || !isVibrate || !isInSky || !isVibrate || !isValue || !isCheckBits || !isCheckFligthPhas || !isCheckCtrlMode || !isCheckConditionValuesBean) {
-                return false;
-            }
-            return true;
+            return isGroup && isOffSetBit && isSeverity && isText && isSpeak && isVibrate && isInSky && isVibrate && isValue && isCheckBits && isCheckFligthPhas && isCheckCtrlMode && isCheckConditionValuesBean;
         }
 
         public String toString() {

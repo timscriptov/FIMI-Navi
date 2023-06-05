@@ -18,11 +18,11 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* loaded from: classes.dex */
+
 public class BitmapLoadTaskInstance {
     private static final String TAG = "BitmapLoadTaskInstance";
     private static BitmapLoadTaskInstance sBitmapLoadTaskInstance;
-    private Executor executor = AsyncTask.THREAD_POOL_EXECUTOR;
+    private final Executor executor = AsyncTask.THREAD_POOL_EXECUTOR;
     private Bitmap mBitmap;
     private OnLoadListener mOnLoadListener;
 
@@ -39,7 +39,7 @@ public class BitmapLoadTaskInstance {
     }
 
     private void execute(AsyncTask<Void, Void, ?> asyncTask) {
-        asyncTask.executeOnExecutor(this.executor, new Void[0]);
+        asyncTask.executeOnExecutor(this.executor);
     }
 
     public synchronized void onImageLoaded(Bitmap bitmap) {
@@ -120,12 +120,12 @@ public class BitmapLoadTaskInstance {
         this.mOnLoadListener = onLoadListener;
     }
 
-    /* loaded from: classes.dex */
+
     public interface OnLoadListener {
         void onComplete();
     }
 
-    /* loaded from: classes.dex */
+
     public static class BitmapLoadTask extends AsyncTask<Void, Void, Integer> {
         private final WeakReference<Context> contextRef;
         private final boolean preview;
@@ -139,7 +139,7 @@ public class BitmapLoadTaskInstance {
             this.preview = preview;
         }
 
-        @Override // android.os.AsyncTask
+        @Override
         public Integer doInBackground(Void... voids) {
             try {
                 Context context = this.contextRef.get();
@@ -156,7 +156,7 @@ public class BitmapLoadTaskInstance {
             }
         }
 
-        @Override // android.os.AsyncTask
+        @Override
         public void onPostExecute(Integer orientation) {
             if (this.bitmap != null) {
                 BitmapLoadTaskInstance.sBitmapLoadTaskInstance.onImageLoaded(this.bitmap);

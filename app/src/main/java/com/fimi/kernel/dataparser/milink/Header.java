@@ -2,7 +2,7 @@ package com.fimi.kernel.dataparser.milink;
 
 import com.fimi.kernel.utils.CRCUtil;
 
-/* loaded from: classes.dex */
+
 public class Header {
     public static final int FLAG = 254;
     public static final int HEADERLEN = 20;
@@ -21,9 +21,9 @@ public class Header {
     private byte subDestId;
     private byte subSrcId;
     private int type;
-    private byte startFlag = -2;
+    private final byte startFlag = -2;
     private byte version = 3;
-    private byte[] header = new byte[20];
+    private final byte[] header = new byte[20];
 
     public int getCrcHeader() {
         return this.crcHeader;
@@ -146,7 +146,7 @@ public class Header {
     }
 
     public byte[] onPaket() {
-        int i = 0 + 1;
+        int i = 1;
         this.header[0] = this.startFlag;
         int i2 = i + 1;
         this.header[i] = this.version;
@@ -193,7 +193,7 @@ public class Header {
     }
 
     public void unPacket() {
-        int i = 0 + 1;
+        int i = 1;
         this.header[0] = this.startFlag;
         int i2 = i + 1;
         this.header[i] = this.version;

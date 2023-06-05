@@ -2,7 +2,7 @@ package com.fimi.kernel.utils;
 
 import java.text.SimpleDateFormat;
 
-/* loaded from: classes.dex */
+
 public class DateFormater {
     public static SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat();
 
@@ -23,7 +23,7 @@ public class DateFormater {
         if (hour < 10) {
             stringBuilder.append("0" + hour);
         } else if (hour > 100) {
-            stringBuilder.append(hour - hour);
+            stringBuilder.append(0L);
         } else {
             stringBuilder.append(hour);
         }

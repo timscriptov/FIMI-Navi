@@ -22,7 +22,7 @@ import java.lang.ref.WeakReference;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* loaded from: classes.dex */
+
 public class SurfaceRenderView extends SurfaceView implements IRenderView {
     private MeasureHelper mMeasureHelper;
     private SurfaceCallback mSurfaceCallback;
@@ -54,17 +54,17 @@ public class SurfaceRenderView extends SurfaceView implements IRenderView {
         getHolder().setType(0);
     }
 
-    @Override // com.fimi.player.widget.IRenderView
+    @Override
     public View getView() {
         return this;
     }
 
-    @Override // com.fimi.player.widget.IRenderView
+    @Override
     public boolean shouldWaitForResize() {
         return true;
     }
 
-    @Override // com.fimi.player.widget.IRenderView
+    @Override
     public void setVideoSize(int videoWidth, int videoHeight) {
         if (videoWidth > 0 && videoHeight > 0) {
             this.mMeasureHelper.setVideoSize(videoWidth, videoHeight);
@@ -73,7 +73,7 @@ public class SurfaceRenderView extends SurfaceView implements IRenderView {
         }
     }
 
-    @Override // com.fimi.player.widget.IRenderView
+    @Override
     public void setVideoSampleAspectRatio(int videoSarNum, int videoSarDen) {
         if (videoSarNum > 0 && videoSarDen > 0) {
             this.mMeasureHelper.setVideoSampleAspectRatio(videoSarNum, videoSarDen);
@@ -81,40 +81,40 @@ public class SurfaceRenderView extends SurfaceView implements IRenderView {
         }
     }
 
-    @Override // com.fimi.player.widget.IRenderView
+    @Override
     public void setVideoRotation(int degree) {
         Log.e("", "SurfaceView doesn't support rotation (" + degree + ")!\n");
     }
 
-    @Override // com.fimi.player.widget.IRenderView
+    @Override
     public void setAspectRatio(int aspectRatio) {
         this.mMeasureHelper.setAspectRatio(aspectRatio);
         requestLayout();
     }
 
-    @Override // android.view.SurfaceView, android.view.View
+    @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         this.mMeasureHelper.doMeasure(widthMeasureSpec, heightMeasureSpec);
         setMeasuredDimension(this.mMeasureHelper.getMeasuredWidth(), this.mMeasureHelper.getMeasuredHeight());
     }
 
-    @Override // com.fimi.player.widget.IRenderView
+    @Override
     public void addRenderCallback(IRenderView.IRenderCallback callback) {
         this.mSurfaceCallback.addRenderCallback(callback);
     }
 
-    @Override // com.fimi.player.widget.IRenderView
+    @Override
     public void removeRenderCallback(IRenderView.IRenderCallback callback) {
         this.mSurfaceCallback.removeRenderCallback(callback);
     }
 
-    @Override // android.view.View
+    @Override
     public void onInitializeAccessibilityEvent(AccessibilityEvent event) {
         super.onInitializeAccessibilityEvent(event);
         event.setClassName(SurfaceRenderView.class.getName());
     }
 
-    @Override // android.view.View
+    @Override
     @TargetApi(14)
     public void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info) {
         super.onInitializeAccessibilityNodeInfo(info);
@@ -123,42 +123,42 @@ public class SurfaceRenderView extends SurfaceView implements IRenderView {
         }
     }
 
-    /* loaded from: classes.dex */
+
     public static final class InternalSurfaceHolder implements IRenderView.ISurfaceHolder {
-        private SurfaceHolder mSurfaceHolder;
-        private SurfaceRenderView mSurfaceView;
+        private final SurfaceHolder mSurfaceHolder;
+        private final SurfaceRenderView mSurfaceView;
 
         public InternalSurfaceHolder(@NonNull SurfaceRenderView surfaceView, @Nullable SurfaceHolder surfaceHolder) {
             this.mSurfaceView = surfaceView;
             this.mSurfaceHolder = surfaceHolder;
         }
 
-        @Override // com.fimi.player.widget.IRenderView.ISurfaceHolder
+        @Override
         public void bindToMediaPlayer(IMediaPlayer mp) {
             if (mp != null) {
                 mp.setDisplay(this.mSurfaceHolder);
             }
         }
 
-        @Override // com.fimi.player.widget.IRenderView.ISurfaceHolder
+        @Override
         @NonNull
         public IRenderView getRenderView() {
             return this.mSurfaceView;
         }
 
-        @Override // com.fimi.player.widget.IRenderView.ISurfaceHolder
+        @Override
         @Nullable
         public SurfaceHolder getSurfaceHolder() {
             return this.mSurfaceHolder;
         }
 
-        @Override // com.fimi.player.widget.IRenderView.ISurfaceHolder
+        @Override
         @Nullable
         public SurfaceTexture getSurfaceTexture() {
             return null;
         }
 
-        @Override // com.fimi.player.widget.IRenderView.ISurfaceHolder
+        @Override
         @Nullable
         public Surface openSurface() {
             if (this.mSurfaceHolder == null) {
@@ -168,14 +168,14 @@ public class SurfaceRenderView extends SurfaceView implements IRenderView {
         }
     }
 
-    /* loaded from: classes.dex */
+
     public static final class SurfaceCallback implements SurfaceHolder.Callback {
         private int mFormat;
         private int mHeight;
         private boolean mIsFormatChanged;
-        private Map<IRenderView.IRenderCallback, Object> mRenderCallbackMap = new ConcurrentHashMap();
+        private final Map<IRenderView.IRenderCallback, Object> mRenderCallbackMap = new ConcurrentHashMap();
         private SurfaceHolder mSurfaceHolder;
-        private WeakReference<SurfaceRenderView> mWeakSurfaceView;
+        private final WeakReference<SurfaceRenderView> mWeakSurfaceView;
         private int mWidth;
 
         public SurfaceCallback(@NonNull SurfaceRenderView surfaceView) {
@@ -203,7 +203,7 @@ public class SurfaceRenderView extends SurfaceView implements IRenderView {
             this.mRenderCallbackMap.remove(callback);
         }
 
-        @Override // android.view.SurfaceHolder.Callback
+        @Override
         public void surfaceCreated(SurfaceHolder holder) {
             this.mSurfaceHolder = holder;
             this.mIsFormatChanged = false;
@@ -216,7 +216,7 @@ public class SurfaceRenderView extends SurfaceView implements IRenderView {
             }
         }
 
-        @Override // android.view.SurfaceHolder.Callback
+        @Override
         public void surfaceDestroyed(SurfaceHolder holder) {
             this.mSurfaceHolder = null;
             this.mIsFormatChanged = false;
@@ -229,7 +229,7 @@ public class SurfaceRenderView extends SurfaceView implements IRenderView {
             }
         }
 
-        @Override // android.view.SurfaceHolder.Callback
+        @Override
         public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
             this.mSurfaceHolder = holder;
             this.mIsFormatChanged = true;

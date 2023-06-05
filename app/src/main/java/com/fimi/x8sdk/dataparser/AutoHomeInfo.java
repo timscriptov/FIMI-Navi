@@ -5,8 +5,6 @@ import com.fimi.x8sdk.entity.FLatLng;
 import com.fimi.x8sdk.util.GpsCorrect;
 
 
-
-/* loaded from: classes2.dex */
 public class AutoHomeInfo extends X8BaseMessage {
     float height;
     double homeLatitude;
@@ -15,7 +13,7 @@ public class AutoHomeInfo extends X8BaseMessage {
     int homePointStatus;
     int homePointType;
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         this.homeLongitude = packet.getPayLoad4().getDouble().doubleValue();
@@ -78,7 +76,7 @@ public class AutoHomeInfo extends X8BaseMessage {
         this.homePointStatus = homePointStatus;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public String toString() {
         return "AutoHomeInfo{homeLongitude=" + this.homeLongitude + ", homeLatitude=" + this.homeLatitude + ", height=" + this.height + ", homePointAccuracy=" + this.homePointAccuracy + ", homePointType=" + this.homePointType + ", homePointStatus=" + this.homePointStatus + '}';
     }

@@ -2,7 +2,7 @@ package com.fimi.kernel.upgrade.interfaces;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public interface IUpgradeListener {
     void onConnectFialed(String str);
 

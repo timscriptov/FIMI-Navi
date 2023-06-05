@@ -18,7 +18,7 @@ import com.fimi.kernel.store.shared.SPStoreManager;
 import com.fimi.x8sdk.common.Constants;
 import com.fimi.x8sdk.controller.FcCtrlManager;
 
-/* loaded from: classes.dex */
+
 public class X8FiveKeyDefineController extends AbsX8MenuBoxControllers implements View.OnClickListener {
     private FiveKeyDefineAdapter adapter;
     private int curPosition;
@@ -34,21 +34,21 @@ public class X8FiveKeyDefineController extends AbsX8MenuBoxControllers implement
         super(rootView);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
         LayoutInflater inflater = LayoutInflater.from(rootView.getContext());
         this.contentView = inflater.inflate(R.layout.x8_main_rc_item_five_key_define, (ViewGroup) rootView, true);
         this.mContext = this.contentView.getContext();
-        this.imgReturn = (ImageView) this.contentView.findViewById(R.id.img_return);
-        this.tvTitle = (TextView) this.contentView.findViewById(R.id.tv_title);
-        this.recyclerView = (RecyclerView) this.contentView.findViewById(R.id.recycle_five_key);
+        this.imgReturn = this.contentView.findViewById(R.id.img_return);
+        this.tvTitle = this.contentView.findViewById(R.id.tv_title);
+        this.recyclerView = this.contentView.findViewById(R.id.recycle_five_key);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this.mContext, 3);
         this.recyclerView.setLayoutManager(layoutManager);
         this.adapter = new FiveKeyDefineAdapter(this.mContext, X8RcItemController.FIVE_KEY_DATA_ARRAY);
         this.recyclerView.setAdapter(this.adapter);
         this.recyclerView.setItemAnimator(null);
-        this.adapter.setOnItemClickListener(new FiveKeyDefineAdapter.OnItemClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8FiveKeyDefineController.1
-            @Override // com.fimi.app.x8s.adapter.FiveKeyDefineAdapter.OnItemClickListener
+        this.adapter.setOnItemClickListener(new FiveKeyDefineAdapter.OnItemClickListener() {
+            @Override
             public void onItemClicked(int index) {
                 X8FiveKeyDefineController.this.adapter.setItemSelect(index);
                 if (X8FiveKeyDefineController.this.listener != null) {
@@ -78,23 +78,23 @@ public class X8FiveKeyDefineController extends AbsX8MenuBoxControllers implement
         initActions();
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
         if (this.contentView != null) {
             this.imgReturn.setOnClickListener(this);
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         this.adapter.notifyDataSetChanged();
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.img_return) {
@@ -105,13 +105,13 @@ public class X8FiveKeyDefineController extends AbsX8MenuBoxControllers implement
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void showItem() {
         this.isShow = true;
         this.contentView.setVisibility(0);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void closeItem() {
         this.isShow = false;
         this.contentView.setVisibility(8);

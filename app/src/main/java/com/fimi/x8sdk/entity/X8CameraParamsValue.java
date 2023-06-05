@@ -2,10 +2,10 @@ package com.fimi.x8sdk.entity;
 
 import com.fimi.x8sdk.jsonResult.CurParamsJson;
 
-/* loaded from: classes2.dex */
+
 public class X8CameraParamsValue {
     static X8CameraParamsValue paramsValue;
-    private CurParamsJson curParamsJson = new CurParamsJson();
+    private final CurParamsJson curParamsJson = new CurParamsJson();
 
     public static X8CameraParamsValue getInstance() {
         if (paramsValue == null) {

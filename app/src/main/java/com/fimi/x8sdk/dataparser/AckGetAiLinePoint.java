@@ -7,8 +7,6 @@ import com.fimi.x8sdk.entity.FLatLng;
 import com.fimi.x8sdk.util.GpsCorrect;
 
 
-
-/* loaded from: classes2.dex */
 public class AckGetAiLinePoint extends X8BaseMessage implements Comparable<AckGetAiLinePoint> {
     private int altitude;
     private double altitudePOI;
@@ -180,7 +178,7 @@ public class AckGetAiLinePoint extends X8BaseMessage implements Comparable<AckGe
         this.roration = roration;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         this.number = packet.getPayLoad4().getByte();
@@ -211,20 +209,17 @@ public class AckGetAiLinePoint extends X8BaseMessage implements Comparable<AckGe
         this.altitudePOI = packet.getPayLoad4().getShort() / 10;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public String toString() {
         return "AckGetAiLinePoint{number=" + this.number + ", totalnumber=" + this.totalnumber + ", longitude=" + this.longitude + ", latitude=" + this.latitude + ", fLatLng=" + this.fLatLng + ", altitude=" + this.altitude + ", yaw=" + this.yaw + ", gimbalPitch=" + this.gimbalPitch + ", speed=" + this.speed + ", yawMode=" + ((int) this.yawMode) + ", gimbalMode=" + ((int) this.gimbalMode) + ", trajectoryMode=" + ((int) this.trajectoryMode) + ", missionFinishAction=" + ((int) this.missionFinishAction) + ", rCLostAction=" + ((int) this.rCLostAction) + ", longitudePOI=" + this.longitudePOI + ", latitudePOI=" + this.latitudePOI + ", altitudePOI=" + this.altitudePOI + ", angle=" + this.angle + '}';
     }
 
-    @Override // java.lang.Comparable
+    @Override
     public int compareTo(@NonNull AckGetAiLinePoint o) {
         return getNumber() - o.getNumber();
     }
 
     public boolean hasInterrestPoint() {
-        if (this.longitudePOI != 0.0d || this.latitudePOI != 0.0d || this.altitudePOI != 0.0d) {
-            return true;
-        }
-        return false;
+        return this.longitudePOI != 0.0d || this.latitudePOI != 0.0d || this.altitudePOI != 0.0d;
     }
 }

@@ -67,8 +67,8 @@ public final class ZipEightByteInteger {
     }
 
     public static BigInteger getValue(@NonNull byte[] bytes, int offset) {
-        long value = (bytes[offset + 7] << 56) & BYTE_7_MASK;
-        BigInteger val = BigInteger.valueOf(value + ((bytes[offset + 6] << 48) & BYTE_6_MASK) + ((bytes[offset + 5] << 40) & BYTE_5_MASK) + ((bytes[offset + 4] << 32) & BYTE_4_MASK) + ((bytes[offset + 3] << 24) & BYTE_3_MASK) + ((bytes[offset + 2] << 16) & 16711680) + ((bytes[offset + 1] << 8) & 65280) + (bytes[offset] & 255));
+        long value = ((long) bytes[offset + 7] << 56) & BYTE_7_MASK;
+        BigInteger val = BigInteger.valueOf(value + (((long) bytes[offset + 6] << 48) & BYTE_6_MASK) + (((long) bytes[offset + 5] << 40) & BYTE_5_MASK) + (((long) bytes[offset + 4] << 32) & BYTE_4_MASK) + ((bytes[offset + 3] << 24) & BYTE_3_MASK) + ((bytes[offset + 2] << 16) & 16711680) + ((bytes[offset + 1] << 8) & 65280) + (bytes[offset] & 255));
         if ((bytes[offset + 7] & LEFTMOST_BIT) != -128) {
             return val;
         }

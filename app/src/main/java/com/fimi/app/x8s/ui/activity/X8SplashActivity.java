@@ -20,13 +20,13 @@ import com.fimi.x8sdk.controller.ConnectRcManager;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class X8SplashActivity extends Activity {
-    @Override // android.app.Activity
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ThreadUtils.execute(new Runnable() { // from class: com.fimi.app.x8s.ui.activity.X8SplashActivity.1
-            @Override // java.lang.Runnable
+        ThreadUtils.execute(new Runnable() {
+            @Override
             public void run() {
                 X8SplashActivity.this.syncServerFwInfo();
             }
@@ -60,11 +60,11 @@ public class X8SplashActivity extends Activity {
 
     public void syncServerFwInfo() {
         FwManager x9FwManager = new FwManager();
-        x9FwManager.getX9FwNetDetail(new DisposeDataHandle(new DisposeDataListener() { // from class: com.fimi.app.x8s.ui.activity.X8SplashActivity.2
-            @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+        x9FwManager.getX9FwNetDetail(new DisposeDataHandle(new DisposeDataListener() {
+            @Override
             public void onSuccess(Object responseObj) {
                 try {
-                    NetModel netModel = (NetModel) JSON.parseObject(responseObj.toString(), NetModel.class);
+                    NetModel netModel = JSON.parseObject(responseObj.toString(), NetModel.class);
                     LogUtil.d("moweiru", "responseObj:" + responseObj);
                     if (netModel.isSuccess() && netModel.getData() != null) {
                         List<UpfirewareDto> fwDtos = JSON.parseArray(netModel.getData().toString(), UpfirewareDto.class);
@@ -75,7 +75,7 @@ public class X8SplashActivity extends Activity {
                 }
             }
 
-            @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+            @Override
             public void onFailure(Object reasonObj) {
             }
         }));

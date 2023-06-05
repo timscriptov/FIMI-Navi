@@ -8,7 +8,7 @@ import com.fimi.host.HostConstants;
 import java.io.File;
 import java.io.IOException;
 
-/* loaded from: classes.dex */
+
 public class DirectoryPath {
     public static final int ROOT = 0;
     public static final String TAG = "DirectoryPath";
@@ -101,7 +101,7 @@ public class DirectoryPath {
                 pathBuilder.append("Image");
                 break;
         }
-        return pathBuilder.toString() + File.separator;
+        return pathBuilder + File.separator;
     }
 
     public static String getApkPath() {

@@ -3,15 +3,13 @@ package com.fimi.x8sdk.dataparser;
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 
 
-
-/* loaded from: classes2.dex */
 public class AckGetSensitivity extends X8BaseMessage {
     int pitchPercent;
     int rollPercent;
     int throPercent;
     int yawPercent;
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         this.rollPercent = packet.getPayLoad4().getByte();
@@ -52,7 +50,7 @@ public class AckGetSensitivity extends X8BaseMessage {
         this.throPercent = throPercent;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public String toString() {
         return "AckGetSensitivity{rollPercent=" + this.rollPercent + ", pitchPercent=" + this.pitchPercent + ", yawPercent=" + this.yawPercent + ", throPercent=" + this.throPercent + '}';
     }

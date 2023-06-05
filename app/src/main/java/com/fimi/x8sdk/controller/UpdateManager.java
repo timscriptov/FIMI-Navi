@@ -10,7 +10,7 @@ import com.fimi.x8sdk.update.fwpack.FwInfo;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
+
 public class UpdateManager implements IUpdateAction {
     IUpdateAction updateAction;
 
@@ -18,22 +18,22 @@ public class UpdateManager implements IUpdateAction {
         this.updateAction = new X8UpdatePresenter(context);
     }
 
-    @Override // com.fimi.x8sdk.ivew.IUpdateAction
+    @Override
     public void queryCurUpdateStatus(UiCallBackListener callBackListener) {
         this.updateAction.queryCurUpdateStatus(callBackListener);
     }
 
-    @Override // com.fimi.x8sdk.ivew.IUpdateAction
+    @Override
     public void firmwareBuildPack(List<FwInfo> fwInfoList) {
         this.updateAction.firmwareBuildPack(fwInfoList);
     }
 
-    @Override // com.fimi.x8sdk.ivew.IUpdateAction
+    @Override
     public void setOnUpdateProgress(IX8UpdateProgressView ix8UpdateProgressView) {
         this.updateAction.setOnUpdateProgress(ix8UpdateProgressView);
     }
 
-    @Override // com.fimi.x8sdk.ivew.IUpdateAction
+    @Override
     public void removeNoticeList() {
         this.updateAction.removeNoticeList();
     }

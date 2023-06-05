@@ -2,7 +2,7 @@ package com.fimi.network.entity;
 
 import java.io.Serializable;
 
-/* loaded from: classes.dex */
+
 public class AccessTokenEntity implements Serializable {
     private String access_token;
     private long expires_in;

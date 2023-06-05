@@ -8,11 +8,11 @@ import android.view.View;
 import com.fimi.android.app.R;
 import com.fimi.player.widget.FimiVideoView;
 
-/* loaded from: classes.dex */
+
 public class X8MediaPlayTestActivity extends Activity {
     private FimiVideoView videoView;
 
-    @Override // android.app.Activity
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(1);
@@ -27,7 +27,7 @@ public class X8MediaPlayTestActivity extends Activity {
     }
 
     public void testFimiVideo() {
-        this.videoView = (FimiVideoView) findViewById(R.id.fimi_video);
+        this.videoView = findViewById(R.id.fimi_video);
         String s4 = Environment.getExternalStorageDirectory() + "/a.mp4";
         this.videoView.setVideoPath(s4);
     }

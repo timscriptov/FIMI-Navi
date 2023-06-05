@@ -28,7 +28,6 @@ import org.jetbrains.annotations.Contract;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -36,6 +35,8 @@ import java.util.List;
 import java.util.Map;
 
 public class X8ErrorCodeController extends AbsX8Controllers {
+    private final List<ErrorCodeBean.ActionBean> mediumMap;
+    private final List<ErrorCodeBean.ActionBean> seriousMap;
     public List<ErrorCodeBean.ActionBean> currentMap;
     private ErrorCodeBean bean;
     private Map<String, String> errCodeDesc;
@@ -43,8 +44,6 @@ public class X8ErrorCodeController extends AbsX8Controllers {
     private boolean isGetData;
     private List<X8ErrorCodeInfo> list;
     private X8ErrerCodeSpeakFlashManager mX8ErrerCodeSpeakFlashManager;
-    private final List<ErrorCodeBean.ActionBean> mediumMap;
-    private final List<ErrorCodeBean.ActionBean> seriousMap;
 
     public X8ErrorCodeController(View rootView) {
         super(rootView);

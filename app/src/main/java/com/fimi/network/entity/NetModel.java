@@ -3,8 +3,6 @@ package com.fimi.network.entity;
 import java.io.Serializable;
 
 
-
-/* loaded from: classes.dex */
 public class NetModel implements Serializable {
     public static final String SUCCESS = "90000";
     private static final long serialVersionUID = 1;

@@ -19,8 +19,6 @@ import com.fimi.app.x8s.widget.DeviceNorthView;
 import com.fimi.app.x8s.widget.X8AiTipWithCloseView;
 import com.fimi.app.x8s.widget.X8DoubleCustomDialog;
 import com.fimi.app.x8s.widget.X8VerticalSeekBarValueLayout;
-import com.fimi.kernel.dataparser.usb.CmdResult;
-import com.fimi.kernel.dataparser.usb.UiCallBackListener;
 import com.fimi.kernel.utils.DateUtil;
 import com.fimi.x8sdk.common.Constants;
 import com.fimi.x8sdk.common.GlobalConfig;
@@ -29,10 +27,10 @@ import com.fimi.x8sdk.modulestate.StateManager;
 import com.fimi.x8sdk.modulestate.X8CameraSettings;
 
 public class X8AiSarExcuteController extends AbsX8AiController implements View.OnClickListener, X8DoubleCustomDialog.onDialogButtonClickListener {
+    private final X8sMainActivity activity;
     protected int MAX_WIDTH;
     protected boolean isShow;
     protected int width;
-    private final X8sMainActivity activity;
     private X8DoubleCustomDialog dialog;
     private View flagSmall;
     private ImageView imgBack;

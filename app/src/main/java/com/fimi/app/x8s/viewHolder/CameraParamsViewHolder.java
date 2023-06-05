@@ -9,15 +9,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fimi.android.app.R;
 
-/* loaded from: classes.dex */
+
 public class CameraParamsViewHolder extends RecyclerView.ViewHolder {
-    private Context context;
-    private TextView paramView;
+    private final Context context;
+    private final TextView paramView;
 
     public CameraParamsViewHolder(View itemView) {
         super(itemView);
         this.context = itemView.getContext();
-        this.paramView = (TextView) itemView.findViewById(R.id.params_item);
+        this.paramView = itemView.findViewById(R.id.params_item);
     }
 
     public void initView(String params, boolean enable) {

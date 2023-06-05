@@ -15,7 +15,7 @@ import com.fimi.android.app.R;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes2.dex */
+
 public class XPermission {
     private static OnPermissionListener mOnPermissionListener;
     private static int mRequestCode = -1;
@@ -27,7 +27,7 @@ public class XPermission {
             List<String> deniedPermissions = getDeniedPermissions(context, permissions);
             if (deniedPermissions.size() > 0) {
                 mRequestCode = requestCode;
-                ((Activity) context).requestPermissions((String[]) deniedPermissions.toArray(new String[deniedPermissions.size()]), requestCode);
+                ((Activity) context).requestPermissions(deniedPermissions.toArray(new String[deniedPermissions.size()]), requestCode);
                 return;
             } else if (mOnPermissionListener != null) {
                 mOnPermissionListener.onPermissionGranted();
@@ -69,8 +69,8 @@ public class XPermission {
     }
 
     public static void showTipsDialog(final Context context) {
-        new AlertDialog.Builder(context).setTitle(context.getText(R.string.x8_permission_dialog_title)).setMessage(context.getText(R.string.x8_permission_dialog_message)).setNegativeButton(context.getText(R.string.x8_permission_dialog_cancel), (DialogInterface.OnClickListener) null).setPositiveButton(context.getText(R.string.x8_permission_dialog_comfirm), new DialogInterface.OnClickListener() { // from class: com.fimi.x8sdk.util.XPermission.1
-            @Override // android.content.DialogInterface.OnClickListener
+        new AlertDialog.Builder(context).setTitle(context.getText(R.string.x8_permission_dialog_title)).setMessage(context.getText(R.string.x8_permission_dialog_message)).setNegativeButton(context.getText(R.string.x8_permission_dialog_cancel), null).setPositiveButton(context.getText(R.string.x8_permission_dialog_comfirm), new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int which) {
                 XPermission.startAppSettings(context);
             }
@@ -83,7 +83,7 @@ public class XPermission {
         context.startActivity(intent);
     }
 
-    /* loaded from: classes2.dex */
+
     public interface OnPermissionListener {
         void onPermissionDenied();
 

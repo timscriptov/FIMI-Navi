@@ -27,7 +27,7 @@ public abstract class X8BaseMessage extends ILinkMessage {
         packet.getPayLoad4().setIndex(4);
     }
 
-    @Override // com.fimi.kernel.dataparser.ILinkMessage
+    @Override
     public int getMsgRpt() {
         return this.msgRpt;
     }
@@ -80,12 +80,12 @@ public abstract class X8BaseMessage extends ILinkMessage {
         return "X8BaseMessage{srcId=" + this.srcId + ", desId=" + this.desId + ", version=" + this.version + ", groupID=" + this.groupID + ", msgId=" + this.msgId + ", msgRpt=" + this.msgRpt + '}';
     }
 
-    @Override // com.fimi.kernel.dataparser.ILinkMessage
+    @Override
     public UiCallBackListener getUiCallBack() {
         return this.uiCallBack;
     }
 
-    @Override // com.fimi.kernel.dataparser.ILinkMessage
+    @Override
     public void setUiCallBack(UiCallBackListener uiCallBack) {
         this.uiCallBack = uiCallBack;
     }

@@ -2,18 +2,18 @@ package com.fimi.app.x8s.media;
 
 import java.util.concurrent.LinkedBlockingDeque;
 
-/* loaded from: classes.dex */
+
 public class H264StreamParseThread extends Thread {
     public LinkedBlockingDeque<byte[]> cmdQuene = new LinkedBlockingDeque<>();
     private boolean isWait;
-    private IH264DataListener mH264DataListener;
+    private final IH264DataListener mH264DataListener;
     private boolean mStopFlag;
 
     public H264StreamParseThread(IH264DataListener mH264DataListener) {
         this.mH264DataListener = mH264DataListener;
     }
 
-    @Override // java.lang.Thread, java.lang.Runnable
+    @Override
     public void run() {
         while (!this.mStopFlag) {
             if (this.cmdQuene.size() > 0) {

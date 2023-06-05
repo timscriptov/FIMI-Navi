@@ -17,22 +17,22 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-/* loaded from: classes.dex */
+
 public class MediaFileDownloadManager<T extends MediaModel> implements OnDownloadListener, IMediaDownload, IMediaFileDownloadObserverable {
     private static final int DOWNLOAD_FAIL = 2;
     private static final int DOWNLOAD_PROGRESS = 0;
     private static final int DOWNLOAD_STOP = 3;
     private static final int DOWNLOAD_SUCCESS = 1;
     private static final String TAG = "MediaFileDownloadManage";
-    private static MediaFileDownloadManager mMediaFileDownloadManager = new MediaFileDownloadManager();
+    private static final MediaFileDownloadManager mMediaFileDownloadManager = new MediaFileDownloadManager();
     private OnDownloadUiListener mUiDownloadListener;
     private IMediaFileDownloadObserver observer;
-    private List<MediaModel> data = new ArrayList();
-    private List<MediaModel> dataAll = new ArrayList();
-    private List<MediaModel> dataResult = new ArrayList();
+    private final List<MediaModel> data = new ArrayList();
+    private final List<MediaModel> dataAll = new ArrayList();
+    private final List<MediaModel> dataResult = new ArrayList();
     private int mLastPos = -1;
-    private Handler mHanler = new Handler() { // from class: com.fimi.album.download.manager.MediaFileDownloadManager.1
-        @Override // android.os.Handler
+    private final Handler mHanler = new Handler() {
+        @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (MediaFileDownloadManager.this.mUiDownloadListener != null) {
@@ -50,12 +50,11 @@ public class MediaFileDownloadManager<T extends MediaModel> implements OnDownloa
                         MediaFileDownloadManager.this.mUiDownloadListener.onStop((MediaModel) msg.obj);
                         return;
                     default:
-                        return;
                 }
             }
         }
     };
-    private ExecutorService executorService = Executors.newFixedThreadPool(3);
+    private final ExecutorService executorService = Executors.newFixedThreadPool(3);
 
     public static MediaFileDownloadManager getInstance() {
         return mMediaFileDownloadManager;
@@ -70,17 +69,17 @@ public class MediaFileDownloadManager<T extends MediaModel> implements OnDownloa
         this.data.addAll(selectList);
     }
 
-    @Override // com.fimi.album.interfaces.IMediaDownload
+    @Override
     public void addData(MediaModel m) {
         this.data.add(m);
     }
 
-    @Override // com.fimi.album.interfaces.IMediaDownload
+    @Override
     public void stopDownload() {
         this.data.clear();
     }
 
-    @Override // com.fimi.album.interfaces.IMediaDownload
+    @Override
     public void startDownload() {
     }
 
@@ -111,7 +110,7 @@ public class MediaFileDownloadManager<T extends MediaModel> implements OnDownloa
         notityObserver(this.dataAll.size(), this.dataResult.size());
     }
 
-    @Override // com.fimi.album.download.interfaces.OnDownloadListener
+    @Override
     public void onProgress(Object responseObj, long progrss, long currentLength) {
         int pos = (int) (progrss / (currentLength / 100));
         if (this.mLastPos != pos) {
@@ -120,31 +119,31 @@ public class MediaFileDownloadManager<T extends MediaModel> implements OnDownloa
         }
     }
 
-    @Override // com.fimi.album.download.interfaces.OnDownloadListener
+    @Override
     public void onSuccess(Object responseObj) {
         this.mLastPos = -1;
         this.dataResult.add((MediaModel) responseObj);
         this.mHanler.obtainMessage(1, responseObj).sendToTarget();
     }
 
-    @Override // com.fimi.album.download.interfaces.OnDownloadListener
+    @Override
     public void onFailure(Object reasonObj) {
         this.mLastPos = -1;
         this.mHanler.obtainMessage(2, reasonObj).sendToTarget();
     }
 
-    @Override // com.fimi.album.download.interfaces.OnDownloadListener
+    @Override
     public void onStop(MediaModel reasonObj) {
         this.mLastPos = -1;
         this.mHanler.obtainMessage(3, reasonObj).sendToTarget();
     }
 
-    @Override // com.fimi.album.interfaces.IMediaFileDownloadObserverable
+    @Override
     public void addObserver(IMediaFileDownloadObserver observer) {
         this.observer = observer;
     }
 
-    @Override // com.fimi.album.interfaces.IMediaFileDownloadObserverable
+    @Override
     public void notityObserver(int count, int downloadSize) {
         if (this.observer != null) {
             this.observer.onMediaFileDownloadUpdate(count, downloadSize);

@@ -1,6 +1,6 @@
 package com.fimi.album.handler;
 
-/* loaded from: classes.dex */
+
 public class MessageConstant {
     public static final int ADDNEWITEM = 6;
     public static final int CATEGORYSELECT = 8;

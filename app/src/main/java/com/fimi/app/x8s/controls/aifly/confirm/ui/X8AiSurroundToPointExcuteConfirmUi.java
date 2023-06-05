@@ -18,16 +18,16 @@ import com.fimi.widget.X8ToastUtil;
 import com.fimi.x8sdk.controller.FcManager;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes.dex */
+
 public class X8AiSurroundToPointExcuteConfirmUi implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
     private float MAX;
     private int MAX_PROGRESS;
     private Button btnGo;
-    private View contentView;
+    private final View contentView;
     private FcManager fcManager;
     private ImageView imgBack;
     private IX8NextViewListener listener;
-    private int r;
+    private final int r;
     private SeekBar sbSeekBar;
     private TextView tvOrientation1;
     private TextView tvOrientation2;
@@ -38,9 +38,9 @@ public class X8AiSurroundToPointExcuteConfirmUi implements View.OnClickListener,
     private View vMinus;
     private View vPlus;
     private X8AiSurroundExcuteController x8AiSurroundExcuteController;
-    private float MIN = 1.0f;
+    private final float MIN = 1.0f;
     private double perimeter = 0.0d;
-    private float DEFAULE_SPEED = 2.0f;
+    private final float DEFAULE_SPEED = 2.0f;
 
     public X8AiSurroundToPointExcuteConfirmUi(Activity activity, View parent, float radius) {
         this.MAX = 8.0f;
@@ -64,19 +64,19 @@ public class X8AiSurroundToPointExcuteConfirmUi implements View.OnClickListener,
     }
 
     public void initView(View rootView) {
-        this.imgBack = (ImageView) rootView.findViewById(R.id.img_ai_follow_return);
-        this.tvTime = (TextView) rootView.findViewById(R.id.tv_ai_time);
-        this.tvSpeed = (TextView) rootView.findViewById(R.id.tv_ai_follow_speed);
-        this.tvRotation1 = (TextView) rootView.findViewById(R.id.tv_ai_rotation1);
-        this.tvRotation2 = (TextView) rootView.findViewById(R.id.tv_ai_rotation2);
-        this.tvOrientation1 = (TextView) rootView.findViewById(R.id.tv_ai_orientation1);
-        this.tvOrientation2 = (TextView) rootView.findViewById(R.id.tv_ai_orientation2);
+        this.imgBack = rootView.findViewById(R.id.img_ai_follow_return);
+        this.tvTime = rootView.findViewById(R.id.tv_ai_time);
+        this.tvSpeed = rootView.findViewById(R.id.tv_ai_follow_speed);
+        this.tvRotation1 = rootView.findViewById(R.id.tv_ai_rotation1);
+        this.tvRotation2 = rootView.findViewById(R.id.tv_ai_rotation2);
+        this.tvOrientation1 = rootView.findViewById(R.id.tv_ai_orientation1);
+        this.tvOrientation2 = rootView.findViewById(R.id.tv_ai_orientation2);
         this.tvRotation1.setSelected(true);
         this.tvOrientation1.setSelected(true);
         this.vMinus = rootView.findViewById(R.id.rl_minus);
-        this.sbSeekBar = (SeekBar) rootView.findViewById(R.id.sb_value);
+        this.sbSeekBar = rootView.findViewById(R.id.sb_value);
         this.vPlus = rootView.findViewById(R.id.rl_plus);
-        this.btnGo = (Button) rootView.findViewById(R.id.btn_ai_follow_confirm_ok);
+        this.btnGo = rootView.findViewById(R.id.btn_ai_follow_confirm_ok);
         this.sbSeekBar.setMax(this.MAX_PROGRESS);
     }
 
@@ -94,7 +94,7 @@ public class X8AiSurroundToPointExcuteConfirmUi implements View.OnClickListener,
         this.tvOrientation2.setOnClickListener(this);
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.rl_minus) {
@@ -148,7 +148,7 @@ public class X8AiSurroundToPointExcuteConfirmUi implements View.OnClickListener,
         this.tvTime.setText("" + time + "S");
     }
 
-    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+    @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         float speed = this.MIN + (progress / 10.0f);
         String strSpeed = X8NumberUtil.getSpeedNumberString(speed, 1, true);
@@ -157,11 +157,11 @@ public class X8AiSurroundToPointExcuteConfirmUi implements View.OnClickListener,
         this.tvTime.setText("" + time + "S");
     }
 
-    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+    @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
     }
 
-    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+    @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
     }
 
@@ -175,8 +175,8 @@ public class X8AiSurroundToPointExcuteConfirmUi implements View.OnClickListener,
     }
 
     public void startExcute() {
-        this.fcManager.setAiSurroundExcute(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiSurroundToPointExcuteConfirmUi.1
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.setAiSurroundExcute(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8AiSurroundToPointExcuteConfirmUi.this.x8AiSurroundExcuteController.setSpeedMax((int) (X8AiSurroundToPointExcuteConfirmUi.this.MAX * 10.0f));
@@ -184,7 +184,7 @@ public class X8AiSurroundToPointExcuteConfirmUi implements View.OnClickListener,
                     float speed = X8AiSurroundToPointExcuteConfirmUi.this.MIN + (X8AiSurroundToPointExcuteConfirmUi.this.sbSeekBar.getProgress() / 10.0f);
                     int s = (int) (speed * 10.0f);
                     if (!X8AiSurroundToPointExcuteConfirmUi.this.tvRotation1.isSelected() && X8AiSurroundToPointExcuteConfirmUi.this.tvRotation2.isSelected()) {
-                        s = 0 - s;
+                        s = -s;
                     }
                     X8AiSurroundToPointExcuteConfirmUi.this.x8AiSurroundExcuteController.setSpeed(s);
                 }
@@ -196,10 +196,10 @@ public class X8AiSurroundToPointExcuteConfirmUi implements View.OnClickListener,
         float speed = this.MIN + (this.sbSeekBar.getProgress() / 10.0f);
         int s = (int) (speed * 10.0f);
         if (!this.tvRotation1.isSelected() && this.tvRotation2.isSelected()) {
-            s = 0 - s;
+            s = -s;
         }
-        this.fcManager.setAiSurroundSpeed(s, new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiSurroundToPointExcuteConfirmUi.2
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.setAiSurroundSpeed(s, new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8AiSurroundToPointExcuteConfirmUi.this.setOrientation();
@@ -215,8 +215,8 @@ public class X8AiSurroundToPointExcuteConfirmUi implements View.OnClickListener,
         } else if (this.tvOrientation2.isSelected()) {
             type = 1;
         }
-        this.fcManager.setAiSurroundOrientation(type, new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiSurroundToPointExcuteConfirmUi.3
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.setAiSurroundOrientation(type, new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8AiSurroundToPointExcuteConfirmUi.this.startExcute();
@@ -226,10 +226,6 @@ public class X8AiSurroundToPointExcuteConfirmUi implements View.OnClickListener,
     }
 
     public void setFcHeart(boolean isInSky, boolean isLowPower) {
-        if (isInSky && isLowPower) {
-            this.btnGo.setEnabled(true);
-        } else {
-            this.btnGo.setEnabled(false);
-        }
+        this.btnGo.setEnabled(isInSky && isLowPower);
     }
 }

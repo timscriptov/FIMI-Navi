@@ -5,7 +5,7 @@ import com.fimi.network.DownFwService;
 import com.fimi.network.DownNoticeMananger;
 import com.fimi.network.IDownProgress;
 
-/* loaded from: classes.dex */
+
 public class DownFirmwarePresenter implements IDownProgress {
     IFirmwareDownView iFirmwareDownView;
 
@@ -14,7 +14,7 @@ public class DownFirmwarePresenter implements IDownProgress {
         DownNoticeMananger.getDownNoticManger().addDownNoticeList(this);
     }
 
-    @Override // com.fimi.network.IDownProgress
+    @Override
     public void onProgress(DownFwService.DownState isResult, int progrss, String name) {
         this.iFirmwareDownView.showDownFwProgress(isResult, progrss, name);
     }

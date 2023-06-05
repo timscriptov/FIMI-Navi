@@ -22,7 +22,7 @@ import com.fimi.x8sdk.dataparser.AckRcMatchCodeState;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/* loaded from: classes.dex */
+
 public class X8RCMatchCodeController extends AbsX8MenuBoxControllers implements View.OnClickListener {
     private final int cancelDoing;
     private final int startDone;
@@ -64,7 +64,7 @@ public class X8RCMatchCodeController extends AbsX8MenuBoxControllers implements 
         this.ix8CalibrationListener = ix8CalibrationListener;
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.btn_start_match) {
@@ -95,39 +95,39 @@ public class X8RCMatchCodeController extends AbsX8MenuBoxControllers implements 
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
         this.context = rootView.getContext();
         LayoutInflater inflater = LayoutInflater.from(rootView.getContext());
         this.handleView = inflater.inflate(R.layout.x8_rc_match_code_layout, (ViewGroup) rootView, true);
-        this.imgReturn = (ImageView) this.handleView.findViewById(R.id.img_return);
-        this.btnStart = (Button) this.handleView.findViewById(R.id.btn_start_match);
-        this.tv_tip = (TextView) this.handleView.findViewById(R.id.tv_tip);
-        this.tv_subTip = (TextView) this.handleView.findViewById(R.id.tv_tip1);
-        this.imgAnimation = (ImageView) this.handleView.findViewById(R.id.img_animation);
+        this.imgReturn = this.handleView.findViewById(R.id.img_return);
+        this.btnStart = this.handleView.findViewById(R.id.btn_start_match);
+        this.tv_tip = this.handleView.findViewById(R.id.tv_tip);
+        this.tv_subTip = this.handleView.findViewById(R.id.tv_tip1);
+        this.imgAnimation = this.handleView.findViewById(R.id.img_animation);
         this.imgAnimation.setBackgroundResource(R.drawable.x8_calibration_animation);
         AnimationDrawable ad = (AnimationDrawable) this.imgAnimation.getBackground();
         ad.start();
         this.idealView = this.handleView.findViewById(R.id.rc_match_code_content);
         this.checkView = this.handleView.findViewById(R.id.rc_match_progress_layout);
         this.rtView = this.handleView.findViewById(R.id.rc_match_code_result);
-        this.matchBar = (ProgressBar) this.handleView.findViewById(R.id.calibration_bar);
-        this.tv_progress = (TextView) this.handleView.findViewById(R.id.tv_progress);
-        this.checkTip = (TextView) this.handleView.findViewById(R.id.tv_check_tip);
-        this.rtBtn = (Button) this.handleView.findViewById(R.id.btn_rt_confirm);
+        this.matchBar = this.handleView.findViewById(R.id.calibration_bar);
+        this.tv_progress = this.handleView.findViewById(R.id.tv_progress);
+        this.checkTip = this.handleView.findViewById(R.id.tv_check_tip);
+        this.rtBtn = this.handleView.findViewById(R.id.btn_rt_confirm);
         this.rtBtn.setOnClickListener(this);
-        this.tvRtTip = (TextView) this.handleView.findViewById(R.id.tv_result_tip2);
-        this.tvRt = (TextView) this.handleView.findViewById(R.id.tv_result_tip);
-        this.imgResult = (ImageView) this.handleView.findViewById(R.id.img_result);
+        this.tvRtTip = this.handleView.findViewById(R.id.tv_result_tip2);
+        this.tvRt = this.handleView.findViewById(R.id.tv_result_tip);
+        this.imgResult = this.handleView.findViewById(R.id.img_result);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
         this.imgReturn.setOnClickListener(this);
         this.btnStart.setOnClickListener(this);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
@@ -202,24 +202,21 @@ public class X8RCMatchCodeController extends AbsX8MenuBoxControllers implements 
     }
 
     public boolean isCalibrationing() {
-        if (this.matchStatus != MatchStatus.ideal) {
-            return true;
-        }
-        return false;
+        return this.matchStatus != MatchStatus.ideal;
     }
 
-    /* loaded from: classes.dex */
+
     public enum MatchStatus {
         ideal,
         doing
     }
 
-    /* loaded from: classes.dex */
+
     public class CheckTask extends TimerTask {
         CheckTask() {
         }
 
-        @Override // java.util.TimerTask, java.lang.Runnable
+        @Override
         public void run() {
             if (X8RCMatchCodeController.this.fcCtrlManager != null) {
                 if (X8RCMatchCodeController.this.checkLisenter == null) {
@@ -230,12 +227,12 @@ public class X8RCMatchCodeController extends AbsX8MenuBoxControllers implements 
         }
     }
 
-    /* loaded from: classes.dex */
+
     private class MatchProgressListener implements UiCallBackListener {
         private MatchProgressListener() {
         }
 
-        @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        @Override
         @SuppressLint({"StringFormatInvalid"})
         public void onComplete(CmdResult cmdResult, Object o) {
             if (cmdResult.isSuccess() && o != null) {
@@ -243,7 +240,7 @@ public class X8RCMatchCodeController extends AbsX8MenuBoxControllers implements 
                 int progress = caliState.getProgress();
                 if (progress > 0 && progress < 100) {
                     X8RCMatchCodeController.this.matchBar.setProgress(progress);
-                    X8RCMatchCodeController.this.tv_progress.setText(String.format(X8RCMatchCodeController.this.context.getResources().getString(R.string.x8_calibration_progress), String.valueOf(progress) + "%"));
+                    X8RCMatchCodeController.this.tv_progress.setText(String.format(X8RCMatchCodeController.this.context.getResources().getString(R.string.x8_calibration_progress), progress + "%"));
                     if (progress == 100) {
                         X8RCMatchCodeController.this.matchStatus = MatchStatus.ideal;
                         X8RCMatchCodeController.this.checkView.setVisibility(View.GONE);

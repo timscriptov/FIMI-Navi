@@ -1,6 +1,6 @@
 package com.fimi.x8sdk.entity;
 
-/* loaded from: classes2.dex */
+
 public class ErrCodeEntity {
     private String descript;
     private int errCode;

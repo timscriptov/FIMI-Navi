@@ -15,14 +15,14 @@ import com.fimi.kernel.dataparser.usb.UiCallBackListener;
 import com.fimi.x8sdk.controller.X8VcManager;
 import com.fimi.x8sdk.dataparser.AutoVcTracking;
 
-/* loaded from: classes.dex */
+
 public class X8AiTrackController implements X8DetectionControler.onDetectionListener, X8TrackOverlayView.OverlayListener {
     boolean isLog;
     private FimiH264Video fimiH264Video;
     private boolean isShow;
     private boolean isTou;
     private OnAiTrackControllerListener listener;
-    private X8DetectionControler mX8DetectionControler = new X8DetectionControler();
+    private final X8DetectionControler mX8DetectionControler = new X8DetectionControler();
     private X8VcManager vcManager;
     private X8TrackOverlayView viewTrackOverlay;
 
@@ -38,12 +38,12 @@ public class X8AiTrackController implements X8DetectionControler.onDetectionList
         this.listener = listener;
     }
 
-    @Override // com.fimi.app.x8s.tensortfloow.X8DetectionControler.onDetectionListener
+    @Override
     public void onDetectionResult(int x, int y, int w, int h, int classfier) {
         sendRectF(x, y, w, h, classfier);
     }
 
-    @Override // com.fimi.app.x8s.tensortfloow.X8DetectionControler.onDetectionListener
+    @Override
     public void onDetectionFailed() {
     }
 
@@ -52,8 +52,8 @@ public class X8AiTrackController implements X8DetectionControler.onDetectionList
     }
 
     public void sendRectF(int x, int y, int w, int h, int classfier) {
-        this.vcManager.setVcRectF(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.X8AiTrackController.1
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.vcManager.setVcRectF(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     if (cmdResult.getErrCode() == 0) {
@@ -80,32 +80,32 @@ public class X8AiTrackController implements X8DetectionControler.onDetectionList
         }, x, y, w, h, classfier);
     }
 
-    @Override // com.fimi.app.x8s.widget.X8TrackOverlayView.OverlayListener
+    @Override
     public void onTouchActionDown() {
         this.isTou = false;
         this.mX8DetectionControler.onTouchActionDown();
         this.listener.onTouchActionDown();
     }
 
-    @Override // com.fimi.app.x8s.widget.X8TrackOverlayView.OverlayListener
+    @Override
     public void onTouchActionUp(float x, float y, float w, float h, int x1, int y1, int x2, int y2) {
         this.mX8DetectionControler.onTouchActionUp((int) x, (int) y, (int) w, (int) h, x1, y1, x2, y2);
         this.isTou = true;
         this.listener.onTouchActionUp();
     }
 
-    @Override // com.fimi.app.x8s.widget.X8TrackOverlayView.OverlayListener
+    @Override
     public void onDraw(Canvas canvas, RectF rect, boolean lost) {
     }
 
-    @Override // com.fimi.app.x8s.widget.X8TrackOverlayView.OverlayListener
+    @Override
     public void onChangeGoLocation(float left, float right, float top, float bottom, int w, int h) {
         if (this.listener != null) {
             this.listener.onChangeGoLocation(left, right, top, bottom, w, h);
         }
     }
 
-    @Override // com.fimi.app.x8s.widget.X8TrackOverlayView.OverlayListener
+    @Override
     public boolean isCanSelect() {
         return false;
     }
@@ -124,10 +124,7 @@ public class X8AiTrackController implements X8DetectionControler.onDetectionList
     }
 
     public boolean isValidError(int x, int y, int w, int h) {
-        if (x == y && y == w && w == h && h == 0) {
-            return false;
-        }
-        return true;
+        return x != y || y != w || w != h || h != 0;
     }
 
     public void closeUi() {
@@ -147,7 +144,7 @@ public class X8AiTrackController implements X8DetectionControler.onDetectionList
         this.isTou = tou;
     }
 
-    /* loaded from: classes.dex */
+
     public interface OnAiTrackControllerListener {
         void onChangeGoLocation(float f, float f2, float f3, float f4, int i, int i2);
 

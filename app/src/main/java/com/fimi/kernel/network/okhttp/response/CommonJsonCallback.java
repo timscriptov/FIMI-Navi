@@ -24,7 +24,7 @@ import okhttp3.Callback;
 import okhttp3.Headers;
 import okhttp3.Response;
 
-/* loaded from: classes.dex */
+
 public class CommonJsonCallback implements Callback {
     protected final String RESULT_CODE = "ecode";
     protected final int RESULT_CODE_VALUE = 0;

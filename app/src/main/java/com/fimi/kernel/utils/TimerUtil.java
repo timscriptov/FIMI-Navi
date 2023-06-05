@@ -3,7 +3,7 @@ package com.fimi.kernel.utils;
 import java.util.Formatter;
 import java.util.Locale;
 
-/* loaded from: classes.dex */
+
 public class TimerUtil {
     private static volatile TimerUtil timerUtil;
     private StringBuilder mFormatBuilder;

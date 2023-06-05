@@ -8,7 +8,7 @@ import com.fimi.android.app.R;
 import com.fimi.app.x8s.interfaces.AbsX8Controllers;
 import com.fimi.x8sdk.controller.CameraManager;
 
-/* loaded from: classes.dex */
+
 public class X8CameraStylebItemController extends AbsX8Controllers implements SeekBar.OnSeekBarChangeListener {
     private SeekBar awbSeekBar;
     private CameraManager cameraManager;
@@ -24,35 +24,35 @@ public class X8CameraStylebItemController extends AbsX8Controllers implements Se
         this.cameraManager = cameraManager;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
         this.context = rootView.getContext();
-        this.awbSeekBar = (SeekBar) rootView.findViewById(R.id.awb_seekBar);
+        this.awbSeekBar = rootView.findViewById(R.id.awb_seekBar);
         this.awbSeekBar.setOnSeekBarChangeListener(this);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
-    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+    @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         this.isUser = fromUser;
     }
 
-    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+    @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
     }
 
-    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+    @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public boolean onClickBackKey() {
         return false;
     }

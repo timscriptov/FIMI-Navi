@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.fimi.android.app.R;
 
-/* loaded from: classes.dex */
+
 public class ErrorMessage {
     public static final String AIRCRAFT_ID_CANNOT_BE_EMPTY = "92001";
     public static final String CLIENT_DATA_ILLEGAL_DATA = "90002";

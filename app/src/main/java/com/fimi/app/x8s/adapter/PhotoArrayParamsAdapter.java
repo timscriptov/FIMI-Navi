@@ -13,9 +13,9 @@ import com.fimi.app.x8s.viewHolder.CameraArrayParamsViewHolder;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes.dex */
+
 public class PhotoArrayParamsAdapter extends RecyclerView.Adapter {
-    private Context context;
+    private final Context context;
     private PhotoArrayItemClickListener itemClickListener;
     private Map<String, String> keyMap;
     private List<String> pList;
@@ -27,7 +27,7 @@ public class PhotoArrayParamsAdapter extends RecyclerView.Adapter {
         this.pList = mlist;
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View parentView = LayoutInflater.from(this.context).inflate(R.layout.x8_photo_array_param_list_item, parent, false);
         RecyclerView.ViewHolder viewHolder = new CameraArrayParamsViewHolder(parentView);
@@ -53,23 +53,23 @@ public class PhotoArrayParamsAdapter extends RecyclerView.Adapter {
         notifyDataSetChanged();
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof CameraArrayParamsViewHolder) {
             ((CameraArrayParamsViewHolder) holder).initView(this.pList.get(position), this.keyMap);
             ((CameraArrayParamsViewHolder) holder).upSelected(position == this.select_position);
         }
-        holder.itemView.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.adapter.PhotoArrayParamsAdapter.1
-            @Override // android.view.View.OnClickListener
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 if (PhotoArrayParamsAdapter.this.itemClickListener != null) {
-                    PhotoArrayParamsAdapter.this.itemClickListener.onItemClickListener(PhotoArrayParamsAdapter.this.paramKey, (String) PhotoArrayParamsAdapter.this.pList.get(position));
+                    PhotoArrayParamsAdapter.this.itemClickListener.onItemClickListener(PhotoArrayParamsAdapter.this.paramKey, PhotoArrayParamsAdapter.this.pList.get(position));
                 }
             }
         });
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public int getItemCount() {
         if (this.pList != null) {
             return this.pList.size();
@@ -81,7 +81,7 @@ public class PhotoArrayParamsAdapter extends RecyclerView.Adapter {
         this.itemClickListener = itemClickListener;
     }
 
-    /* loaded from: classes.dex */
+
     public interface PhotoArrayItemClickListener {
         void onItemClickListener(String str, String str2);
     }

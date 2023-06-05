@@ -2,9 +2,9 @@ package com.fimi.app.x8s.config;
 
 import com.fimi.kernel.store.shared.SPStoreManager;
 
-/* loaded from: classes.dex */
+
 public class X8AiConfig {
-    private static X8AiConfig instance = new X8AiConfig();
+    private static final X8AiConfig instance = new X8AiConfig();
     private int aiFlyGravitationHeight;
     private int aiFlyGravitationLevel;
     private int aiFlyGravitationRotate;

@@ -3,7 +3,7 @@ package com.fimi.app.x8s.interfaces;
 import android.view.View;
 import android.view.ViewGroup;
 
-/* loaded from: classes.dex */
+
 public abstract class AbsX8MenuBoxControllers extends AbsX8Controllers {
     protected int MAX_WIDTH;
     protected View contentView;
@@ -41,7 +41,7 @@ public abstract class AbsX8MenuBoxControllers extends AbsX8Controllers {
         return false;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public boolean onClickBackKey() {
         return false;
     }

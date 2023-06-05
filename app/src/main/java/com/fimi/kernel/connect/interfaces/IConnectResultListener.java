@@ -1,6 +1,6 @@
 package com.fimi.kernel.connect.interfaces;
 
-/* loaded from: classes.dex */
+
 public interface IConnectResultListener {
     void onConnectError(String str);
 

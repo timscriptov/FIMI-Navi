@@ -6,8 +6,6 @@ import com.fimi.kernel.dataparser.usb.JsonUiCallBackListener;
 import java.io.Serializable;
 
 
-
-/* loaded from: classes.dex */
 public class JsonMessage implements Serializable {
     private JSONObject jsonRt;
     private int msg_id;

@@ -1,6 +1,6 @@
 package com.fimi.kernel.fds;
 
-/* loaded from: classes.dex */
+
 public interface IFdsUiListener {
     void onFailure(IFdsFileModel iFdsFileModel);
 

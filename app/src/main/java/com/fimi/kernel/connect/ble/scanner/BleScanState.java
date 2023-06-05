@@ -1,6 +1,6 @@
 package com.fimi.kernel.connect.ble.scanner;
 
-/* loaded from: classes.dex */
+
 public enum BleScanState {
     SCAN_TIMEOUT(-2, "SCAN_SUCCESS_TIME_OUT"),
     BLUETOOTH_OFF(-1, "BLUETOOTH_OFF"),
@@ -11,8 +11,8 @@ public enum BleScanState {
     SCAN_FAILED_FEATURE_UNSUPPORTED(4, "SCAN_FAILED_FEATURE_UNSUPPORTED"),
     SCAN_FAILED_OUT_OF_HARDWARE_RESOURCES(5, "SCAN_FAILED_OUT_OF_HARDWARE_RESOURCES");
 
-    private int code;
-    private String message;
+    private final int code;
+    private final String message;
 
     BleScanState(int code, String message) {
         this.code = code;

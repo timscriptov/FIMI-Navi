@@ -14,7 +14,7 @@ public class RecyclerDividerItemDecoration extends RecyclerView.ItemDecoration {
     public static final int VERTICAL_LIST = 1;
     private int mDividerHeight;
     private int mOrientation;
-    private Paint mPaint;
+    private final Paint mPaint;
 
     public RecyclerDividerItemDecoration(@NonNull Context context, int orientation, int dividerHeight, int dividerColor) {
         this.mDividerHeight = 2;

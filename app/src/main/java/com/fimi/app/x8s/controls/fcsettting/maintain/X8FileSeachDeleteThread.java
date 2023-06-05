@@ -15,11 +15,11 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes.dex */
+
 public class X8FileSeachDeleteThread extends Thread {
-    private Handler handler;
-    private boolean isSeach;
-    private X8B2oxAdapter mX8B2oxAdapter;
+    private final Handler handler;
+    private final boolean isSeach;
+    private final X8B2oxAdapter mX8B2oxAdapter;
 
     public X8FileSeachDeleteThread(X8B2oxAdapter mX8B2oxAdapter, Handler handler, boolean seachOrDelete) {
         this.mX8B2oxAdapter = mX8B2oxAdapter;
@@ -27,7 +27,7 @@ public class X8FileSeachDeleteThread extends Thread {
         this.isSeach = seachOrDelete;
     }
 
-    @Override // java.lang.Thread, java.lang.Runnable
+    @Override
     public void run() {
         super.run();
         if (this.isSeach) {
@@ -85,8 +85,8 @@ public class X8FileSeachDeleteThread extends Thread {
     }
 
     public void sort(List<X8B2oxFile> list) {
-        Collections.sort(list, new Comparator<X8B2oxFile>() { // from class: com.fimi.app.x8s.controls.fcsettting.maintain.X8FileSeachDeleteThread.1
-            @Override // java.util.Comparator
+        Collections.sort(list, new Comparator<X8B2oxFile>() {
+            @Override
             public int compare(X8B2oxFile arg0, X8B2oxFile arg1) {
                 int mark = arg1.getFile().getName().compareTo(arg0.getFile().getName());
                 return mark;
@@ -95,8 +95,8 @@ public class X8FileSeachDeleteThread extends Thread {
     }
 
     public void sortGroup(List<String> list) {
-        Collections.sort(list, new Comparator<String>() { // from class: com.fimi.app.x8s.controls.fcsettting.maintain.X8FileSeachDeleteThread.2
-            @Override // java.util.Comparator
+        Collections.sort(list, new Comparator<String>() {
+            @Override
             public int compare(String arg0, String arg1) {
                 int mark = arg1.compareTo(arg0);
                 return mark;
@@ -106,8 +106,8 @@ public class X8FileSeachDeleteThread extends Thread {
 
     private void sortFileOfDate(List fileList) {
         if (fileList != null && fileList.size() > 0) {
-            Collections.sort(fileList, new Comparator<File>() { // from class: com.fimi.app.x8s.controls.fcsettting.maintain.X8FileSeachDeleteThread.3
-                @Override // java.util.Comparator
+            Collections.sort(fileList, new Comparator<File>() {
+                @Override
                 public int compare(File f1, File f2) {
                     long diff = f1.lastModified() - f2.lastModified();
                     if (diff > 0) {
@@ -119,7 +119,7 @@ public class X8FileSeachDeleteThread extends Thread {
                     return 1;
                 }
 
-                @Override // java.util.Comparator
+                @Override
                 public boolean equals(Object obj) {
                     return true;
                 }

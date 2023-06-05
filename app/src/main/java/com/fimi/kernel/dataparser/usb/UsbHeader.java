@@ -2,7 +2,7 @@ package com.fimi.kernel.dataparser.usb;
 
 import android.util.Log;
 
-/* loaded from: classes.dex */
+
 public class UsbHeader {
     public static final int MAGIC_START_NUMBER = 174;
     public static final int USB_HEADER_LEN = 5;

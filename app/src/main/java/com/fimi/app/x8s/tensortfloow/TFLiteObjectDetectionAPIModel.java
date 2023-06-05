@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
-/* loaded from: classes.dex */
+
 public class TFLiteObjectDetectionAPIModel implements Classifier {
     private static final float IMAGE_MEAN = 128.0f;
     private static final float IMAGE_STD = 128.0f;
@@ -34,7 +34,7 @@ public class TFLiteObjectDetectionAPIModel implements Classifier {
     private int inputSize;
     private int[] intValues;
     private boolean isModelQuantized;
-    private Vector<String> labels = new Vector<>();
+    private final Vector<String> labels = new Vector<>();
     private float[] numDetections;
     private float[][] outputClasses;
     private float[][][] outputLocations;
@@ -76,7 +76,7 @@ public class TFLiteObjectDetectionAPIModel implements Classifier {
             } else {
                 numBytesPerChannel = 4;
             }
-            d.imgData = ByteBuffer.allocateDirect(d.inputSize * 1 * d.inputSize * 3 * numBytesPerChannel);
+            d.imgData = ByteBuffer.allocateDirect(d.inputSize * d.inputSize * 3 * numBytesPerChannel);
             d.imgData.order(ByteOrder.nativeOrder());
             d.intValues = new int[d.inputSize * d.inputSize];
             d.tfLite.setNumThreads(6);
@@ -90,7 +90,7 @@ public class TFLiteObjectDetectionAPIModel implements Classifier {
         }
     }
 
-    @Override // com.fimi.app.x8s.tensortfloow.Classifier
+    @Override
     public List<Classifier.Recognition> recognizeImage(Bitmap bitmap) {
         Trace.beginSection("recognizeImage");
         Trace.beginSection("preprocessBitmap");
@@ -138,16 +138,16 @@ public class TFLiteObjectDetectionAPIModel implements Classifier {
         return recognitions;
     }
 
-    @Override // com.fimi.app.x8s.tensortfloow.Classifier
+    @Override
     public void enableStatLogging(boolean logStats) {
     }
 
-    @Override // com.fimi.app.x8s.tensortfloow.Classifier
+    @Override
     public String getStatString() {
         return "";
     }
 
-    @Override // com.fimi.app.x8s.tensortfloow.Classifier
+    @Override
     public void close() {
     }
 }

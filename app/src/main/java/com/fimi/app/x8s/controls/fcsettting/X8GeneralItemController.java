@@ -22,7 +22,7 @@ import com.fimi.x8sdk.controller.X8GimbalManager;
 import com.fimi.x8sdk.map.MapType;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes.dex */
+
 public class X8GeneralItemController extends AbsX8Controllers {
     X8RestSystemController.OnRestSystemListener onRestSystemListener;
     X8RestSystemController restSystemController;
@@ -46,7 +46,7 @@ public class X8GeneralItemController extends AbsX8Controllers {
 
     public X8GeneralItemController(View rootView) {
         super(rootView);
-        this.onRestSystemListener = new X8RestSystemController.OnRestSystemListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GeneralItemController.1
+        this.onRestSystemListener = new X8RestSystemController.OnRestSystemListener() {
             @Override
             // com.fimi.app.x8s.controls.fcsettting.X8RestSystemController.OnRestSystemListener
             public void onStart() {
@@ -72,18 +72,18 @@ public class X8GeneralItemController extends AbsX8Controllers {
         };
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
-        this.stubFcItem = (ViewStub) rootView.findViewById(R.id.stub_general_item);
+        this.stubFcItem = rootView.findViewById(R.id.stub_general_item);
         this.mContext = rootView.getContext();
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
         if (this.rlFcItem != null) {
             this.restSystemController = new X8RestSystemController(this.mContext, this.gimbalManager, this.fcCtrlManager, this.onRestSystemListener);
-            this.mThMap.setOnSelectListener(new X8TabHost.OnSelectListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GeneralItemController.2
-                @Override // com.fimi.app.x8s.widget.X8TabHost.OnSelectListener
+            this.mThMap.setOnSelectListener(new X8TabHost.OnSelectListener() {
+                @Override
                 public void onSelect(int index, String text, int last) {
                     int mapStyle = index == 0 ? Constants.X8_GENERAL_MAP_STYLE_NORMAL : Constants.X8_GENERAL_MAP_STYLE_SATELLITE;
                     SPStoreManager.getInstance().saveInt(Constants.X8_MAP_STYLE, mapStyle);
@@ -93,8 +93,8 @@ public class X8GeneralItemController extends AbsX8Controllers {
                     }
                 }
             });
-            this.mThUnity.setOnSelectListener(new X8TabHost.OnSelectListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GeneralItemController.3
-                @Override // com.fimi.app.x8s.widget.X8TabHost.OnSelectListener
+            this.mThUnity.setOnSelectListener(new X8TabHost.OnSelectListener() {
+                @Override
                 public void onSelect(int index, String text, int last) {
                     boolean isShowMetric = index == 0;
                     if (isShowMetric != GlobalConfig.getInstance().isShowmMtric()) {
@@ -107,38 +107,38 @@ public class X8GeneralItemController extends AbsX8Controllers {
                     }
                 }
             });
-            this.mllVersion.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GeneralItemController.4
-                @Override // android.view.View.OnClickListener
+            this.mllVersion.setOnClickListener(new View.OnClickListener() {
+                @Override
                 public void onClick(View v) {
                     if (X8GeneralItemController.this.mListerner != null) {
                         X8GeneralItemController.this.mListerner.setVersion();
                     }
                 }
             });
-            this.modifyMode.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GeneralItemController.5
-                @Override // android.view.View.OnClickListener
+            this.modifyMode.setOnClickListener(new View.OnClickListener() {
+                @Override
                 public void onClick(View v) {
                     if (X8GeneralItemController.this.mListerner != null) {
                         X8GeneralItemController.this.mListerner.modifyMode();
                     }
                 }
             });
-            this.x8LlFlightlog.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GeneralItemController.6
-                @Override // android.view.View.OnClickListener
+            this.x8LlFlightlog.setOnClickListener(new View.OnClickListener() {
+                @Override
                 public void onClick(View v) {
                     if (X8GeneralItemController.this.mListerner != null) {
                         X8GeneralItemController.this.mListerner.openFlightlog();
                     }
                 }
             });
-            this.btnRestParams.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GeneralItemController.7
-                @Override // android.view.View.OnClickListener
+            this.btnRestParams.setOnClickListener(new View.OnClickListener() {
+                @Override
                 public void onClick(View v) {
                     X8GeneralItemController.this.restSystemController.showRestParamDialog();
                 }
             });
-            this.frequencyPoint.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GeneralItemController.8
-                @Override // android.view.View.OnClickListener
+            this.frequencyPoint.setOnClickListener(new View.OnClickListener() {
+                @Override
                 public void onClick(View v) {
                     if (X8GeneralItemController.this.mListerner != null) {
                         X8GeneralItemController.this.mListerner.frequencyPoint();
@@ -148,11 +148,11 @@ public class X8GeneralItemController extends AbsX8Controllers {
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         if (this.isShow) {
             if (b && StateManager.getInstance().getX8Drone().isOnGround()) {
@@ -165,15 +165,15 @@ public class X8GeneralItemController extends AbsX8Controllers {
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void showItem() {
         if (this.rlFcItem == null) {
             View view = this.stubFcItem.inflate();
             this.rlFcItem = view.findViewById(R.id.x8_rl_main_general_item);
-            this.mThMap = (X8TabHost) view.findViewById(R.id.th_map);
-            this.mSbMapRectifyDeviation = (SwitchButton) view.findViewById(R.id.swb_map_rectify_deviation);
-            this.mSbMapRectifyDeviation.setOnSwitchListener(new SwitchButton.OnSwitchListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GeneralItemController.9
-                @Override // com.fimi.widget.SwitchButton.OnSwitchListener
+            this.mThMap = view.findViewById(R.id.th_map);
+            this.mSbMapRectifyDeviation = view.findViewById(R.id.swb_map_rectify_deviation);
+            this.mSbMapRectifyDeviation.setOnSwitchListener(new SwitchButton.OnSwitchListener() {
+                @Override
                 public void onSwitch(View view2, boolean on) {
                     if (on) {
                         GlobalConfig.getInstance().setRectification(false);
@@ -182,24 +182,24 @@ public class X8GeneralItemController extends AbsX8Controllers {
                         SPStoreManager.getInstance().saveBoolean(Constants.X8_MAP_RECTIFYIN_OPTION, true);
                         GlobalConfig.getInstance().setRectification(true);
                     }
-                    X8GeneralItemController.this.mSbMapRectifyDeviation.setSwitchState(on ? false : true);
+                    X8GeneralItemController.this.mSbMapRectifyDeviation.setSwitchState(!on);
                 }
             });
             this.mSbMapRectifyDeviation.setSwitchState(GlobalConfig.getInstance().isRectification());
-            this.mSbGoogleMap = (SwitchButton) view.findViewById(R.id.swb_google_map);
-            this.mThUnity = (X8TabHost) view.findViewById(R.id.th_unity);
-            this.mSbShowLog = (SwitchButton) view.findViewById(R.id.swb_show_log);
-            this.mllVersion = (PercentRelativeLayout) view.findViewById(R.id.rl_update);
-            this.modifyMode = (LinearLayout) view.findViewById(R.id.ll_modify);
-            this.x8LlFlightlog = (LinearLayout) view.findViewById(R.id.x8_ll_flightlog);
-            this.frequencyPoint = (LinearLayout) view.findViewById(R.id.ll_frequency_point);
+            this.mSbGoogleMap = view.findViewById(R.id.swb_google_map);
+            this.mThUnity = view.findViewById(R.id.th_unity);
+            this.mSbShowLog = view.findViewById(R.id.swb_show_log);
+            this.mllVersion = view.findViewById(R.id.rl_update);
+            this.modifyMode = view.findViewById(R.id.ll_modify);
+            this.x8LlFlightlog = view.findViewById(R.id.x8_ll_flightlog);
+            this.frequencyPoint = view.findViewById(R.id.ll_frequency_point);
             this.mThMap.setSelect(GlobalConfig.getInstance().getMapStyle() == Constants.X8_GENERAL_MAP_STYLE_NORMAL ? 0 : 1);
-            this.btnRestParams = (Button) view.findViewById(R.id.btn_rest_params);
-            this.pbResetParams = (ProgressBar) view.findViewById(R.id.pb_restsystem_loading);
+            this.btnRestParams = view.findViewById(R.id.btn_rest_params);
+            this.pbResetParams = view.findViewById(R.id.pb_restsystem_loading);
             this.mSbGoogleMap.onSwitch(GlobalConfig.getInstance().getMapType() == MapType.GoogleMap);
             this.mSbGoogleMap.setEnabled(true);
-            this.mSbGoogleMap.setOnSwitchListener(new SwitchButton.OnSwitchListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GeneralItemController.10
-                @Override // com.fimi.widget.SwitchButton.OnSwitchListener
+            this.mSbGoogleMap.setOnSwitchListener(new SwitchButton.OnSwitchListener() {
+                @Override
                 public void onSwitch(View view2, boolean on) {
                     if (on) {
                         SPStoreManager.getInstance().saveBoolean(Constants.X8_MAP_OPTION, true);
@@ -234,7 +234,7 @@ public class X8GeneralItemController extends AbsX8Controllers {
         this.mSbShowLog.setAlpha(0.4f);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void closeItem() {
         if (this.rlFcItem != null) {
             this.isShow = false;
@@ -250,7 +250,7 @@ public class X8GeneralItemController extends AbsX8Controllers {
         this.fcCtrlManager = fcCtrlManager;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public boolean onClickBackKey() {
         return false;
     }

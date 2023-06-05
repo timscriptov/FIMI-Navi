@@ -104,7 +104,6 @@ public class X8CustomVideoView extends RelativeLayout implements View.OnClickLis
                         sendEmptyMessageDelayed(1, 1000L);
                         return;
                     }
-                    return;
                 }
             }
         };

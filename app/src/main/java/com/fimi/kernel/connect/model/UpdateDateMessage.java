@@ -3,8 +3,6 @@ package com.fimi.kernel.connect.model;
 import java.io.Serializable;
 
 
-
-/* loaded from: classes.dex */
 public class UpdateDateMessage implements Serializable {
     byte faultMessage;
     int fileOffset;

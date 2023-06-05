@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.fimi.kernel.utils.FontUtil;
 
-/* loaded from: classes.dex */
+
 public class MediaStrokeTextView extends TextView {
     private TextView borderText;
 
@@ -46,13 +46,13 @@ public class MediaStrokeTextView extends TextView {
         this.borderText.setGravity(getGravity());
     }
 
-    @Override // android.view.View
+    @Override
     public void setLayoutParams(ViewGroup.LayoutParams params) {
         super.setLayoutParams(params);
         this.borderText.setLayoutParams(params);
     }
 
-    @Override // android.widget.TextView, android.view.View
+    @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         CharSequence tt = this.borderText.getText();
         if (tt == null || !tt.equals(getText())) {
@@ -63,13 +63,13 @@ public class MediaStrokeTextView extends TextView {
         this.borderText.measure(widthMeasureSpec, heightMeasureSpec);
     }
 
-    @Override // android.widget.TextView, android.view.View
+    @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
         this.borderText.layout(left, top, right, bottom);
     }
 
-    @Override // android.widget.TextView, android.view.View
+    @Override
     protected void onDraw(Canvas canvas) {
         this.borderText.draw(canvas);
         super.onDraw(canvas);

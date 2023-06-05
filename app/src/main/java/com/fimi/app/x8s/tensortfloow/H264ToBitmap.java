@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 
 import androidx.core.view.ViewCompat;
 
-/* loaded from: classes.dex */
+
 public class H264ToBitmap {
     public static Bitmap rgb2Bitmap(byte[] data, int width, int height) {
         int[] colors = convertByteToColor(data);

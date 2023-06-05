@@ -114,7 +114,7 @@ public class X8AiLineHistoryAdapter2 extends RecyclerView.Adapter<X8AiLineHistor
                 info1.setSaveFlag(0);
                 X8AiLinePointInfoHelper.getIntance().updatelineSaveFlag(0, info1.getId());
                 if (X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener != null) {
-                    X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener.onItemChange(((X8AiLinePointInfo) X8AiLineHistoryAdapter2.this.list.get(position)).getId(), 0, position);
+                    X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener.onItemChange(X8AiLineHistoryAdapter2.this.list.get(position).getId(), 0, position);
                 }
                 X8AiLineHistoryAdapter2.this.notifyItemChanged(position);
             } else if (info1.getSaveFlag() == 0) {
@@ -126,8 +126,8 @@ public class X8AiLineHistoryAdapter2 extends RecyclerView.Adapter<X8AiLineHistor
                 info1.setSaveFlag(1);
                 X8AiLinePointInfoHelper.getIntance().updatelineSaveFlag(1, info1.getId());
                 if (X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener != null) {
-                    X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener.onItemChange(((X8AiLinePointInfo) X8AiLineHistoryAdapter2.this.list.get(position)).getId(), 1, position);
-                    X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener.addLineItem((X8AiLinePointInfo) X8AiLineHistoryAdapter2.this.list.get(position));
+                    X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener.onItemChange(X8AiLineHistoryAdapter2.this.list.get(position).getId(), 1, position);
+                    X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener.addLineItem(X8AiLineHistoryAdapter2.this.list.get(position));
                 }
                 X8AiLineHistoryAdapter2.this.notifyItemChanged(position);
                 if (info1.getName() != null && info1.getName().equals("")) {
@@ -137,7 +137,7 @@ public class X8AiLineHistoryAdapter2 extends RecyclerView.Adapter<X8AiLineHistor
         });
         holder.rlRootView.setOnClickListener(v -> {
             if (X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener != null) {
-                X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener.onSelectId(((X8AiLinePointInfo) X8AiLineHistoryAdapter2.this.list.get(position)).getId(), X8AiLineHistoryAdapter2.this.type);
+                X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener.onSelectId(X8AiLineHistoryAdapter2.this.list.get(position).getId(), X8AiLineHistoryAdapter2.this.type);
             }
         });
     }
@@ -178,7 +178,7 @@ public class X8AiLineHistoryAdapter2 extends RecyclerView.Adapter<X8AiLineHistor
                 info.setSaveFlag(0);
                 X8AiLinePointInfoHelper.getIntance().updatelineSaveFlag(0, info.getId());
                 if (X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener != null) {
-                    X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener.onItemChange(((X8AiLinePointInfo) X8AiLineHistoryAdapter2.this.list.get(index)).getId(), 0, index);
+                    X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener.onItemChange(X8AiLineHistoryAdapter2.this.list.get(index).getId(), 0, index);
                 }
                 X8AiLineHistoryAdapter2.this.list.remove(info);
                 X8AiLineHistoryAdapter2.this.notifyItemRemoved(index);
@@ -223,7 +223,7 @@ public class X8AiLineHistoryAdapter2 extends RecyclerView.Adapter<X8AiLineHistor
                 info1.setName(text);
                 X8AiLinePointInfoHelper.getIntance().updateLineName(text, info1.getId());
                 if (X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener != null) {
-                    X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener.onItemChange(((X8AiLinePointInfo) X8AiLineHistoryAdapter2.this.list.get(positon)).getId(), 1, positon);
+                    X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener.onItemChange(X8AiLineHistoryAdapter2.this.list.get(positon).getId(), 1, positon);
                 }
                 X8AiLineHistoryAdapter2.this.notifyItemChanged(positon);
             }
@@ -234,7 +234,7 @@ public class X8AiLineHistoryAdapter2 extends RecyclerView.Adapter<X8AiLineHistor
                     info1.setName(text);
                     X8AiLinePointInfoHelper.getIntance().updateLineName(text, info1.getId());
                     if (X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener != null) {
-                        X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener.onItemChange(((X8AiLinePointInfo) X8AiLineHistoryAdapter2.this.list.get(positon)).getId(), 1, positon);
+                        X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener.onItemChange(X8AiLineHistoryAdapter2.this.list.get(positon).getId(), 1, positon);
                     }
                     X8AiLineHistoryAdapter2.this.notifyItemChanged(positon);
                 }
@@ -258,13 +258,13 @@ public class X8AiLineHistoryAdapter2 extends RecyclerView.Adapter<X8AiLineHistor
         public HistoryViewHolder(View itemView) {
             super(itemView);
             this.rlRootView = itemView.findViewById(R.id.rlRootView);
-            this.mTvItemTitle1 = (TextView) itemView.findViewById(R.id.tvItme1);
-            this.mTvItemTitle2 = (TextView) itemView.findViewById(R.id.tvItme2);
-            this.mTvItemTitle3 = (TextView) itemView.findViewById(R.id.tvItme3);
-            this.mTvItemTitle4 = (TextView) itemView.findViewById(R.id.tvItme4);
-            this.mTvItemTitle5 = (TextView) itemView.findViewById(R.id.tvItme5);
-            this.mTvItemTitle6 = (TextView) itemView.findViewById(R.id.tvItme6);
-            this.mImgSaveFlag = (ImageView) itemView.findViewById(R.id.img_save_flag);
+            this.mTvItemTitle1 = itemView.findViewById(R.id.tvItme1);
+            this.mTvItemTitle2 = itemView.findViewById(R.id.tvItme2);
+            this.mTvItemTitle3 = itemView.findViewById(R.id.tvItme3);
+            this.mTvItemTitle4 = itemView.findViewById(R.id.tvItme4);
+            this.mTvItemTitle5 = itemView.findViewById(R.id.tvItme5);
+            this.mTvItemTitle6 = itemView.findViewById(R.id.tvItme6);
+            this.mImgSaveFlag = itemView.findViewById(R.id.img_save_flag);
             this.rlSaveFlag = itemView.findViewById(R.id.rlSaveFlag);
         }
     }

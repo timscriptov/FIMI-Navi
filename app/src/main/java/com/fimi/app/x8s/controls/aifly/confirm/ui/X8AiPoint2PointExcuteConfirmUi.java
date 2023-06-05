@@ -17,11 +17,11 @@ import com.fimi.kernel.dataparser.usb.UiCallBackListener;
 import com.fimi.x8sdk.controller.FcManager;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes.dex */
+
 public class X8AiPoint2PointExcuteConfirmUi implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
     private float alt;
     private Button btnGo;
-    private View contentView;
+    private final View contentView;
     private FcManager fcManager;
     private float height;
     private ImageView imgBack;
@@ -33,10 +33,10 @@ public class X8AiPoint2PointExcuteConfirmUi implements View.OnClickListener, See
     private TextView tvTime;
     private View vMinus;
     private View vPlus;
-    private float MIN = 1.0f;
-    private float MAX = 10.0f;
-    private float DEFAULE_SPEED = 2.0f;
-    private int MAX_PROGRESS = (int) ((this.MAX - this.MIN) * 10.0f);
+    private final float MIN = 1.0f;
+    private final float MAX = 10.0f;
+    private final float DEFAULE_SPEED = 2.0f;
+    private final int MAX_PROGRESS = (int) ((this.MAX - this.MIN) * 10.0f);
     private int distance = 0;
 
     public X8AiPoint2PointExcuteConfirmUi(Activity activity, View parent) {
@@ -51,14 +51,14 @@ public class X8AiPoint2PointExcuteConfirmUi implements View.OnClickListener, See
     }
 
     public void initView(View rootView) {
-        this.imgBack = (ImageView) rootView.findViewById(R.id.img_ai_follow_return);
-        this.tvDistance = (TextView) rootView.findViewById(R.id.tv_ai_follow_distance);
-        this.tvTime = (TextView) rootView.findViewById(R.id.tv_ai_follow_time);
-        this.tvSpeed = (TextView) rootView.findViewById(R.id.tv_ai_follow_speed);
+        this.imgBack = rootView.findViewById(R.id.img_ai_follow_return);
+        this.tvDistance = rootView.findViewById(R.id.tv_ai_follow_distance);
+        this.tvTime = rootView.findViewById(R.id.tv_ai_follow_time);
+        this.tvSpeed = rootView.findViewById(R.id.tv_ai_follow_speed);
         this.vMinus = rootView.findViewById(R.id.rl_minus);
-        this.sbSeekBar = (SeekBar) rootView.findViewById(R.id.sb_value);
+        this.sbSeekBar = rootView.findViewById(R.id.sb_value);
         this.vPlus = rootView.findViewById(R.id.rl_plus);
-        this.btnGo = (Button) rootView.findViewById(R.id.btn_ai_follow_confirm_ok);
+        this.btnGo = rootView.findViewById(R.id.btn_ai_follow_confirm_ok);
         this.sbSeekBar.setMax(this.MAX_PROGRESS);
     }
 
@@ -73,7 +73,7 @@ public class X8AiPoint2PointExcuteConfirmUi implements View.OnClickListener, See
         this.btnGo.setOnClickListener(this);
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.rl_minus) {
@@ -144,7 +144,7 @@ public class X8AiPoint2PointExcuteConfirmUi implements View.OnClickListener, See
         this.tvTime.setText("" + time + "S");
     }
 
-    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+    @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         float temp;
         boolean isUp;
@@ -178,11 +178,11 @@ public class X8AiPoint2PointExcuteConfirmUi implements View.OnClickListener, See
         this.tvTime.setText("" + time + "S");
     }
 
-    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+    @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
     }
 
-    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+    @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
     }
 
@@ -190,8 +190,8 @@ public class X8AiPoint2PointExcuteConfirmUi implements View.OnClickListener, See
         int altitude = ((int) this.mapPoint.altitude) * 10;
         float speed = this.MIN + (this.sbSeekBar.getProgress() / 10.0f);
         int s = (int) (speed * 10.0f);
-        this.fcManager.setAiFollowPoint2Point(this.mapPoint.longitude, this.mapPoint.latitude, altitude, s, new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiPoint2PointExcuteConfirmUi.1
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.setAiFollowPoint2Point(this.mapPoint.longitude, this.mapPoint.latitude, altitude, s, new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8AiPoint2PointExcuteConfirmUi.this.startExcute();
@@ -201,8 +201,8 @@ public class X8AiPoint2PointExcuteConfirmUi implements View.OnClickListener, See
     }
 
     public void startExcute() {
-        this.fcManager.setAiFollowPoint2PointExcute(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiPoint2PointExcuteConfirmUi.2
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.setAiFollowPoint2PointExcute(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8AiPoint2PointExcuteConfirmUi.this.listener.onExcuteClick();
@@ -212,10 +212,6 @@ public class X8AiPoint2PointExcuteConfirmUi implements View.OnClickListener, See
     }
 
     public void setFcHeart(boolean isInSky, boolean isLowPower) {
-        if (isInSky && isLowPower) {
-            this.btnGo.setEnabled(true);
-        } else {
-            this.btnGo.setEnabled(false);
-        }
+        this.btnGo.setEnabled(isInSky && isLowPower);
     }
 }

@@ -2,7 +2,7 @@ package com.fimi.app.x8s.interfaces;
 
 import android.view.View;
 
-/* loaded from: classes.dex */
+
 public interface IControllers {
     void closeUi();
 

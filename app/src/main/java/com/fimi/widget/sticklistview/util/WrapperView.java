@@ -64,9 +64,9 @@ public class WrapperView extends ViewGroup {
             } else {
                 this.mHeader.measure(childWidthMeasureSpec, View.MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
             }
-            measuredHeight = 0 + this.mHeader.getMeasuredHeight();
+            measuredHeight = this.mHeader.getMeasuredHeight();
         } else if (this.mDivider != null) {
-            measuredHeight = 0 + this.mDividerHeight;
+            measuredHeight = this.mDividerHeight;
         }
         ViewGroup.LayoutParams params2 = this.mItem.getLayoutParams();
         if (params2 != null && params2.height > 0) {

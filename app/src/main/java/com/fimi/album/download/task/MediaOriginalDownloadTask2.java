@@ -17,11 +17,11 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/* loaded from: classes.dex */
+
 public class MediaOriginalDownloadTask2 implements Runnable {
     private int finished = 0;
-    private OnDownloadListener listener;
-    private MediaModel model;
+    private final OnDownloadListener listener;
+    private final MediaModel model;
 
     public MediaOriginalDownloadTask2(MediaModel model, OnDownloadListener listener) {
         this.model = model;
@@ -30,7 +30,7 @@ public class MediaOriginalDownloadTask2 implements Runnable {
         model.setDownloading(true);
     }
 
-    @Override // java.lang.Runnable
+    @Override
     public void run() {
         startDownload();
     }

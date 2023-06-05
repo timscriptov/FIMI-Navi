@@ -82,31 +82,29 @@ public class LetterSideBar extends View {
         int oldChooseIndex = this.mChooseIndex;
         OnTouchingLetterChangedListener listener = this.onTouchingLetterChangedListener;
         int chooseIndex = (int) ((y / getHeight()) * mLetters.length);
-        switch (action) {
-            case 1:
-                setBackgroundResource(R.color.transparent);
-                this.mChooseIndex = -1;
-                invalidate();
-                if (this.mTextDialog != null) {
-                    this.mTextDialog.setVisibility(View.INVISIBLE);
-                    return true;
-                }
+        if (action == 1) {
+            setBackgroundResource(R.color.transparent);
+            this.mChooseIndex = -1;
+            invalidate();
+            if (this.mTextDialog != null) {
+                this.mTextDialog.setVisibility(View.INVISIBLE);
                 return true;
-            default:
-                if (oldChooseIndex != chooseIndex && chooseIndex >= 0 && chooseIndex < mLetters.length) {
-                    if (listener != null) {
-                        listener.onTouchingLetterChanged(mLetters[chooseIndex]);
-                    }
-                    if (this.mTextDialog != null) {
-                        this.mTextDialog.setText(mLetters[chooseIndex]);
-                        this.mTextDialog.setVisibility(View.VISIBLE);
-                    }
-                    this.mChooseIndex = chooseIndex;
-                    invalidate();
-                    return true;
-                }
-                return true;
+            }
+            return true;
         }
+        if (oldChooseIndex != chooseIndex && chooseIndex >= 0 && chooseIndex < mLetters.length) {
+            if (listener != null) {
+                listener.onTouchingLetterChanged(mLetters[chooseIndex]);
+            }
+            if (this.mTextDialog != null) {
+                this.mTextDialog.setText(mLetters[chooseIndex]);
+                this.mTextDialog.setVisibility(View.VISIBLE);
+            }
+            this.mChooseIndex = chooseIndex;
+            invalidate();
+            return true;
+        }
+        return true;
     }
 
     public void setTextView(TextView mTextDialog) {

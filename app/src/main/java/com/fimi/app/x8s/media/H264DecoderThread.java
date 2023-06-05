@@ -6,7 +6,7 @@ import com.fimi.app.x8s.X8Application;
 
 import java.util.concurrent.LinkedBlockingDeque;
 
-/* loaded from: classes.dex */
+
 public class H264DecoderThread extends Thread implements IH264DataListener {
     public LinkedBlockingDeque<byte[]> cmdQuene = new LinkedBlockingDeque<>();
     H264Decoder mDecoder;
@@ -18,12 +18,12 @@ public class H264DecoderThread extends Thread implements IH264DataListener {
     private int count;
     private boolean isCount;
     private H264Player mH264Player;
-    private IFrameDataListener mIFrameDataListener;
+    private final IFrameDataListener mIFrameDataListener;
     private long time;
     private boolean mStopFlag = false;
     private boolean isWait = false;
-    private H264Packet mPacket = new H264Packet(new IH264DataListener() { // from class: com.fimi.app.x8s.media.H264DecoderThread.1
-        @Override // com.fimi.app.x8s.media.IH264DataListener
+    private final H264Packet mPacket = new H264Packet(new IH264DataListener() {
+        @Override
         public void onH264Frame(byte[] data) {
             if (!H264DecoderThread.this.isCount) {
                 H264DecoderThread.this.isCount = true;
@@ -67,7 +67,7 @@ public class H264DecoderThread extends Thread implements IH264DataListener {
         return i;
     }
 
-    @Override // java.lang.Thread, java.lang.Runnable
+    @Override
     public void run() {
         if (this.mDecoder != null) {
             androidDecode();
@@ -190,7 +190,7 @@ public class H264DecoderThread extends Thread implements IH264DataListener {
         interrupt();
     }
 
-    @Override // com.fimi.app.x8s.media.IH264DataListener
+    @Override
     public void onH264Frame(byte[] data) {
         decode(data);
     }

@@ -5,9 +5,9 @@ import org.greenrobot.greendao.query.QueryBuilder;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class BaseDbHelper<T, K> {
-    private AbstractDao<T, K> mDao;
+    private final AbstractDao<T, K> mDao;
 
     public BaseDbHelper(AbstractDao dao) {
         this.mDao = dao;

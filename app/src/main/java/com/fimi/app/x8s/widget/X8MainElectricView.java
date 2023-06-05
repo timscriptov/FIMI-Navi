@@ -20,7 +20,7 @@ public class X8MainElectricView extends View {
     float v;
     private int hightElectric;
     private int lowElectric;
-    private Paint mPaint;
+    private final Paint mPaint;
     private State mState;
     private int middleElectric;
     private int mostlowElectric;

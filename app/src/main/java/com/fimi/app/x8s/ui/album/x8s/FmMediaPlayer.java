@@ -8,7 +8,7 @@ import com.fimi.app.x8s.widget.videoview.X8FmMediaInfo;
 import com.fimi.player.IMediaPlayer;
 import com.fimi.player.widget.FimiVideoView;
 
-/* loaded from: classes.dex */
+
 public class FmMediaPlayer implements IFmMediaPlayer, IMediaPlayer.OnCompletionListener, IMediaPlayer.OnPreparedListener, IMediaPlayer.OnErrorListener {
     public static final String FM_MEDIA_INFO = "FmMediaPlayer_FmMediaInfo";
     public final int STATE_IDLE = 0;
@@ -17,9 +17,9 @@ public class FmMediaPlayer implements IFmMediaPlayer, IMediaPlayer.OnCompletionL
     public final int STATE_COMPLETE = 3;
     public final int STATE_DESTROY = 4;
     String path;
-    private X8FmMediaInfo info;
-    private OnActivityHander listener;
-    private FimiVideoView mainVideo;
+    private final X8FmMediaInfo info;
+    private final OnActivityHander listener;
+    private final FimiVideoView mainVideo;
     private CustomMediaContoller mediaController;
     private int state = 0;
 
@@ -53,27 +53,27 @@ public class FmMediaPlayer implements IFmMediaPlayer, IMediaPlayer.OnCompletionL
         this.mainVideo.setOnErrorListener(this);
     }
 
-    @Override // com.fimi.app.x8s.ui.album.x8s.IFmMediaPlayer
+    @Override
     public void seekTo(int m) {
         this.mainVideo.seekTo(m);
     }
 
-    @Override // com.fimi.app.x8s.ui.album.x8s.IFmMediaPlayer
+    @Override
     public boolean isPlaying() {
         return this.mainVideo.isPlaying();
     }
 
-    @Override // com.fimi.app.x8s.ui.album.x8s.IFmMediaPlayer
+    @Override
     public long getCurrentPosition() {
         return this.mainVideo.getCurrentPosition();
     }
 
-    @Override // com.fimi.app.x8s.ui.album.x8s.IFmMediaPlayer
+    @Override
     public long getDuration() {
         return this.mainVideo.getDuration();
     }
 
-    @Override // com.fimi.app.x8s.ui.album.x8s.IFmMediaPlayer
+    @Override
     public void start() {
         this.mainVideo.start();
         if (this.state != 0) {
@@ -82,13 +82,13 @@ public class FmMediaPlayer implements IFmMediaPlayer, IMediaPlayer.OnCompletionL
         this.state = 1;
     }
 
-    @Override // com.fimi.app.x8s.ui.album.x8s.IFmMediaPlayer
+    @Override
     public void pause() {
         this.mainVideo.pause();
         this.state = 2;
     }
 
-    @Override // com.fimi.app.x8s.ui.album.x8s.IFmMediaPlayer
+    @Override
     public void onDestroy() {
         if (this.state != 4) {
             this.state = 4;
@@ -98,29 +98,29 @@ public class FmMediaPlayer implements IFmMediaPlayer, IMediaPlayer.OnCompletionL
         }
     }
 
-    @Override // com.fimi.player.IMediaPlayer.OnPreparedListener
+    @Override
     public void onPrepared(IMediaPlayer mp) {
     }
 
-    @Override // com.fimi.player.IMediaPlayer.OnPreparedListener
+    @Override
     public void onStartStream() {
         this.mediaController.startSeekbar();
     }
 
-    @Override // com.fimi.player.IMediaPlayer.OnErrorListener
+    @Override
     public boolean onError(IMediaPlayer mp, int what, int extra) {
         Log.i("istep", "onError");
         this.mediaController.onError();
         return false;
     }
 
-    @Override // com.fimi.player.IMediaPlayer.OnCompletionListener
+    @Override
     public void onCompletion(IMediaPlayer mp, int code) {
         this.state = 3;
         this.mediaController.reset();
     }
 
-    /* loaded from: classes.dex */
+
     public interface OnActivityHander {
         void onBack();
     }

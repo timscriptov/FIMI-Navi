@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.fimi.android.app.R;
 
-/* loaded from: classes2.dex */
+
 public class X8Rtp {
     public static boolean isRtpAllShow = false;
     public static boolean simulationTest = false;

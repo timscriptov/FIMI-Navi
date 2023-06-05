@@ -8,7 +8,7 @@ import com.fimi.network.BaseManager;
 import com.fimi.widget.X8ToastUtil;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes.dex */
+
 public class X8MapGetCityManager extends BaseManager {
     public static String locality = "";
 
@@ -31,8 +31,8 @@ public class X8MapGetCityManager extends BaseManager {
                     lng = latLng[1];
                 }
             }
-            activity.getFcManager().setHomePoint(h, lat, lng, type, accuracy, new UiCallBackListener() { // from class: com.fimi.app.x8s.manager.X8MapGetCityManager.1
-                @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+            activity.getFcManager().setHomePoint(h, lat, lng, type, accuracy, new UiCallBackListener() {
+                @Override
                 public void onComplete(CmdResult cmdResult, Object o) {
                     if (cmdResult.isSuccess()) {
                         if (type != 0) {

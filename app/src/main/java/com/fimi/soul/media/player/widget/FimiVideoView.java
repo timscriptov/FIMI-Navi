@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-/* loaded from: classes.dex */
+
 public class FimiVideoView extends FrameLayout implements FmMediaController.MediaPlayerControl {
     public static final int RENDER_NONE = 0;
     public static final int RENDER_SURFACE_VIEW = 1;
@@ -46,25 +46,25 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
     IRenderView.IRenderCallback mSHCallback;
     IMediaPlayer.OnVideoSizeChangedListener mSizeChangedListener;
     OutputStream outputStream;
-    private String TAG;
+    private final String TAG;
     private int decodeType;
-    private boolean isLog;
-    private List<Integer> mAllRenders;
+    private final boolean isLog;
+    private final List<Integer> mAllRenders;
     private Context mAppContext;
-    private IMediaPlayer.OnBufferingUpdateListener mBufferingUpdateListener;
-    private boolean mCanPause;
+    private final IMediaPlayer.OnBufferingUpdateListener mBufferingUpdateListener;
+    private final boolean mCanPause;
     private boolean mCanSeekBack;
     private boolean mCanSeekForward;
-    private IMediaPlayer.OnCompletionListener mCompletionListener;
+    private final IMediaPlayer.OnCompletionListener mCompletionListener;
     private int mCurrentAspectRatio;
     private int mCurrentAspectRatioIndex;
     private int mCurrentBufferPercentage;
     private int mCurrentRender;
     private int mCurrentRenderIndex;
     private int mCurrentState;
-    private IMediaPlayer.OnErrorListener mErrorListener;
+    private final IMediaPlayer.OnErrorListener mErrorListener;
     private Map<String, String> mHeaders;
-    private IMediaPlayer.OnInfoListener mInfoListener;
+    private final IMediaPlayer.OnInfoListener mInfoListener;
     private IMediaController mMediaController;
     private IMediaPlayer mMediaPlayer;
     private IMediaPlayer.OnCompletionListener mOnCompletionListener;
@@ -93,8 +93,8 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
         this.mMediaPlayer = null;
         this.mCanPause = true;
         this.decodeType = 0;
-        this.mSizeChangedListener = new IMediaPlayer.OnVideoSizeChangedListener() { // from class: com.fimi.soul.media.player.widget.FimiVideoView.1
-            @Override // com.fimi.soul.media.player.IMediaPlayer.OnVideoSizeChangedListener
+        this.mSizeChangedListener = new IMediaPlayer.OnVideoSizeChangedListener() {
+            @Override
             public void onVideoSizeChanged(IMediaPlayer mp, int width, int height, int sarNum, int sarDen) {
                 FimiVideoView.this.mVideoWidth = mp.getVideoWidth();
                 FimiVideoView.this.mVideoHeight = mp.getVideoHeight();
@@ -109,8 +109,8 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
                 }
             }
         };
-        this.mPreparedListener = new IMediaPlayer.OnPreparedListener() { // from class: com.fimi.soul.media.player.widget.FimiVideoView.2
-            @Override // com.fimi.soul.media.player.IMediaPlayer.OnPreparedListener
+        this.mPreparedListener = new IMediaPlayer.OnPreparedListener() {
+            @Override
             public void onPrepared(IMediaPlayer mp) {
                 FimiVideoView.this.mCurrentState = 2;
                 if (FimiVideoView.this.mOnPreparedListener != null) {
@@ -152,8 +152,8 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
                 }
             }
         };
-        this.mCompletionListener = new IMediaPlayer.OnCompletionListener() { // from class: com.fimi.soul.media.player.widget.FimiVideoView.3
-            @Override // com.fimi.soul.media.player.IMediaPlayer.OnCompletionListener
+        this.mCompletionListener = new IMediaPlayer.OnCompletionListener() {
+            @Override
             public void onCompletion(IMediaPlayer mp) {
                 FimiVideoView.this.mCurrentState = 5;
                 FimiVideoView.this.mTargetState = 5;
@@ -165,28 +165,26 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
                 }
             }
         };
-        this.mInfoListener = new IMediaPlayer.OnInfoListener() { // from class: com.fimi.soul.media.player.widget.FimiVideoView.4
-            @Override // com.fimi.soul.media.player.IMediaPlayer.OnInfoListener
+        this.mInfoListener = new IMediaPlayer.OnInfoListener() {
+            @Override
             public boolean onInfo(IMediaPlayer mp, int arg1, int arg2) {
                 if (FimiVideoView.this.mOnInfoListener != null) {
                     FimiVideoView.this.mOnInfoListener.onInfo(mp, arg1, arg2);
                 }
-                switch (arg1) {
-                    case 10001:
-                        FimiVideoView.this.mVideoRotationDegree = arg2;
-                        Log.d(FimiVideoView.this.TAG, "MEDIA_INFO_VIDEO_ROTATION_CHANGED: " + arg2);
-                        if (FimiVideoView.this.mRenderView != null) {
-                            FimiVideoView.this.mRenderView.setVideoRotation(arg2);
-                            return true;
-                        }
+                if (arg1 == 10001) {
+                    FimiVideoView.this.mVideoRotationDegree = arg2;
+                    Log.d(FimiVideoView.this.TAG, "MEDIA_INFO_VIDEO_ROTATION_CHANGED: " + arg2);
+                    if (FimiVideoView.this.mRenderView != null) {
+                        FimiVideoView.this.mRenderView.setVideoRotation(arg2);
                         return true;
-                    default:
-                        return true;
+                    }
+                    return true;
                 }
+                return true;
             }
         };
-        this.mErrorListener = new IMediaPlayer.OnErrorListener() { // from class: com.fimi.soul.media.player.widget.FimiVideoView.5
-            @Override // com.fimi.soul.media.player.IMediaPlayer.OnErrorListener
+        this.mErrorListener = new IMediaPlayer.OnErrorListener() {
+            @Override
             public boolean onError(IMediaPlayer mp, int framework_err, int impl_err) {
                 Log.d(FimiVideoView.this.TAG, "Error: " + framework_err + "," + impl_err);
                 FimiVideoView.this.mCurrentState = -1;
@@ -203,14 +201,14 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
                 return FimiVideoView.this.mOnErrorListener != null && FimiVideoView.this.mOnErrorListener.onError(FimiVideoView.this.mMediaPlayer, framework_err, impl_err);
             }
         };
-        this.mBufferingUpdateListener = new IMediaPlayer.OnBufferingUpdateListener() { // from class: com.fimi.soul.media.player.widget.FimiVideoView.6
-            @Override // com.fimi.soul.media.player.IMediaPlayer.OnBufferingUpdateListener
+        this.mBufferingUpdateListener = new IMediaPlayer.OnBufferingUpdateListener() {
+            @Override
             public void onBufferingUpdate(IMediaPlayer mp, int percent) {
                 FimiVideoView.this.mCurrentBufferPercentage = percent;
             }
         };
-        this.mSHCallback = new IRenderView.IRenderCallback() { // from class: com.fimi.soul.media.player.widget.FimiVideoView.7
-            @Override // com.fimi.soul.media.player.widget.IRenderView.IRenderCallback
+        this.mSHCallback = new IRenderView.IRenderCallback() {
+            @Override
             public void onSurfaceChanged(@NonNull IRenderView.ISurfaceHolder holder, int format, int w, int h) {
                 if (holder.getRenderView() != FimiVideoView.this.mRenderView) {
                     Log.e(FimiVideoView.this.TAG, "onSurfaceChanged: unmatched render callback\n");
@@ -228,7 +226,7 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
                 }
             }
 
-            @Override // com.fimi.soul.media.player.widget.IRenderView.IRenderCallback
+            @Override
             public void onSurfaceCreated(@NonNull IRenderView.ISurfaceHolder holder, int width, int height) {
                 if (holder.getRenderView() != FimiVideoView.this.mRenderView) {
                     Log.e(FimiVideoView.this.TAG, "onSurfaceCreated: unmatched render callback\n");
@@ -242,7 +240,7 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
                 }
             }
 
-            @Override // com.fimi.soul.media.player.widget.IRenderView.IRenderCallback
+            @Override
             public void onSurfaceDestroyed(@NonNull IRenderView.ISurfaceHolder holder) {
                 if (holder.getRenderView() != FimiVideoView.this.mRenderView) {
                     Log.e(FimiVideoView.this.TAG, "onSurfaceDestroyed: unmatched render callback\n");
@@ -258,8 +256,8 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
         this.mCurrentRenderIndex = 0;
         this.mCurrentRender = 0;
         this.isLog = false;
-        this.mHandler = new Handler() { // from class: com.fimi.soul.media.player.widget.FimiVideoView.8
-            @Override // android.os.Handler
+        this.mHandler = new Handler() {
+            @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
             }
@@ -276,8 +274,8 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
         this.mMediaPlayer = null;
         this.mCanPause = true;
         this.decodeType = 0;
-        this.mSizeChangedListener = new IMediaPlayer.OnVideoSizeChangedListener() { // from class: com.fimi.soul.media.player.widget.FimiVideoView.1
-            @Override // com.fimi.soul.media.player.IMediaPlayer.OnVideoSizeChangedListener
+        this.mSizeChangedListener = new IMediaPlayer.OnVideoSizeChangedListener() {
+            @Override
             public void onVideoSizeChanged(IMediaPlayer mp, int width, int height, int sarNum, int sarDen) {
                 FimiVideoView.this.mVideoWidth = mp.getVideoWidth();
                 FimiVideoView.this.mVideoHeight = mp.getVideoHeight();
@@ -292,8 +290,8 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
                 }
             }
         };
-        this.mPreparedListener = new IMediaPlayer.OnPreparedListener() { // from class: com.fimi.soul.media.player.widget.FimiVideoView.2
-            @Override // com.fimi.soul.media.player.IMediaPlayer.OnPreparedListener
+        this.mPreparedListener = new IMediaPlayer.OnPreparedListener() {
+            @Override
             public void onPrepared(IMediaPlayer mp) {
                 FimiVideoView.this.mCurrentState = 2;
                 if (FimiVideoView.this.mOnPreparedListener != null) {
@@ -335,8 +333,8 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
                 }
             }
         };
-        this.mCompletionListener = new IMediaPlayer.OnCompletionListener() { // from class: com.fimi.soul.media.player.widget.FimiVideoView.3
-            @Override // com.fimi.soul.media.player.IMediaPlayer.OnCompletionListener
+        this.mCompletionListener = new IMediaPlayer.OnCompletionListener() {
+            @Override
             public void onCompletion(IMediaPlayer mp) {
                 FimiVideoView.this.mCurrentState = 5;
                 FimiVideoView.this.mTargetState = 5;
@@ -348,28 +346,26 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
                 }
             }
         };
-        this.mInfoListener = new IMediaPlayer.OnInfoListener() { // from class: com.fimi.soul.media.player.widget.FimiVideoView.4
-            @Override // com.fimi.soul.media.player.IMediaPlayer.OnInfoListener
+        this.mInfoListener = new IMediaPlayer.OnInfoListener() {
+            @Override
             public boolean onInfo(IMediaPlayer mp, int arg1, int arg2) {
                 if (FimiVideoView.this.mOnInfoListener != null) {
                     FimiVideoView.this.mOnInfoListener.onInfo(mp, arg1, arg2);
                 }
-                switch (arg1) {
-                    case 10001:
-                        FimiVideoView.this.mVideoRotationDegree = arg2;
-                        Log.d(FimiVideoView.this.TAG, "MEDIA_INFO_VIDEO_ROTATION_CHANGED: " + arg2);
-                        if (FimiVideoView.this.mRenderView != null) {
-                            FimiVideoView.this.mRenderView.setVideoRotation(arg2);
-                            return true;
-                        }
+                if (arg1 == 10001) {
+                    FimiVideoView.this.mVideoRotationDegree = arg2;
+                    Log.d(FimiVideoView.this.TAG, "MEDIA_INFO_VIDEO_ROTATION_CHANGED: " + arg2);
+                    if (FimiVideoView.this.mRenderView != null) {
+                        FimiVideoView.this.mRenderView.setVideoRotation(arg2);
                         return true;
-                    default:
-                        return true;
+                    }
+                    return true;
                 }
+                return true;
             }
         };
-        this.mErrorListener = new IMediaPlayer.OnErrorListener() { // from class: com.fimi.soul.media.player.widget.FimiVideoView.5
-            @Override // com.fimi.soul.media.player.IMediaPlayer.OnErrorListener
+        this.mErrorListener = new IMediaPlayer.OnErrorListener() {
+            @Override
             public boolean onError(IMediaPlayer mp, int framework_err, int impl_err) {
                 Log.d(FimiVideoView.this.TAG, "Error: " + framework_err + "," + impl_err);
                 FimiVideoView.this.mCurrentState = -1;
@@ -386,14 +382,14 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
                 return FimiVideoView.this.mOnErrorListener != null && FimiVideoView.this.mOnErrorListener.onError(FimiVideoView.this.mMediaPlayer, framework_err, impl_err);
             }
         };
-        this.mBufferingUpdateListener = new IMediaPlayer.OnBufferingUpdateListener() { // from class: com.fimi.soul.media.player.widget.FimiVideoView.6
-            @Override // com.fimi.soul.media.player.IMediaPlayer.OnBufferingUpdateListener
+        this.mBufferingUpdateListener = new IMediaPlayer.OnBufferingUpdateListener() {
+            @Override
             public void onBufferingUpdate(IMediaPlayer mp, int percent) {
                 FimiVideoView.this.mCurrentBufferPercentage = percent;
             }
         };
-        this.mSHCallback = new IRenderView.IRenderCallback() { // from class: com.fimi.soul.media.player.widget.FimiVideoView.7
-            @Override // com.fimi.soul.media.player.widget.IRenderView.IRenderCallback
+        this.mSHCallback = new IRenderView.IRenderCallback() {
+            @Override
             public void onSurfaceChanged(@NonNull IRenderView.ISurfaceHolder holder, int format, int w, int h) {
                 if (holder.getRenderView() != FimiVideoView.this.mRenderView) {
                     Log.e(FimiVideoView.this.TAG, "onSurfaceChanged: unmatched render callback\n");
@@ -411,7 +407,7 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
                 }
             }
 
-            @Override // com.fimi.soul.media.player.widget.IRenderView.IRenderCallback
+            @Override
             public void onSurfaceCreated(@NonNull IRenderView.ISurfaceHolder holder, int width, int height) {
                 if (holder.getRenderView() != FimiVideoView.this.mRenderView) {
                     Log.e(FimiVideoView.this.TAG, "onSurfaceCreated: unmatched render callback\n");
@@ -425,7 +421,7 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
                 }
             }
 
-            @Override // com.fimi.soul.media.player.widget.IRenderView.IRenderCallback
+            @Override
             public void onSurfaceDestroyed(@NonNull IRenderView.ISurfaceHolder holder) {
                 if (holder.getRenderView() != FimiVideoView.this.mRenderView) {
                     Log.e(FimiVideoView.this.TAG, "onSurfaceDestroyed: unmatched render callback\n");
@@ -441,8 +437,8 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
         this.mCurrentRenderIndex = 0;
         this.mCurrentRender = 0;
         this.isLog = false;
-        this.mHandler = new Handler() { // from class: com.fimi.soul.media.player.widget.FimiVideoView.8
-            @Override // android.os.Handler
+        this.mHandler = new Handler() {
+            @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
             }
@@ -459,8 +455,8 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
         this.mMediaPlayer = null;
         this.mCanPause = true;
         this.decodeType = 0;
-        this.mSizeChangedListener = new IMediaPlayer.OnVideoSizeChangedListener() { // from class: com.fimi.soul.media.player.widget.FimiVideoView.1
-            @Override // com.fimi.soul.media.player.IMediaPlayer.OnVideoSizeChangedListener
+        this.mSizeChangedListener = new IMediaPlayer.OnVideoSizeChangedListener() {
+            @Override
             public void onVideoSizeChanged(IMediaPlayer mp, int width, int height, int sarNum, int sarDen) {
                 FimiVideoView.this.mVideoWidth = mp.getVideoWidth();
                 FimiVideoView.this.mVideoHeight = mp.getVideoHeight();
@@ -475,8 +471,8 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
                 }
             }
         };
-        this.mPreparedListener = new IMediaPlayer.OnPreparedListener() { // from class: com.fimi.soul.media.player.widget.FimiVideoView.2
-            @Override // com.fimi.soul.media.player.IMediaPlayer.OnPreparedListener
+        this.mPreparedListener = new IMediaPlayer.OnPreparedListener() {
+            @Override
             public void onPrepared(IMediaPlayer mp) {
                 FimiVideoView.this.mCurrentState = 2;
                 if (FimiVideoView.this.mOnPreparedListener != null) {
@@ -518,8 +514,8 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
                 }
             }
         };
-        this.mCompletionListener = new IMediaPlayer.OnCompletionListener() { // from class: com.fimi.soul.media.player.widget.FimiVideoView.3
-            @Override // com.fimi.soul.media.player.IMediaPlayer.OnCompletionListener
+        this.mCompletionListener = new IMediaPlayer.OnCompletionListener() {
+            @Override
             public void onCompletion(IMediaPlayer mp) {
                 FimiVideoView.this.mCurrentState = 5;
                 FimiVideoView.this.mTargetState = 5;
@@ -531,28 +527,26 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
                 }
             }
         };
-        this.mInfoListener = new IMediaPlayer.OnInfoListener() { // from class: com.fimi.soul.media.player.widget.FimiVideoView.4
-            @Override // com.fimi.soul.media.player.IMediaPlayer.OnInfoListener
+        this.mInfoListener = new IMediaPlayer.OnInfoListener() {
+            @Override
             public boolean onInfo(IMediaPlayer mp, int arg1, int arg2) {
                 if (FimiVideoView.this.mOnInfoListener != null) {
                     FimiVideoView.this.mOnInfoListener.onInfo(mp, arg1, arg2);
                 }
-                switch (arg1) {
-                    case 10001:
-                        FimiVideoView.this.mVideoRotationDegree = arg2;
-                        Log.d(FimiVideoView.this.TAG, "MEDIA_INFO_VIDEO_ROTATION_CHANGED: " + arg2);
-                        if (FimiVideoView.this.mRenderView != null) {
-                            FimiVideoView.this.mRenderView.setVideoRotation(arg2);
-                            return true;
-                        }
+                if (arg1 == 10001) {
+                    FimiVideoView.this.mVideoRotationDegree = arg2;
+                    Log.d(FimiVideoView.this.TAG, "MEDIA_INFO_VIDEO_ROTATION_CHANGED: " + arg2);
+                    if (FimiVideoView.this.mRenderView != null) {
+                        FimiVideoView.this.mRenderView.setVideoRotation(arg2);
                         return true;
-                    default:
-                        return true;
+                    }
+                    return true;
                 }
+                return true;
             }
         };
-        this.mErrorListener = new IMediaPlayer.OnErrorListener() { // from class: com.fimi.soul.media.player.widget.FimiVideoView.5
-            @Override // com.fimi.soul.media.player.IMediaPlayer.OnErrorListener
+        this.mErrorListener = new IMediaPlayer.OnErrorListener() {
+            @Override
             public boolean onError(IMediaPlayer mp, int framework_err, int impl_err) {
                 Log.d(FimiVideoView.this.TAG, "Error: " + framework_err + "," + impl_err);
                 FimiVideoView.this.mCurrentState = -1;
@@ -569,14 +563,14 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
                 return FimiVideoView.this.mOnErrorListener != null && FimiVideoView.this.mOnErrorListener.onError(FimiVideoView.this.mMediaPlayer, framework_err, impl_err);
             }
         };
-        this.mBufferingUpdateListener = new IMediaPlayer.OnBufferingUpdateListener() { // from class: com.fimi.soul.media.player.widget.FimiVideoView.6
-            @Override // com.fimi.soul.media.player.IMediaPlayer.OnBufferingUpdateListener
+        this.mBufferingUpdateListener = new IMediaPlayer.OnBufferingUpdateListener() {
+            @Override
             public void onBufferingUpdate(IMediaPlayer mp, int percent) {
                 FimiVideoView.this.mCurrentBufferPercentage = percent;
             }
         };
-        this.mSHCallback = new IRenderView.IRenderCallback() { // from class: com.fimi.soul.media.player.widget.FimiVideoView.7
-            @Override // com.fimi.soul.media.player.widget.IRenderView.IRenderCallback
+        this.mSHCallback = new IRenderView.IRenderCallback() {
+            @Override
             public void onSurfaceChanged(@NonNull IRenderView.ISurfaceHolder holder, int format, int w, int h) {
                 if (holder.getRenderView() != FimiVideoView.this.mRenderView) {
                     Log.e(FimiVideoView.this.TAG, "onSurfaceChanged: unmatched render callback\n");
@@ -594,7 +588,7 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
                 }
             }
 
-            @Override // com.fimi.soul.media.player.widget.IRenderView.IRenderCallback
+            @Override
             public void onSurfaceCreated(@NonNull IRenderView.ISurfaceHolder holder, int width, int height) {
                 if (holder.getRenderView() != FimiVideoView.this.mRenderView) {
                     Log.e(FimiVideoView.this.TAG, "onSurfaceCreated: unmatched render callback\n");
@@ -608,7 +602,7 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
                 }
             }
 
-            @Override // com.fimi.soul.media.player.widget.IRenderView.IRenderCallback
+            @Override
             public void onSurfaceDestroyed(@NonNull IRenderView.ISurfaceHolder holder) {
                 if (holder.getRenderView() != FimiVideoView.this.mRenderView) {
                     Log.e(FimiVideoView.this.TAG, "onSurfaceDestroyed: unmatched render callback\n");
@@ -624,8 +618,8 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
         this.mCurrentRenderIndex = 0;
         this.mCurrentRender = 0;
         this.isLog = false;
-        this.mHandler = new Handler() { // from class: com.fimi.soul.media.player.widget.FimiVideoView.8
-            @Override // android.os.Handler
+        this.mHandler = new Handler() {
+            @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
             }
@@ -642,8 +636,8 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
         this.mMediaPlayer = null;
         this.mCanPause = true;
         this.decodeType = 0;
-        this.mSizeChangedListener = new IMediaPlayer.OnVideoSizeChangedListener() { // from class: com.fimi.soul.media.player.widget.FimiVideoView.1
-            @Override // com.fimi.soul.media.player.IMediaPlayer.OnVideoSizeChangedListener
+        this.mSizeChangedListener = new IMediaPlayer.OnVideoSizeChangedListener() {
+            @Override
             public void onVideoSizeChanged(IMediaPlayer mp, int width, int height, int sarNum, int sarDen) {
                 FimiVideoView.this.mVideoWidth = mp.getVideoWidth();
                 FimiVideoView.this.mVideoHeight = mp.getVideoHeight();
@@ -658,8 +652,8 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
                 }
             }
         };
-        this.mPreparedListener = new IMediaPlayer.OnPreparedListener() { // from class: com.fimi.soul.media.player.widget.FimiVideoView.2
-            @Override // com.fimi.soul.media.player.IMediaPlayer.OnPreparedListener
+        this.mPreparedListener = new IMediaPlayer.OnPreparedListener() {
+            @Override
             public void onPrepared(IMediaPlayer mp) {
                 FimiVideoView.this.mCurrentState = 2;
                 if (FimiVideoView.this.mOnPreparedListener != null) {
@@ -701,8 +695,8 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
                 }
             }
         };
-        this.mCompletionListener = new IMediaPlayer.OnCompletionListener() { // from class: com.fimi.soul.media.player.widget.FimiVideoView.3
-            @Override // com.fimi.soul.media.player.IMediaPlayer.OnCompletionListener
+        this.mCompletionListener = new IMediaPlayer.OnCompletionListener() {
+            @Override
             public void onCompletion(IMediaPlayer mp) {
                 FimiVideoView.this.mCurrentState = 5;
                 FimiVideoView.this.mTargetState = 5;
@@ -714,28 +708,26 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
                 }
             }
         };
-        this.mInfoListener = new IMediaPlayer.OnInfoListener() { // from class: com.fimi.soul.media.player.widget.FimiVideoView.4
-            @Override // com.fimi.soul.media.player.IMediaPlayer.OnInfoListener
+        this.mInfoListener = new IMediaPlayer.OnInfoListener() {
+            @Override
             public boolean onInfo(IMediaPlayer mp, int arg1, int arg2) {
                 if (FimiVideoView.this.mOnInfoListener != null) {
                     FimiVideoView.this.mOnInfoListener.onInfo(mp, arg1, arg2);
                 }
-                switch (arg1) {
-                    case 10001:
-                        FimiVideoView.this.mVideoRotationDegree = arg2;
-                        Log.d(FimiVideoView.this.TAG, "MEDIA_INFO_VIDEO_ROTATION_CHANGED: " + arg2);
-                        if (FimiVideoView.this.mRenderView != null) {
-                            FimiVideoView.this.mRenderView.setVideoRotation(arg2);
-                            return true;
-                        }
+                if (arg1 == 10001) {
+                    FimiVideoView.this.mVideoRotationDegree = arg2;
+                    Log.d(FimiVideoView.this.TAG, "MEDIA_INFO_VIDEO_ROTATION_CHANGED: " + arg2);
+                    if (FimiVideoView.this.mRenderView != null) {
+                        FimiVideoView.this.mRenderView.setVideoRotation(arg2);
                         return true;
-                    default:
-                        return true;
+                    }
+                    return true;
                 }
+                return true;
             }
         };
-        this.mErrorListener = new IMediaPlayer.OnErrorListener() { // from class: com.fimi.soul.media.player.widget.FimiVideoView.5
-            @Override // com.fimi.soul.media.player.IMediaPlayer.OnErrorListener
+        this.mErrorListener = new IMediaPlayer.OnErrorListener() {
+            @Override
             public boolean onError(IMediaPlayer mp, int framework_err, int impl_err) {
                 Log.d(FimiVideoView.this.TAG, "Error: " + framework_err + "," + impl_err);
                 FimiVideoView.this.mCurrentState = -1;
@@ -752,14 +744,14 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
                 return FimiVideoView.this.mOnErrorListener != null && FimiVideoView.this.mOnErrorListener.onError(FimiVideoView.this.mMediaPlayer, framework_err, impl_err);
             }
         };
-        this.mBufferingUpdateListener = new IMediaPlayer.OnBufferingUpdateListener() { // from class: com.fimi.soul.media.player.widget.FimiVideoView.6
-            @Override // com.fimi.soul.media.player.IMediaPlayer.OnBufferingUpdateListener
+        this.mBufferingUpdateListener = new IMediaPlayer.OnBufferingUpdateListener() {
+            @Override
             public void onBufferingUpdate(IMediaPlayer mp, int percent) {
                 FimiVideoView.this.mCurrentBufferPercentage = percent;
             }
         };
-        this.mSHCallback = new IRenderView.IRenderCallback() { // from class: com.fimi.soul.media.player.widget.FimiVideoView.7
-            @Override // com.fimi.soul.media.player.widget.IRenderView.IRenderCallback
+        this.mSHCallback = new IRenderView.IRenderCallback() {
+            @Override
             public void onSurfaceChanged(@NonNull IRenderView.ISurfaceHolder holder, int format, int w, int h) {
                 if (holder.getRenderView() != FimiVideoView.this.mRenderView) {
                     Log.e(FimiVideoView.this.TAG, "onSurfaceChanged: unmatched render callback\n");
@@ -777,7 +769,7 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
                 }
             }
 
-            @Override // com.fimi.soul.media.player.widget.IRenderView.IRenderCallback
+            @Override
             public void onSurfaceCreated(@NonNull IRenderView.ISurfaceHolder holder, int width, int height) {
                 if (holder.getRenderView() != FimiVideoView.this.mRenderView) {
                     Log.e(FimiVideoView.this.TAG, "onSurfaceCreated: unmatched render callback\n");
@@ -791,7 +783,7 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
                 }
             }
 
-            @Override // com.fimi.soul.media.player.widget.IRenderView.IRenderCallback
+            @Override
             public void onSurfaceDestroyed(@NonNull IRenderView.ISurfaceHolder holder) {
                 if (holder.getRenderView() != FimiVideoView.this.mRenderView) {
                     Log.e(FimiVideoView.this.TAG, "onSurfaceDestroyed: unmatched render callback\n");
@@ -807,8 +799,8 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
         this.mCurrentRenderIndex = 0;
         this.mCurrentRender = 0;
         this.isLog = false;
-        this.mHandler = new Handler() { // from class: com.fimi.soul.media.player.widget.FimiVideoView.8
-            @Override // android.os.Handler
+        this.mHandler = new Handler() {
+            @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
             }
@@ -892,7 +884,6 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
                 return;
             default:
                 Log.e(this.TAG, String.format(Locale.getDefault(), "invalid render %d\n", Integer.valueOf(render)));
-                return;
         }
     }
 
@@ -989,7 +980,7 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
         attachMediaController();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
+
     private void attachMediaController() {
         if (this.mMediaPlayer != null && this.mMediaController != null) {
             this.mMediaController.setMediaPlayer(this);
@@ -1045,7 +1036,7 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
         }
     }
 
-    @Override // android.view.View
+    @Override
     public boolean onTouchEvent(MotionEvent ev) {
         if (isInPlaybackState() && this.mMediaController != null) {
             toggleMediaControlsVisiblity();
@@ -1054,7 +1045,7 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
         return false;
     }
 
-    @Override // android.view.View
+    @Override
     public boolean onTrackballEvent(MotionEvent ev) {
         if (isInPlaybackState() && this.mMediaController != null) {
             toggleMediaControlsVisiblity();
@@ -1063,9 +1054,9 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
         return false;
     }
 
-    @Override // android.view.View, android.view.KeyEvent.Callback
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        boolean isKeyCodeSupported = (keyCode == 4 || keyCode == 24 || keyCode == 25 || keyCode == 164 || keyCode == 82 || keyCode == 5 || keyCode == 6) ? false : true;
+        boolean isKeyCodeSupported = keyCode != 4 && keyCode != 24 && keyCode != 25 && keyCode != 164 && keyCode != 82 && keyCode != 5 && keyCode != 6;
         if (isInPlaybackState() && isKeyCodeSupported && this.mMediaController != null) {
             if (keyCode == 79 || keyCode == 85) {
                 if (this.mMediaPlayer.isPlaying()) {
@@ -1105,7 +1096,7 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
         }
     }
 
-    @Override // com.fimi.soul.media.player.widget.FmMediaController.MediaPlayerControl
+    @Override
     public void start() {
         if (this.mCurrentState == 5) {
             setVideoURI(this.mUri);
@@ -1117,7 +1108,7 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
         this.mTargetState = 3;
     }
 
-    @Override // com.fimi.soul.media.player.widget.FmMediaController.MediaPlayerControl
+    @Override
     public void pause() {
         Log.d(VineCardUtils.PLAYER_CARD, "pause");
         if (this.mMediaPlayer != null) {
@@ -1140,7 +1131,7 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
         openVideo(this.decodeType);
     }
 
-    @Override // com.fimi.soul.media.player.widget.FmMediaController.MediaPlayerControl
+    @Override
     public int getDuration() {
         Log.d(VineCardUtils.PLAYER_CARD, "getDuration");
         if (isInPlaybackState()) {
@@ -1149,7 +1140,7 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
         return -1;
     }
 
-    @Override // com.fimi.soul.media.player.widget.FmMediaController.MediaPlayerControl
+    @Override
     public int getCurrentPosition() {
         if (isInPlaybackState()) {
             return (int) this.mMediaPlayer.getCurrentPosition();
@@ -1157,7 +1148,7 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
         return 0;
     }
 
-    @Override // com.fimi.soul.media.player.widget.FmMediaController.MediaPlayerControl
+    @Override
     public void seekTo(int msec) {
         Log.d(VineCardUtils.PLAYER_CARD, "seekto");
         if (isInPlaybackState()) {
@@ -1168,12 +1159,12 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
         this.mSeekWhenPrepared = msec;
     }
 
-    @Override // com.fimi.soul.media.player.widget.FmMediaController.MediaPlayerControl
+    @Override
     public boolean isPlaying() {
         return isInPlaybackState() && this.mMediaPlayer.isPlaying();
     }
 
-    @Override // com.fimi.soul.media.player.widget.FmMediaController.MediaPlayerControl
+    @Override
     public int getBufferPercentage() {
         if (this.mMediaPlayer != null) {
             return this.mCurrentBufferPercentage;
@@ -1181,7 +1172,7 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
         return 0;
     }
 
-    @Override // android.view.View
+    @Override
     public void onFinishInflate() {
         Log.d(VineCardUtils.PLAYER_CARD, "onFinishInflate");
         super.onFinishInflate();
@@ -1191,25 +1182,25 @@ public class FimiVideoView extends FrameLayout implements FmMediaController.Medi
     }
 
     private boolean isInPlaybackState() {
-        return (this.mMediaPlayer == null || this.mCurrentState == -1 || this.mCurrentState == 0 || this.mCurrentState == 1) ? false : true;
+        return this.mMediaPlayer != null && this.mCurrentState != -1 && this.mCurrentState != 0 && this.mCurrentState != 1;
     }
 
-    @Override // com.fimi.soul.media.player.widget.FmMediaController.MediaPlayerControl
+    @Override
     public boolean canPause() {
         return this.mCanPause;
     }
 
-    @Override // com.fimi.soul.media.player.widget.FmMediaController.MediaPlayerControl
+    @Override
     public boolean canSeekBackward() {
         return this.mCanSeekBack;
     }
 
-    @Override // com.fimi.soul.media.player.widget.FmMediaController.MediaPlayerControl
+    @Override
     public boolean canSeekForward() {
         return this.mCanSeekForward;
     }
 
-    @Override // com.fimi.soul.media.player.widget.FmMediaController.MediaPlayerControl
+    @Override
     public int getAudioSessionId() {
         return 0;
     }

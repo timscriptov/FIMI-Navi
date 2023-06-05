@@ -1,6 +1,6 @@
 package com.fimi.x8sdk.modulestate;
 
-/* loaded from: classes2.dex */
+
 public abstract class BaseState {
     public final int LOGIN_STATE_IDLE = 0;
     public final int LOGIN_STATE_CONNECT = 1;

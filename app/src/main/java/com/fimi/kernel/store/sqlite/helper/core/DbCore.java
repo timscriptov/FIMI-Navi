@@ -5,7 +5,7 @@ import android.content.Context;
 import com.fimi.kernel.store.sqlite.dao.DaoMaster;
 import com.fimi.kernel.store.sqlite.dao.DaoSession;
 
-/* loaded from: classes.dex */
+
 public class DbCore {
     private static final String DEFAULT_DB_NAME = "_sql.db";
     private static String DB_NAME = null;

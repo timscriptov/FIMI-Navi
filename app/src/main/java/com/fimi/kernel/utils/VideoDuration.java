@@ -5,7 +5,7 @@ import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
 
-/* loaded from: classes.dex */
+
 public class VideoDuration {
     public static long getVideoDuration(Context context, String filePath) {
         try {

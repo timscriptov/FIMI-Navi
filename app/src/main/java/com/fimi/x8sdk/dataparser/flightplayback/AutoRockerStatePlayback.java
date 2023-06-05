@@ -4,8 +4,6 @@ import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 import com.fimi.x8sdk.dataparser.X8BaseMessage;
 
 
-
-/* loaded from: classes2.dex */
 public class AutoRockerStatePlayback extends X8BaseMessage {
     private short rc0;
     private short rc1;
@@ -43,7 +41,7 @@ public class AutoRockerStatePlayback extends X8BaseMessage {
         return this.rockerKeyMessage;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         this.rc0 = packet.getPayLoad4().getShort();
@@ -55,7 +53,7 @@ public class AutoRockerStatePlayback extends X8BaseMessage {
         this.rockerKeyMessage = packet.getPayLoad4().getShort();
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public String toString() {
         return "AutoRockerStatePlayback{rc0=" + ((int) this.rc0) + ", rc1=" + ((int) this.rc1) + ", rc2=" + ((int) this.rc2) + ", rc3=" + ((int) this.rc3) + ", rc4=" + ((int) this.rc4) + ", rc5=" + ((int) this.rc5) + ", rockerKeyMessage=" + ((int) this.rockerKeyMessage) + '}';
     }

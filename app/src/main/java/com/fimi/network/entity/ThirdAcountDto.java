@@ -2,7 +2,7 @@ package com.fimi.network.entity;
 
 import com.alibaba.fastjson.JSON;
 
-/* loaded from: classes.dex */
+
 public class ThirdAcountDto extends BaseModel {
     private String country;
     private String email;

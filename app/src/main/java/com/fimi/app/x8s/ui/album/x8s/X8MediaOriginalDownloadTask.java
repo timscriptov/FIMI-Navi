@@ -20,14 +20,14 @@ import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
-/* loaded from: classes.dex */
+
 public class X8MediaOriginalDownloadTask implements Runnable {
     int max_size = 1024;
     boolean isAwait = false;
     RandomAccessFile randomAccessFile = null;
     private MediaDownloadInfo downloadInfo;
-    private OnDownloadListener listener;
-    private MediaModel model;
+    private final OnDownloadListener listener;
+    private final MediaModel model;
     private long finished = 0;
 
     public X8MediaOriginalDownloadTask(MediaModel model, OnDownloadListener listener) {
@@ -39,7 +39,7 @@ public class X8MediaOriginalDownloadTask implements Runnable {
         NoticeManager.getInstance().addMediaListener(this.mediaDataListener);
     }
 
-    @Override // java.lang.Runnable
+    @Override
     public void run() {
         startDownload();
     }
@@ -69,8 +69,14 @@ public class X8MediaOriginalDownloadTask implements Runnable {
         Log.i("felix", "开始下载位置：" + this.finished);
         HostLogBack.getInstance().writeLog("Alanqiu  ==================startDownload:" + this.model.getDownLoadOriginalPath());
         sendCmd(new X8DownLoadCmd().downMediaFile((int) this.finished, NTLMConstants.TARGET_INFORMATION_SUBBLOCK_DNS_DOMAIN_NAME_TYPE, this.model.getDownLoadOriginalPath(), false));
-    }    MediaDataListener mediaDataListener = new MediaDataListener() { // from class: com.fimi.app.x8s.ui.album.x8s.X8MediaOriginalDownloadTask.1
-        @Override // com.fimi.kernel.connect.session.MediaDataListener
+    }
+
+    public void sendCmd(X8MediaCmd cmd) {
+        if (cmd != null) {
+            SessionManager.getInstance().sendCmd(cmd);
+        }
+    }    MediaDataListener mediaDataListener = new MediaDataListener() {
+        @Override
         public void mediaDataCallBack(byte[] data) {
             if (data != null && data.length > 0) {
                 byte cmdType = data[0];
@@ -108,8 +114,8 @@ public class X8MediaOriginalDownloadTask implements Runnable {
                             X8MediaOriginalDownloadTask.this.closeWriteStream();
                         } else if (!X8MediaOriginalDownloadTask.this.isAwait) {
                             X8MediaOriginalDownloadTask.this.isAwait = true;
-                            HandlerManager.obtain().getHandlerInMainThread().postDelayed(new Runnable() { // from class: com.fimi.app.x8s.ui.album.x8s.X8MediaOriginalDownloadTask.1.1
-                                @Override // java.lang.Runnable
+                            HandlerManager.obtain().getHandlerInMainThread().postDelayed(new Runnable() {
+                                @Override
                                 public void run() {
                                     HostLogBack.getInstance().writeLog("Alanqiu  ==================mediaDataCallBack finished:" + X8MediaOriginalDownloadTask.this.finished + "downLoadPacket.getOffSet():" + downLoadPacket.getOffSet());
                                     X8MediaOriginalDownloadTask.this.sendCmd(new X8DownLoadCmd().downMediaFile((int) X8MediaOriginalDownloadTask.this.finished, NTLMConstants.TARGET_INFORMATION_SUBBLOCK_DNS_DOMAIN_NAME_TYPE, X8MediaOriginalDownloadTask.this.model.getDownLoadOriginalPath(), false));
@@ -122,12 +128,6 @@ public class X8MediaOriginalDownloadTask implements Runnable {
             }
         }
     };
-
-    public void sendCmd(X8MediaCmd cmd) {
-        if (cmd != null) {
-            SessionManager.getInstance().sendCmd(cmd);
-        }
-    }
 
     public void sendStopDownload() {
         sendCmd(new X8DownLoadCmd().downMediaFile((int) this.finished, (short) this.max_size, this.model.getFileUrl(), true));

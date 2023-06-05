@@ -64,10 +64,10 @@ public class PersonSettingNewActivity extends BasePersonActivity implements Bitm
     private RelativeLayout rlLoginNow;
     private RelativeLayout rlPersonTitle;
     private boolean isRequestNewVersion = false;
-    private AdapterView.OnItemClickListener mSecondListerner = new AdapterView.OnItemClickListener() { // from class: com.fimi.libperson.ui.setting.PersonSettingNewActivity.3
-        @Override // android.widget.AdapterView.OnItemClickListener
+    private final AdapterView.OnItemClickListener mSecondListerner = new AdapterView.OnItemClickListener() {
+        @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            PersettingSecondAdapt.State positionIndex = ((PersonSetting) PersonSettingNewActivity.this.mSecondPersonSettings.get(position)).getSecondAdapt();
+            PersettingSecondAdapt.State positionIndex = PersonSettingNewActivity.this.mSecondPersonSettings.get(position).getSecondAdapt();
             if (positionIndex == PersettingSecondAdapt.State.LANGUAGE) {
                 PersonSettingNewActivity.this.readyGoForResult(LanguageSettingActivity.class, com.fimi.x8sdk.common.Constants.A12_TCP_CMD_PORT);
             } else if (positionIndex == PersettingSecondAdapt.State.SERVICE) {
@@ -75,18 +75,18 @@ public class PersonSettingNewActivity extends BasePersonActivity implements Bitm
             }
         }
     };
-    private AdapterView.OnItemClickListener mFourListerner = new AdapterView.OnItemClickListener() { // from class: com.fimi.libperson.ui.setting.PersonSettingNewActivity.4
-        @Override // android.widget.AdapterView.OnItemClickListener
+    private final AdapterView.OnItemClickListener mFourListerner = new AdapterView.OnItemClickListener() {
+        @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             PersonSettingNewActivity.this.isRequestNewVersion = true;
-            PersettingFourAdapt.State positionIndex = ((PersonSetting) PersonSettingNewActivity.this.mFourPersonSettings.get(position)).getFourAdapt();
+            PersettingFourAdapt.State positionIndex = PersonSettingNewActivity.this.mFourPersonSettings.get(position).getFourAdapt();
             if (positionIndex == PersettingFourAdapt.State.ABOUT) {
                 PersonSettingNewActivity.this.readyGo(LibPersonAboutActivity.class);
             }
         }
     };
 
-    @Override // com.fimi.libperson.BasePersonActivity, com.fimi.kernel.base.BaseActivity
+    @Override
     public void setStatusBarColor() {
         StatusBarUtil.StatusBarLightMode(this);
     }
@@ -105,13 +105,12 @@ public class PersonSettingNewActivity extends BasePersonActivity implements Bitm
                     name = "";
                 }
                 textView.setText(name);
-                this.mTvId.setText(getString(R.string.person_setting_fimi_id, new Object[]{fimiId}));
+                this.mTvId.setText(getString(R.string.person_setting_fimi_id, fimiId));
                 FrescoImageLoader.display(this.mIvHead, HostConstants.getUserDetail().getUserImgUrl());
                 this.mBtnBack.setVisibility(View.VISIBLE);
                 this.rlLoginNow.setVisibility(View.GONE);
                 return;
             default:
-                return;
         }
     }
 
@@ -120,21 +119,21 @@ public class PersonSettingNewActivity extends BasePersonActivity implements Bitm
         this.mBitmapLoadTaskInstance.setImage(ImageSource.asset("login_bg.jpg"), this.mContext);
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void initData() {
-        this.mTitleView = (TitleView) findViewById(R.id.title_view);
+        this.mTitleView = findViewById(R.id.title_view);
         this.mTitleView.setTvTitle(getResources().getString(R.string.person_setting_title));
-        this.mIvHead = (SimpleDraweeView) findViewById(R.id.iv_head);
-        this.mBtnBack = (Button) findViewById(R.id.btn_back);
-        this.mTvName = (TextView) findViewById(R.id.tv_name);
-        this.mTvId = (TextView) findViewById(R.id.tv_id);
-        this.rlPersonTitle = (RelativeLayout) findViewById(R.id.rl_person_title);
-        this.rlLoginNow = (RelativeLayout) findViewById(R.id.rl_login_now);
+        this.mIvHead = findViewById(R.id.iv_head);
+        this.mBtnBack = findViewById(R.id.btn_back);
+        this.mTvName = findViewById(R.id.tv_name);
+        this.mTvId = findViewById(R.id.tv_id);
+        this.rlPersonTitle = findViewById(R.id.rl_person_title);
+        this.rlLoginNow = findViewById(R.id.rl_login_now);
         FontUtil.changeFontLanTing(getAssets(), this.mTvName, this.mTvId);
         final String fimiId = HostConstants.getUserDetail().getFimiId();
         handleUserType(TextUtils.isEmpty(fimiId) ? Constants.UserType.Guest : Constants.UserType.Register, fimiId);
-        this.rlPersonTitle.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.libperson.ui.setting.PersonSettingNewActivity.1
-            @Override // android.view.View.OnClickListener
+        this.rlPersonTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 if (TextUtils.isEmpty(fimiId)) {
                     PersonSettingNewActivity.this.go2LoginAboutBigImage();
@@ -155,7 +154,7 @@ public class PersonSettingNewActivity extends BasePersonActivity implements Bitm
     private void initListView() {
         PersettingSecondAdapt.State[] values;
         PersettingFourAdapt.State[] values2;
-        this.mLvSecondSetting = (ListView) findViewById(R.id.lv_second_setting);
+        this.mLvSecondSetting = findViewById(R.id.lv_second_setting);
         this.mPersettingSecondAdapt = new PersettingSecondAdapt(this);
         this.mSecondPersonSettings = new ArrayList();
         for (PersettingSecondAdapt.State state : PersettingSecondAdapt.State.values()) {
@@ -167,9 +166,9 @@ public class PersonSettingNewActivity extends BasePersonActivity implements Bitm
             }
         }
         this.mPersettingSecondAdapt.setData(this.mSecondPersonSettings);
-        this.mLvSecondSetting.setAdapter((ListAdapter) this.mPersettingSecondAdapt);
+        this.mLvSecondSetting.setAdapter(this.mPersettingSecondAdapt);
         this.mLvSecondSetting.setOnItemClickListener(this.mSecondListerner);
-        this.mLvFourSetting = (ListView) findViewById(R.id.lv_four_setting);
+        this.mLvFourSetting = findViewById(R.id.lv_four_setting);
         this.mPersettingFourAdapt = new PersettingFourAdapt(this);
         this.mFourPersonSettings = new ArrayList();
         for (PersettingFourAdapt.State state2 : PersettingFourAdapt.State.values()) {
@@ -181,24 +180,24 @@ public class PersonSettingNewActivity extends BasePersonActivity implements Bitm
             }
         }
         this.mPersettingFourAdapt.setData(this.mFourPersonSettings);
-        this.mLvFourSetting.setAdapter((ListAdapter) this.mPersettingFourAdapt);
+        this.mLvFourSetting.setAdapter(this.mPersettingFourAdapt);
         this.mLvFourSetting.setOnItemClickListener(this.mFourListerner);
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void doTrans() {
-        this.mBtnBack.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.libperson.ui.setting.PersonSettingNewActivity.2
-            @Override // android.view.View.OnClickListener
+        this.mBtnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 DialogManager dialogManager = new DialogManager(PersonSettingNewActivity.this.mContext, PersonSettingNewActivity.this.getString(R.string.person_setting_dialog_exit_title), PersonSettingNewActivity.this.getString(R.string.person_setting_dialog_exit_message), PersonSettingNewActivity.this.getString(R.string.person_setting_back), PersonSettingNewActivity.this.getString(R.string.person_setting_dialog_exit_left_text));
                 dialogManager.setVerticalScreen(true);
-                dialogManager.setOnDiaLogListener(new DialogManager.OnDialogListener() { // from class: com.fimi.libperson.ui.setting.PersonSettingNewActivity.2.1
-                    @Override // com.fimi.widget.DialogManager.OnDialogListener
+                dialogManager.setOnDiaLogListener(new DialogManager.OnDialogListener() {
+                    @Override
                     public void dialogBtnRightOrSingleListener(View customView, DialogInterface dialogInterface, int which) {
                         PersonSettingNewActivity.this.go2LoginAboutBigImage();
                     }
 
-                    @Override // com.fimi.widget.DialogManager.OnDialogListener
+                    @Override
                     public void dialogBtnLeftListener(View customView, DialogInterface dialogInterface, int which) {
                     }
                 });
@@ -215,12 +214,12 @@ public class PersonSettingNewActivity extends BasePersonActivity implements Bitm
         overridePendingTransition(17432576, 17432577);
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     protected int getContentViewLayoutID() {
         return R.layout.activity_person_new_setting;
     }
 
-    @Override // com.fimi.libperson.widget.BitmapLoadTaskInstance.OnLoadListener
+    @Override
     public void onComplete() {
         SPStoreManager.getInstance().removeKey(HostConstants.SP_KEY_USER_DETAIL);
         readyGoThenKillAllActivity(LoginActivity.class);
@@ -235,7 +234,7 @@ public class PersonSettingNewActivity extends BasePersonActivity implements Bitm
         }
     }
 
-    @Override // android.support.v4.app.FragmentActivity, android.app.Activity
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 10010) {
@@ -243,11 +242,11 @@ public class PersonSettingNewActivity extends BasePersonActivity implements Bitm
         }
     }
 
-    @Override // com.fimi.apk.iview.IApkVerisonView
+    @Override
     public void showNewApkVersionDialog(final ApkVersionDto dto, final String savePath) {
         DialogManager dialogManagerUpdate = new DialogManager(this, getString(R.string.fimi_sdk_app_update_title), dto.getUpdcontents(), getString(R.string.fimi_sdk_update_now), getString(R.string.fimi_sdk_update_ignore), 3);
-        dialogManagerUpdate.setOnDiaLogListener(new DialogManager.OnDialogListener() { // from class: com.fimi.libperson.ui.setting.PersonSettingNewActivity.5
-            @Override // com.fimi.widget.DialogManager.OnDialogListener
+        dialogManagerUpdate.setOnDiaLogListener(new DialogManager.OnDialogListener() {
+            @Override
             public void dialogBtnRightOrSingleListener(View customView, DialogInterface dialogInterface, int which) {
                 Intent updateService = new Intent(PersonSettingNewActivity.this.mContext, DownloadApkService.class);
                 updateService.putExtra("down_url", dto.getUrl());
@@ -256,7 +255,7 @@ public class PersonSettingNewActivity extends BasePersonActivity implements Bitm
                 PersonSettingNewActivity.this.mContext.startService(updateService);
             }
 
-            @Override // com.fimi.widget.DialogManager.OnDialogListener
+            @Override
             public void dialogBtnLeftListener(View customView, DialogInterface dialogInterface, int which) {
             }
         });
@@ -264,7 +263,7 @@ public class PersonSettingNewActivity extends BasePersonActivity implements Bitm
         dialogManagerUpdate.showDialog();
     }
 
-    @Override // com.fimi.apk.presenter.ApkVersionPrenster.onApkUpdateListerner
+    @Override
     public void haveUpdate(boolean isUpdate) {
         if (isUpdate) {
             this.mFourPersonSettings.get(0).setIsOPen(true);

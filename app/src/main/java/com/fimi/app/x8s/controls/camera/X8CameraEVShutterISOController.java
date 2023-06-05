@@ -36,7 +36,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes.dex */
+
 public class X8CameraEVShutterISOController extends AbsX8Controllers implements CameraEVParamListener, JsonCallBackListener, X8RulerView.RulerListener, View.OnClickListener {
     private final int TIME_INTERVAL;
     private final String defScale;
@@ -49,18 +49,18 @@ public class X8CameraEVShutterISOController extends AbsX8Controllers implements 
     private TextView ev_reduct_btn;
     private boolean hasInit;
     private boolean isOkay;
-    private CameraEVParamsAdatper isoAdatper;
+    private final CameraEVParamsAdatper isoAdatper;
     private List<String> isoOptions;
     private RecyclerView isoRecycler;
     private RelativeLayout isoView;
     private int iso_index;
     private LinearLayoutManager layoutManager;
-    private Context mContext;
+    private final Context mContext;
     private IX8CameraMainSetListener mainSetListener;
-    private Map<String, String> paramMap;
+    private final Map<String, String> paramMap;
     private X8RulerView rulerView;
     private String scaleValue;
-    private CameraEVParamsAdatper shutterAdapter;
+    private final CameraEVParamsAdatper shutterAdapter;
     private LinearLayoutManager shutterLayout;
     private List<String> shutterOptions;
     private RecyclerView shutterRecycler;
@@ -111,21 +111,21 @@ public class X8CameraEVShutterISOController extends AbsX8Controllers implements 
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
         this.handleView = rootView.findViewById(R.id.camera_params_setting);
-        this.tabHost = (X8TabHost) rootView.findViewById(R.id.camera_tab);
-        this.isoRecycler = (RecyclerView) rootView.findViewById(R.id.iso_recycler);
-        this.shutterRecycler = (RecyclerView) rootView.findViewById(R.id.shutter_recycler);
-        this.rulerView = (X8RulerView) rootView.findViewById(R.id.rulerView);
-        this.tvEv = (TextView) rootView.findViewById(R.id.ev_value);
-        this.shutterView = (RelativeLayout) rootView.findViewById(R.id.shutter_layout);
-        this.tvIso = (TextView) rootView.findViewById(R.id.iso_title);
-        this.tvShutter = (TextView) rootView.findViewById(R.id.shutter_title);
-        this.isoView = (RelativeLayout) rootView.findViewById(R.id.iso_layout);
-        this.evView = (RelativeLayout) rootView.findViewById(R.id.ev_layout);
-        this.ev_add_btn = (TextView) rootView.findViewById(R.id.ev_add_btn);
-        this.ev_reduct_btn = (TextView) rootView.findViewById(R.id.ev_reduce_btn);
+        this.tabHost = rootView.findViewById(R.id.camera_tab);
+        this.isoRecycler = rootView.findViewById(R.id.iso_recycler);
+        this.shutterRecycler = rootView.findViewById(R.id.shutter_recycler);
+        this.rulerView = rootView.findViewById(R.id.rulerView);
+        this.tvEv = rootView.findViewById(R.id.ev_value);
+        this.shutterView = rootView.findViewById(R.id.shutter_layout);
+        this.tvIso = rootView.findViewById(R.id.iso_title);
+        this.tvShutter = rootView.findViewById(R.id.shutter_title);
+        this.isoView = rootView.findViewById(R.id.iso_layout);
+        this.evView = rootView.findViewById(R.id.ev_layout);
+        this.ev_add_btn = rootView.findViewById(R.id.ev_add_btn);
+        this.ev_reduct_btn = rootView.findViewById(R.id.ev_reduce_btn);
         this.layoutManager = new LinearLayoutManager(this.mContext);
         this.layoutManager.setOrientation(0);
         this.isoRecycler.setLayoutManager(this.layoutManager);
@@ -170,14 +170,14 @@ public class X8CameraEVShutterISOController extends AbsX8Controllers implements 
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
-        this.tabHost.setOnSelectListener(new X8TabHost.OnSelectListener() { // from class: com.fimi.app.x8s.controls.camera.X8CameraEVShutterISOController.1
-            @Override // com.fimi.app.x8s.widget.X8TabHost.OnSelectListener
+        this.tabHost.setOnSelectListener(new X8TabHost.OnSelectListener() {
+            @Override
             public void onSelect(int index, String text, int last) {
                 X8CameraEVShutterISOController.this.tabHost.setSelect(last);
                 if (!StateManager.getInstance().getCamera().isDelayedPhotography()) {
@@ -194,37 +194,34 @@ public class X8CameraEVShutterISOController extends AbsX8Controllers implements 
         } else if (index == 1) {
             this.curParam = CameraJsonCollection.KEY_DE_CONTROL_MANUAL;
         }
-        this.cameraManager.setCameraDeControl(this.curParam, new JsonUiCallBackListener() { // from class: com.fimi.app.x8s.controls.camera.X8CameraEVShutterISOController.2
-            @Override // com.fimi.kernel.dataparser.usb.JsonUiCallBackListener
+        this.cameraManager.setCameraDeControl(this.curParam, new JsonUiCallBackListener() {
+            @Override
             public void onComplete(JSONObject rt, Object o) {
                 if (rt != null) {
-                    CameraParamsJson paramsJson = (CameraParamsJson) JSON.parseObject(rt.toString(), CameraParamsJson.class);
+                    CameraParamsJson paramsJson = JSON.parseObject(rt.toString(), CameraParamsJson.class);
                     int rval = paramsJson.getRval();
                     if (paramsJson != null) {
-                        switch (paramsJson.getMsg_id()) {
-                            case 2:
-                                String paramType = paramsJson.getType();
-                                if (paramType != null && paramsJson.getType().equals(CameraJsonCollection.KEY_DE_CONTROL_TYPE) && rval >= 0) {
-                                    if (CameraParamStatus.modelStatus == CameraParamStatus.CameraModelStatus.takePhoto) {
-                                        if (index == 0) {
-                                            X8CameraEVShutterISOController.this.initPhotoModle(true);
-                                        } else if (index == 1) {
-                                            X8CameraEVShutterISOController.this.initPhotoModle(false);
-                                        }
-                                    } else if (CameraParamStatus.modelStatus == CameraParamStatus.CameraModelStatus.record || CameraParamStatus.modelStatus == CameraParamStatus.CameraModelStatus.recording) {
-                                        if (index == 0) {
-                                            X8CameraEVShutterISOController.this.initRecordModle(true);
-                                        } else if (index == 1) {
-                                            X8CameraEVShutterISOController.this.initRecordModle(false);
-                                        }
+                        if (paramsJson.getMsg_id() == 2) {
+                            String paramType = paramsJson.getType();
+                            if (paramType != null && paramsJson.getType().equals(CameraJsonCollection.KEY_DE_CONTROL_TYPE) && rval >= 0) {
+                                if (CameraParamStatus.modelStatus == CameraParamStatus.CameraModelStatus.takePhoto) {
+                                    if (index == 0) {
+                                        X8CameraEVShutterISOController.this.initPhotoModle(true);
+                                    } else if (index == 1) {
+                                        X8CameraEVShutterISOController.this.initPhotoModle(false);
                                     }
-                                    X8CameraEVShutterISOController.this.tabHost.setSelect(index);
-                                    X8CameraParamsValue.getInstance().getCurParamsJson().setDe_control(X8CameraEVShutterISOController.this.curParam);
-                                    return;
+                                } else if (CameraParamStatus.modelStatus == CameraParamStatus.CameraModelStatus.record || CameraParamStatus.modelStatus == CameraParamStatus.CameraModelStatus.recording) {
+                                    if (index == 0) {
+                                        X8CameraEVShutterISOController.this.initRecordModle(true);
+                                    } else if (index == 1) {
+                                        X8CameraEVShutterISOController.this.initRecordModle(false);
+                                    }
                                 }
+                                X8CameraEVShutterISOController.this.tabHost.setSelect(index);
+                                X8CameraParamsValue.getInstance().getCurParamsJson().setDe_control(X8CameraEVShutterISOController.this.curParam);
                                 return;
-                            default:
-                                return;
+                            }
+                            return;
                         }
                     }
                 }
@@ -232,7 +229,7 @@ public class X8CameraEVShutterISOController extends AbsX8Controllers implements 
         });
     }
 
-    @Override // com.fimi.app.x8s.viewHolder.CameraEVParamListener
+    @Override
     public void updateParams(String key, String param) {
         if (this.cameraManager != null) {
             this.paramMap.clear();
@@ -245,45 +242,40 @@ public class X8CameraEVShutterISOController extends AbsX8Controllers implements 
         }
     }
 
-    @Override // com.fimi.x8sdk.listener.JsonCallBackListener
+    @Override
     public void onJSONSuccess(JSONObject json) {
     }
 
-    @Override // com.fimi.x8sdk.listener.JsonCallBackListener
+    @Override
     public void onSuccess(AckCamJsonInfo rtJson) {
         this.curParamsJson = X8CameraParamsValue.getInstance().getCurParamsJson();
-        switch (rtJson.getMsg_id()) {
-            case 1:
-                HostLogBack.getInstance().writeLog("Alanqiu  ==========rtJson:" + rtJson.toString());
-                if (CameraJsonCollection.KEY_AE_ISO.equalsIgnoreCase(rtJson.getType())) {
-                    refreshISOView(rtJson.getParam());
-                    this.curParamsJson.setIso(rtJson.getParam());
-                    break;
-                } else if (CameraJsonCollection.KEY_SHUTTER_TIME.equalsIgnoreCase(rtJson.getType())) {
-                    refreshShutterView(rtJson.getParam());
-                    this.curParamsJson.setShutter_time(rtJson.getParam());
-                    break;
-                } else if ("ae_bias".equalsIgnoreCase(rtJson.getType())) {
-                    String ae_bias = rtJson.getParam();
-                    String[] scaleArray = ae_bias.split("\\s+");
-                    if (scaleArray != null) {
-                        if (scaleArray.length == 3) {
-                            this.scaleValue = scaleArray[1];
-                        } else {
-                            this.scaleValue = scaleArray[0];
-                        }
-                        this.tvEv.setText(this.scaleValue);
+        if (rtJson.getMsg_id() == 1) {
+            HostLogBack.getInstance().writeLog("Alanqiu  ==========rtJson:" + rtJson);
+            if (CameraJsonCollection.KEY_AE_ISO.equalsIgnoreCase(rtJson.getType())) {
+                refreshISOView(rtJson.getParam());
+                this.curParamsJson.setIso(rtJson.getParam());
+            } else if (CameraJsonCollection.KEY_SHUTTER_TIME.equalsIgnoreCase(rtJson.getType())) {
+                refreshShutterView(rtJson.getParam());
+                this.curParamsJson.setShutter_time(rtJson.getParam());
+            } else if ("ae_bias".equalsIgnoreCase(rtJson.getType())) {
+                String ae_bias = rtJson.getParam();
+                String[] scaleArray = ae_bias.split("\\s+");
+                if (scaleArray != null) {
+                    if (scaleArray.length == 3) {
+                        this.scaleValue = scaleArray[1];
+                    } else {
+                        this.scaleValue = scaleArray[0];
                     }
-                    this.curParamsJson.setAe_bias(ae_bias);
-                    if (this.rulerView != null && this.scaleValue != null && !"".equals(this.scaleValue)) {
-                        this.rulerView.setCurScaleValue(Float.valueOf(this.scaleValue).floatValue());
-                        if (this.mainSetListener != null) {
-                            this.mainSetListener.evSetting(String.valueOf(this.scaleValue));
-                            break;
-                        }
+                    this.tvEv.setText(this.scaleValue);
+                }
+                this.curParamsJson.setAe_bias(ae_bias);
+                if (this.rulerView != null && this.scaleValue != null && !"".equals(this.scaleValue)) {
+                    this.rulerView.setCurScaleValue(Float.valueOf(this.scaleValue).floatValue());
+                    if (this.mainSetListener != null) {
+                        this.mainSetListener.evSetting(String.valueOf(this.scaleValue));
                     }
                 }
-                break;
+            }
         }
         if (this.rootView.getVisibility() == 0 && (rtJson instanceof CameraParamsJson)) {
             if (rtJson.getMsg_id() == 9) {
@@ -302,8 +294,8 @@ public class X8CameraEVShutterISOController extends AbsX8Controllers implements 
                     if (this.paramMap.get(CameraJsonCollection.KEY_AE_ISO) != null) {
                         this.curParamsJson.setIso(this.paramMap.get(CameraJsonCollection.KEY_AE_ISO));
                     }
-                    this.handleView.postDelayed(new Runnable() { // from class: com.fimi.app.x8s.controls.camera.X8CameraEVShutterISOController.3
-                        @Override // java.lang.Runnable
+                    this.handleView.postDelayed(new Runnable() {
+                        @Override
                         public void run() {
                             if (X8CameraEVShutterISOController.this.curParamsJson.getShutter_time().trim().equalsIgnoreCase(CameraJsonCollection.KEY_DE_CONTROL_AUTO)) {
                                 X8CameraEVShutterISOController.this.cameraManager.getCameraShutter();
@@ -322,8 +314,8 @@ public class X8CameraEVShutterISOController extends AbsX8Controllers implements 
                     if (this.paramMap.get(CameraJsonCollection.KEY_SHUTTER_TIME) != null) {
                         this.curParamsJson.setShutter_time(this.paramMap.get(CameraJsonCollection.KEY_SHUTTER_TIME));
                     }
-                    this.handleView.postDelayed(new Runnable() { // from class: com.fimi.app.x8s.controls.camera.X8CameraEVShutterISOController.4
-                        @Override // java.lang.Runnable
+                    this.handleView.postDelayed(new Runnable() {
+                        @Override
                         public void run() {
                             if (!X8CameraEVShutterISOController.this.curParamsJson.getIso().trim().equalsIgnoreCase(CameraJsonCollection.KEY_DE_CONTROL_AUTO)) {
                                 X8CameraEVShutterISOController.this.cameraManager.getCameraISO();
@@ -340,8 +332,8 @@ public class X8CameraEVShutterISOController extends AbsX8Controllers implements 
                         this.mainSetListener.evSetting(String.valueOf(this.scaleValue));
                     }
                     this.curParamsJson.setAe_bias(this.scaleValue);
-                    this.handleView.postDelayed(new Runnable() { // from class: com.fimi.app.x8s.controls.camera.X8CameraEVShutterISOController.5
-                        @Override // java.lang.Runnable
+                    this.handleView.postDelayed(new Runnable() {
+                        @Override
                         public void run() {
                             if (!X8CameraEVShutterISOController.this.curParamsJson.getIso().trim().equalsIgnoreCase(CameraJsonCollection.KEY_DE_CONTROL_AUTO)) {
                                 X8CameraEVShutterISOController.this.cameraManager.getCameraISO();
@@ -356,11 +348,11 @@ public class X8CameraEVShutterISOController extends AbsX8Controllers implements 
         }
     }
 
-    @Override // com.fimi.x8sdk.listener.JsonCallBackListener
+    @Override
     public void onFail(int reval, int msgId, String type) {
     }
 
-    @Override // com.fimi.x8sdk.listener.JsonCallBackListener
+    @Override
     public void outTime() {
     }
 
@@ -450,21 +442,21 @@ public class X8CameraEVShutterISOController extends AbsX8Controllers implements 
         }
     }
 
-    @Override // com.fimi.app.x8s.widget.X8RulerView.RulerListener
+    @Override
     public void updateRuler(float scaleValue) {
         if (this.cameraManager != null) {
             if (scaleValue < 0.0f) {
                 this.scaleValue = String.valueOf(scaleValue);
             } else if (scaleValue > 0.0f) {
-                this.scaleValue = this.mContext.getResources().getString(R.string.x8_camera_ev_add) + String.valueOf(scaleValue);
+                this.scaleValue = this.mContext.getResources().getString(R.string.x8_camera_ev_add) + scaleValue;
             } else {
-                this.scaleValue = String.valueOf(" " + scaleValue);
+                this.scaleValue = " " + scaleValue;
             }
             this.cameraManager.setCameraEV(this.scaleValue);
         }
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.ev_add_btn) {
@@ -496,7 +488,7 @@ public class X8CameraEVShutterISOController extends AbsX8Controllers implements 
         this.mainSetListener = mainSetListener;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         super.onDroneConnected(b);
         if (this.isOkay != b) {
@@ -506,7 +498,7 @@ public class X8CameraEVShutterISOController extends AbsX8Controllers implements 
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public boolean onClickBackKey() {
         return false;
     }

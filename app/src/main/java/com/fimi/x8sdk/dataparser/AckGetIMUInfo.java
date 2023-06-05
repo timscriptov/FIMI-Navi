@@ -3,8 +3,6 @@ package com.fimi.x8sdk.dataparser;
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 
 
-
-/* loaded from: classes2.dex */
 public class AckGetIMUInfo extends X8BaseMessage {
     private short accelX;
     private short accelY;
@@ -106,7 +104,7 @@ public class AckGetIMUInfo extends X8BaseMessage {
         this.magZ = magZ;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         this.imuType = packet.getPayLoad4().getByte();
@@ -122,7 +120,7 @@ public class AckGetIMUInfo extends X8BaseMessage {
         this.magZ = packet.getPayLoad4().getShort();
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public String toString() {
         return "AckGetIMUInfo{imuType=" + ((int) this.imuType) + ", iMUTempe=" + ((int) this.iMUTempe) + ", gyroX=" + ((int) this.gyroX) + ", gyroY=" + ((int) this.gyroY) + ", gyroZ=" + ((int) this.gyroZ) + ", accelX=" + ((int) this.accelX) + ", accelY=" + ((int) this.accelY) + ", accelZ=" + ((int) this.accelZ) + ", magX=" + ((int) this.magX) + ", magY=" + ((int) this.magY) + ", magZ=" + ((int) this.magZ) + '}';
     }

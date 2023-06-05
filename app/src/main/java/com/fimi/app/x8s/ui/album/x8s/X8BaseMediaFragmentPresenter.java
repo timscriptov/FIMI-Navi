@@ -48,7 +48,6 @@ import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 
-/* loaded from: classes.dex */
 public abstract class X8BaseMediaFragmentPresenter<T extends MediaModel> implements IRecycleAdapter, IHandlerCallback, IBroadcastPreform {
     private final String TAG = "X9BaseMediaFragmentPren";
     private final int RESH_NOTIFY = 888;
@@ -69,8 +68,8 @@ public abstract class X8BaseMediaFragmentPresenter<T extends MediaModel> impleme
     protected int defaultPhtotHeight = 120;
     protected int defaultPhtotWidth = 120;
     protected boolean isResh = true;
-    private Handler mHandler = new Handler() { // from class: com.fimi.app.x8s.ui.album.x8s.X8BaseMediaFragmentPresenter.1
-        @Override // android.os.Handler
+    private final Handler mHandler = new Handler() {
+        @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == 888) {
@@ -86,12 +85,12 @@ public abstract class X8BaseMediaFragmentPresenter<T extends MediaModel> impleme
             }
         }
     };
-    private IPersonalDataCallBack personalDataCallBack = new IPersonalDataCallBack() { // from class: com.fimi.app.x8s.ui.album.x8s.X8BaseMediaFragmentPresenter.3
-        @Override // com.fimi.kernel.connect.interfaces.IPersonalDataCallBack
+    private final IPersonalDataCallBack personalDataCallBack = new IPersonalDataCallBack() {
+        @Override
         public void onPersonalDataCallBack(int groupId, int cmdId, ILinkMessage message) {
         }
 
-        @Override // com.fimi.kernel.connect.interfaces.IPersonalDataCallBack
+        @Override
         public void onPersonalSendTimeOut(int groupId, int cmdId, BaseCommand bcd) {
         }
     };
@@ -286,11 +285,7 @@ public abstract class X8BaseMediaFragmentPresenter<T extends MediaModel> impleme
                 changeSelectViewState(model, holder, 8);
             }
             preformDataSelect(model);
-            if (this.selectList.size() == (this.modelList.size() - this.stateHashMap.size()) - 1) {
-                callAllSelectMode(true);
-            } else {
-                callAllSelectMode(false);
-            }
+            callAllSelectMode(this.selectList.size() == (this.modelList.size() - this.stateHashMap.size()) - 1);
         }
     }
 
@@ -366,7 +361,7 @@ public abstract class X8BaseMediaFragmentPresenter<T extends MediaModel> impleme
         }
     }
 
-    @Override // com.fimi.album.iview.IBroadcastPreform
+    @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals(AlbumConstant.DELETEITEMACTION)) {
             MediaModel mediaModel = (MediaModel) intent.getSerializableExtra(AlbumConstant.DELETEITEM);
@@ -510,8 +505,8 @@ public abstract class X8BaseMediaFragmentPresenter<T extends MediaModel> impleme
         }
         for (int i = 0; i < this.deleteList.size(); i++) {
             final int finalI = i;
-            CameraManager.getInstansCameraManager().deleteOnlineFile(this.deleteList.get(i).getFileUrl(), new JsonUiCallBackListener() { // from class: com.fimi.app.x8s.ui.album.x8s.X8BaseMediaFragmentPresenter.2
-                @Override // com.fimi.kernel.dataparser.usb.JsonUiCallBackListener
+            CameraManager.getInstansCameraManager().deleteOnlineFile(this.deleteList.get(i).getFileUrl(), new JsonUiCallBackListener() {
+                @Override
                 public void onComplete(JSONObject rt, Object o) {
                     X8BaseMediaFragmentPresenter.this.mHandler.removeMessages(887);
                     X8BaseMediaFragmentPresenter.this.mHandler.sendEmptyMessageDelayed(887, 5000L);
@@ -528,10 +523,7 @@ public abstract class X8BaseMediaFragmentPresenter<T extends MediaModel> impleme
     }
 
     public boolean isModelListEmpty() {
-        if (this.modelList == null || this.modelList.size() <= 0) {
-            return true;
-        }
-        return false;
+        return this.modelList == null || this.modelList.size() <= 0;
     }
 
     public void notifyAllVisible() {
@@ -570,16 +562,12 @@ public abstract class X8BaseMediaFragmentPresenter<T extends MediaModel> impleme
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
+
     public void notifyAddCallback(MediaModel model) {
         callAddSingleFile();
         if (this.isEnterSelectMode) {
             preformDataSelect((T) model);
-            if (this.selectList.size() == (this.modelList.size() - this.stateHashMap.size()) - 1) {
-                callAllSelectMode(true);
-            } else {
-                callAllSelectMode(false);
-            }
+            callAllSelectMode(this.selectList.size() == (this.modelList.size() - this.stateHashMap.size()) - 1);
         }
     }
 }

@@ -28,7 +28,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class FindeNewFwDownActivity extends BaseActivity implements IFirmwareDownView {
     Button btnDownAgain;
     ImageView btnReturn;
@@ -50,20 +50,20 @@ public class FindeNewFwDownActivity extends BaseActivity implements IFirmwareDow
     private boolean isFirstDown = true;
     private String curFirmware = "";
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void initData() {
         this.downFirmwarePresenter = new DownFirmwarePresenter(this);
-        this.tvTitle = (TextView) findViewById(R.id.tv_setting_title);
-        this.tvProgress = (TextView) findViewById(R.id.tv_progress);
-        this.tvDowning = (TextView) findViewById(R.id.tv_downing);
-        this.btnReturn = (ImageView) findViewById(R.id.ibtn_back);
-        this.progressBar = (RoundProgressBar) findViewById(R.id.rpb_down_progress);
-        this.hostDownResult = (ImageView) findViewById(R.id.host_down_result);
-        this.btnDownAgain = (Button) findViewById(R.id.btn_down_again);
-        this.rt_layout = (LinearLayout) findViewById(R.id.rt_layout);
-        this.tv_fail = (TextView) findViewById(R.id.tv_down_fail);
-        this.tv_succeuss = (TextView) findViewById(R.id.tv_down_success);
-        this.tv_downList = (TextView) findViewById(R.id.tv_downing_list);
+        this.tvTitle = findViewById(R.id.tv_setting_title);
+        this.tvProgress = findViewById(R.id.tv_progress);
+        this.tvDowning = findViewById(R.id.tv_downing);
+        this.btnReturn = findViewById(R.id.ibtn_back);
+        this.progressBar = findViewById(R.id.rpb_down_progress);
+        this.hostDownResult = findViewById(R.id.host_down_result);
+        this.btnDownAgain = findViewById(R.id.btn_down_again);
+        this.rt_layout = findViewById(R.id.rt_layout);
+        this.tv_fail = findViewById(R.id.tv_down_fail);
+        this.tv_succeuss = findViewById(R.id.tv_down_success);
+        this.tv_downList = findViewById(R.id.tv_downing_list);
         FontUtil.changeFontLanTing(getAssets(), this.tvTitle, this.tvDowning, this.tvProgress, this.tvProgress, this.btnDownAgain);
         this.mSelectList = (ArrayList) getIntent().getSerializableExtra("listDownloadFwSelectInfo");
         this.currTime = System.currentTimeMillis();
@@ -104,7 +104,7 @@ public class FindeNewFwDownActivity extends BaseActivity implements IFirmwareDow
             this.tv_downList.setVisibility(8);
             this.rt_layout.setVisibility(0);
         } else if (DownFwService.getState().equals(DownFwService.DownState.DownFail)) {
-            String tempString = String.format(getResources().getString(R.string.host_downed_firmware), new Object[0]);
+            String tempString = String.format(getResources().getString(R.string.host_downed_firmware));
             this.tvDowning.setText(tempString);
             this.progressBar.setProgress(0);
             this.progressBar.setVisibility(4);
@@ -172,16 +172,16 @@ public class FindeNewFwDownActivity extends BaseActivity implements IFirmwareDow
         return successBuffer.toString();
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void doTrans() {
-        this.btnReturn.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.libdownfw.update.FindeNewFwDownActivity.1
-            @Override // android.view.View.OnClickListener
+        this.btnReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 FindeNewFwDownActivity.this.finish();
             }
         });
-        this.btnDownAgain.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.libdownfw.update.FindeNewFwDownActivity.2
-            @Override // android.view.View.OnClickListener
+        this.btnDownAgain.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 if (DownFwService.getState().equals(DownFwService.DownState.Finish)) {
                     FindeNewFwDownActivity.this.finish();
@@ -217,17 +217,17 @@ public class FindeNewFwDownActivity extends BaseActivity implements IFirmwareDow
         }
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     protected void setStatusBarColor() {
         StatusBarUtil.StatusBarLightMode(this);
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     protected int getContentViewLayoutID() {
         return R.layout.activity_find_new_fw;
     }
 
-    @Override // com.fimi.libdownfw.ivew.IFirmwareDownView
+    @Override
     public void showDownFwProgress(DownFwService.DownState isResult, int progress, String name) {
         this.curFirmware = name;
         if (isResult == DownFwService.DownState.Downing) {
@@ -255,7 +255,7 @@ public class FindeNewFwDownActivity extends BaseActivity implements IFirmwareDow
             stopService();
         } else if (isResult == DownFwService.DownState.StopDown) {
             DownFwService.setState(DownFwService.DownState.StopDown);
-            String tempString2 = String.format(this.mContext.getString(R.string.host_downing_firmware), this.curFirmware) + String.valueOf(progress) + "%";
+            String tempString2 = String.format(this.mContext.getString(R.string.host_downing_firmware), this.curFirmware) + progress + "%";
             this.tvDowning.setText(tempString2);
         }
         notifyView();
@@ -308,9 +308,6 @@ public class FindeNewFwDownActivity extends BaseActivity implements IFirmwareDow
             dnsTh.join(500L);
         } catch (Exception e) {
         }
-        if (dnsTh.getIP() == null) {
-            return false;
-        }
-        return true;
+        return dnsTh.getIP() != null;
     }
 }

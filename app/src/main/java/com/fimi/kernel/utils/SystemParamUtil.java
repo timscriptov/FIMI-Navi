@@ -22,7 +22,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Locale;
 
-/* loaded from: classes.dex */
+
 public class SystemParamUtil {
     public static String getModelName() {
         return Build.MODEL;
@@ -87,9 +87,7 @@ public class SystemParamUtil {
         NetworkInfo networkInfo = manager.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
             String type = networkInfo.getTypeName();
-            if (type.equalsIgnoreCase("WIFI")) {
-                return true;
-            }
+            return type.equalsIgnoreCase("WIFI");
         }
         return false;
     }
@@ -131,8 +129,7 @@ public class SystemParamUtil {
         if (context instanceof Activity) {
             return (Activity) context;
         }
-        if (context instanceof ContextWrapper) {
-            ContextWrapper wrapper = (ContextWrapper) context;
+        if (context instanceof ContextWrapper wrapper) {
             return findActivity(wrapper.getBaseContext());
         }
         return null;

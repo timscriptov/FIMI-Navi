@@ -7,13 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
-/* loaded from: classes2.dex */
 public class AckUpdateCurrentProgress extends X8BaseMessage {
     int deviceNumber;
     List<UpdateCurrentProgressEntity> updateCurrentProgressEntitys = new ArrayList();
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         this.deviceNumber = packet.getPayLoad4().getByte();
@@ -54,12 +52,12 @@ public class AckUpdateCurrentProgress extends X8BaseMessage {
         this.updateCurrentProgressEntitys = updateCurrentProgressEntitys;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public String toString() {
         StringBuffer updateCurrentProgressEntityStr = new StringBuffer();
         for (UpdateCurrentProgressEntity updateCurrentProgressEntity : this.updateCurrentProgressEntitys) {
             updateCurrentProgressEntityStr.append("updateCurrentProgressEntity:" + updateCurrentProgressEntity.toString());
         }
-        return "AckUpdateCurrentProgress{deviceNumber=" + this.deviceNumber + ", updateCurrentProgressEntitys=" + updateCurrentProgressEntityStr.toString() + '}';
+        return "AckUpdateCurrentProgress{deviceNumber=" + this.deviceNumber + ", updateCurrentProgressEntitys=" + updateCurrentProgressEntityStr + '}';
     }
 }

@@ -24,6 +24,7 @@ import com.xiaomi.account.openauth.XiaomiOAuthConstants;
 import org.apache.mina.proxy.handlers.http.ntlm.NTLMConstants;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -48,13 +49,13 @@ public class X8RulerView extends View {
     private Bitmap minRuler;
     private float min_ruler_len;
     private Paint paint;
-    private Map<Float, Float> pointMap;
-    private ArrayList<Float> points;
+    private final Map<Float, Float> pointMap;
+    private final ArrayList<Float> points;
     private Bitmap resultBmp;
     private int rulerHeight;
-    private int rulerTopGap;
-    private int scaleGap;
-    private int scaleNum;
+    private final int rulerTopGap;
+    private final int scaleGap;
+    private final int scaleNum;
     private ValueAnimator valueAnimator;
     private int width;
 
@@ -169,7 +170,7 @@ public class X8RulerView extends View {
 
     private float keep2point(float value) {
         BigDecimal b = new BigDecimal(value);
-        return b.setScale(2, 4).floatValue();
+        return b.setScale(2, RoundingMode.HALF_UP).floatValue();
     }
 
     private void init(@NonNull Context context) {
@@ -239,7 +240,7 @@ public class X8RulerView extends View {
 
     private void autoVelocityScroll(final int xVelocity) {
         if (Math.abs(xVelocity) >= 1500 && !this.valueAnimator.isRunning()) {
-            this.valueAnimator = ValueAnimator.ofFloat(0.0f, 1.0f).setDuration(Math.abs((int) XiaomiOAuthConstants.SCOPE_MI_CLOUD_CONTACT));
+            this.valueAnimator = ValueAnimator.ofFloat(0.0f, 1.0f).setDuration(Math.abs(XiaomiOAuthConstants.SCOPE_MI_CLOUD_CONTACT));
             this.valueAnimator.setInterpolator(new DecelerateInterpolator());
             this.valueAnimator.addUpdateListener(animation -> {
                 float t = (Float) X8RulerView.this.valueAnimator.getAnimatedValue();

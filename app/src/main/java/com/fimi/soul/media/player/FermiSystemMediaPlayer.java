@@ -16,9 +16,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /* JADX INFO: Access modifiers changed from: package-private */
-/* loaded from: classes.dex */
+
 public class FermiSystemMediaPlayer implements IFermiMediaPlayer, SurfaceHolder.Callback, SeekBar.OnSeekBarChangeListener {
-    private Context context;
+    private final Context context;
     private String dataSourceUrl;
     private boolean isAutoPlay;
     private OnMediaSizeChangedListener onMediaSizeChangedListener;
@@ -28,11 +28,11 @@ public class FermiSystemMediaPlayer implements IFermiMediaPlayer, SurfaceHolder.
     private MediaPlayer player = null;
     private int startPosition = 0;
     private boolean ischanging = false;
-    private List<OnPlayerStateChangedListener> onPlayerStateChangedListenerArray = new ArrayList();
-    private Timer timer = new Timer();
-    private Handler handler = new InnerHandler();
-    private TimerTask timerTask = new TimerTask() { // from class: com.fimi.soul.media.player.FermiSystemMediaPlayer.1
-        @Override // java.util.TimerTask, java.lang.Runnable
+    private final List<OnPlayerStateChangedListener> onPlayerStateChangedListenerArray = new ArrayList();
+    private final Timer timer = new Timer();
+    private final Handler handler = new InnerHandler();
+    private final TimerTask timerTask = new TimerTask() {
+        @Override
         public void run() {
             if (!FermiSystemMediaPlayer.this.ischanging && FermiSystemMediaPlayer.this.player != null && FermiSystemMediaPlayer.this.seekBar != null && !FermiSystemMediaPlayer.this.ischanging) {
                 FermiSystemMediaPlayer.this.seekBar.setProgress(FermiSystemMediaPlayer.this.player.getCurrentPosition());
@@ -53,7 +53,7 @@ public class FermiSystemMediaPlayer implements IFermiMediaPlayer, SurfaceHolder.
         return this.context;
     }
 
-    @Override // com.fimi.soul.media.player.IFermiMediaPlayer
+    @Override
     public void play() {
         if (this.player != null) {
             try {
@@ -73,7 +73,7 @@ public class FermiSystemMediaPlayer implements IFermiMediaPlayer, SurfaceHolder.
         }
     }
 
-    @Override // com.fimi.soul.media.player.IFermiMediaPlayer
+    @Override
     public void prepare() {
         if (this.player != null) {
             try {
@@ -84,7 +84,7 @@ public class FermiSystemMediaPlayer implements IFermiMediaPlayer, SurfaceHolder.
         }
     }
 
-    @Override // com.fimi.soul.media.player.IFermiMediaPlayer
+    @Override
     public void pause() {
         if (this.player != null && this.player.isPlaying()) {
             this.player.pause();
@@ -92,7 +92,7 @@ public class FermiSystemMediaPlayer implements IFermiMediaPlayer, SurfaceHolder.
         }
     }
 
-    @Override // com.fimi.soul.media.player.IFermiMediaPlayer
+    @Override
     public void stop() {
         if (this.player != null) {
             this.player.stop();
@@ -100,7 +100,7 @@ public class FermiSystemMediaPlayer implements IFermiMediaPlayer, SurfaceHolder.
         }
     }
 
-    @Override // com.fimi.soul.media.player.IFermiMediaPlayer
+    @Override
     public void setMediaUri(String uri, String user, String password) {
         this.dataSourceUrl = uri;
         if (this.player != null) {
@@ -118,39 +118,39 @@ public class FermiSystemMediaPlayer implements IFermiMediaPlayer, SurfaceHolder.
         }
     }
 
-    @Override // com.fimi.soul.media.player.IFermiMediaPlayer
+    @Override
     public void setMediaUri(String uri) {
         setMediaUri(uri, null, null);
     }
 
-    @Override // com.fimi.soul.media.player.IFermiMediaPlayer
+    @Override
     public void setSurfaceView(SurfaceView surfaceView) {
         SurfaceHolder surfaceHolder = surfaceView.getHolder();
         surfaceHolder.addCallback(this);
     }
 
-    @Override // com.fimi.soul.media.player.IFermiMediaPlayer
+    @Override
     public void setSeekBar(SeekBar sb) {
         this.seekBar = sb;
         sb.setOnSeekBarChangeListener(this);
     }
 
-    @Override // com.fimi.soul.media.player.IFermiMediaPlayer
+    @Override
     public void setOnProgressChangedListener(OnProgressChangedListener listener) {
         this.onProgressChangedListener = listener;
     }
 
-    @Override // android.view.SurfaceHolder.Callback
+    @Override
     public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {
     }
 
-    @Override // android.view.SurfaceHolder.Callback
+    @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
         this.player = new MediaPlayer();
         this.player.setAudioStreamType(3);
         this.player.setDisplay(surfaceHolder);
-        this.player.setOnSeekCompleteListener(new MediaPlayer.OnSeekCompleteListener() { // from class: com.fimi.soul.media.player.FermiSystemMediaPlayer.2
-            @Override // android.media.MediaPlayer.OnSeekCompleteListener
+        this.player.setOnSeekCompleteListener(new MediaPlayer.OnSeekCompleteListener() {
+            @Override
             public void onSeekComplete(MediaPlayer mp) {
                 FermiSystemMediaPlayer.this.ischanging = false;
                 mp.start();
@@ -159,8 +159,8 @@ public class FermiSystemMediaPlayer implements IFermiMediaPlayer, SurfaceHolder.
         try {
             this.player.setDataSource(this.dataSourceUrl);
             this.player.prepare();
-            this.player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() { // from class: com.fimi.soul.media.player.FermiSystemMediaPlayer.3
-                @Override // android.media.MediaPlayer.OnPreparedListener
+            this.player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
                 public void onPrepared(MediaPlayer mp) {
                     if (FermiSystemMediaPlayer.this.seekBar != null) {
                         FermiSystemMediaPlayer.this.seekBar.setMax(mp.getDuration());
@@ -172,13 +172,13 @@ public class FermiSystemMediaPlayer implements IFermiMediaPlayer, SurfaceHolder.
                     }
                 }
             });
-            this.player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() { // from class: com.fimi.soul.media.player.FermiSystemMediaPlayer.4
-                @Override // android.media.MediaPlayer.OnCompletionListener
+            this.player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
                 public void onCompletion(MediaPlayer mp) {
                 }
             });
-            this.player.setOnVideoSizeChangedListener(new MediaPlayer.OnVideoSizeChangedListener() { // from class: com.fimi.soul.media.player.FermiSystemMediaPlayer.5
-                @Override // android.media.MediaPlayer.OnVideoSizeChangedListener
+            this.player.setOnVideoSizeChangedListener(new MediaPlayer.OnVideoSizeChangedListener() {
+                @Override
                 public void onVideoSizeChanged(MediaPlayer mp, int width, int height) {
                     if (FermiSystemMediaPlayer.this.onMediaSizeChangedListener != null) {
                         Log.d("Good", width + ":" + height);
@@ -192,14 +192,14 @@ public class FermiSystemMediaPlayer implements IFermiMediaPlayer, SurfaceHolder.
         }
     }
 
-    @Override // android.view.SurfaceHolder.Callback
+    @Override
     public void surfaceDestroyed(SurfaceHolder arg0) {
         if (this.player.isPlaying()) {
             this.player.stop();
         }
     }
 
-    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+    @Override
     public void onProgressChanged(SeekBar seekbar, int progress, boolean fromUser) {
         if (fromUser) {
             this.player.seekTo(progress);
@@ -209,26 +209,26 @@ public class FermiSystemMediaPlayer implements IFermiMediaPlayer, SurfaceHolder.
         }
     }
 
-    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+    @Override
     public void onStartTrackingTouch(SeekBar arg0) {
         this.ischanging = true;
     }
 
-    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+    @Override
     public void onStopTrackingTouch(SeekBar arg0) {
     }
 
-    @Override // com.fimi.soul.media.player.IFermiMediaPlayer
+    @Override
     public boolean isAutoPlay() {
         return this.isAutoPlay;
     }
 
-    @Override // com.fimi.soul.media.player.IFermiMediaPlayer
+    @Override
     public void setAutoPlay(boolean isAutoPlay) {
         this.isAutoPlay = isAutoPlay;
     }
 
-    @Override // com.fimi.soul.media.player.IFermiMediaPlayer
+    @Override
     public boolean isPlaying() {
         if (this.player != null) {
             return this.player.isPlaying();
@@ -236,7 +236,7 @@ public class FermiSystemMediaPlayer implements IFermiMediaPlayer, SurfaceHolder.
         return false;
     }
 
-    @Override // com.fimi.soul.media.player.IFermiMediaPlayer
+    @Override
     public void addOnPlayerStateChangedListener(OnPlayerStateChangedListener listener) {
         if (listener != null) {
             this.onPlayerStateChangedListenerArray.add(listener);
@@ -251,42 +251,42 @@ public class FermiSystemMediaPlayer implements IFermiMediaPlayer, SurfaceHolder.
         }
     }
 
-    @Override // com.fimi.soul.media.player.IFermiMediaPlayer
+    @Override
     public int getPosition() {
         return this.player.getCurrentPosition();
     }
 
-    @Override // com.fimi.soul.media.player.IFermiMediaPlayer
+    @Override
     public long getDuration() {
         return this.player.getDuration();
     }
 
-    @Override // com.fimi.soul.media.player.IFermiMediaPlayer
+    @Override
     public void seekTo(long position) {
         this.player.seekTo((int) position);
     }
 
-    @Override // com.fimi.soul.media.player.IFermiMediaPlayer
+    @Override
     public long getCurrentPosition() {
         return this.player.getCurrentPosition();
     }
 
-    @Override // com.fimi.soul.media.player.IFermiMediaPlayer
+    @Override
     public void setPlayPosition(int position) {
         this.startPosition = position;
     }
 
-    @Override // com.fimi.soul.media.player.IFermiMediaPlayer
+    @Override
     public void setOnMediaSizeChangedListener(OnMediaSizeChangedListener listener) {
         this.onMediaSizeChangedListener = listener;
     }
 
-    /* loaded from: classes.dex */
+
     class InnerHandler extends Handler {
         InnerHandler() {
         }
 
-        @Override // android.os.Handler
+        @Override
         public void handleMessage(Message msg) {
             if (FermiSystemMediaPlayer.this.onProgressChangedListener != null) {
                 FermiSystemMediaPlayer.this.onProgressChangedListener.onProgressChanged(msg.arg1, msg.arg2);

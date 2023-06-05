@@ -4,7 +4,7 @@ import com.fimi.kernel.dataparser.milink.LinkMessage;
 import com.fimi.kernel.dataparser.milink.LinkPacket;
 import com.fimi.kernel.dataparser.milink.LinkPayload;
 
-/* loaded from: classes.dex */
+
 public class X9Message extends LinkMessage {
     private byte[] content;
     private int seqIndex;
@@ -25,11 +25,11 @@ public class X9Message extends LinkMessage {
         this.seqIndex = seqIndex;
     }
 
-    @Override // com.fimi.kernel.dataparser.milink.LinkMessage
+    @Override
     public void fillPayload(LinkPacket packet) {
     }
 
-    @Override // com.fimi.kernel.dataparser.milink.LinkMessage
+    @Override
     public void unpack(LinkPayload payload) {
     }
 

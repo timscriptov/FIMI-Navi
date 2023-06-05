@@ -4,7 +4,7 @@ import android.graphics.Rect;
 
 import com.fimi.app.x8s.map.model.MapPointLatLng;
 
-/* loaded from: classes.dex */
+
 public interface IX8MarkerListener {
     Rect getDeletePosition();
 

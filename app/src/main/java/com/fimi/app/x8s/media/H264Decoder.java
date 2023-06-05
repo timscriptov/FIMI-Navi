@@ -2,7 +2,7 @@ package com.fimi.app.x8s.media;
 
 import android.view.Surface;
 
-/* loaded from: classes.dex */
+
 public class H264Decoder {
     private boolean isWorking;
     private H264DecoderThread mH264DecoderThread;

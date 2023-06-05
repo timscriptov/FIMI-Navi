@@ -28,21 +28,21 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes2.dex */
+
 public class X8FlightLogListPresenter implements IDownProgress, IFdsCountListener, IFdsUiListener {
     public static List<String> fileNames = new ArrayList();
-    private Context context;
+    private final Context context;
     private FdsCount fdsCount;
     private boolean isShow;
-    private IX8FlightLogListAction ix8FlightLogListAction;
+    private final IX8FlightLogListAction ix8FlightLogListAction;
     private volatile float lastProgrss;
     private volatile int progrssSum;
     private long time;
     private List<X8PlaybackLogEntity> x8PlaybackLogEntityList;
-    private List<X8FlightLogFile> x8FlightLogFiles = new ArrayList();
-    private List<X8FlightLogFile> x8FlightLogFilesTemp = new ArrayList();
-    private List<X8FlightLogFile> x8FlightLogFilesUpload = new ArrayList();
-    private List<X8PlaybackLogEntity> x8PlaybackLogEntitiesDownload = new ArrayList();
+    private final List<X8FlightLogFile> x8FlightLogFiles = new ArrayList();
+    private final List<X8FlightLogFile> x8FlightLogFilesTemp = new ArrayList();
+    private final List<X8FlightLogFile> x8FlightLogFilesUpload = new ArrayList();
+    private final List<X8PlaybackLogEntity> x8PlaybackLogEntitiesDownload = new ArrayList();
     private boolean isUpDownload = false;
     private volatile float uploadProgrss = 0.0f;
 
@@ -72,10 +72,10 @@ public class X8FlightLogListPresenter implements IDownProgress, IFdsCountListene
             startTime = "2018-01-01-00-00-00";
         }
         String endTime = DateUtil.getStringByFormat(System.currentTimeMillis(), "yyyy-MM-dd-HH-mm-ss");
-        X8FlightPlayBackManager.getX8FlightPlayBackManagerInstans().getX8FlightPlaybackLog(startTime, endTime, new DisposeDataHandle(new DisposeDataListener() { // from class: com.fimi.x8sdk.presenter.X8FlightLogListPresenter.1
+        X8FlightPlayBackManager.getX8FlightPlayBackManagerInstans().getX8FlightPlaybackLog(startTime, endTime, new DisposeDataHandle(new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
-                NetModel netModel = (NetModel) JSON.parseObject(responseObj.toString(), NetModel.class);
+                NetModel netModel = JSON.parseObject(responseObj.toString(), NetModel.class);
                 if (netModel.isSuccess()) {
                     if (netModel.getData() != null) {
                         X8FlightLogListPresenter.this.x8PlaybackLogEntitiesDownload.clear();
@@ -133,7 +133,7 @@ public class X8FlightLogListPresenter implements IDownProgress, IFdsCountListene
                 }
             }
 
-            @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+            @Override
             public void onFailure(Object reasonObj) {
             }
         }));
@@ -149,7 +149,7 @@ public class X8FlightLogListPresenter implements IDownProgress, IFdsCountListene
             this.ix8FlightLogListAction.startSyn();
         }
         int listSize = this.x8FlightLogFilesUpload.size();
-        int position = 0 + 1;
+        int position = 1;
         for (int i = 0; i < listSize; i++) {
             X8FlightLogFile x8FlightLogFile = this.x8FlightLogFilesUpload.get(i);
             if (x8FlightLogFile.getState() == FdsUploadState.IDLE || x8FlightLogFile.getState() == FdsUploadState.STOP || x8FlightLogFile.getState() == FdsUploadState.FAILED) {
@@ -161,7 +161,7 @@ public class X8FlightLogListPresenter implements IDownProgress, IFdsCountListene
         }
     }
 
-    @Override // com.fimi.network.IDownProgress
+    @Override
     public void onProgress(DownFwService.DownState downState, int progrss, String fileName) {
         if (progrss >= 100) {
             if (this.isUpDownload) {
@@ -179,7 +179,7 @@ public class X8FlightLogListPresenter implements IDownProgress, IFdsCountListene
         this.ix8FlightLogListAction.synTotalProgress(progrss);
     }
 
-    @Override // com.fimi.kernel.fds.IFdsUiListener
+    @Override
     public void onProgress(IFdsFileModel model, int progrss) {
         if (this.x8FlightLogFilesUpload != null && this.x8FlightLogFilesUpload.size() > 0) {
             if (progrss > 0) {
@@ -204,25 +204,25 @@ public class X8FlightLogListPresenter implements IDownProgress, IFdsCountListene
         }
     }
 
-    @Override // com.fimi.kernel.fds.IFdsUiListener
+    @Override
     public void onSuccess(IFdsFileModel responseObj) {
         this.fdsCount.completeIncrease();
         FdsManager.getInstance().remove(responseObj);
         synCompleteRefresh(true);
     }
 
-    @Override // com.fimi.kernel.fds.IFdsUiListener
+    @Override
     public void onFailure(IFdsFileModel responseObj) {
         FdsManager.getInstance().remove(responseObj);
         synCompleteRefresh(false);
     }
 
-    @Override // com.fimi.kernel.fds.IFdsUiListener
+    @Override
     public void onStop(IFdsFileModel reasonObj) {
         FdsManager.getInstance().remove(reasonObj);
     }
 
-    @Override // com.fimi.kernel.fds.IFdsCountListener
+    @Override
     public void onUploadingCountChange(int uploading) {
         if (this.fdsCount.getTotal() - this.fdsCount.getComplete() == uploading) {
             if (uploading == 0) {

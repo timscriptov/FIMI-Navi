@@ -22,7 +22,7 @@ import com.fimi.x8sdk.controller.FcCtrlManager;
 import com.fimi.x8sdk.dataparser.AckGetSensitivity;
 import com.fimi.x8sdk.entity.X8AppSettingLog;
 
-/* loaded from: classes.dex */
+
 public class X8FcExpSettingController extends AbsX8MenuBoxControllers implements View.OnClickListener, X8FixedEditText.OnInputChangedListener, X8CustomChartView.OnSeekChangedListener {
     private final int DEFAULT_VALUE;
     private ImageButton btnReset;
@@ -46,17 +46,17 @@ public class X8FcExpSettingController extends AbsX8MenuBoxControllers implements
         this.isRequested = false;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
         LayoutInflater inflater = LayoutInflater.from(rootView.getContext());
         this.contentView = inflater.inflate(R.layout.x8_main_fc_exp_setting, (ViewGroup) rootView, true);
-        this.content_layout = (PercentRelativeLayout) this.contentView.findViewById(R.id.exp_content_layout);
-        this.imgReturn = (ImageView) this.contentView.findViewById(R.id.img_return);
-        this.btnReset = (ImageButton) this.contentView.findViewById(R.id.btn_reset);
+        this.content_layout = this.contentView.findViewById(R.id.exp_content_layout);
+        this.imgReturn = this.contentView.findViewById(R.id.img_return);
+        this.btnReset = this.contentView.findViewById(R.id.btn_reset);
         this.btnReset.setOnClickListener(this);
-        this.edtToUpDown = (X8FixedEditText) this.contentView.findViewById(R.id.edt_to_up_down);
-        this.edtToLeftRight = (X8FixedEditText) this.contentView.findViewById(R.id.edt_to_left_right);
-        this.edtToGoBack = (X8FixedEditText) this.contentView.findViewById(R.id.edt_to_go_back);
+        this.edtToUpDown = this.contentView.findViewById(R.id.edt_to_up_down);
+        this.edtToLeftRight = this.contentView.findViewById(R.id.edt_to_left_right);
+        this.edtToGoBack = this.contentView.findViewById(R.id.edt_to_go_back);
         this.edtToUpDown.setGravity(17);
         this.edtToUpDown.setTextAlignment(4);
         this.edtToUpDown.setFixedText("%");
@@ -72,9 +72,9 @@ public class X8FcExpSettingController extends AbsX8MenuBoxControllers implements
         this.edtToUpDown.setEnabled(false);
         this.edtToLeftRight.setEnabled(false);
         this.edtToGoBack.setEnabled(false);
-        this.cvToUpDown = (X8CustomChartView) this.contentView.findViewById(R.id.cv_to_up_down);
-        this.cvToLeftRight = (X8CustomChartView) this.contentView.findViewById(R.id.cv_to_left_right);
-        this.cvToGoBack = (X8CustomChartView) this.contentView.findViewById(R.id.cv_to_go_back);
+        this.cvToUpDown = this.contentView.findViewById(R.id.cv_to_up_down);
+        this.cvToLeftRight = this.contentView.findViewById(R.id.cv_to_left_right);
+        this.cvToGoBack = this.contentView.findViewById(R.id.cv_to_go_back);
         this.cvToUpDown.setOnSeekChangeListener(this);
         this.cvToLeftRight.setOnSeekChangeListener(this);
         this.cvToGoBack.setOnSeekChangeListener(this);
@@ -82,14 +82,14 @@ public class X8FcExpSettingController extends AbsX8MenuBoxControllers implements
         initActions();
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
         if (this.contentView != null) {
             this.imgReturn.setOnClickListener(this);
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         if (this.isShow && this.isShow) {
             if (b && !this.isRequested) {
@@ -136,8 +136,8 @@ public class X8FcExpSettingController extends AbsX8MenuBoxControllers implements
 
     private void requestDefaultValue() {
         if (this.fcCtrlManager != null) {
-            this.fcCtrlManager.getRockerExp(new UiCallBackListener<AckGetSensitivity>() { // from class: com.fimi.app.x8s.controls.fcsettting.X8FcExpSettingController.1
-                @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+            this.fcCtrlManager.getRockerExp(new UiCallBackListener<AckGetSensitivity>() {
+                @Override
                 public void onComplete(CmdResult cmdResult, AckGetSensitivity sensitivity) {
                     if (cmdResult.isSuccess()) {
                         X8FcExpSettingController.this.cvToUpDown.setCurValue(sensitivity.getThroPercent());
@@ -155,14 +155,14 @@ public class X8FcExpSettingController extends AbsX8MenuBoxControllers implements
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
         updateViewEnable(false, this.content_layout);
         this.btnReset.setAlpha(0.6f);
         this.btnReset.setEnabled(false);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void showItem() {
         this.isShow = true;
         this.contentView.setVisibility(0);
@@ -176,7 +176,7 @@ public class X8FcExpSettingController extends AbsX8MenuBoxControllers implements
         defaultVal();
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void closeItem() {
         this.isShow = false;
         this.contentView.setVisibility(8);
@@ -191,7 +191,7 @@ public class X8FcExpSettingController extends AbsX8MenuBoxControllers implements
         this.listener = listener;
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.img_return) {
@@ -201,7 +201,7 @@ public class X8FcExpSettingController extends AbsX8MenuBoxControllers implements
             }
         } else if (i == R.id.btn_reset) {
             if (this.resetDialog == null) {
-                this.resetDialog = new X8DoubleCustomDialog(this.mContext, this.mContext.getString(R.string.x8_fc_sensitivity_reset_title), this.mContext.getString(R.string.x8_fc_sensitivity_reset_content), new X8DoubleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8FcExpSettingController.2
+                this.resetDialog = new X8DoubleCustomDialog(this.mContext, this.mContext.getString(R.string.x8_fc_sensitivity_reset_title), this.mContext.getString(R.string.x8_fc_sensitivity_reset_content), new X8DoubleCustomDialog.onDialogButtonClickListener() {
                     @Override
                     // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
                     public void onLeft() {
@@ -210,8 +210,8 @@ public class X8FcExpSettingController extends AbsX8MenuBoxControllers implements
                     @Override
                     // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
                     public void onRight() {
-                        X8FcExpSettingController.this.fcCtrlManager.setUpDownRockerExp(new UiCallBackListener<Object>() { // from class: com.fimi.app.x8s.controls.fcsettting.X8FcExpSettingController.2.1
-                            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                        X8FcExpSettingController.this.fcCtrlManager.setUpDownRockerExp(new UiCallBackListener<Object>() {
+                            @Override
                             public void onComplete(CmdResult cmdResult, Object resp) {
                                 if (cmdResult.isSuccess()) {
                                     X8FcExpSettingController.this.cvToUpDown.setCurValue(50.0d);
@@ -220,8 +220,8 @@ public class X8FcExpSettingController extends AbsX8MenuBoxControllers implements
                                 }
                             }
                         }, 50);
-                        X8FcExpSettingController.this.fcCtrlManager.setLeftRightRockerExp(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8FcExpSettingController.2.2
-                            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                        X8FcExpSettingController.this.fcCtrlManager.setLeftRightRockerExp(new UiCallBackListener() {
+                            @Override
                             public void onComplete(CmdResult cmdResult, Object o) {
                                 if (cmdResult.isSuccess()) {
                                     X8FcExpSettingController.this.cvToLeftRight.setCurValue(50.0d);
@@ -230,8 +230,8 @@ public class X8FcExpSettingController extends AbsX8MenuBoxControllers implements
                                 }
                             }
                         }, 50);
-                        X8FcExpSettingController.this.fcCtrlManager.setGoBackRockerExp(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8FcExpSettingController.2.3
-                            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                        X8FcExpSettingController.this.fcCtrlManager.setGoBackRockerExp(new UiCallBackListener() {
+                            @Override
                             public void onComplete(CmdResult cmdResult, Object o) {
                                 if (cmdResult.isSuccess()) {
                                     X8FcExpSettingController.this.cvToGoBack.setCurValue(50.0d);
@@ -248,7 +248,7 @@ public class X8FcExpSettingController extends AbsX8MenuBoxControllers implements
         }
     }
 
-    @Override // com.fimi.app.x8s.widget.X8CustomChartView.OnSeekChangedListener
+    @Override
     public void onSeekChanged(int viewId, double value) {
         if (viewId == R.id.cv_to_up_down) {
             this.edtToUpDown.setText("" + ((int) value));
@@ -259,11 +259,11 @@ public class X8FcExpSettingController extends AbsX8MenuBoxControllers implements
         }
     }
 
-    @Override // com.fimi.app.x8s.widget.X8CustomChartView.OnSeekChangedListener
+    @Override
     public void onFingerUp(int viewId, final double value) {
         if (viewId == R.id.cv_to_up_down) {
-            this.fcCtrlManager.setUpDownRockerExp(new UiCallBackListener<Object>() { // from class: com.fimi.app.x8s.controls.fcsettting.X8FcExpSettingController.3
-                @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+            this.fcCtrlManager.setUpDownRockerExp(new UiCallBackListener<Object>() {
+                @Override
                 public void onComplete(CmdResult cmdResult, Object resp) {
                     if (cmdResult.isSuccess()) {
                         X8AppSettingLog.setExp(-1, -1, (int) value, -1);
@@ -271,15 +271,15 @@ public class X8FcExpSettingController extends AbsX8MenuBoxControllers implements
                 }
             }, (int) value);
         } else if (viewId == R.id.cv_to_left_right) {
-            this.fcCtrlManager.setLeftRightRockerExp(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8FcExpSettingController.4
-                @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+            this.fcCtrlManager.setLeftRightRockerExp(new UiCallBackListener() {
+                @Override
                 public void onComplete(CmdResult cmdResult, Object o) {
                     X8AppSettingLog.setExp(-1, -1, -1, (int) value);
                 }
             }, (int) value);
         } else if (viewId == R.id.cv_to_go_back) {
-            this.fcCtrlManager.setGoBackRockerExp(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8FcExpSettingController.5
-                @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+            this.fcCtrlManager.setGoBackRockerExp(new UiCallBackListener() {
+                @Override
                 public void onComplete(CmdResult cmdResult, Object o) {
                     X8AppSettingLog.setExp((int) value, (int) value, -1, -1);
                 }
@@ -287,14 +287,14 @@ public class X8FcExpSettingController extends AbsX8MenuBoxControllers implements
         }
     }
 
-    @Override // com.fimi.app.x8s.widget.X8FixedEditText.OnInputChangedListener
+    @Override
     public void onInputChanged(int viewId, int value) {
         if (10 <= value && value <= 100) {
             if (viewId == R.id.edt_to_up_down) {
                 this.cvToUpDown.setCurValue(value);
                 this.cvToUpDown.refreshView(false);
-                this.fcCtrlManager.setUpDownRockerExp(new UiCallBackListener<Object>() { // from class: com.fimi.app.x8s.controls.fcsettting.X8FcExpSettingController.6
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                this.fcCtrlManager.setUpDownRockerExp(new UiCallBackListener<Object>() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, Object resp) {
                         if (cmdResult.isSuccess()) {
                         }
@@ -303,16 +303,16 @@ public class X8FcExpSettingController extends AbsX8MenuBoxControllers implements
             } else if (viewId == R.id.edt_to_left_right) {
                 this.cvToLeftRight.setCurValue(value);
                 this.cvToLeftRight.refreshView(false);
-                this.fcCtrlManager.setLeftRightRockerExp(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8FcExpSettingController.7
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                this.fcCtrlManager.setLeftRightRockerExp(new UiCallBackListener() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, Object o) {
                     }
                 }, value);
             } else if (viewId == R.id.edt_to_go_back) {
                 this.cvToGoBack.setCurValue(value);
                 this.cvToGoBack.refreshView(false);
-                this.fcCtrlManager.setGoBackRockerExp(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8FcExpSettingController.8
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                this.fcCtrlManager.setGoBackRockerExp(new UiCallBackListener() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, Object o) {
                     }
                 }, value, value);
@@ -320,7 +320,7 @@ public class X8FcExpSettingController extends AbsX8MenuBoxControllers implements
         }
     }
 
-    @Override // com.fimi.app.x8s.widget.X8FixedEditText.OnInputChangedListener
+    @Override
     public void onError(EditText v, int errorCode, String errorMsg) {
         X8ToastUtil.showToast(this.mContext, this.contentView.getContext().getString(R.string.x8_fc_exp_error_tip), 0);
         double curValue = 0.0d;
@@ -336,7 +336,7 @@ public class X8FcExpSettingController extends AbsX8MenuBoxControllers implements
         v.clearFocus();
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8MenuBoxControllers
+    @Override
     public void updateViewEnable(boolean enable, ViewGroup... parent) {
         if (parent != null && parent.length > 0) {
             for (ViewGroup group : parent) {

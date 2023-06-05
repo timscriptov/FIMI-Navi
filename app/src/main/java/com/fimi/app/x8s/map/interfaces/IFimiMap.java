@@ -8,9 +8,9 @@ import com.fimi.x8sdk.dataparser.AckNoFlyNormal;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.GoogleMap;
 
-/* loaded from: classes.dex */
+
 public interface IFimiMap {
-    public static final String FIMI_GAODE_MAP = "fimi.gaode.map";
+    String FIMI_GAODE_MAP = "fimi.gaode.map";
 
     void changeGoogleCamera(CameraUpdate cameraUpdate);
 

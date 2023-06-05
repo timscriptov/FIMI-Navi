@@ -5,7 +5,7 @@ import com.fimi.x8sdk.command.FcCollection;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class CRCUtil {
     public static final int X25_INIT_CRC = 65535;
 

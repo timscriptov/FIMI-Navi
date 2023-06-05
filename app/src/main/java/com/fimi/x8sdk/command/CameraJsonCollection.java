@@ -5,7 +5,7 @@ import com.fimi.kernel.dataparser.usb.JsonUiCallBackListener;
 import com.fimi.x8sdk.dataparser.CameraJsonData;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes2.dex */
+
 public class CameraJsonCollection extends X8BaseCmd {
     public static final int CMD_BURNIN_FW = 8;
     public static final int CMD_CANCEL_GET_FILE = 1287;

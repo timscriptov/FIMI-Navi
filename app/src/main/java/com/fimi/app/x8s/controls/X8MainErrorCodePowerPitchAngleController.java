@@ -8,7 +8,7 @@ import com.fimi.x8sdk.entity.X8ErrorCodeInfo;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class X8MainErrorCodePowerPitchAngleController extends AbsX8Controllers {
     private X8ErrorCodeController mX8ErrorCodeController;
 
@@ -20,7 +20,7 @@ public class X8MainErrorCodePowerPitchAngleController extends AbsX8Controllers {
         return this.mX8ErrorCodeController;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
         this.handleView = rootView.findViewById(R.id.main_left_tools);
         this.mX8ErrorCodeController = new X8ErrorCodeController(rootView);
@@ -29,11 +29,11 @@ public class X8MainErrorCodePowerPitchAngleController extends AbsX8Controllers {
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
@@ -53,7 +53,7 @@ public class X8MainErrorCodePowerPitchAngleController extends AbsX8Controllers {
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         if (this.mX8ErrorCodeController != null) {
             this.mX8ErrorCodeController.onDroneConnected(b);
@@ -63,7 +63,7 @@ public class X8MainErrorCodePowerPitchAngleController extends AbsX8Controllers {
     public void setErrorViewEnableShow(boolean b) {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public boolean onClickBackKey() {
         return false;
     }

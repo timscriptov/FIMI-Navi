@@ -21,7 +21,7 @@ import com.fimi.network.entity.UpfirewareDto;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class LoginPresenter {
     private static final int TIMER = 1;
     private static final int sUPDATE_TIME = 1000;
@@ -38,10 +38,10 @@ public class LoginPresenter {
         if (!DataValidatorUtil.isMobile(phone)) {
             this.mView.getCodeResult(false, this.mContext.getString(R.string.register_input_right_phone));
         } else {
-            UserManager.getIntance(this.mContext).getSecurityCode(phone, "0", "0", new DisposeDataHandle(new DisposeDataListener() { // from class: com.fimi.libperson.presenter.LoginPresenter.1
-                @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+            UserManager.getIntance(this.mContext).getSecurityCode(phone, "0", "0", new DisposeDataHandle(new DisposeDataListener() {
+                @Override
                 public void onSuccess(Object responseObj) {
-                    NetModel netModel = (NetModel) JSON.parseObject(responseObj.toString(), NetModel.class);
+                    NetModel netModel = JSON.parseObject(responseObj.toString(), NetModel.class);
                     if (netModel.isSuccess()) {
                         LoginPresenter.this.mSeconds = 60;
                         LoginPresenter.this.mView.getCodeResult(true, null);
@@ -50,7 +50,7 @@ public class LoginPresenter {
                     LoginPresenter.this.mView.getCodeResult(false, ErrorMessage.getUserModeErrorMessage(LoginPresenter.this.mContext, netModel.getErrCode()));
                 }
 
-                @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+                @Override
                 public void onFailure(Object reasonObj) {
                     LoginPresenter.this.mView.getCodeResult(false, LoginPresenter.this.mContext.getString(R.string.network_exception));
                 }
@@ -64,10 +64,10 @@ public class LoginPresenter {
         } else if (!DataValidatorUtil.isMobile(phone)) {
             this.mView.iphoneLoginResult(false, this.mContext.getString(R.string.register_input_right_phone));
         } else {
-            UserManager.getIntance(this.mContext).loginFmUser(phone, code, "0", new DisposeDataHandle(new DisposeDataListener() { // from class: com.fimi.libperson.presenter.LoginPresenter.2
-                @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+            UserManager.getIntance(this.mContext).loginFmUser(phone, code, "0", new DisposeDataHandle(new DisposeDataListener() {
+                @Override
                 public void onSuccess(Object responseObj) {
-                    NetModel netModel = (NetModel) JSON.parseObject(responseObj.toString(), NetModel.class);
+                    NetModel netModel = JSON.parseObject(responseObj.toString(), NetModel.class);
                     if (netModel.isSuccess()) {
                         HostConstants.saveUserDetail(netModel.getData());
                         HostConstants.saveUserInfo("0", phone);
@@ -77,7 +77,7 @@ public class LoginPresenter {
                     LoginPresenter.this.mView.iphoneLoginResult(false, ErrorMessage.getUserModeErrorMessage(LoginPresenter.this.mContext, netModel.getErrCode()));
                 }
 
-                @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+                @Override
                 public void onFailure(Object reasonObj) {
                     LoginPresenter.this.mView.iphoneLoginResult(false, LoginPresenter.this.mContext.getString(R.string.network_exception));
                 }
@@ -91,10 +91,10 @@ public class LoginPresenter {
         } else if (!DataValidatorUtil.isEmail(email)) {
             this.mView.emailLoginResult(false, this.mContext.getString(R.string.register_input_right_email));
         } else {
-            UserManager.getIntance(this.mContext).loginFmUser(email, password, "1", new DisposeDataHandle(new DisposeDataListener() { // from class: com.fimi.libperson.presenter.LoginPresenter.3
-                @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+            UserManager.getIntance(this.mContext).loginFmUser(email, password, "1", new DisposeDataHandle(new DisposeDataListener() {
+                @Override
                 public void onSuccess(Object responseObj) {
-                    NetModel netModel = (NetModel) JSON.parseObject(responseObj.toString(), NetModel.class);
+                    NetModel netModel = JSON.parseObject(responseObj.toString(), NetModel.class);
                     if (netModel.isSuccess()) {
                         HostConstants.saveUserDetail(netModel.getData());
                         HostConstants.saveUserInfo("1", email);
@@ -102,14 +102,10 @@ public class LoginPresenter {
                         return;
                     }
                     LoginPresenter.this.mView.emailLoginResult(false, ErrorMessage.getUserModeErrorMessage(LoginPresenter.this.mContext, netModel.getErrCode()));
-                    if (ErrorMessage.VERIFICATION_CODE_LOGIN_OUTTIME.equals(netModel.getErrCode())) {
-                        LoginPresenter.this.mView.freorgottenPasswords(true);
-                    } else {
-                        LoginPresenter.this.mView.freorgottenPasswords(false);
-                    }
+                    LoginPresenter.this.mView.freorgottenPasswords(ErrorMessage.VERIFICATION_CODE_LOGIN_OUTTIME.equals(netModel.getErrCode()));
                 }
 
-                @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+                @Override
                 public void onFailure(Object reasonObj) {
                     LoginPresenter.this.mView.emailLoginResult(false, LoginPresenter.this.mContext.getString(R.string.network_exception));
                 }
@@ -120,12 +116,12 @@ public class LoginPresenter {
     public void getFwDetail() {
         FwManager x9FwManager = new FwManager();
         HostConstants.saveFirmwareDetail(new ArrayList());
-        x9FwManager.getX9FwNetDetail(new DisposeDataHandle(new DisposeDataListener() { // from class: com.fimi.libperson.presenter.LoginPresenter.4
-            @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+        x9FwManager.getX9FwNetDetail(new DisposeDataHandle(new DisposeDataListener() {
+            @Override
             public void onSuccess(Object responseObj) {
                 try {
                     try {
-                        NetModel netModel = (NetModel) JSON.parseObject(responseObj.toString(), NetModel.class);
+                        NetModel netModel = JSON.parseObject(responseObj.toString(), NetModel.class);
                         LogUtil.d("moweiru", "responseObj:" + responseObj);
                         if (netModel.isSuccess() && netModel.getData() != null) {
                             List<UpfirewareDto> fwDtos = JSON.parseArray(netModel.getData().toString(), UpfirewareDto.class);
@@ -149,7 +145,7 @@ public class LoginPresenter {
                 }
             }
 
-            @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+            @Override
             public void onFailure(Object reasonObj) {
                 if (LoginPresenter.this.mView != null) {
                     LoginPresenter.this.mView.loginSuccess();

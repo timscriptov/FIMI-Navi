@@ -1,6 +1,6 @@
 package com.fimi.app.x8s.enums;
 
-/* loaded from: classes.dex */
+
 public class X8VehicleControlConfig {
     public static final byte CTRL_AERIAL_SHOT = 6;
     public static final byte CTRL_SPORT = 7;

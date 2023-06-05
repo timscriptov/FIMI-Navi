@@ -18,11 +18,11 @@ import com.fimi.x8sdk.map.MapType;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class X8AiLinesHistoryUi implements View.OnClickListener {
     private X8AiLineHistoryAdapter adapter;
     private Button btnNext;
-    private View contentView;
+    private final View contentView;
     private X8AiLineExcuteController controller;
     private ListView lv;
 
@@ -33,11 +33,11 @@ public class X8AiLinesHistoryUi implements View.OnClickListener {
     }
 
     public void initView(View rootView) {
-        this.lv = (ListView) rootView.findViewById(R.id.lv);
-        this.btnNext = (Button) rootView.findViewById(R.id.btn_ai_follow_confirm_ok);
+        this.lv = rootView.findViewById(R.id.lv);
+        this.btnNext = rootView.findViewById(R.id.btn_ai_follow_confirm_ok);
         List<X8AiLinePointInfo> list = X8AiLinePointInfoHelper.getIntance().getLastItem(GlobalConfig.getInstance().getMapType() == MapType.AMap ? 1 : 0);
         this.adapter = new X8AiLineHistoryAdapter(this.contentView.getContext(), list);
-        this.lv.setAdapter((ListAdapter) this.adapter);
+        this.lv.setAdapter(this.adapter);
     }
 
     public void initAction() {
@@ -45,7 +45,7 @@ public class X8AiLinesHistoryUi implements View.OnClickListener {
         this.btnNext.setOnClickListener(this);
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.btn_ai_follow_confirm_ok) {
@@ -63,10 +63,6 @@ public class X8AiLinesHistoryUi implements View.OnClickListener {
     }
 
     public void setFcHeart(boolean isInSky, boolean isLowPower) {
-        if (isInSky && isLowPower) {
-            this.btnNext.setEnabled(true);
-        } else {
-            this.btnNext.setEnabled(false);
-        }
+        this.btnNext.setEnabled(isInSky && isLowPower);
     }
 }

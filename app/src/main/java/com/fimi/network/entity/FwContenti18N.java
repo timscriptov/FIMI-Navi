@@ -1,6 +1,6 @@
 package com.fimi.network.entity;
 
-/* loaded from: classes.dex */
+
 public class FwContenti18N extends BaseModel {
     private String en_US;
     private String zh_CN;

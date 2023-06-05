@@ -8,12 +8,12 @@ import com.fimi.app.x8s.interfaces.IFimiOnSnapshotReady;
 import com.fimi.app.x8s.interfaces.IFimiShotResult;
 import com.fimi.app.x8s.ui.activity.X8sMainActivity;
 
-/* loaded from: classes.dex */
+
 public class X8ShotAsyncTask extends AsyncTask<String, String, Bitmap> {
-    private X8sMainActivity activity;
+    private final X8sMainActivity activity;
     private Bitmap btp = null;
-    private IFimiShotResult callback;
-    private int type;
+    private final IFimiShotResult callback;
+    private final int type;
 
     public X8ShotAsyncTask(X8sMainActivity activity, IFimiShotResult callback, int type) {
         this.activity = activity;
@@ -21,23 +21,23 @@ public class X8ShotAsyncTask extends AsyncTask<String, String, Bitmap> {
         this.type = type;
     }
 
-    @Override // android.os.AsyncTask
+    @Override
     protected void onPreExecute() {
         super.onPreExecute();
     }
 
-    @Override // android.os.AsyncTask
+    @Override
     public Bitmap doInBackground(String... params) {
         if (this.type == 0) {
-            this.activity.getmMapVideoController().snapshot(new IFimiOnSnapshotReady() { // from class: com.fimi.app.x8s.manager.X8ShotAsyncTask.1
-                @Override // com.fimi.app.x8s.interfaces.IFimiOnSnapshotReady
+            this.activity.getmMapVideoController().snapshot(new IFimiOnSnapshotReady() {
+                @Override
                 public void onSnapshotReady(Bitmap btp) {
                     X8ShotAsyncTask.this.btp = btp;
                 }
             });
         } else {
-            this.activity.getmMapVideoController().fpvShot(new IFimiFpvShot() { // from class: com.fimi.app.x8s.manager.X8ShotAsyncTask.2
-                @Override // com.fimi.app.x8s.interfaces.IFimiFpvShot
+            this.activity.getmMapVideoController().fpvShot(new IFimiFpvShot() {
+                @Override
                 public void onFpvshotReady(Bitmap btp) {
                     X8ShotAsyncTask.this.btp = btp;
                 }
@@ -53,7 +53,7 @@ public class X8ShotAsyncTask extends AsyncTask<String, String, Bitmap> {
         return this.btp;
     }
 
-    @Override // android.os.AsyncTask
+    @Override
     public void onPostExecute(Bitmap bitmap) {
         super.onPostExecute(bitmap);
         this.callback.onShotResult(bitmap);

@@ -1,6 +1,6 @@
 package com.fimi.player;
 
-/* loaded from: classes.dex */
+
 public abstract class AbstractMediaPlayer implements IMediaPlayer {
     private IMediaPlayer.MediaQualityListener mMediaQualityListener;
     private IMediaPlayer.OnBufferingUpdateListener mOnBufferingUpdateListener;
@@ -12,32 +12,32 @@ public abstract class AbstractMediaPlayer implements IMediaPlayer {
     private IMediaPlayer.OnSeekCompleteListener mOnSeekCompleteListener;
     private IMediaPlayer.OnVideoSizeChangedListener mOnVideoSizeChangedListener;
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public void setMediaQualityListener(IMediaPlayer.MediaQualityListener listener) {
         this.mMediaQualityListener = listener;
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public final void setOnPreparedListener(IMediaPlayer.OnPreparedListener listener) {
         this.mOnPreparedListener = listener;
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public final void setOnCompletionListener(IMediaPlayer.OnCompletionListener listener) {
         this.mOnCompletionListener = listener;
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public final void setOnBufferingUpdateListener(IMediaPlayer.OnBufferingUpdateListener listener) {
         this.mOnBufferingUpdateListener = listener;
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public final void setOnSeekCompleteListener(IMediaPlayer.OnSeekCompleteListener listener) {
         this.mOnSeekCompleteListener = listener;
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public final void setOnVideoSizeChangedListener(IMediaPlayer.OnVideoSizeChangedListener listener) {
         this.mOnVideoSizeChangedListener = listener;
     }
@@ -52,12 +52,12 @@ public abstract class AbstractMediaPlayer implements IMediaPlayer {
         this.mMediaQualityListener = listener;
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public final void setOnErrorListener(IMediaPlayer.OnErrorListener listener) {
         this.mOnErrorListener = listener;
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public final void setOnInfoListener(IMediaPlayer.OnInfoListener listener) {
         this.mOnInfoListener = listener;
     }
@@ -117,7 +117,7 @@ public abstract class AbstractMediaPlayer implements IMediaPlayer {
         return false;
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public void setOnLiveVideoListener(IMediaPlayer.OnLiveVideoListener listener) {
         this.mOnLiveVideoListener = listener;
     }

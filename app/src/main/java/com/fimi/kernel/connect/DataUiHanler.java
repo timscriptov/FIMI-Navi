@@ -7,9 +7,9 @@ import android.os.Message;
 import com.fimi.kernel.connect.interfaces.IPersonalDataCallBack;
 import com.fimi.kernel.dataparser.ILinkMessage;
 
-/* loaded from: classes.dex */
+
 public class DataUiHanler extends Handler {
-    @Override // android.os.Handler
+    @Override
     public void handleMessage(Message msg) {
         Bundle bundle = msg.getData();
         IPersonalDataCallBack callBack = (IPersonalDataCallBack) msg.obj;
@@ -23,7 +23,6 @@ public class DataUiHanler extends Handler {
                 callBack.onPersonalSendTimeOut(msg.arg1, msg.arg2, bcd);
                 return;
             default:
-                return;
         }
     }
 }

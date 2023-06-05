@@ -27,16 +27,16 @@ import com.fimi.x8sdk.dataparser.AckAiGetGravitationPrameter;
 import com.fimi.x8sdk.dataparser.AckAiSetGravitationPrameter;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes.dex */
+
 public class X8AiGravitationExcuteComfirmUi implements View.OnClickListener {
     private final View contentView;
-    private X8sMainActivity activity;
+    private final X8sMainActivity activity;
     private AckAiGetGravitationPrameter mAckAiGetGravitationPrameter;
     private Button mBtnExcuteAdvancedSetting;
     private Button mBtnExcuteDefault;
     private Button mBtnExcuteOk;
     private Button mBtnExcuteSave;
-    private CameraManager mCameraManager;
+    private final CameraManager mCameraManager;
     private ImageView mExcuteReturn;
     private TextView mExcuteTitle;
     private FcManager mFcManager;
@@ -53,44 +53,44 @@ public class X8AiGravitationExcuteComfirmUi implements View.OnClickListener {
     private TextView mTvLevel;
     private X8TabHost mXthRotate;
     private X8TabHost mXthVidotape;
-    private int LEVEL_MIN = 20;
-    private int LEVEL_MAX = 30;
-    private int LEVEL_MAX_PROGRESS = (this.LEVEL_MAX - this.LEVEL_MIN) * 10;
-    private int HIGHT_MIN = 5;
-    private int HIGHT_MAX = 10;
-    private int HIGHT_MAX_PROGRESS = (this.HIGHT_MAX - this.HIGHT_MIN) * 20;
+    private final int LEVEL_MIN = 20;
+    private final int LEVEL_MAX = 30;
+    private final int LEVEL_MAX_PROGRESS = (this.LEVEL_MAX - this.LEVEL_MIN) * 10;
+    private final int HIGHT_MIN = 5;
+    private final int HIGHT_MAX = 10;
+    private final int HIGHT_MAX_PROGRESS = (this.HIGHT_MAX - this.HIGHT_MIN) * 20;
     private ExcuteComfirmState mComfirmState = ExcuteComfirmState.MAIN;
-    private X8SeekBarView.SlideChangeListener seekBarLevelListener = new X8SeekBarView.SlideChangeListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiGravitationExcuteComfirmUi.6
-        @Override // com.fimi.app.x8s.widget.X8SeekBarView.SlideChangeListener
+    private final X8SeekBarView.SlideChangeListener seekBarLevelListener = new X8SeekBarView.SlideChangeListener() {
+        @Override
         public void onStart(X8SeekBarView slideView, int progress) {
         }
 
-        @Override // com.fimi.app.x8s.widget.X8SeekBarView.SlideChangeListener
+        @Override
         public void onProgress(X8SeekBarView slideView, int progress) {
             float levelValue = X8AiGravitationExcuteComfirmUi.this.LEVEL_MIN + (progress / 10);
             String d = X8NumberUtil.getDistanceNumberString(levelValue, 0, true);
             X8AiGravitationExcuteComfirmUi.this.mTvLevel.setText(d);
         }
 
-        @Override // com.fimi.app.x8s.widget.X8SeekBarView.SlideChangeListener
+        @Override
         public void onStop(X8SeekBarView slideView, int progress) {
             float levelValue = X8AiGravitationExcuteComfirmUi.this.LEVEL_MIN + (progress / 10);
             X8AiGravitationExcuteComfirmUi.this.changeEllipse(levelValue);
         }
     };
-    private X8SeekBarView.SlideChangeListener seekBarHightListener = new X8SeekBarView.SlideChangeListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiGravitationExcuteComfirmUi.7
-        @Override // com.fimi.app.x8s.widget.X8SeekBarView.SlideChangeListener
+    private final X8SeekBarView.SlideChangeListener seekBarHightListener = new X8SeekBarView.SlideChangeListener() {
+        @Override
         public void onStart(X8SeekBarView slideView, int progress) {
         }
 
-        @Override // com.fimi.app.x8s.widget.X8SeekBarView.SlideChangeListener
+        @Override
         public void onProgress(X8SeekBarView slideView, int progress) {
             float levelValue = X8AiGravitationExcuteComfirmUi.this.HIGHT_MIN + (progress / 20);
             String d = X8NumberUtil.getDistanceNumberString(levelValue, 0, true);
             X8AiGravitationExcuteComfirmUi.this.mTvHeight.setText(d);
         }
 
-        @Override // com.fimi.app.x8s.widget.X8SeekBarView.SlideChangeListener
+        @Override
         public void onStop(X8SeekBarView slideView, int progress) {
         }
     };
@@ -120,31 +120,31 @@ public class X8AiGravitationExcuteComfirmUi implements View.OnClickListener {
     }
 
     private void initViews(View contentView) {
-        this.mExcuteReturn = (ImageView) contentView.findViewById(R.id.img_ai_gravitation_excute_return);
-        this.mExcuteTitle = (TextView) contentView.findViewById(R.id.tv_ai_gravitation_excute_title);
-        this.mRlExcuteSetting = (RelativeLayout) contentView.findViewById(R.id.rl_gravitation_excute_setting);
-        this.mXthVidotape = (X8TabHost) contentView.findViewById(R.id.x8_ai_gravitation_excute_videotape);
+        this.mExcuteReturn = contentView.findViewById(R.id.img_ai_gravitation_excute_return);
+        this.mExcuteTitle = contentView.findViewById(R.id.tv_ai_gravitation_excute_title);
+        this.mRlExcuteSetting = contentView.findViewById(R.id.rl_gravitation_excute_setting);
+        this.mXthVidotape = contentView.findViewById(R.id.x8_ai_gravitation_excute_videotape);
         this.mXthVidotape.setSelect(0);
-        this.mBtnExcuteAdvancedSetting = (Button) contentView.findViewById(R.id.btn_ai_gravitation_excute_advanced_setting);
-        this.mBtnExcuteOk = (Button) contentView.findViewById(R.id.btn_ai_gravitation_excute_ok);
-        this.mBtnExcuteDefault = (Button) contentView.findViewById(R.id.btn_ai_gravitation_excute_default);
-        this.mBtnExcuteSave = (Button) contentView.findViewById(R.id.btn_ai_gravitation_excute_save);
-        this.mLlAdvancedSetting = (LinearLayout) contentView.findViewById(R.id.ll_gravitation_excute_advanced_setting);
-        this.mTvLevel = (TextView) contentView.findViewById(R.id.tv_ai_gravitation_excute_level);
-        this.mRlLevelMinus = (RelativeLayout) contentView.findViewById(R.id.rl_ai_gravitation_excute_level_minus);
-        this.mSbLevel = (X8SeekBarView) contentView.findViewById(R.id.sb_ai_gravitation_excute_level);
-        this.mRlLevelPlus = (RelativeLayout) contentView.findViewById(R.id.rl_ai_gravitation_excute_level_plus);
-        this.mTvHeight = (TextView) contentView.findViewById(R.id.tv_ai_gravitation_excute_height);
-        this.mRlHightMinus = (RelativeLayout) contentView.findViewById(R.id.rl_ai_gravitation_excute_heigth_minus);
-        this.mSbHeight = (X8SeekBarView) contentView.findViewById(R.id.sb_ai_gravitation_excute_heigth);
-        this.mRlHightPlus = (RelativeLayout) contentView.findViewById(R.id.rl_ai_gravitation_excute_heigth_plus);
-        this.mXthRotate = (X8TabHost) contentView.findViewById(R.id.x8_ai_gravitation_excute_rotate);
+        this.mBtnExcuteAdvancedSetting = contentView.findViewById(R.id.btn_ai_gravitation_excute_advanced_setting);
+        this.mBtnExcuteOk = contentView.findViewById(R.id.btn_ai_gravitation_excute_ok);
+        this.mBtnExcuteDefault = contentView.findViewById(R.id.btn_ai_gravitation_excute_default);
+        this.mBtnExcuteSave = contentView.findViewById(R.id.btn_ai_gravitation_excute_save);
+        this.mLlAdvancedSetting = contentView.findViewById(R.id.ll_gravitation_excute_advanced_setting);
+        this.mTvLevel = contentView.findViewById(R.id.tv_ai_gravitation_excute_level);
+        this.mRlLevelMinus = contentView.findViewById(R.id.rl_ai_gravitation_excute_level_minus);
+        this.mSbLevel = contentView.findViewById(R.id.sb_ai_gravitation_excute_level);
+        this.mRlLevelPlus = contentView.findViewById(R.id.rl_ai_gravitation_excute_level_plus);
+        this.mTvHeight = contentView.findViewById(R.id.tv_ai_gravitation_excute_height);
+        this.mRlHightMinus = contentView.findViewById(R.id.rl_ai_gravitation_excute_heigth_minus);
+        this.mSbHeight = contentView.findViewById(R.id.sb_ai_gravitation_excute_heigth);
+        this.mRlHightPlus = contentView.findViewById(R.id.rl_ai_gravitation_excute_heigth_plus);
+        this.mXthRotate = contentView.findViewById(R.id.x8_ai_gravitation_excute_rotate);
     }
 
     public void setFcHeart(boolean isInSky, boolean isLowPower) {
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View view) {
         int id = view.getId();
         if (id == R.id.img_ai_gravitation_excute_return) {
@@ -211,23 +211,23 @@ public class X8AiGravitationExcuteComfirmUi implements View.OnClickListener {
         prameter.setEccentricWheel(70);
         if (this.mXthVidotape.getSelectIndex() == 0) {
             prameter.setAutoVideo(1);
-            this.mCameraManager.setCameraKeyParams("normal_record", CameraJsonCollection.KEY_RECORD_MODE, new JsonUiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiGravitationExcuteComfirmUi.1
-                @Override // com.fimi.kernel.dataparser.usb.JsonUiCallBackListener
+            this.mCameraManager.setCameraKeyParams("normal_record", CameraJsonCollection.KEY_RECORD_MODE, new JsonUiCallBackListener() {
+                @Override
                 public void onComplete(JSONObject rt, Object o) {
                 }
             });
         } else if (this.mXthVidotape.getSelectIndex() == 1) {
             prameter.setAutoVideo(1);
-            this.mCameraManager.setCameraKeyParams("5s", CameraJsonCollection.KEY_VIDEO_TIMELAPSE, new JsonUiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiGravitationExcuteComfirmUi.2
-                @Override // com.fimi.kernel.dataparser.usb.JsonUiCallBackListener
+            this.mCameraManager.setCameraKeyParams("5s", CameraJsonCollection.KEY_VIDEO_TIMELAPSE, new JsonUiCallBackListener() {
+                @Override
                 public void onComplete(JSONObject rt, Object o) {
                 }
             });
         } else if (this.mXthVidotape.getSelectIndex() == 0) {
             prameter.setAutoVideo(0);
         }
-        this.mFcManager.setGravitationPrameter(prameter, new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiGravitationExcuteComfirmUi.3
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.mFcManager.setGravitationPrameter(prameter, new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess) {
                     X8AiGravitationExcuteComfirmUi.this.getParamer();
@@ -240,8 +240,8 @@ public class X8AiGravitationExcuteComfirmUi implements View.OnClickListener {
     }
 
     public void startGravitation() {
-        this.mFcManager.setGravitationStart(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiGravitationExcuteComfirmUi.4
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.mFcManager.setGravitationStart(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess) {
                     if (X8AiGravitationExcuteComfirmUi.this.mIX8NextViewListener != null) {
@@ -258,8 +258,8 @@ public class X8AiGravitationExcuteComfirmUi implements View.OnClickListener {
     }
 
     public void getParamer() {
-        this.mFcManager.getGravitationPrameter(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiGravitationExcuteComfirmUi.5
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.mFcManager.getGravitationPrameter(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess) {
                     X8AiGravitationExcuteComfirmUi.this.mAckAiGetGravitationPrameter = (AckAiGetGravitationPrameter) o;
@@ -321,7 +321,7 @@ public class X8AiGravitationExcuteComfirmUi implements View.OnClickListener {
         this.mFcManager = fcManager;
     }
 
-    /* loaded from: classes.dex */
+
     public enum ExcuteComfirmState {
         MAIN,
         ADVANCED

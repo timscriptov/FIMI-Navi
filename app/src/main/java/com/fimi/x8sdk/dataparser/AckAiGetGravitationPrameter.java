@@ -3,8 +3,6 @@ package com.fimi.x8sdk.dataparser;
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 
 
-
-/* loaded from: classes2.dex */
 public class AckAiGetGravitationPrameter extends X8BaseMessage {
     private int eccentricWheel;
     private int ellipseInclinal;
@@ -17,7 +15,7 @@ public class AckAiGetGravitationPrameter extends X8BaseMessage {
     private double startLng;
     private float startNosePoint;
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         this.rotateDirecetion = packet.getPayLoad4().getByte();
@@ -112,7 +110,7 @@ public class AckAiGetGravitationPrameter extends X8BaseMessage {
         this.startNosePoint = startNosePoint;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public String toString() {
         return "AckAiGetGravitationPrameter{rotateDirecetion=" + this.rotateDirecetion + ", rotateSpeed=" + this.rotateSpeed + ", horizontalDistance=" + this.horizontalDistance + ", riseHeight=" + this.riseHeight + ", ellipseInclinal=" + this.ellipseInclinal + ", eccentricWheel=" + this.eccentricWheel + ", startLng=" + this.startLng + ", startLat=" + this.startLat + ", startHeight=" + this.startHeight + ", startNosePoint=" + this.startNosePoint + '}';
     }

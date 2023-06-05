@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class X8DetectionControler implements OnX8VideoFrameBufferListener {
     private static final float MINIMUM_CONFIDENCE_TF_OD_API = 0.2f;
     private static final int TF_OD_API_INPUT_SIZE = 300;
@@ -46,13 +46,13 @@ public class X8DetectionControler implements OnX8VideoFrameBufferListener {
     private int rectX;
     private int rectY;
     private TestOverlay testoverlay;
-    private boolean TF_OD_API_IS_QUANTIZED = true;
-    private boolean isLog = true;
+    private final boolean TF_OD_API_IS_QUANTIZED = true;
+    private final boolean isLog = true;
     private Bitmap croppedBitmap = null;
     private String objTitle = "";
-    private int VIDEO_WIDTH = FimiAppContext.UI_HEIGHT;
-    private int VIDEO_HEIGHT = FimiAppContext.UI_WIDTH;
-    private int MAX_UNSIGNED_SHORT = 65535;
+    private final int VIDEO_WIDTH = FimiAppContext.UI_HEIGHT;
+    private final int VIDEO_HEIGHT = FimiAppContext.UI_WIDTH;
+    private final int MAX_UNSIGNED_SHORT = 65535;
     private boolean isFirst = true;
 
     public void initView(Activity context, X8TrackOverlayView overlay, FimiH264Video mFimiH264Video, TestOverlay testoverlay, onDetectionListener listener) {
@@ -67,10 +67,10 @@ public class X8DetectionControler implements OnX8VideoFrameBufferListener {
         this.bitmap = Bitmap.createBitmap(this.VIDEO_WIDTH, this.VIDEO_HEIGHT, Bitmap.Config.ARGB_8888);
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.fimi.app.x8s.tensortfloow.X8DetectionControler$1] */
+
     private void initTensortfloow() {
-        new Thread() { // from class: com.fimi.app.x8s.tensortfloow.X8DetectionControler.1
-            @Override // java.lang.Thread, java.lang.Runnable
+        new Thread() {
+            @Override
             public void run() {
                 if (X8DetectionControler.this.detector == null) {
                     try {
@@ -107,7 +107,7 @@ public class X8DetectionControler implements OnX8VideoFrameBufferListener {
     public void onTouchActionDown() {
     }
 
-    @Override // com.fimi.app.x8s.media.OnX8VideoFrameBufferListener
+    @Override
     public void onFrameBuffer(byte[] rgb) {
         if (this.isRev && this.isTouch) {
             this.bitmap.setPixels(H264ToBitmap.convertByteToColor(rgb), 0, this.VIDEO_WIDTH, 0, 0, this.VIDEO_WIDTH, this.VIDEO_HEIGHT);
@@ -117,16 +117,16 @@ public class X8DetectionControler implements OnX8VideoFrameBufferListener {
         }
     }
 
-    @Override // com.fimi.app.x8s.media.OnX8VideoFrameBufferListener
+    @Override
     public void onH264Frame(ByteBuffer buffer) {
     }
 
-    /* JADX WARN: Type inference failed for: r0v3, types: [com.fimi.app.x8s.tensortfloow.X8DetectionControler$2] */
+
     public void runThread() {
         if (this.isTouch && !this.isFirstWaiting) {
             this.isFirstWaiting = true;
-            new Thread() { // from class: com.fimi.app.x8s.tensortfloow.X8DetectionControler.2
-                @Override // java.lang.Thread, java.lang.Runnable
+            new Thread() {
+                @Override
                 public void run() {
                     X8DetectionControler.this.runTf();
                 }
@@ -151,20 +151,20 @@ public class X8DetectionControler implements OnX8VideoFrameBufferListener {
 
     public void onResult(float x1, float y1, float x2, float y2, boolean b, int classfier) {
         if (this.listener != null) {
-            float preX = ((1.0f * x1) / this.overlay.getMaxWidth()) * this.MAX_UNSIGNED_SHORT;
-            float preY = ((1.0f * y1) / this.overlay.getMaxHeight()) * this.MAX_UNSIGNED_SHORT;
-            float preW = (((x2 - x1) * 1.0f) / this.overlay.getMaxWidth()) * this.MAX_UNSIGNED_SHORT;
-            float preH = (((y2 - y1) * 1.0f) / this.overlay.getMaxHeight()) * this.MAX_UNSIGNED_SHORT;
+            float preX = ((x1) / this.overlay.getMaxWidth()) * this.MAX_UNSIGNED_SHORT;
+            float preY = ((y1) / this.overlay.getMaxHeight()) * this.MAX_UNSIGNED_SHORT;
+            float preW = (((x2 - x1)) / this.overlay.getMaxWidth()) * this.MAX_UNSIGNED_SHORT;
+            float preH = (((y2 - y1)) / this.overlay.getMaxHeight()) * this.MAX_UNSIGNED_SHORT;
             this.listener.onDetectionResult((int) preX, (int) preY, (int) preW, (int) preH, classfier);
         }
     }
 
     public void onResult2(float x1, float y1, float x2, float y2, boolean b, int classfier) {
         if (this.listener != null) {
-            float preX = ((1.0f * x1) / this.overlay.getMaxWidth()) * this.MAX_UNSIGNED_SHORT;
-            float preY = ((1.0f * y1) / this.overlay.getMaxHeight()) * this.MAX_UNSIGNED_SHORT;
-            float preW = ((1.0f * x2) / this.overlay.getMaxWidth()) * this.MAX_UNSIGNED_SHORT;
-            float preH = ((1.0f * y2) / this.overlay.getMaxHeight()) * this.MAX_UNSIGNED_SHORT;
+            float preX = ((x1) / this.overlay.getMaxWidth()) * this.MAX_UNSIGNED_SHORT;
+            float preY = ((y1) / this.overlay.getMaxHeight()) * this.MAX_UNSIGNED_SHORT;
+            float preW = ((x2) / this.overlay.getMaxWidth()) * this.MAX_UNSIGNED_SHORT;
+            float preH = ((y2) / this.overlay.getMaxHeight()) * this.MAX_UNSIGNED_SHORT;
             this.listener.onDetectionResult((int) preX, (int) preY, (int) preW, (int) preH, classfier);
         }
     }
@@ -237,7 +237,7 @@ public class X8DetectionControler implements OnX8VideoFrameBufferListener {
                 this.frameToCropTransform.invert(this.cropToFrameTransform);
                 RectF roiRect = new RectF(this.rectX, this.rectY, this.rectX + this.rectW, this.rectY + this.rectH);
                 if (this.isLog) {
-                    TcpClient.getIntance().sendLog("选框屏幕坐标：-<" + roiRect.toString() + "->    ");
+                    TcpClient.getIntance().sendLog("选框屏幕坐标：-<" + roiRect + "->    ");
                 }
                 try {
                     RectF roiRect2 = new RectF(x1, y1, x2, y2);
@@ -252,7 +252,7 @@ public class X8DetectionControler implements OnX8VideoFrameBufferListener {
                     } catch (Exception e) {
                         e = e;
                         e.printStackTrace();
-                        TcpClient.getIntance().sendLog("roiRect " + e.toString());
+                        TcpClient.getIntance().sendLog("roiRect " + e);
                         long startTime = SystemClock.uptimeMillis();
                         List<Classifier.Recognition> results = this.detector.recognizeImage(this.croppedBitmap);
                         this.lastProcessingTimeMs = SystemClock.uptimeMillis() - startTime;
@@ -288,7 +288,7 @@ public class X8DetectionControler implements OnX8VideoFrameBufferListener {
                 int h2 = (int) (roiRect32.bottom * scaleFrameY);
                 RectF touchRoi2 = new RectF(x3, y3, w2, h2);
                 if (this.isLog) {
-                    TcpClient.getIntance().sendLog("选框在Fpv坐标：" + touchRoi2.toString() + "    ");
+                    TcpClient.getIntance().sendLog("选框在Fpv坐标：" + touchRoi2 + "    ");
                 }
                 if (this.isLog) {
                     TcpClient.getIntance().sendLog("results size= " + results2.size());
@@ -321,9 +321,9 @@ public class X8DetectionControler implements OnX8VideoFrameBufferListener {
                             overlapR = RectOverlap(objRoi, touchRoi2);
                         }
                         if (this.isLog) {
-                            TcpClient.getIntance().sendLog(" 识别结果在Fpv坐标: " + objRoi.toString() + " --- " + overlapR + "         ===");
+                            TcpClient.getIntance().sendLog(" 识别结果在Fpv坐标: " + objRoi + " --- " + overlapR + "         ===");
                         }
-                        if (0 == 0 && (isDianXuan == 1 || (isDianXuan == 0 && overlapR))) {
+                        if ((isDianXuan == 1 || (isDianXuan == 0 && overlapR))) {
                             bFound = true;
                             targetX = (int) objRoi.left;
                             targetY = (int) objRoi.top;
@@ -342,7 +342,7 @@ public class X8DetectionControler implements OnX8VideoFrameBufferListener {
                                 int h3 = y4 + ((int) (targetH * scaleFrameY2));
                                 RectF cf2Fpv = new RectF(x4, y4, w3, h3);
                                 if (this.isLog) {
-                                    TcpClient.getIntance().sendLog(" 识别结果FPV坐标还原到屏幕坐标=  --- " + scaleFrameX2 + " " + cf2Fpv.toString());
+                                    TcpClient.getIntance().sendLog(" 识别结果FPV坐标还原到屏幕坐标=  --- " + scaleFrameX2 + " " + cf2Fpv);
                                 }
                                 onResult(cf2Fpv.left, cf2Fpv.top, cf2Fpv.right, cf2Fpv.bottom, bFound, this.classfier.intValue());
                             } else if (isDianXuan == 0) {
@@ -368,7 +368,7 @@ public class X8DetectionControler implements OnX8VideoFrameBufferListener {
         }
     }
 
-    /* loaded from: classes.dex */
+
     public interface onDetectionListener {
         void onDetectionFailed();
 

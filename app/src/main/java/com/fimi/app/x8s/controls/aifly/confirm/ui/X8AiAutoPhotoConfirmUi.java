@@ -13,11 +13,11 @@ import com.fimi.app.x8s.config.X8AiConfig;
 import com.fimi.app.x8s.controls.X8MainAiFlyController;
 import com.fimi.app.x8s.tools.ImageUtils;
 
-/* loaded from: classes.dex */
+
 public class X8AiAutoPhotoConfirmUi implements View.OnClickListener {
     private View btnOk;
     private CheckBox cbTip;
-    private View contentView;
+    private final View contentView;
     private ImageView imgFlag;
     private View imgReturn;
     private X8MainAiFlyController listener;
@@ -46,12 +46,12 @@ public class X8AiAutoPhotoConfirmUi implements View.OnClickListener {
     public void initViews(View rootView) {
         this.imgReturn = rootView.findViewById(R.id.img_ai_follow_return);
         this.btnOk = rootView.findViewById(R.id.btn_ai_follow_confirm_ok);
-        this.cbTip = (CheckBox) rootView.findViewById(R.id.cb_ai_follow_confirm_ok);
-        this.svTips = (ScrollView) rootView.findViewById(R.id.sv_ai_items);
+        this.cbTip = rootView.findViewById(R.id.cb_ai_follow_confirm_ok);
+        this.svTips = rootView.findViewById(R.id.sv_ai_items);
         this.vItemSelect = rootView.findViewById(R.id.ll_ai_autophoto_item);
         this.vConfirm = rootView.findViewById(R.id.rl_ai_autophoto_confirm);
-        this.tvTitle = (TextView) rootView.findViewById(R.id.tv_ai_follow_title);
-        this.tvContentTip1 = (TextView) rootView.findViewById(R.id.tv_ai_follow_confirm_title1);
+        this.tvTitle = rootView.findViewById(R.id.tv_ai_follow_title);
+        this.tvContentTip1 = rootView.findViewById(R.id.tv_ai_follow_confirm_title1);
         this.vItem1 = rootView.findViewById(R.id.rl_ai_photo1);
         this.vItem2 = rootView.findViewById(R.id.rl_ai_photo2);
         this.tvPhoto1 = rootView.findViewById(R.id.tv_ai_photo1);
@@ -59,7 +59,7 @@ public class X8AiAutoPhotoConfirmUi implements View.OnClickListener {
         this.vItemSelect.setVisibility(0);
         this.vConfirm.setVisibility(8);
         this.tvTitle.setText(this.contentView.getContext().getString(R.string.x8_ai_fly_auto_photo));
-        this.imgFlag = (ImageView) rootView.findViewById(R.id.img_auto_photo_flag);
+        this.imgFlag = rootView.findViewById(R.id.img_auto_photo_flag);
     }
 
     public void initActions() {
@@ -69,7 +69,7 @@ public class X8AiAutoPhotoConfirmUi implements View.OnClickListener {
         this.vItem2.setOnClickListener(this);
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.img_ai_follow_return) {
@@ -84,17 +84,9 @@ public class X8AiAutoPhotoConfirmUi implements View.OnClickListener {
             this.tvTitle.setText(this.contentView.getContext().getString(R.string.x8_ai_fly_auto_photo));
         } else if (id == R.id.btn_ai_follow_confirm_ok) {
             if (this.menuIndex == 1) {
-                if (this.cbTip.isChecked()) {
-                    X8AiConfig.getInstance().setAiAutoPhotoCustomCourse(false);
-                } else {
-                    X8AiConfig.getInstance().setAiAutoPhotoCustomCourse(true);
-                }
+                X8AiConfig.getInstance().setAiAutoPhotoCustomCourse(!this.cbTip.isChecked());
             } else if (this.menuIndex == 2) {
-                if (this.cbTip.isChecked()) {
-                    X8AiConfig.getInstance().setAiAutoPhotoVerticalCourse(false);
-                } else {
-                    X8AiConfig.getInstance().setAiAutoPhotoVerticalCourse(true);
-                }
+                X8AiConfig.getInstance().setAiAutoPhotoVerticalCourse(!this.cbTip.isChecked());
             }
             this.mX8MainAiFlyController.onAutoPhotoConfirmOk(this.menuIndex - 1);
         } else if (id == R.id.rl_ai_photo1) {
@@ -129,10 +121,6 @@ public class X8AiAutoPhotoConfirmUi implements View.OnClickListener {
     }
 
     public void setFcHeart(boolean isInSky, boolean isLowPower) {
-        if (isInSky && isLowPower) {
-            this.btnOk.setEnabled(true);
-        } else {
-            this.btnOk.setEnabled(false);
-        }
+        this.btnOk.setEnabled(isInSky && isLowPower);
     }
 }

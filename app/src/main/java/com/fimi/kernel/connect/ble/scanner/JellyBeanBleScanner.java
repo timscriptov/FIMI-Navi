@@ -7,13 +7,13 @@ import android.content.Context;
 
 import com.fimi.kernel.utils.LogUtil;
 
-/* loaded from: classes.dex */
+
 public class JellyBeanBleScanner extends BaseBleScanner {
     private static final String TAG = JellyBeanBleScanner.class.getName();
     public BluetoothAdapter mBluetooth;
     private SimpleScanCallback mScanCallback;
-    private BluetoothAdapter.LeScanCallback leScanCallback = new BluetoothAdapter.LeScanCallback() { // from class: com.fimi.kernel.connect.ble.scanner.JellyBeanBleScanner.1
-        @Override // android.bluetooth.BluetoothAdapter.LeScanCallback
+    private final BluetoothAdapter.LeScanCallback leScanCallback = new BluetoothAdapter.LeScanCallback() {
+        @Override
         public void onLeScan(BluetoothDevice device, int rssi, byte[] scanRecord) {
             JellyBeanBleScanner.this.mScanCallback.onBleScan(device, rssi, scanRecord);
         }
@@ -27,7 +27,7 @@ public class JellyBeanBleScanner extends BaseBleScanner {
         this.mBluetooth = bluetoothMgr.getAdapter();
     }
 
-    @Override // com.fimi.kernel.connect.ble.scanner.BaseBleScanner
+    @Override
     public void onStartBleScan(long timeoutMillis) {
         long delay = timeoutMillis == 0 ? 10000L : timeoutMillis;
         if (this.mBluetooth != null) {
@@ -39,7 +39,7 @@ public class JellyBeanBleScanner extends BaseBleScanner {
         this.mScanCallback.onBleScanFailed(BleScanState.BLUETOOTH_OFF);
     }
 
-    @Override // com.fimi.kernel.connect.ble.scanner.BaseBleScanner
+    @Override
     public void onStartBleScan() {
         if (this.mBluetooth != null) {
             this.isScanning = this.mBluetooth.startLeScan(this.leScanCallback);
@@ -49,7 +49,7 @@ public class JellyBeanBleScanner extends BaseBleScanner {
         this.mScanCallback.onBleScanFailed(BleScanState.BLUETOOTH_OFF);
     }
 
-    @Override // com.fimi.kernel.connect.ble.scanner.BaseBleScanner
+    @Override
     public void onStopBleScan() {
         this.isScanning = false;
         if (this.mBluetooth != null) {
@@ -57,7 +57,7 @@ public class JellyBeanBleScanner extends BaseBleScanner {
         }
     }
 
-    @Override // com.fimi.kernel.connect.ble.scanner.BaseBleScanner
+    @Override
     public void onBleScanFailed(BleScanState scanState) {
         this.mScanCallback.onBleScanFailed(scanState);
     }

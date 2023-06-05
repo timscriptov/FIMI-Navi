@@ -36,7 +36,7 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
 
-/* loaded from: classes.dex */
+
 public final class FimiMediaPlayer extends AbstractMediaPlayer {
     public static final int IJK_LOG_DEBUG = 3;
     public static final int IJK_LOG_DEFAULT = 1;
@@ -54,7 +54,7 @@ public final class FimiMediaPlayer extends AbstractMediaPlayer {
     public static final int SDL_FCC_RV16 = 909203026;
     public static final int SDL_FCC_RV32 = 842225234;
     public static final int SDL_FCC_YV12 = 842094169;
-    protected static final int MEDIA_SET_VIDEO_SAR = 10001;
+    private static final int MEDIA_SET_VIDEO_SAR = 10001;
     private static final int MEDIA_BUFFERING_UPDATE = 3;
     private static final int MEDIA_ERROR = 100;
     private static final int MEDIA_IMAGE_QUALITY_WARN = 8;
@@ -69,8 +69,8 @@ public final class FimiMediaPlayer extends AbstractMediaPlayer {
     private static final String TAG = FimiMediaPlayer.class.getName();
     private static FimiMediaPlayer fimiMediaPlayer;
     private static RtspServiceListener serviceListener;
-    private static FimiLibLoader sLocalLibLoader = new FimiLibLoader() { // from class: com.fimi.player.FimiMediaPlayer.1
-        @Override // com.fimi.player.FimiLibLoader
+    private static final FimiLibLoader sLocalLibLoader = new FimiLibLoader() {
+        @Override
         public void loadLibrary(String libName) throws UnsatisfiedLinkError, SecurityException {
             System.loadLibrary(libName);
         }
@@ -264,26 +264,26 @@ public final class FimiMediaPlayer extends AbstractMediaPlayer {
 
     public native int fm_avp_vid2img(String str, String str2);
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public native int getAudioSessionId();
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public native long getCurrentPosition();
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public native long getDuration();
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public native boolean isPlaying();
 
     public native int rtmpStart(String str, int i) throws IllegalStateException;
 
     public native int rtmpStop(int i) throws IllegalStateException;
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public native void seekTo(long j) throws IllegalStateException;
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public native void setVolume(float f, float f2);
 
     private void initPlayer(FimiLibLoader libLoader) {
@@ -303,7 +303,7 @@ public final class FimiMediaPlayer extends AbstractMediaPlayer {
         native_setup(new WeakReference(this));
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public void setDisplay(SurfaceHolder sh) {
         Surface surface;
         this.mSurfaceHolder = sh;
@@ -316,7 +316,7 @@ public final class FimiMediaPlayer extends AbstractMediaPlayer {
         updateSurfaceScreenOn();
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public void setSurface(Surface surface) {
         if (!this.mScreenOnWhilePlaying || surface != null) {
         }
@@ -325,12 +325,12 @@ public final class FimiMediaPlayer extends AbstractMediaPlayer {
         updateSurfaceScreenOn();
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public void setDataSource(Context context, Uri uri) throws IOException, IllegalArgumentException, SecurityException, IllegalStateException {
-        setDataSource(context, uri, (Map<String, String>) null);
+        setDataSource(context, uri, null);
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     @TargetApi(14)
     public void setDataSource(Context context, Uri uri, Map<String, String> headers) throws IOException, IllegalArgumentException, SecurityException, IllegalStateException {
         if (uri == null) {
@@ -402,18 +402,18 @@ public final class FimiMediaPlayer extends AbstractMediaPlayer {
         setDataSource(fd);
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public String getDataSource() {
         return this.mDataSource;
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public void setDataSource(String path) throws IOException, IllegalArgumentException, SecurityException, IllegalStateException {
         this.mDataSource = path;
         _setDataSource(path, null, null);
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     @TargetApi(13)
     public void setDataSource(FileDescriptor fd) throws IOException, IllegalArgumentException, IllegalStateException {
         if (Build.VERSION.SDK_INT < 12) {
@@ -437,68 +437,68 @@ public final class FimiMediaPlayer extends AbstractMediaPlayer {
         }
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public void prepareAsync() throws IllegalStateException {
         _prepareAsync();
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public int setDeviceInfo(int device_type, int buffer_count) throws IllegalStateException {
         _setDeviceInfo(device_type, buffer_count);
         return 0;
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public void setPreview(int flag) throws IllegalStateException {
         _setPreview(flag);
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public int recStart(String rec_dir, int file_num, int rec_time) throws IllegalStateException {
         Log.i("peter", "rec_start;");
         return _recStart(rec_dir, file_num, rec_time);
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public int recEmergencySave(String rec_save_dir, int file_num) throws IllegalStateException {
         Log.i("peter", "recEmergencySave;");
         return _recEmergencySave(rec_save_dir, file_num);
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public int recStop() throws IllegalStateException {
         return _recStop();
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public int playerRtmpStart(String str_url, int audio_en) throws IllegalStateException {
         return rtmpStart(str_url, audio_en);
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public int playerRtmpStop(int flag) throws IllegalStateException {
         return rtmpStop(flag);
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public void start() throws IllegalStateException {
         stayAwake(true);
         _start();
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public void stop() throws IllegalStateException {
         stayAwake(false);
         _stop();
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public void pause() throws IllegalStateException {
         stayAwake(false);
         _pause();
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     @SuppressLint({"Wakelock"})
     public void setWakeMode(Context context, int mode) {
         boolean washeld = false;
@@ -517,7 +517,7 @@ public final class FimiMediaPlayer extends AbstractMediaPlayer {
         }
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public void setScreenOnWhilePlaying(boolean screenOn) {
         if (this.mScreenOnWhilePlaying != screenOn) {
             if (screenOn && this.mSurfaceHolder == null) {
@@ -547,27 +547,27 @@ public final class FimiMediaPlayer extends AbstractMediaPlayer {
         }
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public int getVideoWidth() {
         return this.mVideoWidth;
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public int getVideoHeight() {
         return this.mVideoHeight;
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public int getVideoSarNum() {
         return this.mVideoSarNum;
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public int getVideoSarDen() {
         return this.mVideoSarDen;
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public void release() {
         stayAwake(false);
         updateSurfaceScreenOn();
@@ -575,7 +575,7 @@ public final class FimiMediaPlayer extends AbstractMediaPlayer {
         _release();
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public void reset() {
         stayAwake(false);
         _reset();
@@ -584,7 +584,7 @@ public final class FimiMediaPlayer extends AbstractMediaPlayer {
         this.mVideoHeight = 0;
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public MediaInfo getMediaInfo() {
         MediaInfo mediaInfo = new MediaInfo();
         mediaInfo.mMediaPlayerName = "ijkplayer";
@@ -618,11 +618,11 @@ public final class FimiMediaPlayer extends AbstractMediaPlayer {
         return mediaInfo;
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public void setLogEnabled(boolean enable) {
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public boolean isPlayable() {
         return true;
     }
@@ -647,11 +647,11 @@ public final class FimiMediaPlayer extends AbstractMediaPlayer {
         return _getMediaMeta();
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public void setAudioStreamType(int streamtype) {
     }
 
-    @Override // com.fimi.player.IMediaPlayer
+    @Override
     public void setKeepInBackground(boolean keepInBackground) {
     }
 
@@ -671,7 +671,7 @@ public final class FimiMediaPlayer extends AbstractMediaPlayer {
         this.mOnMediaCodecSelectListener = listener;
     }
 
-    @Override // com.fimi.player.AbstractMediaPlayer
+    @Override
     public void resetListeners() {
         super.resetListeners();
         this.mOnMediaCodecSelectListener = null;
@@ -701,36 +701,36 @@ public final class FimiMediaPlayer extends AbstractMediaPlayer {
         serviceListener = serviceListener2;
     }
 
-    /* loaded from: classes.dex */
+
     public interface OnControlMessageListener {
         String onControlResolveSegmentUrl(int i);
     }
 
-    /* loaded from: classes.dex */
+
     public interface OnMediaCodecSelectListener {
         String onMediaCodecSelect(IMediaPlayer iMediaPlayer, String str, int i, int i2);
     }
 
-    /* loaded from: classes.dex */
+
     public interface OnNativeInvokeListener {
         boolean onNativeInvoke(int i, Bundle bundle);
     }
 
-    /* loaded from: classes.dex */
+
     public interface RtspServiceListener {
         void unknownError();
     }
 
-    /* loaded from: classes.dex */
+
     public static class EventHandler extends Handler {
-        private WeakReference<FimiMediaPlayer> mWeakPlayer;
+        private final WeakReference<FimiMediaPlayer> mWeakPlayer;
 
         public EventHandler(FimiMediaPlayer mp, Looper looper) {
             super(looper);
             this.mWeakPlayer = new WeakReference<>(mp);
         }
 
-        @Override // android.os.Handler
+        @Override
         public void handleMessage(Message msg) {
             FimiMediaPlayer player = this.mWeakPlayer.get();
             if (player == null || player.mNativeMediaPlayer == 0) {
@@ -791,10 +791,8 @@ public final class FimiMediaPlayer extends AbstractMediaPlayer {
                     }
                     return;
                 case 200:
-                    switch (msg.arg1) {
-                        case 3:
-                            DebugLog.i(FimiMediaPlayer.TAG, "Info: MEDIA_INFO_VIDEO_RENDERING_START\n");
-                            break;
+                    if (msg.arg1 == 3) {
+                        DebugLog.i(FimiMediaPlayer.TAG, "Info: MEDIA_INFO_VIDEO_RENDERING_START\n");
                     }
                     player.notifyOnInfo(msg.arg1, msg.arg2);
                     return;
@@ -802,16 +800,15 @@ public final class FimiMediaPlayer extends AbstractMediaPlayer {
                     player.mVideoSarNum = msg.arg1;
                     player.mVideoSarDen = msg.arg2;
                     player.notifyOnVideoSizeChanged(player.mVideoWidth, player.mVideoHeight, player.mVideoSarNum, player.mVideoSarDen);
-                    return;
             }
         }
     }
 
-    /* loaded from: classes.dex */
+
     public static class DefaultMediaCodecSelector implements OnMediaCodecSelectListener {
         public static DefaultMediaCodecSelector sInstance = new DefaultMediaCodecSelector();
 
-        @Override // com.fimi.player.FimiMediaPlayer.OnMediaCodecSelectListener
+        @Override
         @TargetApi(16)
         public String onMediaCodecSelect(IMediaPlayer mp, String mimeType, int profile, int level) {
             String[] types;

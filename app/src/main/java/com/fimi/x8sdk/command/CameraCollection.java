@@ -4,7 +4,7 @@ import com.fimi.kernel.connect.interfaces.IPersonalDataCallBack;
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 import com.fimi.kernel.dataparser.usb.UiCallBackListener;
 
-/* loaded from: classes2.dex */
+
 public class CameraCollection extends X8BaseCmd {
     public static final byte MSGID_CAMERA_INTEREST_METERING = 12;
     public static final byte MSGID_CAMERA_STATE = 21;

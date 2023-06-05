@@ -2,7 +2,7 @@ package com.fimi.x8sdk.dataparser;
 
 import java.io.Serializable;
 
-/* loaded from: classes2.dex */
+
 public class CameraJsonData implements Serializable {
     private int fetch_size;
     private String md5sum;

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes2.dex */
+
 public class UpdateUtil {
     public static List<UpfirewareDto> getUpfireDtos() {
         List<UpfirewareDto> list = HostConstants.getDownZoneFinishedFw();

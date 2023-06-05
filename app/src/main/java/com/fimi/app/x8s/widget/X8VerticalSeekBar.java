@@ -204,7 +204,7 @@ public class X8VerticalSeekBar extends View {
         canvas.drawRoundRect((this.width / 2) - (this.mInnerProgressWidthPx / 2), this.locationY, (this.width / 2) + (this.mInnerProgressWidthPx / 2), this.height - (this.mDestRect.height() / 2.0f), r, r, this.paint);
         canvas.save();
         canvas.translate((this.width / 2) - (this.mDestRect.width() / 2.0f), this.locationY - (this.mDestRect.height() / 2.0f));
-        canvas.drawBitmap(this.mThumb, (Rect) null, this.mDestRect, new Paint());
+        canvas.drawBitmap(this.mThumb, null, this.mDestRect, new Paint());
         canvas.restore();
         if (this.listener != null) {
             this.listener.onProgress(this, this.progress);

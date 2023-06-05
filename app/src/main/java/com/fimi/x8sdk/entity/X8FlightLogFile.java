@@ -14,7 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.Future;
 
-/* loaded from: classes2.dex */
+
 public class X8FlightLogFile extends X8FdsFile {
     private long dateSecond;
     private FdsUploadTask fdsUploadTask;
@@ -30,7 +30,7 @@ public class X8FlightLogFile extends X8FdsFile {
     private String fileLogCollectState = "1";
     private String flightMileage = "0.0";
     private int flightDuration = 0;
-    private String[] zipFileSuffix = {X8FcLogManager.FLIGHT_PLAYBACK};
+    private final String[] zipFileSuffix = {X8FcLogManager.FLIGHT_PLAYBACK};
 
     public String getShowLen() {
         return this.showLen;
@@ -48,81 +48,81 @@ public class X8FlightLogFile extends X8FdsFile {
         this.isUpload = upload;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public Future<?> getTaskFutrue() {
         return this.taskFutrue;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public void setTaskFutrue(Future<?> taskFutrue) {
         this.taskFutrue = taskFutrue;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public void stopTask() {
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public String getObjectName() {
         return this.objectName;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public void setObjectName(String objectName) {
         this.objectName = objectName;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public String getFileFdsUrl() {
         return this.filefdsUrl;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public void setFileFdsUrl(String fileUrl) {
         this.filefdsUrl = fileUrl;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public String getFileSuffix() {
         return this.fileSuffix;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public void setFileSuffix(String fileSuffix) {
         this.fileSuffix = fileSuffix;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public String getFileSuffixCollect() {
         return this.fileSuffixCollect;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public void setFileSuffixCollect(String fileSuffixCollect) {
         this.fileSuffixCollect = fileSuffixCollect;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public String[] getNeedZipFileBySuffix() {
         return this.zipFileSuffix;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public FdsUploadTask getRunable() {
         return this.fdsUploadTask;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public void setRunable(FdsUploadTask fdsUploadTask) {
         this.fdsUploadTask = fdsUploadTask;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public File getZipFile() {
         return this.zipFile;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public void setZipFile(File f) {
         this.zipFile = f;
     }
@@ -139,7 +139,7 @@ public class X8FlightLogFile extends X8FdsFile {
         this.fileName = fileName;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public File getFile() {
         return this.file;
     }
@@ -148,17 +148,17 @@ public class X8FlightLogFile extends X8FdsFile {
         this.file = file;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public FdsUploadState getState() {
         return this.state;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public void setState(FdsUploadState state) {
         this.state = state;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public void resetFile(File file) {
         this.file = file;
     }
@@ -196,7 +196,7 @@ public class X8FlightLogFile extends X8FdsFile {
         return this.fileLogCollectState.equalsIgnoreCase("0");
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public String getFlightMileage() {
         return this.flightMileage;
     }
@@ -205,7 +205,7 @@ public class X8FlightLogFile extends X8FdsFile {
         this.flightMileage = flightMileage;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public int getFlightDuration() {
         return this.flightDuration;
     }
@@ -214,12 +214,12 @@ public class X8FlightLogFile extends X8FdsFile {
         this.flightDuration = flightDuration;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public File getPlaybackFile() {
         return this.playbackFile;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public void resetPlaybackFile(File file) {
         this.playbackFile = file;
     }

@@ -2,7 +2,7 @@ package com.fimi.app.x8s.tools;
 
 import com.google.android.gms.maps.model.LatLng;
 
-/* loaded from: classes.dex */
+
 public class X8MapCalcAngle {
     private double getSlope(LatLng fromPoint, LatLng toPoint) {
         if (toPoint.longitude == fromPoint.longitude) {

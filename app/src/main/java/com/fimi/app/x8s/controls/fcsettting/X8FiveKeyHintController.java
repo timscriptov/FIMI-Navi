@@ -13,7 +13,7 @@ import com.fimi.x8sdk.controller.X8GimbalManager;
 import com.fimi.x8sdk.modulestate.GimbalState;
 import com.fimi.x8sdk.presenter.FiveKeyDefinePresenter;
 
-/* loaded from: classes.dex */
+
 public class X8FiveKeyHintController extends AbsX8MenuBoxControllers implements SeekBar.OnSeekBarChangeListener {
     private double angle;
     private int currentValue;
@@ -33,20 +33,20 @@ public class X8FiveKeyHintController extends AbsX8MenuBoxControllers implements 
         this.angle = pitchAngle / 100.0d;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
         this.parentView = rootView.findViewById(R.id.main_all_setting_five_key);
-        this.tvFiveKeyShowType = (TextView) this.parentView.findViewById(R.id.tv_five_key_show_type);
-        this.sbarFiveKey = (SeekBar) this.parentView.findViewById(R.id.sbar_five_key);
+        this.tvFiveKeyShowType = this.parentView.findViewById(R.id.tv_five_key_show_type);
+        this.sbarFiveKey = this.parentView.findViewById(R.id.sbar_five_key);
         this.sbarFiveKey.setProgress(90);
         this.sbarFiveKey.setOnSeekBarChangeListener(this);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
@@ -86,7 +86,7 @@ public class X8FiveKeyHintController extends AbsX8MenuBoxControllers implements 
         }
     }
 
-    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+    @Override
     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
         if (this.currentValue != i) {
             this.currentValue = i;
@@ -108,11 +108,11 @@ public class X8FiveKeyHintController extends AbsX8MenuBoxControllers implements 
         }
     }
 
-    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+    @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
     }
 
-    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+    @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
         if (this.currentValue >= 0 && this.currentValue <= 256) {
             String fiveKeyShowTypeStr = this.tvFiveKeyShowType.getText().toString();

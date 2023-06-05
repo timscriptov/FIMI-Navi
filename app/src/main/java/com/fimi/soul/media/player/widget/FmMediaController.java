@@ -29,8 +29,6 @@ import java.util.Formatter;
 import java.util.Locale;
 
 
-
-/* loaded from: classes.dex */
 public class FmMediaController extends FrameLayout {
     private static final int FADE_OUT = 1;
     private static final int SHOW_PROGRESS = 2;
@@ -39,40 +37,40 @@ public class FmMediaController extends FrameLayout {
     StringBuilder mFormatBuilder;
     Formatter mFormatter;
     private View mAnchor;
-    private Context mContext;
+    private final Context mContext;
     private TextView mCurrentTime;
     private View mDecor;
     private WindowManager.LayoutParams mDecorLayoutParams;
     private boolean mDragging;
     private TextView mEndTime;
     private ImageButton mFfwdButton;
-    private View.OnClickListener mFfwdListener;
+    private final View.OnClickListener mFfwdListener;
     private boolean mFromXml;
-    private Handler mHandler;
-    private View.OnLayoutChangeListener mLayoutChangeListener;
+    private final Handler mHandler;
+    private final View.OnLayoutChangeListener mLayoutChangeListener;
     private boolean mListenersSet;
     private ImageButton mNextButton;
     private View.OnClickListener mNextListener;
     private ImageButton mPauseButton;
-    private View.OnClickListener mPauseListener;
+    private final View.OnClickListener mPauseListener;
     private MediaPlayerControl mPlayer;
     private ImageButton mPrevButton;
     private View.OnClickListener mPrevListener;
     private SeekBar mProgress;
     private ImageButton mRewButton;
-    private View.OnClickListener mRewListener;
+    private final View.OnClickListener mRewListener;
     private View mRoot;
-    private SeekBar.OnSeekBarChangeListener mSeekListener;
+    private final SeekBar.OnSeekBarChangeListener mSeekListener;
     private boolean mShowing;
-    private View.OnTouchListener mTouchListener;
-    private boolean mUseFastForward;
+    private final View.OnTouchListener mTouchListener;
+    private final boolean mUseFastForward;
     private Window mWindow;
     private WindowManager mWindowManager;
 
     public FmMediaController(Context context, AttributeSet attrs) {
         super(context, attrs);
-        this.mLayoutChangeListener = new View.OnLayoutChangeListener() { // from class: com.fimi.soul.media.player.widget.FmMediaController.1
-            @Override // android.view.View.OnLayoutChangeListener
+        this.mLayoutChangeListener = new View.OnLayoutChangeListener() {
+            @Override
             public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
                 FmMediaController.this.updateFloatingWindowLayout();
                 if (FmMediaController.this.mShowing) {
@@ -80,8 +78,8 @@ public class FmMediaController extends FrameLayout {
                 }
             }
         };
-        this.mTouchListener = new View.OnTouchListener() { // from class: com.fimi.soul.media.player.widget.FmMediaController.2
-            @Override // android.view.View.OnTouchListener
+        this.mTouchListener = new View.OnTouchListener() {
+            @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == 0 && FmMediaController.this.mShowing) {
                     FmMediaController.this.hide();
@@ -90,8 +88,8 @@ public class FmMediaController extends FrameLayout {
                 return false;
             }
         };
-        this.mHandler = new Handler() { // from class: com.fimi.soul.media.player.widget.FmMediaController.3
-            @Override // android.os.Handler
+        this.mHandler = new Handler() {
+            @Override
             public void handleMessage(Message msg) {
                 switch (msg.what) {
                     case 0:
@@ -115,27 +113,26 @@ public class FmMediaController extends FrameLayout {
                         }
                         return;
                     default:
-                        return;
                 }
             }
         };
-        this.mPauseListener = new View.OnClickListener() { // from class: com.fimi.soul.media.player.widget.FmMediaController.4
-            @Override // android.view.View.OnClickListener
+        this.mPauseListener = new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 FmMediaController.this.doPauseResume();
                 FmMediaController.this.show(3000);
             }
         };
-        this.mSeekListener = new SeekBar.OnSeekBarChangeListener() { // from class: com.fimi.soul.media.player.widget.FmMediaController.5
-            @Override // android.widget.SeekBar.OnSeekBarChangeListener
+        this.mSeekListener = new SeekBar.OnSeekBarChangeListener() {
+            @Override
             public void onStartTrackingTouch(SeekBar bar) {
                 Log.d(VineCardUtils.PLAYER_CARD, "onStartTrackingTouch");
-                FmMediaController.this.show((int) 3600000);
+                FmMediaController.this.show(3600000);
                 FmMediaController.this.mDragging = true;
                 FmMediaController.this.mHandler.removeMessages(2);
             }
 
-            @Override // android.widget.SeekBar.OnSeekBarChangeListener
+            @Override
             public void onProgressChanged(SeekBar bar, int progress, boolean fromuser) {
                 Log.d(VineCardUtils.PLAYER_CARD, "onProgressChanged");
                 if (fromuser) {
@@ -148,7 +145,7 @@ public class FmMediaController extends FrameLayout {
                 }
             }
 
-            @Override // android.widget.SeekBar.OnSeekBarChangeListener
+            @Override
             public void onStopTrackingTouch(SeekBar bar) {
                 Log.d(VineCardUtils.PLAYER_CARD, "onStopTrackingTouch");
                 FmMediaController.this.mDragging = false;
@@ -158,8 +155,8 @@ public class FmMediaController extends FrameLayout {
                 FmMediaController.this.mHandler.sendEmptyMessage(2);
             }
         };
-        this.mRewListener = new View.OnClickListener() { // from class: com.fimi.soul.media.player.widget.FmMediaController.6
-            @Override // android.view.View.OnClickListener
+        this.mRewListener = new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 int pos = FmMediaController.this.mPlayer.getCurrentPosition();
                 FmMediaController.this.mPlayer.seekTo(pos - 5000);
@@ -167,8 +164,8 @@ public class FmMediaController extends FrameLayout {
                 FmMediaController.this.show(3000);
             }
         };
-        this.mFfwdListener = new View.OnClickListener() { // from class: com.fimi.soul.media.player.widget.FmMediaController.7
-            @Override // android.view.View.OnClickListener
+        this.mFfwdListener = new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 int pos = FmMediaController.this.mPlayer.getCurrentPosition();
                 FmMediaController.this.mPlayer.seekTo(pos + 15000);
@@ -184,8 +181,8 @@ public class FmMediaController extends FrameLayout {
 
     public FmMediaController(Context context, boolean useFastForward) {
         super(context);
-        this.mLayoutChangeListener = new View.OnLayoutChangeListener() { // from class: com.fimi.soul.media.player.widget.FmMediaController.1
-            @Override // android.view.View.OnLayoutChangeListener
+        this.mLayoutChangeListener = new View.OnLayoutChangeListener() {
+            @Override
             public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
                 FmMediaController.this.updateFloatingWindowLayout();
                 if (FmMediaController.this.mShowing) {
@@ -193,8 +190,8 @@ public class FmMediaController extends FrameLayout {
                 }
             }
         };
-        this.mTouchListener = new View.OnTouchListener() { // from class: com.fimi.soul.media.player.widget.FmMediaController.2
-            @Override // android.view.View.OnTouchListener
+        this.mTouchListener = new View.OnTouchListener() {
+            @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == 0 && FmMediaController.this.mShowing) {
                     FmMediaController.this.hide();
@@ -203,8 +200,8 @@ public class FmMediaController extends FrameLayout {
                 return false;
             }
         };
-        this.mHandler = new Handler() { // from class: com.fimi.soul.media.player.widget.FmMediaController.3
-            @Override // android.os.Handler
+        this.mHandler = new Handler() {
+            @Override
             public void handleMessage(Message msg) {
                 switch (msg.what) {
                     case 0:
@@ -228,27 +225,26 @@ public class FmMediaController extends FrameLayout {
                         }
                         return;
                     default:
-                        return;
                 }
             }
         };
-        this.mPauseListener = new View.OnClickListener() { // from class: com.fimi.soul.media.player.widget.FmMediaController.4
-            @Override // android.view.View.OnClickListener
+        this.mPauseListener = new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 FmMediaController.this.doPauseResume();
                 FmMediaController.this.show(3000);
             }
         };
-        this.mSeekListener = new SeekBar.OnSeekBarChangeListener() { // from class: com.fimi.soul.media.player.widget.FmMediaController.5
-            @Override // android.widget.SeekBar.OnSeekBarChangeListener
+        this.mSeekListener = new SeekBar.OnSeekBarChangeListener() {
+            @Override
             public void onStartTrackingTouch(SeekBar bar) {
                 Log.d(VineCardUtils.PLAYER_CARD, "onStartTrackingTouch");
-                FmMediaController.this.show((int) 3600000);
+                FmMediaController.this.show(3600000);
                 FmMediaController.this.mDragging = true;
                 FmMediaController.this.mHandler.removeMessages(2);
             }
 
-            @Override // android.widget.SeekBar.OnSeekBarChangeListener
+            @Override
             public void onProgressChanged(SeekBar bar, int progress, boolean fromuser) {
                 Log.d(VineCardUtils.PLAYER_CARD, "onProgressChanged");
                 if (fromuser) {
@@ -261,7 +257,7 @@ public class FmMediaController extends FrameLayout {
                 }
             }
 
-            @Override // android.widget.SeekBar.OnSeekBarChangeListener
+            @Override
             public void onStopTrackingTouch(SeekBar bar) {
                 Log.d(VineCardUtils.PLAYER_CARD, "onStopTrackingTouch");
                 FmMediaController.this.mDragging = false;
@@ -271,8 +267,8 @@ public class FmMediaController extends FrameLayout {
                 FmMediaController.this.mHandler.sendEmptyMessage(2);
             }
         };
-        this.mRewListener = new View.OnClickListener() { // from class: com.fimi.soul.media.player.widget.FmMediaController.6
-            @Override // android.view.View.OnClickListener
+        this.mRewListener = new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 int pos = FmMediaController.this.mPlayer.getCurrentPosition();
                 FmMediaController.this.mPlayer.seekTo(pos - 5000);
@@ -280,8 +276,8 @@ public class FmMediaController extends FrameLayout {
                 FmMediaController.this.show(3000);
             }
         };
-        this.mFfwdListener = new View.OnClickListener() { // from class: com.fimi.soul.media.player.widget.FmMediaController.7
-            @Override // android.view.View.OnClickListener
+        this.mFfwdListener = new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 int pos = FmMediaController.this.mPlayer.getCurrentPosition();
                 FmMediaController.this.mPlayer.seekTo(pos + 15000);
@@ -303,7 +299,7 @@ public class FmMediaController extends FrameLayout {
         System.out.println(9);
     }
 
-    @Override // android.view.View
+    @Override
     @SuppressLint({"MissingSuperCall"})
     public void onFinishInflate() {
         if (this.mRoot != null) {
@@ -387,40 +383,40 @@ public class FmMediaController extends FrameLayout {
 
     protected View makeControllerView() {
         LayoutInflater inflate = (LayoutInflater) this.mContext.getSystemService("layout_inflater");
-        this.mRoot = inflate.inflate(R.layout.x8_fm_media_controller, (ViewGroup) null);
+        this.mRoot = inflate.inflate(R.layout.x8_fm_media_controller, null);
         initControllerView(this.mRoot);
         return this.mRoot;
     }
 
     private void initControllerView(View v) {
-        this.mPauseButton = (ImageButton) v.findViewById(R.id.pause);
+        this.mPauseButton = v.findViewById(R.id.pause);
         if (this.mPauseButton != null) {
             this.mPauseButton.requestFocus();
             this.mPauseButton.setOnClickListener(this.mPauseListener);
         }
-        this.mFfwdButton = (ImageButton) v.findViewById(R.id.ffwd);
+        this.mFfwdButton = v.findViewById(R.id.ffwd);
         if (this.mFfwdButton != null) {
             this.mFfwdButton.setOnClickListener(this.mFfwdListener);
             if (!this.mFromXml) {
                 this.mFfwdButton.setVisibility(this.mUseFastForward ? 0 : 8);
             }
         }
-        this.mRewButton = (ImageButton) v.findViewById(R.id.rew);
+        this.mRewButton = v.findViewById(R.id.rew);
         if (this.mRewButton != null) {
             this.mRewButton.setOnClickListener(this.mRewListener);
             if (!this.mFromXml) {
                 this.mRewButton.setVisibility(this.mUseFastForward ? 0 : 8);
             }
         }
-        this.mNextButton = (ImageButton) v.findViewById(R.id.next);
+        this.mNextButton = v.findViewById(R.id.next);
         if (this.mNextButton != null && !this.mFromXml && !this.mListenersSet) {
             this.mNextButton.setVisibility(8);
         }
-        this.mPrevButton = (ImageButton) v.findViewById(R.id.prev);
+        this.mPrevButton = v.findViewById(R.id.prev);
         if (this.mPrevButton != null && !this.mFromXml && !this.mListenersSet) {
             this.mPrevButton.setVisibility(8);
         }
-        this.mProgress = (SeekBar) v.findViewById(R.id.fmmediacontroller_progress);
+        this.mProgress = v.findViewById(R.id.fmmediacontroller_progress);
         if (this.mProgress != null) {
             if (this.mProgress instanceof SeekBar) {
                 SeekBar seeker = this.mProgress;
@@ -428,8 +424,8 @@ public class FmMediaController extends FrameLayout {
             }
             this.mProgress.setMax(1000);
         }
-        this.mEndTime = (TextView) v.findViewById(R.id.time);
-        this.mCurrentTime = (TextView) v.findViewById(R.id.time_current);
+        this.mEndTime = v.findViewById(R.id.time);
+        this.mCurrentTime = v.findViewById(R.id.time_current);
         this.mFormatBuilder = new StringBuilder();
         this.mFormatter = new Formatter(this.mFormatBuilder, Locale.getDefault());
         installPrevNextListeners();
@@ -533,19 +529,19 @@ public class FmMediaController extends FrameLayout {
         return position;
     }
 
-    @Override // android.view.View
+    @Override
     public boolean onTouchEvent(MotionEvent event) {
         show(3000);
         return true;
     }
 
-    @Override // android.view.View
+    @Override
     public boolean onTrackballEvent(MotionEvent ev) {
         show(3000);
         return false;
     }
 
-    @Override // android.view.ViewGroup, android.view.View
+    @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         int keyCode = event.getKeyCode();
         boolean uniqueDown = event.getRepeatCount() == 0 && event.getAction() == 0;
@@ -617,7 +613,7 @@ public class FmMediaController extends FrameLayout {
         updatePausePlay();
     }
 
-    @Override // android.view.View
+    @Override
     public void setEnabled(boolean enabled) {
         boolean z = true;
         if (this.mPauseButton != null) {
@@ -646,13 +642,13 @@ public class FmMediaController extends FrameLayout {
         super.setEnabled(enabled);
     }
 
-    @Override // android.view.View
+    @Override
     public void onInitializeAccessibilityEvent(AccessibilityEvent event) {
         super.onInitializeAccessibilityEvent(event);
         event.setClassName(FmMediaController.class.getName());
     }
 
-    @Override // android.view.View
+    @Override
     public void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info) {
         super.onInitializeAccessibilityNodeInfo(info);
         info.setClassName(FmMediaController.class.getName());
@@ -684,7 +680,7 @@ public class FmMediaController extends FrameLayout {
         }
     }
 
-    /* loaded from: classes.dex */
+
     public interface MediaPlayerControl {
         boolean canPause();
 

@@ -6,7 +6,7 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class GoogleMapPoint {
     LatLng A1;
     LatLng A2;

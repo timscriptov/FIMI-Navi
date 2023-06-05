@@ -1,6 +1,6 @@
 package com.fimi.network.oauth2;
 
-/* loaded from: classes.dex */
+
 public class OAuthClientRequest {
     private String mClientId;
     private String mClientSecret;

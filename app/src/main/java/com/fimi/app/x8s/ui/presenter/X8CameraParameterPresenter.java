@@ -4,7 +4,7 @@ import com.fimi.kernel.connect.BaseCommand;
 import com.fimi.kernel.dataparser.ILinkMessage;
 import com.fimi.x8sdk.common.BasePresenter;
 
-/* loaded from: classes.dex */
+
 public class X8CameraParameterPresenter extends BasePresenter {
     @Override
     // com.fimi.x8sdk.common.BasePresenter, com.fimi.kernel.connect.interfaces.IPersonalDataCallBack

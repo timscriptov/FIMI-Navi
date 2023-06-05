@@ -10,7 +10,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-/* loaded from: classes.dex */
+
 public class DateUtil {
     public static final String AM = "AM";
     public static final String PM = "PM";
@@ -67,7 +67,7 @@ public class DateUtil {
         String strDate = null;
         try {
             strDate = mSimpleDateFormat.format(date);
-            if (mSimpleDateFormat.format(date).toString().equals(mSimpleDateFormat.format(new Date()).toString())) {
+            if (mSimpleDateFormat.format(date).equals(mSimpleDateFormat.format(new Date()))) {
                 return BaseApplication.getContext().getString(R.string.date_today);
             }
         } catch (Exception e) {
@@ -251,10 +251,10 @@ public class DateUtil {
     }
 
     public static boolean isLeapYear(int year) {
-        return (year % 4 == 0 && year % 400 != 0) || year % 400 == 0;
+        return year % 4 == 0 || year % 400 == 0;
     }
 
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:92:0x0062 -> B:88:0x0055). Please submit an issue!!! */
+
     public static String formatDateStr2Desc(String strDate, String outFormat) {
         DateFormat df = new SimpleDateFormat(dateFormatYMDHMS);
         Calendar c1 = Calendar.getInstance();
@@ -343,7 +343,7 @@ public class DateUtil {
 
     public static boolean isToday(Date date) {
         SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
-        return fmt.format(date).toString().equals(fmt.format(new Date()).toString());
+        return fmt.format(date).equals(fmt.format(new Date()));
     }
 
     public static void main(String[] args) {
@@ -390,7 +390,7 @@ public class DateUtil {
     public void getUTC(byte[] bytes) {
         Calendar cal = Calendar.getInstance();
         setTimeBytes(bytes, 0, cal.get(13));
-        int pos = 0 + 4;
+        int pos = 4;
         setTimeBytes(bytes, pos, cal.get(12));
         int pos2 = pos + 4;
         setTimeBytes(bytes, pos2, cal.get(11));

@@ -118,6 +118,7 @@ import java.util.List;
 public class X8sMainActivity extends X8BaseActivity implements ConnectListener, FcHeartListener, FcSingalListener, FcBatteryListener, RelayHeartListener, FcSportStateListener, CameraStateListener, IX8SensorListener, HomeInfoListener, IX8VcTrackListener, NavigationStateListener, IX8ErrorCodeListener, IX8PowerListener, RightRollerLinstener, IX8AiStateListener {
     public static final int X8GETAILINEID = 1000001;
     public static final int X8GETAILINEIDBYHISTORY = 1000002;
+    public DeviceNorthView mX8MainDeviceNorthView;
     boolean activateTTS;
     RelativeLayout rlCover;
     RightRollerController rollerController;
@@ -141,25 +142,6 @@ public class X8sMainActivity extends X8BaseActivity implements ConnectListener, 
     private X8MainAiFollowConfirmController mX8MainAiFollowConfirmController;
     private X8MainBottomParameterController mX8MainBottomParameterController;
     private X8MainCameraSettingController mX8MainCameraSettingController;
-    public DeviceNorthView mX8MainDeviceNorthView;
-    private BallProgress mX8MainBallProgress;
-    private PlaneAngleSeekBar mX8MainPlaneAngleSeekBar;
-
-
-    private volatile boolean mHidePoseBallAndMap = true;
-
-    private RelativeLayout mX8MainPoseBallContainer;
-
-    private void i(boolean z2) {
-        this.mX8MainPlaneAngleSeekBar.setVisibility(z2 ? View.VISIBLE : View.GONE);
-        if (z2) {
-            return;
-        }
-        this.mX8MainBallProgress.setProgress(0.0f);
-        this.mX8MainBallProgress.setAngle(0.0f);
-    }
-
-
     IRightRollerMoveListener rightRollerMoveListener = new IRightRollerMoveListener() {
         @Override
         public void onEvSuccess(String value) {
@@ -171,6 +153,10 @@ public class X8sMainActivity extends X8BaseActivity implements ConnectListener, 
             mX8MainCameraSettingController.onISOSuccess(value);
         }
     };
+    private BallProgress mX8MainBallProgress;
+    private PlaneAngleSeekBar mX8MainPlaneAngleSeekBar;
+    private volatile boolean mHidePoseBallAndMap = true;
+    private RelativeLayout mX8MainPoseBallContainer;
     private X8MainErrorCodePowerPitchAngleController mX8MainErrorCodePowerPitchAngleController;
     private X8MainFcAllSettingControler mX8MainFcAllSettingControler;
     public IConnectResultListener mIConnectResultListener = new IConnectResultListener() {
@@ -596,10 +582,9 @@ public class X8sMainActivity extends X8BaseActivity implements ConnectListener, 
             mHidePoseBallAndMap = !mHidePoseBallAndMap;
             mMapVideoController.getRlSmallScreen().setVisibility(!mHidePoseBallAndMap ? View.GONE : View.VISIBLE);
             mX8MainDeviceNorthView.setVisibility(mHidePoseBallAndMap ? View.VISIBLE : View.GONE);
-            mX8MainPoseBallContainer.setVisibility(mHidePoseBallAndMap ? View.VISIBLE : View.GONE);;
+            mX8MainPoseBallContainer.setVisibility(mHidePoseBallAndMap ? View.VISIBLE : View.GONE);
         }
     };
-
     private X8UpdateHintController x8UpdateHintController;
     private X8ScreenEnum mAppScreen = X8ScreenEnum.NORMAL;
     public IX8GestureListener mIX8GestureListener = new IX8GestureListener() {
@@ -718,6 +703,15 @@ public class X8sMainActivity extends X8BaseActivity implements ConnectListener, 
         }
     };
     private int time = 0;
+
+    private void i(boolean z2) {
+        this.mX8MainPlaneAngleSeekBar.setVisibility(z2 ? View.VISIBLE : View.GONE);
+        if (z2) {
+            return;
+        }
+        this.mX8MainBallProgress.setProgress(0.0f);
+        this.mX8MainBallProgress.setAngle(0.0f);
+    }
 
     public FcManager getFcManager() {
         return this.fcManager;

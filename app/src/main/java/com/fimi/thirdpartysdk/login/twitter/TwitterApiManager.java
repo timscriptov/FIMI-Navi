@@ -20,7 +20,7 @@ import java.util.Map;
 
 import retrofit2.Call;
 
-/* loaded from: classes.dex */
+
 public class TwitterApiManager {
     final WeakReference<Context> activityRef;
     volatile TwitterAuthClient authClient;
@@ -30,15 +30,15 @@ public class TwitterApiManager {
     }
 
     public void login(final LoginCallback loginCallback) {
-        getTwitterAuthClient().authorize((Activity) this.activityRef.get(), new Callback<TwitterSession>() { // from class: com.fimi.thirdpartysdk.login.twitter.TwitterApiManager.1
-            @Override // com.twitter.sdk.android.core.Callback
+        getTwitterAuthClient().authorize((Activity) this.activityRef.get(), new Callback<TwitterSession>() {
+            @Override
             public void success(Result<TwitterSession> result) {
                 String name = result.data.getUserName();
                 long userId = result.data.getUserId();
                 TwitterApiManager.this.getTwitterUserInfo(name, userId, loginCallback);
             }
 
-            @Override // com.twitter.sdk.android.core.Callback
+            @Override
             public void failure(TwitterException e) {
                 e.printStackTrace();
                 loginCallback.onFailure();
@@ -64,8 +64,8 @@ public class TwitterApiManager {
         TwitterApiClient client = new TwitterApiClient(activeSession);
         AccountService accountService = client.getAccountService();
         Call<User> show = accountService.verifyCredentials(false, false, false);
-        show.enqueue(new Callback<User>() { // from class: com.fimi.thirdpartysdk.login.twitter.TwitterApiManager.2
-            @Override // com.twitter.sdk.android.core.Callback
+        show.enqueue(new Callback<User>() {
+            @Override
             public void success(Result<User> result) {
                 User data = result.data;
                 String profileImageUrl = data.profileImageUrl.replace("_normal", "");
@@ -77,7 +77,7 @@ public class TwitterApiManager {
                 callback.onSuccess(map);
             }
 
-            @Override // com.twitter.sdk.android.core.Callback
+            @Override
             public void failure(TwitterException exception) {
                 exception.printStackTrace();
                 callback.onFailure();
@@ -85,7 +85,7 @@ public class TwitterApiManager {
         });
     }
 
-    /* loaded from: classes.dex */
+
     public interface LoginCallback {
         void onFailure();
 

@@ -2,14 +2,14 @@ package com.fimi.x8sdk.dataparser;
 
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 
-/* loaded from: classes2.dex */
+
 public class AutoNavigationState extends X8BaseMessage {
     private int apStatus;
     private int naviTaskSta;
     private int taskMode;
     private int wpNUM;
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         this.taskMode = packet.getPayLoad4().getByte() & 255;

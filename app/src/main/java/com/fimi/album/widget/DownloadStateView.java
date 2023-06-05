@@ -12,10 +12,10 @@ import androidx.annotation.Nullable;
 
 import com.fimi.android.app.R;
 
-/* loaded from: classes.dex */
+
 public class DownloadStateView extends View {
-    private static int DOWNLOADING_COLOR = Color.parseColor("#38bbff");
-    private static int DOWNLOAD_FAIL_COLOR = Color.parseColor("#f23206");
+    private static final int DOWNLOADING_COLOR = Color.parseColor("#38bbff");
+    private static final int DOWNLOAD_FAIL_COLOR = Color.parseColor("#f23206");
     private Paint mPaint;
     private State mState;
     private int sweepAngle;
@@ -50,7 +50,7 @@ public class DownloadStateView extends View {
         setBackgroundResource(R.drawable.album_btn_media_pause);
     }
 
-    @Override // android.view.View
+    @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         RectF rectF = new RectF(2.0f, 2.0f, getWidth() - 2, getWidth() - 2);
@@ -86,7 +86,7 @@ public class DownloadStateView extends View {
         }
     }
 
-    /* loaded from: classes.dex */
+
     public enum State {
         PAUSE,
         DOWNLOADING,

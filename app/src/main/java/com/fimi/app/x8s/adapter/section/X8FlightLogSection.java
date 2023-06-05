@@ -5,7 +5,7 @@ import com.fimi.x8sdk.entity.X8FlightLogFile;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class X8FlightLogSection extends AbsSection {
     private List<X8FlightLogFile> list;
 
@@ -23,7 +23,7 @@ public class X8FlightLogSection extends AbsSection {
         this.list = list;
     }
 
-    @Override // com.fimi.app.x8s.adapter.section.AbsSection
+    @Override
     public int getContentItemsTotal() {
         return this.list.size();
     }

@@ -6,7 +6,7 @@ import com.fimi.x8sdk.entity.CurUpdateFwEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes2.dex */
+
 public class AckUpdateStatus extends X8BaseMessage {
     int devModuleId;
     int devTargetId;
@@ -17,7 +17,7 @@ public class AckUpdateStatus extends X8BaseMessage {
     int schedule;
     int state;
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         this.deviceNumber = packet.getPayLoad4().getByte();

@@ -15,13 +15,13 @@ import com.fimi.network.UserManager;
 import com.fimi.network.entity.NetModel;
 import com.fimi.network.entity.RestPswDto;
 
-/* loaded from: classes.dex */
+
 public class ForgetIphonePasswordPresenter {
     private static final String TAG = "ForgetIphonePasswordPre";
     private static final int TIMER = 2;
     private static final int sUPDATE_TIME = 1000;
     Context mContext;
-    private IForgetIphonePasswordView mIForgetPasswordView;
+    private final IForgetIphonePasswordView mIForgetPasswordView;
     private int mSeconds = 60;
 
     public ForgetIphonePasswordPresenter(IForgetIphonePasswordView IForgetPasswordView, Context context) {
@@ -36,11 +36,11 @@ public class ForgetIphonePasswordPresenter {
     }
 
     public void sendIphone(String iphone) {
-        UserManager.getIntance(this.mContext).getSecurityCode(iphone, "2", "0", new DisposeDataHandle(new DisposeDataListener() { // from class: com.fimi.libperson.presenter.ForgetIphonePasswordPresenter.2
-            @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+        UserManager.getIntance(this.mContext).getSecurityCode(iphone, "2", "0", new DisposeDataHandle(new DisposeDataListener() {
+            @Override
             public void onSuccess(Object responseObj) {
                 try {
-                    NetModel netModel = (NetModel) JSON.parseObject(responseObj.toString(), NetModel.class);
+                    NetModel netModel = JSON.parseObject(responseObj.toString(), NetModel.class);
                     Log.i(ForgetIphonePasswordPresenter.TAG, "onSuccess: " + netModel.toString());
                     if (netModel.isSuccess()) {
                         ForgetIphonePasswordPresenter.this.mSeconds = 60;
@@ -56,14 +56,39 @@ public class ForgetIphonePasswordPresenter {
                 }
             }
 
-            @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+            @Override
             public void onFailure(Object reasonObj) {
                 Log.i(ForgetIphonePasswordPresenter.TAG, "onFailure: 4");
                 ForgetIphonePasswordPresenter.this.mIForgetPasswordView.sendIphone(false, ForgetIphonePasswordPresenter.this.mContext.getString(R.string.network_exception));
             }
         }));
-    }    private Handler mForgetIphoneHandler = new Handler() { // from class: com.fimi.libperson.presenter.ForgetIphonePasswordPresenter.1
-        @Override // android.os.Handler
+    }
+
+    public void inputVerficationCode(String iphone, String verficationCode) {
+        RestPswDto restPswDto = new RestPswDto();
+        restPswDto.setPhone(iphone);
+        restPswDto.setCode(verficationCode);
+        restPswDto.setCheckPsw("0");
+        restPswDto.setPassword("");
+        restPswDto.setConfirmPassword("");
+        UserManager.getIntance(this.mContext).resetIphonePassword(restPswDto, new DisposeDataHandle(new DisposeDataListener() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                NetModel netModel = JSON.parseObject(responseObj.toString(), NetModel.class);
+                if (netModel.isSuccess()) {
+                    ForgetIphonePasswordPresenter.this.mIForgetPasswordView.sendVerfication(true, null);
+                } else {
+                    ForgetIphonePasswordPresenter.this.mIForgetPasswordView.sendVerfication(false, ErrorMessage.getUserModeErrorMessage(ForgetIphonePasswordPresenter.this.mContext, netModel.getErrCode()));
+                }
+            }
+
+            @Override
+            public void onFailure(Object reasonObj) {
+                ForgetIphonePasswordPresenter.this.mIForgetPasswordView.sendVerfication(false, ForgetIphonePasswordPresenter.this.mContext.getString(R.string.network_exception));
+            }
+        }));
+    }    private final Handler mForgetIphoneHandler = new Handler() {
+        @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             Log.i(ForgetIphonePasswordPresenter.TAG, "handleMessage: " + msg.what + ",mSecond:" + ForgetIphonePasswordPresenter.this.mSeconds);
@@ -80,31 +105,6 @@ public class ForgetIphonePasswordPresenter {
         }
     };
 
-    public void inputVerficationCode(String iphone, String verficationCode) {
-        RestPswDto restPswDto = new RestPswDto();
-        restPswDto.setPhone(iphone);
-        restPswDto.setCode(verficationCode);
-        restPswDto.setCheckPsw("0");
-        restPswDto.setPassword("");
-        restPswDto.setConfirmPassword("");
-        UserManager.getIntance(this.mContext).resetIphonePassword(restPswDto, new DisposeDataHandle(new DisposeDataListener() { // from class: com.fimi.libperson.presenter.ForgetIphonePasswordPresenter.3
-            @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
-            public void onSuccess(Object responseObj) {
-                NetModel netModel = (NetModel) JSON.parseObject(responseObj.toString(), NetModel.class);
-                if (netModel.isSuccess()) {
-                    ForgetIphonePasswordPresenter.this.mIForgetPasswordView.sendVerfication(true, null);
-                } else {
-                    ForgetIphonePasswordPresenter.this.mIForgetPasswordView.sendVerfication(false, ErrorMessage.getUserModeErrorMessage(ForgetIphonePasswordPresenter.this.mContext, netModel.getErrCode()));
-                }
-            }
-
-            @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
-            public void onFailure(Object reasonObj) {
-                ForgetIphonePasswordPresenter.this.mIForgetPasswordView.sendVerfication(false, ForgetIphonePasswordPresenter.this.mContext.getString(R.string.network_exception));
-            }
-        }));
-    }
-
     public void inputPassword(String iphone, String code, String password, String confirmPassword) {
         if (!password.equals(confirmPassword)) {
             this.mIForgetPasswordView.resetPassword(false, this.mContext.getString(R.string.login_input_password_different_hint));
@@ -116,10 +116,10 @@ public class ForgetIphonePasswordPresenter {
         restPswDto.setPassword(password);
         restPswDto.setConfirmPassword(confirmPassword);
         restPswDto.setCheckPsw("1");
-        UserManager.getIntance(this.mContext).resetIphonePassword(restPswDto, new DisposeDataHandle(new DisposeDataListener() { // from class: com.fimi.libperson.presenter.ForgetIphonePasswordPresenter.4
-            @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+        UserManager.getIntance(this.mContext).resetIphonePassword(restPswDto, new DisposeDataHandle(new DisposeDataListener() {
+            @Override
             public void onSuccess(Object responseObj) {
-                NetModel netModel = (NetModel) JSON.parseObject(responseObj.toString(), NetModel.class);
+                NetModel netModel = JSON.parseObject(responseObj.toString(), NetModel.class);
                 if (netModel.isSuccess()) {
                     ForgetIphonePasswordPresenter.this.mIForgetPasswordView.resetPassword(true, null);
                 } else {
@@ -127,7 +127,7 @@ public class ForgetIphonePasswordPresenter {
                 }
             }
 
-            @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+            @Override
             public void onFailure(Object reasonObj) {
                 ForgetIphonePasswordPresenter.this.mIForgetPasswordView.resetPassword(false, ForgetIphonePasswordPresenter.this.mContext.getString(R.string.network_exception));
             }

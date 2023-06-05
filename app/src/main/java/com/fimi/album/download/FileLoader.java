@@ -7,7 +7,7 @@ import com.fimi.album.download.task.DownloadTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/* loaded from: classes.dex */
+
 public class FileLoader {
     ExecutorService executorService = Executors.newFixedThreadPool(5);
 

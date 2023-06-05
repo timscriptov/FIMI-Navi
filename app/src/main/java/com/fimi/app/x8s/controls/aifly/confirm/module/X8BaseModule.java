@@ -3,7 +3,7 @@ package com.fimi.app.x8s.controls.aifly.confirm.module;
 import android.app.Activity;
 import android.view.View;
 
-/* loaded from: classes.dex */
+
 public abstract class X8BaseModule {
     protected int parentLevel;
     protected View rootView;

@@ -5,7 +5,7 @@ import com.fimi.x8sdk.entity.FLatLng;
 import com.fimi.x8sdk.map.amap.AMapShowInfo;
 import com.fimi.x8sdk.map.googlemap.GoogleMapShowInfo;
 
-/* loaded from: classes2.dex */
+
 public class MapProxy {
     public static MapProxy proxy = null;
     IShowInfo showInfo;
@@ -24,7 +24,6 @@ public class MapProxy {
                 this.showInfo = new GoogleMapShowInfo();
                 return;
             default:
-                return;
         }
     }
 

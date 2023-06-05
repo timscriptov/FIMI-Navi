@@ -18,14 +18,14 @@ import com.fimi.x8sdk.dataparser.AckGetRetHeight;
 import com.fimi.x8sdk.dataparser.AutoFcSportState;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes.dex */
+
 public class X8AiReturnConfirmUi implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
     float temp = 0.0f;
     int res = 0;
     int tmpRes = 0;
     private int MAX;
     private View btnOk;
-    private View contentView;
+    private final View contentView;
     private ImageView imgFlag;
     private View imgReturn;
     private X8MainAiFlyController listener;
@@ -38,10 +38,10 @@ public class X8AiReturnConfirmUi implements View.OnClickListener, SeekBar.OnSeek
     private View rlPlus;
     private TextView tvCuurentHeight;
     private TextView tvHeight;
-    private int MIN = 0;
-    private int accuracy = 10;
-    private float seekBarMax = 120.0f * this.accuracy;
-    private float seekBarMin = 30.0f * this.accuracy;
+    private final int MIN = 0;
+    private final int accuracy = 10;
+    private final float seekBarMax = 120.0f * this.accuracy;
+    private final float seekBarMin = 30.0f * this.accuracy;
 
     public X8AiReturnConfirmUi(Activity activity, View parent) {
         this.MAX = 0;
@@ -62,13 +62,13 @@ public class X8AiReturnConfirmUi implements View.OnClickListener, SeekBar.OnSeek
         this.btnOk = rootView.findViewById(R.id.btn_ai_follow_confirm_ok);
         this.prex = rootView.getContext().getString(R.string.x8_ai_fly_return_home_tip);
         this.prex2 = rootView.getContext().getString(R.string.x8_ai_fly_return_home_tip2);
-        this.tvCuurentHeight = (TextView) rootView.findViewById(R.id.tv_ai_follow_confirm_title1);
-        this.tvHeight = (TextView) rootView.findViewById(R.id.tv_limit_height);
+        this.tvCuurentHeight = rootView.findViewById(R.id.tv_ai_follow_confirm_title1);
+        this.tvHeight = rootView.findViewById(R.id.tv_limit_height);
         this.rlMinus = rootView.findViewById(R.id.rl_minus);
         this.rlPlus = rootView.findViewById(R.id.rl_plus);
-        this.mSeekBar = (SeekBar) rootView.findViewById(R.id.sb_value);
+        this.mSeekBar = rootView.findViewById(R.id.sb_value);
         this.mSeekBar.setMax(this.MAX);
-        this.imgFlag = (ImageView) rootView.findViewById(R.id.img_ai_return_flag);
+        this.imgFlag = rootView.findViewById(R.id.img_ai_return_flag);
         AutoFcSportState state = StateManager.getInstance().getX8Drone().getFcSportState();
         if (state != null) {
             showSportState(state);
@@ -85,14 +85,14 @@ public class X8AiReturnConfirmUi implements View.OnClickListener, SeekBar.OnSeek
 
     public void getHeight() {
         setProgress((int) (StateManager.getInstance().getX8Drone().getReturnHomeHight() * this.accuracy));
-        this.mFcCtrlManager.getReturnHomeHeight(new UiCallBackListener<AckGetRetHeight>() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiReturnConfirmUi.1
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.mFcCtrlManager.getReturnHomeHeight(new UiCallBackListener<AckGetRetHeight>() {
+            @Override
             public void onComplete(CmdResult cmdResult, AckGetRetHeight aFloat) {
             }
         });
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.img_ai_follow_return) {
@@ -101,11 +101,11 @@ public class X8AiReturnConfirmUi implements View.OnClickListener, SeekBar.OnSeek
             onComfirnClick();
         } else if (id == R.id.rl_minus) {
             if (this.mSeekBar.getProgress() != this.MIN) {
-                this.mSeekBar.setProgress(this.mSeekBar.getProgress() - (this.accuracy * 1));
+                this.mSeekBar.setProgress(this.mSeekBar.getProgress() - (this.accuracy));
                 setHeightLimit();
             }
         } else if (id == R.id.rl_plus && this.mSeekBar.getProgress() != this.MAX) {
-            this.mSeekBar.setProgress(this.mSeekBar.getProgress() + (this.accuracy * 1));
+            this.mSeekBar.setProgress(this.mSeekBar.getProgress() + (this.accuracy));
             setHeightLimit();
         }
     }
@@ -123,16 +123,16 @@ public class X8AiReturnConfirmUi implements View.OnClickListener, SeekBar.OnSeek
         this.tvHeight.setText(s);
     }
 
-    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+    @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         setProgress1(progress);
     }
 
-    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+    @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
     }
 
-    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+    @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
         setHeightLimit();
     }
@@ -142,11 +142,7 @@ public class X8AiReturnConfirmUi implements View.OnClickListener, SeekBar.OnSeek
     }
 
     public void setFcHeart(boolean isInSky, boolean isLowPower) {
-        if (isInSky && isLowPower) {
-            this.btnOk.setEnabled(true);
-        } else {
-            this.btnOk.setEnabled(false);
-        }
+        this.btnOk.setEnabled(isInSky && isLowPower);
     }
 
     public void showSportState(AutoFcSportState state) {
@@ -177,8 +173,8 @@ public class X8AiReturnConfirmUi implements View.OnClickListener, SeekBar.OnSeek
 
     public void setHeightLimit() {
         final float h = (this.mSeekBar.getProgress() + this.seekBarMin) / this.accuracy;
-        this.mFcCtrlManager.setReturnHome(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiReturnConfirmUi.2
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.mFcCtrlManager.setReturnHome(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (!cmdResult.isSuccess()) {
                     X8AiReturnConfirmUi.this.setProgress((int) (StateManager.getInstance().getX8Drone().getReturnHomeHight() * X8AiReturnConfirmUi.this.accuracy));

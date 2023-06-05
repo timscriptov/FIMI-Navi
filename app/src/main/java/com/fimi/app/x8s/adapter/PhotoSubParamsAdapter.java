@@ -14,10 +14,10 @@ import com.fimi.app.x8s.viewHolder.SubParamItemListener;
 import com.fimi.app.x8s.viewHolder.SubParamsViewHolder;
 import com.fimi.x8sdk.command.CameraJsonCollection;
 
-/* loaded from: classes.dex */
+
 public class PhotoSubParamsAdapter extends RecyclerView.Adapter {
     SubParamsViewHolder subParamsViewHolderTwo;
-    private Context context;
+    private final Context context;
     private SubParamItemListener paramListener;
     private PhotoSubParamItemEntity subEntity;
     private int option_index = -1;
@@ -32,7 +32,7 @@ public class PhotoSubParamsAdapter extends RecyclerView.Adapter {
         this.paramListener = paramListener;
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 1) {
             View subView = LayoutInflater.from(this.context).inflate(R.layout.x8_iso_recycler_item_title, parent, false);
@@ -51,10 +51,9 @@ public class PhotoSubParamsAdapter extends RecyclerView.Adapter {
         }
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
-        if (holder instanceof SubParamsViewHolder) {
-            final SubParamsViewHolder subParamsViewHolder = (SubParamsViewHolder) holder;
+        if (holder instanceof final SubParamsViewHolder subParamsViewHolder) {
             this.subParamsViewHolderTwo = subParamsViewHolder;
             subParamsViewHolder.initItemData(this.subEntity, position, this.isEnable, this.option_index);
             holder.itemView.setEnabled(true);
@@ -71,8 +70,8 @@ public class PhotoSubParamsAdapter extends RecyclerView.Adapter {
                 holder.itemView.setEnabled(false);
                 holder.itemView.setAlpha(0.4f);
             }
-            holder.itemView.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.adapter.PhotoSubParamsAdapter.1
-                @Override // android.view.View.OnClickListener
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
                 public void onClick(View v) {
                     if (PhotoSubParamsAdapter.this.paramListener != null && PhotoSubParamsAdapter.this.isEnable && !subParamsViewHolder.isRecordingUnclickableItem(PhotoSubParamsAdapter.this.subEntity.getTitleName()) && !subParamsViewHolder.isDelayedPhotographyUnclickableItem(PhotoSubParamsAdapter.this.subEntity.getTitleName())) {
                         String paramKey = PhotoSubParamsAdapter.this.subEntity.getParamKey();
@@ -104,12 +103,11 @@ public class PhotoSubParamsAdapter extends RecyclerView.Adapter {
                     }
                 }
             });
-        } else if (holder instanceof CameraParamsTitleViewHolder) {
-            CameraParamsTitleViewHolder paramsViewHolder = (CameraParamsTitleViewHolder) holder;
+        } else if (holder instanceof CameraParamsTitleViewHolder paramsViewHolder) {
             paramsViewHolder.initView(this.subEntity.getTitleName());
             if (position == 0) {
-                holder.itemView.findViewById(R.id.item_back_btn).setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.adapter.PhotoSubParamsAdapter.2
-                    @Override // android.view.View.OnClickListener
+                holder.itemView.findViewById(R.id.item_back_btn).setOnClickListener(new View.OnClickListener() {
+                    @Override
                     public void onClick(View v) {
                         if (PhotoSubParamsAdapter.this.paramListener != null) {
                             PhotoSubParamsAdapter.this.paramListener.gotoParentItem();
@@ -120,7 +118,7 @@ public class PhotoSubParamsAdapter extends RecyclerView.Adapter {
         }
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public int getItemCount() {
         if (this.subEntity == null || this.subEntity.getOptions() == null) {
             return 0;
@@ -128,7 +126,7 @@ public class PhotoSubParamsAdapter extends RecyclerView.Adapter {
         return this.subEntity.getOptions().size();
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public int getItemViewType(int position) {
         return position == 0 ? 1 : 2;
     }

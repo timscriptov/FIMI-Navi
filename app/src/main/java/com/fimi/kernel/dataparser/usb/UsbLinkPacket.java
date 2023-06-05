@@ -1,6 +1,6 @@
 package com.fimi.kernel.dataparser.usb;
 
-/* loaded from: classes.dex */
+
 public class UsbLinkPacket {
     int type;
     UsbHeader usbHeader = new UsbHeader();

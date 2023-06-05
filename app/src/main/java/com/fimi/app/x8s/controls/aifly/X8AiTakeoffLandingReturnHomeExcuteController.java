@@ -19,13 +19,13 @@ import com.fimi.widget.X8ToastUtil;
 import com.fimi.x8sdk.controller.FcManager;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes.dex */
+
 public class X8AiTakeoffLandingReturnHomeExcuteController extends AbsX8AiController implements View.OnClickListener, X8DoubleCustomDialog.onDialogButtonClickListener {
     protected int MAX_WIDTH;
     protected boolean isShow;
     protected int width;
     X8AiTLRState state;
-    private Activity activity;
+    private final Activity activity;
     private X8DoubleCustomDialog dialog;
     private FcManager fcManager;
     private View flagSmall;
@@ -33,7 +33,7 @@ public class X8AiTakeoffLandingReturnHomeExcuteController extends AbsX8AiControl
     private ImageView imgSmall;
     private IX8TLRListener listener;
     private TextView tvTakeLandReturn;
-    private int type;
+    private final int type;
 
     public X8AiTakeoffLandingReturnHomeExcuteController(Activity activity, View rootView, int type) {
         super(rootView);
@@ -43,11 +43,11 @@ public class X8AiTakeoffLandingReturnHomeExcuteController extends AbsX8AiControl
         this.type = type;
     }
 
-    @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+    @Override
     public void onLeft() {
     }
 
-    @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+    @Override
     public void onRight() {
         if (this.state == X8AiTLRState.RUNING) {
             taskExit();
@@ -58,22 +58,22 @@ public class X8AiTakeoffLandingReturnHomeExcuteController extends AbsX8AiControl
         this.listener = listener;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
     }
 
     public void initViewStubViews(View view) {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.img_ai_follow_back) {
@@ -95,10 +95,10 @@ public class X8AiTakeoffLandingReturnHomeExcuteController extends AbsX8AiControl
         this.isShow = true;
         LayoutInflater inflater = LayoutInflater.from(this.rootView.getContext());
         this.handleView = inflater.inflate(R.layout.x8_ai_takeoff_landing_return_excute_layout, (ViewGroup) this.rootView, true);
-        this.imgBack = (ImageView) this.handleView.findViewById(R.id.img_ai_follow_back);
-        this.tvTakeLandReturn = (TextView) this.handleView.findViewById(R.id.tv_take_land_return);
+        this.imgBack = this.handleView.findViewById(R.id.img_ai_follow_back);
+        this.tvTakeLandReturn = this.handleView.findViewById(R.id.tv_take_land_return);
         this.flagSmall = this.handleView.findViewById(R.id.rl_flag_small);
-        this.imgSmall = (ImageView) this.handleView.findViewById(R.id.img_ai_flag_small);
+        this.imgSmall = this.handleView.findViewById(R.id.img_ai_flag_small);
         this.imgBack.setOnClickListener(this);
         this.flagSmall.setOnClickListener(this);
         showTaskView();
@@ -146,7 +146,7 @@ public class X8AiTakeoffLandingReturnHomeExcuteController extends AbsX8AiControl
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public boolean isShow() {
         return this.isShow;
     }
@@ -177,8 +177,8 @@ public class X8AiTakeoffLandingReturnHomeExcuteController extends AbsX8AiControl
     public void taskExit() {
         this.state = X8AiTLRState.STOP;
         if (this.type == 2) {
-            this.fcManager.takeOffExit(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiTakeoffLandingReturnHomeExcuteController.1
-                @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+            this.fcManager.takeOffExit(new UiCallBackListener() {
+                @Override
                 public void onComplete(CmdResult cmdResult, Object o) {
                     if (cmdResult.isSuccess()) {
                         X8AiTakeoffLandingReturnHomeExcuteController.this.state = X8AiTLRState.WAIT_EXIT;
@@ -188,8 +188,8 @@ public class X8AiTakeoffLandingReturnHomeExcuteController extends AbsX8AiControl
                 }
             });
         } else if (this.type == 3) {
-            this.fcManager.landExit(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiTakeoffLandingReturnHomeExcuteController.2
-                @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+            this.fcManager.landExit(new UiCallBackListener() {
+                @Override
                 public void onComplete(CmdResult cmdResult, Object o) {
                     if (cmdResult.isSuccess()) {
                         X8AiTakeoffLandingReturnHomeExcuteController.this.state = X8AiTLRState.WAIT_EXIT;
@@ -199,8 +199,8 @@ public class X8AiTakeoffLandingReturnHomeExcuteController extends AbsX8AiControl
                 }
             });
         } else if (this.type == 7) {
-            this.fcManager.setAiRetureHomeExite(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiTakeoffLandingReturnHomeExcuteController.3
-                @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+            this.fcManager.setAiRetureHomeExite(new UiCallBackListener() {
+                @Override
                 public void onComplete(CmdResult cmdResult, Object o) {
                     if (cmdResult.isSuccess()) {
                         X8AiTakeoffLandingReturnHomeExcuteController.this.state = X8AiTLRState.WAIT_EXIT;
@@ -213,8 +213,8 @@ public class X8AiTakeoffLandingReturnHomeExcuteController extends AbsX8AiControl
                 }
             });
         } else if (this.type == 8) {
-            this.fcManager.setAiRetureHomeExite(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiTakeoffLandingReturnHomeExcuteController.4
-                @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+            this.fcManager.setAiRetureHomeExite(new UiCallBackListener() {
+                @Override
                 public void onComplete(CmdResult cmdResult, Object o) {
                     if (cmdResult.isSuccess()) {
                         X8AiTakeoffLandingReturnHomeExcuteController.this.state = X8AiTLRState.WAIT_EXIT;
@@ -224,8 +224,8 @@ public class X8AiTakeoffLandingReturnHomeExcuteController extends AbsX8AiControl
                 }
             });
         } else if (this.type == 9) {
-            this.fcManager.setAiRetureHomeExite(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiTakeoffLandingReturnHomeExcuteController.5
-                @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+            this.fcManager.setAiRetureHomeExite(new UiCallBackListener() {
+                @Override
                 public void onComplete(CmdResult cmdResult, Object o) {
                     if (cmdResult.isSuccess()) {
                         X8AiTakeoffLandingReturnHomeExcuteController.this.state = X8AiTLRState.WAIT_EXIT;
@@ -237,7 +237,7 @@ public class X8AiTakeoffLandingReturnHomeExcuteController extends AbsX8AiControl
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         if (this.isShow && !b && this.state != X8AiTLRState.IDLE) {
             ononDroneDisconnectedTaskComplete();
@@ -288,7 +288,7 @@ public class X8AiTakeoffLandingReturnHomeExcuteController extends AbsX8AiControl
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public boolean onClickBackKey() {
         return false;
     }

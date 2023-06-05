@@ -1,8 +1,6 @@
 package com.fimi.kernel.store.sqlite.entity;
 
 
-
-/* loaded from: classes.dex */
 public class X8AiLinePointInfo {
     public Long id;
     private int autoRecord;

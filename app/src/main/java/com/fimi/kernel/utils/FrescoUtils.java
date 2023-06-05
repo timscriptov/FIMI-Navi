@@ -15,7 +15,7 @@ import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
-/* loaded from: classes.dex */
+
 public class FrescoUtils {
     private static boolean isInit = false;
 

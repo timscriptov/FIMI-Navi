@@ -17,7 +17,7 @@ import com.fimi.x8sdk.controller.AllSettingManager;
 import com.fimi.x8sdk.controller.FcCtrlManager;
 import com.fimi.x8sdk.controller.X8GimbalManager;
 
-/* loaded from: classes.dex */
+
 public class X8RestSystemController implements Handler.Callback {
     FcCtrlManager fcCtrlManager;
     X8GimbalManager gimbalManager;
@@ -36,7 +36,7 @@ public class X8RestSystemController implements Handler.Callback {
 
     public void showRestParamDialog() {
         if (this.x8DoubleCustomDialog == null) {
-            this.x8DoubleCustomDialog = new X8DoubleCustomDialog(this.mContext, this.mContext.getString(R.string.x8_general_version_rest_paramters), this.mContext.getString(R.string.x8_general_rest_paramters_content), this.mContext.getString(R.string.x8_general_rest), new X8DoubleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8RestSystemController.1
+            this.x8DoubleCustomDialog = new X8DoubleCustomDialog(this.mContext, this.mContext.getString(R.string.x8_general_version_rest_paramters), this.mContext.getString(R.string.x8_general_rest_paramters_content), this.mContext.getString(R.string.x8_general_rest), new X8DoubleCustomDialog.onDialogButtonClickListener() {
                 @Override
                 // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
                 public void onLeft() {
@@ -63,8 +63,8 @@ public class X8RestSystemController implements Handler.Callback {
     }
 
     private void restRCSystemParams() {
-        this.fcCtrlManager.setRcCtrlMode(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8RestSystemController.2
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcCtrlManager.setRcCtrlMode(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8RestSystemController.this.restSystemParamResult.setRcResult(true);
@@ -93,8 +93,8 @@ public class X8RestSystemController implements Handler.Callback {
     }
 
     private void resetGimablSystem() {
-        this.gimbalManager.resetGCParams(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8RestSystemController.3
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.gimbalManager.resetGCParams(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8RestSystemController.this.restSystemParamResult.setGcResult(true);
@@ -104,8 +104,8 @@ public class X8RestSystemController implements Handler.Callback {
     }
 
     private void restFcSystemParams() {
-        this.fcCtrlManager.restSystemParams(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8RestSystemController.4
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcCtrlManager.restSystemParams(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8RestSystemController.this.restSystemParamResult.setFcResult(true);
@@ -114,7 +114,7 @@ public class X8RestSystemController implements Handler.Callback {
         });
     }
 
-    @Override // android.os.Handler.Callback
+    @Override
     public boolean handleMessage(Message message) {
         if (this.restSystemParamResult.isAppResult() && this.restSystemParamResult.isFcResult() && this.restSystemParamResult.isRcResult()) {
             X8ToastUtil.showToast(this.mContext, this.mContext.getString(R.string.x8_general_rest_paramters_success), 0);
@@ -126,7 +126,7 @@ public class X8RestSystemController implements Handler.Callback {
         return false;
     }
 
-    /* loaded from: classes.dex */
+
     public interface OnRestSystemListener {
         void onFinish();
 

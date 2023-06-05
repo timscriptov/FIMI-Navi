@@ -18,12 +18,12 @@ import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
-/* loaded from: classes.dex */
+
 public class X8MediaThumDownloadTask implements Runnable, MediaDataListener {
     RandomAccessFile randomAccessFile;
     short max_size = NTLMConstants.TARGET_INFORMATION_SUBBLOCK_DNS_DOMAIN_NAME_TYPE;
-    private OnDownloadListener listener;
-    private MediaModel model;
+    private final OnDownloadListener listener;
+    private final MediaModel model;
     private long finished = 0;
 
     public X8MediaThumDownloadTask(MediaModel model, OnDownloadListener listener) {
@@ -33,7 +33,7 @@ public class X8MediaThumDownloadTask implements Runnable, MediaDataListener {
         NoticeManager.getInstance().addMediaListener(this);
     }
 
-    @Override // java.lang.Runnable
+    @Override
     public void run() {
         this.downMediaFileLinstener.onSartFile();
     }
@@ -42,59 +42,7 @@ public class X8MediaThumDownloadTask implements Runnable, MediaDataListener {
         if (cmd != null) {
             SessionManager.getInstance().sendCmd(cmd);
         }
-    }    DownMediaFileLinstener downMediaFileLinstener = new DownMediaFileLinstener() { // from class: com.fimi.app.x8s.ui.album.x8s.X8MediaThumDownloadTask.1
-        @Override // com.fimi.app.x8s.ui.album.x8s.listener.DownMediaFileLinstener
-        public void onSartFile() {
-            X8MediaThumDownloadTask.this.createNewFile();
-        }
-
-        @Override // com.fimi.app.x8s.ui.album.x8s.listener.DownMediaFileLinstener
-        public void onDownFilePre(X8MediaFileInfo x8MediaFileInfo) {
-        }
-
-        @Override // com.fimi.app.x8s.ui.album.x8s.listener.DownMediaFileLinstener
-        public void onProgress(MediaFileDownLoadPacket downLoadPacket) {
-            if (X8MediaThumDownloadTask.this.randomAccessFile != null && downLoadPacket != null && X8MediaThumDownloadTask.this.model != null) {
-                try {
-                    if (X8MediaThumDownloadTask.this.finished < X8MediaThumDownloadTask.this.model.getFileSize() && X8MediaThumDownloadTask.this.model.getFileSize() > 0 && downLoadPacket.getPlayloadSize() > 0) {
-                        if (X8MediaThumDownloadTask.this.finished != downLoadPacket.getOffSet()) {
-                            X8MediaThumDownloadTask.this.sendCmd(new X8DownLoadCmd().downMediaFile((int) X8MediaThumDownloadTask.this.finished, NTLMConstants.TARGET_INFORMATION_SUBBLOCK_DNS_DOMAIN_NAME_TYPE, X8MediaThumDownloadTask.this.model.getThumFileUrl(), false));
-                        } else {
-                            X8MediaThumDownloadTask.this.finished += downLoadPacket.getPlayloadSize();
-                            X8MediaThumDownloadTask.this.randomAccessFile.write(downLoadPacket.getPlayData());
-                            if (downLoadPacket.isFinished()) {
-                                onEndFile(DownFileResultEnum.Success);
-                            }
-                        }
-                    } else {
-                        onEndFile(DownFileResultEnum.Fail);
-                    }
-                } catch (IOException e) {
-                    onEndFile(DownFileResultEnum.Fail);
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        @Override // com.fimi.app.x8s.ui.album.x8s.listener.DownMediaFileLinstener
-        public void onEndFile(DownFileResultEnum resultEnum) {
-            switch (AnonymousClass2.$SwitchMap$com$fimi$app$x8s$ui$album$x8s$DownFileResultEnum[resultEnum.ordinal()]) {
-                case 1:
-                    NoticeManager.getInstance().removeMediaListener(X8MediaThumDownloadTask.this);
-                    X8MediaThumDownloadTask.this.model.setDownLoadThum(true);
-                    X8MediaThumDownloadTask.this.listener.onSuccess(X8MediaThumDownloadTask.this.model);
-                    HostLogBack.getInstance().writeLog("Alanqiu  ================onEndFile:" + X8MediaThumDownloadTask.this.model.toString());
-                    return;
-                case 2:
-                default:
-                    return;
-                case 3:
-                    NoticeManager.getInstance().removeMediaListener(X8MediaThumDownloadTask.this);
-                    X8MediaThumDownloadTask.this.listener.onFailure(X8MediaThumDownloadTask.this.model);
-                    return;
-            }
-        }
-    };
+    }
 
     public void createNewFile() {
         if (this.model.getThumLocalFilePath() != null) {
@@ -119,9 +67,60 @@ public class X8MediaThumDownloadTask implements Runnable, MediaDataListener {
             HostLogBack.getInstance().writeLog("Alanqiu  ===============createNewFile:" + this.model.getThumFileUrl());
             sendCmd(new X8DownLoadCmd().downMediaFile((int) this.finished, NTLMConstants.TARGET_INFORMATION_SUBBLOCK_DNS_DOMAIN_NAME_TYPE, this.model.getThumFileUrl(), false));
         }
-    }
+    }    DownMediaFileLinstener downMediaFileLinstener = new DownMediaFileLinstener() {
+        @Override
+        public void onSartFile() {
+            X8MediaThumDownloadTask.this.createNewFile();
+        }
 
-    @Override // com.fimi.kernel.connect.session.MediaDataListener
+        @Override
+        public void onDownFilePre(X8MediaFileInfo x8MediaFileInfo) {
+        }
+
+        @Override
+        public void onProgress(MediaFileDownLoadPacket downLoadPacket) {
+            if (X8MediaThumDownloadTask.this.randomAccessFile != null && downLoadPacket != null && X8MediaThumDownloadTask.this.model != null) {
+                try {
+                    if (X8MediaThumDownloadTask.this.finished < X8MediaThumDownloadTask.this.model.getFileSize() && X8MediaThumDownloadTask.this.model.getFileSize() > 0 && downLoadPacket.getPlayloadSize() > 0) {
+                        if (X8MediaThumDownloadTask.this.finished != downLoadPacket.getOffSet()) {
+                            X8MediaThumDownloadTask.this.sendCmd(new X8DownLoadCmd().downMediaFile((int) X8MediaThumDownloadTask.this.finished, NTLMConstants.TARGET_INFORMATION_SUBBLOCK_DNS_DOMAIN_NAME_TYPE, X8MediaThumDownloadTask.this.model.getThumFileUrl(), false));
+                        } else {
+                            X8MediaThumDownloadTask.this.finished += downLoadPacket.getPlayloadSize();
+                            X8MediaThumDownloadTask.this.randomAccessFile.write(downLoadPacket.getPlayData());
+                            if (downLoadPacket.isFinished()) {
+                                onEndFile(DownFileResultEnum.Success);
+                            }
+                        }
+                    } else {
+                        onEndFile(DownFileResultEnum.Fail);
+                    }
+                } catch (IOException e) {
+                    onEndFile(DownFileResultEnum.Fail);
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        @Override
+        public void onEndFile(DownFileResultEnum resultEnum) {
+            switch (AnonymousClass2.$SwitchMap$com$fimi$app$x8s$ui$album$x8s$DownFileResultEnum[resultEnum.ordinal()]) {
+                case 1:
+                    NoticeManager.getInstance().removeMediaListener(X8MediaThumDownloadTask.this);
+                    X8MediaThumDownloadTask.this.model.setDownLoadThum(true);
+                    X8MediaThumDownloadTask.this.listener.onSuccess(X8MediaThumDownloadTask.this.model);
+                    HostLogBack.getInstance().writeLog("Alanqiu  ================onEndFile:" + X8MediaThumDownloadTask.this.model.toString());
+                    return;
+                case 2:
+                default:
+                    return;
+                case 3:
+                    NoticeManager.getInstance().removeMediaListener(X8MediaThumDownloadTask.this);
+                    X8MediaThumDownloadTask.this.listener.onFailure(X8MediaThumDownloadTask.this.model);
+            }
+        }
+    };
+
+    @Override
     public void mediaDataCallBack(byte[] data) {
         if (data != null && data.length > 0) {
             byte cmdType = data[0];
@@ -129,7 +128,7 @@ public class X8MediaThumDownloadTask implements Runnable, MediaDataListener {
                 MediaFileDownLoadPacket downLoadPacket = new MediaFileDownLoadPacket();
                 downLoadPacket.unPacket(data);
                 this.downMediaFileLinstener.onProgress(downLoadPacket);
-                HostLogBack.getInstance().writeLog("Alanqiu  ===============Thum===mediaDataCallBack:" + downLoadPacket.toString());
+                HostLogBack.getInstance().writeLog("Alanqiu  ===============Thum===mediaDataCallBack:" + downLoadPacket);
             }
         }
     }
@@ -138,8 +137,6 @@ public class X8MediaThumDownloadTask implements Runnable, MediaDataListener {
         NoticeManager.getInstance().removeMediaListener(this);
     }
 
-    /* renamed from: com.fimi.app.x8s.ui.album.x8s.X8MediaThumDownloadTask$2 */
-    /* loaded from: classes.dex */
     public static /* synthetic */ class AnonymousClass2 {
         static final /* synthetic */ int[] $SwitchMap$com$fimi$app$x8s$ui$album$x8s$DownFileResultEnum = new int[DownFileResultEnum.values().length];
 
@@ -158,6 +155,8 @@ public class X8MediaThumDownloadTask implements Runnable, MediaDataListener {
             }
         }
     }
+
+    /* renamed from: com.fimi.app.x8s.ui.album.x8s.X8MediaThumDownloadTask$2 */
 
 
 

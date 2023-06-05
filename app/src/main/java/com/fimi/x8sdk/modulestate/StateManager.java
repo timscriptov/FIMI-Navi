@@ -26,7 +26,7 @@ import com.fimi.x8sdk.listener.RcMatchStateListener;
 import com.fimi.x8sdk.listener.RelayHeartListener;
 import com.fimi.x8sdk.listener.RightRollerLinstener;
 
-/* loaded from: classes2.dex */
+
 public class StateManager {
     private static final int ALL_CONNECTED_STATE = 0;
     private static final int BATTERYSTATE = 3;
@@ -34,7 +34,7 @@ public class StateManager {
     private static final int PANORAMIC_INFORMATION = 5;
     private static final int RIGHT_ROLLER = 4;
     private static final int VC_TRACKING = 2;
-    private static StateManager stateManager = new StateManager();
+    private static final StateManager stateManager = new StateManager();
     IX8PanoramicInformationListener ix8PanoramicInformationListener;
     IX8ErrorCodeListener mX8ErrorCodeListener;
     IX8PowerListener powerListener;
@@ -56,16 +56,16 @@ public class StateManager {
     private AckRightRoller ackRightRoller;
     private boolean is4KResolution;
     private DroneState droneState = new DroneState();
-    private CameraState camera = new CameraState();
-    private RelayState relayState = new RelayState();
-    private GimbalState gimbalState = new GimbalState();
-    private NfzState mNfzState = new NfzState();
-    private VersionState mVersionState = new VersionState();
+    private final CameraState camera = new CameraState();
+    private final RelayState relayState = new RelayState();
+    private final GimbalState gimbalState = new GimbalState();
+    private final NfzState mNfzState = new NfzState();
+    private final VersionState mVersionState = new VersionState();
     private ConectState conectState = new ConectState();
-    private ErrorCodeState mErrorCodeState = new ErrorCodeState();
-    private RCMatchState rcMatchState = new RCMatchState();
-    Handler mHandler = new Handler(Looper.getMainLooper()) { // from class: com.fimi.x8sdk.modulestate.StateManager.1
-        @Override // android.os.Handler
+    private final ErrorCodeState mErrorCodeState = new ErrorCodeState();
+    private final RCMatchState rcMatchState = new RCMatchState();
+    Handler mHandler = new Handler(Looper.getMainLooper()) {
+        @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
@@ -106,7 +106,6 @@ public class StateManager {
                     }
                     return;
                 default:
-                    return;
             }
         }
     };
@@ -350,10 +349,6 @@ public class StateManager {
     }
 
     public void setIs4KResolution(String is4KResolution) {
-        if (is4KResolution.contains("4K")) {
-            this.is4KResolution = true;
-        } else {
-            this.is4KResolution = false;
-        }
+        this.is4KResolution = is4KResolution.contains("4K");
     }
 }

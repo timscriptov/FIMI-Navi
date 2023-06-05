@@ -4,7 +4,7 @@ import android.view.View;
 
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes.dex */
+
 public final class MeasureHelper {
     private int mCurrentAspectRatio = 0;
     private int mMeasuredHeight;
@@ -14,7 +14,7 @@ public final class MeasureHelper {
     private int mVideoSarDen;
     private int mVideoSarNum;
     private int mVideoWidth;
-    private WeakReference<View> mWeakView;
+    private final WeakReference<View> mWeakView;
 
     public MeasureHelper(View view) {
         this.mWeakView = new WeakReference<>(view);

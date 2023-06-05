@@ -4,7 +4,7 @@ import com.fimi.kernel.dataparser.usb.UiCallBackListener;
 
 import java.io.Serializable;
 
-/* loaded from: classes.dex */
+
 public abstract class ILinkMessage implements Serializable {
     public abstract UiCallBackListener getUiCallBack();
 

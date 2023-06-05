@@ -10,7 +10,7 @@ import com.fimi.x8sdk.dataparser.AckGetRetHeight;
 import com.fimi.x8sdk.ivew.IFcCtrlAction;
 import com.fimi.x8sdk.presenter.FcCtrlPresenter;
 
-/* loaded from: classes2.dex */
+
 public class FcCtrlManager {
     IFcCtrlAction fcCtrlAction = new FcCtrlPresenter();
 
@@ -131,8 +131,8 @@ public class FcCtrlManager {
     }
 
     public void getLowPowerOpt() {
-        this.fcCtrlAction.getLowPowerOperation(new UiCallBackListener() { // from class: com.fimi.x8sdk.controller.FcCtrlManager.1
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcCtrlAction.getLowPowerOperation(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
             }
         });
@@ -199,8 +199,8 @@ public class FcCtrlManager {
     }
 
     public void getRcCtrlMode() {
-        this.fcCtrlAction.getRcCtrlMode(new UiCallBackListener() { // from class: com.fimi.x8sdk.controller.FcCtrlManager.2
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcCtrlAction.getRcCtrlMode(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
             }
         });

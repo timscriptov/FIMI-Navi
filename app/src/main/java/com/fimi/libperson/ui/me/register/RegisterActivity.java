@@ -38,7 +38,7 @@ import com.fimi.libperson.widget.TitleView;
 
 import router.Router;
 
-/* loaded from: classes.dex */
+
 public class RegisterActivity extends BasePersonActivity implements IRegisterView {
     Button mBtnRegisterEmail;
     Button mBtnRegisterPhone;
@@ -70,8 +70,8 @@ public class RegisterActivity extends BasePersonActivity implements IRegisterVie
     boolean isEmail = false;
     private boolean isCheckEmail = false;
     private boolean isCheckPhone = false;
-    private TextView.OnEditorActionListener mOnEditorActionListener = new TextView.OnEditorActionListener() { // from class: com.fimi.libperson.ui.me.register.RegisterActivity.11
-        @Override // android.widget.TextView.OnEditorActionListener
+    private final TextView.OnEditorActionListener mOnEditorActionListener = new TextView.OnEditorActionListener() {
+        @Override
         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
             if (actionId == 4 || actionId == 6 || (event != null && 66 == event.getKeyCode() && event.getAction() == 0)) {
                 AbAppUtil.closeSoftInput(RegisterActivity.this.mContext);
@@ -81,21 +81,21 @@ public class RegisterActivity extends BasePersonActivity implements IRegisterVie
         }
     };
 
-    @Override // com.fimi.libperson.BasePersonActivity, com.fimi.kernel.base.BaseActivity
+    @Override
     public void setStatusBarColor() {
         super.setStatusBarColor();
         StatusBarUtil.StatusBarLightMode(this);
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     protected int getContentViewLayoutID() {
         return R.layout.activity_register;
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void initData() {
         initView();
-        ServiceItem serviceItem = (ServiceItem) SPStoreManager.getInstance().getObject(Constants.SERVICE_ITEM_KEY, ServiceItem.class);
+        ServiceItem serviceItem = SPStoreManager.getInstance().getObject(Constants.SERVICE_ITEM_KEY, ServiceItem.class);
         if (serviceItem != null && serviceItem.getInfo() != R.string.region_Mainland_China) {
             this.isEmail = true;
             this.mTitleView.setTvRightText(getString(R.string.login_iphone_title));
@@ -120,30 +120,30 @@ public class RegisterActivity extends BasePersonActivity implements IRegisterVie
 
     private void initView() {
         this.registerPrenster = new RegisterPrenster(this, this);
-        this.mIvReturn = (ImageView) findViewById(R.id.iv_return);
-        this.mTitleView = (TitleView) findViewById(R.id.title_view);
-        this.mTvSelectCountry = (TextView) findViewById(R.id.tv_select_country);
-        this.mTvAreaCode = (TextView) findViewById(R.id.tv_area_code);
-        this.mEtAccount = (EditText) findViewById(R.id.et_account);
-        this.mEtIphonePassword = (EditText) findViewById(R.id.et_password);
-        this.mEtGetVelidationCode = (EditText) findViewById(R.id.et_verification);
-        this.mTvGetValidationCode = (TextView) findViewById(R.id.btn_get_validation_code);
-        this.mTvErrorHint = (TextView) findViewById(R.id.tv_error_hint);
-        this.mCbIphoneSelectService = (CheckBox) findViewById(R.id.cb_iphone_select_service);
-        this.mCbEmailSelectService = (CheckBox) findViewById(R.id.cb_email_select_service);
-        this.mEtEmailAccount = (EditText) findViewById(R.id.et_email_account);
-        this.mEtEmailPassword = (EditText) findViewById(R.id.et_email_password);
-        this.mTvEmailErrorHint = (TextView) findViewById(R.id.tv_email_error_hint);
-        this.mTvForgetHint = (TextView) findViewById(R.id.tv_forget_hint);
-        this.mBtnRegisterPhone = (Button) findViewById(R.id.btn_register_phone);
-        this.mBtnRegisterEmail = (Button) findViewById(R.id.btn_register_email);
-        this.mRlIphone = (RelativeLayout) findViewById(R.id.rl_iphone);
-        this.mRlEmail = (RelativeLayout) findViewById(R.id.rl_email);
-        this.mIvShowPassword = (ImageView) findViewById(R.id.iv_show_password);
-        this.mIvShowIphonePassword = (ImageView) findViewById(R.id.iv_show_iphone_password);
-        this.mTvIphoneSelectService = (TextView) findViewById(R.id.tv_iphone_select_service);
-        this.mTvEmailSelectService = (TextView) findViewById(R.id.tv_email_select_service);
-        this.mTvTitleNmae = (TextView) findViewById(R.id.tv_title_name);
+        this.mIvReturn = findViewById(R.id.iv_return);
+        this.mTitleView = findViewById(R.id.title_view);
+        this.mTvSelectCountry = findViewById(R.id.tv_select_country);
+        this.mTvAreaCode = findViewById(R.id.tv_area_code);
+        this.mEtAccount = findViewById(R.id.et_account);
+        this.mEtIphonePassword = findViewById(R.id.et_password);
+        this.mEtGetVelidationCode = findViewById(R.id.et_verification);
+        this.mTvGetValidationCode = findViewById(R.id.btn_get_validation_code);
+        this.mTvErrorHint = findViewById(R.id.tv_error_hint);
+        this.mCbIphoneSelectService = findViewById(R.id.cb_iphone_select_service);
+        this.mCbEmailSelectService = findViewById(R.id.cb_email_select_service);
+        this.mEtEmailAccount = findViewById(R.id.et_email_account);
+        this.mEtEmailPassword = findViewById(R.id.et_email_password);
+        this.mTvEmailErrorHint = findViewById(R.id.tv_email_error_hint);
+        this.mTvForgetHint = findViewById(R.id.tv_forget_hint);
+        this.mBtnRegisterPhone = findViewById(R.id.btn_register_phone);
+        this.mBtnRegisterEmail = findViewById(R.id.btn_register_email);
+        this.mRlIphone = findViewById(R.id.rl_iphone);
+        this.mRlEmail = findViewById(R.id.rl_email);
+        this.mIvShowPassword = findViewById(R.id.iv_show_password);
+        this.mIvShowIphonePassword = findViewById(R.id.iv_show_iphone_password);
+        this.mTvIphoneSelectService = findViewById(R.id.tv_iphone_select_service);
+        this.mTvEmailSelectService = findViewById(R.id.tv_email_select_service);
+        this.mTvTitleNmae = findViewById(R.id.tv_title_name);
         this.mTvGetValidationCode.setTextColor(getResources().getColor(R.color.login_get_verfication_unclick));
         this.mTvGetValidationCode.setEnabled(false);
         this.mTvIphoneSelectService.setVisibility(View.VISIBLE);
@@ -173,14 +173,14 @@ public class RegisterActivity extends BasePersonActivity implements IRegisterVie
         FontUtil.changeViewLanTing(getAssets(), getWindow().getDecorView());
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void doTrans() {
         OnClickListener();
     }
 
     private void OnClickListener() {
-        this.mTitleView.setTvRightListener(new View.OnClickListener() { // from class: com.fimi.libperson.ui.me.register.RegisterActivity.1
-            @Override // android.view.View.OnClickListener
+        this.mTitleView.setTvRightListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 AbAppUtil.closeSoftInput(RegisterActivity.this.mContext);
                 RegisterActivity.this.mCbIphoneSelectService.setChecked(false);
@@ -213,15 +213,11 @@ public class RegisterActivity extends BasePersonActivity implements IRegisterVie
                 RegisterActivity.this.mBtnRegisterEmail.setVisibility(0);
                 if (!RegisterActivity.this.isCheckEmail) {
                     RegisterActivity.this.registerBtnIsClick(false);
-                } else if (RegisterActivity.this.mEtEmailPassword.getText().length() < 8 || RegisterActivity.this.mEtEmailPassword.getText().length() > 16) {
-                    RegisterActivity.this.registerBtnIsClick(false);
-                } else {
-                    RegisterActivity.this.registerBtnIsClick(true);
-                }
+                } else RegisterActivity.this.registerBtnIsClick(RegisterActivity.this.mEtEmailPassword.getText().length() >= 8 && RegisterActivity.this.mEtEmailPassword.getText().length() <= 16);
             }
         });
-        this.mIvShowPassword.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.libperson.ui.me.register.RegisterActivity.2
-            @Override // android.view.View.OnClickListener
+        this.mIvShowPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 if (RegisterActivity.this.isShowPassword) {
                     RegisterActivity.this.isShowPassword = false;
@@ -236,8 +232,8 @@ public class RegisterActivity extends BasePersonActivity implements IRegisterVie
                 RegisterActivity.this.mEtEmailPassword.setSelection(RegisterActivity.this.mEtEmailPassword.getText().length());
             }
         });
-        this.mIvShowIphonePassword.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.libperson.ui.me.register.RegisterActivity.3
-            @Override // android.view.View.OnClickListener
+        this.mIvShowIphonePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 if (RegisterActivity.this.isShowIphonePassword) {
                     RegisterActivity.this.isShowIphonePassword = false;
@@ -252,54 +248,50 @@ public class RegisterActivity extends BasePersonActivity implements IRegisterVie
                 RegisterActivity.this.mEtIphonePassword.setSelection(RegisterActivity.this.mEtIphonePassword.getText().length());
             }
         });
-        this.mTvGetValidationCode.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.libperson.ui.me.register.RegisterActivity.4
-            @Override // android.view.View.OnClickListener
+        this.mTvGetValidationCode.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 AbAppUtil.closeSoftInput(RegisterActivity.this.mContext);
                 RegisterActivity.this.registerPrenster.getVerificationCode(RegisterActivity.this.mEtAccount.getText().toString());
             }
         });
-        this.mBtnRegisterPhone.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.libperson.ui.me.register.RegisterActivity.5
-            @Override // android.view.View.OnClickListener
+        this.mBtnRegisterPhone.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 AbAppUtil.closeSoftInput(RegisterActivity.this.mContext);
                 RegisterActivity.this.registerPrenster.registerByPhone(RegisterActivity.this.mEtAccount.getText().toString(), RegisterActivity.this.mEtGetVelidationCode.getText().toString(), RegisterActivity.this.mEtIphonePassword.getText().toString());
             }
         });
-        this.mBtnRegisterEmail.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.libperson.ui.me.register.RegisterActivity.6
-            @Override // android.view.View.OnClickListener
+        this.mBtnRegisterEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 AbAppUtil.closeSoftInput(RegisterActivity.this.mContext);
                 RegisterActivity.this.registerPrenster.registerByEmail(RegisterActivity.this.mEtEmailAccount.getText().toString(), RegisterActivity.this.mEtEmailPassword.getText().toString(), RegisterActivity.this.mEtEmailPassword.getText().toString());
             }
         });
-        this.mCbEmailSelectService.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() { // from class: com.fimi.libperson.ui.me.register.RegisterActivity.7
-            @Override // android.widget.CompoundButton.OnCheckedChangeListener
+        this.mCbEmailSelectService.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 RegisterActivity.this.isCheckEmail = isChecked;
                 RegisterActivity.this.judgeEmailIsClick();
             }
         });
-        this.mCbIphoneSelectService.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() { // from class: com.fimi.libperson.ui.me.register.RegisterActivity.8
-            @Override // android.widget.CompoundButton.OnCheckedChangeListener
+        this.mCbIphoneSelectService.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 RegisterActivity.this.isCheckPhone = isChecked;
                 if (!RegisterActivity.this.isCheckPhone) {
                     RegisterActivity.this.registerBtnIsClick(false);
-                } else if (RegisterActivity.this.mEtGetVelidationCode.getText().length() == 4) {
-                    RegisterActivity.this.registerBtnIsClick(true);
-                } else {
-                    RegisterActivity.this.registerBtnIsClick(false);
-                }
+                } else RegisterActivity.this.registerBtnIsClick(RegisterActivity.this.mEtGetVelidationCode.getText().length() == 4);
             }
         });
-        this.mTvSelectCountry.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.libperson.ui.me.register.RegisterActivity.9
-            @Override // android.view.View.OnClickListener
+        this.mTvSelectCountry.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
             }
         });
-        this.mIvReturn.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.libperson.ui.me.register.RegisterActivity.10
-            @Override // android.view.View.OnClickListener
+        this.mIvReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 RegisterActivity.this.finish();
             }
@@ -321,7 +313,7 @@ public class RegisterActivity extends BasePersonActivity implements IRegisterVie
         super.onCreate(savedInstanceState);
     }
 
-    @Override // com.fimi.libperson.ivew.IRegisterView
+    @Override
     public void getCodeResult(boolean isSuccess, String errMsg) {
         if (!isSuccess) {
             this.mTvErrorHint.setVisibility(0);
@@ -333,7 +325,7 @@ public class RegisterActivity extends BasePersonActivity implements IRegisterVie
         this.mTvErrorHint.setText("");
     }
 
-    @Override // com.fimi.libperson.ivew.IRegisterView
+    @Override
     public void updateSeconds(boolean isComplete, int seconds) {
         if (isComplete) {
             this.mTvGetValidationCode.setEnabled(true);
@@ -346,18 +338,18 @@ public class RegisterActivity extends BasePersonActivity implements IRegisterVie
         this.mTvGetValidationCode.setText(seconds + getString(R.string.login_second));
     }
 
-    @Override // com.fimi.libperson.ivew.IRegisterView
+    @Override
     public void loginSuccess() {
         Constants.isRefreshMainView = true;
-        Intent it = (Intent) Router.invoke(this, "activity://app.main");
+        Intent it = Router.invoke(this, "activity://app.main");
         readyGoThenKillAllActivity(it);
     }
 
-    @Override // com.fimi.libperson.ivew.IRegisterView
+    @Override
     public void registerIphoneResult(boolean isSuceess, String errMsg) {
         if (isSuceess) {
             Constants.isRefreshMainView = true;
-            Intent it = (Intent) Router.invoke(this, "activity://app.main");
+            Intent it = Router.invoke(this, "activity://app.main");
             readyGoThenKillAllActivity(it);
         } else if (errMsg != null) {
             this.mTvErrorHint.setVisibility(0);
@@ -365,11 +357,11 @@ public class RegisterActivity extends BasePersonActivity implements IRegisterVie
         }
     }
 
-    @Override // com.fimi.libperson.ivew.IRegisterView
+    @Override
     public void registerEmailResult(boolean isSuccess, String errMsg) {
         if (isSuccess) {
             Constants.isRefreshMainView = true;
-            Intent it = (Intent) Router.invoke(this, "activity://app.main");
+            Intent it = Router.invoke(this, "activity://app.main");
             readyGoThenKillAllActivity(it);
         } else if (errMsg != null) {
             this.mTvEmailErrorHint.setVisibility(0);
@@ -378,11 +370,7 @@ public class RegisterActivity extends BasePersonActivity implements IRegisterVie
     }
 
     public void judgeEmailIsClick() {
-        if (DataValidatorUtil.isEmail(this.mEtEmailAccount.getText().toString().trim()) && this.mEtEmailPassword.getText().length() >= 8 && this.mEtEmailPassword.getText().length() <= 16 && this.isCheckEmail) {
-            registerBtnIsClick(true);
-        } else {
-            registerBtnIsClick(false);
-        }
+        registerBtnIsClick(DataValidatorUtil.isEmail(this.mEtEmailAccount.getText().toString().trim()) && this.mEtEmailPassword.getText().length() >= 8 && this.mEtEmailPassword.getText().length() <= 16 && this.isCheckEmail);
     }
 
     private SpannableString getSpannableString() {
@@ -395,28 +383,28 @@ public class RegisterActivity extends BasePersonActivity implements IRegisterVie
         spannableString.setSpan(new ForegroundColorSpan(this.mContext.getResources().getColor(R.color.register_agreement)), 0, str1.length(), 33);
         spannableString.setSpan(new ForegroundColorSpan(this.mContext.getResources().getColor(R.color.register_agreement)), str1.length() + str2.length(), str1.length() + str2.length() + str3.length(), 33);
         spannableString.setSpan(new ForegroundColorSpan(this.mContext.getResources().getColor(R.color.register_agreement)), str1.length() + str2.length() + str3.length() + str4.length(), str1.length() + str2.length() + str3.length() + str4.length() + str5.length(), 33);
-        spannableString.setSpan(new ClickableSpan() { // from class: com.fimi.libperson.ui.me.register.RegisterActivity.12
-            @Override // android.text.style.ClickableSpan, android.text.style.CharacterStyle
+        spannableString.setSpan(new ClickableSpan() {
+            @Override
             public void updateDrawState(TextPaint ds) {
                 super.updateDrawState(ds);
                 ds.setColor(RegisterActivity.this.getResources().getColor(R.color.register_agreement_click));
                 ds.setUnderlineText(false);
             }
 
-            @Override // android.text.style.ClickableSpan
+            @Override
             public void onClick(View widget) {
                 RegisterActivity.this.goWebActivity(ComonStaticURL.getPolicyUrl(), RegisterActivity.this.getString(R.string.person_setting_user_agreement));
             }
         }, str1.length(), str1.length() + str2.length(), 33);
-        spannableString.setSpan(new ClickableSpan() { // from class: com.fimi.libperson.ui.me.register.RegisterActivity.13
-            @Override // android.text.style.ClickableSpan, android.text.style.CharacterStyle
+        spannableString.setSpan(new ClickableSpan() {
+            @Override
             public void updateDrawState(TextPaint ds) {
                 super.updateDrawState(ds);
                 ds.setColor(RegisterActivity.this.getResources().getColor(R.color.register_agreement_click));
                 ds.setUnderlineText(false);
             }
 
-            @Override // android.text.style.ClickableSpan
+            @Override
             public void onClick(View widget) {
                 RegisterActivity.this.goWebActivity(ComonStaticURL.getPrivacyUrl(), RegisterActivity.this.getString(R.string.person_setting_user_privacy));
             }
@@ -434,28 +422,28 @@ public class RegisterActivity extends BasePersonActivity implements IRegisterVie
         spannableString.setSpan(new ForegroundColorSpan(this.mContext.getResources().getColor(R.color.register_agreement)), 0, str1.length(), 33);
         spannableString.setSpan(new ForegroundColorSpan(this.mContext.getResources().getColor(R.color.register_agreement)), str1.length() + str2.length(), str1.length() + str2.length() + str3.length(), 33);
         spannableString.setSpan(new ForegroundColorSpan(this.mContext.getResources().getColor(R.color.register_agreement)), str1.length() + str2.length() + str3.length() + str4.length(), str1.length() + str2.length() + str3.length() + str4.length() + str5.length(), 33);
-        spannableString.setSpan(new ClickableSpan() { // from class: com.fimi.libperson.ui.me.register.RegisterActivity.14
-            @Override // android.text.style.ClickableSpan, android.text.style.CharacterStyle
+        spannableString.setSpan(new ClickableSpan() {
+            @Override
             public void updateDrawState(TextPaint ds) {
                 super.updateDrawState(ds);
                 ds.setColor(RegisterActivity.this.getResources().getColor(R.color.register_agreement_click));
                 ds.setUnderlineText(false);
             }
 
-            @Override // android.text.style.ClickableSpan
+            @Override
             public void onClick(View widget) {
                 RegisterActivity.this.goWebActivity(ComonStaticURL.getPolicyUrl(), RegisterActivity.this.getString(R.string.person_setting_user_agreement));
             }
         }, str1.length(), str1.length() + str2.length(), 33);
-        spannableString.setSpan(new ClickableSpan() { // from class: com.fimi.libperson.ui.me.register.RegisterActivity.15
-            @Override // android.text.style.ClickableSpan, android.text.style.CharacterStyle
+        spannableString.setSpan(new ClickableSpan() {
+            @Override
             public void updateDrawState(TextPaint ds) {
                 super.updateDrawState(ds);
                 ds.setColor(RegisterActivity.this.getResources().getColor(R.color.register_agreement_click));
                 ds.setUnderlineText(false);
             }
 
-            @Override // android.text.style.ClickableSpan
+            @Override
             public void onClick(View widget) {
                 RegisterActivity.this.goWebActivity(ComonStaticURL.getPrivacyUrl(), RegisterActivity.this.getString(R.string.person_setting_user_privacy));
             }
@@ -491,23 +479,23 @@ public class RegisterActivity extends BasePersonActivity implements IRegisterVie
         return super.onKeyDown(keyCode, event);
     }
 
-    /* loaded from: classes.dex */
+
     public class EditTextWatcher implements TextWatcher {
-        private EditText mEditText;
+        private final EditText mEditText;
 
         public EditTextWatcher(EditText editText) {
             this.mEditText = editText;
         }
 
-        @Override // android.text.TextWatcher
+        @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         }
 
-        @Override // android.text.TextWatcher
+        @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
         }
 
-        @Override // android.text.TextWatcher
+        @Override
         public void afterTextChanged(Editable s) {
             if (s.length() > 0) {
                 if (R.id.et_account == this.mEditText.getId()) {
@@ -543,20 +531,12 @@ public class RegisterActivity extends BasePersonActivity implements IRegisterVie
             if (R.id.et_password == this.mEditText.getId()) {
                 if (!RegisterActivity.this.isCheckPhone) {
                     RegisterActivity.this.registerBtnIsClick(false);
-                } else if (s.length() < 8 || RegisterActivity.this.mEtGetVelidationCode.getText().length() != 4) {
-                    RegisterActivity.this.registerBtnIsClick(false);
-                } else {
-                    RegisterActivity.this.registerBtnIsClick(true);
-                }
+                } else RegisterActivity.this.registerBtnIsClick(s.length() >= 8 && RegisterActivity.this.mEtGetVelidationCode.getText().length() == 4);
             }
             if (R.id.et_verification == this.mEditText.getId()) {
                 if (!RegisterActivity.this.isCheckPhone) {
                     RegisterActivity.this.registerBtnIsClick(false);
-                } else if (s.length() != 4 || RegisterActivity.this.mEtIphonePassword.getText().length() < 8) {
-                    RegisterActivity.this.registerBtnIsClick(false);
-                } else {
-                    RegisterActivity.this.registerBtnIsClick(true);
-                }
+                } else RegisterActivity.this.registerBtnIsClick(s.length() == 4 && RegisterActivity.this.mEtIphonePassword.getText().length() >= 8);
             }
         }
     }

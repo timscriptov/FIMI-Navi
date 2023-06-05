@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,26 +25,26 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* loaded from: classes.dex */
+
 public class X8sPanelRecycleAdapter<T extends MediaModel> extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Handler.Callback {
     public static final int HEADTYPE = 48;
     public static final int ITEMBODYTYPE = 32;
     public static final int ITEMHEADTYPE = 16;
     public static final String TAG = X8sPanelRecycleAdapter.class.getName();
-    private Context context;
-    private boolean isCamera;
-    private INodataTip mINodataTip;
+    private final Context context;
+    private final boolean isCamera;
+    private final INodataTip mINodataTip;
     private IRecycleAdapter mIRecycleAdapter;
-    private Handler mainHandler;
+    private final Handler mainHandler;
     private CopyOnWriteArrayList<T> modelList;
     private CopyOnWriteArrayList<T> modelNoHeadList;
-    private Handler otherHandler;
+    private final Handler otherHandler;
     private HashMap<String, CopyOnWriteArrayList<T>> stateHashMap;
-    private DataManager mdataManager = DataManager.obtain();
-    private int headSpanCount = 4;
-    private int headCount = 4;
-    private int bodySpanCount = 1;
-    private int internalListBound = 2;
+    private final DataManager mdataManager = DataManager.obtain();
+    private final int headSpanCount = 4;
+    private final int headCount = 4;
+    private final int bodySpanCount = 1;
+    private final int internalListBound = 2;
 
     public X8sPanelRecycleAdapter(Context context, boolean isCamera, INodataTip mINodataTip) {
         this.isCamera = isCamera;
@@ -58,7 +59,7 @@ public class X8sPanelRecycleAdapter<T extends MediaModel> extends RecyclerView.A
         this.mIRecycleAdapter = mIRecycleAdapter;
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder rvViewHolder;
         if (viewType == 48) {
@@ -75,14 +76,13 @@ public class X8sPanelRecycleAdapter<T extends MediaModel> extends RecyclerView.A
         return rvViewHolder;
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
         RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
-        if (manager instanceof GridLayoutManager) {
-            GridLayoutManager mGridLayoutManager = (GridLayoutManager) manager;
-            mGridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() { // from class: com.fimi.app.x8s.adapter.X8sPanelRecycleAdapter.1
-                @Override // android.support.v7.widget.GridLayoutManager.SpanSizeLookup
+        if (manager instanceof GridLayoutManager mGridLayoutManager) {
+            mGridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
                 public int getSpanSize(int position) {
                     if (X8sPanelRecycleAdapter.this.isHeadView(position)) {
                         return X8sPanelRecycleAdapter.this.headCount;
@@ -94,7 +94,7 @@ public class X8sPanelRecycleAdapter<T extends MediaModel> extends RecyclerView.A
         }
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (this.mIRecycleAdapter != null) {
             this.mIRecycleAdapter.onBindViewHolder(holder, position);
@@ -213,7 +213,7 @@ public class X8sPanelRecycleAdapter<T extends MediaModel> extends RecyclerView.A
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
+
     public void addItemReally(T mediaModel) {
         changeMediaModelState(mediaModel);
         int inserterPosition = 0;
@@ -288,7 +288,7 @@ public class X8sPanelRecycleAdapter<T extends MediaModel> extends RecyclerView.A
         mediaModel.setSelect(false);
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public int getItemViewType(int position) {
         if (isHeadView(position)) {
             return 48;
@@ -315,7 +315,7 @@ public class X8sPanelRecycleAdapter<T extends MediaModel> extends RecyclerView.A
         return model.isCategory();
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public int getItemCount() {
         if (this.modelList == null) {
             return 0;
@@ -357,9 +357,9 @@ public class X8sPanelRecycleAdapter<T extends MediaModel> extends RecyclerView.A
         this.modelNoHeadList = this.mdataManager.getLocalDataNoHeadList();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    @Override // android.os.Handler.Callback
-    public boolean handleMessage(Message message) {
+
+    @Override
+    public boolean handleMessage(@NonNull Message message) {
         if (message.what == 5) {
             judgeIsNoData();
             notifyDataSetChanged();

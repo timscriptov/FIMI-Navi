@@ -10,16 +10,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.fimi.android.app.R;
 import com.fimi.app.x8s.entity.PhotoParamItemEntity;
 
-/* loaded from: classes.dex */
+
 public class PhotoParamsViewHolder extends RecyclerView.ViewHolder {
     public final String VALUE_VIDEO_RESOLUTION_1080P;
     public final String VALUE_VIDEO_RESOLUTION_2K;
     public final String VALUE_VIDEO_RESOLUTION_4K;
     public final String VALUE_VIDEO_RESOLUTION_720P;
-    private Context context;
-    private ImageView gotoIcon;
-    private TextView keytv;
-    private TextView valuetv;
+    private final Context context;
+    private final ImageView gotoIcon;
+    private final TextView keytv;
+    private final TextView valuetv;
 
     public PhotoParamsViewHolder(View itemView) {
         super(itemView);
@@ -28,9 +28,9 @@ public class PhotoParamsViewHolder extends RecyclerView.ViewHolder {
         this.VALUE_VIDEO_RESOLUTION_1080P = "1920x1080";
         this.VALUE_VIDEO_RESOLUTION_720P = "1280x720";
         this.context = itemView.getContext();
-        this.keytv = (TextView) itemView.findViewById(R.id.item_name);
-        this.valuetv = (TextView) itemView.findViewById(R.id.item_value);
-        this.gotoIcon = (ImageView) itemView.findViewById(R.id.goto_icon);
+        this.keytv = itemView.findViewById(R.id.item_name);
+        this.valuetv = itemView.findViewById(R.id.item_value);
+        this.gotoIcon = itemView.findViewById(R.id.goto_icon);
     }
 
     public void initItemData(PhotoParamItemEntity itemEntity, boolean isEnable) {

@@ -24,24 +24,24 @@ import com.fimi.x8sdk.controller.CameraManager;
 import com.fimi.x8sdk.entity.X8CameraParamsValue;
 import com.fimi.x8sdk.jsonResult.CameraParamsJson;
 
-/* loaded from: classes.dex */
+
 public class X8CameraSubParamsController extends AbsX8Controllers implements SubParamItemListener, JsonUiCallBackListener {
     int index;
     String key;
     String optionName;
     String value;
     private CameraManager cameraManager;
-    private boolean canScroller;
+    private final boolean canScroller;
     private String contrast;
     private String curParam;
     private SubParamsViewHolder holder;
     private boolean isForbid;
-    private ScrollLinearLayoutManager layoutManager;
+    private final ScrollLinearLayoutManager layoutManager;
     private Context mContext;
     private IX8CameraMainSetListener mainSetListener;
     private CameraParamListener paramListener;
-    private PhotoSubParamsAdapter paramsAdapter;
-    private X8CameraParamsValue paramsValue;
+    private final PhotoSubParamsAdapter paramsAdapter;
+    private final X8CameraParamsValue paramsValue;
     private RecyclerView recyclerView;
     private String saturation;
     private PhotoSubParamItemEntity subParam;
@@ -82,22 +82,22 @@ public class X8CameraSubParamsController extends AbsX8Controllers implements Sub
         this.paramsAdapter.updateData(this.subParam);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
         this.mContext = rootView.getContext();
         this.handleView = rootView.findViewById(R.id.item_param_view_layout);
-        this.recyclerView = (RecyclerView) rootView.findViewById(R.id.item_param_Recycler);
+        this.recyclerView = rootView.findViewById(R.id.item_param_Recycler);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
-    @Override // com.fimi.app.x8s.viewHolder.SubParamItemListener
+    @Override
     public void checkDetailParam(String optionName, String key, int index, RecyclerView.ViewHolder viewHolder) {
         this.holder = (SubParamsViewHolder) viewHolder;
         this.curParam = key;
@@ -131,7 +131,7 @@ public class X8CameraSubParamsController extends AbsX8Controllers implements Sub
         }
     }
 
-    @Override // com.fimi.app.x8s.viewHolder.SubParamItemListener
+    @Override
     public void checkResolutionDetailParam(String optionName, String key, String value, int index, RecyclerView.ViewHolder viewHolder) {
         this.holder = (SubParamsViewHolder) viewHolder;
         this.curParam = key;
@@ -158,7 +158,7 @@ public class X8CameraSubParamsController extends AbsX8Controllers implements Sub
         this.paramsAdapter.notifyDataSetChanged();
     }
 
-    @Override // com.fimi.app.x8s.viewHolder.SubParamItemListener
+    @Override
     public void gotoParentItem() {
         if (this.paramListener != null && this.subParam != null) {
             this.paramsAdapter.viewHolderRemoveAllViews();
@@ -171,96 +171,93 @@ public class X8CameraSubParamsController extends AbsX8Controllers implements Sub
         }
     }
 
-    @Override // com.fimi.kernel.dataparser.usb.JsonUiCallBackListener
+    @Override
     public void onComplete(JSONObject rt, Object o) {
         if (rt != null) {
-            CameraParamsJson paramsJson = (CameraParamsJson) JSON.parseObject(rt.toString(), CameraParamsJson.class);
+            CameraParamsJson paramsJson = JSON.parseObject(rt.toString(), CameraParamsJson.class);
             int rval = paramsJson.getRval();
             if (paramsJson != null) {
-                switch (paramsJson.getMsg_id()) {
-                    case 2:
-                        String paramType = paramsJson.getType();
-                        if (paramType != null) {
-                            if (paramsJson.getType().equals("photo_size") && rval >= 0) {
-                                this.paramsValue.getCurParamsJson().setPhoto_size(this.curParam);
-                                if (this.mainSetListener != null) {
-                                    this.mainSetListener.updateResOrSize();
-                                }
-                            } else if (paramsJson.getType().equals("photo_format") && rval >= 0) {
-                                this.paramsValue.getCurParamsJson().setPhoto_format(this.curParam);
-                            } else if (paramsJson.getType().equals("contrast") && rval >= 0) {
-                                this.subParam.setParamValue(this.mContext.getResources().getString(R.string.x8_camera_contrast));
-                                this.subParam.getOptionMap().put("contrast", this.contrast);
-                                this.paramsValue.getCurParamsJson().setContrast(this.curParam);
-                                return;
-                            } else if (paramsJson.getType().equals("saturation") && rval >= 0) {
-                                this.subParam.setParamValue(this.mContext.getResources().getString(R.string.x8_camera_saturation));
-                                this.subParam.getOptionMap().put("saturation", this.saturation);
-                                this.paramsValue.getCurParamsJson().setSaturation(this.curParam);
-                                return;
-                            } else if (paramsJson.getType().equals("awb") && rval >= 0) {
-                                if (this.mainSetListener != null) {
-                                    this.mainSetListener.awbSetting(this.curParam);
-                                }
-                                this.paramsValue.getCurParamsJson().setAwb(this.curParam);
-                            } else if (paramsJson.getType().equals("video_quality") && rval >= 0) {
-                                this.paramsValue.getCurParamsJson().setVideo_quality(this.curParam);
-                            } else if (paramsJson.getType().equals("video_resolution") && rval >= 0) {
-                                this.paramsValue.getCurParamsJson().setVideo_resolution(this.curParam);
-                                if (this.mainSetListener != null) {
-                                    this.mainSetListener.updateResOrSize();
-                                }
-                            } else if (paramsJson.getType().equals("ae_bias") && rval >= 0) {
-                                this.paramsValue.getCurParamsJson().setAe_bias(this.curParam);
-                            } else if (paramsJson.getType().equals(CameraJsonCollection.KEY_SHUTTER_TIME) && rval >= 0) {
-                                this.paramsValue.getCurParamsJson().setShutter_time(this.curParam);
-                            } else if (paramsJson.getType().equals(CameraJsonCollection.KEY_METERMING_MODE) && rval >= 0) {
-                                this.paramsValue.getCurParamsJson().setMetering_mode(this.curParam);
-                            } else if (paramsJson.getType().equals(CameraJsonCollection.KEY_DIGITAL_EFFECT) && rval >= 0) {
-                                if (this.mainSetListener != null) {
-                                    this.mainSetListener.colorSetting(this.curParam);
-                                }
-                                this.paramsValue.getCurParamsJson().setDigital_effect(this.curParam);
-                            } else if (paramsJson.getType().equals("sharpness") && rval >= 0) {
-                                this.paramsValue.getCurParamsJson().setSharpness(this.curParam);
-                            } else if (paramsJson.getType().equals("system_type") && rval >= 0) {
-                                this.paramsValue.getCurParamsJson().setSystem_type(this.curParam);
-                                this.cameraManager.getCurCameraParams("video_resolution", new JsonUiCallBackListener() { // from class: com.fimi.app.x8s.controls.camera.X8CameraSubParamsController.1
-                                    @Override
-                                    // com.fimi.kernel.dataparser.usb.JsonUiCallBackListener
-                                    public void onComplete(JSONObject rt2, Object o2) {
-                                        if (rt2 != null && rt2.containsKey("rval") && rt2.getIntValue("rval") >= 0 && rt2.containsKey("param")) {
-                                            X8CameraSubParamsController.this.paramsValue.getCurParamsJson().setVideo_resolution(rt2.getString("param"));
-                                            if (X8CameraSubParamsController.this.mainSetListener != null) {
-                                                X8CameraSubParamsController.this.mainSetListener.updateResOrSize();
-                                                X8CameraSubParamsController.this.curParam = rt2.getString("param");
-                                            }
+                if (paramsJson.getMsg_id() == 2) {
+                    String paramType = paramsJson.getType();
+                    if (paramType != null) {
+                        if (paramsJson.getType().equals("photo_size") && rval >= 0) {
+                            this.paramsValue.getCurParamsJson().setPhoto_size(this.curParam);
+                            if (this.mainSetListener != null) {
+                                this.mainSetListener.updateResOrSize();
+                            }
+                        } else if (paramsJson.getType().equals("photo_format") && rval >= 0) {
+                            this.paramsValue.getCurParamsJson().setPhoto_format(this.curParam);
+                        } else if (paramsJson.getType().equals("contrast") && rval >= 0) {
+                            this.subParam.setParamValue(this.mContext.getResources().getString(R.string.x8_camera_contrast));
+                            this.subParam.getOptionMap().put("contrast", this.contrast);
+                            this.paramsValue.getCurParamsJson().setContrast(this.curParam);
+                            return;
+                        } else if (paramsJson.getType().equals("saturation") && rval >= 0) {
+                            this.subParam.setParamValue(this.mContext.getResources().getString(R.string.x8_camera_saturation));
+                            this.subParam.getOptionMap().put("saturation", this.saturation);
+                            this.paramsValue.getCurParamsJson().setSaturation(this.curParam);
+                            return;
+                        } else if (paramsJson.getType().equals("awb") && rval >= 0) {
+                            if (this.mainSetListener != null) {
+                                this.mainSetListener.awbSetting(this.curParam);
+                            }
+                            this.paramsValue.getCurParamsJson().setAwb(this.curParam);
+                        } else if (paramsJson.getType().equals("video_quality") && rval >= 0) {
+                            this.paramsValue.getCurParamsJson().setVideo_quality(this.curParam);
+                        } else if (paramsJson.getType().equals("video_resolution") && rval >= 0) {
+                            this.paramsValue.getCurParamsJson().setVideo_resolution(this.curParam);
+                            if (this.mainSetListener != null) {
+                                this.mainSetListener.updateResOrSize();
+                            }
+                        } else if (paramsJson.getType().equals("ae_bias") && rval >= 0) {
+                            this.paramsValue.getCurParamsJson().setAe_bias(this.curParam);
+                        } else if (paramsJson.getType().equals(CameraJsonCollection.KEY_SHUTTER_TIME) && rval >= 0) {
+                            this.paramsValue.getCurParamsJson().setShutter_time(this.curParam);
+                        } else if (paramsJson.getType().equals(CameraJsonCollection.KEY_METERMING_MODE) && rval >= 0) {
+                            this.paramsValue.getCurParamsJson().setMetering_mode(this.curParam);
+                        } else if (paramsJson.getType().equals(CameraJsonCollection.KEY_DIGITAL_EFFECT) && rval >= 0) {
+                            if (this.mainSetListener != null) {
+                                this.mainSetListener.colorSetting(this.curParam);
+                            }
+                            this.paramsValue.getCurParamsJson().setDigital_effect(this.curParam);
+                        } else if (paramsJson.getType().equals("sharpness") && rval >= 0) {
+                            this.paramsValue.getCurParamsJson().setSharpness(this.curParam);
+                        } else if (paramsJson.getType().equals("system_type") && rval >= 0) {
+                            this.paramsValue.getCurParamsJson().setSystem_type(this.curParam);
+                            this.cameraManager.getCurCameraParams("video_resolution", new JsonUiCallBackListener() {
+                                @Override
+                                // com.fimi.kernel.dataparser.usb.JsonUiCallBackListener
+                                public void onComplete(JSONObject rt2, Object o2) {
+                                    if (rt2 != null && rt2.containsKey("rval") && rt2.getIntValue("rval") >= 0 && rt2.containsKey("param")) {
+                                        X8CameraSubParamsController.this.paramsValue.getCurParamsJson().setVideo_resolution(rt2.getString("param"));
+                                        if (X8CameraSubParamsController.this.mainSetListener != null) {
+                                            X8CameraSubParamsController.this.mainSetListener.updateResOrSize();
+                                            X8CameraSubParamsController.this.curParam = rt2.getString("param");
                                         }
                                     }
-                                });
-                            } else if (paramsJson.getType().equals(CameraJsonCollection.KEY_AE_ISO) && rval >= 0) {
-                                this.paramsValue.getCurParamsJson().setIso(this.curParam);
-                            }
-                            this.subParam.setParamValue(this.curParam);
-                            this.paramsAdapter.updateData(this.subParam);
-                            return;
+                                }
+                            });
+                        } else if (paramsJson.getType().equals(CameraJsonCollection.KEY_AE_ISO) && rval >= 0) {
+                            this.paramsValue.getCurParamsJson().setIso(this.curParam);
                         }
+                        this.subParam.setParamValue(this.curParam);
+                        this.paramsAdapter.updateData(this.subParam);
                         return;
-                    default:
-                        return;
+                    }
+                    return;
                 }
             }
         }
     }
 
-    @Override // com.fimi.app.x8s.viewHolder.SubParamItemListener
+    @Override
     public void setRecyclerScroller(boolean scroller) {
         if (this.layoutManager != null) {
             this.layoutManager.setScrollEnable(scroller);
         }
     }
 
-    @Override // com.fimi.app.x8s.viewHolder.SubParamItemListener
+    @Override
     public void styleParam(String paramKey, int param) {
         if (paramKey.equals("contrast")) {
             this.contrast = String.valueOf(param);
@@ -270,7 +267,7 @@ public class X8CameraSubParamsController extends AbsX8Controllers implements Sub
         this.cameraManager.setCameraKeyParams(String.valueOf(param), paramKey, this);
     }
 
-    @Override // com.fimi.app.x8s.viewHolder.SubParamItemListener
+    @Override
     public void updateAddContent(String paramKey, String paramValue) {
         this.subParam.setParamKey(paramKey);
         this.subParam.setParamValue(paramValue);
@@ -284,7 +281,7 @@ public class X8CameraSubParamsController extends AbsX8Controllers implements Sub
         this.mainSetListener = mainSetListener;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         super.onDroneConnected(b);
         if (this.paramsAdapter != null && this.isForbid != b) {
@@ -293,28 +290,28 @@ public class X8CameraSubParamsController extends AbsX8Controllers implements Sub
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public boolean onClickBackKey() {
         return false;
     }
 
-    /* loaded from: classes.dex */
+
     public class ScrollLinearLayoutManager extends LinearLayoutManager {
         private boolean isScrollEnable;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+
         public ScrollLinearLayoutManager(Context context) {
             super(context);
             this.isScrollEnable = true;
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+
         public ScrollLinearLayoutManager(Context context, int orientation, boolean reverseLayout) {
             super(context, orientation, reverseLayout);
             this.isScrollEnable = true;
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+
         public ScrollLinearLayoutManager(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
             super(context, attrs, defStyleAttr, defStyleRes);
             this.isScrollEnable = true;

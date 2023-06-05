@@ -1,6 +1,6 @@
 package com.fimi.x8sdk.command;
 
-/* loaded from: classes2.dex */
+
 public abstract class X8BaseCmd {
     public static final byte MODULE_BATTERY = 15;
     public static final byte MODULE_CAMERA = 3;
@@ -34,7 +34,7 @@ public abstract class X8BaseCmd {
         }
     }
 
-    /* loaded from: classes2.dex */
+
     public enum X8S_Module {
         MODULE_IDLE,
         MODULE_UAV,

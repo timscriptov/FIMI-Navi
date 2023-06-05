@@ -286,8 +286,8 @@ public class AbAppUtil {
         try {
             final Process m_process = Runtime.getRuntime().exec(script);
             final StringBuilder sbread = new StringBuilder();
-            Thread tout = new Thread(new Runnable() { // from class: com.fimi.kernel.utils.AbAppUtil.2
-                @Override // java.lang.Runnable
+            Thread tout = new Thread(new Runnable() {
+                @Override
                 public void run() {
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(m_process.getInputStream()), 8192);
                     while (true) {
@@ -321,8 +321,8 @@ public class AbAppUtil {
             });
             tout.start();
             final StringBuilder sberr = new StringBuilder();
-            Thread terr = new Thread(new Runnable() { // from class: com.fimi.kernel.utils.AbAppUtil.3
-                @Override // java.lang.Runnable
+            Thread terr = new Thread(new Runnable() {
+                @Override
                 public void run() {
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(m_process.getErrorStream()), 8192);
                     while (true) {
@@ -482,7 +482,7 @@ public class AbAppUtil {
             BufferedReader bufferedReader = new BufferedReader(fileReader, 8192);
             String memInfo = bufferedReader.readLine();
             String[] strs = memInfo.split("\\s+");
-            memory = Integer.valueOf(strs[1]).intValue() * 1024;
+            memory = Integer.valueOf(strs[1]).intValue() * 1024L;
             bufferedReader.close();
             return memory;
         } catch (Exception e) {

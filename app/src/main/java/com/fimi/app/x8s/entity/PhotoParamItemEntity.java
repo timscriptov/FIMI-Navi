@@ -2,7 +2,7 @@ package com.fimi.app.x8s.entity;
 
 import java.io.Serializable;
 
-/* loaded from: classes.dex */
+
 public class PhotoParamItemEntity implements Serializable {
     private String nickName;
     private String nickParam;

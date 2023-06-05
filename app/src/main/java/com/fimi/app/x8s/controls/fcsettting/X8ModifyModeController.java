@@ -31,10 +31,10 @@ import com.fimi.x8sdk.entity.ConectState;
 import com.fimi.x8sdk.modulestate.DroneState;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes.dex */
+
 public class X8ModifyModeController extends AbsX8MenuBoxControllers implements X8DoubleCustomDialog.onDialogButtonClickListener {
     private X8AircraftCalibrationController aircraftCalibrationController;
-    private ApkVersionManager apkVersionManager;
+    private final ApkVersionManager apkVersionManager;
     private ImageView back_btn;
     private RelativeLayout blackBoxLayout;
     private RelativeLayout blackBoxLogLayout;
@@ -53,7 +53,7 @@ public class X8ModifyModeController extends AbsX8MenuBoxControllers implements X
     private RelativeLayout mFormatStorage;
     private X8modifyGimbalSensorController mGimbalSensorController;
     private RelativeLayout mGimbalSensorLayout;
-    private Handler mHandler;
+    private final Handler mHandler;
     private ImageView mIvFormatStorage;
     private CustomLoadManage mLoadManage;
     private ProgressBar mPbFormat;
@@ -73,8 +73,8 @@ public class X8ModifyModeController extends AbsX8MenuBoxControllers implements X
     public X8ModifyModeController(View rootView) {
         super(rootView);
         this.mFormatState = FormatState.IDLE;
-        this.mHandler = new Handler() { // from class: com.fimi.app.x8s.controls.fcsettting.X8ModifyModeController.1
-            @Override // android.os.Handler
+        this.mHandler = new Handler() {
+            @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 switch (AnonymousClass14.$SwitchMap$com$fimi$app$x8s$controls$fcsettting$X8ModifyModeController$FormatState[X8ModifyModeController.this.mFormatState.ordinal()]) {
@@ -106,55 +106,55 @@ public class X8ModifyModeController extends AbsX8MenuBoxControllers implements X
         this.modeControllerListener = modeControllerListener;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
         LayoutInflater inflater = LayoutInflater.from(rootView.getContext());
         this.handleView = inflater.inflate(R.layout.x8_main_general_item_modify_layout, (ViewGroup) rootView, true);
-        this.back_btn = (ImageView) this.handleView.findViewById(R.id.btn_return);
-        this.sensorLayout = (RelativeLayout) this.handleView.findViewById(R.id.x8_sensor_layout);
-        this.mGimbalSensorLayout = (RelativeLayout) this.handleView.findViewById(R.id.x8_gimbal_sensor_layout);
-        this.calibration_btn = (Button) this.handleView.findViewById(R.id.x8_btn_calibration);
-        this.checkLayout = (RelativeLayout) this.handleView.findViewById(R.id.x8_check_layout);
-        this.blackBoxLayout = (RelativeLayout) this.handleView.findViewById(R.id.x8_blackbox_layout);
-        this.topLayout = (PercentRelativeLayout) this.handleView.findViewById(R.id.layout_top);
-        this.itemLayout = (PercentRelativeLayout) this.handleView.findViewById(R.id.x8_modify_item_layout);
-        this.blackBoxLogLayout = (RelativeLayout) this.handleView.findViewById(R.id.x8_blackbox_layout1);
-        this.x8AircraftCalibrationLayout = (RelativeLayout) this.handleView.findViewById(R.id.x8_aircraft_calibration_layout);
-        this.mFormatStorage = (RelativeLayout) this.handleView.findViewById(R.id.x8_format_storage_layout);
-        this.mIvFormatStorage = (ImageView) this.handleView.findViewById(R.id.iv_format_storage);
-        this.mTvFormatDec = (TextView) this.handleView.findViewById(R.id.tv_format_storage_dec);
-        this.mTvFormatTitle = (TextView) this.handleView.findViewById(R.id.tv_format_storage_title);
-        this.mPbFormat = (ProgressBar) this.handleView.findViewById(R.id.pb_format_storage);
-        this.nextContentLayout = (RelativeLayout) this.handleView.findViewById(R.id.rl_next_content);
+        this.back_btn = this.handleView.findViewById(R.id.btn_return);
+        this.sensorLayout = this.handleView.findViewById(R.id.x8_sensor_layout);
+        this.mGimbalSensorLayout = this.handleView.findViewById(R.id.x8_gimbal_sensor_layout);
+        this.calibration_btn = this.handleView.findViewById(R.id.x8_btn_calibration);
+        this.checkLayout = this.handleView.findViewById(R.id.x8_check_layout);
+        this.blackBoxLayout = this.handleView.findViewById(R.id.x8_blackbox_layout);
+        this.topLayout = this.handleView.findViewById(R.id.layout_top);
+        this.itemLayout = this.handleView.findViewById(R.id.x8_modify_item_layout);
+        this.blackBoxLogLayout = this.handleView.findViewById(R.id.x8_blackbox_layout1);
+        this.x8AircraftCalibrationLayout = this.handleView.findViewById(R.id.x8_aircraft_calibration_layout);
+        this.mFormatStorage = this.handleView.findViewById(R.id.x8_format_storage_layout);
+        this.mIvFormatStorage = this.handleView.findViewById(R.id.iv_format_storage);
+        this.mTvFormatDec = this.handleView.findViewById(R.id.tv_format_storage_dec);
+        this.mTvFormatTitle = this.handleView.findViewById(R.id.tv_format_storage_title);
+        this.mPbFormat = this.handleView.findViewById(R.id.pb_format_storage);
+        this.nextContentLayout = this.handleView.findViewById(R.id.rl_next_content);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
-        this.calibration_btn.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8ModifyModeController.2
-            @Override // android.view.View.OnClickListener
+        this.calibration_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 X8ModifyModeController.this.topLayout.setVisibility(8);
                 X8ModifyModeController.this.itemLayout.setVisibility(8);
                 X8ModifyModeController.this.modeControllerListener.onOpen();
                 if (X8ModifyModeController.this.calibrationViewStub == null) {
-                    X8ModifyModeController.this.calibrationViewStub = (ViewStub) X8ModifyModeController.this.handleView.findViewById(R.id.x8_calibration_view);
+                    X8ModifyModeController.this.calibrationViewStub = X8ModifyModeController.this.handleView.findViewById(R.id.x8_calibration_view);
                     X8ModifyModeController.this.calibrationView = X8ModifyModeController.this.calibrationViewStub.inflate();
                     X8ModifyModeController.this.aircraftCalibrationController = new X8AircraftCalibrationController(X8ModifyModeController.this.calibrationView);
                 }
                 X8ModifyModeController.this.aircraftCalibrationController.setFcManager(X8ModifyModeController.this.fcCtrlManager);
                 X8ModifyModeController.this.aircraftCalibrationController.showItem();
-                X8ModifyModeController.this.aircraftCalibrationController.setModeControllerListener(new IX8GeneraModifyModeControllerListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8ModifyModeController.2.1
-                    @Override // com.fimi.app.x8s.interfaces.IX8GeneraModifyModeControllerListener
+                X8ModifyModeController.this.aircraftCalibrationController.setModeControllerListener(new IX8GeneraModifyModeControllerListener() {
+                    @Override
                     public void returnBack() {
                         X8ModifyModeController.this.topLayout.setVisibility(0);
                         X8ModifyModeController.this.itemLayout.setVisibility(0);
                     }
 
-                    @Override // com.fimi.app.x8s.interfaces.IX8GeneraModifyModeControllerListener
+                    @Override
                     public void onOpen() {
                     }
 
-                    @Override // com.fimi.app.x8s.interfaces.IX8GeneraModifyModeControllerListener
+                    @Override
                     public void onClose() {
                         X8ModifyModeController.this.modeControllerListener.onClose();
                     }
@@ -163,36 +163,36 @@ public class X8ModifyModeController extends AbsX8MenuBoxControllers implements X
                 X8ModifyModeController.this.itemLayout.setVisibility(8);
             }
         });
-        this.back_btn.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8ModifyModeController.3
-            @Override // android.view.View.OnClickListener
+        this.back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 X8ModifyModeController.this.handleView.setVisibility(8);
                 X8ModifyModeController.this.modeControllerListener.returnBack();
             }
         });
-        this.mGimbalSensorLayout.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8ModifyModeController.4
-            @Override // android.view.View.OnClickListener
+        this.mGimbalSensorLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 if (X8ModifyModeController.this.gimbalSensorViewStub == null) {
-                    X8ModifyModeController.this.gimbalSensorViewStub = (ViewStub) X8ModifyModeController.this.handleView.findViewById(R.id.x8_gimbal_sensor_view);
+                    X8ModifyModeController.this.gimbalSensorViewStub = X8ModifyModeController.this.handleView.findViewById(R.id.x8_gimbal_sensor_view);
                     X8ModifyModeController.this.gimbalSensorView = X8ModifyModeController.this.gimbalSensorViewStub.inflate();
                 }
                 X8ModifyModeController.this.mGimbalSensorController = new X8modifyGimbalSensorController(X8ModifyModeController.this.gimbalSensorView);
                 X8ModifyModeController.this.mGimbalSensorController.setFcManager(X8ModifyModeController.this.fcCtrlManager);
                 X8ModifyModeController.this.mGimbalSensorController.setX8GimbalManager(X8ModifyModeController.this.mX8GimbalManager);
                 X8ModifyModeController.this.mGimbalSensorController.showItem();
-                X8ModifyModeController.this.mGimbalSensorController.setModeControllerListener(new IX8GeneraModifyModeControllerListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8ModifyModeController.4.1
-                    @Override // com.fimi.app.x8s.interfaces.IX8GeneraModifyModeControllerListener
+                X8ModifyModeController.this.mGimbalSensorController.setModeControllerListener(new IX8GeneraModifyModeControllerListener() {
+                    @Override
                     public void returnBack() {
                         X8ModifyModeController.this.topLayout.setVisibility(0);
                         X8ModifyModeController.this.itemLayout.setVisibility(0);
                     }
 
-                    @Override // com.fimi.app.x8s.interfaces.IX8GeneraModifyModeControllerListener
+                    @Override
                     public void onOpen() {
                     }
 
-                    @Override // com.fimi.app.x8s.interfaces.IX8GeneraModifyModeControllerListener
+                    @Override
                     public void onClose() {
                     }
                 });
@@ -200,28 +200,28 @@ public class X8ModifyModeController extends AbsX8MenuBoxControllers implements X
                 X8ModifyModeController.this.itemLayout.setVisibility(8);
             }
         });
-        this.sensorLayout.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8ModifyModeController.5
-            @Override // android.view.View.OnClickListener
+        this.sensorLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 if (X8ModifyModeController.this.sensorViewStub == null) {
-                    X8ModifyModeController.this.sensorViewStub = (ViewStub) X8ModifyModeController.this.handleView.findViewById(R.id.x8_sensor_view);
+                    X8ModifyModeController.this.sensorViewStub = X8ModifyModeController.this.handleView.findViewById(R.id.x8_sensor_view);
                     X8ModifyModeController.this.sensorView = X8ModifyModeController.this.sensorViewStub.inflate();
                     X8ModifyModeController.this.sensorController = new X8ModifySensorController(X8ModifyModeController.this.sensorView);
                 }
                 X8ModifyModeController.this.sensorController.setFcManager(X8ModifyModeController.this.fcCtrlManager);
                 X8ModifyModeController.this.sensorController.showItem();
-                X8ModifyModeController.this.sensorController.setModeControllerListener(new IX8GeneraModifyModeControllerListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8ModifyModeController.5.1
-                    @Override // com.fimi.app.x8s.interfaces.IX8GeneraModifyModeControllerListener
+                X8ModifyModeController.this.sensorController.setModeControllerListener(new IX8GeneraModifyModeControllerListener() {
+                    @Override
                     public void returnBack() {
                         X8ModifyModeController.this.topLayout.setVisibility(0);
                         X8ModifyModeController.this.itemLayout.setVisibility(0);
                     }
 
-                    @Override // com.fimi.app.x8s.interfaces.IX8GeneraModifyModeControllerListener
+                    @Override
                     public void onOpen() {
                     }
 
-                    @Override // com.fimi.app.x8s.interfaces.IX8GeneraModifyModeControllerListener
+                    @Override
                     public void onClose() {
                     }
                 });
@@ -229,18 +229,18 @@ public class X8ModifyModeController extends AbsX8MenuBoxControllers implements X
                 X8ModifyModeController.this.itemLayout.setVisibility(8);
             }
         });
-        this.checkLayout.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8ModifyModeController.6
-            @Override // android.view.View.OnClickListener
+        this.checkLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
             }
         });
-        this.blackBoxLayout.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8ModifyModeController.7
-            @Override // android.view.View.OnClickListener
+        this.blackBoxLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
             }
         });
-        this.blackBoxLogLayout.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8ModifyModeController.8
-            @Override // android.view.View.OnClickListener
+        this.blackBoxLogLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 X8ModifyModeController.this.topLayout.setVisibility(8);
                 X8ModifyModeController.this.itemLayout.setVisibility(8);
@@ -248,8 +248,8 @@ public class X8ModifyModeController extends AbsX8MenuBoxControllers implements X
                 X8ModifyModeController.this.modeControllerListener.onOpen();
             }
         });
-        this.mFormatStorage.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8ModifyModeController.9
-            @Override // android.view.View.OnClickListener
+        this.mFormatStorage.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 X8ModifyModeController.this.showExitDialog();
             }
@@ -265,11 +265,11 @@ public class X8ModifyModeController extends AbsX8MenuBoxControllers implements X
         this.dialog.show();
     }
 
-    @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+    @Override
     public void onLeft() {
     }
 
-    @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+    @Override
     public void onRight() {
         this.mFormatState = FormatState.SEND_FORMAT_LOG;
         this.mHandler.sendEmptyMessage(0);
@@ -296,8 +296,8 @@ public class X8ModifyModeController extends AbsX8MenuBoxControllers implements X
     }
 
     public void setFormatLogStorage() {
-        this.fcCtrlManager.setFormatStorage(X8Format.FormatType.FORMAT_SENIOR.ordinal(), X8Format.FormatDevid.FORMAT_DEVID_LOG.ordinal(), new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8ModifyModeController.10
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcCtrlManager.setFormatStorage(X8Format.FormatType.FORMAT_SENIOR.ordinal(), X8Format.FormatDevid.FORMAT_DEVID_LOG.ordinal(), new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (!cmdResult.isSuccess) {
                     X8ToastUtil.showToast(X8ModifyModeController.this.rootView.getContext(), X8ModifyModeController.this.rootView.getContext().getString(R.string.x8_modify_format_storage_fail), 1);
@@ -313,8 +313,8 @@ public class X8ModifyModeController extends AbsX8MenuBoxControllers implements X
     }
 
     public void setFormatUpgradeStorage() {
-        this.fcCtrlManager.setFormatStorage(X8Format.FormatType.FORMAT_SENIOR.ordinal(), X8Format.FormatDevid.FORMAT_DEVID_UPGRADE.ordinal(), new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8ModifyModeController.11
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcCtrlManager.setFormatStorage(X8Format.FormatType.FORMAT_SENIOR.ordinal(), X8Format.FormatDevid.FORMAT_DEVID_UPGRADE.ordinal(), new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (!cmdResult.isSuccess) {
                     X8ToastUtil.showToast(X8ModifyModeController.this.rootView.getContext(), X8ModifyModeController.this.rootView.getContext().getString(R.string.x8_modify_format_storage_fail), 1);
@@ -330,8 +330,8 @@ public class X8ModifyModeController extends AbsX8MenuBoxControllers implements X
     }
 
     public void getFormatState() {
-        this.fcCtrlManager.getFormatStorage(X8Format.FormatDevid.FORMAT_DEVID_ALL.ordinal(), new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8ModifyModeController.12
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcCtrlManager.getFormatStorage(X8Format.FormatDevid.FORMAT_DEVID_ALL.ordinal(), new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (!cmdResult.isSuccess) {
                     X8ToastUtil.showToast(X8ModifyModeController.this.rootView.getContext(), X8ModifyModeController.this.rootView.getContext().getString(R.string.x8_modify_format_storage_fail), 1);
@@ -354,15 +354,15 @@ public class X8ModifyModeController extends AbsX8MenuBoxControllers implements X
         });
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void showItem() {
         super.showItem();
-        this.apkVersionManager.getAppSetting(new ApkVersionManager.AppSettingListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8ModifyModeController.13
-            @Override // com.fimi.network.ApkVersionManager.AppSettingListener
+        this.apkVersionManager.getAppSetting(new ApkVersionManager.AppSettingListener() {
+            @Override
             public void onAppSettingListener() {
                 ApkVersionManager apkVersionManager = X8ModifyModeController.this.apkVersionManager;
                 X8ModifyModeController.this.apkVersionManager.getClass();
@@ -388,7 +388,7 @@ public class X8ModifyModeController extends AbsX8MenuBoxControllers implements X
         this.itemLayout.setVisibility(0);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         if (b) {
             DroneState droneState = StateManager.getInstance().getX8Drone();
@@ -412,7 +412,7 @@ public class X8ModifyModeController extends AbsX8MenuBoxControllers implements X
     public void onConnectedState(ConectState state) {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void closeItem() {
         super.closeItem();
         if (this.sensorController != null) {
@@ -428,15 +428,12 @@ public class X8ModifyModeController extends AbsX8MenuBoxControllers implements X
         this.nextContentLayout.removeAllViews();
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8MenuBoxControllers
+    @Override
     public boolean isRunningTask() {
-        if (this.mX8BlackBoxController == null || !this.mX8BlackBoxController.isRunningTask()) {
-            return true;
-        }
-        return false;
+        return this.mX8BlackBoxController == null || !this.mX8BlackBoxController.isRunningTask();
     }
 
-    /* loaded from: classes.dex */
+
     public enum FormatState {
         IDLE,
         SEND_FORMAT_LOG,
@@ -445,7 +442,7 @@ public class X8ModifyModeController extends AbsX8MenuBoxControllers implements X
     }
 
     /* renamed from: com.fimi.app.x8s.controls.fcsettting.X8ModifyModeController$14 */
-    /* loaded from: classes.dex */
+
     static /* synthetic */ class AnonymousClass14 {
         static final /* synthetic */ int[] $SwitchMap$com$fimi$app$x8s$controls$fcsettting$X8ModifyModeController$FormatState = new int[FormatState.values().length];
 

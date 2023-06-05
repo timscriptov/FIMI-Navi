@@ -16,7 +16,7 @@ public class X8FixedEditText extends EditText {
     final String TAG;
     private int MAX;
     private int MIN;
-    private Context context;
+    private final Context context;
     private String fixedText;
     private OnInputChangedListener listener;
 

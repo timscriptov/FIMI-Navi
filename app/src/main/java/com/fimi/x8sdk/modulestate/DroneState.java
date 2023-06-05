@@ -11,7 +11,7 @@ import com.fimi.x8sdk.dataparser.AutoHomeInfo;
 import com.fimi.x8sdk.dataparser.AutoNavigationState;
 import com.fimi.x8sdk.entity.X8AppSettingLog;
 
-/* loaded from: classes2.dex */
+
 public class DroneState extends BaseState {
     public static final int CAMP = 5000;
     public static final int DEFAULT = 1500;
@@ -172,7 +172,7 @@ public class DroneState extends BaseState {
         return version;
     }
 
-    @Override // com.fimi.x8sdk.modulestate.BaseState
+    @Override
     public boolean isAvailable() {
         AckVersion version = StateManager.getInstance().getVersionState().getModuleFcAckVersion();
         return version != null && version.getSoftVersion() >= 0;

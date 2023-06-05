@@ -15,7 +15,7 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
-/* loaded from: classes.dex */
+
 public class ImageLoaderManager {
     private static final int CONNECTION_TIME_OUT = 5000;
     private static final int DISK_CACHE_SIZE = 52428800;

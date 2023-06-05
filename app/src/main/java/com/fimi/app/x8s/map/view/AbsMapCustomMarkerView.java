@@ -2,7 +2,7 @@ package com.fimi.app.x8s.map.view;
 
 import android.content.Context;
 
-/* loaded from: classes.dex */
+
 public abstract class AbsMapCustomMarkerView {
     public abstract Object createCurrentPointView(Context context, int i, int i2, int i3);
 

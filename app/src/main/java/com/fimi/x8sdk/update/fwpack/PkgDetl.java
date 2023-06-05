@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes2.dex */
+
 public class PkgDetl implements Serializable {
     private static final long serialVersionUID = 1;
     private List<FwInfo> fws = new ArrayList();

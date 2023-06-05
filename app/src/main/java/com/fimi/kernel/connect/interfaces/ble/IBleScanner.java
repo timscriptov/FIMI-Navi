@@ -1,6 +1,6 @@
 package com.fimi.kernel.connect.interfaces.ble;
 
-/* loaded from: classes.dex */
+
 public interface IBleScanner {
     boolean isOpenBluetooth();
 

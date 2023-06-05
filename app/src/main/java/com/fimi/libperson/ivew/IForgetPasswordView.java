@@ -1,6 +1,6 @@
 package com.fimi.libperson.ivew;
 
-/* loaded from: classes.dex */
+
 public interface IForgetPasswordView {
     void inputVerfication(boolean z, String str);
 

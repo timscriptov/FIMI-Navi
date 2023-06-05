@@ -1,6 +1,6 @@
 package com.fimi.kernel.store.sqlite.entity;
 
-/* loaded from: classes.dex */
+
 public class GH2DataStaticInfo {
     public String createTime;
     public int gimbalVersion;

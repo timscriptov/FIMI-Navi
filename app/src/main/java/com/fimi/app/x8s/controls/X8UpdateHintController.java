@@ -18,16 +18,16 @@ import com.fimi.x8sdk.update.UpdateUtil;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class X8UpdateHintController {
-    private Activity context;
+    private final Activity context;
     private X8DoubleCustomDialog dialogManagerUpdate;
-    private IUpdateCheckAction iUpdateCheckAction = new IUpdateCheckAction() { // from class: com.fimi.app.x8s.controls.X8UpdateHintController.4
-        @Override // com.fimi.x8sdk.ivew.IUpdateCheckAction
+    private final IUpdateCheckAction iUpdateCheckAction = new IUpdateCheckAction() {
+        @Override
         public void showIsUpdate(boolean isUpdate, int reason) {
         }
 
-        @Override // com.fimi.x8sdk.ivew.IUpdateCheckAction
+        @Override
         public void checkUpdate() {
             X8UpdateHintController.this.showUpdateDialog();
         }
@@ -44,7 +44,7 @@ public class X8UpdateHintController {
                 SPStoreManager.getInstance().saveInt(HostConstants.SP_KEY_UPDATE_CHECK, 1);
                 if (UpdateUtil.isForceUpdate()) {
                     if (this.dialogManagerUpdate == null || !this.dialogManagerUpdate.isShowing()) {
-                        this.dialogManagerUpdate = new X8DoubleCustomDialog(this.context, this.context.getString(R.string.x8_update_fw_title), this.context.getString(R.string.x8_update_tip), this.context.getString(R.string.fimi_sdk_update_now), this.context.getString(R.string.fimi_sdk_update_return), new X8DoubleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.X8UpdateHintController.1
+                        this.dialogManagerUpdate = new X8DoubleCustomDialog(this.context, this.context.getString(R.string.x8_update_fw_title), this.context.getString(R.string.x8_update_tip), this.context.getString(R.string.fimi_sdk_update_now), this.context.getString(R.string.fimi_sdk_update_return), new X8DoubleCustomDialog.onDialogButtonClickListener() {
                             @Override
                             // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
                             public void onLeft() {
@@ -60,8 +60,8 @@ public class X8UpdateHintController {
                             }
                         });
                         this.dialogManagerUpdate.setCanceledOnTouchOutside(false);
-                        this.dialogManagerUpdate.setOnKeyListener(new DialogInterface.OnKeyListener() { // from class: com.fimi.app.x8s.controls.X8UpdateHintController.2
-                            @Override // android.content.DialogInterface.OnKeyListener
+                        this.dialogManagerUpdate.setOnKeyListener(new DialogInterface.OnKeyListener() {
+                            @Override
                             public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
                                 if (keyCode != 4 || event.getRepeatCount() == 0) {
                                 }
@@ -76,7 +76,7 @@ public class X8UpdateHintController {
                     }
                     return;
                 }
-                this.dialogManagerUpdate = new X8DoubleCustomDialog(this.context, this.context.getString(R.string.x8_update_fw_title), this.context.getString(R.string.x8_update_tip), this.context.getString(R.string.fimi_sdk_update_ignore), this.context.getString(R.string.fimi_sdk_update_now), new X8DoubleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.X8UpdateHintController.3
+                this.dialogManagerUpdate = new X8DoubleCustomDialog(this.context, this.context.getString(R.string.x8_update_fw_title), this.context.getString(R.string.x8_update_tip), this.context.getString(R.string.fimi_sdk_update_ignore), this.context.getString(R.string.fimi_sdk_update_now), new X8DoubleCustomDialog.onDialogButtonClickListener() {
                     @Override
                     // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
                     public void onLeft() {

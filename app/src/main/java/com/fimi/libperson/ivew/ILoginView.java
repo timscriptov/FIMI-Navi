@@ -1,6 +1,6 @@
 package com.fimi.libperson.ivew;
 
-/* loaded from: classes.dex */
+
 public interface ILoginView {
     void emailLoginResult(boolean z, String str);
 

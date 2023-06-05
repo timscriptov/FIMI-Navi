@@ -18,7 +18,7 @@ import com.fimi.kernel.dataparser.usb.UiCallBackListener;
 import com.fimi.x8sdk.controller.FcCtrlManager;
 import com.fimi.x8sdk.dataparser.AckGetRcMode;
 
-/* loaded from: classes.dex */
+
 public class X8RockerModeController extends AbsX8MenuBoxControllers implements View.OnClickListener {
     IX8RcRockerListener onRcCtrlModelListener;
     private int curMode;
@@ -52,13 +52,13 @@ public class X8RockerModeController extends AbsX8MenuBoxControllers implements V
     }
 
     public void showApDialog(final int index) {
-        X8DoubleCustomDialog modelDialog = new X8DoubleCustomDialog(this.rootView.getContext(), getString(R.string.x8_rc_setting_model_dialog_title), getString(R.string.x8_rc_setting_model_dialog_content), new X8DoubleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8RockerModeController.1
-            @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+        X8DoubleCustomDialog modelDialog = new X8DoubleCustomDialog(this.rootView.getContext(), getString(R.string.x8_rc_setting_model_dialog_title), getString(R.string.x8_rc_setting_model_dialog_content), new X8DoubleCustomDialog.onDialogButtonClickListener() {
+            @Override
             public void onLeft() {
                 X8RockerModeController.this.switchRocker(X8RockerModeController.this.curMode);
             }
 
-            @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+            @Override
             public void onRight() {
                 byte mode = 0;
                 switch (index) {
@@ -73,8 +73,8 @@ public class X8RockerModeController extends AbsX8MenuBoxControllers implements V
                         break;
                 }
                 final byte temp = mode;
-                X8RockerModeController.this.fcCtrlManager.setRcCtrlMode(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8RockerModeController.1.1
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                X8RockerModeController.this.fcCtrlManager.setRcCtrlMode(new UiCallBackListener() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, Object o) {
                         if (cmdResult.isSuccess()) {
                             X8RockerModeController.this.switchRocker(index);
@@ -82,8 +82,8 @@ public class X8RockerModeController extends AbsX8MenuBoxControllers implements V
                                 X8RockerModeController.this.onRcCtrlModelListener.onRcCtrlModelListener(temp);
                             }
                             if (X8RockerModeController.this.fcCtrlManager != null) {
-                                X8RockerModeController.this.fcCtrlManager.getRcCtrlMode(new UiCallBackListener<AckGetRcMode>() { // from class: com.fimi.app.x8s.controls.fcsettting.X8RockerModeController.1.1.1
-                                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                                X8RockerModeController.this.fcCtrlManager.getRcCtrlMode(new UiCallBackListener<AckGetRcMode>() {
+                                    @Override
                                     public void onComplete(CmdResult cmdResult2, AckGetRcMode obj) {
                                         if (obj == null) {
                                         }
@@ -101,32 +101,32 @@ public class X8RockerModeController extends AbsX8MenuBoxControllers implements V
         modelDialog.show();
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
         LayoutInflater inflater = LayoutInflater.from(rootView.getContext());
         this.contentView = inflater.inflate(R.layout.x8_main_rc_item_rocker_mode, (ViewGroup) rootView, true);
-        this.imgReturn = (ImageView) this.contentView.findViewById(R.id.img_return);
-        this.thSwitchRocker = (X8TabItem) this.contentView.findViewById(R.id.th_switch_rockers);
-        this.imgRockerLeft = (ImageView) this.contentView.findViewById(R.id.img_rocker_left);
-        this.imgRockerRight = (ImageView) this.contentView.findViewById(R.id.img_rocker_right);
-        this.tvLeftSideLeft = (TextView) this.contentView.findViewById(R.id.tv_left_side_left);
-        this.tvLeftSideRight = (TextView) this.contentView.findViewById(R.id.tv_left_side_right);
-        this.tvLeftSideUp = (TextView) this.contentView.findViewById(R.id.tv_left_side_up);
-        this.tvLeftSideDown = (TextView) this.contentView.findViewById(R.id.tv_left_side_down);
-        this.tvRightSideLeft = (TextView) this.contentView.findViewById(R.id.tv_right_side_left);
-        this.tvRightSideRight = (TextView) this.contentView.findViewById(R.id.tv_right_side_right);
-        this.tvRightSideUp = (TextView) this.contentView.findViewById(R.id.tv_right_side_up);
-        this.tvRightSideDown = (TextView) this.contentView.findViewById(R.id.tv_right_side_down);
+        this.imgReturn = this.contentView.findViewById(R.id.img_return);
+        this.thSwitchRocker = this.contentView.findViewById(R.id.th_switch_rockers);
+        this.imgRockerLeft = this.contentView.findViewById(R.id.img_rocker_left);
+        this.imgRockerRight = this.contentView.findViewById(R.id.img_rocker_right);
+        this.tvLeftSideLeft = this.contentView.findViewById(R.id.tv_left_side_left);
+        this.tvLeftSideRight = this.contentView.findViewById(R.id.tv_left_side_right);
+        this.tvLeftSideUp = this.contentView.findViewById(R.id.tv_left_side_up);
+        this.tvLeftSideDown = this.contentView.findViewById(R.id.tv_left_side_down);
+        this.tvRightSideLeft = this.contentView.findViewById(R.id.tv_right_side_left);
+        this.tvRightSideRight = this.contentView.findViewById(R.id.tv_right_side_right);
+        this.tvRightSideUp = this.contentView.findViewById(R.id.tv_right_side_up);
+        this.tvRightSideDown = this.contentView.findViewById(R.id.tv_right_side_down);
         this.mContext = this.contentView.getContext();
         initActions();
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
         if (this.contentView != null) {
             this.imgReturn.setOnClickListener(this);
-            this.thSwitchRocker.setOnSelectListener(new X8TabItem.OnSelectListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8RockerModeController.2
-                @Override // com.fimi.app.x8s.widget.X8TabItem.OnSelectListener
+            this.thSwitchRocker.setOnSelectListener(new X8TabItem.OnSelectListener() {
+                @Override
                 public void onSelect(int index, String text) {
                     if (index != X8RockerModeController.this.curMode) {
                         X8RockerModeController.this.showApDialog(index);
@@ -136,15 +136,15 @@ public class X8RockerModeController extends AbsX8MenuBoxControllers implements V
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.img_return) {
@@ -157,8 +157,8 @@ public class X8RockerModeController extends AbsX8MenuBoxControllers implements V
 
     private void requestDefaultValue() {
         if (this.fcCtrlManager != null) {
-            this.fcCtrlManager.getRcCtrlMode(new UiCallBackListener<AckGetRcMode>() { // from class: com.fimi.app.x8s.controls.fcsettting.X8RockerModeController.3
-                @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+            this.fcCtrlManager.getRcCtrlMode(new UiCallBackListener<AckGetRcMode>() {
+                @Override
                 public void onComplete(CmdResult cmdResult, AckGetRcMode obj) {
                     if (cmdResult.isSuccess()) {
                         int result = obj.getMode();
@@ -173,7 +173,6 @@ public class X8RockerModeController extends AbsX8MenuBoxControllers implements V
                                 X8RockerModeController.this.switchRocker(2);
                                 return;
                             default:
-                                return;
                         }
                     }
                 }
@@ -181,7 +180,7 @@ public class X8RockerModeController extends AbsX8MenuBoxControllers implements V
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void showItem() {
         this.isShow = true;
         this.contentView.setVisibility(0);
@@ -190,7 +189,7 @@ public class X8RockerModeController extends AbsX8MenuBoxControllers implements V
         onRcConnected(this.isRcConnect);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void closeItem() {
         this.isShow = false;
         this.contentView.setVisibility(8);
@@ -242,7 +241,6 @@ public class X8RockerModeController extends AbsX8MenuBoxControllers implements V
                 this.tvRightSideDown.setText(R.string.x8_rc_setting_rc_rocker_to_down);
                 return;
             default:
-                return;
         }
     }
 }

@@ -6,7 +6,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.HttpCookie;
 
-/* loaded from: classes.dex */
+
 public class SerializableHttpCookie implements Serializable {
     private static final long serialVersionUID = 6374381323722046732L;
     private final transient HttpCookie cookie;

@@ -33,12 +33,12 @@ import com.fimi.x8sdk.dataparser.AckNormalCmds;
 import com.fimi.x8sdk.dataparser.AutoFcSportState;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes.dex */
+
 public class X8AiScrewExcuteController extends AbsX8AiController implements View.OnClickListener, X8DoubleCustomDialog.onDialogButtonClickListener {
     protected int MAX_WIDTH;
     protected boolean isShow;
     protected int width;
-    private X8sMainActivity activity;
+    private final X8sMainActivity activity;
     private View blank;
     private double currentLat;
     private double currentLog;
@@ -59,7 +59,7 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
     private IX8ScrewListener listener;
     private FcCtrlManager mFcCtrlManager;
     private FcManager mFcManager;
-    private IX8NextViewListener mIX8NextViewListener;
+    private final IX8NextViewListener mIX8NextViewListener;
     private TextView mTvRadius;
     private X8AiScrewNextModule mX8AiScrewNextModule;
     private View nextRootView;
@@ -78,13 +78,13 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
         this.width = X8Application.ANIMATION_WIDTH;
         this.timeSend = 0;
         this.state = ScrewState.IDLE;
-        this.mIX8NextViewListener = new IX8NextViewListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiScrewExcuteController.2
-            @Override // com.fimi.app.x8s.interfaces.IX8NextViewListener
+        this.mIX8NextViewListener = new IX8NextViewListener() {
+            @Override
             public void onBackClick() {
                 X8AiScrewExcuteController.this.closeNextUi(true);
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8NextViewListener
+            @Override
             public void onExcuteClick() {
                 X8AiScrewExcuteController.this.closeNextUi(false);
                 X8AiScrewExcuteController.this.imgSuroundBg.setVisibility(8);
@@ -94,7 +94,7 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
                 X8AiScrewExcuteController.this.listener.onAiScrewRunning();
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8NextViewListener
+            @Override
             public void onSaveClick() {
             }
         };
@@ -110,11 +110,11 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
         return this.lastLat;
     }
 
-    @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+    @Override
     public void onLeft() {
     }
 
-    @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+    @Override
     public void onRight() {
         if (this.state == ScrewState.RUNNING) {
             sendExiteCmd();
@@ -125,27 +125,27 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
         this.listener = listener;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
     }
 
     public void initViewStubViews(View view) {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public boolean onClickBackKey() {
         return false;
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.img_ai_follow_back) {
@@ -193,13 +193,13 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
         this.isShow = true;
         LayoutInflater inflater = LayoutInflater.from(this.rootView.getContext());
         this.handleView = inflater.inflate(R.layout.x8_ai_screw_layout, (ViewGroup) this.rootView, true);
-        this.imgSuroundBg = (ImageView) this.handleView.findViewById(R.id.img_ai_suround_bg);
-        this.imgBack = (ImageView) this.handleView.findViewById(R.id.img_ai_follow_back);
-        this.tvP2PTip = (TextView) this.handleView.findViewById(R.id.img_ai_p2p_tip);
-        this.tvPoint = (TextView) this.handleView.findViewById(R.id.img_ai_set_dot);
+        this.imgSuroundBg = this.handleView.findViewById(R.id.img_ai_suround_bg);
+        this.imgBack = this.handleView.findViewById(R.id.img_ai_follow_back);
+        this.tvP2PTip = this.handleView.findViewById(R.id.img_ai_p2p_tip);
+        this.tvPoint = this.handleView.findViewById(R.id.img_ai_set_dot);
         this.vRadiusBg = this.handleView.findViewById(R.id.rl_x8_ai_surround_radius);
-        this.mTvRadius = (TextView) this.handleView.findViewById(R.id.tv_ai_radius);
-        this.tvTip = (X8AiTipWithCloseView) this.handleView.findViewById(R.id.v_content_tip);
+        this.mTvRadius = this.handleView.findViewById(R.id.tv_ai_radius);
+        this.tvTip = this.handleView.findViewById(R.id.v_content_tip);
         this.tvTip.setTipText(this.handleView.getContext().getString(R.string.x8_ai_surround_select_point));
         this.flagSmall = this.handleView.findViewById(R.id.rl_flag_small);
         this.flagSmall.setOnClickListener(this);
@@ -244,7 +244,7 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
             this.width = X8Application.ANIMATION_WIDTH;
             ObjectAnimator animatorY = ObjectAnimator.ofFloat(this.nextRootView, "translationX", this.width, 0.0f);
             animatorY.setDuration(300L);
-            animatorY.addListener(new AnimatorListenerAdapter() { // from class: com.fimi.app.x8s.controls.aifly.X8AiScrewExcuteController.1
+            animatorY.addListener(new AnimatorListenerAdapter() {
                 @Override
                 // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationEnd(Animator animation) {
@@ -267,7 +267,7 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
             ObjectAnimator translationRight = ObjectAnimator.ofFloat(this.nextRootView, "translationX", 0.0f, this.width);
             translationRight.setDuration(300L);
             translationRight.start();
-            translationRight.addListener(new AnimatorListenerAdapter() { // from class: com.fimi.app.x8s.controls.aifly.X8AiScrewExcuteController.3
+            translationRight.addListener(new AnimatorListenerAdapter() {
                 @Override
                 // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationEnd(Animator animation) {
@@ -289,7 +289,7 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
         this.mFcManager = mFcManager;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public boolean isShow() {
         if (StateManager.getInstance().getX8Drone().getCtrlMode() == 4) {
             return false;
@@ -312,7 +312,7 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
         onTaskComplete(mode == 1);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         if (this.isShow) {
             if (!b) {
@@ -345,8 +345,8 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
     }
 
     public void sendExiteCmd() {
-        this.mFcManager.setScrewExite(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiScrewExcuteController.4
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.mFcManager.setScrewExite(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8AiScrewExcuteController.this.taskExit();
@@ -426,8 +426,8 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
     private void sendCircleCmd() {
         this.currentLog = StateManager.getInstance().getX8Drone().getLongitude();
         this.currentLat = StateManager.getInstance().getX8Drone().getLatitude();
-        this.mFcManager.setAiSurroundCiclePoint(getLastLng(), getLastLat(), this.height, this.currentLog, this.currentLat, this.height, 2, new UiCallBackListener<AckNormalCmds>() { // from class: com.fimi.app.x8s.controls.aifly.X8AiScrewExcuteController.5
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.mFcManager.setAiSurroundCiclePoint(getLastLng(), getLastLat(), this.height, this.currentLog, this.currentLat, this.height, 2, new UiCallBackListener<AckNormalCmds>() {
+            @Override
             public void onComplete(CmdResult cmdResult, AckNormalCmds o) {
                 if (cmdResult.isSuccess()) {
                     X8AiScrewExcuteController.this.state = ScrewState.SETRADIUS;
@@ -455,8 +455,8 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
     }
 
     public void getPoint() {
-        this.mFcManager.getAiSurroundCiclePoint(new UiCallBackListener<AckGetAiSurroundPoint>() { // from class: com.fimi.app.x8s.controls.aifly.X8AiScrewExcuteController.6
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.mFcManager.getAiSurroundCiclePoint(new UiCallBackListener<AckGetAiSurroundPoint>() {
+            @Override
             public void onComplete(CmdResult cmdResult, AckGetAiSurroundPoint ackGetAiSurroundPoint) {
                 if (!cmdResult.isSuccess()) {
                     X8AiScrewExcuteController.this.isGetPoint = false;
@@ -474,8 +474,8 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
     }
 
     public void getMaxDistance() {
-        this.mFcManager.getScrewPrameter(new UiCallBackListener<AckAiScrewPrameter>() { // from class: com.fimi.app.x8s.controls.aifly.X8AiScrewExcuteController.7
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.mFcManager.getScrewPrameter(new UiCallBackListener<AckAiScrewPrameter>() {
+            @Override
             public void onComplete(CmdResult cmdResult, AckAiScrewPrameter ackAiScrewPrameter) {
                 if (cmdResult.isSuccess()) {
                     X8AiScrewExcuteController.this.isGetDistance = true;
@@ -488,8 +488,8 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
     }
 
     public void getSpeed() {
-        this.mFcManager.getAiSurroundSpeed(new UiCallBackListener<AckAiSurrounds>() { // from class: com.fimi.app.x8s.controls.aifly.X8AiScrewExcuteController.8
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.mFcManager.getAiSurroundSpeed(new UiCallBackListener<AckAiSurrounds>() {
+            @Override
             public void onComplete(CmdResult cmdResult, AckAiSurrounds o) {
                 if (cmdResult.isSuccess()) {
                     X8AiScrewExcuteController.this.isGetSpeed = true;
@@ -517,8 +517,8 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
         if (this.state != ScrewState.RUNNING) {
             if (this.timeSend == 0) {
                 this.timeSend = 1;
-                this.activity.getFcManager().sysCtrlMode2AiVc(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiScrewExcuteController.9
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                this.activity.getFcManager().sysCtrlMode2AiVc(new UiCallBackListener() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, Object o) {
                     }
                 }, X8Task.VCM_SPIRAL.ordinal());
@@ -528,7 +528,7 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
         }
     }
 
-    /* loaded from: classes.dex */
+
     public enum ScrewState {
         IDLE,
         SETDOT,

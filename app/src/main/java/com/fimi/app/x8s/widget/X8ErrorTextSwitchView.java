@@ -18,10 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class X8ErrorTextSwitchView extends TextSwitcher implements ViewSwitcher.ViewFactory {
-    private int colorRes;
-    private Context context;
+    private final int colorRes;
+    private final Context context;
     private int index;
-    private Handler mHandler;
+    private final Handler mHandler;
     private IX8ErrorTextSwitchView mRotationText;
     private TextView mTv;
     private List<String> resString;

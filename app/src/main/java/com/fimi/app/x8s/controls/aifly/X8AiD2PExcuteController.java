@@ -34,13 +34,13 @@ import com.fimi.x8sdk.cmdsenum.X8Task;
 import com.fimi.x8sdk.dataparser.AckGetAiPoint;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes.dex */
+
 public class X8AiD2PExcuteController extends AbsX8AiController implements View.OnClickListener, X8MainPitchingAngle.OnProgressListener, IX8MarkerListener, X8DoubleCustomDialog.onDialogButtonClickListener, X8AiTrackController.OnAiTrackControllerListener {
     protected int MAX_WIDTH;
     protected boolean isNextShow;
     protected boolean isShow;
     protected int width;
-    private X8sMainActivity activity;
+    private final X8sMainActivity activity;
     private View blank;
     private X8DoubleCustomDialog dialog;
     private View flagSmall;
@@ -50,7 +50,7 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
     private boolean isDraw;
     private IX8Point2PointExcuteConttrollerListener listener;
     private AiGetPointState mAiGetPointState;
-    private IX8NextViewListener mIX8NextViewListener;
+    private final IX8NextViewListener mIX8NextViewListener;
     private X8AiTipWithCloseView mTipBgView;
     private X8AiPoint2PointExcuteConfirmModule mX8AiFollowPoint2PointExcuteConfirmModule;
     private X8MapVideoController mapVideoController;
@@ -67,13 +67,13 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
         this.state = X8AiPointState.IDLE;
         this.mAiGetPointState = AiGetPointState.IDLE;
         this.timeSend = 0;
-        this.mIX8NextViewListener = new IX8NextViewListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiD2PExcuteController.5
-            @Override // com.fimi.app.x8s.interfaces.IX8NextViewListener
+        this.mIX8NextViewListener = new IX8NextViewListener() {
+            @Override
             public void onBackClick() {
                 X8AiD2PExcuteController.this.closeNextUi(true);
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8NextViewListener
+            @Override
             public void onExcuteClick() {
                 X8AiD2PExcuteController.this.state = X8AiPointState.RUNNING;
                 X8AiD2PExcuteController.this.isDraw = true;
@@ -85,7 +85,7 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
                 X8AiD2PExcuteController.this.mapVideoController.getFimiMap().getAiPoint2PointManager().setRunning();
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8NextViewListener
+            @Override
             public void onSaveClick() {
             }
         };
@@ -93,7 +93,7 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
         this.state = state;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IX8MarkerListener
+    @Override
     public void onMarkerSelect(boolean onSelect, float altitude, MapPointLatLng mpl, boolean isClick) {
         if (onSelect) {
             this.vHeight.setVisibility(0);
@@ -105,33 +105,33 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
         this.imgNext.setEnabled(true);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IX8MarkerListener
+    @Override
     public void onMarkerSizeChange(int size) {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IX8MarkerListener
+    @Override
     public void onInterestSizeEnable(boolean b) {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IX8MarkerListener
+    @Override
     public Rect getDeletePosition() {
         return null;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IX8MarkerListener
+    @Override
     public void onRunIndex(int index, int action) {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IX8MarkerListener
+    @Override
     public int getOration() {
         return 0;
     }
 
-    @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+    @Override
     public void onLeft() {
     }
 
-    @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+    @Override
     public void onRight() {
         if (this.state == X8AiPointState.RUNNING || this.state == X8AiPointState.RUNNING2) {
             p2pTaskExite();
@@ -142,22 +142,22 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
         this.listener = listener;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
     }
 
     public void initViewStubViews(View view) {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.img_ai_follow_back) {
@@ -200,13 +200,13 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
         LayoutInflater inflater = LayoutInflater.from(this.rootView.getContext());
         this.handleView = inflater.inflate(R.layout.x8_ai_follow_point2point_layout, (ViewGroup) this.rootView, true);
         this.flagSmall = this.handleView.findViewById(R.id.rl_flag_small);
-        this.imgNext = (ImageView) this.handleView.findViewById(R.id.img_ai_follow_next);
+        this.imgNext = this.handleView.findViewById(R.id.img_ai_follow_next);
         this.imgNext.setEnabled(false);
-        this.imgBack = (ImageView) this.handleView.findViewById(R.id.img_ai_follow_back);
-        this.tvP2PTip = (TextView) this.handleView.findViewById(R.id.img_ai_p2p_tip);
-        this.vHeight = (X8MainPitchingAngle) this.handleView.findViewById(R.id.x8_pitching_angle);
-        this.mTipBgView = (X8AiTipWithCloseView) this.handleView.findViewById(R.id.img_ai_follow_tip);
-        this.imgVcToggle = (ImageView) this.handleView.findViewById(R.id.img_vc_targgle);
+        this.imgBack = this.handleView.findViewById(R.id.img_ai_follow_back);
+        this.tvP2PTip = this.handleView.findViewById(R.id.img_ai_p2p_tip);
+        this.vHeight = this.handleView.findViewById(R.id.x8_pitching_angle);
+        this.mTipBgView = this.handleView.findViewById(R.id.img_ai_follow_tip);
+        this.imgVcToggle = this.handleView.findViewById(R.id.img_vc_targgle);
         this.imgVcToggle.setSelected(true);
         this.imgVcToggle.setOnClickListener(this);
         if (this.state == X8AiPointState.IDLE) {
@@ -227,8 +227,8 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
         this.blank = this.rootView.findViewById(R.id.x8_main_ai_point2point_next_blank);
         this.mX8AiFollowPoint2PointExcuteConfirmModule = new X8AiPoint2PointExcuteConfirmModule();
         this.vHeight.setOnProgressListener(this);
-        this.mapVideoController.getFimiMap().setmX8AiItemMapListener(new IX8AiItemMapListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiD2PExcuteController.1
-            @Override // com.fimi.app.x8s.interfaces.IX8AiItemMapListener
+        this.mapVideoController.getFimiMap().setmX8AiItemMapListener(new IX8AiItemMapListener() {
+            @Override
             public X8AiMapItem getCurrentItem() {
                 return X8AiMapItem.AI_POINT_TO_POINT;
             }
@@ -272,7 +272,7 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
         }
     }
 
-    @Override // com.fimi.app.x8s.widget.X8MainPitchingAngle.OnProgressListener
+    @Override
     public void onProgressChanage(float progress) {
         this.mapVideoController.getFimiMap().getAiPoint2PointManager().setMarkerViewInfo(progress);
     }
@@ -284,7 +284,7 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
             ObjectAnimator translationRight = ObjectAnimator.ofFloat(this.nextRootView, "translationX", 0.0f, this.width);
             translationRight.setDuration(300L);
             translationRight.start();
-            translationRight.addListener(new AnimatorListenerAdapter() { // from class: com.fimi.app.x8s.controls.aifly.X8AiD2PExcuteController.2
+            translationRight.addListener(new AnimatorListenerAdapter() {
                 @Override
                 // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationEnd(Animator animation) {
@@ -327,8 +327,8 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
     }
 
     public void getPoint() {
-        this.activity.getFcManager().getAiFollowPoint(new UiCallBackListener<AckGetAiPoint>() { // from class: com.fimi.app.x8s.controls.aifly.X8AiD2PExcuteController.3
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.activity.getFcManager().getAiFollowPoint(new UiCallBackListener<AckGetAiPoint>() {
+            @Override
             public void onComplete(CmdResult cmdResult, AckGetAiPoint ackGetAiPoint) {
                 if (cmdResult.isSuccess() && ackGetAiPoint.getfLatLng() != null) {
                     X8AiD2PExcuteController.this.mapVideoController.getFimiMap().getAiPoint2PointManager().setMarkerByDevice(ackGetAiPoint.getfLatLng().latitude, ackGetAiPoint.getfLatLng().longitude, ackGetAiPoint.getAltitude());
@@ -341,7 +341,7 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
         });
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public boolean isShow() {
         if (StateManager.getInstance().getX8Drone().getCtrlMode() == 4) {
             return false;
@@ -359,8 +359,8 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
     }
 
     public void p2pTaskExite() {
-        this.activity.getFcManager().setAiFollowPoint2PointExite(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiD2PExcuteController.4
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.activity.getFcManager().setAiFollowPoint2PointExite(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8AiD2PExcuteController.this.onTaskComplete(false);
@@ -369,7 +369,7 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
         });
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         if (this.isShow) {
             if (!b) {
@@ -398,8 +398,8 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
     }
 
     public void setAiVcOpen() {
-        this.activity.getFcManager().setAiVcOpen(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiD2PExcuteController.6
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.activity.getFcManager().setAiVcOpen(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8AiD2PExcuteController.this.imgVcToggle.setSelected(true);
@@ -410,8 +410,8 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
     }
 
     public void setAiVcClose() {
-        this.activity.getFcManager().setAiVcClose(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiD2PExcuteController.7
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.activity.getFcManager().setAiVcClose(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8AiD2PExcuteController.this.imgVcToggle.setSelected(false);
@@ -422,8 +422,8 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
     }
 
     public void setAiVcNotityFc() {
-        this.activity.getFcManager().setAiVcNotityFc(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiD2PExcuteController.8
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.activity.getFcManager().setAiVcNotityFc(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                 }
@@ -431,31 +431,31 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
         });
     }
 
-    @Override // com.fimi.app.x8s.controls.X8AiTrackController.OnAiTrackControllerListener
+    @Override
     public void onChangeGoLocation(float left, float right, float top, float bottom, int w, int h) {
     }
 
-    @Override // com.fimi.app.x8s.controls.X8AiTrackController.OnAiTrackControllerListener
+    @Override
     public void setGoEnabled(boolean b) {
         if (b) {
             setAiVcNotityFc();
         }
     }
 
-    @Override // com.fimi.app.x8s.controls.X8AiTrackController.OnAiTrackControllerListener
+    @Override
     public void onTouchActionDown() {
     }
 
-    @Override // com.fimi.app.x8s.controls.X8AiTrackController.OnAiTrackControllerListener
+    @Override
     public void onTouchActionUp() {
     }
 
-    @Override // com.fimi.app.x8s.controls.X8AiTrackController.OnAiTrackControllerListener
+    @Override
     public void onTracking() {
         this.imgVcToggle.setEnabled(true);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public boolean onClickBackKey() {
         return false;
     }
@@ -496,8 +496,8 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
         if (this.state == X8AiPointState.IDLE) {
             if (this.timeSend == 0) {
                 this.timeSend = 1;
-                this.activity.getFcManager().sysCtrlMode2AiVc(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiD2PExcuteController.9
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                this.activity.getFcManager().sysCtrlMode2AiVc(new UiCallBackListener() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, Object o) {
                     }
                 }, X8Task.VCM_FLY_TO.ordinal());
@@ -507,7 +507,7 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
         }
     }
 
-    /* loaded from: classes.dex */
+
     public enum AiGetPointState {
         IDLE,
         GET_POINT,

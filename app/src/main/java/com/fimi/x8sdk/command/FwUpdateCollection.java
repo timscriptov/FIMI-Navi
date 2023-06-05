@@ -8,7 +8,7 @@ import com.fimi.kernel.connect.usb.LinkMsgType;
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 import com.fimi.kernel.dataparser.usb.UiCallBackListener;
 
-/* loaded from: classes2.dex */
+
 public class FwUpdateCollection extends X8BaseCmd {
     public static final byte MSG_GROUP_FW_UPDATE = 16;
     public static final byte MSG_ID_CHECK_CUR_STATUS = 5;
@@ -79,7 +79,7 @@ public class FwUpdateCollection extends X8BaseCmd {
         sendCmd.setReSendNum(10);
         sendCmd.setOutTime(PathInterpolatorCompat.MAX_NUM_POINTS);
         sendCmd.packSendCmd(5, LinkMsgType.FmLink4);
-        HostLogBack.getInstance().writeLog("Alanqiu  ==========" + sendCmd.toString());
+        HostLogBack.getInstance().writeLog("Alanqiu  ==========" + sendCmd);
         return sendCmd;
     }
 
@@ -88,7 +88,7 @@ public class FwUpdateCollection extends X8BaseCmd {
         short payloadLen = (short) payLoad.length;
         byte[] content = new byte[msgLen];
         int checksum = 0;
-        int i = 0 + 1;
+        int i = 1;
         content[0] = (byte) (msgLen >> 0);
         int i2 = i + 1;
         content[i] = (byte) (msgLen >> 8);

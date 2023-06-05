@@ -6,7 +6,7 @@ import com.fimi.x8sdk.process.FcErrProcess;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
+
 public class ErrCodeController {
     public void registerErrCodeListener(ErrcodeListener listener) {
         FcErrProcess.getFcErrProcess().registerErrListener(listener);

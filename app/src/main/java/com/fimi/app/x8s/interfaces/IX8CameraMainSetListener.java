@@ -2,7 +2,7 @@ package com.fimi.app.x8s.interfaces;
 
 import com.alibaba.fastjson.JSONObject;
 
-/* loaded from: classes.dex */
+
 public interface IX8CameraMainSetListener {
     void awbSetting(String str);
 

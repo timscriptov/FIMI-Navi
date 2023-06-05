@@ -28,7 +28,7 @@ import com.fimi.x8sdk.dataparser.AckAiGetGravitationPrameter;
 import com.fimi.x8sdk.dataparser.AutoFcSportState;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes.dex */
+
 public class X8AiGravitationExcuteController extends AbsX8AiController implements View.OnClickListener, X8DoubleCustomDialog.onDialogButtonClickListener, X8AiTrackController.OnAiTrackControllerListener {
     private final X8sMainActivity activity;
     protected boolean isNextShow;
@@ -44,7 +44,7 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
     private View mFlagBottom;
     private X8GravitationState mGravitationState;
     private IX8AiGravitationExcuteControllerListener mIX8AiGravitationExcuteControllerListener;
-    private IX8NextViewListener mIX8NextViewListener;
+    private final IX8NextViewListener mIX8NextViewListener;
     private ImageView mImSuroundBg;
     private View mNextBlank;
     private View mNextContent;
@@ -54,8 +54,8 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
     public X8AiGravitationExcuteController(X8sMainActivity activity, View rootView, X8GravitationState state) {
         super(rootView);
         this.mGravitationState = X8GravitationState.IDLE;
-        this.mIX8NextViewListener = new IX8NextViewListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiGravitationExcuteController.6
-            @Override // com.fimi.app.x8s.interfaces.IX8NextViewListener
+        this.mIX8NextViewListener = new IX8NextViewListener() {
+            @Override
             public void onBackClick() {
                 X8AiGravitationExcuteController.this.closeNextUi(true);
                 if (X8AiGravitationExcuteController.this.activity.getmMapVideoController().isFullVideo()) {
@@ -65,7 +65,7 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
                 }
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8NextViewListener
+            @Override
             public void onExcuteClick() {
                 X8AiGravitationExcuteController.this.closeNextUi(false);
                 if (X8AiGravitationExcuteController.this.activity.getmMapVideoController().isFullVideo()) {
@@ -79,7 +79,7 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
                 X8AiGravitationExcuteController.this.mIX8AiGravitationExcuteControllerListener.onAiGravitaionRunning();
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8NextViewListener
+            @Override
             public void onSaveClick() {
             }
         };
@@ -99,11 +99,11 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
         this.mIX8AiGravitationExcuteControllerListener = listener;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
         if (this.handleView != null) {
             this.imgBack.setOnClickListener(this);
@@ -112,11 +112,11 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public boolean onClickBackKey() {
         return false;
     }
@@ -126,13 +126,13 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
     public void openUi() {
         LayoutInflater inflater = LayoutInflater.from(this.rootView.getContext());
         this.handleView = inflater.inflate(R.layout.x8_ai_gravitation_layout, (ViewGroup) this.rootView, true);
-        this.imgNext = (ImageView) this.handleView.findViewById(R.id.img_ai_gravitation_follow_next);
-        this.imgBack = (ImageView) this.handleView.findViewById(R.id.img_ai_gravitation_follow_back);
-        this.tvTip = (X8AiTipWithCloseView) this.handleView.findViewById(R.id.v_gravitation_content_tip);
+        this.imgNext = this.handleView.findViewById(R.id.img_ai_gravitation_follow_next);
+        this.imgBack = this.handleView.findViewById(R.id.img_ai_gravitation_follow_back);
+        this.tvTip = this.handleView.findViewById(R.id.v_gravitation_content_tip);
         this.mNextBlank = this.handleView.findViewById(R.id.x8_main_ai_gravitation_next_blank);
         this.mNextContent = this.handleView.findViewById(R.id.x8_main_ai_gravitation_next_content);
         this.mFlagBottom = this.handleView.findViewById(R.id.rl_flag_gravitation_bottom);
-        this.mImSuroundBg = (ImageView) this.handleView.findViewById(R.id.img_ai_gravitation_suround_bg);
+        this.mImSuroundBg = this.handleView.findViewById(R.id.img_ai_gravitation_suround_bg);
         this.tvTip.setTipText(this.rootView.getContext().getString(R.string.x8_ai_fly_gravitation_tip4));
         this.imgNext.setEnabled(false);
         this.mExcuteConfirmModule = new X8AiGravitationExcuteConfirmModule();
@@ -166,7 +166,7 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
         this.activity.getmMapVideoController().getFimiMap().getAiSurroundManager().resetMapEvent();
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View view) {
         int id = view.getId();
         if (id == R.id.img_ai_gravitation_follow_next) {
@@ -194,7 +194,7 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         super.onDroneConnected(b);
         if (!b) {
@@ -204,8 +204,8 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
     }
 
     private void getRunningParmeter() {
-        this.mFcManager.getGravitationPrameter(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiGravitationExcuteController.1
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.mFcManager.getGravitationPrameter(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess) {
                     X8AiGravitationExcuteController.this.drawEllipse((AckAiGetGravitationPrameter) o);
@@ -219,8 +219,8 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
     }
 
     private void getRunningDisconnectParmeter() {
-        this.mFcManager.getGravitationPrameter(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiGravitationExcuteController.2
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.mFcManager.getGravitationPrameter(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess) {
                     X8AiGravitationExcuteController.this.mGravitationState = X8GravitationState.RUNNING;
@@ -231,8 +231,8 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
     }
 
     private void getIdleParmeter() {
-        this.mFcManager.getGravitationPrameter(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiGravitationExcuteController.3
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.mFcManager.getGravitationPrameter(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess) {
                     X8AiGravitationExcuteController.this.mAckAiGetGravitationPrameter = (AckAiGetGravitationPrameter) o;
@@ -252,7 +252,7 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
             ObjectAnimator translationRight = ObjectAnimator.ofFloat(this.mNextContent, "translationX", 0.0f, this.width);
             translationRight.setDuration(300L);
             translationRight.start();
-            translationRight.addListener(new AnimatorListenerAdapter() { // from class: com.fimi.app.x8s.controls.aifly.X8AiGravitationExcuteController.4
+            translationRight.addListener(new AnimatorListenerAdapter() {
                 @Override
                 // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationEnd(Animator animation) {
@@ -324,8 +324,8 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
     }
 
     private void closeGravitationing() {
-        this.mFcManager.setAiVcClose(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiGravitationExcuteController.5
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.mFcManager.setAiVcClose(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8AiGravitationExcuteController.this.closeUi();
@@ -341,14 +341,14 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
         });
     }
 
-    @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+    @Override
     public void onLeft() {
     }
 
-    @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+    @Override
     public void onRight() {
-        this.mFcManager.setAiVcClose(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiGravitationExcuteController.7
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.mFcManager.setAiVcClose(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     if (X8AiGravitationExcuteController.this.mGravitationState == X8GravitationState.RUNNING) {
@@ -363,8 +363,8 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
     }
 
     public void exitGravitation() {
-        this.mFcManager.setGravitationExite(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiGravitationExcuteController.8
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.mFcManager.setGravitationExite(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (!cmdResult.isSuccess) {
                     X8ToastUtil.showToast(X8AiGravitationExcuteController.this.handleView.getContext(), cmdResult.getErrDes(), 0);
@@ -376,31 +376,31 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
         });
     }
 
-    @Override // com.fimi.app.x8s.controls.X8AiTrackController.OnAiTrackControllerListener
+    @Override
     public void onChangeGoLocation(float left, float right, float top, float bottom, int w, int h) {
     }
 
-    @Override // com.fimi.app.x8s.controls.X8AiTrackController.OnAiTrackControllerListener
+    @Override
     public void setGoEnabled(boolean b) {
     }
 
-    @Override // com.fimi.app.x8s.controls.X8AiTrackController.OnAiTrackControllerListener
+    @Override
     public void onTouchActionDown() {
     }
 
-    @Override // com.fimi.app.x8s.controls.X8AiTrackController.OnAiTrackControllerListener
+    @Override
     public void onTouchActionUp() {
         this.imgNext.setEnabled(true);
         setAiVcOpen();
     }
 
-    @Override // com.fimi.app.x8s.controls.X8AiTrackController.OnAiTrackControllerListener
+    @Override
     public void onTracking() {
     }
 
     public void setAiVcOpen() {
-        this.mFcManager.setAiVcOpen(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiGravitationExcuteController.9
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.mFcManager.setAiVcOpen(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                 }
@@ -408,7 +408,7 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
         });
     }
 
-    /* loaded from: classes.dex */
+
     public enum X8GravitationState {
         IDLE,
         RUNNING,

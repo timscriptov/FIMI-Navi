@@ -11,7 +11,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class GeoTools {
     private static final double RADIUS_OF_EARTH = 6372797.560856d;
     public List<LatLng> waypoints;

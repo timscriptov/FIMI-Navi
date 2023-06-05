@@ -2,7 +2,7 @@ package com.fimi.x8sdk.ivew;
 
 import com.fimi.kernel.dataparser.usb.JsonUiCallBackListener;
 
-/* loaded from: classes2.dex */
+
 public interface ICamJsonAction {
     void defaltSystem(JsonUiCallBackListener jsonUiCallBackListener);
 

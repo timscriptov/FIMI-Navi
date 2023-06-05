@@ -2,7 +2,7 @@ package com.fimi.x8sdk.util;
 
 import android.os.Environment;
 
-/* loaded from: classes2.dex */
+
 public class FilePathUtil {
     public static String path = Environment.getExternalStorageDirectory().getPath();
     public static String UPDATE_CONFIG_FILE = "fm_package_30.ini";

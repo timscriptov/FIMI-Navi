@@ -1,6 +1,6 @@
 package com.fimi.app.x8s.entity;
 
-/* loaded from: classes.dex */
+
 public class X8AiLinePointEntity {
     private int nPos;
     private int state;

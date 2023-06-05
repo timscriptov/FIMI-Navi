@@ -5,9 +5,9 @@ import com.fimi.kernel.connect.tcp.SocketManager;
 import com.fimi.kernel.connect.tcp.SocketOption;
 import com.fimi.x8sdk.common.Constants;
 
-/* loaded from: classes2.dex */
+
 public class FileDataTcpConnect implements IDataChannel {
-    private SocketManager fileSocketManager = new SocketManager();
+    private final SocketManager fileSocketManager = new SocketManager();
 
     public FileDataTcpConnect() {
         SocketOption fileOption = this.fileSocketManager.getSocketOption();
@@ -17,7 +17,7 @@ public class FileDataTcpConnect implements IDataChannel {
         fileOption.setAutoReconnect(false);
     }
 
-    @Override // com.fimi.kernel.connect.tcp.IDataChannel
+    @Override
     public synchronized void sendFileData(byte[] data, int offset, int count) {
         if (!this.fileSocketManager.isConnected()) {
             this.fileSocketManager.connect();

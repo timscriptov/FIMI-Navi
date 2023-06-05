@@ -2,7 +2,7 @@ package com.fimi.x8sdk.update.fwpack;
 
 import java.io.Serializable;
 
-/* loaded from: classes2.dex */
+
 public class FwInfo implements Serializable {
     public static final String UPDATE_RESULT_FAILED = "1";
     public static final String UPDATE_RESULT_SUCCESS = "0";

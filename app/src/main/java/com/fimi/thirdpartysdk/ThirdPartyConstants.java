@@ -1,6 +1,6 @@
 package com.fimi.thirdpartysdk;
 
-/* loaded from: classes.dex */
+
 public class ThirdPartyConstants {
     public static final String LOGIN_CHANNEL_FB = "2";
     public static final String LOGIN_CHANNEL_FM = "0";

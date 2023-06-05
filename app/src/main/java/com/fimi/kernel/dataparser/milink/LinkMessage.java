@@ -3,7 +3,7 @@ package com.fimi.kernel.dataparser.milink;
 import com.fimi.kernel.dataparser.ILinkMessage;
 import com.fimi.kernel.dataparser.usb.UiCallBackListener;
 
-/* loaded from: classes.dex */
+
 public abstract class LinkMessage extends ILinkMessage {
     private byte errorCode;
     private int msgGroudId;
@@ -38,12 +38,12 @@ public abstract class LinkMessage extends ILinkMessage {
         this.errorCode = errorCode;
     }
 
-    @Override // com.fimi.kernel.dataparser.ILinkMessage
+    @Override
     public UiCallBackListener getUiCallBack() {
         return this.uiCallBack;
     }
 
-    @Override // com.fimi.kernel.dataparser.ILinkMessage
+    @Override
     public void setUiCallBack(UiCallBackListener uiCallBack) {
         this.uiCallBack = uiCallBack;
     }

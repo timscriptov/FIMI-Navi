@@ -25,7 +25,7 @@ import com.fimi.x8sdk.modulestate.StateManager;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/* loaded from: classes.dex */
+
 public class X8CloudCalibrationController extends AbsX8MenuBoxControllers implements View.OnClickListener {
     private final int calibrationError;
     private final int endDone;
@@ -75,7 +75,7 @@ public class X8CloudCalibrationController extends AbsX8MenuBoxControllers implem
         this.ix8CalibrationListener = ix8CalibrationListener;
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.btn_start_calibration) {
@@ -100,7 +100,7 @@ public class X8CloudCalibrationController extends AbsX8MenuBoxControllers implem
 
     private void breakOutDone() {
         if (this.gimbalStatus == GimbalStatus.doing) {
-            this.dialog = new X8DoubleCustomDialog(this.context, this.context.getString(R.string.x8_cloud_gimbal_break_out_title), this.context.getString(R.string.x8_cloud_gimbal_break_out_tip), new X8DoubleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8CloudCalibrationController.1
+            this.dialog = new X8DoubleCustomDialog(this.context, this.context.getString(R.string.x8_cloud_gimbal_break_out_title), this.context.getString(R.string.x8_cloud_gimbal_break_out_tip), new X8DoubleCustomDialog.onDialogButtonClickListener() {
                 @Override
                 // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
                 public void onLeft() {
@@ -111,8 +111,8 @@ public class X8CloudCalibrationController extends AbsX8MenuBoxControllers implem
                 // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
                 public void onRight() {
                     if (X8CloudCalibrationController.this.fcCtrlManager != null) {
-                        X8CloudCalibrationController.this.fcCtrlManager.cloudCalibration(1, new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8CloudCalibrationController.1.1
-                            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                        X8CloudCalibrationController.this.fcCtrlManager.cloudCalibration(1, new UiCallBackListener() {
+                            @Override
                             public void onComplete(CmdResult cmdResult, Object o) {
                                 if (X8CloudCalibrationController.this.ix8CalibrationListener != null) {
                                     X8CloudCalibrationController.this.ix8CalibrationListener.onCalibrationReturn();
@@ -135,8 +135,8 @@ public class X8CloudCalibrationController extends AbsX8MenuBoxControllers implem
 
     public void startCalibration() {
         if (this.fcCtrlManager != null && this.gimbalStatus == GimbalStatus.ideal) {
-            this.fcCtrlManager.cloudCalibration(0, new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8CloudCalibrationController.2
-                @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+            this.fcCtrlManager.cloudCalibration(0, new UiCallBackListener() {
+                @Override
                 public void onComplete(CmdResult cmdResult, Object o) {
                     if (cmdResult.isSuccess()) {
                         X8CloudCalibrationController.this.gimbalStatus = GimbalStatus.doing;
@@ -148,44 +148,44 @@ public class X8CloudCalibrationController extends AbsX8MenuBoxControllers implem
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
         this.context = rootView.getContext();
         LayoutInflater inflater = LayoutInflater.from(rootView.getContext());
         this.handleView = inflater.inflate(R.layout.x8_main_camera_item_cloud_calibration, (ViewGroup) rootView, true);
-        this.cloudView = (ImageView) this.handleView.findViewById(R.id.cloud_v);
-        this.imgReturn = (ImageView) this.handleView.findViewById(R.id.img_return);
-        this.btnStart = (Button) this.handleView.findViewById(R.id.btn_start_calibration);
-        this.tv_tip = (TextView) this.handleView.findViewById(R.id.tv_tip);
-        this.tv_subTip = (TextView) this.handleView.findViewById(R.id.tv_tip1);
-        this.imgAnimation = (ImageView) this.handleView.findViewById(R.id.img_animation);
+        this.cloudView = this.handleView.findViewById(R.id.cloud_v);
+        this.imgReturn = this.handleView.findViewById(R.id.img_return);
+        this.btnStart = this.handleView.findViewById(R.id.btn_start_calibration);
+        this.tv_tip = this.handleView.findViewById(R.id.tv_tip);
+        this.tv_subTip = this.handleView.findViewById(R.id.tv_tip1);
+        this.imgAnimation = this.handleView.findViewById(R.id.img_animation);
         this.imgAnimation.setBackgroundResource(R.drawable.x8_calibration_animation);
         AnimationDrawable ad = (AnimationDrawable) this.imgAnimation.getBackground();
         ad.start();
         this.idealView = this.handleView.findViewById(R.id.rl_cloud_calibration_content);
         this.checkView = this.handleView.findViewById(R.id.rl_calibration_progress_layout);
         this.rtView = this.handleView.findViewById(R.id.rl_cloud_calibration_result);
-        this.calibrationBar = (ProgressBar) this.handleView.findViewById(R.id.calibration_bar);
-        this.tv_progress = (TextView) this.handleView.findViewById(R.id.tv_progress);
-        this.checkTip = (TextView) this.handleView.findViewById(R.id.tv_check_tip);
-        this.rtBtn = (Button) this.handleView.findViewById(R.id.btn_rt_confirm);
+        this.calibrationBar = this.handleView.findViewById(R.id.calibration_bar);
+        this.tv_progress = this.handleView.findViewById(R.id.tv_progress);
+        this.checkTip = this.handleView.findViewById(R.id.tv_check_tip);
+        this.rtBtn = this.handleView.findViewById(R.id.btn_rt_confirm);
         this.rtBtn.setOnClickListener(this);
-        this.tvRtTip = (TextView) this.handleView.findViewById(R.id.tv_result_tip2);
-        this.tvRt = (TextView) this.handleView.findViewById(R.id.tv_result_tip);
-        this.imgResult = (ImageView) this.handleView.findViewById(R.id.img_result);
+        this.tvRtTip = this.handleView.findViewById(R.id.tv_result_tip2);
+        this.tvRt = this.handleView.findViewById(R.id.tv_result_tip);
+        this.imgResult = this.handleView.findViewById(R.id.img_result);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
         this.imgReturn.setOnClickListener(this);
         this.btnStart.setOnClickListener(this);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8MenuBoxControllers
+    @Override
     public void unMountError(boolean unMount) {
         super.unMountError(unMount);
         if (this.isShow && unMount) {
@@ -195,7 +195,7 @@ public class X8CloudCalibrationController extends AbsX8MenuBoxControllers implem
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         super.onDroneConnected(b);
         if (this.isShow) {
@@ -242,7 +242,7 @@ public class X8CloudCalibrationController extends AbsX8MenuBoxControllers implem
         int progress = caliState.getProgress();
         if (progress > 0) {
             this.calibrationBar.setProgress(progress);
-            this.tv_progress.setText(String.format(this.context.getResources().getString(R.string.x8_calibration_progress), String.valueOf(progress) + "%"));
+            this.tv_progress.setText(String.format(this.context.getResources().getString(R.string.x8_calibration_progress), progress + "%"));
             this.gimbalStatus = GimbalStatus.doing;
             if (caliState.isTempeOverErr()) {
                 setCheckTip(R.color.x8_error_code_type1, R.string.x8_cloud_gimbal_tip_3);
@@ -405,7 +405,7 @@ public class X8CloudCalibrationController extends AbsX8MenuBoxControllers implem
         return true;
     }
 
-    /* loaded from: classes.dex */
+
     public enum GimbalStatus {
         ideal,
         doing,
@@ -414,12 +414,12 @@ public class X8CloudCalibrationController extends AbsX8MenuBoxControllers implem
         finish
     }
 
-    /* loaded from: classes.dex */
+
     public class CheckTask extends TimerTask {
         CheckTask() {
         }
 
-        @Override // java.util.TimerTask, java.lang.Runnable
+        @Override
         public void run() {
             if (X8CloudCalibrationController.this.fcCtrlManager != null) {
                 if (X8CloudCalibrationController.this.checkLisenter == null) {
@@ -430,12 +430,12 @@ public class X8CloudCalibrationController extends AbsX8MenuBoxControllers implem
         }
     }
 
-    /* loaded from: classes.dex */
+
     private class CalibrationProgressListener implements UiCallBackListener {
         private CalibrationProgressListener() {
         }
 
-        @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        @Override
         @SuppressLint({"StringFormatInvalid"})
         public void onComplete(CmdResult cmdResult, Object o) {
             if (cmdResult.isSuccess() && o != null) {

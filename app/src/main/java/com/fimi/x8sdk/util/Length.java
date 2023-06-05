@@ -2,7 +2,7 @@ package com.fimi.x8sdk.util;
 
 import java.util.Locale;
 
-/* loaded from: classes2.dex */
+
 public class Length {
     private double lengthInMeters;
 

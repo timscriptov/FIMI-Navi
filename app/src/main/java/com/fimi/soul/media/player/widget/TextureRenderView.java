@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @TargetApi(14)
-/* loaded from: classes.dex */
+
 public class TextureRenderView extends TextureView implements IRenderView {
     private MeasureHelper mMeasureHelper;
     private SurfaceCallback mSurfaceCallback;
@@ -54,17 +54,17 @@ public class TextureRenderView extends TextureView implements IRenderView {
         setSurfaceTextureListener(this.mSurfaceCallback);
     }
 
-    @Override // com.fimi.soul.media.player.widget.IRenderView
+    @Override
     public View getView() {
         return this;
     }
 
-    @Override // com.fimi.soul.media.player.widget.IRenderView
+    @Override
     public boolean shouldWaitForResize() {
         return false;
     }
 
-    @Override // com.fimi.soul.media.player.widget.IRenderView
+    @Override
     public void setVideoSize(int videoWidth, int videoHeight) {
         if (videoWidth > 0 && videoHeight > 0) {
             this.mMeasureHelper.setVideoSize(videoWidth, videoHeight);
@@ -72,7 +72,7 @@ public class TextureRenderView extends TextureView implements IRenderView {
         }
     }
 
-    @Override // com.fimi.soul.media.player.widget.IRenderView
+    @Override
     public void setVideoSampleAspectRatio(int videoSarNum, int videoSarDen) {
         if (videoSarNum > 0 && videoSarDen > 0) {
             this.mMeasureHelper.setVideoSampleAspectRatio(videoSarNum, videoSarDen);
@@ -80,19 +80,19 @@ public class TextureRenderView extends TextureView implements IRenderView {
         }
     }
 
-    @Override // com.fimi.soul.media.player.widget.IRenderView
+    @Override
     public void setVideoRotation(int degree) {
         this.mMeasureHelper.setVideoRotation(degree);
         setRotation(degree);
     }
 
-    @Override // com.fimi.soul.media.player.widget.IRenderView
+    @Override
     public void setAspectRatio(int aspectRatio) {
         this.mMeasureHelper.setAspectRatio(aspectRatio);
         requestLayout();
     }
 
-    @Override // android.view.View
+    @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         this.mMeasureHelper.doMeasure(widthMeasureSpec, heightMeasureSpec);
         setMeasuredDimension(this.mMeasureHelper.getMeasuredWidth(), this.mMeasureHelper.getMeasuredHeight());
@@ -102,44 +102,43 @@ public class TextureRenderView extends TextureView implements IRenderView {
         return new InternalSurfaceHolder(this, this.mSurfaceCallback.mSurfaceTexture);
     }
 
-    @Override // com.fimi.soul.media.player.widget.IRenderView
+    @Override
     public void addRenderCallback(IRenderView.IRenderCallback callback) {
         this.mSurfaceCallback.addRenderCallback(callback);
     }
 
-    @Override // com.fimi.soul.media.player.widget.IRenderView
+    @Override
     public void removeRenderCallback(IRenderView.IRenderCallback callback) {
         this.mSurfaceCallback.removeRenderCallback(callback);
     }
 
-    @Override // android.view.View
+    @Override
     public void onInitializeAccessibilityEvent(AccessibilityEvent event) {
         super.onInitializeAccessibilityEvent(event);
         event.setClassName(TextureRenderView.class.getName());
     }
 
-    @Override // android.view.View
+    @Override
     public void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info) {
         super.onInitializeAccessibilityNodeInfo(info);
         info.setClassName(TextureRenderView.class.getName());
     }
 
-    /* loaded from: classes.dex */
+
     public static final class InternalSurfaceHolder implements IRenderView.ISurfaceHolder {
-        private SurfaceTexture mSurfaceTexture;
-        private TextureRenderView mTextureView;
+        private final SurfaceTexture mSurfaceTexture;
+        private final TextureRenderView mTextureView;
 
         public InternalSurfaceHolder(@NonNull TextureRenderView textureView, @Nullable SurfaceTexture surfaceTexture) {
             this.mTextureView = textureView;
             this.mSurfaceTexture = surfaceTexture;
         }
 
-        @Override // com.fimi.soul.media.player.widget.IRenderView.ISurfaceHolder
+        @Override
         @TargetApi(16)
         public void bindToMediaPlayer(IMediaPlayer mp) {
             if (mp != null) {
-                if (Build.VERSION.SDK_INT >= 16 && (mp instanceof ISurfaceTextureHolder)) {
-                    ISurfaceTextureHolder textureHolder = (ISurfaceTextureHolder) mp;
+                if (Build.VERSION.SDK_INT >= 16 && (mp instanceof ISurfaceTextureHolder textureHolder)) {
                     this.mTextureView.mSurfaceCallback.setOwnSurfaceTecture(false);
                     SurfaceTexture surfaceTexture = textureHolder.getSurfaceTexture();
                     if (surfaceTexture != null) {
@@ -154,25 +153,25 @@ public class TextureRenderView extends TextureView implements IRenderView {
             }
         }
 
-        @Override // com.fimi.soul.media.player.widget.IRenderView.ISurfaceHolder
+        @Override
         @NonNull
         public IRenderView getRenderView() {
             return this.mTextureView;
         }
 
-        @Override // com.fimi.soul.media.player.widget.IRenderView.ISurfaceHolder
+        @Override
         @Nullable
         public SurfaceHolder getSurfaceHolder() {
             return null;
         }
 
-        @Override // com.fimi.soul.media.player.widget.IRenderView.ISurfaceHolder
+        @Override
         @Nullable
         public SurfaceTexture getSurfaceTexture() {
             return this.mSurfaceTexture;
         }
 
-        @Override // com.fimi.soul.media.player.widget.IRenderView.ISurfaceHolder
+        @Override
         @Nullable
         public Surface openSurface() {
             if (this.mSurfaceTexture == null) {
@@ -182,14 +181,14 @@ public class TextureRenderView extends TextureView implements IRenderView {
         }
     }
 
-    /* loaded from: classes.dex */
+
     public static final class SurfaceCallback implements TextureView.SurfaceTextureListener {
         private int mHeight;
         private boolean mIsFormatChanged;
         private boolean mOwnSurfaceTecture = true;
-        private Map<IRenderView.IRenderCallback, Object> mRenderCallbackMap = new ConcurrentHashMap();
+        private final Map<IRenderView.IRenderCallback, Object> mRenderCallbackMap = new ConcurrentHashMap();
         private SurfaceTexture mSurfaceTexture;
-        private WeakReference<TextureRenderView> mWeakRenderView;
+        private final WeakReference<TextureRenderView> mWeakRenderView;
         private int mWidth;
 
         public SurfaceCallback(@NonNull TextureRenderView renderView) {
@@ -221,7 +220,7 @@ public class TextureRenderView extends TextureView implements IRenderView {
             this.mRenderCallbackMap.remove(callback);
         }
 
-        @Override // android.view.TextureView.SurfaceTextureListener
+        @Override
         public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
             this.mSurfaceTexture = surface;
             this.mIsFormatChanged = false;
@@ -233,7 +232,7 @@ public class TextureRenderView extends TextureView implements IRenderView {
             }
         }
 
-        @Override // android.view.TextureView.SurfaceTextureListener
+        @Override
         public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
             this.mSurfaceTexture = surface;
             this.mIsFormatChanged = true;
@@ -245,7 +244,7 @@ public class TextureRenderView extends TextureView implements IRenderView {
             }
         }
 
-        @Override // android.view.TextureView.SurfaceTextureListener
+        @Override
         public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
             this.mSurfaceTexture = surface;
             this.mIsFormatChanged = false;
@@ -258,7 +257,7 @@ public class TextureRenderView extends TextureView implements IRenderView {
             return this.mOwnSurfaceTecture;
         }
 
-        @Override // android.view.TextureView.SurfaceTextureListener
+        @Override
         public void onSurfaceTextureUpdated(SurfaceTexture surface) {
         }
     }

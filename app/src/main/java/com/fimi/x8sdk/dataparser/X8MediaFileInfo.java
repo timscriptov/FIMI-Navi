@@ -1,8 +1,6 @@
 package com.fimi.x8sdk.dataparser;
 
 
-
-/* loaded from: classes2.dex */
 public class X8MediaFileInfo {
     MediaFileType mediaFileType = MediaFileType.NormalFile;
     private byte cmdType;
@@ -25,12 +23,12 @@ public class X8MediaFileInfo {
 
     public int getInt(int index, byte[] data) {
         int result = 0 | ((data[index + 3] & 255) << 24);
-        return result | ((data[index + 2] & 255) << 16) | ((data[index + 1] & 255) << 8) | (data[index + 0] & 255);
+        return result | ((data[index + 2] & 255) << 16) | ((data[index + 1] & 255) << 8) | (data[index] & 255);
     }
 
     public short getShort(int index, byte[] data) {
         short result = (short) (((data[index + 1] & 255) << 8) | 0);
-        return (short) ((data[index + 0] & 255) | result);
+        return (short) ((data[index] & 255) | result);
     }
 
     public byte getCmdType() {
@@ -93,7 +91,7 @@ public class X8MediaFileInfo {
         return "X8MediaFileInfo{cmdType=" + ((int) this.cmdType) + ", msg_len=" + this.msg_len + ", error_code=" + ((int) this.error_code) + ", fileSize=" + this.fileSize + ", nameLen=" + ((int) this.nameLen) + ", fileName='" + this.fileName + "'" + '}';
     }
 
-    /* loaded from: classes2.dex */
+
     public enum MediaFileType {
         RootFile,
         NormalFile

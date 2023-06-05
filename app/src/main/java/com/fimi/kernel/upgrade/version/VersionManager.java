@@ -3,10 +3,10 @@ package com.fimi.kernel.upgrade.version;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes.dex */
+
 public class VersionManager {
-    private static VersionManager mVersionManager = new VersionManager();
-    private Map<Integer, FirmwareBean> hasMap = new HashMap();
+    private static final VersionManager mVersionManager = new VersionManager();
+    private final Map<Integer, FirmwareBean> hasMap = new HashMap();
 
     public static VersionManager getInstance() {
         return mVersionManager;

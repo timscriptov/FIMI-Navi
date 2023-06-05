@@ -735,7 +735,7 @@ public class ZipOutputStream extends FilterOutputStream {
             this.entry = entry;
         }
 
-       CurrentEntry(ZipEntry zipEntry, CurrentEntry currentEntry) {
+        CurrentEntry(ZipEntry zipEntry, CurrentEntry currentEntry) {
             this(zipEntry);
         }
     }

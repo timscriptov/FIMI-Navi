@@ -15,7 +15,7 @@ import com.fimi.x8sdk.controller.FcManager;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class X8AiLinesExcuteConfirmModule extends X8BaseModule {
     private X8AiLinesExcuteConfirmUi mUi;
 
@@ -23,7 +23,7 @@ public class X8AiLinesExcuteConfirmModule extends X8BaseModule {
         this.mUi = new X8AiLinesExcuteConfirmUi(activity, rootView, cameraManager);
     }
 
-    @Override // com.fimi.app.x8s.controls.aifly.confirm.module.X8BaseModule
+    @Override
     public void setFcHeart(boolean isInSky, boolean isLowPower) {
         this.mUi.setFcHeart(isInSky, isLowPower);
     }

@@ -29,7 +29,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class DownloadFwSelectActivity extends BaseActivity implements DownloadFwSelectAdapter.SelectListener {
     long currTime = System.currentTimeMillis();
     private Button btnDown;
@@ -39,36 +39,36 @@ public class DownloadFwSelectActivity extends BaseActivity implements DownloadFw
     private TextView tvHardWareSize;
     private View tv_title;
     private TextView tv_title2;
-    private List<DownloadFwSelectInfo> infoList = new ArrayList();
-    private List<UpfirewareDto> mUpfirewareDtoList = new ArrayList();
+    private final List<DownloadFwSelectInfo> infoList = new ArrayList();
+    private final List<UpfirewareDto> mUpfirewareDtoList = new ArrayList();
     private boolean isFirstDown = true;
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void initData() {
-        this.btnReturn = (ImageView) findViewById(R.id.iv_return);
-        this.btnDown = (Button) findViewById(R.id.btn_down);
-        this.lvSelectFw = (ListView) findViewById(R.id.lv_select_fw);
-        this.tvHardWareSize = (TextView) findViewById(R.id.tv_hardSize);
-        this.tv_title2 = (TextView) findViewById(R.id.tv_title2);
+        this.btnReturn = findViewById(R.id.iv_return);
+        this.btnDown = findViewById(R.id.btn_down);
+        this.lvSelectFw = findViewById(R.id.lv_select_fw);
+        this.tvHardWareSize = findViewById(R.id.tv_hardSize);
+        this.tv_title2 = findViewById(R.id.tv_title2);
         this.tv_title = findViewById(R.id.tv_title);
         initValue();
         this.selectAdapter = new DownloadFwSelectAdapter(this, this.infoList);
         this.selectAdapter.setSelectListener(this);
-        this.lvSelectFw.setAdapter((ListAdapter) this.selectAdapter);
+        this.lvSelectFw.setAdapter(this.selectAdapter);
         this.currTime = System.currentTimeMillis();
         FontUtil.changeFontLanTing(getAssets(), this.tvHardWareSize, this.tv_title2, this.tv_title);
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void doTrans() {
-        this.btnReturn.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.libdownfw.update.DownloadFwSelectActivity.1
-            @Override // android.view.View.OnClickListener
+        this.btnReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 DownloadFwSelectActivity.this.finish();
             }
         });
-        this.btnDown.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.libdownfw.update.DownloadFwSelectActivity.2
-            @Override // android.view.View.OnClickListener
+        this.btnDown.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 if (System.currentTimeMillis() - DownloadFwSelectActivity.this.currTime >= 1000 || DownloadFwSelectActivity.this.isFirstDown) {
                     DownloadFwSelectActivity.this.currTime = System.currentTimeMillis();
@@ -81,13 +81,13 @@ public class DownloadFwSelectActivity extends BaseActivity implements DownloadFw
                     } else {
                         DialogManager dialogManager = new DialogManager(DownloadFwSelectActivity.this, DownloadFwSelectActivity.this.getString(R.string.host_down_tip), DownloadFwSelectActivity.this.getString(R.string.host_down_firmware_warning), DownloadFwSelectActivity.this.getString(R.string.host_down_continue), DownloadFwSelectActivity.this.getString(R.string.host_down_cancel));
                         dialogManager.setVerticalScreen(true);
-                        dialogManager.setOnDiaLogListener(new DialogManager.OnDialogListener() { // from class: com.fimi.libdownfw.update.DownloadFwSelectActivity.2.1
-                            @Override // com.fimi.widget.DialogManager.OnDialogListener
+                        dialogManager.setOnDiaLogListener(new DialogManager.OnDialogListener() {
+                            @Override
                             public void dialogBtnRightOrSingleListener(View customView, DialogInterface dialogInterface, int which) {
                                 DownloadFwSelectActivity.this.startDownLoad();
                             }
 
-                            @Override // com.fimi.widget.DialogManager.OnDialogListener
+                            @Override
                             public void dialogBtnLeftListener(View customView, DialogInterface dialogInterface, int which) {
                                 dialogInterface.dismiss();
                             }
@@ -97,8 +97,8 @@ public class DownloadFwSelectActivity extends BaseActivity implements DownloadFw
                 }
             }
         });
-        this.lvSelectFw.setOnItemClickListener(new AdapterView.OnItemClickListener() { // from class: com.fimi.libdownfw.update.DownloadFwSelectActivity.3
-            @Override // android.widget.AdapterView.OnItemClickListener
+        this.lvSelectFw.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             }
         });
@@ -120,7 +120,7 @@ public class DownloadFwSelectActivity extends BaseActivity implements DownloadFw
         }
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     protected int getContentViewLayoutID() {
         return R.layout.activity_download_fw_select;
     }
@@ -147,7 +147,7 @@ public class DownloadFwSelectActivity extends BaseActivity implements DownloadFw
         }
     }
 
-    @Override // com.fimi.libdownfw.adapter.DownloadFwSelectAdapter.SelectListener
+    @Override
     public void onSelect(boolean b) {
         if (b) {
             this.btnDown.setEnabled(true);
@@ -164,7 +164,7 @@ public class DownloadFwSelectActivity extends BaseActivity implements DownloadFw
                     totalSize += dto.getFileSize();
                     if (totalSize > 0) {
                         double allFileSizeM = ((totalSize * 1.0d) / 1024.0d) / 1024.0d;
-                        String tempString = String.valueOf(NumberUtil.decimalPointStr(allFileSizeM, 2)) + "M";
+                        String tempString = NumberUtil.decimalPointStr(allFileSizeM, 2) + "M";
                         this.tvHardWareSize.setText(String.format(getString(R.string.downfw_update_firmware_detail), tempString));
                         this.tvHardWareSize.setVisibility(0);
                     }
@@ -177,7 +177,7 @@ public class DownloadFwSelectActivity extends BaseActivity implements DownloadFw
         this.tvHardWareSize.setVisibility(8);
     }
 
-    @Override // android.support.v4.app.FragmentActivity, android.app.Activity
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
     }
@@ -189,13 +189,10 @@ public class DownloadFwSelectActivity extends BaseActivity implements DownloadFw
             dnsTh.join(500L);
         } catch (Exception e) {
         }
-        if (dnsTh.getIP() == null) {
-            return false;
-        }
-        return true;
+        return dnsTh.getIP() != null;
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     protected void setStatusBarColor() {
         StatusBarUtil.StatusBarLightMode(this);
     }

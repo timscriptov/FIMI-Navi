@@ -2,7 +2,7 @@ package com.fimi.kernel;
 
 import android.content.Context;
 
-/* loaded from: classes.dex */
+
 public class FimiAppContext {
     public static final int ALL = 3;
     public static final int DELETE_LOCAL_FILE = 1;

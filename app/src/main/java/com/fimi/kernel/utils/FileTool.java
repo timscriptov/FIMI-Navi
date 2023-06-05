@@ -4,7 +4,7 @@ import android.text.TextUtils;
 
 import java.io.File;
 
-/* loaded from: classes.dex */
+
 public class FileTool {
     public static void deleteFile(String filePath) {
         if (!TextUtils.isEmpty(filePath)) {

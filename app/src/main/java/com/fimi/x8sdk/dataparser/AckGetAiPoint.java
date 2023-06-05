@@ -4,7 +4,7 @@ import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 import com.fimi.x8sdk.entity.FLatLng;
 import com.fimi.x8sdk.util.GpsCorrect;
 
-/* loaded from: classes2.dex */
+
 public class AckGetAiPoint extends X8BaseMessage {
     private int altitude;
     private float distance;
@@ -39,7 +39,7 @@ public class AckGetAiPoint extends X8BaseMessage {
         this.fLatLng = fLatLng;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         this.longitude = packet.getPayLoad4().getDouble().doubleValue();

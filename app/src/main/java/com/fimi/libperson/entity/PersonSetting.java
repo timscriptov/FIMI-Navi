@@ -7,7 +7,7 @@ import com.fimi.libperson.adapter.PersonSettingAdapt;
 
 import java.util.Observable;
 
-/* loaded from: classes.dex */
+
 public class PersonSetting extends Observable {
     private String content;
     private int id;

@@ -6,12 +6,12 @@ import com.fimi.kernel.connect.session.NoticeManager;
 import com.fimi.kernel.dataparser.fmlink4.Parser4;
 import com.fimi.kernel.utils.ByteUtil;
 
-/* loaded from: classes2.dex */
+
 public class FwUploadDataChanel implements IDataChanel {
-    private Parser4 p = new Parser4();
+    private final Parser4 p = new Parser4();
     private IRetransmissionUsbHandle retransmissionUsbHandle;
 
-    @Override // com.fimi.x8sdk.connect.datatype.IDataChanel
+    @Override
     public void forwardData(byte[] data) {
         UpdateDateMessage updateDateMessage = new UpdateDateMessage();
         updateDateMessage.setMsgLen(ByteUtil.bytesToInt(data, 0));

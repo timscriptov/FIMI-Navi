@@ -136,27 +136,27 @@ public class HttpsUtils {
 
     @NonNull
     public static X509TrustManager initTrustManager() {
-        X509TrustManager mTrustManager = new X509TrustManager() { // from class: com.fimi.kernel.network.okhttp.https.HttpsUtils.1
-            @Override // javax.net.ssl.X509TrustManager
+        X509TrustManager mTrustManager = new X509TrustManager() {
+            @Override
             public X509Certificate[] getAcceptedIssuers() {
                 return new X509Certificate[0];
             }
 
-            @Override // javax.net.ssl.X509TrustManager
+            @Override
             public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
             }
 
-            @Override // javax.net.ssl.X509TrustManager
+            @Override
             public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
             }
         };
         return mTrustManager;
     }
 
-    /* loaded from: classes.dex */
+
     private static class MyTrustManager implements X509TrustManager {
-        private X509TrustManager defaultTrustManager;
-        private X509TrustManager localTrustManager;
+        private final X509TrustManager defaultTrustManager;
+        private final X509TrustManager localTrustManager;
 
         public MyTrustManager(X509TrustManager localTrustManager) throws NoSuchAlgorithmException, KeyStoreException {
             TrustManagerFactory var4 = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
@@ -165,11 +165,11 @@ public class HttpsUtils {
             this.localTrustManager = localTrustManager;
         }
 
-        @Override // javax.net.ssl.X509TrustManager
+        @Override
         public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
         }
 
-        @Override // javax.net.ssl.X509TrustManager
+        @Override
         public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
             try {
                 this.defaultTrustManager.checkServerTrusted(chain, authType);
@@ -178,7 +178,7 @@ public class HttpsUtils {
             }
         }
 
-        @Override // javax.net.ssl.X509TrustManager
+        @Override
         public X509Certificate[] getAcceptedIssuers() {
             return new X509Certificate[0];
         }

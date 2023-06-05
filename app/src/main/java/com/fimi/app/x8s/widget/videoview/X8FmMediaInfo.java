@@ -5,7 +5,6 @@ import androidx.annotation.NonNull;
 import java.io.Serializable;
 
 
-
 public class X8FmMediaInfo implements Serializable {
     private String duration;
     private String name;

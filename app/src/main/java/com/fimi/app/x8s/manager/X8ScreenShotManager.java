@@ -21,7 +21,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/* loaded from: classes.dex */
+
 public class X8ScreenShotManager {
     public static boolean isBusy;
     boolean isFpvShotSuccess;
@@ -106,16 +106,16 @@ public class X8ScreenShotManager {
 
     public void starThread(final X8sMainActivity activity) {
         isBusy = true;
-        this.mMapShotTask = new X8ShotAsyncTask(activity, new IFimiShotResult() { // from class: com.fimi.app.x8s.manager.X8ScreenShotManager.1
-            @Override // com.fimi.app.x8s.interfaces.IFimiShotResult
+        this.mMapShotTask = new X8ShotAsyncTask(activity, new IFimiShotResult() {
+            @Override
             public void onShotResult(Bitmap btp) {
                 activity.getmMapVideoController().setMapShot(btp);
                 X8ScreenShotManager.this.isMapShotSuccess = true;
             }
         }, 0);
         this.mMapShotTask.execute("");
-        this.mFpvShotTask = new X8ShotAsyncTask(activity, new IFimiShotResult() { // from class: com.fimi.app.x8s.manager.X8ScreenShotManager.2
-            @Override // com.fimi.app.x8s.interfaces.IFimiShotResult
+        this.mFpvShotTask = new X8ShotAsyncTask(activity, new IFimiShotResult() {
+            @Override
             public void onShotResult(Bitmap btp) {
                 activity.getmMapVideoController().setFpvShot(btp);
                 X8ScreenShotManager.this.isFpvShotSuccess = true;

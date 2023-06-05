@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-/* loaded from: classes.dex */
+
 public class PercentFrameLayout extends FrameLayout {
     private final PercentLayoutHelper mHelper;
 
@@ -25,12 +25,12 @@ public class PercentFrameLayout extends FrameLayout {
         this.mHelper = new PercentLayoutHelper(this);
     }
 
-    @Override // android.widget.FrameLayout, android.view.ViewGroup
+    @Override
     public LayoutParams generateLayoutParams(AttributeSet attrs) {
         return new LayoutParams(getContext(), attrs);
     }
 
-    @Override // android.widget.FrameLayout, android.view.View
+    @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         this.mHelper.adjustChildren(widthMeasureSpec, heightMeasureSpec);
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -39,13 +39,13 @@ public class PercentFrameLayout extends FrameLayout {
         }
     }
 
-    @Override // android.widget.FrameLayout, android.view.ViewGroup, android.view.View
+    @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
         this.mHelper.restoreOriginalParams();
     }
 
-    /* loaded from: classes.dex */
+
     public static class LayoutParams extends FrameLayout.LayoutParams implements PercentLayoutHelper.PercentLayoutParams {
         private PercentLayoutHelper.PercentLayoutInfo mPercentLayoutInfo;
 
@@ -80,12 +80,12 @@ public class PercentFrameLayout extends FrameLayout {
             this.mPercentLayoutInfo = source.mPercentLayoutInfo;
         }
 
-        @Override // com.fimi.kernel.percent.PercentLayoutHelper.PercentLayoutParams
+        @Override
         public PercentLayoutHelper.PercentLayoutInfo getPercentLayoutInfo() {
             return this.mPercentLayoutInfo;
         }
 
-        @Override // android.view.ViewGroup.LayoutParams
+        @Override
         protected void setBaseAttributes(TypedArray a, int widthAttr, int heightAttr) {
             PercentLayoutHelper.fetchWidthAndHeight(this, a, widthAttr, heightAttr);
         }

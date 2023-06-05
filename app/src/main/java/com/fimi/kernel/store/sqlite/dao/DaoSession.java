@@ -15,7 +15,7 @@ import org.greenrobot.greendao.internal.DaoConfig;
 
 import java.util.Map;
 
-/* loaded from: classes.dex */
+
 public class DaoSession extends AbstractDaoSession {
     private final DataStaticInfoDao dataStaticInfoDao;
     private final DaoConfig dataStaticInfoDaoConfig;

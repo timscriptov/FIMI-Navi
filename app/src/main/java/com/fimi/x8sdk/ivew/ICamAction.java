@@ -3,7 +3,7 @@ package com.fimi.x8sdk.ivew;
 import com.fimi.kernel.dataparser.usb.UiCallBackListener;
 import com.fimi.x8sdk.listener.CallBackParamListener;
 
-/* loaded from: classes2.dex */
+
 public interface ICamAction {
     void endRecord(UiCallBackListener uiCallBackListener);
 

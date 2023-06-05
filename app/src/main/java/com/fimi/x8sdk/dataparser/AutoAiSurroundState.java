@@ -3,8 +3,6 @@ package com.fimi.x8sdk.dataparser;
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 
 
-
-/* loaded from: classes2.dex */
 public class AutoAiSurroundState extends X8BaseMessage {
     private int altitude;
     private int radius;
@@ -52,7 +50,7 @@ public class AutoAiSurroundState extends X8BaseMessage {
         this.states = states;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         this.radius = packet.getPayLoad4().getShort();
@@ -62,7 +60,7 @@ public class AutoAiSurroundState extends X8BaseMessage {
         this.states = packet.getPayLoad4().getByte();
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public String toString() {
         return "{radius=" + this.radius + ", speed=" + this.speed + ", altitude=" + this.altitude + ", yawMode=" + this.yawMode + ", states=" + this.states + '}';
     }

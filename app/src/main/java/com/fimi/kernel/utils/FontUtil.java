@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-/* loaded from: classes.dex */
+
 public class FontUtil {
     private static Typeface lantingTF = null;
     private static Typeface sDINAlernateBold = null;
@@ -73,8 +73,7 @@ public class FontUtil {
     }
 
     public static void changeViewLanTing(AssetManager mgr, View view) {
-        if (view instanceof ViewGroup) {
-            ViewGroup vp = (ViewGroup) view;
+        if (view instanceof ViewGroup vp) {
             for (int i = 0; i < vp.getChildCount(); i++) {
                 View viewchild = vp.getChildAt(i);
                 if (viewchild.getClass().equals(TextView.class)) {

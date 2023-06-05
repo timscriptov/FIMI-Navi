@@ -24,12 +24,13 @@ import com.fimi.x8sdk.jsonResult.CurParamsJson;
 import com.fimi.x8sdk.modulestate.StateManager;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes.dex */
+
 public class X8CameraTakePhotoSettingContoller extends AbsX8Controllers implements CameraParamListener, JsonUiCallBackListener {
     PhotoSubParamItemEntity itemEntity;
     Map<String, String> paramMap;
@@ -71,12 +72,12 @@ public class X8CameraTakePhotoSettingContoller extends AbsX8Controllers implemen
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
         this.context = rootView.getContext();
         this.handleView = rootView.findViewById(R.id.x8_mode_setting_layout);
-        this.paramViewStub = (ViewStub) rootView.findViewById(R.id.param_default_layout);
-        this.subViewStub = (ViewStub) rootView.findViewById(R.id.sub_param_layout);
+        this.paramViewStub = rootView.findViewById(R.id.param_default_layout);
+        this.subViewStub = rootView.findViewById(R.id.sub_param_layout);
         if (this.paramView == null) {
             this.paramView = this.paramViewStub.inflate();
         }
@@ -84,15 +85,15 @@ public class X8CameraTakePhotoSettingContoller extends AbsX8Controllers implemen
         this.paramController.setParamListener(this);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
-    @Override // com.fimi.app.x8s.viewHolder.CameraParamListener
+    @Override
     public void gotoSubItem(String key, String value, RecyclerView.ViewHolder viewHolder) {
         if (this.subView == null) {
             this.subView = this.subViewStub.inflate();
@@ -347,7 +348,7 @@ public class X8CameraTakePhotoSettingContoller extends AbsX8Controllers implemen
         this.subParamsController.openUi();
     }
 
-    @Override // com.fimi.app.x8s.viewHolder.CameraParamListener
+    @Override
     public void itemReturnBack(String paramKey, String... paramValue) {
         this.paramController.openUi();
         this.subParamsController.closeUi();
@@ -463,89 +464,81 @@ public class X8CameraTakePhotoSettingContoller extends AbsX8Controllers implemen
         reviewData();
     }
 
-    @Override // com.fimi.kernel.dataparser.usb.JsonUiCallBackListener
+    @Override
     public void onComplete(JSONObject rt, Object o) {
         if (rt != null) {
-            CameraParamsJson paramsJson = (CameraParamsJson) JSON.toJavaObject(rt, CameraParamsJson.class);
+            CameraParamsJson paramsJson = JSON.toJavaObject(rt, CameraParamsJson.class);
             String paramType = paramsJson.getParam();
             if (paramsJson != null && paramType != null) {
-                switch (paramsJson.getMsg_id()) {
-                    case 9:
-                        HostLogBack.getInstance().writeLog("Alanqiu onComplete ++++0" + paramsJson.toString());
-                        List<String> mlist = paramsJson.getOptions();
+                if (paramsJson.getMsg_id() == 9) {
+                    HostLogBack.getInstance().writeLog("Alanqiu onComplete ++++0" + paramsJson);
+                    List<String> mlist = paramsJson.getOptions();
+                    mlist.add(0, this.itemEntity.getTitleName());
+                    if (paramType.equals(CameraJsonCollection.KEY_SHUTTER_TIME)) {
+                        this.itemEntity.setParamKey(CameraJsonCollection.KEY_SHUTTER_TIME);
+                    } else if (paramType.equals("photo_format")) {
+                        this.itemEntity.clearOptions();
+                        this.itemEntity.setParamKey("photo_format");
+                        this.itemEntity.setOptions(mlist);
+                    } else if (paramType.equals("photo_size")) {
+                        this.itemEntity.clearOptions();
+                        this.itemEntity.setParamKey("photo_size");
+                        this.itemEntity.setOptions(mlist);
+                        HostLogBack.getInstance().writeLog("Alanqiu onComplete ++++111" + paramsJson);
+                    } else if (paramType.equals("awb")) {
+                        this.itemEntity.clearOptions();
+                        this.itemEntity.setParamKey("awb");
+                        this.itemEntity.setOptions(mlist);
+                    } else if (paramType.equals(CameraJsonCollection.KEY_METERMING_MODE)) {
+                        this.itemEntity.clearOptions();
+                        this.itemEntity.setParamKey(CameraJsonCollection.KEY_METERMING_MODE);
+                        this.itemEntity.setOptions(mlist);
+                    } else if (paramType.equals(CameraJsonCollection.KEY_DIGITAL_EFFECT)) {
+                        this.itemEntity.clearOptions();
+                        this.itemEntity.setParamKey(CameraJsonCollection.KEY_DIGITAL_EFFECT);
+                        this.itemEntity.setOptions(mlist);
+                    } else if (paramType.equals("system_type") || paramsJson.equals("system_type")) {
+                        this.itemEntity.clearOptions();
+                        this.itemEntity.setParamKey("system_type");
+                        this.itemEntity.setOptions(mlist);
+                    } else if (paramType.equals("video_quality")) {
+                        this.itemEntity.clearOptions();
+                        this.itemEntity.setParamKey("video_quality");
+                        this.itemEntity.setOptions(mlist);
+                    } else if (paramType.equals("video_resolution")) {
+                        this.itemEntity.setParamKey("video_resolution");
+                    } else if (paramType.equals(CameraJsonCollection.KEY_RECORD_MODE)) {
+                        String[] modeArray = this.context.getResources().getStringArray(R.array.x8_record_mode_array);
+                        mlist.clear();
                         mlist.add(0, this.itemEntity.getTitleName());
-                        if (paramType.equals(CameraJsonCollection.KEY_SHUTTER_TIME)) {
-                            this.itemEntity.setParamKey(CameraJsonCollection.KEY_SHUTTER_TIME);
-                        } else if (paramType.equals("photo_format")) {
-                            this.itemEntity.clearOptions();
-                            this.itemEntity.setParamKey("photo_format");
-                            this.itemEntity.setOptions(mlist);
-                        } else if (paramType.equals("photo_size")) {
-                            this.itemEntity.clearOptions();
-                            this.itemEntity.setParamKey("photo_size");
-                            this.itemEntity.setOptions(mlist);
-                            HostLogBack.getInstance().writeLog("Alanqiu onComplete ++++111" + paramsJson.toString());
-                        } else if (paramType.equals("awb")) {
-                            this.itemEntity.clearOptions();
-                            this.itemEntity.setParamKey("awb");
-                            this.itemEntity.setOptions(mlist);
-                        } else if (paramType.equals(CameraJsonCollection.KEY_METERMING_MODE)) {
-                            this.itemEntity.clearOptions();
-                            this.itemEntity.setParamKey(CameraJsonCollection.KEY_METERMING_MODE);
-                            this.itemEntity.setOptions(mlist);
-                        } else if (paramType.equals(CameraJsonCollection.KEY_DIGITAL_EFFECT)) {
-                            this.itemEntity.clearOptions();
-                            this.itemEntity.setParamKey(CameraJsonCollection.KEY_DIGITAL_EFFECT);
-                            this.itemEntity.setOptions(mlist);
-                        } else if (paramType.equals("system_type") || paramsJson.equals("system_type")) {
-                            this.itemEntity.clearOptions();
-                            this.itemEntity.setParamKey("system_type");
-                            this.itemEntity.setOptions(mlist);
-                        } else if (paramType.equals("video_quality")) {
-                            this.itemEntity.clearOptions();
-                            this.itemEntity.setParamKey("video_quality");
-                            this.itemEntity.setOptions(mlist);
-                        } else if (paramType.equals("video_resolution")) {
-                            this.itemEntity.setParamKey("video_resolution");
-                        } else if (paramType.equals(CameraJsonCollection.KEY_RECORD_MODE)) {
-                            String[] modeArray = this.context.getResources().getStringArray(R.array.x8_record_mode_array);
-                            mlist.clear();
-                            mlist.add(0, this.itemEntity.getTitleName());
-                            for (String str : modeArray) {
-                                mlist.add(str);
-                            }
-                            this.itemEntity.setOptions(mlist);
-                        } else if (paramType.equals("capture_mode")) {
-                            String[] modeArray2 = this.context.getResources().getStringArray(R.array.x8_photo_mode_array);
-                            mlist.clear();
-                            mlist.add(0, this.itemEntity.getTitleName());
-                            for (String str2 : modeArray2) {
-                                mlist.add(str2);
-                            }
-                            this.itemEntity.setOptions(mlist);
-                        } else if (paramType.equals(CameraJsonCollection.KEY_CAMERA_STYLE)) {
-                            String[] styleArray = this.context.getResources().getStringArray(R.array.x8_photo_style_array);
-                            mlist.clear();
-                            mlist.add(0, this.itemEntity.getTitleName());
-                            for (String str3 : styleArray) {
-                                mlist.add(str3);
-                            }
-                            this.itemEntity.setOptions(mlist);
-                        }
-                        List<String> options = paramsJson.getOptions();
-                        if (paramType.equals(CameraJsonCollection.KEY_METERMING_MODE) && options != null && options.size() > 0) {
-                            for (int m = options.size() - 1; m >= 0; m--) {
-                                String val = options.get(m);
-                                if (val.equalsIgnoreCase(this.context.getResources().getString(R.string.x8_meter_roi))) {
-                                    options.remove(m);
-                                } else if (val.equalsIgnoreCase(this.context.getResources().getString(R.string.x8_colours_flog)) && !StateManager.getInstance().isIs4KResolution()) {
-                                    options.remove(m);
-                                }
+                        Collections.addAll(mlist, modeArray);
+                        this.itemEntity.setOptions(mlist);
+                    } else if (paramType.equals("capture_mode")) {
+                        String[] modeArray2 = this.context.getResources().getStringArray(R.array.x8_photo_mode_array);
+                        mlist.clear();
+                        mlist.add(0, this.itemEntity.getTitleName());
+                        Collections.addAll(mlist, modeArray2);
+                        this.itemEntity.setOptions(mlist);
+                    } else if (paramType.equals(CameraJsonCollection.KEY_CAMERA_STYLE)) {
+                        String[] styleArray = this.context.getResources().getStringArray(R.array.x8_photo_style_array);
+                        mlist.clear();
+                        mlist.add(0, this.itemEntity.getTitleName());
+                        Collections.addAll(mlist, styleArray);
+                        this.itemEntity.setOptions(mlist);
+                    }
+                    List<String> options = paramsJson.getOptions();
+                    if (paramType.equals(CameraJsonCollection.KEY_METERMING_MODE) && options != null && options.size() > 0) {
+                        for (int m = options.size() - 1; m >= 0; m--) {
+                            String val = options.get(m);
+                            if (val.equalsIgnoreCase(this.context.getResources().getString(R.string.x8_meter_roi))) {
+                                options.remove(m);
+                            } else if (val.equalsIgnoreCase(this.context.getResources().getString(R.string.x8_colours_flog)) && !StateManager.getInstance().isIs4KResolution()) {
+                                options.remove(m);
                             }
                         }
-                        this.itemEntity.setOptions(options);
-                        matchNickKey(options);
-                        break;
+                    }
+                    this.itemEntity.setOptions(options);
+                    matchNickKey(options);
                 }
                 if (this.subParamsController != null && this.itemEntity != null) {
                     this.subParamsController.setSubParam(this.itemEntity);
@@ -656,7 +649,7 @@ public class X8CameraTakePhotoSettingContoller extends AbsX8Controllers implemen
         this.itemEntity.setOptions(keyOptions);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         super.onDroneConnected(b);
         if (this.tokenEnable != b) {
@@ -701,7 +694,7 @@ public class X8CameraTakePhotoSettingContoller extends AbsX8Controllers implemen
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public boolean onClickBackKey() {
         return false;
     }

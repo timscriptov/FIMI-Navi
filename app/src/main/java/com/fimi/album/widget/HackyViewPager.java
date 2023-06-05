@@ -7,7 +7,7 @@ import android.view.MotionEvent;
 
 import androidx.viewpager.widget.ViewPager;
 
-/* loaded from: classes.dex */
+
 public class HackyViewPager extends ViewPager {
     private static final String TAG = "HackyViewPager";
     private boolean scrollble;
@@ -22,7 +22,7 @@ public class HackyViewPager extends ViewPager {
         this.scrollble = true;
     }
 
-    @Override // android.support.v4.view.ViewPager, android.view.ViewGroup
+    @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         try {
             if (this.scrollble) {
@@ -38,7 +38,7 @@ public class HackyViewPager extends ViewPager {
         }
     }
 
-    @Override // android.support.v4.view.ViewPager, android.view.View
+    @Override
     public boolean onTouchEvent(MotionEvent ev) {
         if (this.scrollble) {
             return super.onTouchEvent(ev);
@@ -50,7 +50,7 @@ public class HackyViewPager extends ViewPager {
         this.scrollble = scrollble;
     }
 
-    @Override // android.view.View
+    @Override
     public void scrollTo(int x, int y) {
         super.scrollTo(x, y);
     }

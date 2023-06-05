@@ -16,9 +16,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-/* loaded from: classes.dex */
+
 public class FermiPlayerUtils {
-    private static SimpleDateFormat sdf = new SimpleDateFormat();
+    private static final SimpleDateFormat sdf = new SimpleDateFormat();
 
     public static Bitmap createVideoThumbnail(String filePath) {
         return ThumbnailUtils.createVideoThumbnail(filePath.replace("file://", ""), 1);
@@ -34,7 +34,7 @@ public class FermiPlayerUtils {
         if (Build.VERSION.SDK_INT >= 14) {
             MediaMetadataRetriever retriever = new MediaMetadataRetriever();
             retriever.setDataSource(filePath2);
-            Bitmap bitmap = retriever.getFrameAtTime(offsetMillSecond * 1000, 2);
+            Bitmap bitmap = retriever.getFrameAtTime(offsetMillSecond * 1000L, 2);
             return bitmap;
         }
         Bitmap bitmap2 = createVideoThumbnail(filePath2);

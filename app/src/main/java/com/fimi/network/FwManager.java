@@ -5,7 +5,7 @@ import com.fimi.kernel.network.okhttp.CommonOkHttpClient;
 import com.fimi.kernel.network.okhttp.listener.DisposeDataHandle;
 import com.fimi.kernel.network.okhttp.request.CommonRequest;
 
-/* loaded from: classes.dex */
+
 public class FwManager extends BaseManager {
     private final String V2 = "v2";
     private final String V3 = "v3";

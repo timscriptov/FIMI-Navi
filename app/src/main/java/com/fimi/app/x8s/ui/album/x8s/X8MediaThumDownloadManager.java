@@ -14,15 +14,15 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/* loaded from: classes.dex */
+
 public class X8MediaThumDownloadManager implements OnDownloadListener, IMediaDownload {
-    private static X8MediaThumDownloadManager x8MediaThumDownloadManager = new X8MediaThumDownloadManager();
+    private static final X8MediaThumDownloadManager x8MediaThumDownloadManager = new X8MediaThumDownloadManager();
     public boolean isDownload;
     private int index;
     private OnDownloadUiListener mUiDownloadListener;
-    private List<MediaModel> data = new ArrayList();
-    private Handler mHanler = new Handler() { // from class: com.fimi.app.x8s.ui.album.x8s.X8MediaThumDownloadManager.1
-        @Override // android.os.Handler
+    private final List<MediaModel> data = new ArrayList();
+    private final Handler mHanler = new Handler() {
+        @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
@@ -38,11 +38,10 @@ public class X8MediaThumDownloadManager implements OnDownloadListener, IMediaDow
                     X8MediaThumDownloadManager.this.mUiDownloadListener.onFailure((MediaModel) msg.obj);
                     return;
                 default:
-                    return;
             }
         }
     };
-    private ExecutorService executorService = Executors.newFixedThreadPool(1);
+    private final ExecutorService executorService = Executors.newFixedThreadPool(1);
 
     public static X8MediaThumDownloadManager getInstance() {
         return x8MediaThumDownloadManager;
@@ -52,14 +51,14 @@ public class X8MediaThumDownloadManager implements OnDownloadListener, IMediaDow
         this.mUiDownloadListener = mUiDownloadListener;
     }
 
-    @Override // com.fimi.album.interfaces.IMediaDownload
+    @Override
     public void addData(MediaModel m) {
         if (!this.data.contains(m)) {
             this.data.add(m);
         }
     }
 
-    @Override // com.fimi.album.interfaces.IMediaDownload
+    @Override
     public void stopDownload() {
         this.isDownload = false;
         this.index = 0;
@@ -70,7 +69,7 @@ public class X8MediaThumDownloadManager implements OnDownloadListener, IMediaDow
         return this.data.size();
     }
 
-    @Override // com.fimi.album.interfaces.IMediaDownload
+    @Override
     public void startDownload() {
         this.isDownload = true;
         if (this.data.size() > 0 && this.index < this.data.size()) {
@@ -88,13 +87,13 @@ public class X8MediaThumDownloadManager implements OnDownloadListener, IMediaDow
         }
     }
 
-    @Override // com.fimi.album.download.interfaces.OnDownloadListener
+    @Override
     public void onProgress(Object responseObj, long progrss, long currentLength) {
         int i = (int) (progrss / (currentLength / 100));
         this.mHanler.obtainMessage(0, (int) progrss, (int) progrss, responseObj).sendToTarget();
     }
 
-    @Override // com.fimi.album.download.interfaces.OnDownloadListener
+    @Override
     public void onSuccess(Object responseObj) {
         MediaModel model = (MediaModel) responseObj;
         model.setThumDownloading(false);
@@ -103,14 +102,14 @@ public class X8MediaThumDownloadManager implements OnDownloadListener, IMediaDow
         next();
     }
 
-    @Override // com.fimi.album.download.interfaces.OnDownloadListener
+    @Override
     public void onFailure(Object reasonObj) {
         this.mHanler.obtainMessage(2, reasonObj).sendToTarget();
         HostLogBack.getInstance().writeLog("Alanqiu  ===============next onFailure:" + this.index);
         next();
     }
 
-    @Override // com.fimi.album.download.interfaces.OnDownloadListener
+    @Override
     public void onStop(MediaModel reasonObj) {
     }
 }

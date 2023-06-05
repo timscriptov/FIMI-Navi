@@ -1,9 +1,9 @@
 package com.fimi.x8sdk.cmdsenum;
 
-/* loaded from: classes2.dex */
+
 public class X8Cali {
 
-    /* loaded from: classes2.dex */
+
     public enum CaliCmd {
         CALI_CMD_IDLE,
         CALI_CMD_START,
@@ -13,14 +13,14 @@ public class X8Cali {
         CALI_CMD_ALL_DONE
     }
 
-    /* loaded from: classes2.dex */
+
     public enum CaliMode {
         CALI_MODE_NULL,
         CALI_MODE_AUTO,
         CALI_MODE_MANUALLY
     }
 
-    /* loaded from: classes2.dex */
+
     public enum CaliStep {
         CALI_STEP_IDLE,
         CALI_STEP_HORIZONTAL,
@@ -36,7 +36,7 @@ public class X8Cali {
         CALI_STEP_DATA_PROCESS
     }
 
-    /* loaded from: classes2.dex */
+
     public enum CaliStepStatus {
         CALI_STA_IDLE,
         CALI_STA_OBSERVERING,
@@ -52,7 +52,7 @@ public class X8Cali {
         CALI_STA_SAMPLE_DONE
     }
 
-    /* loaded from: classes2.dex */
+
     public enum CaliType {
         CALI_TYPE_IDLE,
         CALI_MAG,
@@ -60,7 +60,7 @@ public class X8Cali {
         CALI_IMU_ORTH
     }
 
-    /* loaded from: classes2.dex */
+
     public enum SensorType {
         IDLE,
         IMUM,

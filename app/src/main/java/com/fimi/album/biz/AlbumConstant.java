@@ -1,6 +1,6 @@
 package com.fimi.album.biz;
 
-/* loaded from: classes.dex */
+
 public class AlbumConstant {
     public static final String DELETEITEM = "deleteItem";
     public static final String DELETEITEMACTION = "deleteItemAction";

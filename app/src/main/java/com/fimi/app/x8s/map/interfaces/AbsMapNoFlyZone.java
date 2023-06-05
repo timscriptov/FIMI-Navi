@@ -4,7 +4,7 @@ import android.graphics.Color;
 
 import com.fimi.app.x8s.tools.GpsPointTools;
 
-/* loaded from: classes.dex */
+
 public abstract class AbsMapNoFlyZone {
     protected GpsPointTools mGpsPointTools = new GpsPointTools();
     protected int strokeColor = Color.argb(99, 255, 79, 0);

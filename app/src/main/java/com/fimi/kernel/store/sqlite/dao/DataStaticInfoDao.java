@@ -11,7 +11,7 @@ import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.database.DatabaseStatement;
 import org.greenrobot.greendao.internal.DaoConfig;
 
-/* loaded from: classes.dex */
+
 public class DataStaticInfoDao extends AbstractDao<DataStaticInfo, Long> {
     public static final String TABLENAME = "DATA_STATIC_INFO";
 
@@ -33,7 +33,7 @@ public class DataStaticInfoDao extends AbstractDao<DataStaticInfo, Long> {
         db.execSQL(sql);
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public final void bindValues(DatabaseStatement stmt, DataStaticInfo entity) {
         stmt.clearBindings();
         Long id = entity.getId();
@@ -84,7 +84,7 @@ public class DataStaticInfoDao extends AbstractDao<DataStaticInfo, Long> {
         }
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public final void bindValues(SQLiteStatement stmt, DataStaticInfo entity) {
         stmt.clearBindings();
         Long id = entity.getId();
@@ -135,23 +135,23 @@ public class DataStaticInfoDao extends AbstractDao<DataStaticInfo, Long> {
         }
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public Long readKey(Cursor cursor, int offset) {
-        if (cursor.isNull(offset + 0)) {
+        if (cursor.isNull(offset)) {
             return null;
         }
-        return Long.valueOf(cursor.getLong(offset + 0));
+        return Long.valueOf(cursor.getLong(offset));
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public DataStaticInfo readEntity(Cursor cursor, int offset) {
-        DataStaticInfo entity = new DataStaticInfo(cursor.isNull(offset + 0) ? null : Long.valueOf(cursor.getLong(offset + 0)), cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), (byte) cursor.getShort(offset + 5), (byte) cursor.getShort(offset + 6), cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
+        DataStaticInfo entity = new DataStaticInfo(cursor.isNull(offset) ? null : Long.valueOf(cursor.getLong(offset)), cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), (byte) cursor.getShort(offset + 5), (byte) cursor.getShort(offset + 6), cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
         return entity;
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public void readEntity(Cursor cursor, DataStaticInfo entity, int offset) {
-        entity.setId(cursor.isNull(offset + 0) ? null : Long.valueOf(cursor.getLong(offset + 0)));
+        entity.setId(cursor.isNull(offset) ? null : Long.valueOf(cursor.getLong(offset)));
         entity.setCurrentTime(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setFlyTime(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setUserId(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
@@ -166,13 +166,13 @@ public class DataStaticInfoDao extends AbstractDao<DataStaticInfo, Long> {
         entity.setLatitude(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public final Long updateKeyAfterInsert(DataStaticInfo entity, long rowId) {
         entity.setId(Long.valueOf(rowId));
         return Long.valueOf(rowId);
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public Long getKey(DataStaticInfo entity) {
         if (entity != null) {
             return entity.getId();
@@ -180,17 +180,17 @@ public class DataStaticInfoDao extends AbstractDao<DataStaticInfo, Long> {
         return null;
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public boolean hasKey(DataStaticInfo entity) {
         return entity.getId() != null;
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public final boolean isEntityUpdateable() {
         return true;
     }
 
-    /* loaded from: classes.dex */
+
     public static class Properties {
         public static final Property Id = new Property(0, Long.class, "id", true, "_id");
         public static final Property CurrentTime = new Property(1, String.class, "currentTime", false, "CURRENT_TIME");

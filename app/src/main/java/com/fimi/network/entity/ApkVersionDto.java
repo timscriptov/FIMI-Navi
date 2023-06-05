@@ -1,6 +1,6 @@
 package com.fimi.network.entity;
 
-/* loaded from: classes.dex */
+
 public class ApkVersionDto extends BaseModel {
     private String fileEncode;
     private String fimiID;

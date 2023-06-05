@@ -18,8 +18,6 @@ import com.fimi.x8sdk.entity.GpsInfoCmd;
 import java.util.Calendar;
 
 
-
-/* loaded from: classes2.dex */
 public class FcCollection extends X8BaseCmd {
     public static final byte MSG_ATUO_BATTERRY = 5;
     public static final byte MSG_BLACK_BOX_30 = 48;
@@ -368,7 +366,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd setAiFollowSpeed(int value) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[6];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 3;
         int i2 = i + 1;
         payload[i] = MSG_SET_FOLLOW_SPEED;
@@ -388,7 +386,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd getAiFollowSpeed() {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[4];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 3;
         int i2 = i + 1;
         payload[i] = MSG_GET_FOLLOW_SPEED;
@@ -420,7 +418,7 @@ public class FcCollection extends X8BaseCmd {
     public BaseCommand setAiFollowPoint2Point(double longitude, double latitude, int altitude, int speed) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[25];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 3;
         payload[i] = 52;
         int i2 = i + 1 + 2;
@@ -465,7 +463,7 @@ public class FcCollection extends X8BaseCmd {
     public BaseCommand setAiSurroundPoint(int msgId, double longitude, double latitude, float altitude, double longitudeTakeoff, double latitudeTakeoff, float altitudeTakeoff, int type) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[44];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 3;
         payload[i] = (byte) msgId;
         int i2 = i + 1 + 2;
@@ -508,7 +506,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd setAiSurroundSpeed(byte msgId, int value) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[8];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 3;
         int i2 = i + 1;
         payload[i] = msgId;
@@ -532,7 +530,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd setAiSurroundOrientation(byte msgId, int value) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[8];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 3;
         int i2 = i + 1;
         payload[i] = msgId;
@@ -588,7 +586,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd setAiLinePoints(CmdAiLinePoints points) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[58];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 3;
         int i2 = i + 1;
         payload[i] = 36;
@@ -661,7 +659,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd setAiLinePointsAction(CmdAiLinePointsAction action) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[56];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 3;
         int i2 = i + 1;
         payload[i] = 37;
@@ -727,7 +725,7 @@ public class FcCollection extends X8BaseCmd {
     public BaseCommand setAiAutoPhotoValue(CmdAiAutoPhoto aiAutoPhotoValue) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[11];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 3;
         int i2 = i + 1;
         payload[i] = MSG_SET_AUTO_PHOTO_VALUE;
@@ -773,7 +771,7 @@ public class FcCollection extends X8BaseCmd {
     public BaseCommand setCalibrationStart(int type, int cmd, int mode) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[7];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 13;
         int i2 = i + 1;
         payload[i] = 5;
@@ -795,7 +793,7 @@ public class FcCollection extends X8BaseCmd {
     public BaseCommand setAircrftCalibrationStart(int type, int cmd, int mode) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[7];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 13;
         int i2 = i + 1;
         payload[i] = 5;
@@ -818,7 +816,7 @@ public class FcCollection extends X8BaseCmd {
     public BaseCommand getAircrftCalibrationState(int sensorType, int type) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal(), 0);
         byte[] payload = new byte[6];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 13;
         int i2 = i + 1;
         payload[i] = 6;
@@ -832,7 +830,7 @@ public class FcCollection extends X8BaseCmd {
         payload[i5] = (byte) type;
         sendCmd.setPayLoad(payload);
         sendCmd.packSendCmd();
-        sendCmd.setOutTime((int) 3600000);
+        sendCmd.setOutTime(3600000);
         sendCmd.setReSendNum(10);
         return sendCmd;
     }
@@ -840,7 +838,7 @@ public class FcCollection extends X8BaseCmd {
     public BaseCommand getCalibrationState(int sensorType, int type) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[6];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 13;
         int i2 = i + 1;
         payload[i] = 6;
@@ -860,7 +858,7 @@ public class FcCollection extends X8BaseCmd {
     public BaseCommand setFormatStorage(int opcode, int devid) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[6];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 1;
         int i2 = i + 1;
         payload[i] = 12;
@@ -880,7 +878,7 @@ public class FcCollection extends X8BaseCmd {
     public BaseCommand getFormatStorage(int devid) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[3];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 1;
         int i2 = i + 1;
         payload[i] = 21;
@@ -901,7 +899,7 @@ public class FcCollection extends X8BaseCmd {
         byte second = (byte) calendar.get(13);
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal(), 0);
         byte[] payload = new byte[11];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 8;
         int i2 = i + 1;
         payload[i] = 4;
@@ -931,7 +929,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd setApMode(byte mode) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_REPEATER_RC.ordinal());
         byte[] payload = new byte[5];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 14;
         int i2 = i + 1;
         payload[i] = 10;
@@ -949,7 +947,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd setApModeRestart() {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_REPEATER_RC.ordinal());
         byte[] payload = new byte[5];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 14;
         int i2 = i + 1;
         payload[i] = 15;
@@ -967,7 +965,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd getApMode() {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[4];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 4;
         int i2 = i + 1;
         payload[i] = 21;
@@ -983,7 +981,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd setLowPowerOperation(int lowPowerValue, int seriousLowPowerValue, int lowPowerOpt, int seriousLowPowerOpt) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[8];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 4;
         int i2 = i + 1;
         payload[i] = 24;
@@ -1007,7 +1005,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd getLowPowerOperation() {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[4];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 4;
         int i2 = i + 1;
         payload[i] = MSG_ID_GET_LOW_POWER_OPERATION;
@@ -1023,7 +1021,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd getIMUInfoCmd(int imuType) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[5];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 12;
         int i2 = i + 1;
         payload[i] = 7;
@@ -1041,7 +1039,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd checkIMUInfoCmd() {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[4];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 13;
         int i2 = i + 1;
         payload[i] = 7;
@@ -1053,7 +1051,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd checkIMUException(int sensorType) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[5];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 13;
         int i2 = i + 1;
         payload[i] = 8;
@@ -1079,7 +1077,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd setCloudCalibrationCmd(int status) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_GIMBAL.ordinal());
         byte[] payload = new byte[5];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 9;
         int i2 = i + 1;
         payload[i] = 44;
@@ -1097,7 +1095,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd checkCloudCalibrationCmd() {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_GIMBAL.ordinal());
         byte[] payload = new byte[4];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 9;
         int i2 = i + 1;
         payload[i] = 45;
@@ -1113,7 +1111,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd RCMatchOrCancelCode(int doneType) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_RC.ordinal());
         byte[] payload = new byte[4];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 14;
         int i2 = i + 1;
         payload[i] = (byte) doneType;
@@ -1129,7 +1127,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd checkMatchCodeProgress() {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_RC.ordinal());
         byte[] payload = new byte[4];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 14;
         int i2 = i + 1;
         payload[i] = 2;
@@ -1147,7 +1145,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd rcCalibration(int cmdType) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_RC.ordinal());
         byte[] payload = new byte[5];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 11;
         int i2 = i + 1;
         payload[i] = 14;
@@ -1165,7 +1163,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd checkRCCalibration() {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_RC.ordinal());
         byte[] payload = new byte[4];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 11;
         int i2 = i + 1;
         payload[i] = 15;
@@ -1181,7 +1179,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd setOpticFlow(boolean isOpen) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[5];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 4;
         int i2 = i + 1;
         payload[i] = 14;
@@ -1199,7 +1197,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd getOpticFlow() {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[4];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 4;
         int i2 = i + 1;
         payload[i] = 15;
@@ -1215,7 +1213,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd setAttitudeSensitivity(int rollPercent, int pitchPercent) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[9];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 4;
         int i2 = i + 1;
         payload[i] = 37;
@@ -1241,7 +1239,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd setYawSensitivity(int yawPercent) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[9];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 4;
         int i2 = i + 1;
         payload[i] = 37;
@@ -1267,7 +1265,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd getSensitivity() {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[4];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 4;
         int i2 = i + 1;
         payload[i] = 38;
@@ -1283,7 +1281,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd setBrakeSens(int rollPercent, int pitchPercent) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[9];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 4;
         int i2 = i + 1;
         payload[i] = 35;
@@ -1309,7 +1307,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd getBrakeSens() {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[4];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 4;
         int i2 = i + 1;
         payload[i] = 36;
@@ -1325,7 +1323,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd setYawTrip(int yawValue) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[9];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 4;
         int i2 = i + 1;
         payload[i] = 33;
@@ -1351,7 +1349,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd getYawTrip() {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[4];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 4;
         int i2 = i + 1;
         payload[i] = 34;
@@ -1367,7 +1365,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd setUpDownRockerExp(int throttlePercent) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[9];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 4;
         int i2 = i + 1;
         payload[i] = MSG_ID_SET_ROCKER_EXP;
@@ -1393,7 +1391,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd restSystemParams() {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[5];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 4;
         int i2 = i + 1;
         payload[i] = MSG_REST_SYSTEM_PARAMS;
@@ -1411,7 +1409,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd setLockMotor(int lock) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[5];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 4;
         int i2 = i + 1;
         payload[i] = MSG_LOCK_MOTOR_STATE;
@@ -1429,7 +1427,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd setSportMode(int enable) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[6];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 4;
         int i2 = i + 1;
         payload[i] = 3;
@@ -1449,7 +1447,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd getSportMode() {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[5];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 4;
         int i2 = i + 1;
         payload[i] = 4;
@@ -1465,7 +1463,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd setLeftRightRockerExp(int yawPercent) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[9];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 4;
         int i2 = i + 1;
         payload[i] = MSG_ID_SET_ROCKER_EXP;
@@ -1491,7 +1489,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd setGoBackRockerExp(int rollPercent, int pitchPercent) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[9];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 4;
         int i2 = i + 1;
         payload[i] = MSG_ID_SET_ROCKER_EXP;
@@ -1517,7 +1515,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd getRockerExp() {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[4];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 4;
         int i2 = i + 1;
         payload[i] = 26;
@@ -1565,7 +1563,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd setCtrlMode(byte mode) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_RC.ordinal());
         byte[] payload = new byte[5];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 11;
         int i2 = i + 1;
         payload[i] = 17;
@@ -1583,7 +1581,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd getCtrlMode() {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_RC.ordinal());
         byte[] payload = new byte[4];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 11;
         int i2 = i + 1;
         payload[i] = 18;
@@ -1727,7 +1725,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd setGravitationPrameter(AckAiSetGravitationPrameter prameter) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[11];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 3;
         int i2 = i + 1;
         payload[i] = MSG_SET_GRAVITATION_PRAMETER;
@@ -1757,7 +1755,7 @@ public class FcCollection extends X8BaseCmd {
     public X8SendCmd setScrewPrameter(AckAiScrewPrameter prameter) {
         X8SendCmd sendCmd = getFCBase((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal());
         byte[] payload = new byte[12];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 3;
         int i2 = i + 1;
         payload[i] = MSG_SET_SCREW_PRAMETER;

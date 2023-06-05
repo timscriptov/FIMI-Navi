@@ -14,13 +14,13 @@ import com.fimi.kernel.utils.DateUtil;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class X8AiLineHistoryAdapter extends BaseAdapter implements AdapterView.OnItemClickListener {
-    private Context context;
-    private int defaultColor;
-    private List<X8AiLinePointInfo> mList;
+    private final Context context;
+    private final int defaultColor;
+    private final List<X8AiLinePointInfo> mList;
     private int select = -1;
-    private int selectColor;
+    private final int selectColor;
 
     public X8AiLineHistoryAdapter(Context context, List<X8AiLinePointInfo> mList) {
         this.context = context;
@@ -29,22 +29,22 @@ public class X8AiLineHistoryAdapter extends BaseAdapter implements AdapterView.O
         this.selectColor = context.getResources().getColor(R.color.x8_fc_all_setting_blue);
     }
 
-    @Override // android.widget.Adapter
+    @Override
     public int getCount() {
         return this.mList.size();
     }
 
-    @Override // android.widget.Adapter
+    @Override
     public Object getItem(int position) {
         return this.mList.get(position);
     }
 
-    @Override // android.widget.Adapter
+    @Override
     public long getItemId(int position) {
         return position;
     }
 
-    @Override // android.widget.Adapter
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
@@ -74,7 +74,7 @@ public class X8AiLineHistoryAdapter extends BaseAdapter implements AdapterView.O
         return convertView;
     }
 
-    @Override // android.widget.AdapterView.OnItemClickListener
+    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         this.select = position;
         notifyDataSetChanged();
@@ -87,7 +87,7 @@ public class X8AiLineHistoryAdapter extends BaseAdapter implements AdapterView.O
         return this.mList.get(this.select);
     }
 
-    /* loaded from: classes.dex */
+
     public class ViewHolder {
         public TextView mTvItemTitle1;
         public TextView mTvItemTitle2;
@@ -99,9 +99,9 @@ public class X8AiLineHistoryAdapter extends BaseAdapter implements AdapterView.O
         public View initView(ViewGroup parent) {
             LayoutInflater inflater = LayoutInflater.from(X8AiLineHistoryAdapter.this.context);
             View view = inflater.inflate(R.layout.x8_ai_line_history_item_layout, parent, false);
-            this.mTvItemTitle1 = (TextView) view.findViewById(R.id.tvItme1);
-            this.mTvItemTitle2 = (TextView) view.findViewById(R.id.tvItme2);
-            this.mTvItemTitle3 = (TextView) view.findViewById(R.id.tvItme3);
+            this.mTvItemTitle1 = view.findViewById(R.id.tvItme1);
+            this.mTvItemTitle2 = view.findViewById(R.id.tvItme2);
+            this.mTvItemTitle3 = view.findViewById(R.id.tvItme3);
             return view;
         }
     }

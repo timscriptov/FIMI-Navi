@@ -14,7 +14,7 @@ import com.fimi.x8sdk.controller.FcCtrlManager;
 import com.fimi.x8sdk.dataparser.AckCheckIMUException;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes.dex */
+
 public class X8IMUCheckController {
     AckCheckIMUException checkIMUException1;
     OnCheckIMULisenter checkIMULisenter;
@@ -32,8 +32,8 @@ public class X8IMUCheckController {
 
     public void startCheckIMUStatus() {
         this.reqestCount = 0;
-        this.fcCtrlManager.openCheckIMU(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8IMUCheckController.2
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcCtrlManager.openCheckIMU(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
             }
         });
@@ -43,7 +43,7 @@ public class X8IMUCheckController {
 
     public void showImuDialog() {
         if (this.checkIMUDialog == null) {
-            this.checkIMUDialog = new X8DoubleCustomDialog(this.mContext, this.mContext.getString(R.string.x8_fc_item_imu_check), this.mContext.getString(R.string.x8_fc_item_imu_dialog), new X8DoubleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8IMUCheckController.3
+            this.checkIMUDialog = new X8DoubleCustomDialog(this.mContext, this.mContext.getString(R.string.x8_fc_item_imu_check), this.mContext.getString(R.string.x8_fc_item_imu_dialog), new X8DoubleCustomDialog.onDialogButtonClickListener() {
                 @Override
                 // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
                 public void onLeft() {
@@ -57,45 +57,21 @@ public class X8IMUCheckController {
             });
         }
         this.checkIMUDialog.show();
-    }    Handler mHandler = new Handler() { // from class: com.fimi.app.x8s.controls.fcsettting.X8IMUCheckController.1
-        @Override // android.os.Handler
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case 0:
-                    X8IMUCheckController.this.reqestCount++;
-                    if (!StateManager.getInstance().getX8Drone().isConnect()) {
-                        X8IMUCheckController.this.checkIMULisenter.checkFinish(0, "");
-                        X8IMUCheckController.this.removeCheckIMUMessage();
-                        return;
-                    } else if (X8IMUCheckController.this.reqestCount >= 65) {
-                        X8IMUCheckController.this.checkIMULisenter.checkFinish(0, "");
-                        X8IMUCheckController.this.removeCheckIMUMessage();
-                        return;
-                    } else {
-                        X8IMUCheckController.this.checkIMULisenter.checkProgress();
-                        X8IMUCheckController.this.getCheckIMUResult();
-                        return;
-                    }
-                default:
-                    return;
-            }
-        }
-    };
+    }
 
     @SuppressLint({"StringFormatMatches"})
     public void getCheckIMUResult() {
         if (this.checkIMUException1 == null || this.checkIMUException1.getSensorMaintainSta() != 4) {
-            this.fcCtrlManager.checkIMUException(1, new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8IMUCheckController.4
-                @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+            this.fcCtrlManager.checkIMUException(1, new UiCallBackListener() {
+                @Override
                 public void onComplete(CmdResult cmdResult, Object o) {
                     X8IMUCheckController.this.checkIMUException1 = (AckCheckIMUException) o;
                 }
             });
         }
         if (this.checkIMUMxception2 == null || this.checkIMUMxception2.getSensorMaintainSta() != 4) {
-            this.fcCtrlManager.checkIMUException(2, new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8IMUCheckController.5
-                @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+            this.fcCtrlManager.checkIMUException(2, new UiCallBackListener() {
+                @Override
                 public void onComplete(CmdResult cmdResult, Object o) {
                     X8IMUCheckController.this.checkIMUMxception2 = (AckCheckIMUException) o;
                 }
@@ -113,7 +89,28 @@ public class X8IMUCheckController {
             return;
         }
         this.mHandler.sendEmptyMessageDelayed(0, 1000L);
-    }
+    }    Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == 0) {
+                X8IMUCheckController.this.reqestCount++;
+                if (!StateManager.getInstance().getX8Drone().isConnect()) {
+                    X8IMUCheckController.this.checkIMULisenter.checkFinish(0, "");
+                    X8IMUCheckController.this.removeCheckIMUMessage();
+                    return;
+                } else if (X8IMUCheckController.this.reqestCount >= 65) {
+                    X8IMUCheckController.this.checkIMULisenter.checkFinish(0, "");
+                    X8IMUCheckController.this.removeCheckIMUMessage();
+                    return;
+                } else {
+                    X8IMUCheckController.this.checkIMULisenter.checkProgress();
+                    X8IMUCheckController.this.getCheckIMUResult();
+                    return;
+                }
+            }
+        }
+    };
 
     public void stopCheckIMUChck() {
         removeCheckIMUMessage();
@@ -125,7 +122,6 @@ public class X8IMUCheckController {
         }
     }
 
-    /* loaded from: classes.dex */
     public interface OnCheckIMULisenter {
         void checkFinish(int i, String str);
 
@@ -133,6 +129,7 @@ public class X8IMUCheckController {
 
         void startCheck();
     }
+
 
 
 

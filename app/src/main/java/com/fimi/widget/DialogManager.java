@@ -158,22 +158,14 @@ public class DialogManager {
             } else {
                 dialog.setContentView(this.dialogView);
             }
-            if (this.clickOutIsCancle) {
-                dialog.setClickOutIsCancle(true);
-            } else {
-                dialog.setClickOutIsCancle(false);
-            }
+            dialog.setClickOutIsCancle(this.clickOutIsCancle);
             if (this.isSpan) {
                 dialog.setSpan(true);
             }
             if (this.mGravity != -1) {
                 dialog.setGravity(this.mGravity);
             }
-            if (this.isShowVirtKey) {
-                dialog.setShowVirtKey(true);
-            } else {
-                dialog.setShowVirtKey(false);
-            }
+            dialog.setShowVirtKey(this.isShowVirtKey);
             this.mCustomDialog = dialog.setRightButton(this.rightBtnText, (dialogInterface, which) -> {
                 dialogInterface.dismiss();
                 if (DialogManager.this.listener != null) {

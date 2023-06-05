@@ -1,6 +1,6 @@
 package com.fimi.x8sdk.entity;
 
-/* loaded from: classes2.dex */
+
 public class GpsInfoCmd {
     public float mAltitude;
     public int mBearing;

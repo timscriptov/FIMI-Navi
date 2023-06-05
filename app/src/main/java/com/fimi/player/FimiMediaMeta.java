@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Locale;
 
-/* loaded from: classes.dex */
+
 public class FimiMediaMeta {
     public static final long AV_CH_BACK_CENTER = 256;
     public static final long AV_CH_BACK_LEFT = 16;
@@ -197,7 +197,7 @@ public class FimiMediaMeta {
         return String.format(Locale.US, "%02d:%02d:%02d", Long.valueOf(hours), Long.valueOf(mins % 60), Long.valueOf(secs % 60));
     }
 
-    /* loaded from: classes.dex */
+
     public static class IjkStreamMeta {
         public long mBitrate;
         public long mChannelLayout;

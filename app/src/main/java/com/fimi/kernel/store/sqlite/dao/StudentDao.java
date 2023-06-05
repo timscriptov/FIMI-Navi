@@ -11,7 +11,7 @@ import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.database.DatabaseStatement;
 import org.greenrobot.greendao.internal.DaoConfig;
 
-/* loaded from: classes.dex */
+
 public class StudentDao extends AbstractDao<Student, Long> {
     public static final String TABLENAME = "STUDENT";
 
@@ -33,7 +33,7 @@ public class StudentDao extends AbstractDao<Student, Long> {
         db.execSQL(sql);
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public final void bindValues(DatabaseStatement stmt, Student entity) {
         stmt.clearBindings();
         Long id = entity.getId();
@@ -54,7 +54,7 @@ public class StudentDao extends AbstractDao<Student, Long> {
         }
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public final void bindValues(SQLiteStatement stmt, Student entity) {
         stmt.clearBindings();
         Long id = entity.getId();
@@ -75,35 +75,35 @@ public class StudentDao extends AbstractDao<Student, Long> {
         }
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public Long readKey(Cursor cursor, int offset) {
-        if (cursor.isNull(offset + 0)) {
+        if (cursor.isNull(offset)) {
             return null;
         }
-        return Long.valueOf(cursor.getLong(offset + 0));
+        return Long.valueOf(cursor.getLong(offset));
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public Student readEntity(Cursor cursor, int offset) {
-        Student entity = new Student(cursor.isNull(offset + 0) ? null : Long.valueOf(cursor.getLong(offset + 0)), cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        Student entity = new Student(cursor.isNull(offset) ? null : Long.valueOf(cursor.getLong(offset)), cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         return entity;
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public void readEntity(Cursor cursor, Student entity, int offset) {
-        entity.setId(cursor.isNull(offset + 0) ? null : Long.valueOf(cursor.getLong(offset + 0)));
+        entity.setId(cursor.isNull(offset) ? null : Long.valueOf(cursor.getLong(offset)));
         entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setAge(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setNumber(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public final Long updateKeyAfterInsert(Student entity, long rowId) {
         entity.setId(Long.valueOf(rowId));
         return Long.valueOf(rowId);
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public Long getKey(Student entity) {
         if (entity != null) {
             return entity.getId();
@@ -111,17 +111,17 @@ public class StudentDao extends AbstractDao<Student, Long> {
         return null;
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public boolean hasKey(Student entity) {
         return entity.getId() != null;
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public final boolean isEntityUpdateable() {
         return true;
     }
 
-    /* loaded from: classes.dex */
+
     public static class Properties {
         public static final Property Id = new Property(0, Long.class, "id", true, "_id");
         public static final Property Name = new Property(1, String.class, "name", false, "NAME");

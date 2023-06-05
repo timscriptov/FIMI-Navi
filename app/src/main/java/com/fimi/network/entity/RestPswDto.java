@@ -1,6 +1,6 @@
 package com.fimi.network.entity;
 
-/* loaded from: classes.dex */
+
 public class RestPswDto extends BaseModel {
     private String checkPsw;
     private String code;

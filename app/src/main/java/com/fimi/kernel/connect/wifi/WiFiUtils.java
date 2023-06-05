@@ -15,7 +15,7 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class WiFiUtils {
     public static int netId = -1;
     public static ScanResult scanResult;
@@ -175,7 +175,7 @@ public class WiFiUtils {
                     while (enumIpAddr.hasMoreElements()) {
                         InetAddress inetAddress = enumIpAddr.nextElement();
                         if (!inetAddress.isLoopbackAddress()) {
-                            return inetAddress.getHostAddress().toString();
+                            return inetAddress.getHostAddress();
                         }
                     }
                 }

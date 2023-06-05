@@ -2,7 +2,7 @@ package com.fimi.app.x8s.viewHolder;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-/* loaded from: classes.dex */
+
 public interface SubParamItemListener {
     void checkDetailParam(String str, String str2, int i, RecyclerView.ViewHolder viewHolder);
 

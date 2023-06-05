@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-/* loaded from: classes.dex */
+
 public class BaseManager {
     private String getSignMsg(RequestParams params) {
         StringBuffer buffer = new StringBuffer();
@@ -26,14 +26,14 @@ public class BaseManager {
         Set<Map.Entry<String, String>> set = map.entrySet();
         for (Map.Entry entry2 : set) {
             if (entry2.getValue() != null && !entry2.getKey().equals("signMsg")) {
-                buffer.append(((Object) entry2.getKey()) + "=" + ((Object) entry2.getValue()) + "&");
+                buffer.append(entry2.getKey() + "=" + entry2.getValue() + "&");
             }
         }
         if (buffer.length() > 0) {
             buffer.deleteCharAt(buffer.length() - 1);
         }
         String signMsg = MD5Util.MD5(buffer.toString());
-        System.out.println(buffer.toString());
+        System.out.println(buffer);
         System.out.println("signMsg:" + signMsg);
         return signMsg;
     }

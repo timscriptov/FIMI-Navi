@@ -15,7 +15,7 @@ import com.fimi.kernel.utils.NumberUtil;
 import com.fimi.x8sdk.modulestate.DroneState;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes.dex */
+
 public class X8GimbalHorizontalTrimController extends AbsX8Controllers {
     private final float MAX_ANGLE;
     private final float MIN_ANGLE;
@@ -30,15 +30,15 @@ public class X8GimbalHorizontalTrimController extends AbsX8Controllers {
         this.activity = activity;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
@@ -48,7 +48,7 @@ public class X8GimbalHorizontalTrimController extends AbsX8Controllers {
         this.isShow = true;
         LayoutInflater inflater = LayoutInflater.from(this.rootView.getContext());
         this.handleView = inflater.inflate(R.layout.x8_view_horizontal_trim_layout, (ViewGroup) this.rootView, true);
-        this.horizontalTrimView = (X8HorizontalTrimView) this.handleView.findViewById(R.id.x8_horizontal_trim_view);
+        this.horizontalTrimView = this.handleView.findViewById(R.id.x8_horizontal_trim_view);
         if (this.listener != null) {
             this.horizontalTrimView.setListener(this.listener);
         }
@@ -70,8 +70,8 @@ public class X8GimbalHorizontalTrimController extends AbsX8Controllers {
 
     private void initData() {
         if (this.activity.getmX8GimbalManager() != null && StateManager.getInstance().getX8Drone().isConnect()) {
-            this.activity.getmX8GimbalManager().getHorizontalAdjust(new UiCallBackListener<Float>() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GimbalHorizontalTrimController.1
-                @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+            this.activity.getmX8GimbalManager().getHorizontalAdjust(new UiCallBackListener<Float>() {
+                @Override
                 public void onComplete(CmdResult cmdResult, Float value) {
                     if (cmdResult.isSuccess()) {
                         if (value.floatValue() > 10.0f) {
@@ -86,7 +86,7 @@ public class X8GimbalHorizontalTrimController extends AbsX8Controllers {
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         super.onDroneConnected(b);
         if (b && this.horizontalTrimView != null) {
@@ -98,8 +98,8 @@ public class X8GimbalHorizontalTrimController extends AbsX8Controllers {
         DroneState droneState = StateManager.getInstance().getX8Drone();
         if (droneState.isConnect() && this.activity.getmX8GimbalManager() != null) {
             float value = Float.valueOf(NumberUtil.decimalPointStr(this.horizontalTrimView.getCurrValue(), 1)).floatValue();
-            this.activity.getmX8GimbalManager().setHorizontalAdjust(value, new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8GimbalHorizontalTrimController.2
-                @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+            this.activity.getmX8GimbalManager().setHorizontalAdjust(value, new UiCallBackListener() {
+                @Override
                 public void onComplete(CmdResult cmdResult, Object o) {
                     if (cmdResult.isSuccess()) {
                     }
@@ -108,7 +108,7 @@ public class X8GimbalHorizontalTrimController extends AbsX8Controllers {
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public boolean onClickBackKey() {
         if (this.isShow) {
             closeUi();

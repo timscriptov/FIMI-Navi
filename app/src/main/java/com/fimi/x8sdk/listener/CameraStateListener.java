@@ -2,7 +2,7 @@ package com.fimi.x8sdk.listener;
 
 import com.fimi.x8sdk.dataparser.AutoCameraStateADV;
 
-/* loaded from: classes2.dex */
+
 public interface CameraStateListener {
     void showCamState(AutoCameraStateADV autoCameraStateADV);
 }

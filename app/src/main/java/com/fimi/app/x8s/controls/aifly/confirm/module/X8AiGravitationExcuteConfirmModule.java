@@ -8,7 +8,7 @@ import com.fimi.app.x8s.ui.activity.X8sMainActivity;
 import com.fimi.x8sdk.controller.CameraManager;
 import com.fimi.x8sdk.controller.FcManager;
 
-/* loaded from: classes.dex */
+
 public class X8AiGravitationExcuteConfirmModule extends X8BaseModule {
     private X8AiGravitationExcuteComfirmUi mX8AiGravitationExcuteComfirmUi;
 
@@ -16,7 +16,7 @@ public class X8AiGravitationExcuteConfirmModule extends X8BaseModule {
         this.mX8AiGravitationExcuteComfirmUi = new X8AiGravitationExcuteComfirmUi(activity, rootView, cameraManager);
     }
 
-    @Override // com.fimi.app.x8s.controls.aifly.confirm.module.X8BaseModule
+    @Override
     public void setFcHeart(boolean isInSky, boolean isLowPower) {
         this.mX8AiGravitationExcuteComfirmUi.setFcHeart(isInSky, isLowPower);
     }

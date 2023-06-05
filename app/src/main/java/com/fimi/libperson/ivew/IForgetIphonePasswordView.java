@@ -1,6 +1,6 @@
 package com.fimi.libperson.ivew;
 
-/* loaded from: classes.dex */
+
 public interface IForgetIphonePasswordView {
     void resetPassword(boolean z, String str);
 

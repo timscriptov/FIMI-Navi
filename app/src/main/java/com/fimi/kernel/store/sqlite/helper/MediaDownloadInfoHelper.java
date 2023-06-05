@@ -9,10 +9,10 @@ import org.greenrobot.greendao.query.WhereCondition;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class MediaDownloadInfoHelper {
-    private static MediaDownloadInfoHelper mMediaDownloadInfoHelper = new MediaDownloadInfoHelper();
-    private MediaDownloadInfoDao dao = DbCore.getDaoSession().getMediaDownloadInfoDao();
+    private static final MediaDownloadInfoHelper mMediaDownloadInfoHelper = new MediaDownloadInfoHelper();
+    private final MediaDownloadInfoDao dao = DbCore.getDaoSession().getMediaDownloadInfoDao();
 
     public static MediaDownloadInfoHelper getIntance() {
         return mMediaDownloadInfoHelper;
@@ -80,7 +80,7 @@ public class MediaDownloadInfoHelper {
 
     private List<MediaDownloadInfo> queryList(String url) {
         QueryBuilder<MediaDownloadInfo> qb = this.dao.queryBuilder();
-        qb.where(MediaDownloadInfoDao.Properties.Url.eq(url), new WhereCondition[0]);
+        qb.where(MediaDownloadInfoDao.Properties.Url.eq(url));
         List<MediaDownloadInfo> list = qb.list();
         return list;
     }

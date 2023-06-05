@@ -28,14 +28,14 @@ public class X8PieView extends View {
     private float circleWidth;
     private int[] colors;
     private Paint dataPaint;
-    private Rect dataTextBound;
+    private final Rect dataTextBound;
     private int dataTextColor;
     private float dataTextSize;
     private Paint mArcPaint;
     private String[] names;
     private int[] numbers;
     private float radius;
-    private Random random;
+    private final Random random;
     private RectF rectF;
     private int sum;
 

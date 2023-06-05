@@ -9,25 +9,22 @@ import com.fimi.app.x8s.entity.X8ShowErrorCodeTask;
 import com.fimi.app.x8s.enums.X8ErrorCodeEnum;
 import com.fimi.x8sdk.entity.ErrorCodeBean;
 
-/* loaded from: classes.dex */
+
 public class X8ErrerCodeSpeakFlashManager {
-    private Context context;
-    private X8ErrorCodeController errorCodeController;
+    private final Context context;
+    private final X8ErrorCodeController errorCodeController;
     private boolean isSpeek;
     private boolean isStart;
-    private X8ShowErrorCodeTask mediumTask;
-    private X8ShowErrorCodeTask seriousTask;
+    private final X8ShowErrorCodeTask mediumTask;
+    private final X8ShowErrorCodeTask seriousTask;
     private long speekId;
-    private Handler mHandler = new Handler() { // from class: com.fimi.app.x8s.manager.X8ErrerCodeSpeakFlashManager.1
-        @Override // android.os.Handler
+    private final Handler mHandler = new Handler() {
+        @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            switch (msg.what) {
-                case 1:
-                    X8ErrerCodeSpeakFlashManager.this.nextRunBySpeekEnd();
-                    return;
-                default:
-                    return;
+            if (msg.what == 1) {
+                X8ErrerCodeSpeakFlashManager.this.nextRunBySpeekEnd();
+                return;
             }
         }
     };

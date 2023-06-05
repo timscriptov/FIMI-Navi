@@ -3,8 +3,6 @@ package com.fimi.x8sdk.dataparser;
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 
 
-
-/* loaded from: classes2.dex */
 public class AutoVcTracking extends X8BaseMessage {
     public static final int REMOTESIGN_LOW = 30;
     public static final int REMOTESIGN_MID = 80;
@@ -25,7 +23,7 @@ public class AutoVcTracking extends X8BaseMessage {
         return 30;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         this.time = packet.getPayLoad4().getInt();
@@ -98,7 +96,7 @@ public class AutoVcTracking extends X8BaseMessage {
         this.trackErrorCode = trackErrorCode;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public String toString() {
         return "AutoVcTracking{time=" + this.time + ", x=" + this.x + ", y=" + this.y + ", h=" + this.h + ", w=" + this.w + ", confidence=" + this.confidence + ", trackErrorCode=" + this.trackErrorCode + '}';
     }

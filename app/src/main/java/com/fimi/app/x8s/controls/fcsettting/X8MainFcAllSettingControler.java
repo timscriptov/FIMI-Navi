@@ -46,7 +46,7 @@ import java.io.File;
 
 import router.Router;
 
-/* loaded from: classes.dex */
+
 public class X8MainFcAllSettingControler extends AbsX8MenuBoxControllers implements View.OnClickListener {
     public IX8CalibrationListener mX8CalibrationListener;
     public IX8FcItemListener mX8FcItemListener;
@@ -60,19 +60,19 @@ public class X8MainFcAllSettingControler extends AbsX8MenuBoxControllers impleme
     private int contentViewTopMargin;
     private FcCtrlManager fcCtrlManager;
     private FcManager fcManager;
-    private View firstContentView;
+    private final View firstContentView;
     private X8GimbalManager gimbalManager;
-    private IX8GimbalSettingListener gimbalSettingListener;
+    private final IX8GimbalSettingListener gimbalSettingListener;
     private boolean isCanClose;
     private boolean isfiveKeyOpen;
     private IX8FcAllSettingListener listener;
     private X8DoubleCustomDialog loginDialogRestart;
-    private Activity mActivity;
+    private final Activity mActivity;
     private AbsX8MenuBoxControllers mCurrentFirstController;
     private AbsX8MenuBoxControllers mCurrentSecondController;
     private CustomLoadManage mCustomLoadManage;
     private FirstMenu mFirstMenu;
-    private IX8DroneStateListener mIX8DroneStateListener;
+    private final IX8DroneStateListener mIX8DroneStateListener;
     private IX8GeneralItemControllerListerner mIX8GeneralItemControllerListerner;
     private SecondMenu mSecondMenu;
     private X8DroneCalibrationController mX8DroneCalibrationController;
@@ -80,11 +80,11 @@ public class X8MainFcAllSettingControler extends AbsX8MenuBoxControllers impleme
     private X8FcSettingMenuController mX8FcSettingMenuController;
     private X8FirmwareUpgradeController mX8FirmwareUpgradeController;
     private X8FrequencyPointController mX8FrequencyPointController;
-    private IX8GeneraModifyModeControllerListener modifyModeControllerListener;
+    private final IX8GeneraModifyModeControllerListener modifyModeControllerListener;
     private X8RCCalibrationController rcCalibrationController;
     private X8RCMatchCodeController rcMatchCodeController;
-    private View rlFcAllSetting;
-    private View secondContentView;
+    private final View rlFcAllSetting;
+    private final View secondContentView;
     private X8CloudCalibrationController x8CloudCalibrationController;
     private X8FcExpSettingController x8FcExpSettingController;
     private X8FcSensitivitySettingController x8FcSensitivitySettingController;
@@ -99,151 +99,151 @@ public class X8MainFcAllSettingControler extends AbsX8MenuBoxControllers impleme
         this.isCanClose = true;
         this.mSecondMenu = SecondMenu.IDLE;
         this.mFirstMenu = FirstMenu.IDLE;
-        this.mIX8DroneStateListener = new IX8DroneStateListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8MainFcAllSettingControler.2
-            @Override // com.fimi.app.x8s.interfaces.IX8DroneStateListener
+        this.mIX8DroneStateListener = new IX8DroneStateListener() {
+            @Override
             public void onCalibrationItemClick() {
                 X8MainFcAllSettingControler.this.showCampView();
             }
         };
         this.isfiveKeyOpen = false;
-        this.mX8FcItemListener = new IX8FcItemListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8MainFcAllSettingControler.4
-            @Override // com.fimi.app.x8s.interfaces.IX8FcItemListener
+        this.mX8FcItemListener = new IX8FcItemListener() {
+            @Override
             public void onCalibrationItemClick() {
                 X8MainFcAllSettingControler.this.showCampView();
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8FcItemListener
+            @Override
             public void onFcExpSettingClick() {
                 X8MainFcAllSettingControler.this.showExpUi();
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8FcItemListener
+            @Override
             public void onFcSensitivitySettingClick() {
                 X8MainFcAllSettingControler.this.showSensitivityUi();
             }
         };
-        this.mX8RcItemControllerListener = new IX8RcItemControllerListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8MainFcAllSettingControler.5
-            @Override // com.fimi.app.x8s.interfaces.IX8RcItemControllerListener
+        this.mX8RcItemControllerListener = new IX8RcItemControllerListener() {
+            @Override
             public void onRockerModeClicked(IX8RcRockerListener onRcCtrlModelListener) {
                 X8MainFcAllSettingControler.this.rcCtrlModelListener = onRcCtrlModelListener;
                 X8MainFcAllSettingControler.this.showRockerModeUi();
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8RcItemControllerListener
+            @Override
             public void onFiveKeyClicked(int key, int curIndex) {
                 X8MainFcAllSettingControler.this.showFiveKeyUi(key, curIndex);
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8RcItemControllerListener
+            @Override
             public void onRcMatchCode() {
                 X8MainFcAllSettingControler.this.showRcMatchCodeView();
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8RcItemControllerListener
+            @Override
             public void onRcCalibration() {
                 X8MainFcAllSettingControler.this.showRcCalibrationUi();
             }
         };
-        this.mx8FiveKeyCalibrationListener = new IX8FiveKeyDefineListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8MainFcAllSettingControler.6
-            @Override // com.fimi.app.x8s.interfaces.IX8FiveKeyDefineListener
+        this.mx8FiveKeyCalibrationListener = new IX8FiveKeyDefineListener() {
+            @Override
             public void onBack() {
                 X8MainFcAllSettingControler.this.closeSecondUi();
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8FiveKeyDefineListener
+            @Override
             public void onSelected(int key, int position) {
                 X8MainFcAllSettingControler.this.mX8FcSettingMenuController.setFiveKeyValue(key, position);
             }
         };
-        this.mX8CalibrationListener = new IX8CalibrationListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8MainFcAllSettingControler.7
-            @Override // com.fimi.app.x8s.interfaces.IX8CalibrationListener
+        this.mX8CalibrationListener = new IX8CalibrationListener() {
+            @Override
             public void onCalibrationReturn() {
                 X8MainFcAllSettingControler.this.closeSecondUi();
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8CalibrationListener
+            @Override
             public void onCalibrationStart() {
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8CalibrationListener
+            @Override
             public void onOpen() {
                 X8MainFcAllSettingControler.this.isCanClose = false;
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8CalibrationListener
+            @Override
             public void onClose() {
                 X8MainFcAllSettingControler.this.isCanClose = true;
             }
         };
-        this.mx8RockerCalibrationListener = new IX8CalibrationListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8MainFcAllSettingControler.8
-            @Override // com.fimi.app.x8s.interfaces.IX8CalibrationListener
+        this.mx8RockerCalibrationListener = new IX8CalibrationListener() {
+            @Override
             public void onCalibrationReturn() {
                 X8MainFcAllSettingControler.this.closeSecondUi();
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8CalibrationListener
+            @Override
             public void onCalibrationStart() {
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8CalibrationListener
+            @Override
             public void onOpen() {
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8CalibrationListener
+            @Override
             public void onClose() {
             }
         };
-        this.gimbalSettingListener = new IX8GimbalSettingListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8MainFcAllSettingControler.9
-            @Override // com.fimi.app.x8s.interfaces.IX8GimbalSettingListener
+        this.gimbalSettingListener = new IX8GimbalSettingListener() {
+            @Override
             public void onGimbalCalibrationClick() {
                 X8MainFcAllSettingControler.this.showGimbalCalibarationUi();
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8GimbalSettingListener
+            @Override
             public void onHorizontalTrimClick() {
                 if (X8MainFcAllSettingControler.this.listener != null) {
                     X8MainFcAllSettingControler.this.listener.onGimbalHorizontalTrimClick();
                 }
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8GimbalSettingListener
+            @Override
             public void onAdvancedSetup() {
                 if (X8MainFcAllSettingControler.this.listener != null) {
                     X8MainFcAllSettingControler.this.listener.onGimbalAdvancedSetup();
                 }
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8GimbalSettingListener
+            @Override
             public void onGimbalXYZAdjust() {
                 if (X8MainFcAllSettingControler.this.listener != null) {
                     X8MainFcAllSettingControler.this.listener.onGimbalXYZAdjustClick();
                 }
             }
         };
-        this.mX8FwUpgradeCtrlListener = new IX8FirmwareUpgradeControllerListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8MainFcAllSettingControler.12
-            @Override // com.fimi.app.x8s.interfaces.IX8FirmwareUpgradeControllerListener
+        this.mX8FwUpgradeCtrlListener = new IX8FirmwareUpgradeControllerListener() {
+            @Override
             public void onFirmwareUpgradeReturn() {
                 X8MainFcAllSettingControler.this.closeSecondUi();
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8FirmwareUpgradeControllerListener
+            @Override
             public void onFirmwareUpgradeClick() {
                 Intent intent = new Intent(X8MainFcAllSettingControler.this.contentView.getContext(), X8UpdateDetailActivity.class);
                 X8MainFcAllSettingControler.this.contentView.getContext().startActivity(intent);
             }
         };
-        this.modifyModeControllerListener = new IX8GeneraModifyModeControllerListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8MainFcAllSettingControler.13
-            @Override // com.fimi.app.x8s.interfaces.IX8GeneraModifyModeControllerListener
+        this.modifyModeControllerListener = new IX8GeneraModifyModeControllerListener() {
+            @Override
             public void returnBack() {
                 X8MainFcAllSettingControler.this.closeSecondUi();
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8GeneraModifyModeControllerListener
+            @Override
             public void onOpen() {
                 X8MainFcAllSettingControler.this.isCanClose = false;
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8GeneraModifyModeControllerListener
+            @Override
             public void onClose() {
                 X8MainFcAllSettingControler.this.isCanClose = true;
             }
@@ -285,11 +285,11 @@ public class X8MainFcAllSettingControler extends AbsX8MenuBoxControllers impleme
         this.mX8DroneInfoStateController = null;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
     }
 
@@ -311,19 +311,16 @@ public class X8MainFcAllSettingControler extends AbsX8MenuBoxControllers impleme
                 }
                 break;
         }
-        switch (this.mFirstMenu) {
-            case FCSETTINGMENU:
-                if (this.mX8FcSettingMenuController != null) {
-                    this.mX8FcSettingMenuController.onRcConnected(isConnect);
-                    return;
-                }
+        if (this.mFirstMenu == FirstMenu.FCSETTINGMENU) {
+            if (this.mX8FcSettingMenuController != null) {
+                this.mX8FcSettingMenuController.onRcConnected(isConnect);
                 return;
-            default:
-                return;
+            }
+            return;
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
@@ -333,7 +330,7 @@ public class X8MainFcAllSettingControler extends AbsX8MenuBoxControllers impleme
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         if (this.isShow) {
             defaultVal();
@@ -373,8 +370,8 @@ public class X8MainFcAllSettingControler extends AbsX8MenuBoxControllers impleme
                 this.isShow = true;
                 if (this.width == 0) {
                     this.contentView.setAlpha(0.0f);
-                    this.contentView.post(new Runnable() { // from class: com.fimi.app.x8s.controls.fcsettting.X8MainFcAllSettingControler.1
-                        @Override // java.lang.Runnable
+                    this.contentView.post(new Runnable() {
+                        @Override
                         public void run() {
                             X8MainFcAllSettingControler.this.contentView.setAlpha(1.0f);
                             X8MainFcAllSettingControler.this.contentView.getWidth();
@@ -444,7 +441,7 @@ public class X8MainFcAllSettingControler extends AbsX8MenuBoxControllers impleme
             ObjectAnimator translationRight = ObjectAnimator.ofFloat(this.contentView, "translationY", 0.0f, (-this.width) - this.contentViewTopMargin);
             translationRight.setDuration(250L);
             translationRight.start();
-            translationRight.addListener(new AnimatorListenerAdapter() { // from class: com.fimi.app.x8s.controls.fcsettting.X8MainFcAllSettingControler.3
+            translationRight.addListener(new AnimatorListenerAdapter() {
                 @Override
                 // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationEnd(Animator animation) {
@@ -464,7 +461,7 @@ public class X8MainFcAllSettingControler extends AbsX8MenuBoxControllers impleme
         this.mIX8GeneralItemControllerListerner = ix8GeneralItemControllerListerner;
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.x8_rl_main_fc_all_setting && this.isCanClose && !(this.mCurrentSecondController instanceof X8RCMatchCodeController) && !(this.mCurrentSecondController instanceof X8CloudCalibrationController) && !(this.mCurrentSecondController instanceof X8RCCalibrationController)) {
@@ -662,16 +659,16 @@ public class X8MainFcAllSettingControler extends AbsX8MenuBoxControllers impleme
             return;
         }
         final Context context = this.contentView.getContext();
-        this.loginDialogRestart = new X8DoubleCustomDialog(context, context.getString(R.string.x8_modify_black_box_login_title), context.getString(R.string.x8_playback_login_hint), context.getString(R.string.x8_modify_black_box_login_go), new X8DoubleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8MainFcAllSettingControler.10
-            @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+        this.loginDialogRestart = new X8DoubleCustomDialog(context, context.getString(R.string.x8_modify_black_box_login_title), context.getString(R.string.x8_playback_login_hint), context.getString(R.string.x8_modify_black_box_login_go), new X8DoubleCustomDialog.onDialogButtonClickListener() {
+            @Override
             public void onLeft() {
                 X8MainFcAllSettingControler.this.loginDialogRestart.dismiss();
             }
 
-            @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+            @Override
             public void onRight() {
                 SPStoreManager.getInstance().saveInt(Constants.SP_PERSON_USER_TYPE, Constants.UserType.Ideal.ordinal());
-                Intent intent = (Intent) Router.invoke(context, "activity://app.SplashActivity");
+                Intent intent = Router.invoke(context, "activity://app.SplashActivity");
                 context.startActivity(intent);
             }
         });
@@ -694,8 +691,8 @@ public class X8MainFcAllSettingControler extends AbsX8MenuBoxControllers impleme
         this.firstContentView.setVisibility(View.GONE);
         this.secondContentView.setVisibility(View.VISIBLE);
         this.mX8FrequencyPointController = new X8FrequencyPointController(this.secondContentView);
-        this.mX8FrequencyPointController.setListener(new IX8FrequencyPointListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8MainFcAllSettingControler.11
-            @Override // com.fimi.app.x8s.interfaces.IX8FrequencyPointListener
+        this.mX8FrequencyPointController.setListener(new IX8FrequencyPointListener() {
+            @Override
             public void onBack() {
                 X8MainFcAllSettingControler.this.closeSecondUi();
             }
@@ -723,7 +720,7 @@ public class X8MainFcAllSettingControler extends AbsX8MenuBoxControllers impleme
         this.gimbalManager = gimbalManager;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8MenuBoxControllers
+    @Override
     public void unMountError(boolean mountError) {
         if (this.mCurrentSecondController != null) {
             this.mCurrentSecondController.unMountError(mountError);
@@ -736,7 +733,7 @@ public class X8MainFcAllSettingControler extends AbsX8MenuBoxControllers impleme
         return false;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8MenuBoxControllers
+    @Override
     public boolean isRunningTask() {
         if (this.mCurrentSecondController == null) {
             return false;
@@ -744,14 +741,14 @@ public class X8MainFcAllSettingControler extends AbsX8MenuBoxControllers impleme
         return this.mCurrentSecondController.isRunningTask();
     }
 
-    /* loaded from: classes.dex */
+
     public enum FirstMenu {
         IDLE,
         DRONESTATE,
         FCSETTINGMENU
     }
 
-    /* loaded from: classes.dex */
+
     public enum SecondMenu {
         IDLE,
         DRONECALIBRATION,

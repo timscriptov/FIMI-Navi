@@ -3,13 +3,11 @@ package com.fimi.x8sdk.dataparser;
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 
 
-
-/* loaded from: classes2.dex */
 public class AckGetFormatStorageState extends X8BaseMessage {
     private int devid;
     private int process;
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         this.devid = packet.getPayLoad4().getByte();
@@ -32,7 +30,7 @@ public class AckGetFormatStorageState extends X8BaseMessage {
         this.process = process;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public String toString() {
         return "AckGetFormatStorageState{devid=" + this.devid + ", process=" + this.process + '}';
     }

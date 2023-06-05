@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_pressed="true" android:drawable="@drawable/x8_top_copy_clip_latlng_press"/>
-    <item android:drawable="@drawable/x8_top_copy_clip_latlng_normal"/>
+    <item android:drawable="@drawable/x8_top_copy_clip_latlng_press" android:state_pressed="true" />
+    <item android:drawable="@drawable/x8_top_copy_clip_latlng_normal" />
 </selector>

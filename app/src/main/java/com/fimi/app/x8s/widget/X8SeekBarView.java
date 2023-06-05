@@ -22,11 +22,11 @@ public class X8SeekBarView extends View {
     private float cicleY;
     private float downX;
     private float downY;
-    private float dpLineH;
-    private float dpMaginW;
-    private float dpR;
-    private float dpThumpW;
-    private float dph;
+    private final float dpLineH;
+    private final float dpMaginW;
+    private final float dpR;
+    private final float dpThumpW;
+    private final float dph;
     private float endX;
     private float endY;
     private int h;

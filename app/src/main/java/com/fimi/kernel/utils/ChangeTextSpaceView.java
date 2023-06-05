@@ -6,7 +6,7 @@ import android.text.style.ScaleXSpan;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-/* loaded from: classes.dex */
+
 public class ChangeTextSpaceView extends TextView {
     private CharSequence originalText;
     private float spacing;
@@ -38,13 +38,13 @@ public class ChangeTextSpaceView extends TextView {
         applySpacing();
     }
 
-    @Override // android.widget.TextView
+    @Override
     public void setText(CharSequence text, TextView.BufferType type) {
         this.originalText = text;
         applySpacing();
     }
 
-    @Override // android.widget.TextView
+    @Override
     public CharSequence getText() {
         return this.originalText;
     }

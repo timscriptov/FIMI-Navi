@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fimi.android.app.R;
@@ -33,16 +34,14 @@ import java.util.List;
 import java.util.Map;
 
 
-
-/* loaded from: classes.dex */
 public class X8FlightLogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private final Context context;
+    private final IX8FlightlogRenameFile mIX8FlightlogRenameFile;
+    private final Map<String, X8FlightLogSection> sections = new LinkedHashMap();
     X8FlightLogSection section;
-    private Context context;
     private X8FlightLogFile furrentFile;
-    private IX8FlightlogRenameFile mIX8FlightlogRenameFile;
     private String playbackDistance;
     private String playbackTotalTime;
-    private Map<String, X8FlightLogSection> sections = new LinkedHashMap();
 
     public X8FlightLogAdapter(Context context, IX8FlightlogRenameFile renameFile) {
         this.context = context;
@@ -87,7 +86,7 @@ public class X8FlightLogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         return this.sections.get("");
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 0) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.x8_flight_log_header_layout, parent, false);
@@ -100,7 +99,7 @@ public class X8FlightLogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         int currentPos = 0;
         for (Map.Entry<String, X8FlightLogSection> entry : this.sections.entrySet()) {
@@ -155,7 +154,7 @@ public class X8FlightLogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public void onHeaderBindViewHolder(RecyclerView.ViewHolder holder) {
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public int getItemCount() {
         int count = 0;
         for (Map.Entry<String, X8FlightLogSection> entry : this.sections.entrySet()) {
@@ -165,7 +164,7 @@ public class X8FlightLogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         return count;
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public int getItemViewType(int position) {
         int currentPos = 0;
         for (Map.Entry<String, X8FlightLogSection> entry : this.sections.entrySet()) {
@@ -198,32 +197,31 @@ public class X8FlightLogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     public void sort(List<X8FlightLogFile> list) {
-        Collections.sort(list, new Comparator<X8FlightLogFile>() { // from class: com.fimi.app.x8s.adapter.X8FlightLogAdapter.2
-            @Override // java.util.Comparator
+        Collections.sort(list, new Comparator<>() {
+            @Override
             public int compare(X8FlightLogFile arg0, X8FlightLogFile arg1) {
                 int a = Integer.parseInt(arg1.getFileLogCollectState()) - Integer.parseInt(arg0.getFileLogCollectState());
                 if (a != 0) {
                     return a < 0 ? 1 : -1;
                 }
-                int mark = arg1.getPlaybackFile().getName().compareTo(arg0.getPlaybackFile().getName());
-                return mark;
+                return arg1.getPlaybackFile().getName().compareTo(arg0.getPlaybackFile().getName());
             }
         });
     }
 
-    private void renameCollectFile(X8FlightLogFile x8FlightLogFile, boolean isCollect) {
+    private void renameCollectFile(@NonNull X8FlightLogFile x8FlightLogFile, boolean isCollect) {
         String path;
         File file = x8FlightLogFile.getPlaybackFile();
         String path2 = file.getAbsolutePath();
         if (isCollect) {
             if (path2.contains(X8FcLogManager.prexSD)) {
                 int index = path2.indexOf(X8FcLogManager.prexSD);
-                StringBuffer stringBuffer = new StringBuffer(path2);
+                StringBuilder stringBuffer = new StringBuilder(path2);
                 stringBuffer.insert(index, X8FcLogManager.getInstance().prexCollect);
                 path = stringBuffer.toString();
             } else {
                 int index2 = path2.indexOf(X8FcLogManager.FLIGHT_PLAYBACK);
-                StringBuffer stringBuffer2 = new StringBuffer(path2);
+                StringBuilder stringBuffer2 = new StringBuilder(path2);
                 stringBuffer2.insert(index2 - 1, X8FcLogManager.getInstance().prexCollect);
                 path = stringBuffer2.toString();
             }
@@ -255,30 +253,27 @@ public class X8FlightLogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         this.playbackTotalTime = playbackTotalTime;
     }
 
-    /* loaded from: classes.dex */
     public class X8B2oxViewHolder extends RecyclerView.ViewHolder {
+        private final ImageView mImgSaveFlag;
+        private final ImageView x8IvFlightlogCollect;
         public View rlRootView;
         public TextView x8FlightlogItemMileage;
         public TextView x8FlightlogItemSize;
         public TextView x8FlightlogItemTime;
         public TextView x8FlightlogItmeDate;
-        private ImageView mImgSaveFlag;
-        private ImageView x8IvFlightlogCollect;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public X8B2oxViewHolder(View itemView) {
             super(itemView);
             this.rlRootView = itemView.findViewById(R.id.rlRootView);
-            this.x8IvFlightlogCollect = (ImageView) itemView.findViewById(R.id.x8_iv_flightlog_collect);
-            this.x8FlightlogItmeDate = (TextView) itemView.findViewById(R.id.x8_flightlog_itme_date);
-            this.x8FlightlogItemMileage = (TextView) itemView.findViewById(R.id.x8_flightlog_item_mileage);
-            this.x8FlightlogItemSize = (TextView) itemView.findViewById(R.id.x8_flightlog_item_size);
-            this.x8FlightlogItemTime = (TextView) itemView.findViewById(R.id.x8_flightlog_item_time);
-            this.mImgSaveFlag = (ImageView) itemView.findViewById(R.id.img_save_flag);
+            this.x8IvFlightlogCollect = itemView.findViewById(R.id.x8_iv_flightlog_collect);
+            this.x8FlightlogItmeDate = itemView.findViewById(R.id.x8_flightlog_itme_date);
+            this.x8FlightlogItemMileage = itemView.findViewById(R.id.x8_flightlog_item_mileage);
+            this.x8FlightlogItemSize = itemView.findViewById(R.id.x8_flightlog_item_size);
+            this.x8FlightlogItemTime = itemView.findViewById(R.id.x8_flightlog_item_time);
+            this.mImgSaveFlag = itemView.findViewById(R.id.img_save_flag);
         }
     }
 
-    /* loaded from: classes.dex */
     public class X8B2oxHeaderViewHolder extends RecyclerView.ViewHolder {
         public View rlRootView;
 

@@ -83,7 +83,7 @@ public class CommonRequest {
                 if (entry.getValue() instanceof File) {
                     requestBody.addPart(Headers.of("Content-Disposition", "form-data; name=\"" + entry.getKey() + "\""), RequestBody.create(FILE_TYPE, (File) entry.getValue()));
                 } else if (entry.getValue() instanceof String) {
-                    requestBody.addPart(Headers.of("Content-Disposition", "form-data; name=\"" + entry.getKey() + "\""), RequestBody.create((MediaType) null, (String) entry.getValue()));
+                    requestBody.addPart(Headers.of("Content-Disposition", "form-data; name=\"" + entry.getKey() + "\""), RequestBody.create(null, (String) entry.getValue()));
                 }
             }
         }

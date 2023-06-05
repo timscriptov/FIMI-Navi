@@ -24,9 +24,9 @@ import com.fimi.x8sdk.cmdsenum.X8Task;
 import com.fimi.x8sdk.dataparser.AckAiFollowGetSpeed;
 import com.fimi.x8sdk.dataparser.AckGetAiFollowMode;
 
-/* loaded from: classes.dex */
+
 public class X8AiFollowExcuteController extends AbsX8AiController implements View.OnClickListener, X8AiTrackController.OnAiTrackControllerListener, X8DoubleCustomDialog.onDialogButtonClickListener, X8AiFollowModeItemView.OnModeSelectListner, X8FollowSpeedContainerView.OnSendSpeedListener {
-    private X8sMainActivity activity;
+    private final X8sMainActivity activity;
     private X8DoubleCustomDialog dialog;
     private View flagSmall;
     private int goHeight;
@@ -62,11 +62,11 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
         this.listener = listener;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
         if (this.handleView != null) {
             this.imgGo.setOnClickListener(this);
@@ -75,12 +75,12 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
     }
 
     public void initViewStubViews(View view) {
-        this.imgGo = (ImageView) view.findViewById(R.id.img_ai_follow_go);
-        this.imgBack = (ImageView) view.findViewById(R.id.img_ai_follow_back);
-        this.tvTitle = (TextView) view.findViewById(R.id.tv_title);
-        this.vModeImtes = (X8AiFollowModeItemView) view.findViewById(R.id.v_mode_item);
-        this.vSpeedContainer = (X8FollowSpeedContainerView) view.findViewById(R.id.v_lock_mode_speed);
-        this.mTipBgView = (X8AiTipWithCloseView) view.findViewById(R.id.v_content_tip);
+        this.imgGo = view.findViewById(R.id.img_ai_follow_go);
+        this.imgBack = view.findViewById(R.id.img_ai_follow_back);
+        this.tvTitle = view.findViewById(R.id.tv_title);
+        this.vModeImtes = view.findViewById(R.id.v_mode_item);
+        this.vSpeedContainer = view.findViewById(R.id.v_lock_mode_speed);
+        this.mTipBgView = view.findViewById(R.id.v_content_tip);
         this.mTipBgView.setVisibility(0);
         if (this.type == 0) {
             this.mTipBgView.setTipText(getString(R.string.x8_ai_fly_follow_normal_tip));
@@ -121,7 +121,7 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
         this.isShow = true;
         LayoutInflater inflater = LayoutInflater.from(this.rootView.getContext());
         this.handleView = inflater.inflate(R.layout.x8_ai_follow_excute_layout, (ViewGroup) this.rootView, true);
-        this.imgSmall = (ImageView) this.handleView.findViewById(R.id.img_ai_flag_small);
+        this.imgSmall = this.handleView.findViewById(R.id.img_ai_flag_small);
         this.flagSmall = this.handleView.findViewById(R.id.rl_flag_small);
         this.flagSmall.setOnClickListener(this);
         initViewStubViews(this.handleView);
@@ -153,11 +153,11 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
         this.mX8AiFollowState = X8AiFollowState.IDLE;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.img_ai_follow_go) {
@@ -173,19 +173,19 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
         }
     }
 
-    @Override // com.fimi.app.x8s.controls.X8AiTrackController.OnAiTrackControllerListener
+    @Override
     public void onTouchActionDown() {
         this.isTou = false;
         this.imgGo.setVisibility(4);
     }
 
-    @Override // com.fimi.app.x8s.controls.X8AiTrackController.OnAiTrackControllerListener
+    @Override
     public void onTouchActionUp() {
         this.isTou = true;
         setAiVcNotityFc();
     }
 
-    @Override // com.fimi.app.x8s.controls.X8AiTrackController.OnAiTrackControllerListener
+    @Override
     public void onChangeGoLocation(float left, float right, float top, float bottom, int w, int h) {
         int l;
         int t;
@@ -226,13 +226,13 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
         }
     }
 
-    @Override // com.fimi.app.x8s.controls.X8AiTrackController.OnAiTrackControllerListener
+    @Override
     public void setGoEnabled(boolean b) {
     }
 
     public void setAiVcNotityFc() {
-        this.activity.getFcManager().setAiVcNotityFc(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiFollowExcuteController.1
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.activity.getFcManager().setAiVcNotityFc(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 TcpClient.getIntance().sendLog("----->...setAiVcNotityFc..." + cmdResult.getErrDes());
                 if (cmdResult.isSuccess()) {
@@ -241,7 +241,7 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
         });
     }
 
-    @Override // com.fimi.app.x8s.controls.X8AiTrackController.OnAiTrackControllerListener
+    @Override
     public void onTracking() {
         if (this.isShow && this.isTou && this.isShowGo && this.imgGo.getVisibility() == 0) {
             this.imgGo.setVisibility(4);
@@ -253,8 +253,8 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
     }
 
     public void doFollow() {
-        this.activity.getFcManager().setFollowExcute(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiFollowExcuteController.2
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.activity.getFcManager().setFollowExcute(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8AiFollowExcuteController.this.listener.onAiFollowRunning();
@@ -271,8 +271,8 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
     }
 
     public void setModle(final int mode) {
-        this.activity.getFcManager().setAiFollowModle(mode, new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiFollowExcuteController.3
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.activity.getFcManager().setAiFollowModle(mode, new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 TcpClient.getIntance().sendLog("..setModle.. " + cmdResult.getErrDes() + " mode=" + X8AiFollowExcuteController.this.type);
                 if (cmdResult.isSuccess()) {
@@ -293,8 +293,8 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
     }
 
     public void getFollowMode() {
-        this.activity.getFcManager().getAiFollowModle(new UiCallBackListener<AckGetAiFollowMode>() { // from class: com.fimi.app.x8s.controls.aifly.X8AiFollowExcuteController.4
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.activity.getFcManager().getAiFollowModle(new UiCallBackListener<AckGetAiFollowMode>() {
+            @Override
             public void onComplete(CmdResult cmdResult, AckGetAiFollowMode ackGetAiFollowMode) {
                 if (cmdResult.isSuccess()) {
                     X8AiFollowExcuteController.this.isGetMode = true;
@@ -310,8 +310,8 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
     }
 
     public void getFollowSpeed() {
-        this.activity.getFcManager().getAiFollowSpeed(new UiCallBackListener<AckAiFollowGetSpeed>() { // from class: com.fimi.app.x8s.controls.aifly.X8AiFollowExcuteController.5
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.activity.getFcManager().getAiFollowSpeed(new UiCallBackListener<AckAiFollowGetSpeed>() {
+            @Override
             public void onComplete(CmdResult cmdResult, AckAiFollowGetSpeed o) {
                 if (cmdResult.isSuccess()) {
                     X8AiFollowExcuteController.this.isGetSpeed = true;
@@ -390,11 +390,11 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
         this.dialog.show();
     }
 
-    @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+    @Override
     public void onLeft() {
     }
 
-    @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+    @Override
     public void onRight() {
         sendExiteCmd();
     }
@@ -404,8 +404,8 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
     }
 
     public void sendExiteCmd() {
-        this.activity.getFcManager().setAiVcClose(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiFollowExcuteController.6
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.activity.getFcManager().setAiVcClose(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     TcpClient.getIntance().sendLog("setAiVcClose success  " + cmdResult.getErrDes() + X8AiFollowExcuteController.this.mX8AiFollowState);
@@ -421,8 +421,8 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
     }
 
     public void setAiVcCloseByTaskModeChange() {
-        this.activity.getFcManager().setAiVcClose(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiFollowExcuteController.7
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.activity.getFcManager().setAiVcClose(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 TcpClient.getIntance().sendLog("setAiVcCloseByTaskModeChange   " + cmdResult.getErrDes());
             }
@@ -430,8 +430,8 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
     }
 
     public void setFollowExit(int mode) {
-        this.activity.getFcManager().setFollowExit(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiFollowExcuteController.8
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.activity.getFcManager().setFollowExit(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     TcpClient.getIntance().sendLog("退出跟随 success  " + cmdResult.getErrDes());
@@ -442,7 +442,7 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
         });
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         if (this.isShow) {
             if (!b) {
@@ -467,21 +467,21 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
         }
     }
 
-    @Override // com.fimi.app.x8s.widget.X8AiFollowModeItemView.OnModeSelectListner
+    @Override
     public void onModeSelect(int mode) {
         TcpClient.getIntance().sendLog("onModeSelect success  " + mode);
         this.isSwitchMode = true;
         setModle(mode);
     }
 
-    @Override // com.fimi.app.x8s.widget.X8FollowSpeedContainerView.OnSendSpeedListener
+    @Override
     public void onSendSpeed(int speed) {
         setFollowSpeed(speed);
     }
 
     public void setFollowSpeed(final int speed) {
-        this.activity.getFcManager().setAiFollowSpeed(speed, new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiFollowExcuteController.9
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.activity.getFcManager().setAiFollowSpeed(speed, new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 TcpClient.getIntance().sendLog("..setFollowSpeed.. " + cmdResult.getErrDes() + " speed=" + speed);
                 if (cmdResult.isSuccess()) {
@@ -496,7 +496,7 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public boolean onClickBackKey() {
         return false;
     }
@@ -505,8 +505,8 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
         if (this.mX8AiFollowState != X8AiFollowState.RUNNING) {
             if (this.timeSend == 0) {
                 this.timeSend = 1;
-                this.activity.getFcManager().sysCtrlMode2AiVc(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiFollowExcuteController.10
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                this.activity.getFcManager().sysCtrlMode2AiVc(new UiCallBackListener() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, Object o) {
                     }
                 }, X8Task.VCM_FOLLOW.ordinal());

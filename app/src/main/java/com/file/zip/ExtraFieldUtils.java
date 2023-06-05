@@ -98,7 +98,7 @@ public class ExtraFieldUtils {
             }
         }
         ZipExtraField[] result = new ZipExtraField[v.size()];
-        return (ZipExtraField[]) v.toArray(result);
+        return v.toArray(result);
     }
 
     @NonNull

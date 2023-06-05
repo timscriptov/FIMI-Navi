@@ -4,7 +4,7 @@ import com.fimi.kernel.dataparser.milink.LinkMessage;
 import com.fimi.kernel.dataparser.milink.LinkPacket;
 import com.fimi.kernel.dataparser.milink.LinkPayload;
 
-/* loaded from: classes.dex */
+
 public class GhMessage extends LinkMessage {
     private byte cmdId;
     private byte commanType;
@@ -43,11 +43,11 @@ public class GhMessage extends LinkMessage {
         this.commanType = commanType;
     }
 
-    @Override // com.fimi.kernel.dataparser.milink.LinkMessage
+    @Override
     public void fillPayload(LinkPacket packet) {
     }
 
-    @Override // com.fimi.kernel.dataparser.milink.LinkMessage
+    @Override
     public void unpack(LinkPayload payload) {
     }
 

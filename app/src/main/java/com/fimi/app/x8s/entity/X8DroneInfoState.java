@@ -2,7 +2,7 @@ package com.fimi.app.x8s.entity;
 
 import com.fimi.app.x8s.controls.fcsettting.X8DroneInfoStateController;
 
-/* loaded from: classes.dex */
+
 public class X8DroneInfoState {
     private int errorEvent;
     private String info;

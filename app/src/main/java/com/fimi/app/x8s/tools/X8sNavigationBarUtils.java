@@ -10,7 +10,7 @@ import android.view.View;
 
 import com.fimi.android.app.R;
 
-/* loaded from: classes.dex */
+
 public class X8sNavigationBarUtils {
     public static final float STANDARD_SCREEN_SCALE = 0.5625f;
 

@@ -2,7 +2,7 @@ package com.fimi.app.x8s.tools;
 
 import android.content.Context;
 
-/* loaded from: classes.dex */
+
 public class ConvertSize {
     public static int dipToPx(Context context, float dpValue) {
         float scale = context.getResources().getDisplayMetrics().density;

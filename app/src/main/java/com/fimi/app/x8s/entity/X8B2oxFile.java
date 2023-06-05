@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.Future;
 
-/* loaded from: classes.dex */
+
 public class X8B2oxFile extends X8FdsFile {
     private FdsUploadTask fdsUploadTask;
     private File file;
@@ -49,99 +49,99 @@ public class X8B2oxFile extends X8FdsFile {
         this.isUpload = upload;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public Future<?> getTaskFutrue() {
         return this.taskFutrue;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public void setTaskFutrue(Future<?> taskFutrue) {
         this.taskFutrue = taskFutrue;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public void stopTask() {
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public String getObjectName() {
         return this.objectName;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public void setObjectName(String objectName) {
         this.objectName = objectName;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public String getFileFdsUrl() {
         return this.filefdsUrl;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public void setFileFdsUrl(String fileUrl) {
         this.filefdsUrl = fileUrl;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public String getFileSuffix() {
         return this.fileSuffix;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public void setFileSuffix(String fileSuffix) {
         this.fileSuffix = fileSuffix;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public String getFileSuffixCollect() {
         return "";
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public void setFileSuffixCollect(String suffix) {
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public File getPlaybackFile() {
         return null;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public String getFlightMileage() {
         return null;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public int getFlightDuration() {
         return 0;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public void resetPlaybackFile(File file) {
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public String[] getNeedZipFileBySuffix() {
         return this.zipFileSuffix;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public FdsUploadTask getRunable() {
         return this.fdsUploadTask;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public void setRunable(FdsUploadTask fdsUploadTask) {
         this.fdsUploadTask = fdsUploadTask;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public File getZipFile() {
         return this.zipFile;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public void setZipFile(File f) {
         this.zipFile = f;
     }
@@ -162,17 +162,17 @@ public class X8B2oxFile extends X8FdsFile {
         this.fileName = fileName;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public File getFile() {
         return this.file;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public FdsUploadState getState() {
         return this.state;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public void setState(FdsUploadState state) {
         this.state = state;
     }
@@ -199,7 +199,7 @@ public class X8B2oxFile extends X8FdsFile {
         return ret;
     }
 
-    @Override // com.fimi.kernel.fds.IFdsFileModel
+    @Override
     public void resetFile(File file) {
         this.file = file;
     }

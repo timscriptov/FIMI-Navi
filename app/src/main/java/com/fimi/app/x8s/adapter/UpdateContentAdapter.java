@@ -13,7 +13,7 @@ import com.fimi.network.entity.UpfirewareDto;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class UpdateContentAdapter extends BaseAdapter {
     List<UpfirewareDto> list;
     Context mContext;
@@ -23,30 +23,30 @@ public class UpdateContentAdapter extends BaseAdapter {
         this.mContext = mContext;
     }
 
-    @Override // android.widget.Adapter
+    @Override
     public int getCount() {
         return this.list.size();
     }
 
-    @Override // android.widget.Adapter
+    @Override
     public Object getItem(int i) {
         return this.list.get(i);
     }
 
-    @Override // android.widget.Adapter
+    @Override
     public long getItemId(int i) {
         return i;
     }
 
-    @Override // android.widget.Adapter
+    @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHold viewHandle;
         if (view == null) {
             viewHandle = new ViewHold();
-            view = LayoutInflater.from(this.mContext).inflate(R.layout.x8_item_update_detail, (ViewGroup) null);
-            viewHandle.tvSysnameFlag = (TextView) view.findViewById(R.id.tv_sysname_flag);
-            viewHandle.tvSysname = (TextView) view.findViewById(R.id.tv_sysname);
-            viewHandle.tvSyscontent = (TextView) view.findViewById(R.id.tv_sys_content);
+            view = LayoutInflater.from(this.mContext).inflate(R.layout.x8_item_update_detail, null);
+            viewHandle.tvSysnameFlag = view.findViewById(R.id.tv_sysname_flag);
+            viewHandle.tvSysname = view.findViewById(R.id.tv_sysname);
+            viewHandle.tvSyscontent = view.findViewById(R.id.tv_sys_content);
             FontUtil.changeFontLanTing(this.mContext.getAssets(), viewHandle.tvSyscontent);
             view.setTag(viewHandle);
         } else {
@@ -67,7 +67,7 @@ public class UpdateContentAdapter extends BaseAdapter {
         return (position + 1) + ".";
     }
 
-    /* loaded from: classes.dex */
+
     private class ViewHold {
         TextView tvSyscontent;
         TextView tvSysname;

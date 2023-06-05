@@ -20,19 +20,19 @@ import com.fimi.x8sdk.controller.FcManager;
 import com.fimi.x8sdk.dataparser.cmd.CmdAiAutoPhoto;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes.dex */
+
 public class X8AiAutoPhotoExcuteConfirmUi implements View.OnClickListener, SwitchButton.OnSwitchListener {
-    private int angle;
+    private final int angle;
     private View btnOk;
-    private View contentView;
+    private final View contentView;
     private float currentDroneHeight;
     private int distanceMax;
     private FcManager fcManager;
     private View imgReturn;
     private int item;
     private IX8NextViewListener listener;
-    private Activity mActivity;
-    private int mType;
+    private final Activity mActivity;
+    private final int mType;
     private X8MainAiFlyController mX8MainAiFlyController;
     private X8SeekBarView sbDistance;
     private X8SeekBarView sbSpeed;
@@ -48,22 +48,22 @@ public class X8AiAutoPhotoExcuteConfirmUi implements View.OnClickListener, Switc
     private View vSpeedPlus;
     private int verticalMax;
     private X8AiAutoPhototExcuteController x8AiAutoPhototExcuteController;
-    private float SPEED_MIN = 1.0f;
-    private float SPEED_MAX = 10.0f;
-    private int SPEED_MAX_PROGRESS = (int) ((this.SPEED_MAX - this.SPEED_MIN) * 10.0f);
-    private float SPEED_DEFALOUT = 3.0f - this.SPEED_MIN;
-    private float DISTANCE_MIN = 1.0f;
-    private float DISTANCE_MAX = 300.0f;
-    private int DISTANCE_MAX_PROGRESS = (int) ((this.DISTANCE_MAX - this.DISTANCE_MIN) * 10.0f);
-    private float DISTANCE_DEFALOUT = 30.0f - this.DISTANCE_MIN;
-    private float DISTANCE_VERTIIVAL_MAX = 120.0f;
-    private int DISTANCE_VERTIIVAL_MAX_PROGRESS = (int) ((this.DISTANCE_VERTIIVAL_MAX - this.DISTANCE_MIN) * 10.0f);
-    private X8SeekBarView.SlideChangeListener speedListener = new X8SeekBarView.SlideChangeListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiAutoPhotoExcuteConfirmUi.1
-        @Override // com.fimi.app.x8s.widget.X8SeekBarView.SlideChangeListener
+    private final float SPEED_MIN = 1.0f;
+    private final float SPEED_MAX = 10.0f;
+    private final int SPEED_MAX_PROGRESS = (int) ((this.SPEED_MAX - this.SPEED_MIN) * 10.0f);
+    private final float SPEED_DEFALOUT = 3.0f - this.SPEED_MIN;
+    private final float DISTANCE_MIN = 1.0f;
+    private final float DISTANCE_MAX = 300.0f;
+    private final int DISTANCE_MAX_PROGRESS = (int) ((this.DISTANCE_MAX - this.DISTANCE_MIN) * 10.0f);
+    private final float DISTANCE_DEFALOUT = 30.0f - this.DISTANCE_MIN;
+    private final float DISTANCE_VERTIIVAL_MAX = 120.0f;
+    private final int DISTANCE_VERTIIVAL_MAX_PROGRESS = (int) ((this.DISTANCE_VERTIIVAL_MAX - this.DISTANCE_MIN) * 10.0f);
+    private final X8SeekBarView.SlideChangeListener speedListener = new X8SeekBarView.SlideChangeListener() {
+        @Override
         public void onStart(X8SeekBarView slideView, int progress) {
         }
 
-        @Override // com.fimi.app.x8s.widget.X8SeekBarView.SlideChangeListener
+        @Override
         public void onProgress(X8SeekBarView slideView, int progress) {
             float speed = X8AiAutoPhotoExcuteConfirmUi.this.SPEED_MIN + (progress / 10.0f);
             String strSpeed = X8NumberUtil.getSpeedNumberString(speed, 1, true);
@@ -71,16 +71,16 @@ public class X8AiAutoPhotoExcuteConfirmUi implements View.OnClickListener, Switc
             X8AiAutoPhotoExcuteConfirmUi.this.setValue();
         }
 
-        @Override // com.fimi.app.x8s.widget.X8SeekBarView.SlideChangeListener
+        @Override
         public void onStop(X8SeekBarView slideView, int progress) {
         }
     };
-    private X8SeekBarView.SlideChangeListener distanceListener = new X8SeekBarView.SlideChangeListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiAutoPhotoExcuteConfirmUi.2
-        @Override // com.fimi.app.x8s.widget.X8SeekBarView.SlideChangeListener
+    private final X8SeekBarView.SlideChangeListener distanceListener = new X8SeekBarView.SlideChangeListener() {
+        @Override
         public void onStart(X8SeekBarView slideView, int progress) {
         }
 
-        @Override // com.fimi.app.x8s.widget.X8SeekBarView.SlideChangeListener
+        @Override
         public void onProgress(X8SeekBarView slideView, int progress) {
             if (X8AiAutoPhotoExcuteConfirmUi.this.mType == 1) {
                 float distance = X8AiAutoPhotoExcuteConfirmUi.this.DISTANCE_MIN + (progress / 10.0f);
@@ -94,7 +94,7 @@ public class X8AiAutoPhotoExcuteConfirmUi implements View.OnClickListener, Switc
             X8AiAutoPhotoExcuteConfirmUi.this.setValue();
         }
 
-        @Override // com.fimi.app.x8s.widget.X8SeekBarView.SlideChangeListener
+        @Override
         public void onStop(X8SeekBarView slideView, int progress) {
         }
     };
@@ -115,18 +115,18 @@ public class X8AiAutoPhotoExcuteConfirmUi implements View.OnClickListener, Switc
     public void initViews(View rootView) {
         this.imgReturn = rootView.findViewById(R.id.img_ai_return);
         this.btnOk = rootView.findViewById(R.id.btn_ai_confirm_ok);
-        this.tvTitle = (TextView) rootView.findViewById(R.id.tv_ai_title);
-        this.tvContent = (TextView) rootView.findViewById(R.id.tv_ai_next_content1);
-        this.tvTime = (TextView) rootView.findViewById(R.id.tv_ai_time);
-        this.tvSpeed = (TextView) rootView.findViewById(R.id.tv_ai_speed);
-        this.tvDistance = (TextView) rootView.findViewById(R.id.tv_ai_distance);
+        this.tvTitle = rootView.findViewById(R.id.tv_ai_title);
+        this.tvContent = rootView.findViewById(R.id.tv_ai_next_content1);
+        this.tvTime = rootView.findViewById(R.id.tv_ai_time);
+        this.tvSpeed = rootView.findViewById(R.id.tv_ai_speed);
+        this.tvDistance = rootView.findViewById(R.id.tv_ai_distance);
         this.vSpeedMinus = rootView.findViewById(R.id.rl_speed_minus);
         this.vSpeedPlus = rootView.findViewById(R.id.rl_speed_plus);
-        this.sbSpeed = (X8SeekBarView) rootView.findViewById(R.id.sb_speed);
+        this.sbSpeed = rootView.findViewById(R.id.sb_speed);
         this.sbSpeed.setMaxProgress(this.SPEED_MAX_PROGRESS);
         this.vDistanceMinus = rootView.findViewById(R.id.rl_distance_minus);
         this.vDistancePlus = rootView.findViewById(R.id.rl_distance_plus);
-        this.sbDistance = (X8SeekBarView) rootView.findViewById(R.id.sb_distance);
+        this.sbDistance = rootView.findViewById(R.id.sb_distance);
         this.currentDroneHeight = StateManager.getInstance().getX8Drone().getHeight();
         if (this.mType == 1) {
             this.verticalMax = ((int) ((this.DISTANCE_VERTIIVAL_MAX - this.DISTANCE_MIN) - this.currentDroneHeight)) * 10;
@@ -145,7 +145,7 @@ public class X8AiAutoPhotoExcuteConfirmUi implements View.OnClickListener, Switc
             }
             this.sbDistance.setMaxProgress(this.distanceMax);
         }
-        this.swbAutoReturn = (SwitchButton) rootView.findViewById(R.id.swb_ai_auto_return);
+        this.swbAutoReturn = rootView.findViewById(R.id.swb_ai_auto_return);
         this.swbAutoReturn.setEnabled(true);
     }
 
@@ -165,7 +165,7 @@ public class X8AiAutoPhotoExcuteConfirmUi implements View.OnClickListener, Switc
         this.sbDistance.setProgress(progress2);
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id != R.id.img_ai_return) {
@@ -247,13 +247,9 @@ public class X8AiAutoPhotoExcuteConfirmUi implements View.OnClickListener, Switc
         this.tvTitle.setText(this.contentView.getResources().getString(R.string.x8_ai_auto_photo_vertical_title));
     }
 
-    @Override // com.fimi.widget.SwitchButton.OnSwitchListener
+    @Override
     public void onSwitch(View view, boolean on) {
-        if (on) {
-            this.swbAutoReturn.setSwitchState(false);
-        } else {
-            this.swbAutoReturn.setSwitchState(true);
-        }
+        this.swbAutoReturn.setSwitchState(!on);
     }
 
     public void setAiAutoPhotoValueCmd(final IX8AiAutoPhototExcuteListener excuteListener) {
@@ -263,8 +259,8 @@ public class X8AiAutoPhotoExcuteConfirmUi implements View.OnClickListener, Switc
         cmd.angle = this.angle;
         cmd.mode = this.item != 0 ? 0 : 1;
         cmd.routeLength = (int) ((this.DISTANCE_MIN * 10.0f) + this.sbDistance.getProgress());
-        this.fcManager.setAiAutoPhotoValue(cmd, new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiAutoPhotoExcuteConfirmUi.3
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.setAiAutoPhotoValue(cmd, new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8AiAutoPhotoExcuteConfirmUi.this.startAiAutoPhoto(excuteListener);
@@ -276,23 +272,15 @@ public class X8AiAutoPhotoExcuteConfirmUi implements View.OnClickListener, Switc
     }
 
     public void startAiAutoPhoto(final IX8AiAutoPhototExcuteListener excuteListener) {
-        this.fcManager.setAiAutoPhotoExcute(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiAutoPhotoExcuteConfirmUi.4
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.setAiAutoPhotoExcute(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                    excuteListener.autoPhototExcute(true);
-                } else {
-                    excuteListener.autoPhototExcute(false);
-                }
+                excuteListener.autoPhototExcute(cmdResult.isSuccess());
             }
         });
     }
 
     public void setFcHeart(boolean isInSky, boolean isLowPower) {
-        if (isInSky && isLowPower) {
-            this.btnOk.setEnabled(true);
-        } else {
-            this.btnOk.setEnabled(false);
-        }
+        this.btnOk.setEnabled(isInSky && isLowPower);
     }
 }

@@ -3,7 +3,7 @@ package com.fimi.kernel.network.okhttp;
 import com.fimi.thirdpartysdk.ThirdPartyConstants;
 import com.umeng.commonsdk.proguard.g;
 
-/* loaded from: classes.dex */
+
 public class HttpConstant {
     public static final String AD_DATA_FAILED = "202";
     public static final String AD_DATA_SUCCESS = "200";
@@ -15,7 +15,7 @@ public class HttpConstant {
     public static final String SID = "sid";
     public static final String STEP_CD = "cd";
 
-    /* loaded from: classes.dex */
+
     public enum Params {
         lvs("lvs", "4"),
         st("st", "12"),
@@ -27,8 +27,8 @@ public class HttpConstant {
         ad_analize("sp", "2"),
         ad_load("sp", ThirdPartyConstants.LOGIN_CHANNEL_TW);
 
-        private String key;
-        private String value;
+        private final String key;
+        private final String value;
 
         Params(String key, String value) {
             this.key = key;

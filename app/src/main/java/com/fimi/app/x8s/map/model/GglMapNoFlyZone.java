@@ -11,7 +11,7 @@ import com.google.android.gms.maps.model.PolygonOptions;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class GglMapNoFlyZone extends AbsMapNoFlyZone {
     private LatLng A3;
     private LatLng A4;
@@ -23,17 +23,17 @@ public class GglMapNoFlyZone extends AbsMapNoFlyZone {
     private LatLng D4;
     private PolygonOptions candyPolygonOptions;
     private CircleOptions circleOptions;
-    private GoogleMap googleMap;
+    private final GoogleMap googleMap;
     private PolygonOptions options;
     private double[][] pointArcs1;
     private double[][] pointArcs2;
     private double[][] pointArcs3;
     private double[][] pointArcs4;
     private PolygonOptions polygonOptions;
-    private List<Polygon> polygonList = new ArrayList();
-    private List<Circle> circleList = new ArrayList();
-    private List<LatLng> latLngsNofly = new ArrayList();
-    private List<LatLng> latLngs = new ArrayList();
+    private final List<Polygon> polygonList = new ArrayList();
+    private final List<Circle> circleList = new ArrayList();
+    private final List<LatLng> latLngsNofly = new ArrayList();
+    private final List<LatLng> latLngs = new ArrayList();
 
     public GglMapNoFlyZone(GoogleMap map) {
         this.googleMap = map;

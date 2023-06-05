@@ -34,7 +34,7 @@ public class RemotesimulatorView extends View {
     private Context context;
     private int currentLeftRemoteIndex;
     private int currentRightRemoteIndex;
-    private int[] doughnutColors;
+    private final int[] doughnutColors;
     private boolean isBatteryPress;
     private boolean isLandPress;
     private boolean isReturnPress;
@@ -45,7 +45,7 @@ public class RemotesimulatorView extends View {
     private Matrix mMatrix;
     private int marginLeft;
     private int marginTop;
-    private int midRemoteCenter;
+    private final int midRemoteCenter;
     private Paint paint;
     private Paint paint1;
     private Rect rect;
@@ -159,14 +159,14 @@ public class RemotesimulatorView extends View {
             canvas.drawBitmap(this.batteryBG, this.batteryBGLeft + this.marginLeft, (this.RemoteBG.getHeight() * 0.6f) + this.marginTop, this.paint1);
         }
         this.paint.setColor(Color.parseColor("#FF00E8FD"));
-        this.paint.setShader(new LinearGradient(this.leftCenterRidus + this.marginLeft, (this.RemoteBG.getHeight() / 2) + this.marginTop, this.leftCenterRidus + this.RemoteCenter.getWidth() + this.marginLeft, (this.RemoteBG.getHeight() / 2) - (this.currentLeftRemoteIndex * this.scale), this.doughnutColors, (float[]) null, Shader.TileMode.MIRROR));
+        this.paint.setShader(new LinearGradient(this.leftCenterRidus + this.marginLeft, (this.RemoteBG.getHeight() / 2) + this.marginTop, this.leftCenterRidus + this.RemoteCenter.getWidth() + this.marginLeft, (this.RemoteBG.getHeight() / 2) - (this.currentLeftRemoteIndex * this.scale), this.doughnutColors, null, Shader.TileMode.MIRROR));
         this.rf.set(this.leftCenterRidus + this.marginLeft, (this.RemoteBG.getHeight() / 2) - (this.currentLeftRemoteIndex * this.scale), this.leftCenterRidus + this.RemoteCenter.getWidth() + this.marginLeft, (this.RemoteBG.getHeight() / 2) + this.marginTop);
         this.mMatrix.postRotate(this.rotateLeftAngle, this.leftCenterRidus + (this.RemoteCenter.getWidth() / 2) + this.marginLeft, this.centerRidusTop + (this.RemoteCenter.getWidth() / 2) + this.marginTop);
         canvas.setMatrix(this.mMatrix);
         canvas.drawRoundRect(this.rf, this.RemoteCenter.getWidth() / 2, this.RemoteCenter.getWidth() / 2, this.paint);
         this.mMatrix.setRotate(0.0f);
         canvas.setMatrix(this.mMatrix);
-        this.paint.setShader(new LinearGradient(this.rightCenterRidus + this.marginLeft, (this.RemoteBG.getHeight() / 2) + this.marginTop, this.rightCenterRidus + this.RemoteCenter.getWidth() + this.marginLeft, ((this.RemoteBG.getHeight() / 2) - (this.currentRightRemoteIndex * this.scale)) + this.marginTop, this.doughnutColors, (float[]) null, Shader.TileMode.MIRROR));
+        this.paint.setShader(new LinearGradient(this.rightCenterRidus + this.marginLeft, (this.RemoteBG.getHeight() / 2) + this.marginTop, this.rightCenterRidus + this.RemoteCenter.getWidth() + this.marginLeft, ((this.RemoteBG.getHeight() / 2) - (this.currentRightRemoteIndex * this.scale)) + this.marginTop, this.doughnutColors, null, Shader.TileMode.MIRROR));
         this.rf.set(this.rightCenterRidus + this.marginLeft, ((this.RemoteBG.getHeight() / 2) - (this.currentRightRemoteIndex * this.scale)) + this.marginTop, this.rightCenterRidus + this.RemoteCenter.getWidth() + this.marginLeft, (this.RemoteBG.getHeight() / 2) + this.marginTop);
         this.mMatrix.postRotate(this.rotateRightAngle, this.rightCenterRidus + (this.RemoteCenter.getWidth() / 2) + this.marginLeft, this.centerRidusTop + (this.RemoteCenter.getWidth() / 2) + this.marginTop);
         canvas.setMatrix(this.mMatrix);

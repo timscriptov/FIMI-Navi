@@ -9,7 +9,7 @@ import androidx.core.view.MotionEventCompat;
 import java.io.File;
 import java.io.FileOutputStream;
 
-/* loaded from: classes.dex */
+
 public class ImageUtils {
     static final int kMaxChannelValue = 262143;
     private static boolean useNativeConversion;

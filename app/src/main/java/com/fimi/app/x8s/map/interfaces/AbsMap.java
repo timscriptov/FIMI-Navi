@@ -7,7 +7,7 @@ import com.fimi.app.x8s.map.model.FimiPoint;
 import com.fimi.app.x8s.map.model.MapPointLatLng;
 import com.google.android.gms.maps.GoogleMap;
 
-/* loaded from: classes.dex */
+
 public abstract class AbsMap implements IFimiMap {
     public static final float ZOOMDEFAOULT = 21.0f;
     protected Context context;
@@ -54,7 +54,7 @@ public abstract class AbsMap implements IFimiMap {
 
     public abstract FimiPoint toScreenLocation(double d, double d2);
 
-    @Override // com.fimi.app.x8s.map.interfaces.IFimiMap
+    @Override
     public GoogleMap googleMap() {
         return null;
     }

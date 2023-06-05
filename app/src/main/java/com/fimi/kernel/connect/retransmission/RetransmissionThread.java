@@ -10,11 +10,11 @@ import com.fimi.kernel.dataparser.milink.LinkPacket;
 import java.util.Iterator;
 import java.util.concurrent.LinkedBlockingDeque;
 
-/* loaded from: classes.dex */
+
 public class RetransmissionThread extends Thread {
     private final int sleepTime = 500;
     public LinkedBlockingDeque<BaseCommand> mListReSend = new LinkedBlockingDeque<>();
-    private IDataTransfer mDataTransfer;
+    private final IDataTransfer mDataTransfer;
     private boolean isLoop = true;
 
     public RetransmissionThread(IDataTransfer mDataTransfer) {
@@ -73,7 +73,7 @@ public class RetransmissionThread extends Thread {
         return ret;
     }
 
-    @Override // java.lang.Thread, java.lang.Runnable
+    @Override
     public void run() {
         while (this.isLoop) {
             if (!this.mListReSend.isEmpty()) {

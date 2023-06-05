@@ -1,6 +1,6 @@
 package com.fimi.app.x8s.tools;
 
-/* loaded from: classes.dex */
+
 public class TimeFormateUtil {
     public static String getRecordTime(int time) {
         if (time == 0) {

@@ -21,29 +21,25 @@ import com.fimi.x8sdk.modulestate.StateManager;
 import java.io.File;
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes.dex */
+
 public class X8MediaPresenter<T extends Activity> implements IDateHandler {
     private final String TAG = "X8MediaPresenter";
     Handler handler = new Handler();
     private IMediaCameraConnected iMediaCameraConnected;
-    private X8MediaActivity mMediaActivity;
-    Runnable runnable = new Runnable() { // from class: com.fimi.app.x8s.ui.presenter.X8MediaPresenter.3
-        @Override // java.lang.Runnable
+    private final X8MediaActivity mMediaActivity;
+    Runnable runnable = new Runnable() {
+        @Override
         public void run() {
             if (X8MediaPresenter.this.mMediaActivity.getTlTitleCategoly().getSelectedTabPosition() == 0) {
-                if (StateManager.getInstance().getCamera().getToken() > 0) {
-                    X8MediaPresenter.this.iMediaCameraConnected.onCameraConnectedState(true);
-                } else {
-                    X8MediaPresenter.this.iMediaCameraConnected.onCameraConnectedState(false);
-                }
+                X8MediaPresenter.this.iMediaCameraConnected.onCameraConnectedState(StateManager.getInstance().getCamera().getToken() > 0);
                 X8MediaPresenter.this.handler.postDelayed(this, 1000L);
             }
         }
     };
-    private WeakReference<T> weakReference;
-    private DataManager<MediaModel> mDataManager = DataManager.obtain();
+    private final WeakReference<T> weakReference;
+    private final DataManager<MediaModel> mDataManager = DataManager.obtain();
     private boolean isFirstEnterCamera = true;
-    private ICameraDeviceDispater mCameraDispater = new X8CameraDispater();
+    private final ICameraDeviceDispater mCameraDispater = new X8CameraDispater();
 
     public X8MediaPresenter(T activity) {
         this.weakReference = new WeakReference<>(activity);
@@ -53,10 +49,10 @@ public class X8MediaPresenter<T extends Activity> implements IDateHandler {
         this.handler.postDelayed(this.runnable, 1000L);
     }
 
-    @Override // com.fimi.album.iview.IDateHandler
+    @Override
     public void loadDateComplete(final boolean isCamera, boolean isSuccess) {
-        HandlerManager.obtain().getHandlerInMainThread().post(new Runnable() { // from class: com.fimi.app.x8s.ui.presenter.X8MediaPresenter.1
-            @Override // java.lang.Runnable
+        HandlerManager.obtain().getHandlerInMainThread().post(new Runnable() {
+            @Override
             public void run() {
                 if (isCamera) {
                     X8MediaPresenter.this.isFirstEnterCamera = false;
@@ -72,7 +68,7 @@ public class X8MediaPresenter<T extends Activity> implements IDateHandler {
         onStartReshAdapter();
     }
 
-    @Override // com.fimi.album.iview.IDateHandler
+    @Override
     public void refreshLoadDataComplete() {
     }
 
@@ -186,8 +182,8 @@ public class X8MediaPresenter<T extends Activity> implements IDateHandler {
             }
         }
         LogUtil.d("X8MediaPresenter", "switchLoadMedia: 3" + this.mDataManager.isX9LocalLoad());
-        this.handler.postDelayed(new Runnable() { // from class: com.fimi.app.x8s.ui.presenter.X8MediaPresenter.2
-            @Override // java.lang.Runnable
+        this.handler.postDelayed(new Runnable() {
+            @Override
             public void run() {
                 if (X8MediaPresenter.this.mDataManager.isX9LocalLoad()) {
                     X8MediaPresenter.this.mMediaActivity.getmX8LocalMediaFragment().reshAdapter();
@@ -230,7 +226,7 @@ public class X8MediaPresenter<T extends Activity> implements IDateHandler {
         this.iMediaCameraConnected = iMediaCameraConnected;
     }
 
-    /* loaded from: classes.dex */
+
     public interface IMediaCameraConnected {
         void onCameraConnectedState(boolean z);
     }

@@ -16,7 +16,7 @@ import com.github.moduth.blockcanary.internal.BlockInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class PermissionManager {
     public static final int ACTION_LOCATION_SOURCE_SETTINGS = 1314;
     public static final int REQUEST_ACCESS_COARSE_LOCATION = 2;
@@ -33,8 +33,8 @@ public class PermissionManager {
     public static String[] PERMISSIONS_EXTERNAL_STORAGE = {"android.permission.READ_EXTERNAL_STORAGE", "android.permission.WRITE_EXTERNAL_STORAGE"};
     public static String[] PERMISSIONS_CAMERA = {"android.permission.CAMERA", "android.permission.RECORD_AUDIO"};
     public static String[] PERMISSIONS_RECORD_AUDIO = {"android.permission.RECORD_AUDIO"};
-    private static String[] PERMISSIONS_INTERNET = {"android.permission.INTERNET", "android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"};
-    private static List<String> permissionsList = new ArrayList();
+    private static final String[] PERMISSIONS_INTERNET = {"android.permission.INTERNET", "android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"};
+    private static final List<String> permissionsList = new ArrayList();
 
     public static void requestStoragePermissions() {
         int permission = ActivityCompat.checkSelfPermission(BaseAppManager.getInstance().getForwardActivity(), "android.permission.WRITE_EXTERNAL_STORAGE");
@@ -52,10 +52,7 @@ public class PermissionManager {
 
     public static boolean hasLocaltionPermissions() {
         int permission = ActivityCompat.checkSelfPermission(BaseAppManager.getInstance().getForwardActivity(), "android.permission.ACCESS_COARSE_LOCATION");
-        if (permission == 0) {
-            return true;
-        }
-        return false;
+        return permission == 0;
     }
 
     public static boolean shouldShowLocaltionPermissions() {
@@ -156,7 +153,7 @@ public class PermissionManager {
             }
         }
         if (permissionsList.size() > 0) {
-            ActivityCompat.requestPermissions(activity, (String[]) permissionsList.toArray(new String[permissionsList.size()]), 9);
+            ActivityCompat.requestPermissions(activity, permissionsList.toArray(new String[permissionsList.size()]), 9);
         }
     }
 }

@@ -10,7 +10,7 @@ import androidx.core.view.ViewCompat;
 
 import java.util.Iterator;
 
-/* loaded from: classes.dex */
+
 public abstract class BaseViewAnimator {
     public static final long DURATION = 1000;
     private long mDuration = 1000;

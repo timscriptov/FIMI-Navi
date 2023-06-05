@@ -42,10 +42,10 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class X8FlightPlaybackActivity extends BaseActivity implements UpdateChangeMapTypeInterface, IFlightPlayBackAction, SeekBar.OnSeekBarChangeListener {
-    IX8FlightLogTopBarListener ix8FlightLogTopBarListener = new IX8FlightLogTopBarListener() { // from class: com.fimi.app.x8s.ui.activity.X8FlightPlaybackActivity.5
-        @Override // com.fimi.app.x8s.interfaces.IX8FlightLogTopBarListener
+    IX8FlightLogTopBarListener ix8FlightLogTopBarListener = new IX8FlightLogTopBarListener() {
+        @Override
         public void toMainUI() {
             X8FlightPlaybackActivity.this.finish();
         }
@@ -81,7 +81,7 @@ public class X8FlightPlaybackActivity extends BaseActivity implements UpdateChan
     private RemotesimulatorView x8RemoteSimulator;
     private SeekBar x8SeebarPaly;
 
-    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+    @Override
     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
         X8FlightPlayBackPresenter x8FlightPlayBackPresenter = this.x8FlightPlayBackPresenter;
         this.x8FlightPlayBackPresenter.getClass();
@@ -89,12 +89,12 @@ public class X8FlightPlaybackActivity extends BaseActivity implements UpdateChan
         this.x8FlightPlayBackPresenter.currentProgress = this.x8FlightPlayBackPresenter.play2Second * i;
     }
 
-    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+    @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
         this.x8FlightPlayBackPresenter.stopFlightPlayback();
     }
 
-    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+    @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
         if (this.x8FlightPlayBackPresenter.mPlayStatus == X8FlightPlayBackPresenter.PlayStatus.Stop) {
             this.x8FlightPlayBackPresenter.sendEmptyMessageDelayed();
@@ -111,7 +111,7 @@ public class X8FlightPlaybackActivity extends BaseActivity implements UpdateChan
         X8sNavigationBarUtils.hideBottomUIMenu(this);
     }
 
-    @Override // android.app.Activity, android.view.Window.Callback
+    @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus) {
@@ -119,7 +119,7 @@ public class X8FlightPlaybackActivity extends BaseActivity implements UpdateChan
         }
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     protected void setStatusBarColor() {
         requestWindowFeature(1);
         getWindow().setFlags(1024, 1024);
@@ -127,29 +127,29 @@ public class X8FlightPlaybackActivity extends BaseActivity implements UpdateChan
         StatusBarUtil.StatusBarLightMode(this);
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void initData() {
         Intent intent = getIntent();
         String filePath = intent.getStringExtra(Constants.X8_FLIGHTLOG_PATH);
         this.x8FlightplaybackMain = findViewById(R.id.x8_flightplayback_main);
         this.x8FlightlogTopBarController = new X8FlightlogTopBarController(this.x8FlightplaybackMain, filePath.contains(X8FcLogManager.getInstance().prexCollect), this);
         this.x8FlightlogTopBarController.setListener(this.ix8FlightLogTopBarListener);
-        this.showMoreRemoteStatus = (ImageView) findViewById(R.id.show_more_remote_status);
-        this.showMoreGpsStatus = (ImageView) findViewById(R.id.show_more_gps_status);
-        this.showMoreBatteryStatus = (ImageView) findViewById(R.id.show_more_battery_status);
-        this.x8RemoteSimulator = (RemotesimulatorView) findViewById(R.id.x8_remote_simulator);
-        this.x8ProgressLoading = (PercentRelativeLayout) findViewById(R.id.x8_progress_loading);
-        this.x8PlayBackTotalTime = (TextView) findViewById(R.id.x8_play_back_total_time);
-        this.x8PlayBackProgressFact = (TextView) findViewById(R.id.x8_play_back_progress_fact);
-        this.x8BtnPaly = (ImageView) findViewById(R.id.x8_btn_paly);
-        this.x8SeebarPaly = (SeekBar) findViewById(R.id.x8_seebar_paly);
+        this.showMoreRemoteStatus = findViewById(R.id.show_more_remote_status);
+        this.showMoreGpsStatus = findViewById(R.id.show_more_gps_status);
+        this.showMoreBatteryStatus = findViewById(R.id.show_more_battery_status);
+        this.x8RemoteSimulator = findViewById(R.id.x8_remote_simulator);
+        this.x8ProgressLoading = findViewById(R.id.x8_progress_loading);
+        this.x8PlayBackTotalTime = findViewById(R.id.x8_play_back_total_time);
+        this.x8PlayBackProgressFact = findViewById(R.id.x8_play_back_progress_fact);
+        this.x8BtnPaly = findViewById(R.id.x8_btn_paly);
+        this.x8SeebarPaly = findViewById(R.id.x8_seebar_paly);
         this.x8SeebarPaly.setOnSeekBarChangeListener(this);
-        this.x8DrontBatteryRl = (PercentRelativeLayout) findViewById(R.id.x8_dront_battery_rl);
-        this.x8BatteryTemDesValue = (TextView) findViewById(R.id.x8_battery_tem_des_value);
-        this.x8BatteryElectricityDesValue = (TextView) findViewById(R.id.x8_battery_electricity_des_value);
-        this.x8BatteryVoltageOneValue = (TextView) findViewById(R.id.x8_battery_voltage_one_value);
-        this.x8BatteryVoltageSencondValue = (TextView) findViewById(R.id.x8_battery_voltage_sencond_value);
-        this.x8BatteryVoltageThreeValue = (TextView) findViewById(R.id.x8_battery_voltage_three_value);
+        this.x8DrontBatteryRl = findViewById(R.id.x8_dront_battery_rl);
+        this.x8BatteryTemDesValue = findViewById(R.id.x8_battery_tem_des_value);
+        this.x8BatteryElectricityDesValue = findViewById(R.id.x8_battery_electricity_des_value);
+        this.x8BatteryVoltageOneValue = findViewById(R.id.x8_battery_voltage_one_value);
+        this.x8BatteryVoltageSencondValue = findViewById(R.id.x8_battery_voltage_sencond_value);
+        this.x8BatteryVoltageThreeValue = findViewById(R.id.x8_battery_voltage_three_value);
         this.mFragmentManager = getSupportFragmentManager();
         this.mPlayBackMapFragment = (PlayBackMapFragment) this.mFragmentManager.findFragmentById(R.id.mapFragment);
         if (this.mPlayBackMapFragment == null) {
@@ -165,10 +165,10 @@ public class X8FlightPlaybackActivity extends BaseActivity implements UpdateChan
         this.x8FlightPlayBackPresenter.parseFileDate(filePath);
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void doTrans() {
-        this.x8BtnPaly.setOnClickListener(new NoDoubleClickListener(500) { // from class: com.fimi.app.x8s.ui.activity.X8FlightPlaybackActivity.1
-            @Override // com.fimi.widget.impl.NoDoubleClickListener
+        this.x8BtnPaly.setOnClickListener(new NoDoubleClickListener(500) {
+            @Override
             protected void onNoDoubleClick(View v) {
                 if (X8FlightPlaybackActivity.this.x8FlightPlayBackPresenter.mPlayStatus == X8FlightPlayBackPresenter.PlayStatus.Payback) {
                     if (X8FlightPlaybackActivity.this.x8FlightPlayBackPresenter.currentProgress != X8FlightPlaybackActivity.this.x8SeebarPaly.getMax()) {
@@ -186,8 +186,8 @@ public class X8FlightPlaybackActivity extends BaseActivity implements UpdateChan
                 X8FlightPlaybackActivity.this.x8FlightPlayBackPresenter.mPlayStatus = X8FlightPlayBackPresenter.PlayStatus.Payback;
             }
         });
-        this.showMoreRemoteStatus.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.ui.activity.X8FlightPlaybackActivity.2
-            @Override // android.view.View.OnClickListener
+        this.showMoreRemoteStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 if (X8FlightPlaybackActivity.this.x8RemoteSimulator.isShown()) {
                     X8FlightPlaybackActivity.this.changeViewBg(X8FlightPlaybackActivity.this.showMoreRemoteStatus, R.drawable.play_back_remote_more_bg);
@@ -198,15 +198,15 @@ public class X8FlightPlaybackActivity extends BaseActivity implements UpdateChan
                 X8FlightPlaybackActivity.this.x8RemoteSimulator.setVisibility(0);
             }
         });
-        this.showMoreGpsStatus.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.ui.activity.X8FlightPlaybackActivity.3
-            @Override // android.view.View.OnClickListener
+        this.showMoreGpsStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 int backType = X8FlightPlaybackActivity.this.mPlayBackMapFragment.changeMapType();
                 X8FlightPlaybackActivity.this.changeMapType(backType);
             }
         });
-        this.showMoreBatteryStatus.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.ui.activity.X8FlightPlaybackActivity.4
-            @Override // android.view.View.OnClickListener
+        this.showMoreBatteryStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 if (X8FlightPlaybackActivity.this.x8DrontBatteryRl.isShown()) {
                     X8FlightPlaybackActivity.this.changeViewBg(X8FlightPlaybackActivity.this.showMoreBatteryStatus, R.drawable.play_back_battery_more_bg);
@@ -219,7 +219,7 @@ public class X8FlightPlaybackActivity extends BaseActivity implements UpdateChan
         });
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     protected int getContentViewLayoutID() {
         return R.layout.activity_x8_flightplayback;
     }
@@ -232,7 +232,7 @@ public class X8FlightPlaybackActivity extends BaseActivity implements UpdateChan
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.UpdateChangeMapTypeInterface
+    @Override
     public void update(int currentType) {
         changeMapType(currentType);
     }
@@ -241,7 +241,7 @@ public class X8FlightPlaybackActivity extends BaseActivity implements UpdateChan
         view.setImageResource(resID);
     }
 
-    @Override // com.fimi.x8sdk.ivew.IFlightPlayBackAction
+    @Override
     public void parseFileDateEnd(int totalTime, boolean isParseFileSucceed) {
         this.isParseFileSucceed = isParseFileSucceed;
         this.x8ProgressLoading.setVisibility(8);
@@ -250,7 +250,7 @@ public class X8FlightPlaybackActivity extends BaseActivity implements UpdateChan
         this.x8SeebarPaly.setMax(totalTime);
     }
 
-    @Override // com.fimi.x8sdk.ivew.IFlightPlayBackAction
+    @Override
     public void showRemoteControlDisconnectState() {
         this.x8FlightlogTopBarController.defaultVal();
         this.x8BatteryTemDesValue.setText("0°C");
@@ -261,7 +261,7 @@ public class X8FlightPlaybackActivity extends BaseActivity implements UpdateChan
         this.x8RemoteSimulator.showDefaultView();
     }
 
-    @Override // com.fimi.x8sdk.ivew.IFlightPlayBackAction
+    @Override
     public void showDroneDisconnectState() {
         this.x8FlightlogTopBarController.onDisconnectDroneVal();
         this.x8BatteryTemDesValue.setText("0°C");
@@ -271,7 +271,7 @@ public class X8FlightPlaybackActivity extends BaseActivity implements UpdateChan
         this.x8BatteryVoltageThreeValue.setText("0 V");
     }
 
-    @Override // com.fimi.x8sdk.ivew.IFlightPlayBackAction
+    @Override
     public void setPlaybackProgress(int progress, boolean isPlayEnd) {
         this.x8SeebarPaly.setProgress(progress);
         this.x8PlayBackProgressFact.setText(TimerUtil.getInstance().stringForTime(progress, true));
@@ -282,7 +282,7 @@ public class X8FlightPlaybackActivity extends BaseActivity implements UpdateChan
         }
     }
 
-    @Override // com.fimi.x8sdk.ivew.IFlightPlayBackAction
+    @Override
     public void showAutoFcHeart(AutoFcHeartPlayback autoFcHeartPlayback, DroneStateFlightPlayback droneStateFlightPlayback) {
         boolean z = false;
         X8FlightlogTopBarController x8FlightlogTopBarController = this.x8FlightlogTopBarController;
@@ -294,35 +294,35 @@ public class X8FlightPlaybackActivity extends BaseActivity implements UpdateChan
         this.x8FlightlogTopBarController.onPowerChange(droneStateFlightPlayback.getAutoFcHeart().getPowerConRate());
     }
 
-    @Override // com.fimi.x8sdk.ivew.IFlightPlayBackAction
+    @Override
     public void showAutoFcSignalState(AutoFcSignalStatePlayback autoFcSignalStatePlayback) {
         this.x8FlightlogTopBarController.showSingal(autoFcSignalStatePlayback);
     }
 
-    @Override // com.fimi.x8sdk.ivew.IFlightPlayBackAction
+    @Override
     public void showAutoFcBattery(AutoFcBatteryPlayback autoFcBatteryPlayback) {
         this.remainPercentage = autoFcBatteryPlayback.getRemainPercentage();
         this.x8FlightlogTopBarController.onBatteryListener(autoFcBatteryPlayback);
         showBatteryInfo(autoFcBatteryPlayback);
     }
 
-    @Override // com.fimi.x8sdk.ivew.IFlightPlayBackAction
+    @Override
     public void showAutoFcErrCode(List<X8ErrorCodeInfo> x8ErrorCodeInfos) {
         this.mX8MainErrorCodePowerPitchAngleController.onErrorCode(x8ErrorCodeInfos);
     }
 
-    @Override // com.fimi.x8sdk.ivew.IFlightPlayBackAction
+    @Override
     public void showAutoFcSportState(AutoFcSportStatePlayback autoFcSportStatePlayback) {
         this.x8FlightlogTopBarController.showSportState(autoFcSportStatePlayback);
         this.mPlayBackMapFragment.handlerDroneMarker(autoFcSportStatePlayback);
     }
 
-    @Override // com.fimi.x8sdk.ivew.IFlightPlayBackAction
+    @Override
     public void showAutoHomeInfo(AutoHomeInfoPlayback autoHomeInfoPlayback) {
         this.mPlayBackMapFragment.handlerHomePoint(autoHomeInfoPlayback);
     }
 
-    @Override // com.fimi.x8sdk.ivew.IFlightPlayBackAction
+    @Override
     public void showAutoRockerState(AutoRockerStatePlayback autoRockerStatePlayback) {
         this.rockerKeyMessage = autoRockerStatePlayback.getRockerKeyMessage();
         this.isBatteryPress = (this.rockerKeyMessage & 1) == 1;
@@ -340,18 +340,18 @@ public class X8FlightPlaybackActivity extends BaseActivity implements UpdateChan
         showRcMode(this.mMode);
     }
 
-    @Override // com.fimi.x8sdk.ivew.IFlightPlayBackAction
+    @Override
     public void showAutoRelayHeart(AutoRelayHeartPlayback autoRelayHeartPlayback) {
         this.x8FlightlogTopBarController.showRelayHeart(autoRelayHeartPlayback);
     }
 
-    @Override // com.fimi.x8sdk.ivew.IFlightPlayBackAction
+    @Override
     public void showGetRcMode(AckGetRcMode ackGetRcMode) {
         this.mMode = ackGetRcMode.getMode();
         showRcMode(this.mMode);
     }
 
-    @Override // com.fimi.x8sdk.ivew.IFlightPlayBackAction
+    @Override
     public void showGetLowPowerOpt(AckGetLowPowerOpt ackGetLowPowerOpt) {
         this.lowPowerValue = ackGetLowPowerOpt.getLowPowerValue();
     }
@@ -378,8 +378,7 @@ public class X8FlightPlaybackActivity extends BaseActivity implements UpdateChan
                 List<Object> list = this.x8FlightPlayBackPresenter.listLinkedHashMap.get(Integer.valueOf(x));
                 if (list != null) {
                     for (Object obj : list) {
-                        if (obj != null && (obj instanceof AutoFcSportStatePlayback)) {
-                            AutoFcSportStatePlayback autoFcSportStatePlayback = (AutoFcSportStatePlayback) obj;
+                        if (obj != null && (obj instanceof AutoFcSportStatePlayback autoFcSportStatePlayback)) {
                             LatLng latLng = new LatLng(autoFcSportStatePlayback.getLatitude(), autoFcSportStatePlayback.getLongitude());
                             listDronePoint.add(latLng);
                         }

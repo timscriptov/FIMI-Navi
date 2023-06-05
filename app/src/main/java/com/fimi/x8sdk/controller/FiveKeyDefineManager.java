@@ -7,7 +7,7 @@ import com.fimi.x8sdk.presenter.FiveKeyDefinePresenter;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
+
 public class FiveKeyDefineManager {
     FiveKeyDefinePresenter fiveKeyDefinePresenter;
     IFiveKeyAction iFiveKeyAction;

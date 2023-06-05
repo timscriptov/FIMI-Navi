@@ -15,12 +15,11 @@ import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 
 
-
 public class LogSaveLocalHelper {
     private static LogSaveLocalHelper instance = null;
     private static String tag = null;
-    private int appid = Process.myPid();
-    private String dirPath;
+    private final int appid = Process.myPid();
+    private final String dirPath;
     private Thread logThread;
 
     private LogSaveLocalHelper(Context mContext, String path) {
@@ -54,9 +53,9 @@ public class LogSaveLocalHelper {
     }
 
     public static class LogRunnable implements Runnable {
-        private String cmds;
+        private final String cmds;
         private FileOutputStream fos;
-        private String mPid;
+        private final String mPid;
         private java.lang.Process mProcess;
         private BufferedReader mReader;
 

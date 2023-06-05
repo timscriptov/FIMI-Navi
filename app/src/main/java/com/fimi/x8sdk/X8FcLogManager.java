@@ -29,6 +29,7 @@ public class X8FcLogManager {
     public static final byte FLIGHT_PLAYBACK_SIGN = -3;
     public static final int LENGTH_OF = 12;
     public static final float NA = -1000.0f;
+    private static final byte[] rn = "\r\n".getBytes();
     public static String prexFC = "fc";
     public static String prexCM = "relay";
     public static String prexAPP = "setting";
@@ -36,7 +37,6 @@ public class X8FcLogManager {
     public static String prexSD = "_sd";
     private static volatile X8FcLogManager log;
     private static String currentWrite = "";
-    private static final byte[] rn = "\r\n".getBytes();
     private final int REBUILD_FC_LOG_MESSAGE = 0;
     private final int REBUILD_FLIGHT_PLAYBACK_LOG_MESSAGE = 1;
     private final int MILEAGE_FLIGHT_PLAYBACK_LOG_MESSAGE = 2;
@@ -86,8 +86,47 @@ public class X8FcLogManager {
             this.state = LogState.ONGROUND;
             closeFileOutputStream();
         }
+    }
+
+    public void initFileOutputStream() {
+        File flightPlaybackPath;
+        if (this.fcOutputStream == null || this.cmOutputStream == null || this.appLogOutputStream == null || this.flightPlaybackLogOutputStream == null) {
+            String dirPath = DateUtil.getStringByFormat(System.currentTimeMillis(), "yyyy-MM-dd-HH-mm-ss-SSS");
+            String dirPathPlayback = DateUtil.getStringByFormat(System.currentTimeMillis(), "yyyy-MM-dd-HH-mm-ss");
+            currentWrite = dirPath;
+            try {
+                File f = new File(DirectoryPath.getX8B2oxPath() + "/" + dirPath);
+                if (!f.exists()) {
+                    f.mkdirs();
+                }
+                String uuid = UUID.randomUUID().toString();
+                if (HostConstants.getUserDetail().getFimiId() != null && !HostConstants.getUserDetail().getFimiId().equals("")) {
+                    flightPlaybackPath = new File(DirectoryPath.getX8LoginFlightPlaybackPath(uuid));
+                } else {
+                    flightPlaybackPath = new File(DirectoryPath.getX8flightPlaybackPath(uuid));
+                }
+                if (!flightPlaybackPath.exists()) {
+                    flightPlaybackPath.mkdirs();
+                }
+                String fcName = dirPath + "." + prexFC;
+                String cmName = dirPath + "." + prexCM;
+                String appName = dirPath + "." + prexAPP;
+                String str = dirPath + "." + prexFcStatus;
+                String flightPlayback = dirPathPlayback + "." + FLIGHT_PLAYBACK;
+                this.currentWriteFile = flightPlayback;
+                this.fcOutputStream = new FileOutputStream(f.getAbsolutePath() + "/" + fcName, true);
+                this.cmOutputStream = new FileOutputStream(f.getAbsolutePath() + "/" + cmName, true);
+                this.appLogOutputStream = new FileOutputStream(f.getAbsolutePath() + "/" + appName, true);
+                this.flightPlaybackLogOutputStream = new FileOutputStream(flightPlaybackPath.getAbsolutePath() + "/" + flightPlayback, true);
+                this.isWriteFirst = true;
+                this.isWriteFlightPlaybackFirst = true;
+                this.startTime = 0L;
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
     }    Handler handler = new Handler(Looper.getMainLooper()) {
-        @Override // android.os.Handler
+        @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
@@ -135,49 +174,9 @@ public class X8FcLogManager {
                     X8FcLogManager.this.handler.sendEmptyMessageDelayed(2, 500L);
                     return;
                 default:
-                    return;
             }
         }
     };
-
-    public void initFileOutputStream() {
-        File flightPlaybackPath;
-        if (this.fcOutputStream == null || this.cmOutputStream == null || this.appLogOutputStream == null || this.flightPlaybackLogOutputStream == null) {
-            String dirPath = DateUtil.getStringByFormat(System.currentTimeMillis(), "yyyy-MM-dd-HH-mm-ss-SSS");
-            String dirPathPlayback = DateUtil.getStringByFormat(System.currentTimeMillis(), "yyyy-MM-dd-HH-mm-ss");
-            currentWrite = dirPath;
-            try {
-                File f = new File(DirectoryPath.getX8B2oxPath() + "/" + dirPath);
-                if (!f.exists()) {
-                    f.mkdirs();
-                }
-                String uuid = UUID.randomUUID().toString();
-                if (HostConstants.getUserDetail().getFimiId() != null && !HostConstants.getUserDetail().getFimiId().equals("")) {
-                    flightPlaybackPath = new File(DirectoryPath.getX8LoginFlightPlaybackPath(uuid));
-                } else {
-                    flightPlaybackPath = new File(DirectoryPath.getX8flightPlaybackPath(uuid));
-                }
-                if (!flightPlaybackPath.exists()) {
-                    flightPlaybackPath.mkdirs();
-                }
-                String fcName = dirPath + "." + prexFC;
-                String cmName = dirPath + "." + prexCM;
-                String appName = dirPath + "." + prexAPP;
-                String str = dirPath + "." + prexFcStatus;
-                String flightPlayback = dirPathPlayback + "." + FLIGHT_PLAYBACK;
-                this.currentWriteFile = flightPlayback;
-                this.fcOutputStream = new FileOutputStream(f.getAbsolutePath() + "/" + fcName, true);
-                this.cmOutputStream = new FileOutputStream(f.getAbsolutePath() + "/" + cmName, true);
-                this.appLogOutputStream = new FileOutputStream(f.getAbsolutePath() + "/" + appName, true);
-                this.flightPlaybackLogOutputStream = new FileOutputStream(flightPlaybackPath.getAbsolutePath() + "/" + flightPlayback, true);
-                this.isWriteFirst = true;
-                this.isWriteFlightPlaybackFirst = true;
-                this.startTime = 0L;
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     public void closeFileOutputStream() {
         this.currentWriteFile = "";
@@ -295,7 +294,7 @@ public class X8FcLogManager {
         byte[] desCbcEncrypts = DesEncryptUtil.getInstans().desCbcEncrypt(bytes, DesEncryptUtil.getInstans().ENCRYPT_KEY_BYTES_TWO);
         byte[] bytesSave = new byte[desCbcEncrypts.length + 3];
         short msgLen = (short) bytesSave.length;
-        int index = 0 + 1;
+        int index = 1;
         bytesSave[0] = -3;
         byte[] short2byte = ByteUtil.shortToByte(msgLen);
         int index2 = index + 1;
@@ -354,7 +353,7 @@ public class X8FcLogManager {
         byte[] bytesSave = new byte[desCbcEncrypts.length + 8];
         short msgLen = (short) bytesSave.length;
         int ptsb = (int) (System.currentTimeMillis() - this.startTime);
-        int index = 0 + 1;
+        int index = 1;
         bytesSave[0] = -3;
         int index2 = index + 1;
         bytesSave[index] = 0;
@@ -380,7 +379,7 @@ public class X8FcLogManager {
         short msgLen = (short) bytesSave.length;
         int ptsb = (int) (System.currentTimeMillis() - this.startTime);
         float distance = (this.originalDistance / 100.0f) / 2.0f;
-        int index = 0 + 1;
+        int index = 1;
         bytesSave[0] = -3;
         int index2 = index + 1;
         bytesSave[index] = 1;
@@ -442,4 +441,6 @@ public class X8FcLogManager {
         INSKY,
         ONGROUND
     }
+
+
 }

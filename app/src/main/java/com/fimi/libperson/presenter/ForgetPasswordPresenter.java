@@ -12,10 +12,10 @@ import com.fimi.network.UserManager;
 import com.fimi.network.entity.NetModel;
 import com.fimi.network.entity.RestPswDto;
 
-/* loaded from: classes.dex */
+
 public class ForgetPasswordPresenter {
     Context mContext;
-    private IForgetPasswordView mIForgetPasswordView;
+    private final IForgetPasswordView mIForgetPasswordView;
 
     public ForgetPasswordPresenter(IForgetPasswordView IForgetPasswordView, Context context) {
         this.mIForgetPasswordView = IForgetPasswordView;
@@ -23,11 +23,11 @@ public class ForgetPasswordPresenter {
     }
 
     public void sendEmail(String emailAddress) {
-        UserManager.getIntance(this.mContext).getSecurityCode(emailAddress, "1", "1", new DisposeDataHandle(new DisposeDataListener() { // from class: com.fimi.libperson.presenter.ForgetPasswordPresenter.1
-            @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+        UserManager.getIntance(this.mContext).getSecurityCode(emailAddress, "1", "1", new DisposeDataHandle(new DisposeDataListener() {
+            @Override
             public void onSuccess(Object responseObj) {
                 try {
-                    NetModel netModel = (NetModel) JSON.parseObject(responseObj.toString(), NetModel.class);
+                    NetModel netModel = JSON.parseObject(responseObj.toString(), NetModel.class);
                     if (netModel.isSuccess()) {
                         ForgetPasswordPresenter.this.mIForgetPasswordView.sendEmail(true, null);
                     } else {
@@ -37,7 +37,7 @@ public class ForgetPasswordPresenter {
                 }
             }
 
-            @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+            @Override
             public void onFailure(Object reasonObj) {
                 ForgetPasswordPresenter.this.mIForgetPasswordView.sendEmail(false, ForgetPasswordPresenter.this.mContext.getString(R.string.network_exception));
             }
@@ -51,10 +51,10 @@ public class ForgetPasswordPresenter {
         restPswDto.setCheckPsw("0");
         restPswDto.setPassword("");
         restPswDto.setConfirmPassword("");
-        UserManager.getIntance(this.mContext).resetPassword(restPswDto, new DisposeDataHandle(new DisposeDataListener() { // from class: com.fimi.libperson.presenter.ForgetPasswordPresenter.2
-            @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+        UserManager.getIntance(this.mContext).resetPassword(restPswDto, new DisposeDataHandle(new DisposeDataListener() {
+            @Override
             public void onSuccess(Object responseObj) {
-                NetModel netModel = (NetModel) JSON.parseObject(responseObj.toString(), NetModel.class);
+                NetModel netModel = JSON.parseObject(responseObj.toString(), NetModel.class);
                 if (netModel.isSuccess()) {
                     ForgetPasswordPresenter.this.mIForgetPasswordView.inputVerfication(true, null);
                 } else {
@@ -62,7 +62,7 @@ public class ForgetPasswordPresenter {
                 }
             }
 
-            @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+            @Override
             public void onFailure(Object reasonObj) {
                 ForgetPasswordPresenter.this.mIForgetPasswordView.inputVerfication(false, ForgetPasswordPresenter.this.mContext.getString(R.string.network_exception));
             }
@@ -79,10 +79,10 @@ public class ForgetPasswordPresenter {
         restPswDto.setCode(code);
         restPswDto.setPassword(password);
         restPswDto.setConfirmPassword(confirmPassword);
-        UserManager.getIntance(this.mContext).resetPassword(restPswDto, new DisposeDataHandle(new DisposeDataListener() { // from class: com.fimi.libperson.presenter.ForgetPasswordPresenter.3
-            @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+        UserManager.getIntance(this.mContext).resetPassword(restPswDto, new DisposeDataHandle(new DisposeDataListener() {
+            @Override
             public void onSuccess(Object responseObj) {
-                NetModel netModel = (NetModel) JSON.parseObject(responseObj.toString(), NetModel.class);
+                NetModel netModel = JSON.parseObject(responseObj.toString(), NetModel.class);
                 if (netModel.isSuccess()) {
                     ForgetPasswordPresenter.this.mIForgetPasswordView.resetPassword(true, null);
                 } else {
@@ -90,7 +90,7 @@ public class ForgetPasswordPresenter {
                 }
             }
 
-            @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+            @Override
             public void onFailure(Object reasonObj) {
                 ForgetPasswordPresenter.this.mIForgetPasswordView.resetPassword(false, ForgetPasswordPresenter.this.mContext.getString(R.string.network_exception));
             }

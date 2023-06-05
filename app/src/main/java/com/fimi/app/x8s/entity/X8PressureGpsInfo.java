@@ -1,10 +1,8 @@
 package com.fimi.app.x8s.entity;
 
 
-
-/* loaded from: classes.dex */
 public class X8PressureGpsInfo {
-    private static X8PressureGpsInfo instance = new X8PressureGpsInfo();
+    private static final X8PressureGpsInfo instance = new X8PressureGpsInfo();
     private float hPa;
     private boolean hasLocation;
     private boolean hasPressure;

@@ -7,14 +7,14 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-/* loaded from: classes.dex */
+
 public class SocketManager {
     private static SocketManager socketNetworkManager = null;
     private DataInputStream inFromServer;
     private DataOutputStream outToServer;
     private Socket socket = null;
     private boolean isServerPortException = false;
-    private SocketOption socketOption = new SocketOption();
+    private final SocketOption socketOption = new SocketOption();
 
     public static synchronized SocketManager getInstance() {
         SocketManager socketManager;
@@ -41,8 +41,8 @@ public class SocketManager {
             this.socket.setSoLinger(true, 0);
             this.outToServer = new DataOutputStream(this.socket.getOutputStream());
             this.inFromServer = new DataInputStream(this.socket.getInputStream());
-            ThreadUtils.execute(new Runnable() { // from class: com.fimi.kernel.connect.tcp.SocketManager.1
-                @Override // java.lang.Runnable
+            ThreadUtils.execute(new Runnable() {
+                @Override
                 public void run() {
                     while (true) {
                         byte[] input = new byte[SocketManager.this.socketOption.getReceiveBufferSize()];
@@ -128,11 +128,7 @@ public class SocketManager {
         try {
             p = Runtime.getRuntime().exec("ping -c 1 -W 1 " + ip);
             int status = p.waitFor();
-            if (status == 0) {
-                success = true;
-            } else {
-                success = false;
-            }
+            success = status == 0;
             if (p != null) {
                 p.destroy();
             }

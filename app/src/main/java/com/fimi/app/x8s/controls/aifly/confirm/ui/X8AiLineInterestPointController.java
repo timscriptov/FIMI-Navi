@@ -8,13 +8,13 @@ import android.widget.TextView;
 
 import com.fimi.android.app.R;
 
-/* loaded from: classes.dex */
+
 public class X8AiLineInterestPointController {
-    private RelativeLayout group;
+    private final RelativeLayout group;
     private OnInterestTouchUp listener;
-    private TextView textView;
+    private final TextView textView;
     private ImageView tmpView;
-    private ImageView view;
+    private final ImageView view;
 
     public X8AiLineInterestPointController(RelativeLayout group, ImageView view, TextView textView) {
         this.group = group;
@@ -32,8 +32,8 @@ public class X8AiLineInterestPointController {
     }
 
     public void addTouchEvent() {
-        this.view.setOnTouchListener(new View.OnTouchListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiLineInterestPointController.1
-            @Override // android.view.View.OnTouchListener
+        this.view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == 0) {
                     X8AiLineInterestPointController.this.tmpView = new ImageView(X8AiLineInterestPointController.this.group.getContext());
@@ -66,7 +66,7 @@ public class X8AiLineInterestPointController {
         }
     }
 
-    /* loaded from: classes.dex */
+
     public interface OnInterestTouchUp {
         void onUp(int i, int i2);
     }

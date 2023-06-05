@@ -4,12 +4,10 @@ import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 import com.fimi.kernel.utils.ByteUtil;
 
 
-
-/* loaded from: classes2.dex */
 public class AckGetHorizontalAdjust extends X8BaseMessage {
     float angle;
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         byte byte0 = packet.getPayLoad4().getByte();
@@ -27,7 +25,7 @@ public class AckGetHorizontalAdjust extends X8BaseMessage {
         this.angle = angle;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public String toString() {
         return "AckGetHorizontalAdjust{angle=" + this.angle + '}';
     }

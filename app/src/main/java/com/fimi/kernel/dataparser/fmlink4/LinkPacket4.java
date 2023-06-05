@@ -4,11 +4,11 @@ import com.fimi.kernel.connect.interfaces.IPersonalDataCallBack;
 import com.fimi.kernel.dataparser.milink.ByteHexHelper;
 import com.fimi.kernel.dataparser.usb.UiCallBackListener;
 
-/* loaded from: classes.dex */
+
 public class LinkPacket4 {
     byte[] sendCmd;
-    private Header4 header4 = new Header4();
-    private LinkPayLoad4 payLoad4 = new LinkPayLoad4();
+    private final Header4 header4 = new Header4();
+    private final LinkPayLoad4 payLoad4 = new LinkPayLoad4();
     private IPersonalDataCallBack personalDataCallBack;
     private UiCallBackListener uiCallBack;
 

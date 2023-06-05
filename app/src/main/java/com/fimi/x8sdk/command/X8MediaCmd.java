@@ -5,7 +5,7 @@ import com.fimi.kernel.connect.usb.LinkMsgType;
 import com.fimi.kernel.dataparser.milink.LinkPayload;
 import com.fimi.kernel.dataparser.usb.UsbLinkPacket;
 
-/* loaded from: classes2.dex */
+
 public class X8MediaCmd extends BaseCommand {
     public void packCmd(byte[] cmdData) {
         setCmdData(addUSBHeader(cmdData));
@@ -18,7 +18,7 @@ public class X8MediaCmd extends BaseCommand {
         return packet.packCmd();
     }
 
-    @Override // com.fimi.kernel.dataparser.milink.LinkMessage
+    @Override
     public void unpack(LinkPayload payload) {
     }
 }

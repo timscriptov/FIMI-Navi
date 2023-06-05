@@ -6,8 +6,6 @@ import com.fimi.x8sdk.entity.FLatLng;
 import com.fimi.x8sdk.util.GpsCorrect;
 
 
-
-/* loaded from: classes2.dex */
 public class AutoFcSportStatePlayback extends X8BaseMessage {
     int downVelocity;
     FLatLng fLatLng = new FLatLng();
@@ -22,7 +20,7 @@ public class AutoFcSportStatePlayback extends X8BaseMessage {
     int reserve2;
     int rollAngle;
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         this.longitude = packet.getPayLoad4().getDouble().doubleValue();
@@ -139,7 +137,7 @@ public class AutoFcSportStatePlayback extends X8BaseMessage {
         this.homeDistance = homeDistance;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public String toString() {
         return "AutoFcSportStatePlayback{longitude=" + this.longitude + ", latitude=" + this.latitude + ", height=" + this.height + ", groupSpeed=" + this.groupSpeed + ", downVelocity=" + this.downVelocity + ", rollAngle=" + this.rollAngle + ", pitchAngle=" + this.pitchAngle + ", headingAngle=" + this.headingAngle + ", reserve1=" + this.reserve1 + ", reserve2=" + this.reserve2 + ", homeDistance=" + this.homeDistance + ", fLatLng=" + this.fLatLng + '}';
     }

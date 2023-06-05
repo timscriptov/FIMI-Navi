@@ -9,7 +9,7 @@ import com.fimi.app.x8s.interfaces.IX8AiAutoPhototExcuteListener;
 import com.fimi.app.x8s.interfaces.IX8NextViewListener;
 import com.fimi.x8sdk.controller.FcManager;
 
-/* loaded from: classes.dex */
+
 public class X8AiAutoPhotoExcuteConfirmModule extends X8BaseModule {
     private X8AiAutoPhotoExcuteConfirmUi mUi;
 
@@ -17,7 +17,7 @@ public class X8AiAutoPhotoExcuteConfirmModule extends X8BaseModule {
         this.mUi = new X8AiAutoPhotoExcuteConfirmUi(activity, rootView, type, angle);
     }
 
-    @Override // com.fimi.app.x8s.controls.aifly.confirm.module.X8BaseModule
+    @Override
     public void setFcHeart(boolean isInSky, boolean isLowPower) {
         this.mUi.setFcHeart(isInSky, isLowPower);
     }

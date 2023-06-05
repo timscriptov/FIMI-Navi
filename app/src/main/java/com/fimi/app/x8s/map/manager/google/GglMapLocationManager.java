@@ -36,19 +36,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class GglMapLocationManager extends LocationCallback implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     Marker locationMarker;
     GoogleApiClient mGoogleApiClient;
     GoogleMap mGoogleMap;
     private float accuracy;
-    private Context context;
+    private final Context context;
     private Marker deviceMarker;
     private Polyline flyPolyLine;
     private Marker home;
-    private LocationRequest locationRequest;
-    private MarkerOptions markerOptions;
-    private List<LatLng> latLngs = new ArrayList();
+    private final LocationRequest locationRequest;
+    private final MarkerOptions markerOptions;
+    private final List<LatLng> latLngs = new ArrayList();
     private int state = 0;
 
     @SuppressLint({"RestrictedApi"})
@@ -84,7 +84,7 @@ public class GglMapLocationManager extends LocationCallback implements GoogleApi
         this.mGoogleApiClient = new GoogleApiClient.Builder(this.context).addConnectionCallbacks(this).addOnConnectionFailedListener(this).addApi(LocationServices.API).build();
     }
 
-    @Override // com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks
+    @Override
     @SuppressLint({"MissingPermission"})
     public void onConnected(Bundle bundle) {
         Log.i("位置", LocationServices.FusedLocationApi.getLocationAvailability(this.mGoogleApiClient) + "");
@@ -100,10 +100,10 @@ public class GglMapLocationManager extends LocationCallback implements GoogleApi
 
     @SuppressLint({"MissingPermission"})
     public void locationRequest() {
-        LocationServices.FusedLocationApi.requestLocationUpdates(this.mGoogleApiClient, this.locationRequest, this, (Looper) null);
+        LocationServices.FusedLocationApi.requestLocationUpdates(this.mGoogleApiClient, this.locationRequest, this, null);
     }
 
-    @Override // com.google.android.gms.location.LocationCallback
+    @Override
     public void onLocationResult(LocationResult result) {
         TimeStampState.getInstance().setTimeStamp(result.getLastLocation().getTime());
         if (this.locationMarker == null) {
@@ -118,16 +118,16 @@ public class GglMapLocationManager extends LocationCallback implements GoogleApi
         onLocationChanged(result.getLastLocation());
     }
 
-    @Override // com.google.android.gms.location.LocationCallback
+    @Override
     public void onLocationAvailability(LocationAvailability locationAvailability) {
         Log.i("位置", "onLocationAvailability: isLocationAvailable =  " + locationAvailability.isLocationAvailable());
     }
 
-    @Override // com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks
+    @Override
     public void onConnectionSuspended(int i) {
     }
 
-    @Override // com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener
+    @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
     }
 
@@ -151,7 +151,7 @@ public class GglMapLocationManager extends LocationCallback implements GoogleApi
 
     private void startMoveLocationAndMap(Location location) {
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        Log.i("位置", "latLng" + latLng.toString());
+        Log.i("位置", "latLng" + latLng);
         if (this.locationMarker != null) {
             this.locationMarker.setPosition(latLng);
         }
@@ -284,8 +284,8 @@ public class GglMapLocationManager extends LocationCallback implements GoogleApi
         }
         if (X8MapGetCityManager.locality.equals("") && this.state == 0) {
             this.state = 1;
-            ThreadUtils.execute(new Runnable() { // from class: com.fimi.app.x8s.map.manager.google.GglMapLocationManager.1
-                @Override // java.lang.Runnable
+            ThreadUtils.execute(new Runnable() {
+                @Override
                 public void run() {
                     GglMapLocationManager.this.getCity(location);
                 }

@@ -5,7 +5,7 @@ import android.view.View;
 
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes.dex */
+
 public class AbsX8BaseConnectView {
     protected boolean isConect = StateManager.getInstance().getX8Drone().isConnect();
     protected boolean isInSky = StateManager.getInstance().getX8Drone().isInSky();

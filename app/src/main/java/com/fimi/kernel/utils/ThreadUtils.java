@@ -3,7 +3,7 @@ package com.fimi.kernel.utils;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/* loaded from: classes.dex */
+
 public class ThreadUtils {
     private static ExecutorService executorService;
 

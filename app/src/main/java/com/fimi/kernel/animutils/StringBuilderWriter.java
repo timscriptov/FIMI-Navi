@@ -3,7 +3,7 @@ package com.fimi.kernel.animutils;
 import java.io.Serializable;
 import java.io.Writer;
 
-/* loaded from: classes.dex */
+
 public class StringBuilderWriter extends Writer implements Serializable {
     private final StringBuilder builder;
 
@@ -19,40 +19,40 @@ public class StringBuilderWriter extends Writer implements Serializable {
         this.builder = builder == null ? new StringBuilder() : builder;
     }
 
-    @Override // java.io.Writer, java.lang.Appendable
+    @Override
     public Writer append(char value) {
         this.builder.append(value);
         return this;
     }
 
-    @Override // java.io.Writer, java.lang.Appendable
+    @Override
     public Writer append(CharSequence value) {
         this.builder.append(value);
         return this;
     }
 
-    @Override // java.io.Writer, java.lang.Appendable
+    @Override
     public Writer append(CharSequence value, int start, int end) {
         this.builder.append(value, start, end);
         return this;
     }
 
-    @Override // java.io.Writer, java.io.Closeable, java.lang.AutoCloseable
+    @Override
     public void close() {
     }
 
-    @Override // java.io.Writer, java.io.Flushable
+    @Override
     public void flush() {
     }
 
-    @Override // java.io.Writer
+    @Override
     public void write(String value) {
         if (value != null) {
             this.builder.append(value);
         }
     }
 
-    @Override // java.io.Writer
+    @Override
     public void write(char[] value, int offset, int length) {
         if (value != null) {
             this.builder.append(value, offset, length);

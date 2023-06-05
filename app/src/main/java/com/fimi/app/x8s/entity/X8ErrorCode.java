@@ -3,8 +3,6 @@ package com.fimi.app.x8s.entity;
 import com.fimi.app.x8s.enums.X8ErrorCodeEnum;
 
 
-
-/* loaded from: classes.dex */
 public class X8ErrorCode {
     private int bgId;
     private String detail;

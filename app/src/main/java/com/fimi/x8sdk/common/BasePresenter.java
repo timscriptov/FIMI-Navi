@@ -16,7 +16,7 @@ import com.fimi.kernel.dataparser.usb.CmdResult;
 import com.fimi.widget.X8ToastUtil;
 import com.fimi.x8sdk.rtp.X8Rtp;
 
-/* loaded from: classes2.dex */
+
 public abstract class BasePresenter implements IPersonalDataCallBack, IDataCallBack {
     public static final int ERR = -1;
     public static final int SUCCESS = 0;
@@ -53,15 +53,15 @@ public abstract class BasePresenter implements IPersonalDataCallBack, IDataCallB
     public void onDataCallBack(int groupId, int msgId, ILinkMessage packet) {
     }
 
-    @Override // com.fimi.kernel.connect.interfaces.IDataCallBack
+    @Override
     public void onSendTimeOut(int groupId, int msgId, BaseCommand bcd) {
     }
 
-    @Override // com.fimi.kernel.connect.interfaces.IPersonalDataCallBack
+    @Override
     public void onPersonalDataCallBack(int groupId, int msgId, ILinkMessage packet) {
     }
 
-    @Override // com.fimi.kernel.connect.interfaces.IPersonalDataCallBack
+    @Override
     public void onPersonalSendTimeOut(int groupId, int msgId, BaseCommand bcd) {
     }
 

@@ -7,16 +7,16 @@ import okhttp3.Cookie;
 import okhttp3.CookieJar;
 import okhttp3.HttpUrl;
 
-/* loaded from: classes.dex */
+
 public final class SimpleCookieJar implements CookieJar {
     private final List<Cookie> allCookies = new ArrayList();
 
-    @Override // okhttp3.CookieJar
+    @Override
     public synchronized void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
         this.allCookies.addAll(cookies);
     }
 
-    @Override // okhttp3.CookieJar
+    @Override
     public synchronized List<Cookie> loadForRequest(HttpUrl url) {
         List<Cookie> result;
         result = new ArrayList<>();

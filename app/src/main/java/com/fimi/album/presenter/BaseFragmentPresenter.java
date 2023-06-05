@@ -161,7 +161,7 @@ public abstract class BaseFragmentPresenter<T extends MediaModel> implements IBr
         this.context.startActivity(intent);
     }
 
-    @Override // com.fimi.album.iview.IBroadcastPreform
+    @Override
     public void onReceive(Context context, Intent intent) {
         MediaModel mediaModel = (MediaModel) intent.getSerializableExtra(AlbumConstant.DELETEITEM);
         if (this.modelList.contains(mediaModel)) {

@@ -20,7 +20,7 @@ public class X8FrequencyPoint extends View {
     int pW;
     private Paint dashPaint;
     private Paint mPaint;
-    private int[] pencent;
+    private final int[] pencent;
 
     public X8FrequencyPoint(Context context) {
         super(context);
@@ -79,8 +79,8 @@ public class X8FrequencyPoint extends View {
         canvas.drawRect(new Rect(0, 0, getWidth(), getHeight()), this.mPaint);
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         this.dashPaint.setPathEffect(new DashPathEffect(new float[]{10.0f, 5.0f}, 0.0f));
-        canvas.drawLine(this.lineW + 0, getHeight() / 3.0f, getWidth() - this.lineW, getHeight() / 3.0f, this.dashPaint);
-        canvas.drawLine(this.lineW + 0, (getHeight() * 2) / 3.0f, getWidth() - this.lineW, (getHeight() * 2) / 3.0f, this.dashPaint);
+        canvas.drawLine(this.lineW, getHeight() / 3.0f, getWidth() - this.lineW, getHeight() / 3.0f, this.dashPaint);
+        canvas.drawLine(this.lineW, (getHeight() * 2) / 3.0f, getWidth() - this.lineW, (getHeight() * 2) / 3.0f, this.dashPaint);
         int w = getWidth() - (this.lineW * 2);
         int h = getHeight() - (this.lineW * 2);
         for (int i = 1; i < 6; i++) {

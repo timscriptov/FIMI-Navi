@@ -14,9 +14,9 @@ import com.fimi.app.x8s.viewHolder.PhotoParamsViewHolder;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class PhotoParamsAdapter extends RecyclerView.Adapter {
-    private Context context;
+    private final Context context;
     private boolean isEnable = false;
     private List<PhotoParamItemEntity> pList;
     private CameraParamListener paramListener;
@@ -30,7 +30,7 @@ public class PhotoParamsAdapter extends RecyclerView.Adapter {
         this.paramListener = paramListener;
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View parentView = LayoutInflater.from(this.context).inflate(R.layout.x8_photo_param_list_item, parent, false);
         RecyclerView.ViewHolder viewHolder = new PhotoParamsViewHolder(parentView);
@@ -44,13 +44,13 @@ public class PhotoParamsAdapter extends RecyclerView.Adapter {
         notifyDataSetChanged();
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         final PhotoParamItemEntity itemEntity = this.pList.get(position);
         if (holder instanceof PhotoParamsViewHolder) {
             ((PhotoParamsViewHolder) holder).initItemData(this.pList.get(position), this.isEnable);
-            holder.itemView.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.adapter.PhotoParamsAdapter.1
-                @Override // android.view.View.OnClickListener
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
                 public void onClick(View v) {
                     if (PhotoParamsAdapter.this.paramListener != null) {
                         PhotoParamsAdapter.this.paramListener.gotoSubItem(itemEntity.getParamKey(), itemEntity.getParamValue(), holder);
@@ -60,7 +60,7 @@ public class PhotoParamsAdapter extends RecyclerView.Adapter {
         }
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public int getItemCount() {
         if (this.pList != null) {
             return this.pList.size();

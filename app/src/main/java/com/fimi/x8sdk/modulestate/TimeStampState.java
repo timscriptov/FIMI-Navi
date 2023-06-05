@@ -1,8 +1,8 @@
 package com.fimi.x8sdk.modulestate;
 
-/* loaded from: classes2.dex */
+
 public class TimeStampState {
-    private static TimeStampState timeStampState = new TimeStampState();
+    private static final TimeStampState timeStampState = new TimeStampState();
     private long timeStamp;
 
     public static TimeStampState getInstance() {

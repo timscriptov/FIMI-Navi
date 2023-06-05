@@ -1,6 +1,6 @@
 package com.fimi.kernel.dataparser;
 
-/* loaded from: classes.dex */
+
 public class LinkConstants {
     public static final int PROTOCOL_CAMERA_UPDATE_HEADER_TYPE = 3;
     public static final int PROTOCOL_FPV = 2;

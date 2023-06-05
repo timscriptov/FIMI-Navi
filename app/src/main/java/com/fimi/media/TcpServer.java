@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-/* loaded from: classes.dex */
+
 public class TcpServer extends Thread {
     boolean isLoop;
     private InputStream in;
@@ -41,7 +41,7 @@ public class TcpServer extends Thread {
         TcpServerLaunch.mHandler.obtainMessage(0, "" + t + IOUtils.LINE_SEPARATOR_UNIX).sendToTarget();
     }
 
-    @Override // java.lang.Thread, java.lang.Runnable
+    @Override
     public void run() {
         if (this.in != null) {
             byte[] data = new byte[SocketOption.RECEIVE_BUFFER_SIZE];

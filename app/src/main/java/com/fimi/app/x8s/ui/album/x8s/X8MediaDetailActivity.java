@@ -29,7 +29,7 @@ import com.fimi.kernel.utils.FontUtil;
 import com.fimi.kernel.utils.LogUtil;
 import com.fimi.widget.X8ToastUtil;
 
-/* loaded from: classes.dex */
+
 public class X8MediaDetailActivity extends BaseActivity implements X8CustomVideoView.VideoPlayerListener {
     private static final String TAG = "X8MediaDetailActivity";
     private int currentSelectPosition;
@@ -61,7 +61,7 @@ public class X8MediaDetailActivity extends BaseActivity implements X8CustomVideo
     private HackyViewPager mViewPager;
     private TextView tvPhotoName;
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     protected void setStatusBarColor() {
         getWindow().setFlags(1024, 1024);
         getWindow().addFlags(128);
@@ -84,7 +84,7 @@ public class X8MediaDetailActivity extends BaseActivity implements X8CustomVideo
         this.isDataRefresh = true;
     }
 
-    @Override // android.app.Activity, android.view.Window.Callback
+    @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus) {
@@ -92,30 +92,30 @@ public class X8MediaDetailActivity extends BaseActivity implements X8CustomVideo
         }
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void initData() {
-        this.mRelativeLayout = (RelativeLayout) findViewById(R.id.rl);
-        this.mIvTopBar = (ImageView) findViewById(R.id.iv_top_bar);
-        this.mViewPager = (HackyViewPager) findViewById(R.id.viewpaper);
-        this.mIbtnMediaBack = (ImageButton) findViewById(R.id.media_back_btn);
-        this.mIbtnBottomDelete = (ImageButton) findViewById(R.id.ibtn_delete);
-        this.mBtnPlayMax = (Button) findViewById(R.id.btn_play_max);
-        this.mIbtnLeftSlide = (ImageButton) findViewById(R.id.ibtn_left_slide);
-        this.mIbtnRightSlide = (ImageButton) findViewById(R.id.ibtn_right_slide);
-        this.mMediaDetailDownloadStateView = (MediaDetailDownloadStateView) findViewById(R.id.download_state_view);
-        this.tvPhotoName = (TextView) findViewById(R.id.tv_photo_name);
-        this.mTvFileName = (TextView) findViewById(R.id.tv_file_name);
-        this.mTvPercent = (TextView) findViewById(R.id.tv_percent);
-        this.mRlDelete = (RelativeLayout) findViewById(R.id.rl_delete);
-        this.mRlDownload = (RelativeLayout) findViewById(R.id.rl_download);
-        this.mIbtnDelete = (ImageButton) findViewById(R.id.ibtn_delete);
-        this.mTvDelete = (TextView) findViewById(R.id.tv_bottom_delete);
-        this.mIbtnDwonload = (ImageButton) findViewById(R.id.ibtn_download);
-        this.mTvDownload = (TextView) findViewById(R.id.tv_bottom_download);
-        this.mRlDownloadBottom = (RelativeLayout) findViewById(R.id.rl_media_download);
-        this.mRlSelectBottom = (RelativeLayout) findViewById(R.id.rl_bottom_bar);
-        this.mMediaDownloadProgressView = (MediaDownloadProgressView) findViewById(R.id.pv_progress);
-        this.mBtnStart = (Button) findViewById(R.id.btn_start);
+        this.mRelativeLayout = findViewById(R.id.rl);
+        this.mIvTopBar = findViewById(R.id.iv_top_bar);
+        this.mViewPager = findViewById(R.id.viewpaper);
+        this.mIbtnMediaBack = findViewById(R.id.media_back_btn);
+        this.mIbtnBottomDelete = findViewById(R.id.ibtn_delete);
+        this.mBtnPlayMax = findViewById(R.id.btn_play_max);
+        this.mIbtnLeftSlide = findViewById(R.id.ibtn_left_slide);
+        this.mIbtnRightSlide = findViewById(R.id.ibtn_right_slide);
+        this.mMediaDetailDownloadStateView = findViewById(R.id.download_state_view);
+        this.tvPhotoName = findViewById(R.id.tv_photo_name);
+        this.mTvFileName = findViewById(R.id.tv_file_name);
+        this.mTvPercent = findViewById(R.id.tv_percent);
+        this.mRlDelete = findViewById(R.id.rl_delete);
+        this.mRlDownload = findViewById(R.id.rl_download);
+        this.mIbtnDelete = findViewById(R.id.ibtn_delete);
+        this.mTvDelete = findViewById(R.id.tv_bottom_delete);
+        this.mIbtnDwonload = findViewById(R.id.ibtn_download);
+        this.mTvDownload = findViewById(R.id.tv_bottom_download);
+        this.mRlDownloadBottom = findViewById(R.id.rl_media_download);
+        this.mRlSelectBottom = findViewById(R.id.rl_bottom_bar);
+        this.mMediaDownloadProgressView = findViewById(R.id.pv_progress);
+        this.mBtnStart = findViewById(R.id.btn_start);
         FontUtil.changeFontLanTing(getAssets(), this.tvPhotoName);
         this.mIbtnDelete.setAlpha(1.0f);
         this.mIbtnDelete.setEnabled(true);
@@ -148,19 +148,19 @@ public class X8MediaDetailActivity extends BaseActivity implements X8CustomVideo
         this.mFragmentManager = getSupportFragmentManager();
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void doTrans() {
-        this.mIbtnMediaBack.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.ui.album.x8s.X8MediaDetailActivity.1
-            @Override // android.view.View.OnClickListener
+        this.mIbtnMediaBack.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 X8MediaDetailActivity.this.finish();
                 X8MediaDetailActivity.this.mMediaDetailPresenter.setOnDestory();
             }
         });
-        this.mIbtnDelete.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.ui.album.x8s.X8MediaDetailActivity.2
-            @Override // android.view.View.OnClickListener
+        this.mIbtnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
-                X8DoubleCustomDialog doubleCustomDialog = new X8DoubleCustomDialog(X8MediaDetailActivity.this.mContext, X8MediaDetailActivity.this.getString(R.string.x8_album_warn_tip), X8MediaDetailActivity.this.getString(R.string.album_dialog_delete_title), X8MediaDetailActivity.this.getString(R.string.media_delete), new X8DoubleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.ui.album.x8s.X8MediaDetailActivity.2.1
+                X8DoubleCustomDialog doubleCustomDialog = new X8DoubleCustomDialog(X8MediaDetailActivity.this.mContext, X8MediaDetailActivity.this.getString(R.string.x8_album_warn_tip), X8MediaDetailActivity.this.getString(R.string.album_dialog_delete_title), X8MediaDetailActivity.this.getString(R.string.media_delete), new X8DoubleCustomDialog.onDialogButtonClickListener() {
                     @Override
                     // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
                     public void onLeft() {
@@ -175,41 +175,41 @@ public class X8MediaDetailActivity extends BaseActivity implements X8CustomVideo
                 doubleCustomDialog.show();
             }
         });
-        this.mIbtnDwonload.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.ui.album.x8s.X8MediaDetailActivity.3
-            @Override // android.view.View.OnClickListener
+        this.mIbtnDwonload.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 X8MediaDetailActivity.this.mMediaDetailPresenter.downloadFile(X8MediaDetailActivity.this.mViewPager.getCurrentItem());
             }
         });
-        this.mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() { // from class: com.fimi.app.x8s.ui.album.x8s.X8MediaDetailActivity.4
-            @Override // android.support.v4.view.ViewPager.OnPageChangeListener
+        this.mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }
 
-            @Override // android.support.v4.view.ViewPager.OnPageChangeListener
+            @Override
             public void onPageSelected(int position) {
                 X8MediaDetailActivity.this.mMediaDetailPresenter.updateItem(position);
                 X8MediaDetailActivity.this.mMediaDetailPresenter.showTopBottom(position);
             }
 
-            @Override // android.support.v4.view.ViewPager.OnPageChangeListener
+            @Override
             public void onPageScrollStateChanged(int state) {
             }
         });
-        this.mIbtnLeftSlide.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.ui.album.x8s.X8MediaDetailActivity.5
-            @Override // android.view.View.OnClickListener
+        this.mIbtnLeftSlide.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 X8MediaDetailActivity.this.mViewPager.setCurrentItem(X8MediaDetailActivity.this.mViewPager.getCurrentItem() - 1, true);
             }
         });
-        this.mIbtnRightSlide.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.ui.album.x8s.X8MediaDetailActivity.6
-            @Override // android.view.View.OnClickListener
+        this.mIbtnRightSlide.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 X8MediaDetailActivity.this.mViewPager.setCurrentItem(X8MediaDetailActivity.this.mViewPager.getCurrentItem() + 1, true);
             }
         });
-        this.mBtnPlayMax.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.ui.album.x8s.X8MediaDetailActivity.7
-            @Override // android.view.View.OnClickListener
+        this.mBtnPlayMax.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 if (X8MediaDetailActivity.this.mMediaDetailPresenter.isDownloadFinish()) {
                     X8MediaDetailActivity.this.mMediaDetailPresenter.startActivity();
@@ -218,15 +218,15 @@ public class X8MediaDetailActivity extends BaseActivity implements X8CustomVideo
                 }
             }
         });
-        this.mBtnStart.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.ui.album.x8s.X8MediaDetailActivity.8
-            @Override // android.view.View.OnClickListener
+        this.mBtnStart.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 X8MediaDetailActivity.this.mMediaDetailPresenter.downloadFile(X8MediaDetailActivity.this.mViewPager.getCurrentItem());
             }
         });
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     protected int getContentViewLayoutID() {
         return R.layout.x8_activity_media_detial;
     }
@@ -262,27 +262,27 @@ public class X8MediaDetailActivity extends BaseActivity implements X8CustomVideo
         return this.mIbtnMediaBack;
     }
 
-    @Override // com.fimi.app.x8s.widget.videoview.X8CustomVideoView.VideoPlayerListener
+    @Override
     public void onBufferUpdate(int time) {
         LogUtil.i(TAG, "onBufferUpdate: time:" + time);
     }
 
-    @Override // com.fimi.app.x8s.widget.videoview.X8CustomVideoView.VideoPlayerListener
+    @Override
     public void onClickFullScreenBtn() {
         LogUtil.i(TAG, "onClickFullScreenBtn: ");
     }
 
-    @Override // com.fimi.app.x8s.widget.videoview.X8CustomVideoView.VideoPlayerListener
+    @Override
     public void onClickVideo() {
         LogUtil.i(TAG, "onClickVideo: ");
     }
 
-    @Override // com.fimi.app.x8s.widget.videoview.X8CustomVideoView.VideoPlayerListener
+    @Override
     public void onClickBackBtn() {
         LogUtil.i(TAG, "onClickBackBtn: ");
     }
 
-    @Override // com.fimi.app.x8s.widget.videoview.X8CustomVideoView.VideoPlayerListener
+    @Override
     public void onClickPlay(X8FmMediaInfo info) {
         LogUtil.i("moweiru", "onClickPlay===== " + info.toString());
         String name = this.mMediaDetailPresenter.getMediaFileName();
@@ -291,30 +291,30 @@ public class X8MediaDetailActivity extends BaseActivity implements X8CustomVideo
         }
     }
 
-    @Override // com.fimi.app.x8s.widget.videoview.X8CustomVideoView.VideoPlayerListener
+    @Override
     public void onVideoPause(boolean isPause) {
         this.mIbtnRightSlide.setVisibility(isPause ? 8 : 0);
         this.mIbtnLeftSlide.setVisibility(isPause ? 8 : 0);
-        this.mViewPager.setScrollble(isPause ? false : true);
+        this.mViewPager.setScrollble(!isPause);
         LogUtil.i(TAG, "onVideoPause: ");
     }
 
-    @Override // com.fimi.app.x8s.widget.videoview.X8CustomVideoView.VideoPlayerListener
+    @Override
     public void onVideoLoadSuccess() {
         LogUtil.i(TAG, "onVideoLoadSuccess: ");
     }
 
-    @Override // com.fimi.app.x8s.widget.videoview.X8CustomVideoView.VideoPlayerListener
+    @Override
     public void onVideoLoadFailed() {
         LogUtil.i(TAG, "onVideoLoadFailed: ");
     }
 
-    @Override // com.fimi.app.x8s.widget.videoview.X8CustomVideoView.VideoPlayerListener
+    @Override
     public void onVideoLoadComplete() {
         LogUtil.i(TAG, "onVideoLoadComplete: ");
     }
 
-    @Override // com.fimi.app.x8s.widget.videoview.X8CustomVideoView.VideoPlayerListener
+    @Override
     public void showBar(boolean isShow) {
         if (isShow) {
             showTopBar(true);

@@ -8,9 +8,9 @@ import com.fimi.kernel.GlobalConfig;
 import com.fimi.kernel.region.ServiceItem;
 import com.fimi.kernel.store.shared.SPStoreManager;
 
-/* loaded from: classes.dex */
+
 public class ComonStaticURL {
-    private static String[] staticUrls = {"https://paas-beijing6-static-file.fimi.com/h5/", "https://fimiapp-web-us.mi-ae.com/h5/"};
+    private static final String[] staticUrls = {"https://paas-beijing6-static-file.fimi.com/h5/", "https://fimiapp-web-us.mi-ae.com/h5/"};
 
     public static String getGuideBookUrl() {
         return getCommonFormateURL(R.string.kernal_gh2_guidebook);
@@ -32,7 +32,7 @@ public class ComonStaticURL {
         String iCountry;
         StringBuffer stringBuffer = new StringBuffer();
         String url = FimiAppContext.getContext().getResources().getString(resourceId);
-        ServiceItem serviceItem = (ServiceItem) SPStoreManager.getInstance().getObject(Constants.SERVICE_ITEM_KEY, ServiceItem.class);
+        ServiceItem serviceItem = SPStoreManager.getInstance().getObject(Constants.SERVICE_ITEM_KEY, ServiceItem.class);
         if (serviceItem == null || serviceItem.getCountryCode().equals("")) {
             iCountry = "en";
         } else if (Constants.productType == ProductEnum.GH2) {
@@ -63,7 +63,7 @@ public class ComonStaticURL {
 
     private static String getCommonFormateURL(int resourceId) {
         StringBuffer stringBuffer = new StringBuffer();
-        ServiceItem serviceItem = (ServiceItem) SPStoreManager.getInstance().getObject(Constants.SERVICE_ITEM_KEY, ServiceItem.class);
+        ServiceItem serviceItem = SPStoreManager.getInstance().getObject(Constants.SERVICE_ITEM_KEY, ServiceItem.class);
         if (serviceItem.getInfo() == R.string.region_Mainland_China) {
             stringBuffer.append(staticUrls[0]);
         } else {

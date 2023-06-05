@@ -8,16 +8,16 @@ import com.fimi.app.x8s.interfaces.IX8NextViewListener;
 import com.fimi.app.x8s.map.model.MapPointLatLng;
 import com.fimi.x8sdk.controller.FcManager;
 
-/* loaded from: classes.dex */
+
 public class X8AiPoint2PointExcuteConfirmModule extends X8BaseModule {
     private X8AiPoint2PointExcuteConfirmUi mUi;
 
-    @Override // com.fimi.app.x8s.controls.aifly.confirm.module.X8BaseModule
+    @Override
     public void init(Activity activity, View rootView) {
         this.mUi = new X8AiPoint2PointExcuteConfirmUi(activity, rootView);
     }
 
-    @Override // com.fimi.app.x8s.controls.aifly.confirm.module.X8BaseModule
+    @Override
     public void setFcHeart(boolean isInSky, boolean isLowPower) {
         this.mUi.setFcHeart(isInSky, isLowPower);
     }

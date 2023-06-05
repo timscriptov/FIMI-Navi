@@ -1,10 +1,10 @@
 package com.fimi.kernel.connect;
 
-/* loaded from: classes.dex */
+
 public class SeqCache {
     private final int MAX_LEN = 100;
     private int index;
-    private int[] seqIndex = new int[100];
+    private final int[] seqIndex = new int[100];
 
     public void add2SeqCache(int seq) {
         int[] iArr = this.seqIndex;

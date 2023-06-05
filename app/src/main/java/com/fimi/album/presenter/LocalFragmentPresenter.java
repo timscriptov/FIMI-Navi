@@ -24,12 +24,12 @@ import com.fimi.kernel.utils.VideoDuration;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* loaded from: classes.dex */
+
 public class LocalFragmentPresenter<T extends MediaModel> extends BaseFragmentPresenter implements IHandlerCallback {
-    private int defaultBound;
-    private Handler durationHandler;
+    private final int defaultBound;
+    private final Handler durationHandler;
     private GridLayoutManager mGridLayoutManager;
-    private Handler mainHandler;
+    private final Handler mainHandler;
 
     public LocalFragmentPresenter(RecyclerView mRecyclerView, PanelRecycleAdapter mPanelRecycleAdapter, ISelectData mISelectData, Context context) {
         super(mRecyclerView, mPanelRecycleAdapter, mISelectData, context);
@@ -44,25 +44,24 @@ public class LocalFragmentPresenter<T extends MediaModel> extends BaseFragmentPr
     }
 
     private void doTrans() {
-        this.mRecyclerView.setRecyclerListener(new RecyclerView.RecyclerListener() { // from class: com.fimi.album.presenter.LocalFragmentPresenter.1
-            @Override // android.support.v7.widget.RecyclerView.RecyclerListener
+        this.mRecyclerView.setRecyclerListener(new RecyclerView.RecyclerListener() {
+            @Override
             public void onViewRecycled(RecyclerView.ViewHolder holder) {
-                if (holder instanceof BodyRecycleViewHolder) {
-                    BodyRecycleViewHolder mBodyRecycleViewHolder = (BodyRecycleViewHolder) holder;
+                if (holder instanceof BodyRecycleViewHolder mBodyRecycleViewHolder) {
                     mBodyRecycleViewHolder.tvDuringdate.setVisibility(8);
                     mBodyRecycleViewHolder.ivSelect.setVisibility(8);
                 }
             }
         });
-        this.mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() { // from class: com.fimi.album.presenter.LocalFragmentPresenter.2
-            @Override // android.support.v7.widget.RecyclerView.OnScrollListener
+        this.mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 BaseFragmentPresenter.isScrollRecycle = false;
                 LocalFragmentPresenter.this.durationHandler.sendEmptyMessage(1);
             }
 
-            @Override // android.support.v7.widget.RecyclerView.OnScrollListener
+            @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 if (Math.abs(dy) <= LocalFragmentPresenter.this.defaultBound) {
@@ -75,7 +74,7 @@ public class LocalFragmentPresenter<T extends MediaModel> extends BaseFragmentPr
         });
     }
 
-    @Override // com.fimi.album.iview.IHandlerCallback, android.os.Handler.Callback
+    @Override
     public boolean handleMessage(Message message) {
         if (message.what == 1) {
             int firstVisibleItem = this.mGridLayoutManager.findFirstVisibleItemPosition();
@@ -107,7 +106,7 @@ public class LocalFragmentPresenter<T extends MediaModel> extends BaseFragmentPr
         return true;
     }
 
-    @Override // com.fimi.album.iview.IRecycleAdapter
+    @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof BodyRecycleViewHolder) {
             doBodyTrans((BodyRecycleViewHolder) holder, position);
@@ -128,8 +127,8 @@ public class LocalFragmentPresenter<T extends MediaModel> extends BaseFragmentPr
                 holder.tvAllSelect.setText(R.string.media_select_all);
             }
         }
-        holder.rlRightSelect.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.album.presenter.LocalFragmentPresenter.3
-            @Override // android.view.View.OnClickListener
+        holder.rlRightSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 LocalFragmentPresenter.this.onItemCategoryClick(holder, position, mediaModel);
             }
@@ -140,15 +139,11 @@ public class LocalFragmentPresenter<T extends MediaModel> extends BaseFragmentPr
         if (mediaModel != null) {
             String formatDate = mediaModel.getFormatDate();
             CopyOnWriteArrayList<MediaModel> internalList = (CopyOnWriteArrayList<MediaModel>) this.stateHashMap.get(formatDate);
-            if (this.context.getString(R.string.media_select_all).equals(holder.tvAllSelect.getText())) {
-                perfomSelectCategory(internalList, true);
-            } else {
-                perfomSelectCategory(internalList, false);
-            }
+            perfomSelectCategory(internalList, this.context.getString(R.string.media_select_all).equals(holder.tvAllSelect.getText()));
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
+
     private void perfomSelectCategory(CopyOnWriteArrayList<MediaModel> internalList, boolean isSelect) {
         Iterator<MediaModel> it = internalList.iterator();
         while (it.hasNext()) {
@@ -199,14 +194,14 @@ public class LocalFragmentPresenter<T extends MediaModel> extends BaseFragmentPr
                 } else {
                     changeViewState(holder.ivSelect, 8, R.drawable.album_icon_share_media_nomal);
                 }
-                holder.sdvImageView.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.album.presenter.LocalFragmentPresenter.4
-                    @Override // android.view.View.OnClickListener
+                holder.sdvImageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
                     public void onClick(View view) {
                         LocalFragmentPresenter.this.onItemClick(holder, view, position);
                     }
                 });
-                holder.sdvImageView.setOnLongClickListener(new View.OnLongClickListener() { // from class: com.fimi.album.presenter.LocalFragmentPresenter.5
-                    @Override // android.view.View.OnLongClickListener
+                holder.sdvImageView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
                     public boolean onLongClick(View view) {
                         LocalFragmentPresenter.this.onItemLongClick(holder, view, position);
                         return true;

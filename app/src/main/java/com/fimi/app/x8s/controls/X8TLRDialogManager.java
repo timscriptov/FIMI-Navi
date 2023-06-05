@@ -11,12 +11,12 @@ import com.fimi.kernel.dataparser.usb.UiCallBackListener;
 import com.fimi.x8sdk.dataparser.AutoFcSportState;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes.dex */
+
 public class X8TLRDialogManager {
     private X8TLRDialog mX8LandingDialog;
     private X8TLRDialog mX8ReturnDialog;
     private X8TLRDialog mX8TakeOffDialog;
-    private X8RightIconForMapController x8RightIconForMapController;
+    private final X8RightIconForMapController x8RightIconForMapController;
 
     public X8TLRDialogManager(X8RightIconForMapController x8RightIconForMapController) {
         this.x8RightIconForMapController = x8RightIconForMapController;
@@ -37,18 +37,18 @@ public class X8TLRDialogManager {
     }
 
     public void showReturnDialog() {
-        this.mX8ReturnDialog = new X8TLRDialog(this.x8RightIconForMapController.getActivity(), this.x8RightIconForMapController.getString(R.string.x8_ai_fly_return_home_title), "", true, 0, new X8DoubleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.X8TLRDialogManager.1
-            @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+        this.mX8ReturnDialog = new X8TLRDialog(this.x8RightIconForMapController.getActivity(), this.x8RightIconForMapController.getString(R.string.x8_ai_fly_return_home_title), "", true, 0, new X8DoubleCustomDialog.onDialogButtonClickListener() {
+            @Override
             public void onLeft() {
             }
 
-            @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+            @Override
             public void onRight() {
                 X8TLRDialogManager.this.onRetureHomeClick();
             }
         });
-        this.mX8ReturnDialog.setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.fimi.app.x8s.controls.X8TLRDialogManager.2
-            @Override // android.content.DialogInterface.OnDismissListener
+        this.mX8ReturnDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
             public void onDismiss(DialogInterface dialog) {
                 X8TLRDialogManager.this.mX8ReturnDialog = null;
             }
@@ -64,18 +64,18 @@ public class X8TLRDialogManager {
         } else {
             number = X8NumberUtil.getDistanceNumberString(4.0f, 1, false);
         }
-        this.mX8TakeOffDialog = new X8TLRDialog(this.x8RightIconForMapController.getActivity(), this.x8RightIconForMapController.getString(R.string.x8_ai_fly_take_off_title), String.format(this.x8RightIconForMapController.getString(R.string.x8_ai_fly_take_off_tip), number), false, R.drawable.x8_img_take_off_flag, new X8DoubleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.X8TLRDialogManager.3
-            @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+        this.mX8TakeOffDialog = new X8TLRDialog(this.x8RightIconForMapController.getActivity(), this.x8RightIconForMapController.getString(R.string.x8_ai_fly_take_off_title), String.format(this.x8RightIconForMapController.getString(R.string.x8_ai_fly_take_off_tip), number), false, R.drawable.x8_img_take_off_flag, new X8DoubleCustomDialog.onDialogButtonClickListener() {
+            @Override
             public void onLeft() {
             }
 
-            @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+            @Override
             public void onRight() {
                 X8TLRDialogManager.this.onTakeOffClick();
             }
         });
-        this.mX8TakeOffDialog.setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.fimi.app.x8s.controls.X8TLRDialogManager.4
-            @Override // android.content.DialogInterface.OnDismissListener
+        this.mX8TakeOffDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
             public void onDismiss(DialogInterface dialog) {
                 X8TLRDialogManager.this.mX8TakeOffDialog = null;
             }
@@ -85,18 +85,18 @@ public class X8TLRDialogManager {
     }
 
     public void showLandingDialog() {
-        this.mX8LandingDialog = new X8TLRDialog(this.x8RightIconForMapController.getActivity(), this.x8RightIconForMapController.getString(R.string.x8_ai_fly_land_title), this.x8RightIconForMapController.getString(R.string.x8_ai_fly_land_tip), false, R.drawable.x8_img_landing_flag, new X8DoubleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.X8TLRDialogManager.5
-            @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+        this.mX8LandingDialog = new X8TLRDialog(this.x8RightIconForMapController.getActivity(), this.x8RightIconForMapController.getString(R.string.x8_ai_fly_land_title), this.x8RightIconForMapController.getString(R.string.x8_ai_fly_land_tip), false, R.drawable.x8_img_landing_flag, new X8DoubleCustomDialog.onDialogButtonClickListener() {
+            @Override
             public void onLeft() {
             }
 
-            @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+            @Override
             public void onRight() {
                 X8TLRDialogManager.this.onLandingClick();
             }
         });
-        this.mX8LandingDialog.setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.fimi.app.x8s.controls.X8TLRDialogManager.6
-            @Override // android.content.DialogInterface.OnDismissListener
+        this.mX8LandingDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
             public void onDismiss(DialogInterface dialog) {
                 X8TLRDialogManager.this.mX8LandingDialog = null;
             }
@@ -123,8 +123,8 @@ public class X8TLRDialogManager {
     }
 
     public void onRetureHomeClick() {
-        this.x8RightIconForMapController.getActivity().getFcManager().setAiRetureHome(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.X8TLRDialogManager.7
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.x8RightIconForMapController.getActivity().getFcManager().setAiRetureHome(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                 }
@@ -133,8 +133,8 @@ public class X8TLRDialogManager {
     }
 
     public void onTakeOffClick() {
-        this.x8RightIconForMapController.getActivity().getFcManager().takeOff(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.X8TLRDialogManager.8
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.x8RightIconForMapController.getActivity().getFcManager().takeOff(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                 }
@@ -143,8 +143,8 @@ public class X8TLRDialogManager {
     }
 
     public void onLandingClick() {
-        this.x8RightIconForMapController.getActivity().getFcManager().land(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.X8TLRDialogManager.9
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.x8RightIconForMapController.getActivity().getFcManager().land(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                 }

@@ -11,10 +11,10 @@ import org.greenrobot.greendao.query.WhereCondition;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class DataStasicInfoHelper {
-    private static DataStasicInfoHelper sDataStasicInfoHelper = new DataStasicInfoHelper();
-    private DataStaticInfoDao dao = DbCore.getDaoSession().getDataStaticInfoDao();
+    private static final DataStasicInfoHelper sDataStasicInfoHelper = new DataStasicInfoHelper();
+    private final DataStaticInfoDao dao = DbCore.getDaoSession().getDataStaticInfoDao();
 
     public static DataStasicInfoHelper getInstance() {
         return sDataStasicInfoHelper;
@@ -35,14 +35,14 @@ public class DataStasicInfoHelper {
 
     public List<DataStaticInfo> queryX9FlyTime() {
         QueryBuilder<DataStaticInfo> qb = this.dao.queryBuilder();
-        qb.where(DataStaticInfoDao.Properties.Type.eq(1), new WhereCondition[0]).where(DataStaticInfoDao.Properties.DeviceType.eq(0), new WhereCondition[0]);
+        qb.where(DataStaticInfoDao.Properties.Type.eq(1), new WhereCondition[0]).where(DataStaticInfoDao.Properties.DeviceType.eq(0));
         List<DataStaticInfo> list = qb.list();
         return list;
     }
 
     public List<DataStaticInfo> queryX9UseTime() {
         QueryBuilder<DataStaticInfo> qb = this.dao.queryBuilder();
-        qb.where(DataStaticInfoDao.Properties.Type.eq(0), new WhereCondition[0]).where(DataStaticInfoDao.Properties.DeviceType.eq(0), new WhereCondition[0]);
+        qb.where(DataStaticInfoDao.Properties.Type.eq(0), new WhereCondition[0]).where(DataStaticInfoDao.Properties.DeviceType.eq(0));
         List<DataStaticInfo> list = qb.list();
         return list;
     }

@@ -6,7 +6,7 @@ import com.fimi.x8sdk.command.FcCollection;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes2.dex */
+
 public class FwPackMain {
     public static void main(String[] args) {
         List<FwInfo> fws = new ArrayList<>();

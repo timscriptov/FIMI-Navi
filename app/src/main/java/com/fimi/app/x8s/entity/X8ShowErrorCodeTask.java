@@ -15,21 +15,21 @@ import com.fimi.x8sdk.entity.ErrorCodeBean;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class X8ShowErrorCodeTask {
-    private Context context;
-    private X8ErrorCodeController errorCodeController;
-    private X8ErrerCodeSpeakFlashManager flashManager;
+    private final Context context;
+    private final X8ErrorCodeController errorCodeController;
+    private final X8ErrerCodeSpeakFlashManager flashManager;
     private boolean isShowTex;
     private ErrorCodeBean.ActionBean lastActionBean;
     private long lastTime;
     private volatile long startTime;
-    private X8ErrorCodeEnum type;
-    private Vibrator vibrator;
+    private final X8ErrorCodeEnum type;
+    private final Vibrator vibrator;
     private long speekId = 0;
-    private long[] pattern = {50, 200, 50, 200, 50, 200};
-    private List<ErrorCodeBean.ActionBean> speakList = new ArrayList();
-    private List<ErrorCodeBean.ActionBean> vibrateLList = new ArrayList();
+    private final long[] pattern = {50, 200, 50, 200, 50, 200};
+    private final List<ErrorCodeBean.ActionBean> speakList = new ArrayList();
+    private final List<ErrorCodeBean.ActionBean> vibrateLList = new ArrayList();
     private int state = 0;
 
     public X8ShowErrorCodeTask(Context context, X8ErrorCodeController errorCodeController, X8ErrorCodeEnum type, X8ErrerCodeSpeakFlashManager x8ErrerCodeSpeakFlashManager) {
@@ -46,31 +46,28 @@ public class X8ShowErrorCodeTask {
 
     public void setState(int state) {
         this.state = state;
-    }    private Handler mHandler = new Handler() { // from class: com.fimi.app.x8s.entity.X8ShowErrorCodeTask.1
-        @Override // android.os.Handler
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case 0:
-                    X8ShowErrorCodeTask.this.isShowTex = false;
-                    X8ShowErrorCodeTask.this.flashManager.nextRun(X8ShowErrorCodeTask.this.type);
-                    return;
-                default:
-                    return;
-            }
-        }
-    };
+    }
 
     public void showText(List<X8ErrorCode> codeList) {
         this.isShowTex = true;
-        this.errorCodeController.showTextByCode(codeList, new IX8ErrorTextIsFinishShow() { // from class: com.fimi.app.x8s.entity.X8ShowErrorCodeTask.2
-            @Override // com.fimi.app.x8s.interfaces.IX8ErrorTextIsFinishShow
+        this.errorCodeController.showTextByCode(codeList, new IX8ErrorTextIsFinishShow() {
+            @Override
             public void isFinish() {
                 X8ShowErrorCodeTask.this.flashManager.setStart(false);
             }
         });
         this.mHandler.sendEmptyMessageDelayed(0, 3000L);
-    }
+    }    private final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == 0) {
+                X8ShowErrorCodeTask.this.isShowTex = false;
+                X8ShowErrorCodeTask.this.flashManager.nextRun(X8ShowErrorCodeTask.this.type);
+                return;
+            }
+        }
+    };
 
     public boolean isSpeaking(ErrorCodeBean.ActionBean bean) {
         return this.speakList.contains(bean);
@@ -118,7 +115,7 @@ public class X8ShowErrorCodeTask {
                                 this.startTime = System.currentTimeMillis();
                             }
                             this.lastTime = System.currentTimeMillis();
-                            if (this.lastTime - this.startTime >= actionBean.getInhibition() * 1000) {
+                            if (this.lastTime - this.startTime >= actionBean.getInhibition() * 1000L) {
                                 code.setShow(true);
                                 this.startTime = 0L;
                             } else {

@@ -5,14 +5,14 @@ import com.fimi.x8sdk.entity.ConectState;
 import com.fimi.x8sdk.modulestate.StateManager;
 import com.fimi.x8sdk.rtp.X8Rtp;
 
-/* loaded from: classes2.dex */
+
 public class DeviceMonitorThread extends Thread {
     public boolean isLoop = true;
     boolean isConnectDrone;
     boolean isConnectRelay;
     ConectState conectState = new ConectState();
 
-    @Override // java.lang.Thread, java.lang.Runnable
+    @Override
     public void run() {
         super.run();
         while (this.isLoop) {

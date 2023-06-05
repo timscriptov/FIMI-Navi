@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 
-/* loaded from: classes2.dex */
+
 public class AckGetAiLinePointsAction extends X8BaseMessage implements Comparable<AckGetAiLinePointsAction> {
     public int cmd0;
     public int cmd1;
@@ -14,7 +14,7 @@ public class AckGetAiLinePointsAction extends X8BaseMessage implements Comparabl
     public int pos;
     public int time;
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         this.pos = packet.getPayLoad4().getByte();
@@ -31,7 +31,7 @@ public class AckGetAiLinePointsAction extends X8BaseMessage implements Comparabl
         this.para1 = packet.getPayLoad4().getByte();
     }
 
-    @Override // java.lang.Comparable
+    @Override
     public int compareTo(@NonNull AckGetAiLinePointsAction o) {
         return this.pos - o.pos;
     }

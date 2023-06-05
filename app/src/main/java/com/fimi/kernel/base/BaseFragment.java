@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-/* loaded from: classes.dex */
+
 public abstract class BaseFragment extends Fragment {
     protected Activity mActivity;
     protected Context mContext;
@@ -27,27 +27,27 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract void initMVP();
 
-    @Override // android.support.v4.app.Fragment
+    @Override
     public void onAttach(Context context) {
         this.mActivity = (Activity) context;
         this.mContext = context;
         super.onAttach(context);
     }
 
-    @Override // android.support.v4.app.Fragment
+    @Override
     @Nullable
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         if (getLayoutView() != null) {
             return getLayoutView();
         }
-        View view = inflater.inflate(getLayoutId(), (ViewGroup) null);
+        View view = inflater.inflate(getLayoutId(), null);
         initData(view);
         initMVP();
         doTrans();
         return view;
     }
 
-    @Override // android.support.v4.app.Fragment
+    @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         getBundle(getArguments());
         super.onViewCreated(view, savedInstanceState);
@@ -60,12 +60,12 @@ public abstract class BaseFragment extends Fragment {
         return null;
     }
 
-    @Override // android.support.v4.app.Fragment
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
     }
 
-    @Override // android.support.v4.app.Fragment
+    @Override
     public void onDetach() {
         super.onDetach();
     }

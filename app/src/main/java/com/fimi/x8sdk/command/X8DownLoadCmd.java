@@ -6,7 +6,7 @@ import com.fimi.kernel.dataparser.milink.LinkPayload;
 
 import org.apache.mina.proxy.handlers.http.ntlm.NTLMConstants;
 
-/* loaded from: classes2.dex */
+
 public class X8DownLoadCmd extends BaseCommand {
     private X8MediaCmd createBaseComand() {
         X8MediaCmd x8MediaCmd = new X8MediaCmd();
@@ -20,7 +20,7 @@ public class X8DownLoadCmd extends BaseCommand {
         byte[] payload = new byte[len + 7];
         byte[] lenBytes = ByteHexHelper.intToByteArray(payload.length);
         payload[0] = 0;
-        System.arraycopy(lenBytes, 0, payload, 0 + 1, lenBytes.length);
+        System.arraycopy(lenBytes, 0, payload, 1, lenBytes.length);
         int i = lenBytes.length + 1;
         int i2 = i + 1;
         payload[i] = (byte) (len & 255);
@@ -39,11 +39,11 @@ public class X8DownLoadCmd extends BaseCommand {
         byte[] payload = new byte[len + 13];
         byte[] lenBytes = ByteHexHelper.intToByteArray(payload.length);
         if (isStop) {
-            int i2 = 0 + 1;
+            int i2 = 1;
             payload[0] = 2;
             i = i2;
         } else {
-            int i3 = 0 + 1;
+            int i3 = 1;
             payload[0] = 1;
             i = i3;
         }
@@ -76,7 +76,7 @@ public class X8DownLoadCmd extends BaseCommand {
         short len = (short) downFileName.getBytes().length;
         byte[] nameBytes = downFileName.getBytes();
         byte[] payload = new byte[len + 13];
-        int i = 0 + 1;
+        int i = 1;
         payload[0] = 1;
         int payLoadLen = payload.length;
         int i2 = i + 1;
@@ -112,7 +112,7 @@ public class X8DownLoadCmd extends BaseCommand {
         return x8MediaCmd;
     }
 
-    @Override // com.fimi.kernel.dataparser.milink.LinkMessage
+    @Override
     public void unpack(LinkPayload payload) {
     }
 }

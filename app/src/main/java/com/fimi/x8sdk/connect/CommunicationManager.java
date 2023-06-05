@@ -7,7 +7,7 @@ import com.fimi.kernel.connect.usb.IUSBStatusListener;
 import com.fimi.x8sdk.connect.tcp.TcpConnectThread;
 import com.fimi.x8sdk.connect.usb.UsbConnectThread;
 
-/* loaded from: classes2.dex */
+
 public class CommunicationManager implements IUSBStatusListener {
     public static CommunicationManager communicationManager = new CommunicationManager();
     UsbAccessory accessory;
@@ -37,7 +37,6 @@ public class CommunicationManager implements IUSBStatusListener {
                 }
                 return;
             default:
-                return;
         }
     }
 
@@ -56,7 +55,7 @@ public class CommunicationManager implements IUSBStatusListener {
         }
     }
 
-    @Override // com.fimi.kernel.connect.usb.IUSBStatusListener
+    @Override
     public void onAoaIoError(int type) {
         stopConnectThread();
     }

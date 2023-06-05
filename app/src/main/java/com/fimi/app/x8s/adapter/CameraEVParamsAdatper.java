@@ -1,5 +1,6 @@
 package com.fimi.app.x8s.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,11 +14,11 @@ import com.fimi.app.x8s.viewHolder.CameraParamsViewHolder;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class CameraEVParamsAdatper extends RecyclerView.Adapter {
-    private Context context;
-    private CameraEVParamListener listener;
-    private String paramKey;
+    private final Context context;
+    private final CameraEVParamListener listener;
+    private final String paramKey;
     private List<String> plist;
     private int selectIndex = 0;
     private boolean isEnable = false;
@@ -34,30 +35,26 @@ public class CameraEVParamsAdatper extends RecyclerView.Adapter {
         notifyDataSetChanged();
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View rootView = LayoutInflater.from(this.context).inflate(R.layout.x8_iso_recycler_item, parent, false);
-        RecyclerView.ViewHolder viewHolder = new CameraParamsViewHolder(rootView);
-        return viewHolder;
+        return new CameraParamsViewHolder(rootView);
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         if ((holder instanceof CameraParamsViewHolder) && this.plist.size() > 0) {
             ((CameraParamsViewHolder) holder).initView(this.plist.get(position), this.isEnable);
             ((CameraParamsViewHolder) holder).upSelected(position == this.selectIndex);
-            holder.itemView.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.adapter.CameraEVParamsAdatper.1
-                @Override // android.view.View.OnClickListener
-                public void onClick(View v) {
-                    if (CameraEVParamsAdatper.this.isEnable && CameraEVParamsAdatper.this.listener != null) {
-                        CameraEVParamsAdatper.this.listener.updateParams(CameraEVParamsAdatper.this.paramKey, (String) CameraEVParamsAdatper.this.plist.get(position));
-                    }
+            holder.itemView.setOnClickListener(v -> {
+                if (CameraEVParamsAdatper.this.isEnable && CameraEVParamsAdatper.this.listener != null) {
+                    CameraEVParamsAdatper.this.listener.updateParams(CameraEVParamsAdatper.this.paramKey, CameraEVParamsAdatper.this.plist.get(position));
                 }
             });
         }
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public int getItemCount() {
         if (this.plist != null) {
             return this.plist.size();

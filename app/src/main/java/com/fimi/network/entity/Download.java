@@ -1,8 +1,6 @@
 package com.fimi.network.entity;
 
 
-
-/* loaded from: classes.dex */
 public class Download {
     private String fileEncode;
     private String forceSign;

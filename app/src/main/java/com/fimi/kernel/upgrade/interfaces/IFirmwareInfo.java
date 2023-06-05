@@ -1,6 +1,6 @@
 package com.fimi.kernel.upgrade.interfaces;
 
-/* loaded from: classes.dex */
+
 public interface IFirmwareInfo {
     String getErrorInfo();
 

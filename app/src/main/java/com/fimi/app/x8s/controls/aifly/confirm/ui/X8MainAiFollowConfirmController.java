@@ -16,7 +16,7 @@ import com.fimi.app.x8s.interfaces.IX8Point2PointExcuteListener;
 import com.fimi.app.x8s.map.model.MapPointLatLng;
 import com.fimi.x8sdk.controller.FcManager;
 
-/* loaded from: classes.dex */
+
 public class X8MainAiFollowConfirmController extends AbsX8MenuBoxControllers implements View.OnClickListener {
     private Activity activity;
     private View blank;
@@ -34,7 +34,7 @@ public class X8MainAiFollowConfirmController extends AbsX8MenuBoxControllers imp
         this.activity = acitivity;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
         this.mainLayout = rootView.findViewById(R.id.x8_main_ai_follow_confirm_main_layout);
         this.blank = rootView.findViewById(R.id.x8_main_ai_follow_confirm_main_layout_content_blank);
@@ -43,16 +43,16 @@ public class X8MainAiFollowConfirmController extends AbsX8MenuBoxControllers imp
         this.currentModule = this.mX8AiFollowPoint2PointExcuteConfirmModule;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
         this.blank.setOnClickListener(this);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.x8_main_ai_follow_confirm_main_layout_content_blank) {
@@ -71,8 +71,8 @@ public class X8MainAiFollowConfirmController extends AbsX8MenuBoxControllers imp
             this.isShow = true;
             if (this.width == 0) {
                 this.contentView.setAlpha(0.0f);
-                this.contentView.post(new Runnable() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8MainAiFollowConfirmController.1
-                    @Override // java.lang.Runnable
+                this.contentView.post(new Runnable() {
+                    @Override
                     public void run() {
                         X8MainAiFollowConfirmController.this.contentView.setAlpha(1.0f);
                         X8MainAiFollowConfirmController.this.MAX_WIDTH = X8MainAiFollowConfirmController.this.mainLayout.getWidth();
@@ -99,7 +99,7 @@ public class X8MainAiFollowConfirmController extends AbsX8MenuBoxControllers imp
             ObjectAnimator translationRight = ObjectAnimator.ofFloat(this.contentView, "translationX", 0.0f, this.width);
             translationRight.setDuration(300L);
             translationRight.start();
-            translationRight.addListener(new AnimatorListenerAdapter() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8MainAiFollowConfirmController.2
+            translationRight.addListener(new AnimatorListenerAdapter() {
                 @Override
                 // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationEnd(Animator animation) {

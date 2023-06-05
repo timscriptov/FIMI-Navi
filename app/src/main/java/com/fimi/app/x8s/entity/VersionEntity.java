@@ -6,7 +6,7 @@ import com.fimi.android.app.R;
 import com.fimi.x8sdk.dataparser.AckVersion;
 import com.twitter.sdk.android.core.internal.scribe.EventsFilesManager;
 
-/* loaded from: classes.dex */
+
 public class VersionEntity {
     private boolean hasNewVersion;
     private int tag;

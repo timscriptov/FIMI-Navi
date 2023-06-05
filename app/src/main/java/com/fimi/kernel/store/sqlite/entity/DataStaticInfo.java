@@ -1,6 +1,6 @@
 package com.fimi.kernel.store.sqlite.entity;
 
-/* loaded from: classes.dex */
+
 public class DataStaticInfo {
     public Long id;
     private String currentTime;

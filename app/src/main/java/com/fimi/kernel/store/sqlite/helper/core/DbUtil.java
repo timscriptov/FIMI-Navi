@@ -3,7 +3,7 @@ package com.fimi.kernel.store.sqlite.helper.core;
 import com.fimi.kernel.store.sqlite.dao.StudentDao;
 import com.fimi.kernel.store.sqlite.helper.StudentHelper;
 
-/* loaded from: classes.dex */
+
 public class DbUtil {
     private static StudentHelper sStudentHelper;
 

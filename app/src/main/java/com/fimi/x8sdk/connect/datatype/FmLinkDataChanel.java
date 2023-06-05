@@ -97,16 +97,16 @@ import com.fimi.x8sdk.process.FcErrProcess;
 import com.fimi.x8sdk.process.RelayProcess;
 import com.fimi.x8sdk.rtp.X8Rtp;
 
-/* loaded from: classes2.dex */
+
 public class FmLinkDataChanel implements IDataChanel {
     IRetransmissionHandle retransmissionHandle;
     ITimerSendQueueHandle timerSendQueueHandle;
     boolean isResponse = false;
-    private Parser4 p = new Parser4();
-    private ConnectStatusManager statusManager = new ConnectStatusManager();
-    private SeqCache mSeqCache = new SeqCache();
+    private final Parser4 p = new Parser4();
+    private final ConnectStatusManager statusManager = new ConnectStatusManager();
+    private final SeqCache mSeqCache = new SeqCache();
 
-    @Override // com.fimi.x8sdk.connect.datatype.IDataChanel
+    @Override
     public void forwardData(byte[] buffer) {
         if (buffer != null && buffer.length > 0) {
             for (byte b : buffer) {
@@ -173,34 +173,27 @@ public class FmLinkDataChanel implements IDataChanel {
 
     private void fromFcRelayCmd(int msgId, int groupId, LinkPacket4 linkPacket4) {
         if (groupId == 16) {
-            switch (msgId) {
-                case 177:
-                    AckVersion ackVersion = new AckVersion();
-                    ackVersion.unPacket(linkPacket4);
-                    notityX8Message(groupId, msgId, ackVersion, linkPacket4);
-                    return;
-                default:
-                    return;
+            if (msgId == 177) {
+                AckVersion ackVersion = new AckVersion();
+                ackVersion.unPacket(linkPacket4);
+                notityX8Message(groupId, msgId, ackVersion, linkPacket4);
+                return;
             }
         }
     }
 
     private void fromRcCmd(int msgId, int groupId, LinkPacket4 linkPacket4) {
         if (groupId == 16) {
-            switch (msgId) {
-                case 177:
-                    AckVersion ackVersion = new AckVersion();
-                    ackVersion.unPacket(linkPacket4);
-                    notityX8Message(groupId, msgId, ackVersion, linkPacket4);
-                    break;
+            if (msgId == 177) {
+                AckVersion ackVersion = new AckVersion();
+                ackVersion.unPacket(linkPacket4);
+                notityX8Message(groupId, msgId, ackVersion, linkPacket4);
             }
         } else if (groupId == 14) {
-            switch (msgId) {
-                case 2:
-                    AutoRCMatchRt autoRCMatchRt = new AutoRCMatchRt();
-                    autoRCMatchRt.unPacket(linkPacket4);
-                    StateManager.getInstance().getRcMatchState().setMatchRt(autoRCMatchRt);
-                    break;
+            if (msgId == 2) {
+                AutoRCMatchRt autoRCMatchRt = new AutoRCMatchRt();
+                autoRCMatchRt.unPacket(linkPacket4);
+                StateManager.getInstance().getRcMatchState().setMatchRt(autoRCMatchRt);
             }
         }
         if (groupId == 11) {
@@ -258,49 +251,39 @@ public class FmLinkDataChanel implements IDataChanel {
                     AckRightRoller rightRoller = new AckRightRoller();
                     rightRoller.unPacket(linkPacket4);
                     StateManager.getInstance().setAckRightRoller(rightRoller);
-                    return;
             }
         }
     }
 
     private void fromBatteryCmd(int msgId, int groupId, LinkPacket4 linkPacket4) {
         if (groupId == 16) {
-            switch (msgId) {
-                case 177:
-                    AckVersion ackVersion = new AckVersion();
-                    ackVersion.unPacket(linkPacket4);
-                    notityX8Message(groupId, msgId, ackVersion, linkPacket4);
-                    return;
-                default:
-                    return;
+            if (msgId == 177) {
+                AckVersion ackVersion = new AckVersion();
+                ackVersion.unPacket(linkPacket4);
+                notityX8Message(groupId, msgId, ackVersion, linkPacket4);
+                return;
             }
         }
     }
 
     private void fromUltrasonicCmd(int msgId, int groupId, LinkPacket4 linkPacket4) {
         if (groupId == 16) {
-            switch (msgId) {
-                case 177:
-                    AckVersion ackVersion = new AckVersion();
-                    ackVersion.unPacket(linkPacket4);
-                    notityX8Message(groupId, msgId, ackVersion, linkPacket4);
-                    return;
-                default:
-                    return;
+            if (msgId == 177) {
+                AckVersion ackVersion = new AckVersion();
+                ackVersion.unPacket(linkPacket4);
+                notityX8Message(groupId, msgId, ackVersion, linkPacket4);
+                return;
             }
         }
     }
 
     private void fromGimbalCmd(int msgId, int groupId, LinkPacket4 linkPacket4) {
         if (groupId == 16) {
-            switch (msgId) {
-                case 177:
-                    AckVersion ackVersion = new AckVersion();
-                    ackVersion.unPacket(linkPacket4);
-                    notityX8Message(groupId, msgId, ackVersion, linkPacket4);
-                    return;
-                default:
-                    return;
+            if (msgId == 177) {
+                AckVersion ackVersion = new AckVersion();
+                ackVersion.unPacket(linkPacket4);
+                notityX8Message(groupId, msgId, ackVersion, linkPacket4);
+                return;
             }
         } else if (groupId == 9) {
             switch (msgId) {
@@ -385,21 +368,17 @@ public class FmLinkDataChanel implements IDataChanel {
                     notityX8Message(groupId, msgId, ackCloudParams, linkPacket4);
                     return;
                 default:
-                    return;
             }
         }
     }
 
     private void fromEscCmd(int msgId, int groupId, LinkPacket4 linkPacket4) {
         if (groupId == 16) {
-            switch (msgId) {
-                case 177:
-                    AckVersion ackVersion = new AckVersion();
-                    ackVersion.unPacket(linkPacket4);
-                    notityX8Message(groupId, msgId, ackVersion, linkPacket4);
-                    return;
-                default:
-                    return;
+            if (msgId == 177) {
+                AckVersion ackVersion = new AckVersion();
+                ackVersion.unPacket(linkPacket4);
+                notityX8Message(groupId, msgId, ackVersion, linkPacket4);
+                return;
             }
         }
     }
@@ -425,14 +404,11 @@ public class FmLinkDataChanel implements IDataChanel {
             }
         }
         if (groupId == 16) {
-            switch (msgId) {
-                case 177:
-                    AckVersion ackVersion = new AckVersion();
-                    ackVersion.unPacket(linkPacket4);
-                    notityX8Message(groupId, msgId, ackVersion, linkPacket4);
-                    return;
-                default:
-                    return;
+            if (msgId == 177) {
+                AckVersion ackVersion = new AckVersion();
+                ackVersion.unPacket(linkPacket4);
+                notityX8Message(groupId, msgId, ackVersion, linkPacket4);
+                return;
             }
         }
     }
@@ -459,50 +435,42 @@ public class FmLinkDataChanel implements IDataChanel {
             }
         }
         if (groupId == 16) {
-            switch (msgId) {
-                case 177:
-                    AckVersion ackVersion = new AckVersion();
-                    ackVersion.unPacket(linkPacket4);
-                    notityX8Message(groupId, msgId, ackVersion, linkPacket4);
-                    return;
-                default:
-                    return;
+            if (msgId == 177) {
+                AckVersion ackVersion = new AckVersion();
+                ackVersion.unPacket(linkPacket4);
+                notityX8Message(groupId, msgId, ackVersion, linkPacket4);
+                return;
             }
         }
     }
 
     private void fromFcCmd(int msgId, int groupId, LinkPacket4 linkPacket4) {
         if (groupId == 11) {
-            switch (msgId) {
-                case 2:
-                    AutoRockerStatePlayback autoRockerStatePlayback = new AutoRockerStatePlayback();
-                    autoRockerStatePlayback.unPacket(linkPacket4);
-                    notityX8Message(groupId, msgId, autoRockerStatePlayback, linkPacket4);
-                    short rockerKeyMessage = autoRockerStatePlayback.getRockerKeyMessage();
-                    if (((rockerKeyMessage >> 1) & 1) == 1) {
-                        X8FcLogManager.getInstance().setRockerLandDownData(linkPacket4.getPacketData());
-                    }
-                    X8FcLogManager.getInstance().setRockerStateData(linkPacket4.getPacketData());
-                    break;
+            if (msgId == 2) {
+                AutoRockerStatePlayback autoRockerStatePlayback = new AutoRockerStatePlayback();
+                autoRockerStatePlayback.unPacket(linkPacket4);
+                notityX8Message(groupId, msgId, autoRockerStatePlayback, linkPacket4);
+                short rockerKeyMessage = autoRockerStatePlayback.getRockerKeyMessage();
+                if (((rockerKeyMessage >> 1) & 1) == 1) {
+                    X8FcLogManager.getInstance().setRockerLandDownData(linkPacket4.getPacketData());
+                }
+                X8FcLogManager.getInstance().setRockerStateData(linkPacket4.getPacketData());
             }
         }
         if (groupId == 16) {
-            switch (msgId) {
-                case 177:
-                    AckVersion ackVersion = new AckVersion();
-                    ackVersion.unPacket(linkPacket4);
-                    notityX8Message(groupId, msgId, ackVersion, linkPacket4);
-                    if (X8Rtp.simulationTest) {
-                        StateManager.getInstance().getVersionState().setModuleFcAckVersion(ackVersion);
-                        StateManager.getInstance().getVersionState().setModuleRepeaterRcVersion(ackVersion);
-                        AutoRelayHeart relayHeart = new AutoRelayHeart();
-                        relayHeart.setStatus((short) 2045);
-                        StateManager.getInstance().getCamera().setCameraStatus(relayHeart.getStatus());
-                        StateManager.getInstance().getRelayState().setRelayHeart(relayHeart);
-                        RelayProcess.getRelayProcess().setRelayHeart(relayHeart);
-                        break;
-                    }
-                    break;
+            if (msgId == 177) {
+                AckVersion ackVersion = new AckVersion();
+                ackVersion.unPacket(linkPacket4);
+                notityX8Message(groupId, msgId, ackVersion, linkPacket4);
+                if (X8Rtp.simulationTest) {
+                    StateManager.getInstance().getVersionState().setModuleFcAckVersion(ackVersion);
+                    StateManager.getInstance().getVersionState().setModuleRepeaterRcVersion(ackVersion);
+                    AutoRelayHeart relayHeart = new AutoRelayHeart();
+                    relayHeart.setStatus((short) 2045);
+                    StateManager.getInstance().getCamera().setCameraStatus(relayHeart.getStatus());
+                    StateManager.getInstance().getRelayState().setRelayHeart(relayHeart);
+                    RelayProcess.getRelayProcess().setRelayHeart(relayHeart);
+                }
             }
         }
         if (StateManager.getInstance().getX8Drone().isConnect()) {
@@ -1081,7 +1049,6 @@ public class FmLinkDataChanel implements IDataChanel {
                         notityX8Message(groupId, msgId, ackGetIMUInfo, linkPacket4);
                         return;
                     default:
-                        return;
                 }
             } else if (groupId == 13) {
                 switch (msgId) {
@@ -1102,17 +1069,13 @@ public class FmLinkDataChanel implements IDataChanel {
                         AckCheckIMUException checkIMUException = new AckCheckIMUException();
                         checkIMUException.unPacket(linkPacket4);
                         notityX8Message(groupId, msgId, checkIMUException, linkPacket4);
-                        return;
                 }
             } else if (groupId == 8) {
-                switch (msgId) {
-                    case 4:
-                        AckSyncTime ackSyncTime = new AckSyncTime();
-                        ackSyncTime.unPacket(linkPacket4);
-                        notityX8Message(groupId, msgId, ackSyncTime, linkPacket4);
-                        return;
-                    default:
-                        return;
+                if (msgId == 4) {
+                    AckSyncTime ackSyncTime = new AckSyncTime();
+                    ackSyncTime.unPacket(linkPacket4);
+                    notityX8Message(groupId, msgId, ackSyncTime, linkPacket4);
+                    return;
                 }
             } else if (groupId == 10) {
                 AutoBlackBox30 blackBox30 = new AutoBlackBox30();
@@ -1130,7 +1093,6 @@ public class FmLinkDataChanel implements IDataChanel {
                         notityX8Message(groupId, msgId, formatStorageState, linkPacket4);
                         return;
                     default:
-                        return;
                 }
             }
         }
@@ -1146,25 +1108,21 @@ public class FmLinkDataChanel implements IDataChanel {
 
     private void fromRelayCmd(int msgId, int groupId, LinkPacket4 linkPacket4) {
         if (groupId == 14) {
-            switch (msgId) {
-                case 5:
-                    AutoRelayHeart relayHeart = new AutoRelayHeart();
-                    relayHeart.unPacket(linkPacket4);
-                    notityX8Message(groupId, msgId, relayHeart, linkPacket4);
-                    StateManager.getInstance().getCamera().setCameraStatus(relayHeart.getStatus());
-                    StateManager.getInstance().getRelayState().setRelayHeart(relayHeart);
-                    RelayProcess.getRelayProcess().setRelayHeart(relayHeart);
-                    flightPlaybackLogUnPacket(linkPacket4, false);
-                    break;
+            if (msgId == 5) {
+                AutoRelayHeart relayHeart = new AutoRelayHeart();
+                relayHeart.unPacket(linkPacket4);
+                notityX8Message(groupId, msgId, relayHeart, linkPacket4);
+                StateManager.getInstance().getCamera().setCameraStatus(relayHeart.getStatus());
+                StateManager.getInstance().getRelayState().setRelayHeart(relayHeart);
+                RelayProcess.getRelayProcess().setRelayHeart(relayHeart);
+                flightPlaybackLogUnPacket(linkPacket4, false);
             }
         }
         if (groupId == 16) {
-            switch (msgId) {
-                case 177:
-                    AckVersion ackVersion = new AckVersion();
-                    ackVersion.unPacket(linkPacket4);
-                    notityX8Message(groupId, msgId, ackVersion, linkPacket4);
-                    break;
+            if (msgId == 177) {
+                AckVersion ackVersion = new AckVersion();
+                ackVersion.unPacket(linkPacket4);
+                notityX8Message(groupId, msgId, ackVersion, linkPacket4);
             }
         }
         if (groupId == 14) {
@@ -1264,7 +1222,6 @@ public class FmLinkDataChanel implements IDataChanel {
                     StateManager.getInstance().getCamera().setAutoCameraStateADV(autoCameraStateADV);
                     return;
                 default:
-                    return;
             }
         }
     }

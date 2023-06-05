@@ -3,8 +3,6 @@ package com.fimi.x8sdk.modulestate;
 import com.fimi.x8sdk.dataparser.AutoGimbalState;
 
 
-
-/* loaded from: classes2.dex */
 public class GimbalState extends BaseState {
     public int errorCode;
     public int pitchAngle;
@@ -32,7 +30,7 @@ public class GimbalState extends BaseState {
         return this.yawAnagle;
     }
 
-    @Override // com.fimi.x8sdk.modulestate.BaseState
+    @Override
     public boolean isAvailable() {
         return false;
     }

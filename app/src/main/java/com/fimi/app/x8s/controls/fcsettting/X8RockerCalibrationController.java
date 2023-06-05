@@ -8,7 +8,7 @@ import com.fimi.app.x8s.interfaces.AbsX8MenuBoxControllers;
 import com.fimi.app.x8s.interfaces.IX8CalibrationListener;
 import com.fimi.x8sdk.controller.FcCtrlManager;
 
-/* loaded from: classes.dex */
+
 public class X8RockerCalibrationController extends AbsX8MenuBoxControllers implements View.OnClickListener {
     private FcCtrlManager fcCtrlManager;
     private ImageView imgReturn;
@@ -18,28 +18,28 @@ public class X8RockerCalibrationController extends AbsX8MenuBoxControllers imple
         super(rootView);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
         this.contentView = rootView.findViewById(R.id.x8_rl_main_rc_item_rocker_mode_layout);
-        this.imgReturn = (ImageView) this.contentView.findViewById(R.id.img_return);
+        this.imgReturn = this.contentView.findViewById(R.id.img_return);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
         this.imgReturn.setOnClickListener(this);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         if (this.isShow) {
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.img_return) {
@@ -50,13 +50,13 @@ public class X8RockerCalibrationController extends AbsX8MenuBoxControllers imple
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void showItem() {
         this.isShow = true;
         this.contentView.setVisibility(0);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void closeItem() {
         this.isShow = false;
         this.contentView.setVisibility(8);

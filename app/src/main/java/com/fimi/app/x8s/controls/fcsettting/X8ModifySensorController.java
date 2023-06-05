@@ -18,7 +18,7 @@ import com.fimi.x8sdk.controller.FcCtrlManager;
 import com.fimi.x8sdk.dataparser.AckGetIMUInfo;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes.dex */
+
 public class X8ModifySensorController extends AbsX8MenuBoxControllers {
     Handler mHandler;
     X8IMUCheckController.OnCheckIMULisenter mOncheckImuLisenter;
@@ -54,7 +54,7 @@ public class X8ModifySensorController extends AbsX8MenuBoxControllers {
 
     public X8ModifySensorController(View rootView) {
         super(rootView);
-        this.mOncheckImuLisenter = new X8IMUCheckController.OnCheckIMULisenter() { // from class: com.fimi.app.x8s.controls.fcsettting.X8ModifySensorController.3
+        this.mOncheckImuLisenter = new X8IMUCheckController.OnCheckIMULisenter() {
             @Override
             // com.fimi.app.x8s.controls.fcsettting.X8IMUCheckController.OnCheckIMULisenter
             public void startCheck() {
@@ -73,8 +73,8 @@ public class X8ModifySensorController extends AbsX8MenuBoxControllers {
                 X8ModifySensorController.this.setImuState(result, erreoCode);
             }
         };
-        this.mHandler = new Handler() { // from class: com.fimi.app.x8s.controls.fcsettting.X8ModifySensorController.7
-            @Override // android.os.Handler
+        this.mHandler = new Handler() {
+            @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 X8ModifySensorController.this.updateView();
@@ -95,45 +95,45 @@ public class X8ModifySensorController extends AbsX8MenuBoxControllers {
         this.modeControllerListener = modeControllerListener;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
         this.handleView = rootView.findViewById(R.id.x8_rl_main_mdify_sensor_layout);
-        this.back_btn = (ImageView) this.handleView.findViewById(R.id.btn_return);
-        this.tvGyroX = (TextView) this.handleView.findViewById(R.id.gyro_x);
-        this.tvGyroY = (TextView) this.handleView.findViewById(R.id.gyro_y);
-        this.tvGyroZ = (TextView) this.handleView.findViewById(R.id.gyro_z);
-        this.tvAccelX = (TextView) this.handleView.findViewById(R.id.accel_x);
-        this.tvAccelY = (TextView) this.handleView.findViewById(R.id.accel_y);
-        this.tvAccelZ = (TextView) this.handleView.findViewById(R.id.accel_z);
-        this.tvMagX = (TextView) this.handleView.findViewById(R.id.magx_x);
-        this.tvMagY = (TextView) this.handleView.findViewById(R.id.magx_y);
-        this.tvMagZ = (TextView) this.handleView.findViewById(R.id.magx_z);
-        this.tvGyroxMode = (TextView) this.handleView.findViewById(R.id.gyro_mode);
-        this.tvAccelMode = (TextView) this.handleView.findViewById(R.id.accel_mode);
-        this.tvMagMode = (TextView) this.handleView.findViewById(R.id.magx_mode);
-        this.tvGyroX2 = (TextView) this.handleView.findViewById(R.id.gyro2_x);
-        this.tvGyroY2 = (TextView) this.handleView.findViewById(R.id.gyro2_y);
-        this.tvGyroZ2 = (TextView) this.handleView.findViewById(R.id.gyro2_z);
-        this.tvAccelX2 = (TextView) this.handleView.findViewById(R.id.accel2_x);
-        this.tvAccelY2 = (TextView) this.handleView.findViewById(R.id.accel2_y);
-        this.tvAccelZ2 = (TextView) this.handleView.findViewById(R.id.accel2_z);
-        this.tvGyroxMode2 = (TextView) this.handleView.findViewById(R.id.gyro2_mode);
-        this.tvAccelMode2 = (TextView) this.handleView.findViewById(R.id.accel2_mode);
-        this.btnImuCheck = (Button) this.handleView.findViewById(R.id.btn_imu_check);
+        this.back_btn = this.handleView.findViewById(R.id.btn_return);
+        this.tvGyroX = this.handleView.findViewById(R.id.gyro_x);
+        this.tvGyroY = this.handleView.findViewById(R.id.gyro_y);
+        this.tvGyroZ = this.handleView.findViewById(R.id.gyro_z);
+        this.tvAccelX = this.handleView.findViewById(R.id.accel_x);
+        this.tvAccelY = this.handleView.findViewById(R.id.accel_y);
+        this.tvAccelZ = this.handleView.findViewById(R.id.accel_z);
+        this.tvMagX = this.handleView.findViewById(R.id.magx_x);
+        this.tvMagY = this.handleView.findViewById(R.id.magx_y);
+        this.tvMagZ = this.handleView.findViewById(R.id.magx_z);
+        this.tvGyroxMode = this.handleView.findViewById(R.id.gyro_mode);
+        this.tvAccelMode = this.handleView.findViewById(R.id.accel_mode);
+        this.tvMagMode = this.handleView.findViewById(R.id.magx_mode);
+        this.tvGyroX2 = this.handleView.findViewById(R.id.gyro2_x);
+        this.tvGyroY2 = this.handleView.findViewById(R.id.gyro2_y);
+        this.tvGyroZ2 = this.handleView.findViewById(R.id.gyro2_z);
+        this.tvAccelX2 = this.handleView.findViewById(R.id.accel2_x);
+        this.tvAccelY2 = this.handleView.findViewById(R.id.accel2_y);
+        this.tvAccelZ2 = this.handleView.findViewById(R.id.accel2_z);
+        this.tvGyroxMode2 = this.handleView.findViewById(R.id.gyro2_mode);
+        this.tvAccelMode2 = this.handleView.findViewById(R.id.accel2_mode);
+        this.btnImuCheck = this.handleView.findViewById(R.id.btn_imu_check);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
-        this.back_btn.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8ModifySensorController.1
-            @Override // android.view.View.OnClickListener
+        this.back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 X8ModifySensorController.this.handleView.setVisibility(8);
                 X8ModifySensorController.this.modeControllerListener.returnBack();
                 X8ModifySensorController.this.closeItem();
             }
         });
-        this.btnImuCheck.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8ModifySensorController.2
-            @Override // android.view.View.OnClickListener
+        this.btnImuCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 if (X8ModifySensorController.this.fcManager != null) {
                     X8ModifySensorController.this.x8IMUCheckController = new X8IMUCheckController(X8ModifySensorController.this.rootView.getContext(), X8ModifySensorController.this.fcManager, X8ModifySensorController.this.mOncheckImuLisenter);
@@ -149,7 +149,7 @@ public class X8ModifySensorController extends AbsX8MenuBoxControllers {
         }
         switch (type) {
             case 0:
-                this.x8IMUCustomDialog = new X8IMUCustomDialog(this.handleView.getContext(), getString(R.string.x8_fc_item_dialog_title_two), null, getString(R.string.x8_fc_item_imu_err), true, new X8IMUCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8ModifySensorController.4
+                this.x8IMUCustomDialog = new X8IMUCustomDialog(this.handleView.getContext(), getString(R.string.x8_fc_item_dialog_title_two), null, getString(R.string.x8_fc_item_imu_err), true, new X8IMUCustomDialog.onDialogButtonClickListener() {
                     @Override
                     // com.fimi.app.x8s.widget.X8IMUCustomDialog.onDialogButtonClickListener
                     public void onSingleButtonClick() {
@@ -161,7 +161,7 @@ public class X8ModifySensorController extends AbsX8MenuBoxControllers {
                 this.x8IMUCustomDialog.show();
                 return;
             case 1:
-                this.x8IMUCustomDialog = new X8IMUCustomDialog(this.handleView.getContext(), getString(R.string.x8_fc_item_dialog_title), getString(R.string.x8_fc_item_imu_normal), null, false, new X8IMUCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8ModifySensorController.5
+                this.x8IMUCustomDialog = new X8IMUCustomDialog(this.handleView.getContext(), getString(R.string.x8_fc_item_dialog_title), getString(R.string.x8_fc_item_imu_normal), null, false, new X8IMUCustomDialog.onDialogButtonClickListener() {
                     @Override
                     // com.fimi.app.x8s.widget.X8IMUCustomDialog.onDialogButtonClickListener
                     public void onSingleButtonClick() {
@@ -173,7 +173,7 @@ public class X8ModifySensorController extends AbsX8MenuBoxControllers {
                 this.x8IMUCustomDialog.show();
                 return;
             case 2:
-                this.x8IMUCustomDialog = new X8IMUCustomDialog(this.handleView.getContext(), getString(R.string.x8_fc_item_dialog_title), getString(R.string.x8_fc_item_imu_abnormal), erreoCode, false, new X8IMUCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8ModifySensorController.6
+                this.x8IMUCustomDialog = new X8IMUCustomDialog(this.handleView.getContext(), getString(R.string.x8_fc_item_dialog_title), getString(R.string.x8_fc_item_imu_abnormal), erreoCode, false, new X8IMUCustomDialog.onDialogButtonClickListener() {
                     @Override
                     // com.fimi.app.x8s.widget.X8IMUCustomDialog.onDialogButtonClickListener
                     public void onSingleButtonClick() {
@@ -185,11 +185,10 @@ public class X8ModifySensorController extends AbsX8MenuBoxControllers {
                 this.x8IMUCustomDialog.show();
                 return;
             default:
-                return;
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
         this.tvGyroX.setText("N/A");
         this.tvGyroY.setText("N/A");
@@ -217,8 +216,8 @@ public class X8ModifySensorController extends AbsX8MenuBoxControllers {
         if (!StateManager.getInstance().getConectState().isConnectDrone()) {
             defaultVal();
         } else if (this.fcManager != null) {
-            this.fcManager.getIUMInfo(1, new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8ModifySensorController.8
-                @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+            this.fcManager.getIUMInfo(1, new UiCallBackListener() {
+                @Override
                 public void onComplete(CmdResult cmdResult, Object o) {
                     AckGetIMUInfo imuInfo = (AckGetIMUInfo) o;
                     if (imuInfo != null) {
@@ -240,8 +239,8 @@ public class X8ModifySensorController extends AbsX8MenuBoxControllers {
                     }
                 }
             });
-            this.fcManager.getIUMInfo(2, new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8ModifySensorController.9
-                @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+            this.fcManager.getIUMInfo(2, new UiCallBackListener() {
+                @Override
                 public void onComplete(CmdResult cmdResult, Object o) {
                     AckGetIMUInfo imuInfo = (AckGetIMUInfo) o;
                     if (imuInfo != null) {
@@ -261,19 +260,19 @@ public class X8ModifySensorController extends AbsX8MenuBoxControllers {
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void showItem() {
         super.showItem();
         this.handleView.setVisibility(0);
         this.mHandler.sendEmptyMessageDelayed(0, 10L);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         super.onDroneConnected(b);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void closeItem() {
         super.closeItem();
         if (this.mHandler != null) {

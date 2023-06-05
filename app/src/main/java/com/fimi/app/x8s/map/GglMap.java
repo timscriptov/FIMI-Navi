@@ -37,7 +37,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class GglMap extends AbsFimiMap implements OnMapReadyCallback {
     LatLng BEIJING = new LatLng(22.63916666d, 113.8108333d);
     private GglMapAiLineManager aiLineManager;
@@ -52,25 +52,22 @@ public class GglMap extends AbsFimiMap implements OnMapReadyCallback {
     private GglMapNoFlyZone noFlyZone;
     private float currentZoom = 0.0f;
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsMap
+    @Override
     public void setmX8AiItemMapListener(IX8AiItemMapListener mX8AiItemMapListener) {
         this.mX8AiItemMapListener = mX8AiItemMapListener;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsMap
+    @Override
     public boolean isMapInit() {
         return this.isInit;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsMap
+    @Override
     public boolean hasHomeInfo() {
-        if (!this.isInit || this.gglMapLocationManager == null || this.gglMapLocationManager.getHomeLocation() == null) {
-            return false;
-        }
-        return true;
+        return this.isInit && this.gglMapLocationManager != null && this.gglMapLocationManager.getHomeLocation() != null;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsMap
+    @Override
     public float getAccuracy() {
         if (!this.isInit || this.gglMapLocationManager == null) {
             return 0.0f;
@@ -79,23 +76,23 @@ public class GglMap extends AbsFimiMap implements OnMapReadyCallback {
         return accuracy;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.IFimiMap
+    @Override
     public View getMapView() {
         return this.mapView;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsMap, com.fimi.app.x8s.map.interfaces.IFimiMap
+    @Override
     public GoogleMap googleMap() {
         return this.googleMap;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsMap
+    @Override
     public void setHomeLocation(double latitude, double longitude) {
         LatLng latLng = new LatLng(latitude, longitude);
         addHomeLocation(latLng);
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.IFimiMap
+    @Override
     public void onCreate(View rootView, Bundle savedInstanceState) {
         this.mapView = new MapView(rootView.getContext());
         this.mapView.onCreate(savedInstanceState);
@@ -104,7 +101,7 @@ public class GglMap extends AbsFimiMap implements OnMapReadyCallback {
         this.mapView.getMapAsync(this);
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.IFimiMap
+    @Override
     public void onResume() {
         this.mapView.onResume();
         if (this.gglMapLocationManager != null) {
@@ -112,7 +109,7 @@ public class GglMap extends AbsFimiMap implements OnMapReadyCallback {
         }
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.IFimiMap
+    @Override
     public void onPause() {
         this.mapView.onPause();
         if (this.gglMapLocationManager != null) {
@@ -120,24 +117,24 @@ public class GglMap extends AbsFimiMap implements OnMapReadyCallback {
         }
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.IFimiMap
+    @Override
     public void onSaveInstanceState(Bundle outState) {
         this.mapView.onSaveInstanceState(outState);
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.IFimiMap
+    @Override
     public void onDestroy() {
         this.mapView.onDestroy();
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.IFimiMap
+    @Override
     public float getZoom() {
         float f = this.googleMap.getCameraPosition().zoom;
         this.currentZoom = f;
         return f;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.IFimiMap
+    @Override
     public void switchMapStyle(int mapStyle) {
         if (this.isInit) {
             if (mapStyle == Constants.X8_GENERAL_MAP_STYLE_NORMAL) {
@@ -152,12 +149,12 @@ public class GglMap extends AbsFimiMap implements OnMapReadyCallback {
         }
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.IFimiMap
+    @Override
     public void changeGoogleCamera(CameraUpdate update) {
         this.googleMap.moveCamera(update);
     }
 
-    @Override // com.google.android.gms.maps.OnMapReadyCallback
+    @Override
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
         this.noFlyZone = new GglMapNoFlyZone(googleMap);
@@ -182,14 +179,14 @@ public class GglMap extends AbsFimiMap implements OnMapReadyCallback {
         }
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsMap
+    @Override
     public void onSensorChanged(float degree) {
         if (this.gglMapLocationManager != null) {
             this.gglMapLocationManager.onSensorChanged(degree);
         }
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsMap
+    @Override
     public void addDeviceLocation(double latitude, double logitude) {
         LatLng mLatLng = new LatLng(latitude, logitude);
         addDeviceLocation(mLatLng);
@@ -197,12 +194,12 @@ public class GglMap extends AbsFimiMap implements OnMapReadyCallback {
         this.gglMapLocationManager.drawFlyLine();
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsMap
+    @Override
     public void chaneDeviceAngle(float angle) {
         this.gglMapLocationManager.chaneDeviceAngle(angle);
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsMap
+    @Override
     public void addFlyPolyline(double latitude, double logitude) {
         DroneState droneState = StateManager.getInstance().getX8Drone();
         if (droneState.isInSky()) {
@@ -212,36 +209,36 @@ public class GglMap extends AbsFimiMap implements OnMapReadyCallback {
         }
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsMap
+    @Override
     public void defaultMapValue() {
         if (this.gglMapLocationManager != null) {
             this.gglMapLocationManager.clearMarker();
         }
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsMap
+    @Override
     public void animateCamer() {
         if (this.gglMapLocationManager != null) {
             this.gglMapLocationManager.animatePersonLocation();
         }
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsMap
+    @Override
     public AbsAiLineManager getAiLineManager() {
         return this.aiLineManager;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsMap
+    @Override
     public AbsAiPoint2PointManager getAiPoint2PointManager() {
         return this.aiP2PManager;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsMap
+    @Override
     public AbsAiSurroundManager getAiSurroundManager() {
         return this.aiSurroundManager;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsMap
+    @Override
     public FimiPoint toScreenLocation(double lat, double lng) {
         FimiPoint p = new FimiPoint();
         LatLng mLatlng = new LatLng(lat, lng);
@@ -253,7 +250,7 @@ public class GglMap extends AbsFimiMap implements OnMapReadyCallback {
         return p;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsMap
+    @Override
     public MapPointLatLng getDeviceLatlng() {
         MapPointLatLng p = new MapPointLatLng();
         LatLng latlng = this.gglMapLocationManager.getDevLocation();
@@ -264,7 +261,7 @@ public class GglMap extends AbsFimiMap implements OnMapReadyCallback {
         return p;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.IFimiMap
+    @Override
     public void drawNoFlightZone(AckNoFlyNormal flyNormal, NoFlyZoneEnum noFlyZoneEnum) {
         if (this.noFlyZone != null) {
             if (this.googleMapPoint == null) {
@@ -315,7 +312,7 @@ public class GglMap extends AbsFimiMap implements OnMapReadyCallback {
         }
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.IFimiMap
+    @Override
     public void clearNoFlightZone() {
         if (this.noFlyZone != null) {
             this.noFlyZone.clearNoFlightZone();
@@ -338,7 +335,6 @@ public class GglMap extends AbsFimiMap implements OnMapReadyCallback {
                     this.aiSurroundManager.drawAiLimit(latLng.latitude, latLng.longitude, 1000.0d);
                     return;
                 default:
-                    return;
             }
         }
     }
@@ -356,14 +352,14 @@ public class GglMap extends AbsFimiMap implements OnMapReadyCallback {
         }
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsMap
+    @Override
     public void moveCameraByDevice() {
         if (this.gglMapLocationManager != null) {
             this.gglMapLocationManager.moveCameraByDevice();
         }
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsMap
+    @Override
     public double[] getDevicePosition() {
         if (this.gglMapLocationManager != null) {
             return this.gglMapLocationManager.getDevicePosition();
@@ -371,20 +367,20 @@ public class GglMap extends AbsFimiMap implements OnMapReadyCallback {
         return null;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsMap
+    @Override
     public void onLocationEvnent() {
         AutoHomeInfo homeInfo = StateManager.getInstance().getX8Drone().getHomeInfo();
         LatLng latLng = new LatLng(homeInfo.getFLatLng().latitude, homeInfo.getFLatLng().longitude);
         this.googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 21.0f));
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsMap
+    @Override
     public void onLocationGravitTrailEvent() {
         LatLng latLng = new LatLng(StateManager.getInstance().getX8Drone().getLatitude(), StateManager.getInstance().getX8Drone().getLongitude());
         this.googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 20.0f));
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsMap
+    @Override
     public double[] getManLatLng() {
         LatLng ll;
         double[] latLng = new double[2];
@@ -396,10 +392,10 @@ public class GglMap extends AbsFimiMap implements OnMapReadyCallback {
         return null;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsFimiMap
+    @Override
     public void snapshot(final IFimiOnSnapshotReady callBack) {
-        this.googleMap.snapshot(new GoogleMap.SnapshotReadyCallback() { // from class: com.fimi.app.x8s.map.GglMap.1
-            @Override // com.google.android.gms.maps.GoogleMap.SnapshotReadyCallback
+        this.googleMap.snapshot(new GoogleMap.SnapshotReadyCallback() {
+            @Override
             public void onSnapshotReady(Bitmap bitmap) {
                 callBack.onSnapshotReady(bitmap);
             }

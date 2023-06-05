@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.fimi.android.app.R;
 
-/* loaded from: classes.dex */
+
 public class CustomMediaContoller {
     private static final int MESSAGE_HIDE_CONTOLL = 5;
     private static final int MESSAGE_SEEK_NEW_POSITION = 4;
@@ -22,19 +22,19 @@ public class CustomMediaContoller {
     private final int SEEKBAR_TIME = 1000;
     private TextView allTime;
     private ImageView backBtn;
-    private Context context;
+    private final Context context;
     private long duration;
     private boolean isDragging;
     private boolean isShow;
     private boolean isShowContoller;
-    private View itemView;
-    private IFmMediaPlayer mediaPlayer;
+    private final View itemView;
+    private final IFmMediaPlayer mediaPlayer;
     private ImageView miniPlay;
     private TextView name;
     private ImageView play;
     private SeekBar seekBar;
     private TextView time;
-    private View view;
+    private final View view;
 
     public CustomMediaContoller(Context context, View view, IFmMediaPlayer meidaPlayer) {
         this.view = view;
@@ -51,17 +51,22 @@ public class CustomMediaContoller {
     }
 
     private void initView() {
-        this.seekBar = (SeekBar) this.itemView.findViewById(R.id.play_sb);
-        this.allTime = (TextView) this.itemView.findViewById(R.id.total_time_tv);
-        this.time = (TextView) this.itemView.findViewById(R.id.time_current_tv);
-        this.miniPlay = (ImageView) this.itemView.findViewById(R.id.mini_player_btn);
-        this.play = (ImageView) this.view.findViewById(R.id.player_btn);
+        this.seekBar = this.itemView.findViewById(R.id.play_sb);
+        this.allTime = this.itemView.findViewById(R.id.total_time_tv);
+        this.time = this.itemView.findViewById(R.id.time_current_tv);
+        this.miniPlay = this.itemView.findViewById(R.id.mini_player_btn);
+        this.play = this.view.findViewById(R.id.player_btn);
         this.time.setText("" + generateTime(0L));
         this.allTime.setText("" + generateTime(this.duration));
-        this.name = (TextView) this.itemView.findViewById(R.id.tv_photo_name);
-        this.backBtn = (ImageView) this.itemView.findViewById(R.id.ibtn_return);
-    }    private Handler handler = new Handler() { // from class: com.fimi.app.x8s.ui.album.x8s.CustomMediaContoller.1
-        @Override // android.os.Handler
+        this.name = this.itemView.findViewById(R.id.tv_photo_name);
+        this.backBtn = this.itemView.findViewById(R.id.ibtn_return);
+    }
+
+    public void setNameAndDuration(String mediaName, String duration) {
+        this.name.setText(mediaName);
+        this.allTime.setText(duration);
+    }    private final Handler handler = new Handler() {
+        @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
@@ -72,25 +77,19 @@ public class CustomMediaContoller {
                     CustomMediaContoller.this.setProgress();
                     return;
                 default:
-                    return;
             }
         }
     };
 
-    public void setNameAndDuration(String mediaName, String duration) {
-        this.name.setText(mediaName);
-        this.allTime.setText(duration);
-    }
-
     private void initAction() {
-        this.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() { // from class: com.fimi.app.x8s.ui.album.x8s.CustomMediaContoller.2
-            @Override // android.widget.SeekBar.OnSeekBarChangeListener
+        this.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                String string = CustomMediaContoller.this.generateTime((long) ((((float) (CustomMediaContoller.this.duration * progress)) * 1.0f) / 100.0f));
+                String string = CustomMediaContoller.this.generateTime((long) ((((float) (CustomMediaContoller.this.duration * progress))) / 100.0f));
                 CustomMediaContoller.this.time.setText(string);
             }
 
-            @Override // android.widget.SeekBar.OnSeekBarChangeListener
+            @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
                 CustomMediaContoller.this.setProgress();
                 CustomMediaContoller.this.isDragging = true;
@@ -99,18 +98,18 @@ public class CustomMediaContoller {
                 CustomMediaContoller.this.handler.removeMessages(1);
             }
 
-            @Override // android.widget.SeekBar.OnSeekBarChangeListener
+            @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 CustomMediaContoller.this.isDragging = false;
-                CustomMediaContoller.this.mediaPlayer.seekTo((int) ((((float) (CustomMediaContoller.this.duration * seekBar.getProgress())) * 1.0f) / 100.0f));
+                CustomMediaContoller.this.mediaPlayer.seekTo((int) ((((float) (CustomMediaContoller.this.duration * seekBar.getProgress()))) / 100.0f));
                 CustomMediaContoller.this.handler.removeMessages(2);
                 CustomMediaContoller.this.isDragging = false;
                 CustomMediaContoller.this.handler.sendEmptyMessageDelayed(2, 1000L);
                 CustomMediaContoller.this.show();
             }
         });
-        this.view.setOnTouchListener(new View.OnTouchListener() { // from class: com.fimi.app.x8s.ui.album.x8s.CustomMediaContoller.3
-            @Override // android.view.View.OnTouchListener
+        this.view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case 0:
@@ -134,20 +133,20 @@ public class CustomMediaContoller {
                 return true;
             }
         });
-        this.play.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.ui.album.x8s.CustomMediaContoller.4
-            @Override // android.view.View.OnClickListener
+        this.play.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 CustomMediaContoller.this.onPlay();
             }
         });
-        this.miniPlay.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.ui.album.x8s.CustomMediaContoller.5
-            @Override // android.view.View.OnClickListener
+        this.miniPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 CustomMediaContoller.this.onPlay();
             }
         });
-        this.backBtn.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.ui.album.x8s.CustomMediaContoller.6
-            @Override // android.view.View.OnClickListener
+        this.backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 CustomMediaContoller.this.mediaPlayer.onDestroy();
             }

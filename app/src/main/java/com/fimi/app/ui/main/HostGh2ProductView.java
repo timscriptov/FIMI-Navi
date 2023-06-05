@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 import com.fimi.android.app.R;
 
-/* loaded from: classes.dex */
+
 public class HostGh2ProductView extends FrameLayout {
     public HostGh2ProductView(@NonNull Context context) {
         super(context);

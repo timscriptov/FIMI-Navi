@@ -11,7 +11,7 @@ import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.database.DatabaseStatement;
 import org.greenrobot.greendao.internal.DaoConfig;
 
-/* loaded from: classes.dex */
+
 public class GH2DataStaticInfoDao extends AbstractDao<GH2DataStaticInfo, Long> {
     public static final String TABLENAME = "GH2_DATA_STATIC_INFO";
 
@@ -33,7 +33,7 @@ public class GH2DataStaticInfoDao extends AbstractDao<GH2DataStaticInfo, Long> {
         db.execSQL(sql);
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public final void bindValues(DatabaseStatement stmt, GH2DataStaticInfo entity) {
         stmt.clearBindings();
         Long id = entity.getId();
@@ -55,7 +55,7 @@ public class GH2DataStaticInfoDao extends AbstractDao<GH2DataStaticInfo, Long> {
         }
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public final void bindValues(SQLiteStatement stmt, GH2DataStaticInfo entity) {
         stmt.clearBindings();
         Long id = entity.getId();
@@ -77,23 +77,23 @@ public class GH2DataStaticInfoDao extends AbstractDao<GH2DataStaticInfo, Long> {
         }
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public Long readKey(Cursor cursor, int offset) {
-        if (cursor.isNull(offset + 0)) {
+        if (cursor.isNull(offset)) {
             return null;
         }
-        return Long.valueOf(cursor.getLong(offset + 0));
+        return Long.valueOf(cursor.getLong(offset));
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public GH2DataStaticInfo readEntity(Cursor cursor, int offset) {
-        GH2DataStaticInfo entity = new GH2DataStaticInfo(cursor.isNull(offset + 0) ? null : Long.valueOf(cursor.getLong(offset + 0)), cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), cursor.getInt(offset + 2), cursor.getInt(offset + 3), cursor.getDouble(offset + 4), cursor.getDouble(offset + 5), cursor.getDouble(offset + 6), cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        GH2DataStaticInfo entity = new GH2DataStaticInfo(cursor.isNull(offset) ? null : Long.valueOf(cursor.getLong(offset)), cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), cursor.getInt(offset + 2), cursor.getInt(offset + 3), cursor.getDouble(offset + 4), cursor.getDouble(offset + 5), cursor.getDouble(offset + 6), cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
         return entity;
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public void readEntity(Cursor cursor, GH2DataStaticInfo entity, int offset) {
-        entity.setId(cursor.isNull(offset + 0) ? null : Long.valueOf(cursor.getLong(offset + 0)));
+        entity.setId(cursor.isNull(offset) ? null : Long.valueOf(cursor.getLong(offset)));
         entity.setProductModel(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setHandleVersion(cursor.getInt(offset + 2));
         entity.setGimbalVersion(cursor.getInt(offset + 3));
@@ -103,13 +103,13 @@ public class GH2DataStaticInfoDao extends AbstractDao<GH2DataStaticInfo, Long> {
         entity.setCreateTime(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public final Long updateKeyAfterInsert(GH2DataStaticInfo entity, long rowId) {
         entity.setId(Long.valueOf(rowId));
         return Long.valueOf(rowId);
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public Long getKey(GH2DataStaticInfo entity) {
         if (entity != null) {
             return entity.getId();
@@ -117,17 +117,17 @@ public class GH2DataStaticInfoDao extends AbstractDao<GH2DataStaticInfo, Long> {
         return null;
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public boolean hasKey(GH2DataStaticInfo entity) {
         return entity.getId() != null;
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public final boolean isEntityUpdateable() {
         return true;
     }
 
-    /* loaded from: classes.dex */
+
     public static class Properties {
         public static final Property Id = new Property(0, Long.class, "id", true, "_id");
         public static final Property ProductModel = new Property(1, String.class, "productModel", false, "PRODUCT_MODEL");

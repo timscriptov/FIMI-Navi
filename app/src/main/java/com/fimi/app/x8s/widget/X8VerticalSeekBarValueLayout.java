@@ -47,8 +47,8 @@ public class X8VerticalSeekBarValueLayout extends RelativeLayout implements X8Ve
         this.seekBarMin = 10;
         this.curValue = 10;
         this.lastValue = 0;
-        this.mHandler = new Handler() { // from class: com.fimi.app.x8s.widget.X8VerticalSeekBarValueLayout.1
-            @Override // android.os.Handler
+        this.mHandler = new Handler() {
+            @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
             }

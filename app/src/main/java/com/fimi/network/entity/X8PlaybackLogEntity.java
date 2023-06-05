@@ -2,7 +2,7 @@ package com.fimi.network.entity;
 
 import java.io.Serializable;
 
-/* loaded from: classes.dex */
+
 public class X8PlaybackLogEntity implements Serializable {
     private long createTime;
     private String fimiId;

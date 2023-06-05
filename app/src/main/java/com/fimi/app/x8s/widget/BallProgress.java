@@ -23,6 +23,19 @@ public class BallProgress extends View {
         this.b = 0.0f;
     }
 
+    public BallProgress(Context context, AttributeSet attributeSet) {
+        super(context, attributeSet);
+        this.a = 5000.0f;
+        this.b = 0.0f;
+    }
+
+    public BallProgress(Context context, AttributeSet attributeSet, int i2) {
+        super(context, attributeSet, i2);
+        this.a = 5000.0f;
+        this.b = 0.0f;
+        a();
+    }
+
     private void a() {
         this.f2551c = new Paint();
         this.f2551c.setAntiAlias(true);
@@ -45,6 +58,20 @@ public class BallProgress extends View {
         return this.a;
     }
 
+    public void setProgress(float f2) {
+        double sin = Math.sin((f2 * 3.141592653589793d) / 180.0d);
+        int i2 = (sin > 0.0d ? 1 : (sin == 0.0d ? 0 : -1));
+        if (i2 == 0) {
+            this.a = 5000.0f;
+        } else if (i2 > 0) {
+            this.a = (float) ((sin * 5000.0d) + 5000.0d);
+        } else {
+            this.a = (float) (5000.0d - Math.abs(sin * 5000.0d));
+        }
+        this.a = Math.abs(10000.0f - this.a);
+        postInvalidate();
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -60,32 +87,5 @@ public class BallProgress extends View {
             this.b = (180.0f - Math.abs(f2)) + 180.0f;
         }
         postInvalidate();
-    }
-
-    public void setProgress(float f2) {
-        double sin = Math.sin((f2 * 3.141592653589793d) / 180.0d);
-        int i2 = (sin > 0.0d ? 1 : (sin == 0.0d ? 0 : -1));
-        if (i2 == 0) {
-            this.a = 5000.0f;
-        } else if (i2 > 0) {
-            this.a = (float) ((sin * 5000.0d) + 5000.0d);
-        } else {
-            this.a = (float) (5000.0d - Math.abs(sin * 5000.0d));
-        }
-        this.a = Math.abs(10000.0f - this.a);
-        postInvalidate();
-    }
-
-    public BallProgress(Context context, AttributeSet attributeSet) {
-        super(context, attributeSet);
-        this.a = 5000.0f;
-        this.b = 0.0f;
-    }
-
-    public BallProgress(Context context, AttributeSet attributeSet, int i2) {
-        super(context, attributeSet, i2);
-        this.a = 5000.0f;
-        this.b = 0.0f;
-        a();
     }
 }

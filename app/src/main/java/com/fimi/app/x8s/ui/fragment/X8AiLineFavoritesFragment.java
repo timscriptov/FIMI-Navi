@@ -22,7 +22,7 @@ import com.fimi.x8sdk.map.MapType;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class X8AiLineFavoritesFragment extends Fragment {
     public static final String ARGS_PAGE = "X8AiLineFavoritesFragment";
     private X8SingleCustomDialog dialog;
@@ -34,17 +34,17 @@ public class X8AiLineFavoritesFragment extends Fragment {
     private IX8AiLineHistoryListener mX8AiLineSelectListener;
     private View rootView;
 
-    @Override // android.support.v4.app.Fragment
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
-    @Override // android.support.v4.app.Fragment
+    @Override
     @Nullable
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         if (this.rootView == null) {
             this.rootView = inflater.inflate(R.layout.x8_fragment_ai_line_history, container, false);
-            this.mRecyclerView = (RecyclerView) this.rootView.findViewById(R.id.recycleview);
+            this.mRecyclerView = this.rootView.findViewById(R.id.recycleview);
             this.list = X8AiLinePointInfoHelper.getIntance().getLastItem(GlobalConfig.getInstance().getMapType() == MapType.AMap ? 1 : 0, true, 20);
             LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
             this.mRecyclerView.setLayoutManager(layoutManager);
@@ -117,7 +117,7 @@ public class X8AiLineFavoritesFragment extends Fragment {
                 if (this.dialog == null) {
                     String t = getContext().getString(R.string.x8_ai_line_not_enough_save_title);
                     String m = getContext().getString(R.string.x8_ai_line_not_enough_save_tip);
-                    this.dialog = new X8SingleCustomDialog(getContext(), t, m, new X8SingleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.ui.fragment.X8AiLineFavoritesFragment.1
+                    this.dialog = new X8SingleCustomDialog(getContext(), t, m, new X8SingleCustomDialog.onDialogButtonClickListener() {
                         @Override
                         // com.fimi.app.x8s.widget.X8SingleCustomDialog.onDialogButtonClickListener
                         public void onSingleButtonClick() {

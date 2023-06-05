@@ -7,9 +7,9 @@ import android.os.Bundle;
 import com.fimi.app.x8s.X8Application;
 import com.fimi.x8sdk.controller.ConnectRcManager;
 
-/* loaded from: classes.dex */
+
 public class FimiAoaSplashActivity extends Activity {
-    @Override // android.app.Activity
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if ((getIntent().getFlags() & 4194304) != 0) {

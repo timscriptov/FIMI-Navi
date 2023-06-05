@@ -13,14 +13,14 @@ import com.fimi.x8sdk.listener.JsonCallBackListener;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes2.dex */
+
 public class JsonNoticeManager {
-    private static JsonNoticeManager noticeManager = new JsonNoticeManager();
+    private static final JsonNoticeManager noticeManager = new JsonNoticeManager();
     private final int outTimeMsg = 1;
     private final int normalMsg = 0;
     List<JsonCallBackListener> callBackListeners = new ArrayList();
-    Handler mHandler = new Handler(Looper.getMainLooper()) { // from class: com.fimi.x8sdk.connect.JsonNoticeManager.1
-        @Override // android.os.Handler
+    Handler mHandler = new Handler(Looper.getMainLooper()) {
+        @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
@@ -30,7 +30,7 @@ public class JsonNoticeManager {
                             JSONObject rtJson = (JSONObject) msg.obj;
                             switch (rtJson.getIntValue("msg_id")) {
                                 case 1:
-                                    CameraParamsJson msg9ParamJson2 = (CameraParamsJson) JSON.parseObject(rtJson.toString(), CameraParamsJson.class);
+                                    CameraParamsJson msg9ParamJson2 = JSON.parseObject(rtJson.toString(), CameraParamsJson.class);
                                     if (msg9ParamJson2.getRval() >= 0) {
                                         listener.onSuccess(msg9ParamJson2);
                                         listener.onJSONSuccess(rtJson);
@@ -41,7 +41,7 @@ public class JsonNoticeManager {
                                     }
                                 case 2:
                                 case 9:
-                                    CameraParamsJson msg9ParamJson = (CameraParamsJson) JSON.parseObject(rtJson.toString(), CameraParamsJson.class);
+                                    CameraParamsJson msg9ParamJson = JSON.parseObject(rtJson.toString(), CameraParamsJson.class);
                                     if (msg9ParamJson.getRval() >= 0) {
                                         listener.onSuccess(msg9ParamJson);
                                         listener.onJSONSuccess(rtJson);
@@ -56,7 +56,7 @@ public class JsonNoticeManager {
                                         listener.onJSONSuccess(rtJson);
                                         break;
                                     } else {
-                                        AckCamJsonInfo failAck = (AckCamJsonInfo) JSON.parseObject(rtJson.toString(), AckCamJsonInfo.class);
+                                        AckCamJsonInfo failAck = JSON.parseObject(rtJson.toString(), AckCamJsonInfo.class);
                                         listener.onFail(failAck.getRval(), failAck.getMsg_id(), failAck.getType());
                                         break;
                                     }
@@ -74,7 +74,6 @@ public class JsonNoticeManager {
                     }
                     return;
                 default:
-                    return;
             }
         }
     };
@@ -88,9 +87,7 @@ public class JsonNoticeManager {
     }
 
     public void removeListener(JsonCallBackListener listener) {
-        if (this.callBackListeners.contains(listener)) {
-            this.callBackListeners.remove(listener);
-        }
+        this.callBackListeners.remove(listener);
     }
 
     public void removeAll() {

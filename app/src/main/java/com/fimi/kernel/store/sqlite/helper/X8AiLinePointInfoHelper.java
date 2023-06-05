@@ -12,11 +12,11 @@ import org.greenrobot.greendao.query.WhereCondition;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class X8AiLinePointInfoHelper {
-    private static X8AiLinePointInfoHelper instance = new X8AiLinePointInfoHelper();
-    private X8AiLinePointInfoDao lineDao = DbCore.getDaoSession().getX8AiLinePointInfoDao();
-    private X8AiLinePointLatlngInfoDao pointDao = DbCore.getDaoSession().getX8AiLinePointLatlngInfoDao();
+    private static final X8AiLinePointInfoHelper instance = new X8AiLinePointInfoHelper();
+    private final X8AiLinePointInfoDao lineDao = DbCore.getDaoSession().getX8AiLinePointInfoDao();
+    private final X8AiLinePointLatlngInfoDao pointDao = DbCore.getDaoSession().getX8AiLinePointLatlngInfoDao();
 
     public static X8AiLinePointInfoHelper getIntance() {
         return instance;
@@ -47,7 +47,7 @@ public class X8AiLinePointInfoHelper {
             qb.where(where, where1).build();
         } else {
             WhereCondition where2 = X8AiLinePointInfoDao.Properties.MapType.eq(Integer.valueOf(mapType));
-            qb.where(where2, new WhereCondition[0]);
+            qb.where(where2);
         }
         qb.orderDesc(X8AiLinePointInfoDao.Properties.Id);
         qb.limit(count);
@@ -66,7 +66,7 @@ public class X8AiLinePointInfoHelper {
     public X8AiLinePointInfo getLineInfoById(long lineId) {
         QueryBuilder<X8AiLinePointInfo> qb = this.lineDao.queryBuilder();
         WhereCondition where = X8AiLinePointInfoDao.Properties.Id.eq(Long.valueOf(lineId));
-        qb.where(where, new WhereCondition[0]);
+        qb.where(where);
         qb.orderDesc(X8AiLinePointInfoDao.Properties.Id);
         List<X8AiLinePointInfo> list = qb.list();
         return list.get(0);
@@ -81,7 +81,7 @@ public class X8AiLinePointInfoHelper {
     public List<X8AiLinePointLatlngInfo> getLatlngByLineId(int mapType, long lineId) {
         QueryBuilder<X8AiLinePointLatlngInfo> qb = this.pointDao.queryBuilder();
         WhereCondition where = X8AiLinePointLatlngInfoDao.Properties.LineId.eq(Long.valueOf(lineId));
-        qb.where(where, new WhereCondition[0]);
+        qb.where(where);
         List<X8AiLinePointLatlngInfo> list = qb.list();
         return list;
     }

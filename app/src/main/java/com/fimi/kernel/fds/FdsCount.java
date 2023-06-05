@@ -1,6 +1,6 @@
 package com.fimi.kernel.fds;
 
-/* loaded from: classes.dex */
+
 public class FdsCount {
     private int complete;
     private int remainder;

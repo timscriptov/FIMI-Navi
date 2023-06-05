@@ -10,27 +10,27 @@ import java.io.FileDescriptor;
 import java.io.IOException;
 import java.util.Map;
 
-/* loaded from: classes.dex */
+
 public interface IMediaPlayer {
-    public static final int MEDIA_ERROR_IO = -1004;
-    public static final int MEDIA_ERROR_MALFORMED = -1007;
-    public static final int MEDIA_ERROR_NOT_VALID_FOR_PROGRESSIVE_PLAYBACK = 200;
-    public static final int MEDIA_ERROR_SERVER_DIED = 100;
-    public static final int MEDIA_ERROR_TIMED_OUT = -110;
-    public static final int MEDIA_ERROR_UNKNOWN = 1;
-    public static final int MEDIA_ERROR_UNSUPPORTED = -1010;
-    public static final int MEDIA_INFO_BAD_INTERLEAVING = 800;
-    public static final int MEDIA_INFO_BUFFERING_END = 702;
-    public static final int MEDIA_INFO_BUFFERING_START = 701;
-    public static final int MEDIA_INFO_METADATA_UPDATE = 802;
-    public static final int MEDIA_INFO_NETWORK_BANDWIDTH = 703;
-    public static final int MEDIA_INFO_NOT_SEEKABLE = 801;
-    public static final int MEDIA_INFO_STARTED_AS_NEXT = 2;
-    public static final int MEDIA_INFO_TIMED_TEXT_ERROR = 900;
-    public static final int MEDIA_INFO_UNKNOWN = 1;
-    public static final int MEDIA_INFO_VIDEO_RENDERING_START = 3;
-    public static final int MEDIA_INFO_VIDEO_ROTATION_CHANGED = 10001;
-    public static final int MEDIA_INFO_VIDEO_TRACK_LAGGING = 700;
+    int MEDIA_ERROR_IO = -1004;
+    int MEDIA_ERROR_MALFORMED = -1007;
+    int MEDIA_ERROR_NOT_VALID_FOR_PROGRESSIVE_PLAYBACK = 200;
+    int MEDIA_ERROR_SERVER_DIED = 100;
+    int MEDIA_ERROR_TIMED_OUT = -110;
+    int MEDIA_ERROR_UNKNOWN = 1;
+    int MEDIA_ERROR_UNSUPPORTED = -1010;
+    int MEDIA_INFO_BAD_INTERLEAVING = 800;
+    int MEDIA_INFO_BUFFERING_END = 702;
+    int MEDIA_INFO_BUFFERING_START = 701;
+    int MEDIA_INFO_METADATA_UPDATE = 802;
+    int MEDIA_INFO_NETWORK_BANDWIDTH = 703;
+    int MEDIA_INFO_NOT_SEEKABLE = 801;
+    int MEDIA_INFO_STARTED_AS_NEXT = 2;
+    int MEDIA_INFO_TIMED_TEXT_ERROR = 900;
+    int MEDIA_INFO_UNKNOWN = 1;
+    int MEDIA_INFO_VIDEO_RENDERING_START = 3;
+    int MEDIA_INFO_VIDEO_ROTATION_CHANGED = 10001;
+    int MEDIA_INFO_VIDEO_TRACK_LAGGING = 700;
 
     int PlayerGetNetworkInfo(int[] iArr);
 
@@ -120,38 +120,38 @@ public interface IMediaPlayer {
 
     void stop() throws IllegalStateException;
 
-    /* loaded from: classes.dex */
-    public interface OnBufferingUpdateListener {
+
+    interface OnBufferingUpdateListener {
         void onBufferingUpdate(IMediaPlayer iMediaPlayer, int i);
     }
 
-    /* loaded from: classes.dex */
-    public interface OnCompletionListener {
+
+    interface OnCompletionListener {
         void onCompletion(IMediaPlayer iMediaPlayer);
     }
 
-    /* loaded from: classes.dex */
-    public interface OnErrorListener {
+
+    interface OnErrorListener {
         boolean onError(IMediaPlayer iMediaPlayer, int i, int i2);
     }
 
-    /* loaded from: classes.dex */
-    public interface OnInfoListener {
+
+    interface OnInfoListener {
         boolean onInfo(IMediaPlayer iMediaPlayer, int i, int i2);
     }
 
-    /* loaded from: classes.dex */
-    public interface OnPreparedListener {
+
+    interface OnPreparedListener {
         void onPrepared(IMediaPlayer iMediaPlayer);
     }
 
-    /* loaded from: classes.dex */
-    public interface OnSeekCompleteListener {
+
+    interface OnSeekCompleteListener {
         void onSeekComplete(IMediaPlayer iMediaPlayer);
     }
 
-    /* loaded from: classes.dex */
-    public interface OnVideoSizeChangedListener {
+
+    interface OnVideoSizeChangedListener {
         void onVideoSizeChanged(IMediaPlayer iMediaPlayer, int i, int i2, int i3, int i4);
     }
 }

@@ -6,13 +6,11 @@ import com.fimi.x8sdk.cmdsenum.X8FpvSignalState;
 import com.fimi.x8sdk.modulestate.StateManager;
 
 
-
-/* loaded from: classes2.dex */
 public class AutoRelayHeart extends X8BaseMessage {
     int channel;
     short status;
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         float distance;
         super.decrypt(packet);
@@ -60,7 +58,7 @@ public class AutoRelayHeart extends X8BaseMessage {
         this.status = status;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public String toString() {
         return "AutoRelayHeart{status=" + ((int) this.status) + '}';
     }

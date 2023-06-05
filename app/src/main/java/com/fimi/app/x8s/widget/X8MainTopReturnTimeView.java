@@ -20,14 +20,14 @@ import com.fimi.kernel.utils.AbViewUtil;
 
 public class X8MainTopReturnTimeView extends View {
     private static final String TAG = "X8TopReturnView";
-    private int SPACING;
+    private final int SPACING;
     private Bitmap mBpEmpty;
     private int mBpEmptySource;
     private Bitmap mBpFull;
     private int mBpFullSource;
     private Bitmap mBpMiddle;
     private int mBpMiddleSource;
-    private Paint mPaint;
+    private final Paint mPaint;
     private int percent;
 
     public X8MainTopReturnTimeView(Context context, @Nullable AttributeSet attrs) {
@@ -60,7 +60,7 @@ public class X8MainTopReturnTimeView extends View {
         super.onDraw(canvas);
         if (this.mBpEmpty != null) {
         }
-        canvas.drawBitmap(this.mBpEmpty, 0.0f, 0.0f, (Paint) null);
+        canvas.drawBitmap(this.mBpEmpty, 0.0f, 0.0f, null);
         if (this.percent > 0) {
             drawPercent(canvas, this.percent);
         }
@@ -78,9 +78,9 @@ public class X8MainTopReturnTimeView extends View {
         path.lineTo(getWidth(), 0.0f);
         path.close();
         if (percent > 50) {
-            canvas.drawBitmap(this.mBpFull, 0.0f, 0.0f, (Paint) null);
+            canvas.drawBitmap(this.mBpFull, 0.0f, 0.0f, null);
         } else {
-            canvas.drawBitmap(this.mBpMiddle, 0.0f, 0.0f, (Paint) null);
+            canvas.drawBitmap(this.mBpMiddle, 0.0f, 0.0f, null);
         }
         this.mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
         canvas.drawPath(path, this.mPaint);

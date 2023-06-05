@@ -1,8 +1,6 @@
 package com.fimi.x8sdk.dataparser.cmd;
 
 
-
-/* loaded from: classes2.dex */
 public class CmdAiLinePoints {
     public int altitude;
     public int altitudePIO;

@@ -25,7 +25,7 @@ import org.apache.mina.proxy.handlers.http.ntlm.NTLMConstants;
 
 import java.io.File;
 
-/* loaded from: classes.dex */
+
 public class DownloadApkService extends Service {
     public static final String APK_FILE_NAME = "temp_update.apk";
     private static final int NOTIFACTION_ID = 8888;
@@ -34,14 +34,14 @@ public class DownloadApkService extends Service {
     private Notification notification;
     private NotificationManager notificationManager;
     private String path;
-    private Handler handler = new Handler() { // from class: com.fimi.apk.DownloadApkService.1
+    private final Handler handler = new Handler() {
         private int nPos = 0;
 
         public void resetPos() {
             this.nPos = 0;
         }
 
-        @Override // android.os.Handler
+        @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
@@ -58,12 +58,11 @@ public class DownloadApkService extends Service {
                     resetPos();
                     return;
                 default:
-                    return;
             }
         }
     };
-    public DisposeDataHandle dataHandle = new DisposeDataHandle(new DisposeDownloadListener() { // from class: com.fimi.apk.DownloadApkService.2
-        @Override // com.fimi.kernel.network.okhttp.listener.DisposeDownloadListener
+    public DisposeDataHandle dataHandle = new DisposeDataHandle(new DisposeDownloadListener() {
+        @Override
         public void onProgress(int progrss, int currentLength) {
             Message message = new Message();
             message.what = 0;
@@ -73,7 +72,7 @@ public class DownloadApkService extends Service {
             Log.i("zdy", "" + progrss + " +++++++++++++  " + currentLength);
         }
 
-        @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+        @Override
         public void onSuccess(Object responseObj) {
             Uri data;
             DownloadApkService.this.handler.sendEmptyMessage(1);
@@ -93,7 +92,7 @@ public class DownloadApkService extends Service {
             DownloadApkService.this.stopSelf();
         }
 
-        @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+        @Override
         public void onFailure(Object reasonObj) {
             DownloadApkService.this.handler.sendEmptyMessage(1);
             DownloadApkService.this.notificationManager.cancel(DownloadApkService.NOTIFACTION_ID);
@@ -102,7 +101,7 @@ public class DownloadApkService extends Service {
         }
     });
 
-    @Override // android.app.Service
+    @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         String url = intent.getStringExtra("down_url");
         if (intent != null && url != null && !isDownApking) {
@@ -113,12 +112,12 @@ public class DownloadApkService extends Service {
         return super.onStartCommand(intent, flags, startId);
     }
 
-    @Override // android.app.Service
+    @Override
     public IBinder onBind(Intent intent) {
         return null;
     }
 
-    @Override // android.app.Service
+    @Override
     public void onCreate() {
         super.onCreate();
         this.notificationManager = (NotificationManager) getSystemService("notification");

@@ -24,7 +24,7 @@ public class AckVersion extends X8BaseMessage {
         this.versionDetails = versionDetails;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         int verLen = packet.getPayLoad4().getPayloadData().length;
@@ -166,9 +166,9 @@ public class AckVersion extends X8BaseMessage {
         }
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public String toString() {
-        String v = "AckVersion{type=" + this.type + ", model=" + this.model + ", reserved1=" + this.reserved1 + ", reserved2=" + this.reserved2 + ", hardwareVersion=" + this.hardwareVersion + ", softVersion=" + this.softVersion + ", idA=" + this.idA + ", idB=" + this.idB + ", idC=" + this.idC + ", idD=" + this.idD + ", versionDetails='" + this.versionDetails + '\'' +'}';
+        String v = "AckVersion{type=" + this.type + ", model=" + this.model + ", reserved1=" + this.reserved1 + ", reserved2=" + this.reserved2 + ", hardwareVersion=" + this.hardwareVersion + ", softVersion=" + this.softVersion + ", idA=" + this.idA + ", idB=" + this.idB + ", idC=" + this.idC + ", idD=" + this.idD + ", versionDetails='" + this.versionDetails + '\'' + '}';
         return v;
     }
 

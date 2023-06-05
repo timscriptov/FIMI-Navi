@@ -2,13 +2,13 @@ package com.fimi.x8sdk.dataparser;
 
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 
-/* loaded from: classes2.dex */
+
 public class AckCloudParamsNew extends X8BaseMessage {
     private double param1;
     private double param2;
     private double param3;
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         this.param1 = packet.getPayLoad4().getByte();

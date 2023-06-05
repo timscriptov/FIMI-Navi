@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
-/* loaded from: classes2.dex */
 public class AutoNotifyFwFile extends X8BaseMessage {
     int devModuleId;
     int devTargetId;
@@ -21,7 +19,7 @@ public class AutoNotifyFwFile extends X8BaseMessage {
     int schedule;
     int stage;
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         this.notifyType = packet.getPayLoad4().getByte();
@@ -74,7 +72,6 @@ public class AutoNotifyFwFile extends X8BaseMessage {
                 this.result = packet.getPayLoad4().getShort();
                 return;
             default:
-                return;
         }
     }
 
@@ -122,7 +119,7 @@ public class AutoNotifyFwFile extends X8BaseMessage {
         return this.fwTypeList;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public String toString() {
         return "AutoNotifyFwFile{notifyType=" + this.notifyType + ", result=" + this.result + ", fwNumber=" + this.fwNumber + ", devTargetId=" + this.devTargetId + ", devModuleId=" + this.devModuleId + ", msgModuleId=" + this.msgModuleId + ", stage=" + this.stage + ", schedule=" + this.schedule + ", reserve=" + this.reserve + '}';
     }

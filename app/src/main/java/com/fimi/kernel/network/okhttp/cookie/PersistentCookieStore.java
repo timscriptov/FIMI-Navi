@@ -21,7 +21,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* loaded from: classes.dex */
+
 public class PersistentCookieStore implements CookieStore {
     private static final String COOKIE_NAME_PREFIX = "cookie_";
     private static final String COOKIE_PREFS = "CookiePrefsFile";
@@ -34,7 +34,7 @@ public class PersistentCookieStore implements CookieStore {
         this.cookiePrefs = context.getSharedPreferences(COOKIE_PREFS, 0);
         Map<String, ?> prefsMap = this.cookiePrefs.getAll();
         for (Map.Entry<String, ?> entry : prefsMap.entrySet()) {
-            if (((String) entry.getValue()) != null && !((String) entry.getValue()).startsWith(COOKIE_NAME_PREFIX)) {
+            if (entry.getValue() != null && !((String) entry.getValue()).startsWith(COOKIE_NAME_PREFIX)) {
                 String[] cookieNames = TextUtils.split((String) entry.getValue(), ",");
                 for (String name : cookieNames) {
                     String encodedCookie = this.cookiePrefs.getString(COOKIE_NAME_PREFIX + name, null);
@@ -49,7 +49,7 @@ public class PersistentCookieStore implements CookieStore {
         }
     }
 
-    @Override // java.net.CookieStore
+    @Override
     public void add(URI uri, HttpCookie cookie) {
         String name = getCookieToken(uri, cookie);
         if (!cookie.hasExpired()) {
@@ -70,7 +70,7 @@ public class PersistentCookieStore implements CookieStore {
         return cookie.getName() + cookie.getDomain();
     }
 
-    @Override // java.net.CookieStore
+    @Override
     public List<HttpCookie> get(URI uri) {
         ArrayList<HttpCookie> ret = new ArrayList<>();
         if (this.cookies.containsKey(uri.getHost())) {
@@ -79,7 +79,7 @@ public class PersistentCookieStore implements CookieStore {
         return ret;
     }
 
-    @Override // java.net.CookieStore
+    @Override
     public boolean removeAll() {
         SharedPreferences.Editor prefsWriter = this.cookiePrefs.edit();
         prefsWriter.clear();
@@ -88,7 +88,7 @@ public class PersistentCookieStore implements CookieStore {
         return true;
     }
 
-    @Override // java.net.CookieStore
+    @Override
     public boolean remove(URI uri, HttpCookie cookie) {
         String name = getCookieToken(uri, cookie);
         if (this.cookies.containsKey(uri.getHost()) && this.cookies.get(uri.getHost()).containsKey(name)) {
@@ -104,7 +104,7 @@ public class PersistentCookieStore implements CookieStore {
         return false;
     }
 
-    @Override // java.net.CookieStore
+    @Override
     public List<HttpCookie> getCookies() {
         ArrayList<HttpCookie> ret = new ArrayList<>();
         for (String key : this.cookies.keySet()) {
@@ -113,7 +113,7 @@ public class PersistentCookieStore implements CookieStore {
         return ret;
     }
 
-    @Override // java.net.CookieStore
+    @Override
     public List<URI> getURIs() {
         ArrayList<URI> ret = new ArrayList<>();
         for (String key : this.cookies.keySet()) {

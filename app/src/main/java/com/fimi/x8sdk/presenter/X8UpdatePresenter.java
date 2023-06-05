@@ -36,7 +36,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/* loaded from: classes2.dex */
+
 public class X8UpdatePresenter extends BasePresenter implements IUpdateAction, UpdateDateListener {
     private final int EACH_PACKAGE_LEN = 1024;
     private final int CONTINUOUS_MAX_NUMBER = 16;
@@ -52,7 +52,7 @@ public class X8UpdatePresenter extends BasePresenter implements IUpdateAction, U
     int cameraConnectedState = -1;
     boolean isCameraUpdate = false;
     private int aggregateProgress;
-    private Context context;
+    private final Context context;
     private List<UpdateCurrentProgressEntity> currentProgressEntityList;
     private byte[] fileBytes;
     private int fileProgress;
@@ -68,15 +68,15 @@ public class X8UpdatePresenter extends BasePresenter implements IUpdateAction, U
     private Thread updateThread;
     private int packNum = 0;
     private boolean updateFailure = false;
-    private volatile List<FwInfo> fwInfos = new ArrayList();
+    private final List<FwInfo> fwInfos = new ArrayList();
     private boolean hasAccumulate = false;
     private Timer checkUpdateTimeout = new Timer();
     private boolean isLockOffset = false;
     private int callbackOffset = 0;
     private boolean waitSend = false;
     @SuppressLint({"HandlerLeak"})
-    private Handler handler = new Handler() { // from class: com.fimi.x8sdk.presenter.X8UpdatePresenter.3
-        @Override // android.os.Handler
+    private final Handler handler = new Handler() {
+        @Override
         public void handleMessage(Message msg) {
             if (msg.what == 1) {
                 X8UpdatePresenter.this.ix8UpdateProgressView.showUpdateProgress(true, msg.arg1, null, X8UpdatePresenter.this.firewareName);
@@ -92,7 +92,7 @@ public class X8UpdatePresenter extends BasePresenter implements IUpdateAction, U
                 }
                 for (int i2 = 0; i2 < X8UpdatePresenter.this.fwInfos.size() - 1; i2++) {
                     for (int j = X8UpdatePresenter.this.fwInfos.size() - 1; j > i2; j--) {
-                        if (((FwInfo) X8UpdatePresenter.this.fwInfos.get(j)).getTypeId() == ((FwInfo) X8UpdatePresenter.this.fwInfos.get(i2)).getTypeId() && ((FwInfo) X8UpdatePresenter.this.fwInfos.get(j)).getModelId() == ((FwInfo) X8UpdatePresenter.this.fwInfos.get(i2)).getModelId()) {
+                        if (X8UpdatePresenter.this.fwInfos.get(j).getTypeId() == X8UpdatePresenter.this.fwInfos.get(i2).getTypeId() && X8UpdatePresenter.this.fwInfos.get(j).getModelId() == X8UpdatePresenter.this.fwInfos.get(i2).getModelId()) {
                             X8UpdatePresenter.this.fwInfos.remove(j);
                         }
                     }
@@ -103,13 +103,13 @@ public class X8UpdatePresenter extends BasePresenter implements IUpdateAction, U
             }
         }
     };
-    public IConnectResultListener mIConnectResultListener = new IConnectResultListener() { // from class: com.fimi.x8sdk.presenter.X8UpdatePresenter.5
-        @Override // com.fimi.kernel.connect.interfaces.IConnectResultListener
+    public IConnectResultListener mIConnectResultListener = new IConnectResultListener() {
+        @Override
         public void onConnected(String msg) {
             StateManager.getInstance().startUpdateTimer();
         }
 
-        @Override // com.fimi.kernel.connect.interfaces.IConnectResultListener
+        @Override
         public void onDisconnect(String msg) {
             if (!X8UpdatePresenter.this.containRemoteControl()) {
                 X8UpdatePresenter.this.updateFailure = true;
@@ -122,15 +122,15 @@ public class X8UpdatePresenter extends BasePresenter implements IUpdateAction, U
             }
         }
 
-        @Override // com.fimi.kernel.connect.interfaces.IConnectResultListener
+        @Override
         public void onConnectError(String msg) {
         }
 
-        @Override // com.fimi.kernel.connect.interfaces.IConnectResultListener
+        @Override
         public void onDeviceConnect() {
         }
 
-        @Override // com.fimi.kernel.connect.interfaces.IConnectResultListener
+        @Override
         public void onDeviceDisConnnect() {
         }
     };
@@ -186,7 +186,7 @@ public class X8UpdatePresenter extends BasePresenter implements IUpdateAction, U
         this.updateThread.start();
     }
 
-    @Override // com.fimi.x8sdk.common.BasePresenter
+    @Override
     public void reponseCmd(boolean isAck, int groupId, int msgId, ILinkMessage packet, BaseCommand bcd) {
         AckUpdateCurrentProgress ackUpdateCurrentProgress;
         int deviceNumber;
@@ -286,8 +286,8 @@ public class X8UpdatePresenter extends BasePresenter implements IUpdateAction, U
                 this.currentProgressEntityList = ackUpdateCurrentProgress.getUpdateCurrentProgressEntitys();
                 for (int i = 0; i < this.currentProgressEntityList.size(); i++) {
                     if ((containCamera(this.currentProgressEntityList.get(i).getDevModuleID(), this.currentProgressEntityList.get(i).getDevTargetID()) || containRemoteControl()) && (this.fileProgress + this.notifyProgress == 100 || this.currentProgressEntityList.get(this.currentProgressEntityList.size() - 1).getSchedule() == 100)) {
-                        this.handler.postDelayed(new Runnable() { // from class: com.fimi.x8sdk.presenter.X8UpdatePresenter.1
-                            @Override // java.lang.Runnable
+                        this.handler.postDelayed(new Runnable() {
+                            @Override
                             public void run() {
                                 X8UpdatePresenter.this.updateFailure = false;
                                 X8UpdatePresenter.this.updateProgressView(2, 100);
@@ -348,20 +348,20 @@ public class X8UpdatePresenter extends BasePresenter implements IUpdateAction, U
         }
     }
 
-    @Override // com.fimi.x8sdk.ivew.IUpdateAction
+    @Override
     public void queryCurUpdateStatus(UiCallBackListener callBackListener) {
         BaseCommand command = new FwUpdateCollection().queryCurUpdateStatus();
         sendCmd(command);
     }
 
-    @Override // com.fimi.x8sdk.ivew.IUpdateAction
+    @Override
     public void firmwareBuildPack(final List<FwInfo> fwInfoList) {
         this.fwInfoList = fwInfoList;
-        ThreadUtils.execute(new Runnable() { // from class: com.fimi.x8sdk.presenter.X8UpdatePresenter.2
-            @Override // java.lang.Runnable
+        ThreadUtils.execute(new Runnable() {
+            @Override
             public void run() {
-                IBuildPackInfo pack = new FirmwareBuildPack(new FirmwareBuildPack.MergFileListener() { // from class: com.fimi.x8sdk.presenter.X8UpdatePresenter.2.1
-                    @Override // com.fimi.x8sdk.update.fwpack.FirmwareBuildPack.MergFileListener
+                IBuildPackInfo pack = new FirmwareBuildPack(new FirmwareBuildPack.MergFileListener() {
+                    @Override
                     public void mergResult(int result) {
                         X8UpdatePresenter.this.fileBytes = FileUtil.getFileBytes(FirmwareBuildPack.PKG_UPDATE_FILE);
                         X8UpdatePresenter.this.residueNum = X8UpdatePresenter.this.fileBytes.length % 1024;
@@ -421,18 +421,15 @@ public class X8UpdatePresenter extends BasePresenter implements IUpdateAction, U
     }
 
     private boolean containCamera(int modelID, int typeID) {
-        if (modelID == 2 && typeID == 4) {
-            return true;
-        }
-        return false;
+        return modelID == 2 && typeID == 4;
     }
 
-    @Override // com.fimi.x8sdk.ivew.IUpdateAction
+    @Override
     public void setOnUpdateProgress(IX8UpdateProgressView ix8UpdateProgressView) {
         this.ix8UpdateProgressView = ix8UpdateProgressView;
     }
 
-    @Override // com.fimi.kernel.connect.session.UpdateDateListener
+    @Override
     public void onUpdateDateCallBack(UpdateDateMessage updateDateMessage) {
         this.callbackOffset = updateDateMessage.getFileOffset();
         try {
@@ -475,8 +472,8 @@ public class X8UpdatePresenter extends BasePresenter implements IUpdateAction, U
         if (this.checkUpdateTimeout == null) {
             this.checkUpdateTimeout = new Timer();
         }
-        this.checkUpdateTimeout.schedule(new TimerTask() { // from class: com.fimi.x8sdk.presenter.X8UpdatePresenter.4
-            @Override // java.util.TimerTask, java.lang.Runnable
+        this.checkUpdateTimeout.schedule(new TimerTask() {
+            @Override
             public void run() {
                 if (X8UpdatePresenter.this.updateState != UpdateState.updateEnd) {
                     if (X8UpdatePresenter.this.startCheckUpdateTimeOut) {
@@ -507,11 +504,7 @@ public class X8UpdatePresenter extends BasePresenter implements IUpdateAction, U
 
     private boolean isAdd(FwInfo fwInfo) {
         for (FwInfo info : this.fwInfos) {
-            if (info.getModelId() == fwInfo.getModelId() && info.getTypeId() == fwInfo.getTypeId()) {
-                this.alreadyExist = true;
-            } else {
-                this.alreadyExist = false;
-            }
+            this.alreadyExist = info.getModelId() == fwInfo.getModelId() && info.getTypeId() == fwInfo.getTypeId();
         }
         return this.alreadyExist;
     }
@@ -602,13 +595,13 @@ public class X8UpdatePresenter extends BasePresenter implements IUpdateAction, U
         }
     }
 
-    @Override // com.fimi.x8sdk.ivew.IUpdateAction
+    @Override
     public void removeNoticeList() {
         SessionManager.getInstance().removeNoticeList(this.mIConnectResultListener);
         removeNoticeListener();
     }
 
-    /* loaded from: classes2.dex */
+
     public enum UpdateState {
         updateInit,
         requestUpdate,
@@ -618,12 +611,12 @@ public class X8UpdatePresenter extends BasePresenter implements IUpdateAction, U
         updateEnd
     }
 
-    /* loaded from: classes2.dex */
+
     public class X8UpdateRunnable implements Runnable {
         private X8UpdateRunnable() {
         }
 
-        @Override // java.lang.Runnable
+        @Override
         public void run() {
             try {
                 X8UpdatePresenter.this.offset = 0.0d;

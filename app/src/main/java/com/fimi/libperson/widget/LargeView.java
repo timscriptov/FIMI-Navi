@@ -14,22 +14,22 @@ import androidx.annotation.Nullable;
 
 import com.fimi.kernel.utils.AbViewUtil;
 
-/* loaded from: classes.dex */
+
 public class LargeView extends View {
     private static final String TAG = "LargeView";
     private static final int sHeight = 1920;
     private static final int sWidth = 1080;
     private Bitmap bitmap;
     private boolean bitmapIsCached;
-    private Paint bitmapPaint;
-    private long duration;
+    private final Paint bitmapPaint;
+    private final long duration;
     private boolean isFirst;
     private boolean isUp;
     private boolean mReady;
-    private Matrix matrix;
+    private final Matrix matrix;
     private float scale;
     private long startTime;
-    private PointF vTranslate;
+    private final PointF vTranslate;
 
     public LargeView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -45,7 +45,7 @@ public class LargeView extends View {
         this.matrix = new Matrix();
     }
 
-    @Override // android.view.View
+    @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         this.matrix.reset();
@@ -58,7 +58,7 @@ public class LargeView extends View {
             }
             long scaleElapsed = System.currentTimeMillis() - this.startTime;
             boolean finished = scaleElapsed > this.duration;
-            float percent = ((float) scaleElapsed) / (((float) this.duration) * 1.0f);
+            float percent = ((float) scaleElapsed) / (((float) this.duration));
             if (!this.isUp) {
                 percent = 1.0f - percent;
             }
@@ -66,7 +66,7 @@ public class LargeView extends View {
             Log.i(TAG, "onDraw: " + this.vTranslate.y + ",scale:" + this.scale + ",percent:" + percent);
             if (finished) {
                 this.startTime = System.currentTimeMillis();
-                this.isUp = this.isUp ? false : true;
+                this.isUp = !this.isUp;
             }
             invalidate();
         }

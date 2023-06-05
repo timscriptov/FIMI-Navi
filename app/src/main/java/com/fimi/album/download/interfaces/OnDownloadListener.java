@@ -2,7 +2,7 @@ package com.fimi.album.download.interfaces;
 
 import com.fimi.album.entity.MediaModel;
 
-/* loaded from: classes.dex */
+
 public interface OnDownloadListener {
     void onFailure(Object obj);
 

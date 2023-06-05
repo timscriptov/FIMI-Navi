@@ -36,7 +36,7 @@ import com.fimi.kernel.utils.SizeTool;
 
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes.dex */
+
 public abstract class X8MediaBaseFragment extends BaseFragment implements INodataTip {
     protected WeakReference<Context> contextWeakReference;
     protected ImageButton lbBottomDelect;
@@ -59,7 +59,7 @@ public abstract class X8MediaBaseFragment extends BaseFragment implements INodat
 
     abstract boolean judgeTypeCurrentFragment();
 
-    @Override // android.support.v4.app.Fragment
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.deleteItemReceiver = new DeleteItemReceiver();
@@ -68,11 +68,11 @@ public abstract class X8MediaBaseFragment extends BaseFragment implements INodat
         this.isCamera = judgeTypeCurrentFragment();
     }
 
-    @Override // com.fimi.kernel.base.BaseFragment, android.support.v4.app.Fragment
+    @Override
     @Nullable
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         int layoutID = getContentID();
-        View view = inflater.inflate(layoutID, (ViewGroup) null);
+        View view = inflater.inflate(layoutID, null);
         initView(view);
         initData();
         initTrans();
@@ -80,28 +80,28 @@ public abstract class X8MediaBaseFragment extends BaseFragment implements INodat
         return view;
     }
 
-    @Override // com.fimi.kernel.base.BaseFragment
+    @Override
     protected void doTrans() {
     }
 
-    @Override // com.fimi.kernel.base.BaseFragment
+    @Override
     protected void initMVP() {
     }
 
-    @Override // com.fimi.kernel.base.BaseFragment
+    @Override
     protected void initData(View view) {
     }
 
-    @Override // com.fimi.kernel.base.BaseFragment
+    @Override
     public int getLayoutId() {
         return 0;
     }
 
     private void initTrans() {
-        this.lbBottomDelect.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.ui.album.x8s.X8MediaBaseFragment.1
-            @Override // android.view.View.OnClickListener
+        this.lbBottomDelect.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
-                X8DoubleCustomDialog doubleCustomDialog = new X8DoubleCustomDialog(X8MediaBaseFragment.this.mContext, X8MediaBaseFragment.this.getString(R.string.x8_album_warn_tip), X8MediaBaseFragment.this.getString(R.string.album_dialog_delete_title), X8MediaBaseFragment.this.getString(R.string.media_delete), new X8DoubleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.ui.album.x8s.X8MediaBaseFragment.1.1
+                X8DoubleCustomDialog doubleCustomDialog = new X8DoubleCustomDialog(X8MediaBaseFragment.this.mContext, X8MediaBaseFragment.this.getString(R.string.x8_album_warn_tip), X8MediaBaseFragment.this.getString(R.string.album_dialog_delete_title), X8MediaBaseFragment.this.getString(R.string.media_delete), new X8DoubleCustomDialog.onDialogButtonClickListener() {
                     @Override
                     // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
                     public void onLeft() {
@@ -120,8 +120,8 @@ public abstract class X8MediaBaseFragment extends BaseFragment implements INodat
                 doubleCustomDialog.show();
             }
         });
-        this.lbBottomDownload.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.ui.album.x8s.X8MediaBaseFragment.2
-            @Override // android.view.View.OnClickListener
+        this.lbBottomDownload.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 if (X8MediaBaseFragment.this.mBaseFragmentPresenter != null) {
                     if (X8MediaBaseFragment.this.mBaseFragmentPresenter.querySelectSize() > 0) {
@@ -135,16 +135,16 @@ public abstract class X8MediaBaseFragment extends BaseFragment implements INodat
     }
 
     void initView(View view) {
-        this.mProgressBar = (ProgressBar) view.findViewById(R.id.loading);
-        this.rlMediaNoDataTip = (RelativeLayout) view.findViewById(R.id.x9_media_no_data_tip);
-        this.lbBottomDelect = (ImageButton) view.findViewById(R.id.ibtn_delete);
-        this.lbBottomDownload = (ImageButton) view.findViewById(R.id.ibtn_download);
-        this.mTvBottomDelete = (TextView) view.findViewById(R.id.tv_bottom_delete);
-        this.mTvBottomDownload = (TextView) view.findViewById(R.id.tv_bottom_download);
-        this.rlMediaSelectBottom = (RelativeLayout) view.findViewById(R.id.rl_bottom_bar);
-        this.mRecyclerView = (RecyclerView) view.findViewById(R.id.recycleview);
-        this.mRlDownload = (RelativeLayout) view.findViewById(R.id.rl_download);
-        this.mRlBottomBar = (RelativeLayout) view.findViewById(R.id.rl_bottom_bar);
+        this.mProgressBar = view.findViewById(R.id.loading);
+        this.rlMediaNoDataTip = view.findViewById(R.id.x9_media_no_data_tip);
+        this.lbBottomDelect = view.findViewById(R.id.ibtn_delete);
+        this.lbBottomDownload = view.findViewById(R.id.ibtn_download);
+        this.mTvBottomDelete = view.findViewById(R.id.tv_bottom_delete);
+        this.mTvBottomDownload = view.findViewById(R.id.tv_bottom_download);
+        this.rlMediaSelectBottom = view.findViewById(R.id.rl_bottom_bar);
+        this.mRecyclerView = view.findViewById(R.id.recycleview);
+        this.mRlDownload = view.findViewById(R.id.rl_download);
+        this.mRlBottomBar = view.findViewById(R.id.rl_bottom_bar);
         if (!this.isCamera) {
             this.mRlDownload.setVisibility(8);
         } else {
@@ -182,7 +182,7 @@ public abstract class X8MediaBaseFragment extends BaseFragment implements INodat
         }
     }
 
-    @Override // com.fimi.kernel.base.BaseFragment, android.support.v4.app.Fragment
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         this.contextWeakReference = new WeakReference<>(context);
@@ -191,7 +191,7 @@ public abstract class X8MediaBaseFragment extends BaseFragment implements INodat
         }
     }
 
-    @Override // android.support.v4.app.Fragment
+    @Override
     public void onDestroy() {
         super.onDestroy();
         this.mISelectData = null;
@@ -269,7 +269,7 @@ public abstract class X8MediaBaseFragment extends BaseFragment implements INodat
         this.rlMediaSelectBottom.setVisibility(8);
     }
 
-    @Override // com.fimi.album.iview.INodataTip
+    @Override
     public void noDataTipCallback(boolean isNodata) {
         if (this.rlMediaNoDataTip != null) {
             if (isNodata) {
@@ -280,7 +280,7 @@ public abstract class X8MediaBaseFragment extends BaseFragment implements INodat
         }
     }
 
-    @Override // com.fimi.album.iview.INodataTip
+    @Override
     public void notifyAddCallback(MediaModel model) {
         this.mBaseFragmentPresenter.notifyAddCallback(model);
     }
@@ -298,19 +298,19 @@ public abstract class X8MediaBaseFragment extends BaseFragment implements INodat
         }
     }
 
-    /* loaded from: classes.dex */
+
     public class MyGridLayoutManager extends GridLayoutManager {
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+
         public MyGridLayoutManager(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
             super(context, attrs, defStyleAttr, defStyleRes);
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+
         public MyGridLayoutManager(Context context, int spanCount) {
             super(context, spanCount);
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+
         public MyGridLayoutManager(Context context, int spanCount, int orientation, boolean reverseLayout) {
             super(context, spanCount, orientation, reverseLayout);
         }

@@ -4,7 +4,7 @@ import com.fimi.x8sdk.dataparser.AckCamJsonInfo;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
+
 public class CameraParamsJson extends AckCamJsonInfo {
     private List<String> options;
     private String permission;

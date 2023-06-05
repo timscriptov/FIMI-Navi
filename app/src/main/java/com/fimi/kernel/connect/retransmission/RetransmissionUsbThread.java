@@ -8,10 +8,10 @@ import com.fimi.kernel.connect.interfaces.IDataTransfer;
 import java.util.Iterator;
 import java.util.concurrent.LinkedBlockingDeque;
 
-/* loaded from: classes.dex */
+
 public class RetransmissionUsbThread extends Thread {
     public LinkedBlockingDeque<BaseCommand> mListReSend = new LinkedBlockingDeque<>();
-    private IDataTransfer mDataTransfer;
+    private final IDataTransfer mDataTransfer;
     private boolean isLoop = true;
 
     public RetransmissionUsbThread(IDataTransfer mDataTransfer) {
@@ -68,7 +68,7 @@ public class RetransmissionUsbThread extends Thread {
         return ret;
     }
 
-    @Override // java.lang.Thread, java.lang.Runnable
+    @Override
     public void run() {
         while (this.isLoop) {
             if (!this.mListReSend.isEmpty()) {

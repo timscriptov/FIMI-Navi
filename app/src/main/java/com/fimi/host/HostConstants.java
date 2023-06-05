@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class HostConstants {
     public static final String APP_ID = "2882303761517518920";
     public static final String APP_KEY = "5761751863920";
@@ -70,7 +70,7 @@ public class HostConstants {
 
     public static void initUrl() {
         String url;
-        ServiceItem serviceItem = (ServiceItem) SPStoreManager.getInstance().getObject(Constants.SERVICE_ITEM_KEY, ServiceItem.class);
+        ServiceItem serviceItem = SPStoreManager.getInstance().getObject(Constants.SERVICE_ITEM_KEY, ServiceItem.class);
         if (serviceItem == null) {
             url = ServiceItem.newusService;
         } else {
@@ -208,10 +208,7 @@ public class HostConstants {
         if (arrayList2.size() > 0 && arrayList.size() > 0) {
             for (UpfirewareDto dto1 : arrayList2) {
                 for (UpfirewareDto dto2 : arrayList) {
-                    boolean isAdd = false;
-                    if (dto1.getType() == dto2.getType() && dto1.getModel() == dto2.getModel()) {
-                        isAdd = true;
-                    }
+                    boolean isAdd = dto1.getType() == dto2.getType() && dto1.getModel() == dto2.getModel();
                     if (!isAdd) {
                         needDownFw.add(dto1);
                     }
@@ -323,7 +320,7 @@ public class HostConstants {
         if (TextUtils.isEmpty(userDtoStr)) {
             return new UserDto();
         }
-        UserDto dto = (UserDto) JSON.parseObject(userDtoStr, UserDto.class);
+        UserDto dto = JSON.parseObject(userDtoStr, UserDto.class);
         if (dto == null) {
             return new UserDto();
         }

@@ -7,7 +7,7 @@ import com.fimi.kernel.dataparser.milink.LinkPacket;
 import com.fimi.kernel.dataparser.usb.JsonUiCallBackListener;
 import com.fimi.kernel.dataparser.usb.UiCallBackListener;
 
-/* loaded from: classes.dex */
+
 public abstract class BaseCommand extends LinkMessage {
     public String camKey;
     public int fileOffset;
@@ -124,7 +124,7 @@ public abstract class BaseCommand extends LinkMessage {
         this.lastSendTime = lastSendTime;
     }
 
-    @Override // com.fimi.kernel.dataparser.milink.LinkMessage
+    @Override
     public void fillPayload(LinkPacket packet) {
         if (this.encryptData != null && packet.payload != null) {
             packet.payload.putBytes(this.encryptData);

@@ -26,7 +26,7 @@ import com.fimi.x8sdk.controller.CameraManager;
 import com.fimi.x8sdk.dataparser.AutoCameraStateADV;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes.dex */
+
 public class X8CameraOtherSettingController extends AbsX8Controllers implements View.OnClickListener {
     double sdcardFree;
     private CameraManager cameraManager;
@@ -65,33 +65,33 @@ public class X8CameraOtherSettingController extends AbsX8Controllers implements 
         upCapacityDes();
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
         this.context = rootView.getContext();
         this.handleView = rootView.findViewById(R.id.rl_main_camera_otherSetting_layout);
-        this.x8PieView = (X8PieView) rootView.findViewById(R.id.x8_pieView);
+        this.x8PieView = rootView.findViewById(R.id.x8_pieView);
         String[] pieArray = this.context.getResources().getStringArray(R.array.x8_sdcard_array);
         this.x8PieView.setData(new int[]{45, 65, 78}, pieArray);
-        this.x8LinesSettingLayout = (RelativeLayout) rootView.findViewById(R.id.x8_lines_layout);
-        this.x8LinesSettingStub = (ViewStub) rootView.findViewById(R.id.x8_lines_setting_stub);
-        this.x8OtherSettingMainLayout = (RelativeLayout) rootView.findViewById(R.id.x8_other_setting_main_layout);
-        this.tvCurrLinesSetting = (TextView) rootView.findViewById(R.id.tv_current_lines_setting);
+        this.x8LinesSettingLayout = rootView.findViewById(R.id.x8_lines_layout);
+        this.x8LinesSettingStub = rootView.findViewById(R.id.x8_lines_setting_stub);
+        this.x8OtherSettingMainLayout = rootView.findViewById(R.id.x8_other_setting_main_layout);
+        this.tvCurrLinesSetting = rootView.findViewById(R.id.tv_current_lines_setting);
         this.linesSelectIdx = GlobalConfig.getInstance().getGridLine();
         this.tvCurrLinesSetting.setText(getCurrLinesSettingStr());
         this.x8LinesSettingLayout.setOnClickListener(this);
-        this.formatView = (RelativeLayout) rootView.findViewById(R.id.x8_sdcard_format_layout);
-        this.resetView = (RelativeLayout) rootView.findViewById(R.id.x8_camera_reset_layout);
+        this.formatView = rootView.findViewById(R.id.x8_sdcard_format_layout);
+        this.resetView = rootView.findViewById(R.id.x8_camera_reset_layout);
         this.formatView.setOnClickListener(this);
         this.resetView.setOnClickListener(this);
-        this.sdcard_free_tv = (TextView) rootView.findViewById(R.id.sdcard_free_tv);
-        this.capacity_tv = (TextView) rootView.findViewById(R.id.sdcard_capacity_tv);
+        this.sdcard_free_tv = rootView.findViewById(R.id.sdcard_free_tv);
+        this.capacity_tv = rootView.findViewById(R.id.sdcard_capacity_tv);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
@@ -107,19 +107,19 @@ public class X8CameraOtherSettingController extends AbsX8Controllers implements 
         super.closeUi();
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.x8_lines_layout) {
             if (this.x8LinesSettingDetailView == null) {
                 this.x8LinesSettingStub.inflate();
-                this.x8LinesSettingDetailView = (PercentLinearLayout) this.rootView.findViewById(R.id.rl_main_camera_otherSetting_layout_grid);
-                this.layoutReturn = (RelativeLayout) this.rootView.findViewById(R.id.x8_lines_layout_top);
-                this.x8CameraOtherImgReturn = (ImageView) this.rootView.findViewById(R.id.img_return);
-                this.tvLinesSettingNone = (TextView) this.rootView.findViewById(R.id.x8_lines_layout_none);
-                this.tvLinesSettingCenterPoint = (TextView) this.rootView.findViewById(R.id.x8_lines_layout_center_point);
-                this.tvLinesSettingNineLines = (TextView) this.rootView.findViewById(R.id.x8_lines_layout_nine_lines);
-                this.tvLinesSettingDiagonalAndNine = (TextView) this.rootView.findViewById(R.id.x8_lines_layout_diagonal_and_nine);
+                this.x8LinesSettingDetailView = this.rootView.findViewById(R.id.rl_main_camera_otherSetting_layout_grid);
+                this.layoutReturn = this.rootView.findViewById(R.id.x8_lines_layout_top);
+                this.x8CameraOtherImgReturn = this.rootView.findViewById(R.id.img_return);
+                this.tvLinesSettingNone = this.rootView.findViewById(R.id.x8_lines_layout_none);
+                this.tvLinesSettingCenterPoint = this.rootView.findViewById(R.id.x8_lines_layout_center_point);
+                this.tvLinesSettingNineLines = this.rootView.findViewById(R.id.x8_lines_layout_nine_lines);
+                this.tvLinesSettingDiagonalAndNine = this.rootView.findViewById(R.id.x8_lines_layout_diagonal_and_nine);
                 this.x8CameraOtherImgReturn.setOnClickListener(this);
                 this.tvLinesSettingNone.setOnClickListener(this);
                 this.tvLinesSettingCenterPoint.setOnClickListener(this);
@@ -149,7 +149,7 @@ public class X8CameraOtherSettingController extends AbsX8Controllers implements 
             setLinesSelect();
         } else if (i == R.id.x8_sdcard_format_layout) {
             if (CameraParamStatus.modelStatus != CameraParamStatus.CameraModelStatus.recording) {
-                this.dialog = new X8DoubleCustomDialog(this.context, this.context.getString(R.string.x8_sdcard_format_title), this.context.getString(R.string.x8_sdcard_format_tip), new X8DoubleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.camera.X8CameraOtherSettingController.1
+                this.dialog = new X8DoubleCustomDialog(this.context, this.context.getString(R.string.x8_sdcard_format_title), this.context.getString(R.string.x8_sdcard_format_tip), new X8DoubleCustomDialog.onDialogButtonClickListener() {
                     @Override
                     // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
                     public void onLeft() {
@@ -159,8 +159,8 @@ public class X8CameraOtherSettingController extends AbsX8Controllers implements 
                     @Override
                     // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
                     public void onRight() {
-                        X8CameraOtherSettingController.this.cameraManager.formatTFCard(new JsonUiCallBackListener() { // from class: com.fimi.app.x8s.controls.camera.X8CameraOtherSettingController.1.1
-                            @Override // com.fimi.kernel.dataparser.usb.JsonUiCallBackListener
+                        X8CameraOtherSettingController.this.cameraManager.formatTFCard(new JsonUiCallBackListener() {
+                            @Override
                             public void onComplete(JSONObject rt, Object o) {
                                 if (rt != null && rt.getIntValue("rval") >= 0) {
                                     Toast.makeText(X8CameraOtherSettingController.this.context, X8CameraOtherSettingController.this.context.getResources().getString(R.string.x8_sdcard_format_rt), 0).show();
@@ -173,7 +173,7 @@ public class X8CameraOtherSettingController extends AbsX8Controllers implements 
                 this.dialog.show();
             }
         } else if (i == R.id.x8_camera_reset_layout && CameraParamStatus.modelStatus != CameraParamStatus.CameraModelStatus.recording) {
-            this.dialog = new X8DoubleCustomDialog(this.context, this.context.getString(R.string.x8_camera_reset_title), this.context.getString(R.string.x8_camera_reset_tip), new X8DoubleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.camera.X8CameraOtherSettingController.2
+            this.dialog = new X8DoubleCustomDialog(this.context, this.context.getString(R.string.x8_camera_reset_title), this.context.getString(R.string.x8_camera_reset_tip), new X8DoubleCustomDialog.onDialogButtonClickListener() {
                 @Override
                 // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
                 public void onLeft() {
@@ -183,8 +183,8 @@ public class X8CameraOtherSettingController extends AbsX8Controllers implements 
                 @Override
                 // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
                 public void onRight() {
-                    X8CameraOtherSettingController.this.cameraManager.defaltSystem(new JsonUiCallBackListener() { // from class: com.fimi.app.x8s.controls.camera.X8CameraOtherSettingController.2.1
-                        @Override // com.fimi.kernel.dataparser.usb.JsonUiCallBackListener
+                    X8CameraOtherSettingController.this.cameraManager.defaltSystem(new JsonUiCallBackListener() {
+                        @Override
                         public void onComplete(JSONObject rt, Object o) {
                             if (rt != null && rt.getIntValue("rval") >= 0) {
                                 Toast.makeText(X8CameraOtherSettingController.this.context, X8CameraOtherSettingController.this.context.getResources().getString(R.string.x8_camera_reset_rt), 0).show();
@@ -238,7 +238,7 @@ public class X8CameraOtherSettingController extends AbsX8Controllers implements 
             this.capacity_tv.setText("");
         } else if (stateADV != null && stateADV.isCardInfo()) {
             String freeSpace = NumberUtil.decimalPointStr((stateADV.getFreeSpace() / 1024.0d) / 1024.0d, 1);
-            freeSpace = (freeSpace.equals("") || freeSpace == null) ? "0" : "0";
+            freeSpace = "0";
             double freeCapacity = NumberUtil.convertToDouble(freeSpace, Double.valueOf(0.0d)).doubleValue();
             if (this.sdcardFree != freeCapacity) {
                 this.sdcardFree = freeCapacity;
@@ -262,7 +262,7 @@ public class X8CameraOtherSettingController extends AbsX8Controllers implements 
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         super.onDroneConnected(b);
         if (this.clickAble != b) {
@@ -272,11 +272,7 @@ public class X8CameraOtherSettingController extends AbsX8Controllers implements 
             if (CameraParamStatus.modelStatus != CameraParamStatus.CameraModelStatus.recording && !StateManager.getInstance().getCamera().isDelayedPhotography()) {
                 AutoCameraStateADV stateADV = StateManager.getInstance().getCamera().getAutoCameraStateADV();
                 if (stateADV != null && !stateADV.isCardInfo()) {
-                    if (stateADV.isNoTFCard()) {
-                        updateViewEnable(false, this.formatView);
-                    } else {
-                        updateViewEnable(true, this.formatView);
-                    }
+                    updateViewEnable(!stateADV.isNoTFCard(), this.formatView);
                 }
                 updateViewEnable(true, this.resetView);
                 return;
@@ -306,7 +302,7 @@ public class X8CameraOtherSettingController extends AbsX8Controllers implements 
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public boolean onClickBackKey() {
         return false;
     }

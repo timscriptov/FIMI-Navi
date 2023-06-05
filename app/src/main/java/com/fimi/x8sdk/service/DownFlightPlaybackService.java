@@ -24,7 +24,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* loaded from: classes2.dex */
+
 public class DownFlightPlaybackService extends Service {
     private static final int PROGRESS_MAX = 100;
     public static volatile int checkingTaskCount = 0;
@@ -42,12 +42,23 @@ public class DownFlightPlaybackService extends Service {
         DisposeDataHandle.isStop = state2 == DownFwService.DownState.StopDown;
     }
 
-    @Override // android.app.Service
+    @Override
     @Nullable
     public IBinder onBind(Intent intent) {
         return null;
-    }    public DisposeDataHandle dataHandle = new DisposeDataHandle(new DisposeDownloadListener() { // from class: com.fimi.x8sdk.service.DownFlightPlaybackService.1
-        @Override // com.fimi.kernel.network.okhttp.listener.DisposeDownloadListener
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        if (intent != null) {
+            DisposeDataHandle.isStop = false;
+            this.needDownDto = (ArrayList) intent.getSerializableExtra("listDownloadFlightPlayback");
+            state = DownFwService.DownState.Start;
+            downFirmware();
+        }
+        return super.onStartCommand(intent, flags, startId);
+    }    public DisposeDataHandle dataHandle = new DisposeDataHandle(new DisposeDownloadListener() {
+        @Override
         public void onProgress(int progrss, int currentLength) {
             int pro = ((DownFlightPlaybackService.checkingTaskCount * 100) + progrss) / DownFlightPlaybackService.this.needDownDto.size();
             if (progrss == 100) {
@@ -89,7 +100,7 @@ public class DownFlightPlaybackService extends Service {
             }
         }
 
-        @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+        @Override
         public void onSuccess(Object responseObj) {
             if (DownFlightPlaybackService.this.needDownDto == null || DownFlightPlaybackService.this.needDownDto.size() < 1 || DownFlightPlaybackService.checkingTaskCount == DownFlightPlaybackService.this.needDownDto.size()) {
                 DownFlightPlaybackService.state = DownFwService.DownState.Finish;
@@ -98,7 +109,7 @@ public class DownFlightPlaybackService extends Service {
             DownFlightPlaybackService.this.reportProgress(DownFlightPlaybackService.state, pro, "");
         }
 
-        @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+        @Override
         public void onFailure(Object reasonObj) {
             int pro = (DownFlightPlaybackService.checkingTaskCount * 100) / DownFlightPlaybackService.this.needDownDto.size();
             DownFlightPlaybackService.state = DownFwService.DownState.DownFail;
@@ -107,17 +118,6 @@ public class DownFlightPlaybackService extends Service {
             DownFlightPlaybackService.this.downFirmware();
         }
     });
-
-    @Override // android.app.Service
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        if (intent != null) {
-            DisposeDataHandle.isStop = false;
-            this.needDownDto = (ArrayList) intent.getSerializableExtra("listDownloadFlightPlayback");
-            state = DownFwService.DownState.Start;
-            downFirmware();
-        }
-        return super.onStartCommand(intent, flags, startId);
-    }
 
     public synchronized void startCheckingTask() {
         checkingTaskCount++;

@@ -11,7 +11,7 @@ import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.database.DatabaseStatement;
 import org.greenrobot.greendao.internal.DaoConfig;
 
-/* loaded from: classes.dex */
+
 public class MediaDownloadInfoDao extends AbstractDao<MediaDownloadInfo, Long> {
     public static final String TABLENAME = "MEDIA_DOWNLOAD_INFO";
 
@@ -33,7 +33,7 @@ public class MediaDownloadInfoDao extends AbstractDao<MediaDownloadInfo, Long> {
         db.execSQL(sql);
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public final void bindValues(DatabaseStatement stmt, MediaDownloadInfo entity) {
         stmt.clearBindings();
         Long id = entity.getId();
@@ -49,7 +49,7 @@ public class MediaDownloadInfoDao extends AbstractDao<MediaDownloadInfo, Long> {
         }
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public final void bindValues(SQLiteStatement stmt, MediaDownloadInfo entity) {
         stmt.clearBindings();
         Long id = entity.getId();
@@ -65,36 +65,36 @@ public class MediaDownloadInfoDao extends AbstractDao<MediaDownloadInfo, Long> {
         }
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public Long readKey(Cursor cursor, int offset) {
-        if (cursor.isNull(offset + 0)) {
+        if (cursor.isNull(offset)) {
             return null;
         }
-        return Long.valueOf(cursor.getLong(offset + 0));
+        return Long.valueOf(cursor.getLong(offset));
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public MediaDownloadInfo readEntity(Cursor cursor, int offset) {
-        MediaDownloadInfo entity = new MediaDownloadInfo(cursor.isNull(offset + 0) ? null : Long.valueOf(cursor.getLong(offset + 0)), cursor.getLong(offset + 1), cursor.getLong(offset + 2), cursor.getLong(offset + 3), cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        MediaDownloadInfo entity = new MediaDownloadInfo(cursor.isNull(offset) ? null : Long.valueOf(cursor.getLong(offset)), cursor.getLong(offset + 1), cursor.getLong(offset + 2), cursor.getLong(offset + 3), cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         return entity;
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public void readEntity(Cursor cursor, MediaDownloadInfo entity, int offset) {
-        entity.setId(cursor.isNull(offset + 0) ? null : Long.valueOf(cursor.getLong(offset + 0)));
+        entity.setId(cursor.isNull(offset) ? null : Long.valueOf(cursor.getLong(offset)));
         entity.setStartPos(cursor.getLong(offset + 1));
         entity.setEndPos(cursor.getLong(offset + 2));
         entity.setCompeleteZize(cursor.getLong(offset + 3));
         entity.setUrl(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public final Long updateKeyAfterInsert(MediaDownloadInfo entity, long rowId) {
         entity.setId(Long.valueOf(rowId));
         return Long.valueOf(rowId);
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public Long getKey(MediaDownloadInfo entity) {
         if (entity != null) {
             return entity.getId();
@@ -102,17 +102,17 @@ public class MediaDownloadInfoDao extends AbstractDao<MediaDownloadInfo, Long> {
         return null;
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public boolean hasKey(MediaDownloadInfo entity) {
         return entity.getId() != null;
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public final boolean isEntityUpdateable() {
         return true;
     }
 
-    /* loaded from: classes.dex */
+
     public static class Properties {
         public static final Property Id = new Property(0, Long.class, "id", true, "_id");
         public static final Property StartPos = new Property(1, Long.TYPE, "startPos", false, "START_POS");

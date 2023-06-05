@@ -1,8 +1,6 @@
 package com.fimi.x8sdk.entity;
 
 
-
-/* loaded from: classes2.dex */
 public class UpdateCurrentProgressEntity {
     int devModuleID;
     int devTargetID;

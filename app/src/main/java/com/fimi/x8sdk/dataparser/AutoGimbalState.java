@@ -3,8 +3,6 @@ package com.fimi.x8sdk.dataparser;
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 
 
-
-/* loaded from: classes2.dex */
 public class AutoGimbalState extends X8BaseMessage {
     private int errorCode;
     private int pitchAngle;
@@ -12,7 +10,7 @@ public class AutoGimbalState extends X8BaseMessage {
     private int stateCode;
     private int yawAnagle;
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         this.errorCode = packet.getPayLoad4().getShort();
@@ -63,7 +61,7 @@ public class AutoGimbalState extends X8BaseMessage {
         this.yawAnagle = yawAnagle;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public String toString() {
         return "AutoGimbalState{errorCode=" + this.errorCode + ", stateCode=" + this.stateCode + ", rollAngle=" + this.rollAngle + ", pitchAngle=" + this.pitchAngle + ", yawAnagle=" + this.yawAnagle + '}';
     }

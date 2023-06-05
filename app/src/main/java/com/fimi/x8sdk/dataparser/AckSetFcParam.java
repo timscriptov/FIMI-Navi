@@ -3,12 +3,10 @@ package com.fimi.x8sdk.dataparser;
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 
 
-
-/* loaded from: classes2.dex */
 public class AckSetFcParam extends X8BaseMessage {
     int paraset;
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         this.paraset = packet.getPayLoad4().getByte();
@@ -22,7 +20,7 @@ public class AckSetFcParam extends X8BaseMessage {
         this.paraset = paraset;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public String toString() {
         return "AckSetFcParam{paraset=" + this.paraset + '}';
     }

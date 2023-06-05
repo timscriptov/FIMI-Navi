@@ -10,7 +10,7 @@ import org.greenrobot.greendao.database.DatabaseOpenHelper;
 import org.greenrobot.greendao.database.StandardDatabase;
 import org.greenrobot.greendao.identityscope.IdentityScopeType;
 
-/* loaded from: classes.dex */
+
 public class DaoMaster extends AbstractDaoMaster {
     public static final int SCHEMA_VERSION = 1;
 
@@ -52,17 +52,17 @@ public class DaoMaster extends AbstractDaoMaster {
         return daoMaster.newSession();
     }
 
-    @Override // org.greenrobot.greendao.AbstractDaoMaster
+    @Override
     public DaoSession newSession() {
         return new DaoSession(this.db, IdentityScopeType.Session, this.daoConfigMap);
     }
 
-    @Override // org.greenrobot.greendao.AbstractDaoMaster
+    @Override
     public DaoSession newSession(IdentityScopeType type) {
         return new DaoSession(this.db, type, this.daoConfigMap);
     }
 
-    /* loaded from: classes.dex */
+
     public static abstract class OpenHelper extends DatabaseOpenHelper {
         public OpenHelper(Context context, String name) {
             super(context, name, 1);
@@ -72,14 +72,14 @@ public class DaoMaster extends AbstractDaoMaster {
             super(context, name, factory, 1);
         }
 
-        @Override // org.greenrobot.greendao.database.DatabaseOpenHelper
+        @Override
         public void onCreate(Database db) {
             Log.i("greenDAO", "Creating tables for schema version 1");
             DaoMaster.createAllTables(db, false);
         }
     }
 
-    /* loaded from: classes.dex */
+
     public static class DevOpenHelper extends OpenHelper {
         public DevOpenHelper(Context context, String name) {
             super(context, name);
@@ -89,7 +89,7 @@ public class DaoMaster extends AbstractDaoMaster {
             super(context, name, factory);
         }
 
-        @Override // org.greenrobot.greendao.database.DatabaseOpenHelper
+        @Override
         public void onUpgrade(Database db, int oldVersion, int newVersion) {
             Log.i("greenDAO", "Upgrading schema from version " + oldVersion + " to " + newVersion + " by dropping all tables");
             DaoMaster.dropAllTables(db, true);

@@ -1,6 +1,6 @@
 package com.fimi.app.x8s.ui.album.x8s;
 
-/* loaded from: classes.dex */
+
 public class VideoThumInfo {
     private String fileName;
     private long fileSize;

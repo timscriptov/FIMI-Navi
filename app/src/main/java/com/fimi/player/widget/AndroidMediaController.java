@@ -11,10 +11,10 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/* loaded from: classes.dex */
+
 public class AndroidMediaController extends FmMediaController implements IMediaController {
     private ActionBar mActionBar;
-    private ArrayList<View> mShowOnceArray;
+    private final ArrayList<View> mShowOnceArray;
 
     public AndroidMediaController(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -46,7 +46,7 @@ public class AndroidMediaController extends FmMediaController implements IMediaC
         }
     }
 
-    @Override // com.fimi.player.widget.FmMediaController, com.fimi.player.widget.IMediaController
+    @Override
     public void show() {
         super.show();
         if (this.mActionBar != null) {
@@ -59,7 +59,7 @@ public class AndroidMediaController extends FmMediaController implements IMediaC
         }
     }
 
-    @Override // com.fimi.player.widget.FmMediaController, com.fimi.player.widget.IMediaController
+    @Override
     public void hide() {
         super.hide();
         if (this.mActionBar != null) {
@@ -72,7 +72,7 @@ public class AndroidMediaController extends FmMediaController implements IMediaC
         }
     }
 
-    @Override // com.fimi.player.widget.IMediaController
+    @Override
     public void showOnce(@NonNull View view) {
         this.mShowOnceArray.add(view);
         view.setVisibility(0);

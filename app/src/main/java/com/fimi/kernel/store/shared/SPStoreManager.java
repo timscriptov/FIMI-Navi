@@ -9,7 +9,7 @@ import java.util.List;
 
 public class SPStoreManager implements IKeyValueStoreManager {
     private static SPStoreManager manager = null;
-    private SharedPreferences settings;
+    private final SharedPreferences settings;
 
     private SPStoreManager(String key_storeName) {
         this.settings = SharePrefernceSec.getSharedPreferences(key_storeName);

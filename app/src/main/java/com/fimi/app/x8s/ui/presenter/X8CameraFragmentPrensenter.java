@@ -42,28 +42,28 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* loaded from: classes.dex */
+
 public class X8CameraFragmentPrensenter<T extends MediaModel> extends X8BaseMediaFragmentPresenter<T> implements Handler.Callback {
     public static final String LOCALFILEDELETEEIVER = "LOCALFILEDELETEEIVER";
     public static final String LOCLAFILEDELETEITEM = "LOCLAFILEDELETEITEM";
     private static final String TAG = "X8CameraFragmentPrensenter";
-    private int defaultBound;
-    private Handler durationHandler;
+    private final int defaultBound;
+    private final Handler durationHandler;
     private X8CameraFragmentPrensenter<T>.LocalFileDeleteReceiver mLocalFileDeleteReceiver;
-    private X8MediaThumDownloadManager mMediaDownloadManager;
-    private OnDownloadUiListener mOnDownloadUiListener;
-    private OnDownloadUiListener mOnOriginalDownloadUiListener;
-    private Handler mainHandler;
+    private final X8MediaThumDownloadManager mMediaDownloadManager;
+    private final OnDownloadUiListener mOnDownloadUiListener;
+    private final OnDownloadUiListener mOnOriginalDownloadUiListener;
+    private final Handler mainHandler;
 
     public X8CameraFragmentPrensenter(RecyclerView mRecyclerView, X8sPanelRecycleAdapter mPanelRecycleAdapter, ISelectData mISelectData, Context context) {
         super(mRecyclerView, mPanelRecycleAdapter, mISelectData, context, true);
         this.defaultBound = 2;
-        this.mOnDownloadUiListener = new OnDownloadUiListener() { // from class: com.fimi.app.x8s.ui.presenter.X8CameraFragmentPrensenter.8
-            @Override // com.fimi.album.interfaces.OnDownloadUiListener
+        this.mOnDownloadUiListener = new OnDownloadUiListener() {
+            @Override
             public void onProgress(MediaModel model, int progrss) {
             }
 
-            @Override // com.fimi.album.interfaces.OnDownloadUiListener
+            @Override
             public void onSuccess(MediaModel responseObj) {
                 Message updateMessage = new Message();
                 updateMessage.what = 2;
@@ -72,16 +72,16 @@ public class X8CameraFragmentPrensenter<T extends MediaModel> extends X8BaseMedi
                 HostLogBack.getInstance().writeLog("Alanqiu  ==================mOnDownloadUiListener:" + X8CameraFragmentPrensenter.this.modelList.indexOf(responseObj));
             }
 
-            @Override // com.fimi.album.interfaces.OnDownloadUiListener
+            @Override
             public void onFailure(MediaModel reasonObj) {
             }
 
-            @Override // com.fimi.album.interfaces.OnDownloadUiListener
+            @Override
             public void onStop(MediaModel reasonObj) {
             }
         };
-        this.mOnOriginalDownloadUiListener = new OnDownloadUiListener() { // from class: com.fimi.app.x8s.ui.presenter.X8CameraFragmentPrensenter.9
-            @Override // com.fimi.album.interfaces.OnDownloadUiListener
+        this.mOnOriginalDownloadUiListener = new OnDownloadUiListener() {
+            @Override
             public void onProgress(MediaModel model, int progrss) {
                 model.setProgress(progrss);
                 if (X8CameraFragmentPrensenter.this.isResh) {
@@ -89,7 +89,7 @@ public class X8CameraFragmentPrensenter<T extends MediaModel> extends X8BaseMedi
                 }
             }
 
-            @Override // com.fimi.album.interfaces.OnDownloadUiListener
+            @Override
             public void onSuccess(MediaModel model) {
                 LogUtil.i("download", "onSuccess1: name:" + model.getName());
                 model.setProgress(0);
@@ -101,13 +101,13 @@ public class X8CameraFragmentPrensenter<T extends MediaModel> extends X8BaseMedi
                 X8CameraFragmentPrensenter.this.sendBroadcastMediaScannerScanFile(model.getFileLocalPath());
             }
 
-            @Override // com.fimi.album.interfaces.OnDownloadUiListener
+            @Override
             public void onFailure(MediaModel model) {
                 LogUtil.i("download", "onFailure1: name:" + model.getName());
                 X8CameraFragmentPrensenter.this.mPanelRecycleAdapter.notifyItemChanged(model.getItemPosition());
             }
 
-            @Override // com.fimi.album.interfaces.OnDownloadUiListener
+            @Override
             public void onStop(MediaModel model) {
                 LogUtil.i("download", "onStop1: name:" + model.getName());
                 X8CameraFragmentPrensenter.this.mPanelRecycleAdapter.notifyItemChanged(model.getItemPosition());
@@ -126,25 +126,24 @@ public class X8CameraFragmentPrensenter<T extends MediaModel> extends X8BaseMedi
     }
 
     private void doTrans() {
-        this.mRecyclerView.setRecyclerListener(new RecyclerView.RecyclerListener() { // from class: com.fimi.app.x8s.ui.presenter.X8CameraFragmentPrensenter.1
-            @Override // android.support.v7.widget.RecyclerView.RecyclerListener
+        this.mRecyclerView.setRecyclerListener(new RecyclerView.RecyclerListener() {
+            @Override
             public void onViewRecycled(RecyclerView.ViewHolder holder) {
-                if (holder instanceof BodyRecycleViewHolder) {
-                    BodyRecycleViewHolder mBodyRecycleViewHolder = (BodyRecycleViewHolder) holder;
+                if (holder instanceof BodyRecycleViewHolder mBodyRecycleViewHolder) {
                     mBodyRecycleViewHolder.tvDuringdate.setVisibility(8);
                     mBodyRecycleViewHolder.ivSelect.setVisibility(8);
                 }
             }
         });
-        this.mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() { // from class: com.fimi.app.x8s.ui.presenter.X8CameraFragmentPrensenter.2
-            @Override // android.support.v7.widget.RecyclerView.OnScrollListener
+        this.mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 X8CameraFragmentPrensenter.this.isScrollRecycle = false;
                 X8CameraFragmentPrensenter.this.durationHandler.sendEmptyMessage(1);
             }
 
-            @Override // android.support.v7.widget.RecyclerView.OnScrollListener
+            @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 if (Math.abs(dy) <= X8CameraFragmentPrensenter.this.defaultBound) {
@@ -158,7 +157,7 @@ public class X8CameraFragmentPrensenter<T extends MediaModel> extends X8BaseMedi
         });
     }
 
-    @Override // com.fimi.album.iview.IHandlerCallback, android.os.Handler.Callback
+    @Override
     public boolean handleMessage(Message message) {
         try {
             if (message.what == 1) {
@@ -193,7 +192,7 @@ public class X8CameraFragmentPrensenter<T extends MediaModel> extends X8BaseMedi
         return true;
     }
 
-    @Override // com.fimi.album.iview.IRecycleAdapter
+    @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (position >= 0) {
             if (holder instanceof HeadRecyleViewHolder) {
@@ -220,8 +219,8 @@ public class X8CameraFragmentPrensenter<T extends MediaModel> extends X8BaseMedi
                 holder.mBtnAllSelect.setImageResource(R.drawable.x8_ablum_unselect);
             }
         }
-        holder.mBtnAllSelect.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.ui.presenter.X8CameraFragmentPrensenter.3
-            @Override // android.view.View.OnClickListener
+        holder.mBtnAllSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 X8CameraFragmentPrensenter.this.onItemCategoryClick(holder, position, mediaModel);
             }
@@ -237,15 +236,11 @@ public class X8CameraFragmentPrensenter<T extends MediaModel> extends X8BaseMedi
         if (mediaModel != null) {
             String formatDate = mediaModel.getFormatDate();
             CopyOnWriteArrayList<MediaModel> internalList = (CopyOnWriteArrayList<MediaModel>) this.stateHashMap.get(formatDate);
-            if (mediaModel.isSelect()) {
-                perfomSelectCategory(internalList, false);
-            } else {
-                perfomSelectCategory(internalList, true);
-            }
+            perfomSelectCategory(internalList, !mediaModel.isSelect());
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
+
     private void perfomSelectCategory(CopyOnWriteArrayList<MediaModel> internalList, boolean isSelect) {
         Iterator<MediaModel> it = internalList.iterator();
         while (it.hasNext()) {
@@ -262,11 +257,7 @@ public class X8CameraFragmentPrensenter<T extends MediaModel> extends X8BaseMedi
         }
         notifyAllVisible();
         callBackSelectSize(this.selectList.size());
-        if (this.selectList.size() == (this.modelList.size() - this.stateHashMap.size()) - 1) {
-            callAllSelectMode(true);
-        } else {
-            callAllSelectMode(false);
-        }
+        callAllSelectMode(this.selectList.size() == (this.modelList.size() - this.stateHashMap.size()) - 1);
     }
 
     private void doBodyTrans(final BodyRecycleViewHolder holder, final int position) {
@@ -282,7 +273,7 @@ public class X8CameraFragmentPrensenter<T extends MediaModel> extends X8BaseMedi
                 }
                 if (mediaModel.isDownLoadThum() && !mediaModel.isDownloading()) {
                     holder.sdvImageView.setTag(currentFilePath);
-                    FrescoUtils.displayPhoto(holder.sdvImageView, this.perfix + currentFilePath, this.defaultPhtotWidth, this.defaultPhtotHeight, new FrescoControllerListener() { // from class: com.fimi.app.x8s.ui.presenter.X8CameraFragmentPrensenter.4
+                    FrescoUtils.displayPhoto(holder.sdvImageView, this.perfix + currentFilePath, this.defaultPhtotWidth, this.defaultPhtotHeight, new FrescoControllerListener() {
                         @Override
                         // com.fimi.album.biz.FrescoControllerListener, com.facebook.drawee.controller.ControllerListener
                         public void onFailure(String id, Throwable throwable) {
@@ -326,14 +317,14 @@ public class X8CameraFragmentPrensenter<T extends MediaModel> extends X8BaseMedi
                 } else {
                     changeSelectViewState(mediaModel, holder, 8);
                 }
-                holder.sdvImageView.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.ui.presenter.X8CameraFragmentPrensenter.5
-                    @Override // android.view.View.OnClickListener
+                holder.sdvImageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
                     public void onClick(View view) {
                         X8CameraFragmentPrensenter.this.onItemClick(holder, view, position);
                     }
                 });
-                holder.sdvImageView.setOnLongClickListener(new View.OnLongClickListener() { // from class: com.fimi.app.x8s.ui.presenter.X8CameraFragmentPrensenter.6
-                    @Override // android.view.View.OnLongClickListener
+                holder.sdvImageView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
                     public boolean onLongClick(View view) {
                         X8CameraFragmentPrensenter.this.onItemLongClick(holder, view, position);
                         return true;
@@ -363,8 +354,8 @@ public class X8CameraFragmentPrensenter<T extends MediaModel> extends X8BaseMedi
                     } else {
                         holder.mFileSize.setVisibility(8);
                     }
-                    holder.mDownloadStateView.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.ui.presenter.X8CameraFragmentPrensenter.7
-                        @Override // android.view.View.OnClickListener
+                    holder.mDownloadStateView.setOnClickListener(new View.OnClickListener() {
+                        @Override
                         public void onClick(View v) {
                             if (mediaModel.isStop() || mediaModel.isDownloadFail()) {
                                 X8MediaFileDownloadManager.getInstance().startDownload(mediaModel);
@@ -400,7 +391,7 @@ public class X8CameraFragmentPrensenter<T extends MediaModel> extends X8BaseMedi
         goMediaDetailActivity(this.modelList.indexOf(model));
     }
 
-    @Override // com.fimi.app.x8s.ui.album.x8s.X8BaseMediaFragmentPresenter
+    @Override
     public void showCategorySelectView(boolean state) {
         int firstVisibleItem = this.mGridLayoutManager.findFirstVisibleItemPosition();
         int lastVisibleItem = this.mGridLayoutManager.findLastVisibleItemPosition();
@@ -415,7 +406,7 @@ public class X8CameraFragmentPrensenter<T extends MediaModel> extends X8BaseMedi
         }
     }
 
-    @Override // com.fimi.app.x8s.ui.album.x8s.X8BaseMediaFragmentPresenter
+    @Override
     public void registerReciver() {
         this.mLocalFileDeleteReceiver = new LocalFileDeleteReceiver();
         IntentFilter intentFilter = new IntentFilter();
@@ -423,7 +414,7 @@ public class X8CameraFragmentPrensenter<T extends MediaModel> extends X8BaseMedi
         LocalBroadcastManager.getInstance(this.context).registerReceiver(this.mLocalFileDeleteReceiver, intentFilter);
     }
 
-    @Override // com.fimi.app.x8s.ui.album.x8s.X8BaseMediaFragmentPresenter
+    @Override
     public void registerDownloadListerner() {
         X8MediaFileDownloadManager.getInstance().setUiDownloadListener(this.mOnOriginalDownloadUiListener);
         if (this.mPanelRecycleAdapter != null) {
@@ -431,7 +422,7 @@ public class X8CameraFragmentPrensenter<T extends MediaModel> extends X8BaseMedi
         }
     }
 
-    @Override // com.fimi.app.x8s.ui.album.x8s.X8BaseMediaFragmentPresenter
+    @Override
     public void unRegisterReciver() {
         LocalBroadcastManager.getInstance(this.context).unregisterReceiver(this.mLocalFileDeleteReceiver);
     }
@@ -440,13 +431,13 @@ public class X8CameraFragmentPrensenter<T extends MediaModel> extends X8BaseMedi
         public LocalFileDeleteReceiver() {
         }
 
-        @Override // android.content.BroadcastReceiver
+        @Override
         public void onReceive(Context context, final Intent intent) {
             if (X8CameraFragmentPrensenter.this.modelList != null) {
                 String action = intent.getAction();
                 if (action.equals(X8CameraFragmentPrensenter.LOCALFILEDELETEEIVER)) {
-                    X8CameraFragmentPrensenter.this.durationHandler.post(new Runnable() { // from class: com.fimi.app.x8s.ui.presenter.X8CameraFragmentPrensenter.LocalFileDeleteReceiver.1
-                        @Override // java.lang.Runnable
+                    X8CameraFragmentPrensenter.this.durationHandler.post(new Runnable() {
+                        @Override
                         public void run() {
                             List<T> selectList = (List) intent.getSerializableExtra(X8CameraFragmentPrensenter.LOCLAFILEDELETEITEM);
                             for (T select : selectList) {
@@ -457,8 +448,8 @@ public class X8CameraFragmentPrensenter<T extends MediaModel> extends X8BaseMedi
                                         MediaModel model = (MediaModel) it.next();
                                         if (!model.isCategory() && !model.isHeadView() && model.getName().equals(select.getName()) && model.getFileLocalPath().equals(select.getFileLocalPath())) {
                                             model.setDownLoadOriginalFile(false);
-                                            X8CameraFragmentPrensenter.this.mainHandler.post(new Runnable() { // from class: com.fimi.app.x8s.ui.presenter.X8CameraFragmentPrensenter.LocalFileDeleteReceiver.1.1
-                                                @Override // java.lang.Runnable
+                                            X8CameraFragmentPrensenter.this.mainHandler.post(new Runnable() {
+                                                @Override
                                                 public void run() {
                                                 }
                                             });

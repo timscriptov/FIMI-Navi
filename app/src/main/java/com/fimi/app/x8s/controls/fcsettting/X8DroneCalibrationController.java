@@ -21,7 +21,7 @@ import com.fimi.x8sdk.controller.FcCtrlManager;
 import com.fimi.x8sdk.dataparser.AckGetCaliState;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes.dex */
+
 public class X8DroneCalibrationController extends AbsX8MenuBoxControllers implements View.OnClickListener, X8DoubleCustomDialog.onDialogButtonClickListener {
     public Handler mTimeHandler;
     private Button btnResultConfirm;
@@ -44,8 +44,8 @@ public class X8DroneCalibrationController extends AbsX8MenuBoxControllers implem
     public X8DroneCalibrationController(View rootView) {
         super(rootView);
         this.mGaliStete = GaliStete.IDLE;
-        this.mTimeHandler = new Handler() { // from class: com.fimi.app.x8s.controls.fcsettting.X8DroneCalibrationController.7
-            @Override // android.os.Handler
+        this.mTimeHandler = new Handler() {
+            @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 X8DroneCalibrationController.this.getCalibrationState();
@@ -54,11 +54,11 @@ public class X8DroneCalibrationController extends AbsX8MenuBoxControllers implem
         };
     }
 
-    @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+    @Override
     public void onLeft() {
     }
 
-    @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+    @Override
     public void onRight() {
         if (this.mGaliStete == GaliStete.IDLE || this.mGaliStete == GaliStete.DISCONNECT_FAILED) {
             closeItem();
@@ -68,33 +68,33 @@ public class X8DroneCalibrationController extends AbsX8MenuBoxControllers implem
         quitGalibration();
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
         LayoutInflater inflater = LayoutInflater.from(rootView.getContext());
         this.contentView = inflater.inflate(R.layout.x8_main_fc_item_drone_calibration, (ViewGroup) rootView, true);
         this.rlCalibration = this.contentView.findViewById(R.id.rl_drone_calibartion_content);
         this.rlResult = this.contentView.findViewById(R.id.rl_drone_calibartion_result);
-        this.imgReturn = (ImageView) this.contentView.findViewById(R.id.img_return);
-        this.tvTip = (TextView) this.contentView.findViewById(R.id.tv_tip);
-        this.tvTip1 = (TextView) this.contentView.findViewById(R.id.tv_tip1);
+        this.imgReturn = this.contentView.findViewById(R.id.img_return);
+        this.tvTip = this.contentView.findViewById(R.id.tv_tip);
+        this.tvTip1 = this.contentView.findViewById(R.id.tv_tip1);
         this.vVideo = this.contentView.findViewById(R.id.v_video);
-        this.btnStart = (Button) this.contentView.findViewById(R.id.btn_compass_calibration);
-        this.imgResult = (ImageView) this.contentView.findViewById(R.id.img_result);
-        this.tvResultTip = (TextView) this.contentView.findViewById(R.id.tv_result_tip);
-        this.tvResultTip1 = (TextView) this.contentView.findViewById(R.id.tv_result_tip1);
-        this.btnResultConfirm = (Button) this.contentView.findViewById(R.id.btn_compass_result_confirm);
-        this.imgFlag = (ImageView) rootView.findViewById(R.id.img_camp_flag);
+        this.btnStart = this.contentView.findViewById(R.id.btn_compass_calibration);
+        this.imgResult = this.contentView.findViewById(R.id.img_result);
+        this.tvResultTip = this.contentView.findViewById(R.id.tv_result_tip);
+        this.tvResultTip1 = this.contentView.findViewById(R.id.tv_result_tip1);
+        this.btnResultConfirm = this.contentView.findViewById(R.id.btn_compass_result_confirm);
+        this.imgFlag = rootView.findViewById(R.id.img_camp_flag);
         this.imgFlag.setImageBitmap(ImageUtils.getBitmapByPath(rootView.getContext(), R.drawable.x8_img_camp_enable));
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
         this.imgReturn.setOnClickListener(this);
         this.btnStart.setOnClickListener(this);
         this.btnResultConfirm.setOnClickListener(this);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         if (this.isShow) {
             if (b) {
@@ -125,7 +125,7 @@ public class X8DroneCalibrationController extends AbsX8MenuBoxControllers implem
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
         this.rlCalibration.setVisibility(0);
         this.rlCalibration.setEnabled(false);
@@ -135,7 +135,7 @@ public class X8DroneCalibrationController extends AbsX8MenuBoxControllers implem
         this.btnStart.setVisibility(8);
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.img_return) {
@@ -155,7 +155,7 @@ public class X8DroneCalibrationController extends AbsX8MenuBoxControllers implem
         this.rlResult.setVisibility(8);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void showItem() {
         this.isShow = true;
         this.tvTip.setText(getString(R.string.x8_compass_calibartion_tip));
@@ -167,7 +167,7 @@ public class X8DroneCalibrationController extends AbsX8MenuBoxControllers implem
         this.listener.onOpen();
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void closeItem() {
         if (this.mGaliStete == GaliStete.IDLE || this.mGaliStete == GaliStete.DISCONNECT_FAILED) {
             this.isShow = false;
@@ -233,8 +233,8 @@ public class X8DroneCalibrationController extends AbsX8MenuBoxControllers implem
 
     public void startCalibration() {
         this.mGaliStete = GaliStete.WAITSTART;
-        this.fcCtrlManager.setCalibrationStart(X8Cali.CaliType.CALI_MAG.ordinal(), X8Cali.CaliCmd.CALI_CMD_START.ordinal(), X8Cali.CaliMode.CALI_MODE_MANUALLY.ordinal(), new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8DroneCalibrationController.1
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcCtrlManager.setCalibrationStart(X8Cali.CaliType.CALI_MAG.ordinal(), X8Cali.CaliCmd.CALI_CMD_START.ordinal(), X8Cali.CaliMode.CALI_MODE_MANUALLY.ordinal(), new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8DroneCalibrationController.this.mTimeHandler.sendEmptyMessage(0);
@@ -248,8 +248,8 @@ public class X8DroneCalibrationController extends AbsX8MenuBoxControllers implem
     }
 
     public void nextStepCalibration() {
-        this.fcCtrlManager.setCalibrationStart(X8Cali.CaliType.CALI_MAG.ordinal(), X8Cali.CaliCmd.CALI_CMD_NEXT_STEP.ordinal(), X8Cali.CaliMode.CALI_MODE_MANUALLY.ordinal(), new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8DroneCalibrationController.2
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcCtrlManager.setCalibrationStart(X8Cali.CaliType.CALI_MAG.ordinal(), X8Cali.CaliCmd.CALI_CMD_NEXT_STEP.ordinal(), X8Cali.CaliMode.CALI_MODE_MANUALLY.ordinal(), new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8DroneCalibrationController.this.mGaliStete = GaliStete.NEXT_STEP;
@@ -259,8 +259,8 @@ public class X8DroneCalibrationController extends AbsX8MenuBoxControllers implem
     }
 
     public void endStepCalibration() {
-        this.fcCtrlManager.setCalibrationStart(X8Cali.CaliType.CALI_MAG.ordinal(), X8Cali.CaliCmd.CALI_CMD_NEXT_STEP.ordinal(), X8Cali.CaliMode.CALI_MODE_MANUALLY.ordinal(), new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8DroneCalibrationController.3
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcCtrlManager.setCalibrationStart(X8Cali.CaliType.CALI_MAG.ordinal(), X8Cali.CaliCmd.CALI_CMD_NEXT_STEP.ordinal(), X8Cali.CaliMode.CALI_MODE_MANUALLY.ordinal(), new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8DroneCalibrationController.this.mGaliStete = GaliStete.NEXT_END;
@@ -270,8 +270,8 @@ public class X8DroneCalibrationController extends AbsX8MenuBoxControllers implem
     }
 
     public void quitGalibration() {
-        this.fcCtrlManager.setCalibrationStart(X8Cali.CaliType.CALI_MAG.ordinal(), X8Cali.CaliCmd.CALI_CMD_QUIT.ordinal(), X8Cali.CaliMode.CALI_MODE_MANUALLY.ordinal(), new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8DroneCalibrationController.4
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcCtrlManager.setCalibrationStart(X8Cali.CaliType.CALI_MAG.ordinal(), X8Cali.CaliCmd.CALI_CMD_QUIT.ordinal(), X8Cali.CaliMode.CALI_MODE_MANUALLY.ordinal(), new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     if (X8DroneCalibrationController.this.mGaliStete == GaliStete.INTERRUPT) {
@@ -291,8 +291,8 @@ public class X8DroneCalibrationController extends AbsX8MenuBoxControllers implem
     }
 
     public void completeGalibration() {
-        this.fcCtrlManager.setCalibrationStart(X8Cali.CaliType.CALI_MAG.ordinal(), X8Cali.CaliCmd.CALI_CMD_ALL_DONE.ordinal(), X8Cali.CaliMode.CALI_MODE_MANUALLY.ordinal(), new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8DroneCalibrationController.5
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcCtrlManager.setCalibrationStart(X8Cali.CaliType.CALI_MAG.ordinal(), X8Cali.CaliCmd.CALI_CMD_ALL_DONE.ordinal(), X8Cali.CaliMode.CALI_MODE_MANUALLY.ordinal(), new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     if (X8DroneCalibrationController.this.mGaliStete == GaliStete.INTERRUPT) {
@@ -307,8 +307,8 @@ public class X8DroneCalibrationController extends AbsX8MenuBoxControllers implem
     }
 
     public void getCalibrationState() {
-        this.fcCtrlManager.getCalibrationState(X8Cali.SensorType.MAGM.ordinal(), X8Cali.CaliType.CALI_MAG.ordinal(), new UiCallBackListener<AckGetCaliState>() { // from class: com.fimi.app.x8s.controls.fcsettting.X8DroneCalibrationController.6
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcCtrlManager.getCalibrationState(X8Cali.SensorType.MAGM.ordinal(), X8Cali.CaliType.CALI_MAG.ordinal(), new UiCallBackListener<AckGetCaliState>() {
+            @Override
             public void onComplete(CmdResult cmdResult, AckGetCaliState o) {
                 if (cmdResult.isSuccess()) {
                     switch (AnonymousClass8.$SwitchMap$com$fimi$app$x8s$controls$fcsettting$X8DroneCalibrationController$GaliStete[X8DroneCalibrationController.this.mGaliStete.ordinal()]) {
@@ -359,7 +359,6 @@ public class X8DroneCalibrationController extends AbsX8MenuBoxControllers implem
                                 return;
                             }
                         default:
-                            return;
                     }
                 }
             }
@@ -394,12 +393,12 @@ public class X8DroneCalibrationController extends AbsX8MenuBoxControllers implem
         return true;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public String getString(int id) {
         return this.rootView.getContext().getResources().getString(id);
     }
 
-    /* loaded from: classes.dex */
+
     public enum GaliStete {
         IDLE,
         WAITSTART,
@@ -414,7 +413,7 @@ public class X8DroneCalibrationController extends AbsX8MenuBoxControllers implem
     }
 
     /* renamed from: com.fimi.app.x8s.controls.fcsettting.X8DroneCalibrationController$8 */
-    /* loaded from: classes.dex */
+
     public static /* synthetic */ class AnonymousClass8 {
         static final /* synthetic */ int[] $SwitchMap$com$fimi$app$x8s$controls$fcsettting$X8DroneCalibrationController$GaliStete = new int[GaliStete.values().length];
 

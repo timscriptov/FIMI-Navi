@@ -7,7 +7,7 @@ import com.fimi.kernel.utils.CRCUtil;
 import com.fimi.x8sdk.command.FcCollection;
 import com.fimi.x8sdk.command.X8GimbalCollection;
 
-/* loaded from: classes.dex */
+
 public class Header4 {
     public static final int HEADER_LEN = 16;
     public static byte startFlag = -2;
@@ -133,7 +133,7 @@ public class Header4 {
     }
 
     public byte[] onPacket() {
-        int i = 0 + 1;
+        int i = 1;
         this.headerArr[0] = startFlag;
         this.verAndLen = (short) ((this.ver & X8GimbalCollection.MSG_ID_GET_GIMBAL_GAIN) | ((this.len & 511) << 6));
         int i2 = i + 1;

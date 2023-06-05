@@ -30,11 +30,11 @@ import java.util.Map;
 
 import router.Router;
 
-/* loaded from: classes.dex */
+
 public class X8B2oxAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private Context context;
+    private final Context context;
     private X8DoubleCustomDialog loginDialogRestart;
-    private volatile Map<String, X8B2oxSection> sections = new LinkedHashMap();
+    private final Map<String, X8B2oxSection> sections = new LinkedHashMap();
 
     public X8B2oxAdapter(Context context) {
         this.context = context;
@@ -44,7 +44,7 @@ public class X8B2oxAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         this.sections.put(title, section);
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 0) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.x8_black_box_header_layout, parent, false);
@@ -57,7 +57,7 @@ public class X8B2oxAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         int currentPos = 0;
         for (Map.Entry<String, X8B2oxSection> entry : this.sections.entrySet()) {
@@ -118,8 +118,8 @@ public class X8B2oxAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         if (file.getState() != FdsUploadState.IDLE && file.getState() != FdsUploadState.STOP && file.getState() != FdsUploadState.FAILED) {
             return;
         }
-        ((X8B2oxViewHolder) holder).rlSaveFlag.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.adapter.X8B2oxAdapter.1
-            @Override // android.view.View.OnClickListener
+        ((X8B2oxViewHolder) holder).rlSaveFlag.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 if (!DNSLookupThread.isDSNSuceess()) {
                     X8ToastUtil.showToast(X8B2oxAdapter.this.context, X8B2oxAdapter.this.context.getString(R.string.x8_fds_connect_internet), 0);
@@ -129,7 +129,7 @@ public class X8B2oxAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     FdsManager.getInstance().startDownload(file);
                     X8B2oxAdapter.this.notifyItemChanged(position1);
                 } else {
-                    X8B2oxAdapter.this.loginDialogRestart = new X8DoubleCustomDialog(X8B2oxAdapter.this.context, X8B2oxAdapter.this.context.getString(R.string.x8_modify_black_box_login_title), X8B2oxAdapter.this.context.getString(R.string.x8_modify_black_box_login_content), X8B2oxAdapter.this.context.getString(R.string.x8_modify_black_box_login_go), new X8DoubleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.adapter.X8B2oxAdapter.1.1
+                    X8B2oxAdapter.this.loginDialogRestart = new X8DoubleCustomDialog(X8B2oxAdapter.this.context, X8B2oxAdapter.this.context.getString(R.string.x8_modify_black_box_login_title), X8B2oxAdapter.this.context.getString(R.string.x8_modify_black_box_login_content), X8B2oxAdapter.this.context.getString(R.string.x8_modify_black_box_login_go), new X8DoubleCustomDialog.onDialogButtonClickListener() {
                         @Override
                         // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
                         public void onLeft() {
@@ -140,7 +140,7 @@ public class X8B2oxAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                         // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
                         public void onRight() {
                             SPStoreManager.getInstance().saveInt(Constants.SP_PERSON_USER_TYPE, Constants.UserType.Ideal.ordinal());
-                            Intent intent = (Intent) Router.invoke(X8B2oxAdapter.this.context, "activity://app.SplashActivity");
+                            Intent intent = Router.invoke(X8B2oxAdapter.this.context, "activity://app.SplashActivity");
                             X8B2oxAdapter.this.context.startActivity(intent);
                         }
                     });
@@ -173,7 +173,7 @@ public class X8B2oxAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         notifyDataSetChanged();
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public int getItemCount() {
         int count = 0;
         for (Map.Entry<String, X8B2oxSection> entry : this.sections.entrySet()) {
@@ -183,7 +183,7 @@ public class X8B2oxAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         return count;
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public int getItemViewType(int position) {
         int currentPos = 0;
         for (Map.Entry<String, X8B2oxSection> entry : this.sections.entrySet()) {
@@ -215,23 +215,23 @@ public class X8B2oxAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         notifyDataSetChanged();
     }
 
-    /* loaded from: classes.dex */
+
     public class X8B2oxViewHolder extends RecyclerView.ViewHolder {
         public TextView mTvItemTitle1;
         public TextView mTvItemTitle2;
         public TextView mTvItemTitle3;
         public View rlRootView;
-        private ImageView mImgSaveFlag;
-        private View rlSaveFlag;
+        private final ImageView mImgSaveFlag;
+        private final View rlSaveFlag;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+
         public X8B2oxViewHolder(View itemView) {
             super(itemView);
             this.rlRootView = itemView.findViewById(R.id.rlRootView);
-            this.mTvItemTitle1 = (TextView) itemView.findViewById(R.id.tvItme1);
-            this.mTvItemTitle2 = (TextView) itemView.findViewById(R.id.tvItme2);
-            this.mTvItemTitle3 = (TextView) itemView.findViewById(R.id.tvItme6);
-            this.mImgSaveFlag = (ImageView) itemView.findViewById(R.id.img_save_flag);
+            this.mTvItemTitle1 = itemView.findViewById(R.id.tvItme1);
+            this.mTvItemTitle2 = itemView.findViewById(R.id.tvItme2);
+            this.mTvItemTitle3 = itemView.findViewById(R.id.tvItme6);
+            this.mImgSaveFlag = itemView.findViewById(R.id.img_save_flag);
             this.rlSaveFlag = itemView.findViewById(R.id.rlSaveFlag);
         }
     }
@@ -240,11 +240,11 @@ public class X8B2oxAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         public View rlRootView;
         public TextView tvTitle;
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+
         public X8B2oxHeaderViewHolder(View itemView) {
             super(itemView);
             this.rlRootView = itemView.findViewById(R.id.rlRootView);
-            this.tvTitle = (TextView) itemView.findViewById(R.id.tvItme1);
+            this.tvTitle = itemView.findViewById(R.id.tvItme1);
         }
     }
 }

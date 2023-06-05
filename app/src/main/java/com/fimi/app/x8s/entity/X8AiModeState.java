@@ -1,6 +1,6 @@
 package com.fimi.app.x8s.entity;
 
-/* loaded from: classes.dex */
+
 public class X8AiModeState {
     private AiModeState aiModeState = AiModeState.IDLE;
 
@@ -20,7 +20,7 @@ public class X8AiModeState {
         return this.aiModeState == AiModeState.IDLE;
     }
 
-    /* loaded from: classes.dex */
+
     public enum AiModeState {
         IDLE,
         READY,

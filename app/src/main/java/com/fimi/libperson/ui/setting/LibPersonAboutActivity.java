@@ -38,7 +38,7 @@ import com.fimi.widget.DialogManager;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class LibPersonAboutActivity extends BasePersonActivity implements BitmapLoadTaskInstance.OnLoadListener {
     BitmapLoadTaskInstance mBitmapLoadTaskInstance;
     boolean isLogin = false;
@@ -48,10 +48,10 @@ public class LibPersonAboutActivity extends BasePersonActivity implements Bitmap
     private PersettingThirdAdapt mPersettingThirdAdapt;
     private List<PersonSetting> mThirdPersonSettings;
     private TitleView mTitleView;
-    private AdapterView.OnItemClickListener mThirdListerner = new AdapterView.OnItemClickListener() { // from class: com.fimi.libperson.ui.setting.LibPersonAboutActivity.2
-        @Override // android.widget.AdapterView.OnItemClickListener
+    private final AdapterView.OnItemClickListener mThirdListerner = new AdapterView.OnItemClickListener() {
+        @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            PersettingThirdAdapt.State positionIndex = ((PersonSetting) LibPersonAboutActivity.this.mThirdPersonSettings.get(position)).getThirdAdapt();
+            PersettingThirdAdapt.State positionIndex = LibPersonAboutActivity.this.mThirdPersonSettings.get(position).getThirdAdapt();
             if (positionIndex == PersettingThirdAdapt.State.USER_PRIVACY) {
                 LibPersonAboutActivity.this.goWebActivity(ComonStaticURL.getPrivacyUrl(), LibPersonAboutActivity.this.getString(R.string.person_setting_user_privacy));
             } else if (positionIndex == PersettingThirdAdapt.State.USER_AGREEMENT) {
@@ -62,17 +62,17 @@ public class LibPersonAboutActivity extends BasePersonActivity implements Bitmap
         }
     };
 
-    @Override // com.fimi.libperson.BasePersonActivity, com.fimi.kernel.base.BaseActivity
+    @Override
     public void setStatusBarColor() {
         StatusBarUtil.StatusBarLightMode(this);
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     protected int getContentViewLayoutID() {
         return R.layout.libperson_activity_about;
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void initData() {
         PersettingThirdAdapt.State[] values;
         initView();
@@ -88,7 +88,7 @@ public class LibPersonAboutActivity extends BasePersonActivity implements Bitmap
             }
         }
         this.mPersettingThirdAdapt.setData(this.mThirdPersonSettings);
-        this.mLvMainSetting.setAdapter((ListAdapter) this.mPersettingThirdAdapt);
+        this.mLvMainSetting.setAdapter(this.mPersettingThirdAdapt);
         this.mLvMainSetting.setOnItemClickListener(this.mThirdListerner);
         this.mBitmapLoadTaskInstance = BitmapLoadTaskInstance.getInstance();
     }
@@ -96,11 +96,11 @@ public class LibPersonAboutActivity extends BasePersonActivity implements Bitmap
     private void initView() {
         String fimiId = HostConstants.getUserDetail().getFimiId();
         this.isLogin = !TextUtils.isEmpty(fimiId);
-        this.mTitleView = (TitleView) findViewById(R.id.title_view);
+        this.mTitleView = findViewById(R.id.title_view);
         this.mTitleView.setTvTitle(getResources().getString(R.string.libperson_about));
-        this.mLvMainSetting = (ListView) findViewById(R.id.lv_main_setting);
-        this.libpersonTvVersions = (TextView) findViewById(R.id.libperson_tv_versions);
-        this.libpersonBtnRepeal = (Button) findViewById(R.id.libperson_btn_repeal);
+        this.mLvMainSetting = findViewById(R.id.lv_main_setting);
+        this.libpersonTvVersions = findViewById(R.id.libperson_tv_versions);
+        this.libpersonBtnRepeal = findViewById(R.id.libperson_btn_repeal);
         this.libpersonBtnRepeal.setVisibility(this.isLogin ? 0 : 8);
         FontUtil.changeFontLanTing(getAssets(), this.libpersonTvVersions, findViewById(R.id.libperson_tv_rights_reserved), this.libpersonBtnRepeal);
         this.libpersonTvVersions.setText(getResources().getString(R.string.app_product_name) + " " + getResources().getString(R.string.app_version) + "");
@@ -131,7 +131,7 @@ public class LibPersonAboutActivity extends BasePersonActivity implements Bitmap
         }
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void doTrans() {
         this.libpersonBtnRepeal.setOnClickListener(new AnonymousClass1());
     }
@@ -144,7 +144,7 @@ public class LibPersonAboutActivity extends BasePersonActivity implements Bitmap
         overridePendingTransition(17432576, 17432577);
     }
 
-    @Override // android.support.v4.app.FragmentActivity, android.app.Activity
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 10010) {
@@ -161,7 +161,7 @@ public class LibPersonAboutActivity extends BasePersonActivity implements Bitmap
         }
     }
 
-    @Override // com.fimi.libperson.widget.BitmapLoadTaskInstance.OnLoadListener
+    @Override
     public void onComplete() {
         SPStoreManager.getInstance().removeKey(HostConstants.SP_KEY_USER_DETAIL);
         SPStoreManager.getInstance().saveBoolean(HostConstants.USER_PROTOCOL, false);
@@ -169,23 +169,23 @@ public class LibPersonAboutActivity extends BasePersonActivity implements Bitmap
     }
 
     /* renamed from: com.fimi.libperson.ui.setting.LibPersonAboutActivity$1 */
-    /* loaded from: classes.dex */
+
     public class AnonymousClass1 implements View.OnClickListener {
         AnonymousClass1() {
         }
 
-        @Override // android.view.View.OnClickListener
+        @Override
         public void onClick(View view) {
             DialogManager dialogManager = new DialogManager(LibPersonAboutActivity.this.mContext, LibPersonAboutActivity.this.getString(R.string.libperson_repeal_accredit), LibPersonAboutActivity.this.getString(R.string.libperson_repeal_accredit_hint), LibPersonAboutActivity.this.getString(R.string.login_ensure), LibPersonAboutActivity.this.getString(R.string.person_setting_dialog_exit_left_text));
             dialogManager.setVerticalScreen(true);
-            dialogManager.setOnDiaLogListener(new DialogManager.OnDialogListener() { // from class: com.fimi.libperson.ui.setting.LibPersonAboutActivity.1.1
-                @Override // com.fimi.widget.DialogManager.OnDialogListener
+            dialogManager.setOnDiaLogListener(new DialogManager.OnDialogListener() {
+                @Override
                 public void dialogBtnRightOrSingleListener(View customView, DialogInterface dialogInterface, int which) {
-                    UserManager.getIntance(LibPersonAboutActivity.this).sendRepealAccredit(Constants.productType.name().toLowerCase(), new DisposeDataHandle(new DisposeDataListener() { // from class: com.fimi.libperson.ui.setting.LibPersonAboutActivity.1.1.1
-                        @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+                    UserManager.getIntance(LibPersonAboutActivity.this).sendRepealAccredit(Constants.productType.name().toLowerCase(), new DisposeDataHandle(new DisposeDataListener() {
+                        @Override
                         public void onSuccess(Object responseObj) {
                             try {
-                                NetModel netModel = (NetModel) JSON.parseObject(responseObj.toString(), NetModel.class);
+                                NetModel netModel = JSON.parseObject(responseObj.toString(), NetModel.class);
                                 if (netModel.isSuccess()) {
                                     LibPersonAboutActivity.this.mBitmapLoadTaskInstance.setOnLoadListener(LibPersonAboutActivity.this);
                                     LibPersonAboutActivity.this.mBitmapLoadTaskInstance.setImage(ImageSource.asset("login_bg.jpg"), LibPersonAboutActivity.this.mContext);
@@ -197,14 +197,14 @@ public class LibPersonAboutActivity extends BasePersonActivity implements Bitmap
                             }
                         }
 
-                        @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+                        @Override
                         public void onFailure(Object reasonObj) {
                             ToastUtil.showToast(LibPersonAboutActivity.this, LibPersonAboutActivity.this.mContext.getString(R.string.network_exception), 1);
                         }
                     }));
                 }
 
-                @Override // com.fimi.widget.DialogManager.OnDialogListener
+                @Override
                 public void dialogBtnLeftListener(View customView, DialogInterface dialogInterface, int which) {
                 }
             });

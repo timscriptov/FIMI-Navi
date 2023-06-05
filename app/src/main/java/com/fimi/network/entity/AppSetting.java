@@ -1,8 +1,6 @@
 package com.fimi.network.entity;
 
 
-
-/* loaded from: classes.dex */
 public class AppSetting extends BaseModel {
     String key;
     String value;

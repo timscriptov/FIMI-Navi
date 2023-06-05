@@ -14,14 +14,14 @@ import okhttp3.Callback;
 import okhttp3.HttpUrl;
 import okhttp3.Response;
 
-/* loaded from: classes.dex */
+
 public class CommonUrlCallback implements Callback {
     protected final int NETWORK_ERROR = -1;
     private boolean isArray;
     private boolean isGetCode;
-    private Class<?> mClass;
-    private DisposeDataListener mListener;
-    private Handler mDeliveryHandler = new Handler(Looper.getMainLooper());
+    private final Class<?> mClass;
+    private final DisposeDataListener mListener;
+    private final Handler mDeliveryHandler = new Handler(Looper.getMainLooper());
 
     public CommonUrlCallback(DisposeDataHandle handle, boolean isGetCode) {
         this.isArray = false;
@@ -32,22 +32,22 @@ public class CommonUrlCallback implements Callback {
         this.isGetCode = isGetCode;
     }
 
-    @Override // okhttp3.Callback
+    @Override
     public void onFailure(Call call, final IOException e) {
-        this.mDeliveryHandler.post(new Runnable() { // from class: com.fimi.kernel.network.okhttp.response.CommonUrlCallback.1
-            @Override // java.lang.Runnable
+        this.mDeliveryHandler.post(new Runnable() {
+            @Override
             public void run() {
                 CommonUrlCallback.this.mListener.onFailure(new OkHttpException(-1, e));
             }
         });
     }
 
-    @Override // okhttp3.Callback
+    @Override
     public void onResponse(Call call, Response response) throws IOException {
         final String result = response.body().string();
         final HttpUrl url = response.request().url();
-        this.mDeliveryHandler.post(new Runnable() { // from class: com.fimi.kernel.network.okhttp.response.CommonUrlCallback.2
-            @Override // java.lang.Runnable
+        this.mDeliveryHandler.post(new Runnable() {
+            @Override
             public void run() {
                 if (CommonUrlCallback.this.isGetCode) {
                     CommonUrlCallback.this.handleResponse(url);

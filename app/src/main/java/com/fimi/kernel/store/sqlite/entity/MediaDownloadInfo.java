@@ -1,6 +1,6 @@
 package com.fimi.kernel.store.sqlite.entity;
 
-/* loaded from: classes.dex */
+
 public class MediaDownloadInfo {
     public Long id;
     private long compeleteZize;

@@ -18,25 +18,22 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-/* loaded from: classes.dex */
+
 public class CommonFileCallback implements Callback {
     private static final int PROGRESS_MESSAGE = 1;
     protected final int NETWORK_ERROR = -1;
     protected final int IO_ERROR = -2;
     protected final String EMPTY_MSG = "";
     DisposeDataHandle dataHandle;
-    private String mFilePath;
-    private DisposeDownloadListener mListener;
+    private final String mFilePath;
+    private final DisposeDownloadListener mListener;
     private int mProgress;
-    private Handler mDeliveryHandler = new Handler(Looper.getMainLooper()) { // from class: com.fimi.kernel.network.okhttp.response.CommonFileCallback.1
-        @Override // android.os.Handler
+    private final Handler mDeliveryHandler = new Handler(Looper.getMainLooper()) {
+        @Override
         public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 1:
-                    CommonFileCallback.this.mListener.onProgress(msg.arg1, msg.arg2);
-                    return;
-                default:
-                    return;
+            if (msg.what == 1) {
+                CommonFileCallback.this.mListener.onProgress(msg.arg1, msg.arg2);
+                return;
             }
         }
     };
@@ -47,21 +44,21 @@ public class CommonFileCallback implements Callback {
         this.dataHandle = handle;
     }
 
-    @Override // okhttp3.Callback
+    @Override
     public void onFailure(Call call, final IOException ioexception) {
-        this.mDeliveryHandler.post(new Runnable() { // from class: com.fimi.kernel.network.okhttp.response.CommonFileCallback.2
-            @Override // java.lang.Runnable
+        this.mDeliveryHandler.post(new Runnable() {
+            @Override
             public void run() {
                 CommonFileCallback.this.mListener.onFailure(new OkHttpException(-1, ioexception));
             }
         });
     }
 
-    @Override // okhttp3.Callback
+    @Override
     public void onResponse(Call call, Response response) throws IOException {
         final File file = handleResponse(response);
-        this.mDeliveryHandler.post(new Runnable() { // from class: com.fimi.kernel.network.okhttp.response.CommonFileCallback.3
-            @Override // java.lang.Runnable
+        this.mDeliveryHandler.post(new Runnable() {
+            @Override
             public void run() {
                 if (file != null) {
                     CommonFileCallback.this.mListener.onSuccess(file);

@@ -1,6 +1,6 @@
 package com.fimi.kernel.connect.wifi;
 
-/* loaded from: classes.dex */
+
 public abstract class EventMsg {
     private Object msg_content;
     private int msg_id;
@@ -30,7 +30,7 @@ public abstract class EventMsg {
         this.msg_content = msg_content;
     }
 
-    /* loaded from: classes.dex */
+
     public enum msgType {
         error,
         warn,

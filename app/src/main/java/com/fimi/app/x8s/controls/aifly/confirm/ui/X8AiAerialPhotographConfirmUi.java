@@ -11,11 +11,11 @@ import com.fimi.app.x8s.config.X8AiConfig;
 import com.fimi.app.x8s.controls.X8MainAiFlyController;
 import com.fimi.app.x8s.tools.ImageUtils;
 
-/* loaded from: classes.dex */
+
 public class X8AiAerialPhotographConfirmUi implements View.OnClickListener {
     private View btnOk;
     private CheckBox cbTip;
-    private View contentView;
+    private final View contentView;
     private ImageView imgFlag;
     private View imgReturn;
     private X8MainAiFlyController listener;
@@ -34,8 +34,8 @@ public class X8AiAerialPhotographConfirmUi implements View.OnClickListener {
     public void initViews(View rootView) {
         this.imgReturn = rootView.findViewById(R.id.img_ai_follow_return);
         this.btnOk = rootView.findViewById(R.id.btn_ai_follow_confirm_ok);
-        this.cbTip = (CheckBox) rootView.findViewById(R.id.cb_ai_follow_confirm_ok);
-        this.imgFlag = (ImageView) rootView.findViewById(R.id.img_aerial_photo_flag);
+        this.cbTip = rootView.findViewById(R.id.cb_ai_follow_confirm_ok);
+        this.imgFlag = rootView.findViewById(R.id.img_aerial_photo_flag);
         this.imgFlag.setImageBitmap(ImageUtils.getBitmapByPath(rootView.getContext(), R.drawable.x8_img_aerial_photograph));
     }
 
@@ -44,26 +44,18 @@ public class X8AiAerialPhotographConfirmUi implements View.OnClickListener {
         this.btnOk.setOnClickListener(this);
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.img_ai_follow_return) {
             this.mX8MainAiFlyController.onCloseConfirmUi();
         } else if (id == R.id.btn_ai_follow_confirm_ok) {
-            if (this.cbTip.isChecked()) {
-                X8AiConfig.getInstance().setAiAerialPhotographCourse(false);
-            } else {
-                X8AiConfig.getInstance().setAiAerialPhotographCourse(true);
-            }
+            X8AiConfig.getInstance().setAiAerialPhotographCourse(!this.cbTip.isChecked());
             this.mX8MainAiFlyController.onAerialPhotographConfirmOkClick();
         }
     }
 
     public void setFcHeart(boolean isInSky, boolean isLowPower) {
-        if (isInSky && isLowPower) {
-            this.btnOk.setEnabled(true);
-        } else {
-            this.btnOk.setEnabled(false);
-        }
+        this.btnOk.setEnabled(isInSky && isLowPower);
     }
 }

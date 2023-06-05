@@ -25,7 +25,7 @@ import java.net.UnknownHostException;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
 
-/* loaded from: classes.dex */
+
 public class UdpConnect extends BaseConnect implements IDataTransfer, IRetransmissionHandle, ITimerSendQueueHandle {
     private static DatagramPacket packetRcv;
     private static DatagramPacket packetSend;
@@ -39,10 +39,10 @@ public class UdpConnect extends BaseConnect implements IDataTransfer, IRetransmi
     private TimerSendQueueThread mTimerSendQueueThread;
     private ReadThread readThread;
     private SendThread sendThread;
-    private SocketOption socketOption;
-    private ResultListener x9Listener;
+    private final SocketOption socketOption;
+    private final ResultListener x9Listener;
     private boolean udpLife = true;
-    private byte[] msgRcv = new byte[1024];
+    private final byte[] msgRcv = new byte[1024];
 
     public UdpConnect(DatagramSocket socket2, SocketOption option, ResultListener listener) throws UnknownHostException {
         this.hostAddress = null;
@@ -53,12 +53,12 @@ public class UdpConnect extends BaseConnect implements IDataTransfer, IRetransmi
         this.hostAddress = InetAddress.getByName(this.socketOption.getHost());
     }
 
-    @Override // com.fimi.kernel.connect.interfaces.IDataTransfer
+    @Override
     public void sendRestransmissionData(BaseCommand bcd) {
         sendDatas(bcd);
     }
 
-    @Override // com.fimi.kernel.connect.interfaces.IDataTransfer
+    @Override
     public void onSendTimeOut(int group_id, int cmdId, BaseCommand bcd) {
         if (bcd.getPersonalDataCallBack() == null) {
             NoticeManager.getInstance().onSendTimeOut(group_id, cmdId, bcd);
@@ -67,7 +67,7 @@ public class UdpConnect extends BaseConnect implements IDataTransfer, IRetransmi
         }
     }
 
-    @Override // com.fimi.kernel.connect.interfaces.IRetransmissionHandle
+    @Override
     public boolean removeFromListByCmdID(int groupId, int cmdId, int seq, LinkPacket packet) {
         if (this.mRetransmissionThread == null) {
             return false;
@@ -75,12 +75,12 @@ public class UdpConnect extends BaseConnect implements IDataTransfer, IRetransmi
         return this.mRetransmissionThread.removeFromListByCmdID(groupId, cmdId, seq, packet);
     }
 
-    @Override // com.fimi.kernel.connect.interfaces.IRetransmissionHandle
+    @Override
     public boolean removeFromListByCmdIDLinkPacket4(int groupId, int cmdId, int seq, LinkPacket4 packet) {
         return false;
     }
 
-    @Override // com.fimi.kernel.connect.interfaces.ITimerSendQueueHandle
+    @Override
     public boolean removeFromTimerSendQueueByCmdID(int groupId, int cmdId, int seq, LinkPacket packet) {
         if (this.mTimerSendQueueThread == null) {
             return false;
@@ -125,7 +125,7 @@ public class UdpConnect extends BaseConnect implements IDataTransfer, IRetransmi
         }
     }
 
-    @Override // com.fimi.kernel.connect.BaseConnect
+    @Override
     public void startSession() {
         this.readThread = new ReadThread();
         this.sendThread = new SendThread();
@@ -142,7 +142,7 @@ public class UdpConnect extends BaseConnect implements IDataTransfer, IRetransmi
         this.mCheckDeviceConnectThread.start();
     }
 
-    @Override // com.fimi.kernel.connect.BaseConnect
+    @Override
     public void closeSession() {
         this.udpLife = false;
         if (this.readThread != null) {
@@ -167,7 +167,7 @@ public class UdpConnect extends BaseConnect implements IDataTransfer, IRetransmi
         SessionManager.getInstance().removeSession();
     }
 
-    @Override // com.fimi.kernel.connect.BaseConnect
+    @Override
     public void sendCmd(BaseCommand cmd) {
         try {
             this.cmdQuene.offer(cmd, cmd.getOutTime(), TimeUnit.MILLISECONDS);
@@ -177,7 +177,7 @@ public class UdpConnect extends BaseConnect implements IDataTransfer, IRetransmi
         }
     }
 
-    @Override // com.fimi.kernel.connect.BaseConnect
+    @Override
     public boolean isDeviceConnected() {
         return this.udpLife;
     }
@@ -186,16 +186,16 @@ public class UdpConnect extends BaseConnect implements IDataTransfer, IRetransmi
         this.lastTime = System.currentTimeMillis();
     }
 
-    @Override // com.fimi.kernel.connect.BaseConnect
+    @Override
     public void sendJsonCmd(BaseCommand cmd) {
     }
 
-    /* loaded from: classes.dex */
+
     public class ReadThread extends Thread {
         ReadThread() {
         }
 
-        @Override // java.lang.Thread, java.lang.Runnable
+        @Override
         public void run() {
             while (UdpConnect.this.udpLife) {
                 try {
@@ -211,12 +211,12 @@ public class UdpConnect extends BaseConnect implements IDataTransfer, IRetransmi
         }
     }
 
-    /* loaded from: classes.dex */
+
     public class SendThread extends Thread {
         private SendThread() {
         }
 
-        @Override // java.lang.Thread, java.lang.Runnable
+        @Override
         public void run() {
             super.run();
             while (UdpConnect.this.udpLife) {
@@ -240,7 +240,7 @@ public class UdpConnect extends BaseConnect implements IDataTransfer, IRetransmi
         }
     }
 
-    /* loaded from: classes.dex */
+
     public class CheckDeviceConnectThread extends Thread {
         private boolean isLoop = true;
 
@@ -252,7 +252,7 @@ public class UdpConnect extends BaseConnect implements IDataTransfer, IRetransmi
             interrupt();
         }
 
-        @Override // java.lang.Thread, java.lang.Runnable
+        @Override
         public void run() {
             while (this.isLoop) {
                 if (System.currentTimeMillis() - UdpConnect.this.lastTime > 3000) {

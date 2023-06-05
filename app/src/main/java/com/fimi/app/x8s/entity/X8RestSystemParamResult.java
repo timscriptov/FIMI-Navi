@@ -1,6 +1,6 @@
 package com.fimi.app.x8s.entity;
 
-/* loaded from: classes.dex */
+
 public class X8RestSystemParamResult {
     private boolean appResult;
     private boolean fcResult;

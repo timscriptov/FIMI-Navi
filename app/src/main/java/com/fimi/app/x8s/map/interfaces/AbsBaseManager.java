@@ -11,13 +11,13 @@ import com.google.android.gms.maps.model.PatternItem;
 import java.util.Arrays;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public abstract class AbsBaseManager {
     public static final int MAX_DISTANCE = 1000;
-    private static int PATTERN_DASH_LENGTH_PX = 50;
-    private static int PATTERN_GAP_LENGTH_PX = 20;
-    private static Dash DASH = new Dash(PATTERN_DASH_LENGTH_PX);
-    private static Gap GAP = new Gap(PATTERN_GAP_LENGTH_PX);
+    private static final int PATTERN_DASH_LENGTH_PX = 50;
+    private static final int PATTERN_GAP_LENGTH_PX = 20;
+    private static final Dash DASH = new Dash(PATTERN_DASH_LENGTH_PX);
+    private static final Gap GAP = new Gap(PATTERN_GAP_LENGTH_PX);
     public static List<PatternItem> PATTERN_DASHED = Arrays.asList(DASH, GAP);
     protected X8MapCalcAngle mapCalcAngle = new X8MapCalcAngle();
     protected int strokeColor = Color.argb(99, 255, 79, 0);

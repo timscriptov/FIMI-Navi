@@ -1,6 +1,6 @@
 package com.fimi.network.oauth2;
 
-/* loaded from: classes.dex */
+
 public class OauthConstant {
     public static final String ACCESS_TOKEN_SP = "access_token_sp";
     public static final String AUTHORIZATION_CODE = "authorization_code";

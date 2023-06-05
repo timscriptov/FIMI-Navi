@@ -25,20 +25,20 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* loaded from: classes.dex */
+
 public class X9CameraDispater<T extends MediaModel> implements IHandlerCallback, OnX9MediaFileListener, ICameraDeviceDispater {
     private IDateHandler mIDateHandler;
-    private MediaLoadProxy mMediaLoadProxy = new MediaLoadProxy();
+    private final MediaLoadProxy mMediaLoadProxy = new MediaLoadProxy();
     private boolean isLoadCompleteSuccess = false;
     private boolean isLoading = false;
     private long videoCount = 0;
     private long photoCount = 0;
-    private Handler otherHandler = HandlerManager.obtain().getHandlerInOtherThread(this);
-    private CopyOnWriteArrayList<T> cameraDataList = new CopyOnWriteArrayList<>();
-    private CopyOnWriteArrayList<T> cameraDataNoHeadList = new CopyOnWriteArrayList<>();
-    private LinkedHashMap<String, CopyOnWriteArrayList<T>> cameraDateHash = new LinkedHashMap<>();
+    private final Handler otherHandler = HandlerManager.obtain().getHandlerInOtherThread(this);
+    private final CopyOnWriteArrayList<T> cameraDataList = new CopyOnWriteArrayList<>();
+    private final CopyOnWriteArrayList<T> cameraDataNoHeadList = new CopyOnWriteArrayList<>();
+    private final LinkedHashMap<String, CopyOnWriteArrayList<T>> cameraDateHash = new LinkedHashMap<>();
 
-    @Override // com.fimi.album.interfaces.ICameraDeviceDispater
+    @Override
     public void forCameraFolder() {
         Log.i("mediax9", "forCameraFolder: ");
         if (!this.isLoading && !this.otherHandler.hasMessages(10)) {
@@ -50,7 +50,7 @@ public class X9CameraDispater<T extends MediaModel> implements IHandlerCallback,
         }
     }
 
-    @Override // com.fimi.album.iview.IHandlerCallback, android.os.Handler.Callback
+    @Override
     public boolean handleMessage(Message message) {
         if (!this.isLoadCompleteSuccess && message.what == 10) {
             reallyCameraFolderFile();
@@ -72,27 +72,27 @@ public class X9CameraDispater<T extends MediaModel> implements IHandlerCallback,
         m.setLocalFileDir(path);
         m.setFileUrl("https://cdn.awsbj0.fds.api.mi-img.com/mediasdata/firmware-C1.zip");
         m.setDownLoadThum(true);
-        new Thread(new MediaOriginalDownloadTask(m, new OnDownloadListener() { // from class: com.fimi.album.biz.X9CameraDispater.1
-            @Override // com.fimi.album.download.interfaces.OnDownloadListener
+        new Thread(new MediaOriginalDownloadTask(m, new OnDownloadListener() {
+            @Override
             public void onProgress(Object responseObj, long progrss, long currentLength) {
                 int i = (int) (progrss / (currentLength / 100));
             }
 
-            @Override // com.fimi.album.download.interfaces.OnDownloadListener
+            @Override
             public void onSuccess(Object responseObj) {
             }
 
-            @Override // com.fimi.album.download.interfaces.OnDownloadListener
+            @Override
             public void onFailure(Object reasonObj) {
             }
 
-            @Override // com.fimi.album.download.interfaces.OnDownloadListener
+            @Override
             public void onStop(MediaModel reasonObj) {
             }
         })).start();
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
+
     private void addHeadModelBean(List<T> cacheList, CopyOnWriteArrayList<T> saveList, HashMap<String, CopyOnWriteArrayList<T>> saveHash) {
         String cacheFormateDate = null;
         CopyOnWriteArrayList copyOnWriteArrayList = null;
@@ -102,7 +102,7 @@ public class X9CameraDispater<T extends MediaModel> implements IHandlerCallback,
         saveList.add((T) headViewModel);
         for (T t : cacheList) {
             String lastModifyDate = t.getFormatDate().split(" ")[0];
-            if (cacheFormateDate == null || !lastModifyDate.equals(cacheFormateDate)) {
+            if (!lastModifyDate.equals(cacheFormateDate)) {
                 if (copyOnWriteArrayList != null) {
                     saveHash.put(cacheFormateDate, copyOnWriteArrayList);
                     saveList.addAll(copyOnWriteArrayList);
@@ -126,22 +126,22 @@ public class X9CameraDispater<T extends MediaModel> implements IHandlerCallback,
         }
     }
 
-    @Override // com.fimi.album.interfaces.ICameraDeviceDispater
+    @Override
     public CopyOnWriteArrayList<T> getCameraDataList() {
         return this.cameraDataList;
     }
 
-    @Override // com.fimi.album.interfaces.ICameraDeviceDispater
+    @Override
     public CopyOnWriteArrayList<T> getCameraDataNoHeadList() {
         return this.cameraDataNoHeadList;
     }
 
-    @Override // com.fimi.album.interfaces.ICameraDeviceDispater
+    @Override
     public LinkedHashMap<String, CopyOnWriteArrayList<T>> getCameraDateHash() {
         return this.cameraDateHash;
     }
 
-    @Override // com.fimi.album.interfaces.ICameraDeviceDispater
+    @Override
     public void reDefaultList() {
         this.isLoading = false;
         this.isLoadCompleteSuccess = false;
@@ -152,7 +152,7 @@ public class X9CameraDispater<T extends MediaModel> implements IHandlerCallback,
         this.cameraDateHash.clear();
     }
 
-    @Override // com.fimi.album.x9.interfaces.OnX9MediaFileListener
+    @Override
     public void onComplete(boolean success) {
         if (success && this.cameraDataNoHeadList != null && this.cameraDataNoHeadList.size() > 0) {
             List<T> cacheList = new ArrayList<>();
@@ -184,37 +184,37 @@ public class X9CameraDispater<T extends MediaModel> implements IHandlerCallback,
         this.isLoading = false;
     }
 
-    @Override // com.fimi.album.interfaces.ICameraDeviceDispater
+    @Override
     public void setmIDateHandler(IDateHandler mIDateHandler) {
         this.mIDateHandler = mIDateHandler;
     }
 
-    @Override // com.fimi.album.interfaces.ICameraDeviceDispater
+    @Override
     public long getVideoCount() {
         return this.videoCount;
     }
 
-    @Override // com.fimi.album.interfaces.ICameraDeviceDispater
+    @Override
     public void setVideoCount(long videoCount) {
         this.videoCount = videoCount;
     }
 
-    @Override // com.fimi.album.interfaces.ICameraDeviceDispater
+    @Override
     public long getPhotoCount() {
         return this.photoCount;
     }
 
-    @Override // com.fimi.album.interfaces.ICameraDeviceDispater
+    @Override
     public void setPhotoCount(long photoCount) {
         this.photoCount = photoCount;
     }
 
-    @Override // com.fimi.album.interfaces.ICameraDeviceDispater
+    @Override
     public boolean isLoadCompleteSuccess() {
         return this.isLoadCompleteSuccess;
     }
 
-    @Override // com.fimi.album.interfaces.ICameraDeviceDispater
+    @Override
     public void setLoadCompleteSuccess(boolean loadCompleteSuccess) {
         this.isLoadCompleteSuccess = loadCompleteSuccess;
     }

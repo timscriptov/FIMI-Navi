@@ -3,8 +3,6 @@ package com.fimi.x8sdk.dataparser;
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 
 
-
-/* loaded from: classes2.dex */
 public class AckAiScrewPrameter extends X8BaseMessage {
     private int RTHTostart;
     private int ciclePeriod;
@@ -14,7 +12,7 @@ public class AckAiScrewPrameter extends X8BaseMessage {
     private int rev3;
     private int vertSpeed;
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         this.distance = packet.getPayLoad4().getShort() / 10;
@@ -81,7 +79,7 @@ public class AckAiScrewPrameter extends X8BaseMessage {
         this.ciclePeriod = ciclePeriod;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public String toString() {
         return "AckAiScrewPrameter{distance=" + this.distance + ", ciclePeriod=" + this.ciclePeriod + ", vertSpeed=" + this.vertSpeed + ", RTHTostart=" + this.RTHTostart + ", rev1=" + this.rev1 + ", pev2=" + this.pev2 + ", rev3=" + this.rev3 + '}';
     }

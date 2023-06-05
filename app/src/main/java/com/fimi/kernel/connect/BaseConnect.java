@@ -1,6 +1,6 @@
 package com.fimi.kernel.connect;
 
-/* loaded from: classes.dex */
+
 public abstract class BaseConnect {
     private String clientAddress;
     private String clientName;
@@ -40,7 +40,7 @@ public abstract class BaseConnect {
         this.clientAddress = clientAddress;
     }
 
-    /* loaded from: classes.dex */
+
     public enum DeviceConnectState {
         IDEL,
         CONNECTED,

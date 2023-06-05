@@ -26,14 +26,14 @@ public class X8TrackOverlayView extends View {
     public int selectedColor;
     int initialValue;
     private int MAX_HEIGHT;
-    private int MAX_UNSIGNED_SHORT;
+    private final int MAX_UNSIGNED_SHORT;
     private int MAX_WIDTH;
     private float d;
     private boolean enableCustomOverlay;
     private float endX;
     private float endY;
     private String errorMsg;
-    private boolean isClean;
+    private final boolean isClean;
     private boolean isErrorSelect;
     private boolean isLost;
     private boolean isTracking;
@@ -42,15 +42,15 @@ public class X8TrackOverlayView extends View {
     private int lostColor;
     private int lostfillColor;
     private int lostfillErrorColor;
-    private Rect mBounds;
-    private Handler mHandler;
-    private Paint p;
-    private int previewH;
-    private int previewH2;
-    private int previewW;
-    private int previewW2;
-    private RectF r1;
-    private RectF r2;
+    private final Rect mBounds;
+    private final Handler mHandler;
+    private final Paint p;
+    private final int previewH;
+    private final int previewH2;
+    private final int previewW;
+    private final int previewW2;
+    private final RectF r1;
+    private final RectF r2;
     private int selectedErrorColor;
     private float startX;
     private float startY;
@@ -96,8 +96,8 @@ public class X8TrackOverlayView extends View {
         this.MARGING_TOP = 20;
         this.previewW2 = 1;
         this.previewH2 = 1;
-        this.mHandler = new Handler() { // from class: com.fimi.app.x8s.widget.X8TrackOverlayView.1
-            @Override // android.os.Handler
+        this.mHandler = new Handler() {
+            @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 X8TrackOverlayView.this.cleanTrackerRect();
@@ -141,8 +141,8 @@ public class X8TrackOverlayView extends View {
         this.MARGING_TOP = 20;
         this.previewW2 = 1;
         this.previewH2 = 1;
-        this.mHandler = new Handler() { // from class: com.fimi.app.x8s.widget.X8TrackOverlayView.1
-            @Override // android.os.Handler
+        this.mHandler = new Handler() {
+            @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 X8TrackOverlayView.this.cleanTrackerRect();
@@ -188,8 +188,8 @@ public class X8TrackOverlayView extends View {
         this.MARGING_TOP = 20;
         this.previewW2 = 1;
         this.previewH2 = 1;
-        this.mHandler = new Handler() { // from class: com.fimi.app.x8s.widget.X8TrackOverlayView.1
-            @Override // android.os.Handler
+        this.mHandler = new Handler() {
+            @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 X8TrackOverlayView.this.cleanTrackerRect();

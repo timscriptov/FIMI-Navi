@@ -42,7 +42,7 @@ import com.fimi.x8sdk.modulestate.DroneState;
 import com.fimi.x8sdk.modulestate.StateManager;
 import com.fimi.x8sdk.modulestate.X8CameraSettings;
 
-/* loaded from: classes.dex */
+
 public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements View.OnClickListener {
     FcManager fcManager;
     private X8sMainActivity activity;
@@ -112,12 +112,12 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
         this.activity = activity;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
         this.rlAiFly = rootView.findViewById(R.id.x8_rl_main_ai_fly);
         this.aiFlyBlank = rootView.findViewById(R.id.x8_rl_main_ai_fly_blank);
         this.contentView = rootView.findViewById(R.id.rl_main_ai_fly_content);
-        this.stubAiFlyAllItems = (ViewStub) rootView.findViewById(R.id.stub_ai_fly_items);
+        this.stubAiFlyAllItems = rootView.findViewById(R.id.stub_ai_fly_items);
         this.confirmContent = rootView.findViewById(R.id.x8_main_ai_confirm_content);
         this.mX8AiPoint2PointConfirmModule = new X8AiPoint2PointConfirmModule();
         this.mX8AiSurroundToPointConfirmModule = new X8AiSurroundToPointConfirmModule();
@@ -136,12 +136,12 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
         this.mX8AiGravitationConfirmModule = new X8AiGravitationConfirmModule();
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
         this.aiFlyBlank.setOnClickListener(this);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
         if (this.rlAiFlyItems != null && this.isShow) {
             setAllEnabled();
@@ -217,11 +217,10 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
                 return;
             case AI_FLY_GRAVITATION:
                 onCloseConfirmUi();
-                return;
         }
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.img_ai_take_land_off) {
@@ -270,36 +269,36 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
             if (this.rlAiFlyItems == null) {
                 View view = this.stubAiFlyAllItems.inflate();
                 this.rlAiFlyItems = view.findViewById(R.id.x8_rl_main_ai_fly_items);
-                this.imgAiTakeLandOff = (ImageView) view.findViewById(R.id.img_ai_take_land_off);
-                this.svAiItems = (ScrollView) view.findViewById(R.id.sv_ai_items);
-                this.imgAiReturnHome = (ImageView) view.findViewById(R.id.img_ai_return_home);
-                this.imgAiPointToPoint = (ImageView) view.findViewById(R.id.img_ai_point_to_point);
-                this.imgAiRout = (ImageView) view.findViewById(R.id.img_ai_rout);
-                this.imgAiAutoPhoto = (ImageView) view.findViewById(R.id.img_ai_auto_photo);
-                this.imgAiFollow = (ImageView) view.findViewById(R.id.img_ai_follow);
-                this.imgAiFollowToHostpot = (ImageView) view.findViewById(R.id.img_ai_follow_to_hostpot);
-                this.imgAiSurroundToPoint = (ImageView) view.findViewById(R.id.img_ai_surround_to_point);
-                this.imgAiTtipod = (ImageView) view.findViewById(R.id.img_ai_tripod);
-                this.imgAiAerialPhotograph = (ImageView) view.findViewById(R.id.img_ai_aerial_photograph);
-                this.imgAiFixedwing = (ImageView) view.findViewById(R.id.img_ai_fixed_wing);
-                this.imgAiHeadingLock = (ImageView) view.findViewById(R.id.img_ai_heading_lock);
-                this.imgAiSrcew = (ImageView) view.findViewById(R.id.img_ai_screw);
-                this.imgFlyGravitation = (ImageView) view.findViewById(R.id.img_ai_fly_gravitation);
-                this.imgAiSar = (ImageView) view.findViewById(R.id.img_ai_sar);
-                this.tvAiTakeLandOff = (TextView) view.findViewById(R.id.tv_ai_take_land_off);
-                this.tvAiReturnHome = (TextView) view.findViewById(R.id.tv_ai_return_home);
-                this.tvAiRout = (TextView) view.findViewById(R.id.tv_ai_rout);
-                this.tvAiFollow = (TextView) view.findViewById(R.id.tv_ai_follow);
-                this.tvAiSurroundToPoint = (TextView) view.findViewById(R.id.tv_ai_surround_to_point);
-                this.tvAiPointToPoint = (TextView) view.findViewById(R.id.tv_ai_point_to_point);
-                this.tvAiAutoPhoto = (TextView) view.findViewById(R.id.tv_ai_auto_photo);
-                this.tvAiScrew = (TextView) view.findViewById(R.id.tv_ai_screw);
-                this.tvAiGravitation = (TextView) view.findViewById(R.id.tv_ai_fly_gravitation);
-                this.tvAiSar = (TextView) view.findViewById(R.id.tv_ai_sar);
-                this.tvAerialShot = (TextView) view.findViewById(R.id.tv_ai_aerial_photograph);
-                this.tvTripod = (TextView) view.findViewById(R.id.tv_ai_tripod);
-                this.tvHeadLock = (TextView) view.findViewById(R.id.tv_ai_heading_lock);
-                this.tvFixedwing = (TextView) view.findViewById(R.id.tv_ai_fixed_wing);
+                this.imgAiTakeLandOff = view.findViewById(R.id.img_ai_take_land_off);
+                this.svAiItems = view.findViewById(R.id.sv_ai_items);
+                this.imgAiReturnHome = view.findViewById(R.id.img_ai_return_home);
+                this.imgAiPointToPoint = view.findViewById(R.id.img_ai_point_to_point);
+                this.imgAiRout = view.findViewById(R.id.img_ai_rout);
+                this.imgAiAutoPhoto = view.findViewById(R.id.img_ai_auto_photo);
+                this.imgAiFollow = view.findViewById(R.id.img_ai_follow);
+                this.imgAiFollowToHostpot = view.findViewById(R.id.img_ai_follow_to_hostpot);
+                this.imgAiSurroundToPoint = view.findViewById(R.id.img_ai_surround_to_point);
+                this.imgAiTtipod = view.findViewById(R.id.img_ai_tripod);
+                this.imgAiAerialPhotograph = view.findViewById(R.id.img_ai_aerial_photograph);
+                this.imgAiFixedwing = view.findViewById(R.id.img_ai_fixed_wing);
+                this.imgAiHeadingLock = view.findViewById(R.id.img_ai_heading_lock);
+                this.imgAiSrcew = view.findViewById(R.id.img_ai_screw);
+                this.imgFlyGravitation = view.findViewById(R.id.img_ai_fly_gravitation);
+                this.imgAiSar = view.findViewById(R.id.img_ai_sar);
+                this.tvAiTakeLandOff = view.findViewById(R.id.tv_ai_take_land_off);
+                this.tvAiReturnHome = view.findViewById(R.id.tv_ai_return_home);
+                this.tvAiRout = view.findViewById(R.id.tv_ai_rout);
+                this.tvAiFollow = view.findViewById(R.id.tv_ai_follow);
+                this.tvAiSurroundToPoint = view.findViewById(R.id.tv_ai_surround_to_point);
+                this.tvAiPointToPoint = view.findViewById(R.id.tv_ai_point_to_point);
+                this.tvAiAutoPhoto = view.findViewById(R.id.tv_ai_auto_photo);
+                this.tvAiScrew = view.findViewById(R.id.tv_ai_screw);
+                this.tvAiGravitation = view.findViewById(R.id.tv_ai_fly_gravitation);
+                this.tvAiSar = view.findViewById(R.id.tv_ai_sar);
+                this.tvAerialShot = view.findViewById(R.id.tv_ai_aerial_photograph);
+                this.tvTripod = view.findViewById(R.id.tv_ai_tripod);
+                this.tvHeadLock = view.findViewById(R.id.tv_ai_heading_lock);
+                this.tvFixedwing = view.findViewById(R.id.tv_ai_fixed_wing);
                 this.imgAiTakeLandOff.setOnClickListener(this);
                 this.imgAiReturnHome.setOnClickListener(this);
                 this.imgAiPointToPoint.setOnClickListener(this);
@@ -333,7 +332,7 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
             ObjectAnimator translationRight = ObjectAnimator.ofFloat(this.contentView, "translationX", 0.0f, this.width);
             translationRight.setDuration(300L);
             translationRight.start();
-            translationRight.addListener(new AnimatorListenerAdapter() { // from class: com.fimi.app.x8s.controls.X8MainAiFlyController.1
+            translationRight.addListener(new AnimatorListenerAdapter() {
                 @Override
                 // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationEnd(Animator animation) {
@@ -365,8 +364,8 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
             this.isShow = true;
             if (this.width == 0) {
                 this.contentView.setAlpha(0.0f);
-                this.contentView.post(new Runnable() { // from class: com.fimi.app.x8s.controls.X8MainAiFlyController.2
-                    @Override // java.lang.Runnable
+                this.contentView.post(new Runnable() {
+                    @Override
                     public void run() {
                         X8MainAiFlyController.this.contentView.setAlpha(1.0f);
                         X8MainAiFlyController.this.MAX_WIDTH = X8MainAiFlyController.this.rlAiFly.getWidth();
@@ -660,7 +659,6 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
                 this.mX8AiFixedwingConfirmModule.setFcHeart(isInSky, isLowPow);
                 return;
             default:
-                return;
         }
     }
 
@@ -668,8 +666,8 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
         if (this.fcManager != null) {
             DroneState droneState = StateManager.getInstance().getX8Drone();
             if (droneState.isInSky()) {
-                this.fcManager.land(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.X8MainAiFlyController.3
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                this.fcManager.land(new UiCallBackListener() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, Object o) {
                         if (cmdResult.isSuccess()) {
                             X8MainAiFlyController.this.closeAiUi(true, false);
@@ -677,8 +675,8 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
                     }
                 });
             } else {
-                this.fcManager.takeOff(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.X8MainAiFlyController.4
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                this.fcManager.takeOff(new UiCallBackListener() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, Object o) {
                         if (cmdResult.isSuccess()) {
                             X8MainAiFlyController.this.closeAiUi(true, false);
@@ -694,8 +692,8 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
     }
 
     public void setAiVcOpen(final int type) {
-        this.fcManager.setAiVcOpen(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.X8MainAiFlyController.5
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.setAiVcOpen(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8MainAiFlyController.this.listener.onAiFollowConfirmClick(type);
@@ -796,8 +794,8 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
     }
 
     public void setAiVcOpenForAutoPhoto(final int type) {
-        this.fcManager.setAiVcOpen(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.X8MainAiFlyController.6
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.setAiVcOpen(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8MainAiFlyController.this.listener.onAiAutoPhotoConfirmClick(type);
@@ -818,8 +816,8 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
     }
 
     public void onRetureHomeClick() {
-        this.fcManager.setAiRetureHome(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.X8MainAiFlyController.7
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.setAiRetureHome(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8MainAiFlyController.this.closeAiUi(true, false);
@@ -839,8 +837,8 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
     }
 
     public void setFixedwingType() {
-        this.mFcCtrlManager.setEnableFixwing(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.X8MainAiFlyController.8
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.mFcCtrlManager.setEnableFixwing(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8MainAiFlyController.this.closeAiUi(true, false);
@@ -851,8 +849,8 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
     }
 
     public void setHeadlockType() {
-        this.mFcCtrlManager.setEnableHeadingFree(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.X8MainAiFlyController.9
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.mFcCtrlManager.setEnableHeadingFree(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8MainAiFlyController.this.closeAiUi(true, false);
@@ -863,8 +861,8 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
     }
 
     public void setTripodType() {
-        this.mFcCtrlManager.setEnableTripod(1, new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.X8MainAiFlyController.10
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.mFcCtrlManager.setEnableTripod(1, new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8MainAiFlyController.this.closeAiUi(true, false);
@@ -875,8 +873,8 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
     }
 
     public void setAerailShotType() {
-        this.mFcCtrlManager.setEnableAerailShot(1, new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.X8MainAiFlyController.11
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.mFcCtrlManager.setEnableAerailShot(1, new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8MainAiFlyController.this.closeAiUi(true, false);

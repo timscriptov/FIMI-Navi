@@ -4,14 +4,14 @@ import com.fimi.kernel.connect.interfaces.IPersonalDataCallBack;
 
 import java.io.Serializable;
 
-/* loaded from: classes.dex */
+
 public class LinkPacket implements Serializable {
     public LinkPayload payload = new LinkPayload();
     byte[] msg;
     private int MsgId;
     private int msgGroupId;
     private IPersonalDataCallBack personalDataCallBack;
-    private Header mHeader = new Header();
+    private final Header mHeader = new Header();
 
     public IPersonalDataCallBack getPersonalDataCallBack() {
         return this.personalDataCallBack;

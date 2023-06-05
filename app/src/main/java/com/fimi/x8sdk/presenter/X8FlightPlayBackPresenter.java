@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-/* loaded from: classes2.dex */
+
 public class X8FlightPlayBackPresenter {
     public final int X8_PLAYBACK_PALYBACK = 1;
     private final int lengthIndex = 2;
@@ -54,9 +54,9 @@ public class X8FlightPlayBackPresenter {
     private PercentRelativeLayout x8ProgressLoading;
     private RandomAccessFile randomFile = null;
     private long offset = 0;
-    private Parser4 p = new Parser4();
+    private final Parser4 p = new Parser4();
     private boolean isDroneDisConnectState = true;
-    private ErrorCodeState errorCodeState = new ErrorCodeState();
+    private final ErrorCodeState errorCodeState = new ErrorCodeState();
 
     public void setOnFlightPlayBackAction(IFlightPlayBackAction iFlightPlayBackAction) {
         this.iFlightPlayBackAction = iFlightPlayBackAction;
@@ -67,8 +67,8 @@ public class X8FlightPlayBackPresenter {
     }
 
     public void parseFileDate(final String filePath) {
-        ThreadUtils.execute(new Runnable() { // from class: com.fimi.x8sdk.presenter.X8FlightPlayBackPresenter.1
-            @Override // java.lang.Runnable
+        ThreadUtils.execute(new Runnable() {
+            @Override
             public void run() {
                 if (filePath != null && !filePath.equals("")) {
                     X8FlightPlayBackPresenter.this.offset = 0L;
@@ -127,47 +127,11 @@ public class X8FlightPlayBackPresenter {
                 }
             }
         });
-    }    private Handler handler = new Handler() { // from class: com.fimi.x8sdk.presenter.X8FlightPlayBackPresenter.3
-        @Override // android.os.Handler
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            int msgWhat = msg.what;
-            switch (msgWhat) {
-                case 0:
-                    boolean isParseFileSucceed = ((Boolean) msg.obj).booleanValue();
-                    int playTotalTime = Float.valueOf(Math.round(X8FlightPlayBackPresenter.this.totalTime / (X8FlightPlayBackPresenter.this.play2Second * 1.0f))).intValue();
-                    X8FlightPlayBackPresenter.this.iFlightPlayBackAction.parseFileDateEnd(playTotalTime, isParseFileSucceed);
-                    return;
-                case 1:
-                    X8FlightPlayBackPresenter.this.iFlightPlayBackAction.setPlaybackProgress(X8FlightPlayBackPresenter.this.currentProgress / X8FlightPlayBackPresenter.this.play2Second, false);
-                    X8FlightPlayBackPresenter.this.handlerOneFps(X8FlightPlayBackPresenter.this.currentProgress);
-                    X8FlightPlayBackPresenter.this.currentProgress++;
-                    if (X8FlightPlayBackPresenter.this.currentProgress % 5 == 0) {
-                        if (X8FlightPlayBackPresenter.this.isDroneDisConnectState) {
-                            X8FlightPlayBackPresenter.this.isDisconnectDrone = true;
-                            X8FlightPlayBackPresenter.this.iFlightPlayBackAction.showDroneDisconnectState();
-                        }
-                        X8FlightPlayBackPresenter.this.isDroneDisConnectState = true;
-                    }
-                    if (X8FlightPlayBackPresenter.this.currentProgress == 1) {
-                    }
-                    if (X8FlightPlayBackPresenter.this.currentProgress <= X8FlightPlayBackPresenter.this.totalTime) {
-                        X8FlightPlayBackPresenter.this.handler.sendEmptyMessageDelayed(1, 100L);
-                        return;
-                    }
-                    X8FlightPlayBackPresenter.this.currentProgress = 0;
-                    X8FlightPlayBackPresenter.this.iFlightPlayBackAction.setPlaybackProgress(X8FlightPlayBackPresenter.this.currentProgress, true);
-                    X8FlightPlayBackPresenter.this.mPlayStatus = PlayStatus.Payback;
-                    return;
-                default:
-                    return;
-            }
-        }
-    };
+    }
 
     public void toFlightPlaybackEntity(final List<byte[]> flightPlaybackAllDatas, final int totalPtsdTime) {
-        ThreadUtils.execute(new Runnable() { // from class: com.fimi.x8sdk.presenter.X8FlightPlayBackPresenter.2
-            @Override // java.lang.Runnable
+        ThreadUtils.execute(new Runnable() {
+            @Override
             public void run() {
                 int cacheTime = 0;
                 int currPtsb = 0;
@@ -225,7 +189,42 @@ public class X8FlightPlayBackPresenter {
                 }
             }
         });
-    }
+    }    private final Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            int msgWhat = msg.what;
+            switch (msgWhat) {
+                case 0:
+                    boolean isParseFileSucceed = ((Boolean) msg.obj).booleanValue();
+                    int playTotalTime = Float.valueOf(Math.round(X8FlightPlayBackPresenter.this.totalTime / (X8FlightPlayBackPresenter.this.play2Second * 1.0f))).intValue();
+                    X8FlightPlayBackPresenter.this.iFlightPlayBackAction.parseFileDateEnd(playTotalTime, isParseFileSucceed);
+                    return;
+                case 1:
+                    X8FlightPlayBackPresenter.this.iFlightPlayBackAction.setPlaybackProgress(X8FlightPlayBackPresenter.this.currentProgress / X8FlightPlayBackPresenter.this.play2Second, false);
+                    X8FlightPlayBackPresenter.this.handlerOneFps(X8FlightPlayBackPresenter.this.currentProgress);
+                    X8FlightPlayBackPresenter.this.currentProgress++;
+                    if (X8FlightPlayBackPresenter.this.currentProgress % 5 == 0) {
+                        if (X8FlightPlayBackPresenter.this.isDroneDisConnectState) {
+                            X8FlightPlayBackPresenter.this.isDisconnectDrone = true;
+                            X8FlightPlayBackPresenter.this.iFlightPlayBackAction.showDroneDisconnectState();
+                        }
+                        X8FlightPlayBackPresenter.this.isDroneDisConnectState = true;
+                    }
+                    if (X8FlightPlayBackPresenter.this.currentProgress == 1) {
+                    }
+                    if (X8FlightPlayBackPresenter.this.currentProgress <= X8FlightPlayBackPresenter.this.totalTime) {
+                        X8FlightPlayBackPresenter.this.handler.sendEmptyMessageDelayed(1, 100L);
+                        return;
+                    }
+                    X8FlightPlayBackPresenter.this.currentProgress = 0;
+                    X8FlightPlayBackPresenter.this.iFlightPlayBackAction.setPlaybackProgress(X8FlightPlayBackPresenter.this.currentProgress, true);
+                    X8FlightPlayBackPresenter.this.mPlayStatus = PlayStatus.Payback;
+                    return;
+                default:
+            }
+        }
+    };
 
     public Object byte2Object(byte[] packetData) {
         if (packetData != null && packetData.length > 0) {
@@ -273,18 +272,16 @@ public class X8FlightPlayBackPresenter {
                                 return rcMode;
                         }
                     } else if (this.groupId == 14) {
-                        switch (this.msgId) {
-                            case 5:
-                                AutoRelayHeartPlayback relayHeartPlayback = new AutoRelayHeartPlayback();
-                                relayHeartPlayback.unPacket(packet);
-                                return relayHeartPlayback;
+                        if (this.msgId == 5) {
+                            AutoRelayHeartPlayback relayHeartPlayback = new AutoRelayHeartPlayback();
+                            relayHeartPlayback.unPacket(packet);
+                            return relayHeartPlayback;
                         }
                     } else if (this.groupId == 4) {
-                        switch (this.msgId) {
-                            case 23:
-                                AckGetLowPowerOpt lowPowerOpt = new AckGetLowPowerOpt();
-                                lowPowerOpt.unPacket(packet);
-                                return lowPowerOpt;
+                        if (this.msgId == 23) {
+                            AckGetLowPowerOpt lowPowerOpt = new AckGetLowPowerOpt();
+                            lowPowerOpt.unPacket(packet);
+                            return lowPowerOpt;
                         }
                     } else {
                         continue;
@@ -302,8 +299,7 @@ public class X8FlightPlayBackPresenter {
             if (list != null) {
                 for (Object obj : list) {
                     if (obj != null) {
-                        if (obj instanceof AutoFcHeartPlayback) {
-                            AutoFcHeartPlayback autoFcHeartPlayback = (AutoFcHeartPlayback) obj;
+                        if (obj instanceof AutoFcHeartPlayback autoFcHeartPlayback) {
                             droneStateFlightPlayback.setFcHeart(autoFcHeartPlayback);
                             if (this.isDisconnectDrone) {
                                 if (droneStateFlightPlayback.isOnGround()) {
@@ -315,39 +311,30 @@ public class X8FlightPlayBackPresenter {
                                 this.iFlightPlayBackAction.showAutoFcHeart(autoFcHeartPlayback, droneStateFlightPlayback);
                             }
                             this.isDroneDisConnectState = false;
-                        } else if (obj instanceof AutoFcSignalStatePlayback) {
-                            AutoFcSignalStatePlayback autoFcSignalStatePlayback = (AutoFcSignalStatePlayback) obj;
+                        } else if (obj instanceof AutoFcSignalStatePlayback autoFcSignalStatePlayback) {
                             this.iFlightPlayBackAction.showAutoFcSignalState(autoFcSignalStatePlayback);
                             this.isDroneDisConnectState = false;
-                        } else if (obj instanceof AutoFcBatteryPlayback) {
-                            AutoFcBatteryPlayback autoFcBatteryPlayback = (AutoFcBatteryPlayback) obj;
+                        } else if (obj instanceof AutoFcBatteryPlayback autoFcBatteryPlayback) {
                             this.iFlightPlayBackAction.showAutoFcBattery(autoFcBatteryPlayback);
                             this.isDroneDisConnectState = false;
-                        } else if (obj instanceof AutoFcErrCode) {
-                            AutoFcErrCode autoFcErrCodePlayback = (AutoFcErrCode) obj;
+                        } else if (obj instanceof AutoFcErrCode autoFcErrCodePlayback) {
                             this.errorCodeState.setErrorCode(autoFcErrCodePlayback);
                             this.iFlightPlayBackAction.showAutoFcErrCode(this.errorCodeState.getErrooInfo());
                             this.isDroneDisConnectState = false;
-                        } else if (obj instanceof AutoFcSportStatePlayback) {
-                            AutoFcSportStatePlayback autoFcSportStatePlayback = (AutoFcSportStatePlayback) obj;
+                        } else if (obj instanceof AutoFcSportStatePlayback autoFcSportStatePlayback) {
                             this.iFlightPlayBackAction.showAutoFcSportState(autoFcSportStatePlayback);
                             this.isDroneDisConnectState = false;
-                        } else if (obj instanceof AutoHomeInfoPlayback) {
-                            AutoHomeInfoPlayback autoHomeInfoPlayback = (AutoHomeInfoPlayback) obj;
+                        } else if (obj instanceof AutoHomeInfoPlayback autoHomeInfoPlayback) {
                             this.iFlightPlayBackAction.showAutoHomeInfo(autoHomeInfoPlayback);
                             this.isDroneDisConnectState = false;
-                        } else if (obj instanceof AutoRockerStatePlayback) {
-                            AutoRockerStatePlayback autoRockerStatePlayback = (AutoRockerStatePlayback) obj;
+                        } else if (obj instanceof AutoRockerStatePlayback autoRockerStatePlayback) {
                             this.iFlightPlayBackAction.showAutoRockerState(autoRockerStatePlayback);
-                        } else if (obj instanceof AutoRelayHeartPlayback) {
-                            AutoRelayHeartPlayback autoRelayHeartPlayback = (AutoRelayHeartPlayback) obj;
+                        } else if (obj instanceof AutoRelayHeartPlayback autoRelayHeartPlayback) {
                             this.iFlightPlayBackAction.showAutoRelayHeart(autoRelayHeartPlayback);
                             this.isDroneDisConnectState = false;
-                        } else if (obj instanceof AckGetRcMode) {
-                            AckGetRcMode ackGetRcMode = (AckGetRcMode) obj;
+                        } else if (obj instanceof AckGetRcMode ackGetRcMode) {
                             this.iFlightPlayBackAction.showGetRcMode(ackGetRcMode);
-                        } else if (obj instanceof AckGetLowPowerOpt) {
-                            AckGetLowPowerOpt ackGetLowPowerOpt = (AckGetLowPowerOpt) obj;
+                        } else if (obj instanceof AckGetLowPowerOpt ackGetLowPowerOpt) {
                             this.iFlightPlayBackAction.showGetLowPowerOpt(ackGetLowPowerOpt);
                             this.isDroneDisConnectState = false;
                         } else {
@@ -409,11 +396,11 @@ public class X8FlightPlayBackPresenter {
         }
     }
 
-    /* loaded from: classes2.dex */
     public enum PlayStatus {
         Payback,
         Stop
     }
+
 
 
 

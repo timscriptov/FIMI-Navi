@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Vector;
 
-/* loaded from: classes.dex */
+
 public class TensorFlowObjectDetectionAPIModel implements Classifier {
     private static final int MAX_RESULTS = 100;
     private byte[] byteValues;
@@ -27,7 +27,7 @@ public class TensorFlowObjectDetectionAPIModel implements Classifier {
     private String inputName;
     private int inputSize;
     private int[] intValues;
-    private Vector<String> labels = new Vector<>();
+    private final Vector<String> labels = new Vector<>();
     private boolean logStats = false;
     private float[] outputClasses;
     private float[] outputLocations;
@@ -81,7 +81,7 @@ public class TensorFlowObjectDetectionAPIModel implements Classifier {
         return d;
     }
 
-    @Override // com.fimi.app.x8s.tensortfloow.Classifier
+    @Override
     public List<Classifier.Recognition> recognizeImage(Bitmap bitmap) {
         Trace.beginSection("recognizeImage");
         Trace.beginSection("preprocessBitmap");
@@ -89,7 +89,7 @@ public class TensorFlowObjectDetectionAPIModel implements Classifier {
         for (int i = 0; i < this.intValues.length; i++) {
             this.byteValues[(i * 3) + 2] = (byte) (this.intValues[i] & 255);
             this.byteValues[(i * 3) + 1] = (byte) ((this.intValues[i] >> 8) & 255);
-            this.byteValues[(i * 3) + 0] = (byte) ((this.intValues[i] >> 16) & 255);
+            this.byteValues[(i * 3)] = (byte) ((this.intValues[i] >> 16) & 255);
         }
         Trace.endSection();
         Trace.beginSection("feed");
@@ -108,8 +108,8 @@ public class TensorFlowObjectDetectionAPIModel implements Classifier {
         this.inferenceInterface.fetch(this.outputNames[2], this.outputClasses);
         this.inferenceInterface.fetch(this.outputNames[3], this.outputNumDetections);
         Trace.endSection();
-        PriorityQueue<Classifier.Recognition> pq = new PriorityQueue<>(1, new Comparator<Classifier.Recognition>() { // from class: com.fimi.app.x8s.tensortfloow.TensorFlowObjectDetectionAPIModel.1
-            @Override // java.util.Comparator
+        PriorityQueue<Classifier.Recognition> pq = new PriorityQueue<>(1, new Comparator<Classifier.Recognition>() {
+            @Override
             public int compare(Classifier.Recognition lhs, Classifier.Recognition rhs) {
                 return Float.compare(rhs.getConfidence().floatValue(), lhs.getConfidence().floatValue());
             }
@@ -126,17 +126,17 @@ public class TensorFlowObjectDetectionAPIModel implements Classifier {
         return recognitions;
     }
 
-    @Override // com.fimi.app.x8s.tensortfloow.Classifier
+    @Override
     public void enableStatLogging(boolean logStats) {
         this.logStats = logStats;
     }
 
-    @Override // com.fimi.app.x8s.tensortfloow.Classifier
+    @Override
     public String getStatString() {
         return this.inferenceInterface.getStatString();
     }
 
-    @Override // com.fimi.app.x8s.tensortfloow.Classifier
+    @Override
     public void close() {
         this.inferenceInterface.close();
     }

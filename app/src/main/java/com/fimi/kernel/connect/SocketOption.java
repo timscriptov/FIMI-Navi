@@ -2,7 +2,7 @@ package com.fimi.kernel.connect;
 
 import androidx.vectordrawable.graphics.drawable.PathInterpolatorCompat;
 
-/* loaded from: classes.dex */
+
 public class SocketOption {
     private String host;
     private int port;

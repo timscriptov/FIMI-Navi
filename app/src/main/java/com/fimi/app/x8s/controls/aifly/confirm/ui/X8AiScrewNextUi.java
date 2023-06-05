@@ -19,7 +19,7 @@ import com.fimi.x8sdk.dataparser.AckAiScrewPrameter;
 import com.fimi.x8sdk.dataparser.AckNormalCmds;
 import com.fimi.x8sdk.dataparser.AutoFcSportState;
 
-/* loaded from: classes.dex */
+
 public class X8AiScrewNextUi implements View.OnClickListener, X8TabHost.OnSelectListener, X8PlusMinusSeekBar2.onSeekValueSetListener {
     private final View contentView;
     private View btnOk;
@@ -44,19 +44,19 @@ public class X8AiScrewNextUi implements View.OnClickListener, X8TabHost.OnSelect
     }
 
     public void initViews(View rootView) {
-        this.tvHeight = (TextView) rootView.findViewById(R.id.tv_height_value);
-        this.tvDistance = (TextView) rootView.findViewById(R.id.tv_distance_value);
-        this.tvTip = (TextView) rootView.findViewById(R.id.tv_tip);
-        this.tvMaxDistance = (TextView) rootView.findViewById(R.id.tv_max_distance_value);
-        this.sbDistance = (X8PlusMinusSeekBar2) rootView.findViewById(R.id.sb_max_distance);
-        this.swAutoReturn = (SwitchButton) rootView.findViewById(R.id.sb_ai_auto_return);
+        this.tvHeight = rootView.findViewById(R.id.tv_height_value);
+        this.tvDistance = rootView.findViewById(R.id.tv_distance_value);
+        this.tvTip = rootView.findViewById(R.id.tv_tip);
+        this.tvMaxDistance = rootView.findViewById(R.id.tv_max_distance_value);
+        this.sbDistance = rootView.findViewById(R.id.sb_max_distance);
+        this.swAutoReturn = rootView.findViewById(R.id.sb_ai_auto_return);
         this.btnOk = rootView.findViewById(R.id.btn_ai_ok);
         String prex = rootView.getContext().getString(R.string.x8_ai_fly_screw_tip4);
         String str1 = X8NumberUtil.getDistanceNumberString(3.0f, 1, false);
         String str2 = X8NumberUtil.getDistanceNumberString(5.0f, 1, false);
         String str3 = X8NumberUtil.getDistanceNumberString(200.0f, 1, false);
         this.tvTip.setText(String.format(prex, str1, str2, str3));
-        this.rorate = (X8TabHost) rootView.findViewById(R.id.x8_ai_screw_rorate);
+        this.rorate = rootView.findViewById(R.id.x8_ai_screw_rorate);
         this.sbDistance.setListener(this);
         this.rorate.setOnSelectListener(this);
     }
@@ -64,15 +64,15 @@ public class X8AiScrewNextUi implements View.OnClickListener, X8TabHost.OnSelect
     public void initActions() {
         this.btnOk.setOnClickListener(this);
         this.btnOk.setOnClickListener(this);
-        this.swAutoReturn.setOnSwitchListener(new SwitchButton.OnSwitchListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiScrewNextUi.1
-            @Override // com.fimi.widget.SwitchButton.OnSwitchListener
+        this.swAutoReturn.setOnSwitchListener(new SwitchButton.OnSwitchListener() {
+            @Override
             public void onSwitch(View view, boolean on) {
                 X8AiScrewNextUi.this.swAutoReturn.setSwitchState(!on);
             }
         });
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.btn_ai_ok) {
@@ -80,16 +80,16 @@ public class X8AiScrewNextUi implements View.OnClickListener, X8TabHost.OnSelect
         }
     }
 
-    @Override // com.fimi.app.x8s.widget.X8PlusMinusSeekBar2.onSeekValueSetListener
+    @Override
     public void onStart(int id, int progress) {
     }
 
-    @Override // com.fimi.app.x8s.widget.X8PlusMinusSeekBar2.onSeekValueSetListener
+    @Override
     public void onStop(int id, int progress) {
         this.x8AiScrewExcuteController.drawScrew(this.rorate.getSelectIndex() == 0, this.radius, this.sbDistance.getProgress());
     }
 
-    @Override // com.fimi.app.x8s.widget.X8PlusMinusSeekBar2.onSeekValueSetListener
+    @Override
     public void onSeekValueSet(int viewId, int value) {
         if (viewId == R.id.sb_max_distance) {
             String str1 = X8NumberUtil.getDistanceNumberString(value, 1, false);
@@ -159,8 +159,8 @@ public class X8AiScrewNextUi implements View.OnClickListener, X8TabHost.OnSelect
         sp.setCiclePeriod(period);
         sp.setRTHTostart(this.swAutoReturn.getToggleOn() ? 1 : 0);
         sp.setVertSpeed(3);
-        this.fcManager.setScrewPrameter(sp, new UiCallBackListener<AckNormalCmds>() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiScrewNextUi.2
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.setScrewPrameter(sp, new UiCallBackListener<AckNormalCmds>() {
+            @Override
             public void onComplete(CmdResult cmdResult, AckNormalCmds o) {
                 if (cmdResult.isSuccess()) {
                     X8AiScrewNextUi.this.startExcute();
@@ -174,8 +174,8 @@ public class X8AiScrewNextUi implements View.OnClickListener, X8TabHost.OnSelect
         if (this.rorate.getSelectIndex() != 0 && this.rorate.getSelectIndex() == 1) {
             s = -30;
         }
-        this.fcManager.setAiSurroundSpeed(s, new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiScrewNextUi.3
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.setAiSurroundSpeed(s, new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8AiScrewNextUi.this.setDistance();
@@ -185,8 +185,8 @@ public class X8AiScrewNextUi implements View.OnClickListener, X8TabHost.OnSelect
     }
 
     public void startExcute() {
-        this.fcManager.setScrewStart(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiScrewNextUi.4
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.setScrewStart(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8AiScrewNextUi.this.mIX8NextViewListener.onExcuteClick();
@@ -195,7 +195,7 @@ public class X8AiScrewNextUi implements View.OnClickListener, X8TabHost.OnSelect
         });
     }
 
-    @Override // com.fimi.app.x8s.widget.X8TabHost.OnSelectListener
+    @Override
     public void onSelect(int index, String text, int last) {
         this.x8AiScrewExcuteController.drawScrew(this.rorate.getSelectIndex() == 0, this.radius, this.sbDistance.getProgress());
     }

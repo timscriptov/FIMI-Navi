@@ -10,13 +10,13 @@ import com.fimi.x8sdk.connect.CommunicationManager;
 import com.fimi.x8sdk.connect.ConnectType;
 import com.fimi.x8sdk.listener.ConnectStatusListener;
 
-/* loaded from: classes2.dex */
+
 public class ConnectAOAManager {
     private static final String ACTION_USB_PERMISSION = "com.google.android.DemoKit.action.USB_PERMISSION";
     Context mContext;
     UsbManager usbManager;
     boolean isRequestPermission = false;
-    private PendingIntent mPermissionIntent;
+    private final PendingIntent mPermissionIntent;
     private volatile boolean mConnected = false;
 
     public ConnectAOAManager(Context mContext) {
@@ -60,9 +60,9 @@ public class ConnectAOAManager {
         CommunicationManager.getCommunicationManager().stopConnectThread();
         this.mConnected = false;
         this.callback.onConnectionClosed();
-    }    ConnectStatusListener.IEngineCallback callback = this.callback;
+    }
 
-
+    ConnectStatusListener.IEngineCallback callback = this.callback;
 
 
 }

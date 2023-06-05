@@ -3,9 +3,9 @@ package com.fimi.network;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* loaded from: classes.dex */
+
 public class DownNoticeMananger {
-    private static DownNoticeMananger noticeMananger = new DownNoticeMananger();
+    private static final DownNoticeMananger noticeMananger = new DownNoticeMananger();
     CopyOnWriteArrayList<IDownProgress> noticeList = new CopyOnWriteArrayList<>();
 
     public static DownNoticeMananger getDownNoticManger() {
@@ -22,7 +22,7 @@ public class DownNoticeMananger {
             IDownProgress iProgress = it.next();
             if (iProgress == null || iProgress != iDownProgress) {
                 if (0 != 0) {
-                    this.noticeList.remove((Object) null);
+                    this.noticeList.remove(null);
                 }
             } else {
                 return;

@@ -4,7 +4,7 @@ import android.view.View;
 
 import com.fimi.app.x8s.X8Application;
 
-/* loaded from: classes.dex */
+
 public abstract class AbsX8AiController extends AbsX8Controllers {
     public AbsX8AiController(View rootView) {
         super(rootView);

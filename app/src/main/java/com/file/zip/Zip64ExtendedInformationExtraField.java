@@ -118,7 +118,7 @@ public class Zip64ExtendedInformationExtraField implements CentralDirectoryParsi
             int offset = 0;
             if (hasUncompressedSize) {
                 this.size = new ZipEightByteInteger(this.rawCentralDirectoryData, 0);
-                offset = 0 + 8;
+                offset = 8;
             }
             if (hasCompressedSize) {
                 this.compressedSize = new ZipEightByteInteger(this.rawCentralDirectoryData, offset);
@@ -171,7 +171,7 @@ public class Zip64ExtendedInformationExtraField implements CentralDirectoryParsi
         int off = 0;
         if (this.size != null) {
             System.arraycopy(this.size.getBytes(), 0, data, 0, 8);
-            off = 0 + 8;
+            off = 8;
         }
         if (this.compressedSize != null) {
             System.arraycopy(this.compressedSize.getBytes(), 0, data, off, 8);

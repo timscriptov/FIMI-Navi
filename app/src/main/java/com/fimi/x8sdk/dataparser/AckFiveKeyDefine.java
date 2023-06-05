@@ -3,13 +3,11 @@ package com.fimi.x8sdk.dataparser;
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 
 
-
-/* loaded from: classes2.dex */
 public class AckFiveKeyDefine extends X8BaseMessage {
     byte adckeyAction;
     byte adckeyIndex;
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         this.adckeyIndex = packet.getPayLoad4().getByte();
@@ -32,7 +30,7 @@ public class AckFiveKeyDefine extends X8BaseMessage {
         this.adckeyAction = adckeyAction;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public String toString() {
         return "AckFiveKeyDefine{adckeyIndex=" + ((int) this.adckeyIndex) + ", adckeyAction=" + ((int) this.adckeyAction) + '}';
     }

@@ -5,7 +5,7 @@ import android.view.View;
 import com.fimi.x8sdk.modulestate.DroneState;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes.dex */
+
 public abstract class AbsX8Controllers implements IControllers {
     protected int ctrlType;
     protected View handleView;

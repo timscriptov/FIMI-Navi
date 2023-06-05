@@ -12,7 +12,7 @@ import com.fimi.album.iview.INodataTip;
 import com.fimi.album.iview.IRecycleAdapter;
 import com.fimi.android.app.R;
 
-/* loaded from: classes.dex */
+
 public class PanelRecycleAdapter<T extends MediaModel> extends BaseRecycleAdapter {
     public static final String TAG = PanelRecycleAdapter.class.getName();
     private IRecycleAdapter mIRecycleAdapter;
@@ -21,7 +21,7 @@ public class PanelRecycleAdapter<T extends MediaModel> extends BaseRecycleAdapte
         super(context, mINodataTip);
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 16) {
             View view = LayoutInflater.from(this.context).inflate(R.layout.album_panel_view_holder, parent, false);
@@ -33,7 +33,7 @@ public class PanelRecycleAdapter<T extends MediaModel> extends BaseRecycleAdapte
         return viewHolder2;
     }
 
-    @Override // android.support.v7.widget.RecyclerView.Adapter
+    @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (this.mIRecycleAdapter != null) {
             this.mIRecycleAdapter.onBindViewHolder(holder, position);

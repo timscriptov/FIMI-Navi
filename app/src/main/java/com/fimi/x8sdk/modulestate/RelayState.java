@@ -4,7 +4,7 @@ import com.fimi.kernel.utils.BitUtil;
 import com.fimi.x8sdk.dataparser.AckVersion;
 import com.fimi.x8sdk.dataparser.AutoRelayHeart;
 
-/* loaded from: classes2.dex */
+
 public class RelayState extends BaseState {
     RelayState relayState;
     private long lastRlHeartTime;
@@ -18,7 +18,7 @@ public class RelayState extends BaseState {
         return System.currentTimeMillis() - this.lastRlHeartTime >= 1500;
     }
 
-    @Override // com.fimi.x8sdk.modulestate.BaseState
+    @Override
     public boolean isAvailable() {
         return true;
     }

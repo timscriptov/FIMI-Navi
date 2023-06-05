@@ -31,7 +31,7 @@ import com.fimi.x8sdk.presenter.FiveKeyDefinePresenter;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class X8MainCameraSettingController extends AbsX8MenuBoxControllers implements View.OnClickListener {
     public JsonUiCallBackListener jsonUiCallBackListener;
     String curParam;
@@ -41,7 +41,7 @@ public class X8MainCameraSettingController extends AbsX8MenuBoxControllers imple
     private CameraManager cameraManager;
     private X8CameraOtherSettingController cameraOtherController;
     private View cameraSettingblank;
-    private Context context;
+    private final Context context;
     private MenuMode curMenu;
     private CameraParamStatus.CameraModelStatus curMode;
     private X8CameraEVShutterISOController evShutterISOController;
@@ -53,7 +53,7 @@ public class X8MainCameraSettingController extends AbsX8MenuBoxControllers imple
     private ViewStub otherSettingStub;
     private View otherSettingView;
     private View paramView;
-    private X8CameraParamsValue paramsValue;
+    private final X8CameraParamsValue paramsValue;
     private List<String> photoModeOptions;
     private List<String> recordModeOptions;
     private ImageView recordSetting;
@@ -65,42 +65,39 @@ public class X8MainCameraSettingController extends AbsX8MenuBoxControllers imple
         super(rootView);
         this.curMenu = MenuMode.normal;
         this.curMode = CameraParamStatus.CameraModelStatus.takePhoto;
-        this.jsonUiCallBackListener = new JsonUiCallBackListener() { // from class: com.fimi.app.x8s.controls.camera.X8MainCameraSettingController.5
-            @Override // com.fimi.kernel.dataparser.usb.JsonUiCallBackListener
+        this.jsonUiCallBackListener = new JsonUiCallBackListener() {
+            @Override
             public void onComplete(JSONObject rt, Object o) {
                 String paramType;
                 if (rt != null) {
-                    CameraParamsJson paramsJson = (CameraParamsJson) JSON.parseObject(rt.toString(), CameraParamsJson.class);
+                    CameraParamsJson paramsJson = JSON.parseObject(rt.toString(), CameraParamsJson.class);
                     int rval = paramsJson.getRval();
                     if (paramsJson != null && (paramType = paramsJson.getType()) != null) {
-                        switch (paramsJson.getMsg_id()) {
-                            case 2:
-                                if (paramType.equals("contrast") && rval >= 0) {
-                                    X8MainCameraSettingController.this.paramsValue.getCurParamsJson().setContrast(X8MainCameraSettingController.this.curParam);
-                                    return;
-                                } else if (paramType.equals("saturation") && rval >= 0) {
-                                    X8MainCameraSettingController.this.paramsValue.getCurParamsJson().setSaturation(X8MainCameraSettingController.this.curParam);
-                                    return;
-                                } else if (paramType.equals(CameraJsonCollection.KEY_METERMING_MODE) && rval >= 0) {
-                                    X8MainCameraSettingController.this.strings = X8MainCameraSettingController.this.context.getResources().getStringArray(R.array.x8_meter_array);
-                                    X8ToastUtil.showToast(X8MainCameraSettingController.this.context, X8MainCameraSettingController.this.context.getString(R.string.x8_metering_switch_hint) + X8MainCameraSettingController.this.strings[X8MainCameraSettingController.this.metermingModeOptions.indexOf(X8MainCameraSettingController.this.curParam)], 1);
-                                    X8MainCameraSettingController.this.paramsValue.getCurParamsJson().setMetering_mode(X8MainCameraSettingController.this.curParam);
-                                    return;
-                                } else if (paramType.equals("capture_mode") && rval >= 0) {
-                                    X8MainCameraSettingController.this.strings = X8MainCameraSettingController.this.context.getResources().getStringArray(R.array.x8_photo_mode_array);
-                                    X8ToastUtil.showToast(X8MainCameraSettingController.this.context, X8MainCameraSettingController.this.context.getString(R.string.x8_metering_switch_hint) + X8MainCameraSettingController.this.strings[X8MainCameraSettingController.this.photoModeOptions.indexOf(X8MainCameraSettingController.this.curParam)], 1);
-                                    X8MainCameraSettingController.this.paramsValue.getCurParamsJson().setCapture_mode(X8MainCameraSettingController.this.curParam);
-                                    return;
-                                } else if (paramType.equals(CameraJsonCollection.KEY_RECORD_MODE) && rval >= 0) {
-                                    X8MainCameraSettingController.this.strings = X8MainCameraSettingController.this.context.getResources().getStringArray(R.array.x8_record_mode_array);
-                                    X8ToastUtil.showToast(X8MainCameraSettingController.this.context, X8MainCameraSettingController.this.context.getString(R.string.x8_metering_switch_hint) + X8MainCameraSettingController.this.strings[X8MainCameraSettingController.this.recordModeOptions.indexOf(X8MainCameraSettingController.this.curParam)], 1);
-                                    X8MainCameraSettingController.this.paramsValue.getCurParamsJson().setRecord_mode(X8MainCameraSettingController.this.curParam);
-                                    return;
-                                } else {
-                                    return;
-                                }
-                            default:
+                        if (paramsJson.getMsg_id() == 2) {
+                            if (paramType.equals("contrast") && rval >= 0) {
+                                X8MainCameraSettingController.this.paramsValue.getCurParamsJson().setContrast(X8MainCameraSettingController.this.curParam);
                                 return;
+                            } else if (paramType.equals("saturation") && rval >= 0) {
+                                X8MainCameraSettingController.this.paramsValue.getCurParamsJson().setSaturation(X8MainCameraSettingController.this.curParam);
+                                return;
+                            } else if (paramType.equals(CameraJsonCollection.KEY_METERMING_MODE) && rval >= 0) {
+                                X8MainCameraSettingController.this.strings = X8MainCameraSettingController.this.context.getResources().getStringArray(R.array.x8_meter_array);
+                                X8ToastUtil.showToast(X8MainCameraSettingController.this.context, X8MainCameraSettingController.this.context.getString(R.string.x8_metering_switch_hint) + X8MainCameraSettingController.this.strings[X8MainCameraSettingController.this.metermingModeOptions.indexOf(X8MainCameraSettingController.this.curParam)], 1);
+                                X8MainCameraSettingController.this.paramsValue.getCurParamsJson().setMetering_mode(X8MainCameraSettingController.this.curParam);
+                                return;
+                            } else if (paramType.equals("capture_mode") && rval >= 0) {
+                                X8MainCameraSettingController.this.strings = X8MainCameraSettingController.this.context.getResources().getStringArray(R.array.x8_photo_mode_array);
+                                X8ToastUtil.showToast(X8MainCameraSettingController.this.context, X8MainCameraSettingController.this.context.getString(R.string.x8_metering_switch_hint) + X8MainCameraSettingController.this.strings[X8MainCameraSettingController.this.photoModeOptions.indexOf(X8MainCameraSettingController.this.curParam)], 1);
+                                X8MainCameraSettingController.this.paramsValue.getCurParamsJson().setCapture_mode(X8MainCameraSettingController.this.curParam);
+                                return;
+                            } else if (paramType.equals(CameraJsonCollection.KEY_RECORD_MODE) && rval >= 0) {
+                                X8MainCameraSettingController.this.strings = X8MainCameraSettingController.this.context.getResources().getStringArray(R.array.x8_record_mode_array);
+                                X8ToastUtil.showToast(X8MainCameraSettingController.this.context, X8MainCameraSettingController.this.context.getString(R.string.x8_metering_switch_hint) + X8MainCameraSettingController.this.strings[X8MainCameraSettingController.this.recordModeOptions.indexOf(X8MainCameraSettingController.this.curParam)], 1);
+                                X8MainCameraSettingController.this.paramsValue.getCurParamsJson().setRecord_mode(X8MainCameraSettingController.this.curParam);
+                                return;
+                            } else {
+                                return;
+                            }
                         }
                     }
                 }
@@ -144,18 +141,18 @@ public class X8MainCameraSettingController extends AbsX8MenuBoxControllers imple
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
         this.handleView = rootView.findViewById(R.id.x8_camera_setting_layout);
         this.rlCameraSetting = rootView.findViewById(R.id.x8_rl_main_camera_setting);
         this.cameraSettingblank = rootView.findViewById(R.id.x8_rl_main_camera_setting_blank);
         this.contentView = rootView.findViewById(R.id.rl_main_camera_setting_content);
-        this.otherSettingStub = (ViewStub) rootView.findViewById(R.id.stub_camera_other_setting);
-        this.x8ISOViewStub = (ViewStub) rootView.findViewById(R.id.stub_camera_iso_setting);
-        this.modleStub = (ViewStub) rootView.findViewById(R.id.stub_camera_mode_setting);
-        this.camerSetting = (ImageView) rootView.findViewById(R.id.camera_setting_btn);
-        this.recordSetting = (ImageView) rootView.findViewById(R.id.record_setting_btn);
-        this.otherSetting = (ImageView) rootView.findViewById(R.id.other_setting_btn);
+        this.otherSettingStub = rootView.findViewById(R.id.stub_camera_other_setting);
+        this.x8ISOViewStub = rootView.findViewById(R.id.stub_camera_iso_setting);
+        this.modleStub = rootView.findViewById(R.id.stub_camera_mode_setting);
+        this.camerSetting = rootView.findViewById(R.id.camera_setting_btn);
+        this.recordSetting = rootView.findViewById(R.id.record_setting_btn);
+        this.otherSetting = rootView.findViewById(R.id.other_setting_btn);
         this.cameraSettingblank.setVisibility(0);
         View view = this.otherSettingStub.inflate();
         View isoView = this.x8ISOViewStub.inflate();
@@ -172,7 +169,7 @@ public class X8MainCameraSettingController extends AbsX8MenuBoxControllers imple
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
         this.cameraSettingblank.setOnClickListener(this);
         this.camerSetting.setOnClickListener(this);
@@ -185,7 +182,7 @@ public class X8MainCameraSettingController extends AbsX8MenuBoxControllers imple
         this.curMode = CameraParamStatus.CameraModelStatus.takePhoto;
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.x8_rl_main_camera_setting_blank) {
@@ -230,8 +227,8 @@ public class X8MainCameraSettingController extends AbsX8MenuBoxControllers imple
             this.isShow = true;
             if (this.width == 0) {
                 this.contentView.setAlpha(0.0f);
-                this.contentView.post(new Runnable() { // from class: com.fimi.app.x8s.controls.camera.X8MainCameraSettingController.1
-                    @Override // java.lang.Runnable
+                this.contentView.post(new Runnable() {
+                    @Override
                     public void run() {
                         X8MainCameraSettingController.this.contentView.setAlpha(1.0f);
                         X8MainCameraSettingController.this.MAX_WIDTH = X8MainCameraSettingController.this.rlCameraSetting.getWidth();
@@ -258,7 +255,7 @@ public class X8MainCameraSettingController extends AbsX8MenuBoxControllers imple
             ObjectAnimator translationRight = ObjectAnimator.ofFloat(this.contentView, "translationX", 0.0f, this.width);
             translationRight.setDuration(300L);
             translationRight.start();
-            translationRight.addListener(new AnimatorListenerAdapter() { // from class: com.fimi.app.x8s.controls.camera.X8MainCameraSettingController.2
+            translationRight.addListener(new AnimatorListenerAdapter() {
                 @Override
                 // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationEnd(Animator animation) {
@@ -300,14 +297,14 @@ public class X8MainCameraSettingController extends AbsX8MenuBoxControllers imple
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
         initCameraParams();
     }
 
     public void parseParamsValue(JSONObject rt) {
         if (this.evShutterISOController != null) {
-            CameraCurParamsJson curParamsJson = (CameraCurParamsJson) JSON.parseObject(rt.toString(), new TypeReference<CameraCurParamsJson>() { // from class: com.fimi.app.x8s.controls.camera.X8MainCameraSettingController.3
+            CameraCurParamsJson curParamsJson = JSON.parseObject(rt.toString(), new TypeReference<CameraCurParamsJson>() {
             }, new Feature[0]);
             this.evShutterISOController.initData(curParamsJson);
         }
@@ -317,8 +314,8 @@ public class X8MainCameraSettingController extends AbsX8MenuBoxControllers imple
     }
 
     public void initCameraParams() {
-        this.cameraManager.getCameraCurParams(new JsonUiCallBackListener() { // from class: com.fimi.app.x8s.controls.camera.X8MainCameraSettingController.4
-            @Override // com.fimi.kernel.dataparser.usb.JsonUiCallBackListener
+        this.cameraManager.getCameraCurParams(new JsonUiCallBackListener() {
+            @Override
             public void onComplete(JSONObject rt, Object o) {
                 if (rt != null && rt.getIntValue("msg_id") == 3) {
                     if (X8MainCameraSettingController.this.cameraMainSetListener != null) {
@@ -326,17 +323,17 @@ public class X8MainCameraSettingController extends AbsX8MenuBoxControllers imple
                     }
                     X8MainCameraSettingController.this.parseParamsValue(rt);
                 }
-                X8MainCameraSettingController.this.cameraManager.getCameraKeyOptions(CameraJsonCollection.KEY_METERMING_MODE, new JsonUiCallBackListener() { // from class: com.fimi.app.x8s.controls.camera.X8MainCameraSettingController.4.1
-                    @Override // com.fimi.kernel.dataparser.usb.JsonUiCallBackListener
+                X8MainCameraSettingController.this.cameraManager.getCameraKeyOptions(CameraJsonCollection.KEY_METERMING_MODE, new JsonUiCallBackListener() {
+                    @Override
                     public void onComplete(JSONObject rt2, Object o2) {
                         if (rt2 != null) {
-                            CameraParamsJson paramsJson = (CameraParamsJson) JSON.toJavaObject(rt2, CameraParamsJson.class);
+                            CameraParamsJson paramsJson = JSON.toJavaObject(rt2, CameraParamsJson.class);
                             String paramType = paramsJson.getParam();
                             if (paramsJson != null && paramType != null && paramType.equals(CameraJsonCollection.KEY_METERMING_MODE)) {
                                 X8MainCameraSettingController.this.metermingModeOptions = paramsJson.getOptions();
                                 if (X8MainCameraSettingController.this.metermingModeOptions != null && X8MainCameraSettingController.this.metermingModeOptions.size() > 0) {
                                     for (int m = X8MainCameraSettingController.this.metermingModeOptions.size() - 1; m >= 0; m--) {
-                                        String val = (String) X8MainCameraSettingController.this.metermingModeOptions.get(m);
+                                        String val = X8MainCameraSettingController.this.metermingModeOptions.get(m);
                                         if (val.equals(X8MainCameraSettingController.this.context.getResources().getString(R.string.x8_meter_roi))) {
                                             X8MainCameraSettingController.this.metermingModeOptions.remove(m);
                                             return;
@@ -347,11 +344,11 @@ public class X8MainCameraSettingController extends AbsX8MenuBoxControllers imple
                         }
                     }
                 });
-                X8MainCameraSettingController.this.cameraManager.getCameraKeyOptions(CameraJsonCollection.KEY_RECORD_MODE, new JsonUiCallBackListener() { // from class: com.fimi.app.x8s.controls.camera.X8MainCameraSettingController.4.2
-                    @Override // com.fimi.kernel.dataparser.usb.JsonUiCallBackListener
+                X8MainCameraSettingController.this.cameraManager.getCameraKeyOptions(CameraJsonCollection.KEY_RECORD_MODE, new JsonUiCallBackListener() {
+                    @Override
                     public void onComplete(JSONObject rt2, Object o2) {
                         if (rt2 != null) {
-                            CameraParamsJson paramsJson = (CameraParamsJson) JSON.toJavaObject(rt2, CameraParamsJson.class);
+                            CameraParamsJson paramsJson = JSON.toJavaObject(rt2, CameraParamsJson.class);
                             String paramType = paramsJson.getParam();
                             if (paramsJson != null && paramType != null && paramType.equals(CameraJsonCollection.KEY_RECORD_MODE)) {
                                 X8MainCameraSettingController.this.recordModeOptions = paramsJson.getOptions();
@@ -359,11 +356,11 @@ public class X8MainCameraSettingController extends AbsX8MenuBoxControllers imple
                         }
                     }
                 });
-                X8MainCameraSettingController.this.cameraManager.getCameraKeyOptions("capture_mode", new JsonUiCallBackListener() { // from class: com.fimi.app.x8s.controls.camera.X8MainCameraSettingController.4.3
-                    @Override // com.fimi.kernel.dataparser.usb.JsonUiCallBackListener
+                X8MainCameraSettingController.this.cameraManager.getCameraKeyOptions("capture_mode", new JsonUiCallBackListener() {
+                    @Override
                     public void onComplete(JSONObject rt2, Object o2) {
                         if (rt2 != null) {
-                            CameraParamsJson paramsJson = (CameraParamsJson) JSON.toJavaObject(rt2, CameraParamsJson.class);
+                            CameraParamsJson paramsJson = JSON.toJavaObject(rt2, CameraParamsJson.class);
                             String paramType = paramsJson.getParam();
                             if (paramsJson != null && paramType != null && paramType.equals("capture_mode")) {
                                 X8MainCameraSettingController.this.photoModeOptions = paramsJson.getOptions();
@@ -375,7 +372,7 @@ public class X8MainCameraSettingController extends AbsX8MenuBoxControllers imple
         });
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         super.onDroneConnected(b);
         if (this.evShutterISOController != null) {
@@ -470,7 +467,7 @@ public class X8MainCameraSettingController extends AbsX8MenuBoxControllers imple
         X8Application.enableGesture = b;
     }
 
-    /* loaded from: classes.dex */
+
     public enum MenuMode {
         normal,
         camera,

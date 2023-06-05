@@ -1,6 +1,6 @@
 package com.fimi.app.x8s.map.interfaces;
 
-/* loaded from: classes.dex */
+
 public abstract class AbsAiSurroundManager extends AbsBaseManager {
     public abstract void addEllipse(double d, double d2, float f, float f2);
 
@@ -18,7 +18,7 @@ public abstract class AbsAiSurroundManager extends AbsBaseManager {
 
     public abstract void setAiSurroundMark(double d, double d2);
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsBaseManager
+    @Override
     public void setMarkerViewInfo(float height) {
     }
 }

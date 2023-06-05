@@ -1,6 +1,6 @@
 package com.fimi.kernel.language;
 
-/* loaded from: classes.dex */
+
 public class ConstantRegion {
     public static final String CN = "CN";
     public static final String US = "US";

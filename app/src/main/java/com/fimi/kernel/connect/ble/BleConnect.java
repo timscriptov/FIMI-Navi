@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.LinkedBlockingDeque;
 
-/* loaded from: classes.dex */
+
 public class BleConnect extends BaseConnect implements IDataTransfer, IRetransmissionHandle, ITimerSendQueueHandle {
     private final int SEND_LEN = 20;
     public LinkedBlockingDeque<Object> cmdQuene = new LinkedBlockingDeque<>();
@@ -40,15 +40,15 @@ public class BleConnect extends BaseConnect implements IDataTransfer, IRetransmi
     private BluetoothGattCharacteristic characterWrite;
     private Context context;
     private BluetoothDevice device;
-    private ResultListener gh2ResultListener;
+    private final ResultListener gh2ResultListener;
     private long lastTime;
-    private IBleSendData mBleSendDataHandle;
+    private final IBleSendData mBleSendDataHandle;
     private CheckDeviceConnectThread mCheckDeviceConnectThread;
     private ReadThread mReadThread;
     private RetransmissionThread mRetransmissionThread;
     private TimerSendQueueThread mTimerSendQueueThread;
     private WriteThread mWriteThread;
-    private Parser p = new Parser();
+    private final Parser p = new Parser();
     private BaseConnect.DeviceConnectState mDeviceConnectState = BaseConnect.DeviceConnectState.IDEL;
 
     public BleConnect(IBleSendData mIBleSendData, ResultListener listener) {
@@ -68,22 +68,22 @@ public class BleConnect extends BaseConnect implements IDataTransfer, IRetransmi
         this.device = device;
     }
 
-    @Override // com.fimi.kernel.connect.BaseConnect
+    @Override
     public void sendCmd(BaseCommand cmd) {
         this.cmdQuene.offer(cmd);
         sendSignal();
     }
 
-    @Override // com.fimi.kernel.connect.BaseConnect
+    @Override
     public void sendJsonCmd(BaseCommand cmd) {
     }
 
-    @Override // com.fimi.kernel.connect.BaseConnect
+    @Override
     public void sendTimeCmd(BaseCommand cmd) {
         sendDividedData(cmd.getMsgGroudId(), cmd.getMsgId(), cmd.getCmdData(), cmd.getCmdData().length);
     }
 
-    @Override // com.fimi.kernel.connect.BaseConnect
+    @Override
     public void startSession() {
         setClientAddress(this.device.getAddress());
         setClientName(this.device.getName());
@@ -121,7 +121,7 @@ public class BleConnect extends BaseConnect implements IDataTransfer, IRetransmi
         }
     }
 
-    @Override // com.fimi.kernel.connect.BaseConnect
+    @Override
     public void closeSession() {
         receiveLog("closeSession");
         if (this.mWriteThread != null) {
@@ -149,7 +149,7 @@ public class BleConnect extends BaseConnect implements IDataTransfer, IRetransmi
         SessionManager.getInstance().removeSession();
     }
 
-    @Override // com.fimi.kernel.connect.BaseConnect
+    @Override
     public boolean isDeviceConnected() {
         return this.mDeviceConnectState == BaseConnect.DeviceConnectState.CONNECTED;
     }
@@ -199,7 +199,7 @@ public class BleConnect extends BaseConnect implements IDataTransfer, IRetransmi
         sendLog(hex);
     }
 
-    @Override // com.fimi.kernel.connect.interfaces.IRetransmissionHandle
+    @Override
     public boolean removeFromListByCmdID(int groupId, int cmdId, int seq, LinkPacket packet) {
         if (this.mRetransmissionThread == null) {
             return false;
@@ -207,12 +207,12 @@ public class BleConnect extends BaseConnect implements IDataTransfer, IRetransmi
         return this.mRetransmissionThread.removeFromListByCmdID(groupId, cmdId, seq, packet);
     }
 
-    @Override // com.fimi.kernel.connect.interfaces.IRetransmissionHandle
+    @Override
     public boolean removeFromListByCmdIDLinkPacket4(int groupId, int cmdId, int seq, LinkPacket4 packet) {
         return false;
     }
 
-    @Override // com.fimi.kernel.connect.interfaces.ITimerSendQueueHandle
+    @Override
     public boolean removeFromTimerSendQueueByCmdID(int groupId, int cmdId, int seq, LinkPacket packet) {
         if (this.mTimerSendQueueThread == null) {
             return false;
@@ -220,13 +220,13 @@ public class BleConnect extends BaseConnect implements IDataTransfer, IRetransmi
         return this.mTimerSendQueueThread.removeFromListByCmdID(groupId, cmdId, seq, packet);
     }
 
-    @Override // com.fimi.kernel.connect.interfaces.IDataTransfer
+    @Override
     public void sendRestransmissionData(BaseCommand cmd) {
         sendLog("" + hashCode() + " 重发数据 seq =" + cmd.getMsgSeq() + " " + Integer.toHexString(cmd.getMsgId()));
         sendDividedData(cmd.getMsgGroudId(), cmd.getMsgId(), cmd.getCmdData(), cmd.getCmdData().length);
     }
 
-    @Override // com.fimi.kernel.connect.interfaces.IDataTransfer
+    @Override
     public void onSendTimeOut(int groupId, int cmdId, BaseCommand bcd) {
         NoticeManager.getInstance().onSendTimeOut(groupId, cmdId, bcd);
     }
@@ -251,12 +251,12 @@ public class BleConnect extends BaseConnect implements IDataTransfer, IRetransmi
         this.lastTime = System.currentTimeMillis();
     }
 
-    @Override // com.fimi.kernel.connect.BaseConnect
+    @Override
     public void receiveLog(String msg) {
         this.logger.info("                App ==>" + msg);
     }
 
-    @Override // com.fimi.kernel.connect.BaseConnect
+    @Override
     public void sendLog(String msg) {
         this.logger.info("             send   ==> " + msg);
     }
@@ -265,7 +265,7 @@ public class BleConnect extends BaseConnect implements IDataTransfer, IRetransmi
         this.cmdQuene2.add(data);
     }
 
-    /* loaded from: classes.dex */
+
     public class WriteThread extends Thread {
         private boolean mExit;
 
@@ -277,7 +277,7 @@ public class BleConnect extends BaseConnect implements IDataTransfer, IRetransmi
             interrupt();
         }
 
-        @Override // java.lang.Thread, java.lang.Runnable
+        @Override
         public void run() {
             while (!this.mExit) {
                 try {
@@ -298,14 +298,14 @@ public class BleConnect extends BaseConnect implements IDataTransfer, IRetransmi
                         BleConnect.this.sendSignal();
                     }
                 } catch (Exception e) {
-                    BleConnect.this.receiveLog(" sessionhandler writethread error " + e.toString());
+                    BleConnect.this.receiveLog(" sessionhandler writethread error " + e);
                     return;
                 }
             }
         }
     }
 
-    /* loaded from: classes.dex */
+
     public class ReadThread extends Thread {
         private boolean mExit;
 
@@ -317,7 +317,7 @@ public class BleConnect extends BaseConnect implements IDataTransfer, IRetransmi
             interrupt();
         }
 
-        @Override // java.lang.Thread, java.lang.Runnable
+        @Override
         public void run() {
             while (!this.mExit) {
                 try {
@@ -331,14 +331,14 @@ public class BleConnect extends BaseConnect implements IDataTransfer, IRetransmi
                         Thread.sleep(100L);
                     }
                 } catch (Exception e) {
-                    BleConnect.this.receiveLog(" sessionhandler writethread error " + e.toString());
+                    BleConnect.this.receiveLog(" sessionhandler writethread error " + e);
                     return;
                 }
             }
         }
     }
 
-    /* loaded from: classes.dex */
+
     public class CheckDeviceConnectThread extends Thread {
         private boolean isLoop = true;
 
@@ -350,7 +350,7 @@ public class BleConnect extends BaseConnect implements IDataTransfer, IRetransmi
             interrupt();
         }
 
-        @Override // java.lang.Thread, java.lang.Runnable
+        @Override
         public void run() {
             BleConnect.this.receiveLog(" CheckDeviceConnectThread run");
             while (this.isLoop) {

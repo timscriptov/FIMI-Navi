@@ -1,6 +1,6 @@
 package com.fimi.kernel.connect.tcp;
 
-/* loaded from: classes.dex */
+
 public class SocketOption {
     public static final String DEFAULT_CHARSET = "UTF-8";
     public static final int RECEIVE_BUFFER_SIZE = 10240;

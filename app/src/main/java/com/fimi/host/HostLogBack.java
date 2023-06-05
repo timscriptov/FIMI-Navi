@@ -3,9 +3,9 @@ package com.fimi.host;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/* loaded from: classes.dex */
+
 public class HostLogBack {
-    private static HostLogBack hostLogBack = new HostLogBack();
+    private static final HostLogBack hostLogBack = new HostLogBack();
     Logger logger = LoggerFactory.getLogger("host_app_log");
 
     public static HostLogBack getInstance() {

@@ -8,7 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
-/* loaded from: classes.dex */
+
 public class StatusBarCompat {
     private static int calculateStatusBarColor(int color, int alpha) {
         float a = 1.0f - (alpha / 255.0f);

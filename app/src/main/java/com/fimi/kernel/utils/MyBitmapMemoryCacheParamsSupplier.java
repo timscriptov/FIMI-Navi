@@ -6,7 +6,7 @@ import android.os.Build;
 import com.facebook.common.internal.Supplier;
 import com.facebook.imagepipeline.cache.MemoryCacheParams;
 
-/* loaded from: classes.dex */
+
 public class MyBitmapMemoryCacheParamsSupplier implements Supplier<MemoryCacheParams> {
     private static final int MAX_CACHE_ASHM_ENTRIES = 128;
     private static final int MAX_CACHE_ENTRIES = 56;
@@ -18,7 +18,7 @@ public class MyBitmapMemoryCacheParamsSupplier implements Supplier<MemoryCachePa
         this.mActivityManager = activityManager;
     }
 
-    @Override // com.facebook.common.internal.Supplier
+    @Override
     public MemoryCacheParams get() {
         if (Build.VERSION.SDK_INT >= 21) {
             return new MemoryCacheParams(getMaxCacheSize(), 56, 5, 5, 1);

@@ -1,6 +1,6 @@
 package com.fimi.kernel.base;
 
-/* loaded from: classes.dex */
+
 public class EventMessage<T> {
     private String key;
     private T message;

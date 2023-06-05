@@ -22,18 +22,18 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-/* loaded from: classes.dex */
+
 public class SecurePreferences implements SharedPreferences {
     private static final int ORIGINAL_ITERATION_COUNT = 10000;
     private static final String TAG = SecurePreferences.class.getName();
     private static boolean sLoggingEnabled = false;
     private AesCbcWithIntegrity.SecretKeys keys;
-    private String salt;
+    private final String salt;
     private String sharedPrefFilename;
     private SharedPreferences sharedPreferences;
 
     public SecurePreferences(Context context) {
-        this(context, "", (String) null);
+        this(context, "", null);
     }
 
     public SecurePreferences(Context context, int iterationCount) {
@@ -190,7 +190,7 @@ public class SecurePreferences implements SharedPreferences {
         return ciphertext;
     }
 
-    @Override // android.content.SharedPreferences
+    @Override
     public Map<String, String> getAll() {
         Map<String, ?> encryptedMap = this.sharedPreferences.getAll();
         Map<String, String> decryptedMap = new HashMap<>(encryptedMap.size());
@@ -210,7 +210,7 @@ public class SecurePreferences implements SharedPreferences {
         return decryptedMap;
     }
 
-    @Override // android.content.SharedPreferences
+    @Override
     public String getString(String key, String defaultValue) {
         String encryptedValue = this.sharedPreferences.getString(hashPrefKey(key), null);
         String decryptedValue = decrypt(encryptedValue);
@@ -222,7 +222,7 @@ public class SecurePreferences implements SharedPreferences {
         return encryptedValue != null ? encryptedValue : defaultValue;
     }
 
-    @Override // android.content.SharedPreferences
+    @Override
     @TargetApi(11)
     public Set<String> getStringSet(String key, Set<String> defaultValues) {
         Set<String> encryptedSet = this.sharedPreferences.getStringSet(hashPrefKey(key), null);
@@ -236,7 +236,7 @@ public class SecurePreferences implements SharedPreferences {
         return defaultValues;
     }
 
-    @Override // android.content.SharedPreferences
+    @Override
     public int getInt(String key, int defaultValue) {
         String encryptedValue = this.sharedPreferences.getString(hashPrefKey(key), null);
         if (encryptedValue != null) {
@@ -249,7 +249,7 @@ public class SecurePreferences implements SharedPreferences {
         return defaultValue;
     }
 
-    @Override // android.content.SharedPreferences
+    @Override
     public long getLong(String key, long defaultValue) {
         String encryptedValue = this.sharedPreferences.getString(hashPrefKey(key), null);
         if (encryptedValue == null) {
@@ -263,7 +263,7 @@ public class SecurePreferences implements SharedPreferences {
         }
     }
 
-    @Override // android.content.SharedPreferences
+    @Override
     public float getFloat(String key, float defaultValue) {
         String encryptedValue = this.sharedPreferences.getString(hashPrefKey(key), null);
         if (encryptedValue == null) {
@@ -277,7 +277,7 @@ public class SecurePreferences implements SharedPreferences {
         }
     }
 
-    @Override // android.content.SharedPreferences
+    @Override
     public boolean getBoolean(String key, boolean defaultValue) {
         String encryptedValue = this.sharedPreferences.getString(hashPrefKey(key), null);
         if (encryptedValue == null) {
@@ -291,7 +291,7 @@ public class SecurePreferences implements SharedPreferences {
         }
     }
 
-    @Override // android.content.SharedPreferences
+    @Override
     public boolean contains(String key) {
         return this.sharedPreferences.contains(hashPrefKey(key));
     }
@@ -304,8 +304,7 @@ public class SecurePreferences implements SharedPreferences {
         Map<String, String> unencryptedPrefs = new HashMap<>(allOfThePrefs.size());
         for (String prefKey : allOfThePrefs.keySet()) {
             Object prefValue = allOfThePrefs.get(prefKey);
-            if (prefValue instanceof String) {
-                String prefValueString = (String) prefValue;
+            if (prefValue instanceof String prefValueString) {
                 String plainTextPrefValue = decrypt(prefValueString);
                 unencryptedPrefs.put(prefKey, plainTextPrefValue);
             }
@@ -329,12 +328,12 @@ public class SecurePreferences implements SharedPreferences {
         handlePasswordChange(newPassword, context, 10000);
     }
 
-    @Override // android.content.SharedPreferences
+    @Override
     public Editor edit() {
         return new Editor();
     }
 
-    @Override // android.content.SharedPreferences
+    @Override
     public void registerOnSharedPreferenceChangeListener(SharedPreferences.OnSharedPreferenceChangeListener listener) {
         this.sharedPreferences.registerOnSharedPreferenceChangeListener(listener);
     }
@@ -345,20 +344,20 @@ public class SecurePreferences implements SharedPreferences {
         }
     }
 
-    @Override // android.content.SharedPreferences
+    @Override
     public void unregisterOnSharedPreferenceChangeListener(SharedPreferences.OnSharedPreferenceChangeListener listener) {
         this.sharedPreferences.unregisterOnSharedPreferenceChangeListener(listener);
     }
 
-    /* loaded from: classes.dex */
+
     public final class Editor implements SharedPreferences.Editor {
-        private SharedPreferences.Editor mEditor;
+        private final SharedPreferences.Editor mEditor;
 
         private Editor() {
             this.mEditor = sharedPreferences.edit();
         }
 
-        @Override // android.content.SharedPreferences.Editor
+        @Override
         public SharedPreferences.Editor putString(String key, String value) {
             this.mEditor.putString(SecurePreferences.hashPrefKey(key), SecurePreferences.this.encrypt(value));
             return this;
@@ -369,7 +368,7 @@ public class SecurePreferences implements SharedPreferences {
             return this;
         }
 
-        @Override // android.content.SharedPreferences.Editor
+        @Override
         @TargetApi(11)
         public SharedPreferences.Editor putStringSet(String key, Set<String> values) {
             Set<String> encryptedValues = new HashSet<>(values.size());
@@ -380,48 +379,48 @@ public class SecurePreferences implements SharedPreferences {
             return this;
         }
 
-        @Override // android.content.SharedPreferences.Editor
+        @Override
         public SharedPreferences.Editor putInt(String key, int value) {
             this.mEditor.putString(SecurePreferences.hashPrefKey(key), SecurePreferences.this.encrypt(Integer.toString(value)));
             return this;
         }
 
-        @Override // android.content.SharedPreferences.Editor
+        @Override
         public SharedPreferences.Editor putLong(String key, long value) {
             this.mEditor.putString(SecurePreferences.hashPrefKey(key), SecurePreferences.this.encrypt(Long.toString(value)));
             return this;
         }
 
-        @Override // android.content.SharedPreferences.Editor
+        @Override
         public SharedPreferences.Editor putFloat(String key, float value) {
             this.mEditor.putString(SecurePreferences.hashPrefKey(key), SecurePreferences.this.encrypt(Float.toString(value)));
             return this;
         }
 
-        @Override // android.content.SharedPreferences.Editor
+        @Override
         public SharedPreferences.Editor putBoolean(String key, boolean value) {
             this.mEditor.putString(SecurePreferences.hashPrefKey(key), SecurePreferences.this.encrypt(Boolean.toString(value)));
             return this;
         }
 
-        @Override // android.content.SharedPreferences.Editor
+        @Override
         public SharedPreferences.Editor remove(String key) {
             this.mEditor.remove(SecurePreferences.hashPrefKey(key));
             return this;
         }
 
-        @Override // android.content.SharedPreferences.Editor
+        @Override
         public SharedPreferences.Editor clear() {
             this.mEditor.clear();
             return this;
         }
 
-        @Override // android.content.SharedPreferences.Editor
+        @Override
         public boolean commit() {
             return this.mEditor.commit();
         }
 
-        @Override // android.content.SharedPreferences.Editor
+        @Override
         @TargetApi(9)
         public void apply() {
             if (Build.VERSION.SDK_INT >= 9) {

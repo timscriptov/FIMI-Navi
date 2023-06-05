@@ -15,11 +15,11 @@ import com.fimi.app.x8s.tools.ImageUtils;
 import com.fimi.x8sdk.dataparser.AutoFcSportState;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes.dex */
+
 public class X8AiHeadingLockConfirmUi implements View.OnClickListener {
     private Button btnOk;
     private CheckBox cbTip;
-    private View contentView;
+    private final View contentView;
     private ImageView imgFlag;
     private ImageView imgLockAngle;
     private ImageView imgLockBg;
@@ -45,22 +45,22 @@ public class X8AiHeadingLockConfirmUi implements View.OnClickListener {
 
     public void initViews(View rootView) {
         this.imgReturn = rootView.findViewById(R.id.img_ai_follow_return);
-        this.btnOk = (Button) rootView.findViewById(R.id.btn_ai_follow_confirm_ok);
+        this.btnOk = rootView.findViewById(R.id.btn_ai_follow_confirm_ok);
         this.isCourse = X8AiConfig.getInstance().isAiHeadingLock();
         this.vCourse = rootView.findViewById(R.id.rl_head_lock_course);
         this.vAngle = rootView.findViewById(R.id.rl_head_lock_setangle);
-        this.tvAngle = (TextView) rootView.findViewById(R.id.tv_lock_angle);
+        this.tvAngle = rootView.findViewById(R.id.tv_lock_angle);
         this.prex = rootView.getContext().getString(R.string.x8_ai_heading_lock_tip3);
-        this.imgFlag = (ImageView) rootView.findViewById(R.id.img_heading_lock_flag);
-        this.imgLockBg = (ImageView) rootView.findViewById(R.id.img_lock_bg);
-        this.imgLockAngle = (ImageView) rootView.findViewById(R.id.img_lock_angle);
+        this.imgFlag = rootView.findViewById(R.id.img_heading_lock_flag);
+        this.imgLockBg = rootView.findViewById(R.id.img_lock_bg);
+        this.imgLockAngle = rootView.findViewById(R.id.img_lock_angle);
         this.imgLockBg.setImageBitmap(ImageUtils.getBitmapByPath(rootView.getContext(), R.drawable.x8_img_head_lock_bg));
         this.imgLockAngle.setImageBitmap(ImageUtils.getBitmapByPath(rootView.getContext(), R.drawable.x8_img_head_lock_arrow));
         if (this.isCourse) {
             this.vCourse.setVisibility(0);
             this.vAngle.setVisibility(8);
             this.btnOk.setText(rootView.getContext().getString(R.string.x8_ai_fly_follow_ok));
-            this.cbTip = (CheckBox) rootView.findViewById(R.id.cb_ai_follow_confirm_ok);
+            this.cbTip = rootView.findViewById(R.id.cb_ai_follow_confirm_ok);
             this.imgFlag.setImageBitmap(ImageUtils.getBitmapByPath(rootView.getContext(), R.drawable.x8_img_heading_lock_flag));
             return;
         }
@@ -77,7 +77,7 @@ public class X8AiHeadingLockConfirmUi implements View.OnClickListener {
         this.btnOk.setOnClickListener(this);
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.img_ai_follow_return) {
@@ -116,11 +116,7 @@ public class X8AiHeadingLockConfirmUi implements View.OnClickListener {
     }
 
     public void setFcHeart(boolean isInSky, boolean isLowPower) {
-        if (isInSky && isLowPower) {
-            this.btnOk.setEnabled(true);
-        } else {
-            this.btnOk.setEnabled(false);
-        }
+        this.btnOk.setEnabled(isInSky && isLowPower);
     }
 
     public void showSportState(AutoFcSportState state) {

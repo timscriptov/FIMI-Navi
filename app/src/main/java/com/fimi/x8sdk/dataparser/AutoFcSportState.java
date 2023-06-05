@@ -7,8 +7,6 @@ import com.fimi.x8sdk.entity.FLatLng;
 import com.fimi.x8sdk.util.GpsCorrect;
 
 
-
-/* loaded from: classes2.dex */
 public class AutoFcSportState extends X8BaseMessage {
     int downVelocity;
     FLatLng fLatLng = new FLatLng();
@@ -23,7 +21,7 @@ public class AutoFcSportState extends X8BaseMessage {
     int reserve2;
     int rollAngle;
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         this.longitude = packet.getPayLoad4().getDouble().doubleValue();

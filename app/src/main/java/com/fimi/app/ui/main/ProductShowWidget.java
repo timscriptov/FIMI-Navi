@@ -19,7 +19,7 @@ import com.fimi.app.interfaces.IProductControllers;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class ProductShowWidget extends FrameLayout implements IProductControllers {
     private final Context context;
     ChangePositionListener positionListener;

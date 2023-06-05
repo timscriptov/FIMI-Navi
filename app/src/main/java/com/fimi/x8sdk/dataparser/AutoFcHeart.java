@@ -5,8 +5,6 @@ import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 import com.fimi.x8sdk.entity.X8AppSettingLog;
 
 
-
-/* loaded from: classes2.dex */
 public class AutoFcHeart extends X8BaseMessage {
     public static final int VEHICLE_CTRL_TYPE_ACRO = 5;
     public static final int VEHICLE_CTRL_TYPE_ASSITED = 4;
@@ -31,7 +29,7 @@ public class AutoFcHeart extends X8BaseMessage {
     int systenPhase;
     int takeOffCap;
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         this.flightTime = packet.getPayLoad4().getShort();
@@ -127,7 +125,7 @@ public class AutoFcHeart extends X8BaseMessage {
         this.systenPhase = systenPhase;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public String toString() {
         return "AutoFcHeart{flightTime=" + this.flightTime + ", startUpTime=" + this.startUpTime + ", ctrlType=" + this.ctrlType + ", candidateCtrlType=" + this.candidateCtrlType + ", flightPhase=" + this.flightPhase + ", ctrlModel=" + this.ctrlModel + ", systenPhase=" + this.systenPhase + ", disarmCount=" + this.disarmCount + ", powerConRate=" + this.powerConRate + ", takeOffCap=" + this.takeOffCap + ", autoTakeOffCap=" + this.autoTakeOffCap + '}';
     }

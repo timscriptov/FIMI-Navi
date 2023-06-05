@@ -25,7 +25,7 @@ import com.fimi.widget.DialogManager;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class ServiceSettingActivity extends BasePersonActivity implements AdapterView.OnItemClickListener, BitmapLoadTaskInstance.OnLoadListener {
     private ServiceAdapter adapter;
     private DialogManager dialogManager;
@@ -36,22 +36,22 @@ public class ServiceSettingActivity extends BasePersonActivity implements Adapte
     private TitleView mTitleView;
     private int serviceID;
     private List<ServiceItem> serviceItems;
-    private int mCountryType = -1;
+    private final int mCountryType = -1;
     private boolean isSetting = false;
 
-    @Override // com.fimi.libperson.BasePersonActivity, com.fimi.kernel.base.BaseActivity
+    @Override
     public void setStatusBarColor() {
         StatusBarUtil.setTranslucentForImageViewInFragment(this, null);
         getWindow().getDecorView().setSystemUiVisibility(9216);
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void initData() {
-        this.mTitleView = (TitleView) findViewById(R.id.title_view);
+        this.mTitleView = findViewById(R.id.title_view);
         PercentRelativeLayout.LayoutParams params = (PercentRelativeLayout.LayoutParams) this.mTitleView.getLayoutParams();
         params.setMargins(0, this.statusBarHeight + this.marginStatus, 0, 0);
         this.mTitleView.setLayoutParams(params);
-        this.mListView = (ListView) findViewById(R.id.lv_l_setting_setting);
+        this.mListView = findViewById(R.id.lv_l_setting_setting);
         this.mListView.setOverScrollMode(2);
         this.mTitleView.setTvTitle(getString(R.string.libperson_service_select_title));
         this.isSetting = getIntent().getBooleanExtra("is_setting", true);
@@ -59,7 +59,7 @@ public class ServiceSettingActivity extends BasePersonActivity implements Adapte
         this.mBitmapLoadTaskInstance.setOnLoadListener(this);
     }
 
-    @Override // android.support.v4.app.FragmentActivity, android.app.Activity
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
         if (SPStoreManager.getInstance().getObject(Constants.SERVICE_ITEM_KEY, ServiceItem.class) != null) {
@@ -68,10 +68,10 @@ public class ServiceSettingActivity extends BasePersonActivity implements Adapte
         finish();
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void doTrans() {
-        this.mTitleView.setIvLeftListener(new View.OnClickListener() { // from class: com.fimi.libperson.ui.setting.ServiceSettingActivity.1
-            @Override // android.view.View.OnClickListener
+        this.mTitleView.setIvLeftListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 if (SPStoreManager.getInstance().getObject(Constants.SERVICE_ITEM_KEY, ServiceItem.class) != null) {
                     Constants.isShowUserProtocol = false;
@@ -79,7 +79,7 @@ public class ServiceSettingActivity extends BasePersonActivity implements Adapte
                 ServiceSettingActivity.this.finish();
             }
         });
-        ServiceItem serviceItem = (ServiceItem) SPStoreManager.getInstance().getObject(Constants.SERVICE_ITEM_KEY, ServiceItem.class);
+        ServiceItem serviceItem = SPStoreManager.getInstance().getObject(Constants.SERVICE_ITEM_KEY, ServiceItem.class);
         this.serviceItems = new ArrayList();
         for (int i = 0; i < ServiceItem.getServicename().length; i++) {
             ServiceItem item = new ServiceItem();
@@ -204,16 +204,16 @@ public class ServiceSettingActivity extends BasePersonActivity implements Adapte
             this.serviceItems.add(item);
         }
         this.adapter = new ServiceAdapter(this.serviceItems, this);
-        this.mListView.setAdapter((ListAdapter) this.adapter);
+        this.mListView.setAdapter(this.adapter);
         this.mListView.setOnItemClickListener(this);
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     protected int getContentViewLayoutID() {
         return R.layout.activity_user_language_setting;
     }
 
-    @Override // android.widget.AdapterView.OnItemClickListener
+    @Override
     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
         if (this.mPosition != position || SPStoreManager.getInstance().getObject(Constants.SERVICE_ITEM_KEY, ServiceItem.class) == null) {
             ServiceItem serviceItem = this.serviceItems.get(position);
@@ -230,14 +230,14 @@ public class ServiceSettingActivity extends BasePersonActivity implements Adapte
                     this.dialogManager = new DialogManager(this.mContext, "", getString(R.string.libperson_service_dialog_exit_switch_message), getString(R.string.libperson_service_ok), getString(R.string.person_setting_dialog_exit_left_text));
                 }
                 this.dialogManager.setVerticalScreen(true);
-                this.dialogManager.setOnDiaLogListener(new DialogManager.OnDialogListener() { // from class: com.fimi.libperson.ui.setting.ServiceSettingActivity.2
-                    @Override // com.fimi.widget.DialogManager.OnDialogListener
+                this.dialogManager.setOnDiaLogListener(new DialogManager.OnDialogListener() {
+                    @Override
                     public void dialogBtnRightOrSingleListener(View customView, DialogInterface dialogInterface, int which) {
                         ServiceSettingActivity.this.mPosition = position;
                         ServiceSettingActivity.this.mBitmapLoadTaskInstance.setImage(ImageSource.asset("login_bg.jpg"), ServiceSettingActivity.this.mContext);
                     }
 
-                    @Override // com.fimi.widget.DialogManager.OnDialogListener
+                    @Override
                     public void dialogBtnLeftListener(View customView, DialogInterface dialogInterface, int which) {
                     }
                 });
@@ -250,8 +250,8 @@ public class ServiceSettingActivity extends BasePersonActivity implements Adapte
                 this.dialogManager = new DialogManager(this.mContext, "", getString(R.string.libperson_service_dialog_exit_switch_message), getString(R.string.libperson_service_ok), getString(R.string.person_setting_dialog_exit_left_text));
             }
             this.dialogManager.setVerticalScreen(true);
-            this.dialogManager.setOnDiaLogListener(new DialogManager.OnDialogListener() { // from class: com.fimi.libperson.ui.setting.ServiceSettingActivity.3
-                @Override // com.fimi.widget.DialogManager.OnDialogListener
+            this.dialogManager.setOnDiaLogListener(new DialogManager.OnDialogListener() {
+                @Override
                 public void dialogBtnRightOrSingleListener(View customView, DialogInterface dialogInterface, int which) {
                     SPStoreManager.getInstance().saveObject(Constants.SERVICE_ITEM_KEY, ServiceSettingActivity.this.serviceItems.get(position));
                     HostConstants.initUrl();
@@ -259,7 +259,7 @@ public class ServiceSettingActivity extends BasePersonActivity implements Adapte
                     ServiceSettingActivity.this.finish();
                 }
 
-                @Override // com.fimi.widget.DialogManager.OnDialogListener
+                @Override
                 public void dialogBtnLeftListener(View customView, DialogInterface dialogInterface, int which) {
                 }
             });
@@ -270,7 +270,7 @@ public class ServiceSettingActivity extends BasePersonActivity implements Adapte
     private void onSelectLanguage(int code) {
     }
 
-    @Override // com.fimi.libperson.widget.BitmapLoadTaskInstance.OnLoadListener
+    @Override
     public void onComplete() {
         if (SPStoreManager.getInstance().getObject(Constants.SERVICE_ITEM_KEY, ServiceItem.class) != null) {
             SPStoreManager.getInstance().saveObject(Constants.SERVICE_ITEM_KEY, this.serviceItems.get(this.mPosition));

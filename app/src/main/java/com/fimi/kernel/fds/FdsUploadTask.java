@@ -4,11 +4,11 @@ import android.util.Log;
 
 import java.io.IOException;
 
-/* loaded from: classes.dex */
+
 public class FdsUploadTask implements Runnable {
-    private IFdsUploadListener listener;
-    private FDSClient mFdsService;
-    private IFdsFileModel model;
+    private final IFdsUploadListener listener;
+    private final FDSClient mFdsService;
+    private final IFdsFileModel model;
 
     public FdsUploadTask(IFdsFileModel model, IFdsUploadListener listener) {
         this.model = model;
@@ -17,14 +17,14 @@ public class FdsUploadTask implements Runnable {
         this.mFdsService = new FDSClient();
     }
 
-    @Override // java.lang.Runnable
+    @Override
     public void run() {
         try {
             this.mFdsService.startUpload(this.model, this.listener);
         } catch (IOException e) {
             e.printStackTrace();
             this.model.setState(FdsUploadState.FAILED);
-            Log.i("istep", "" + e.toString());
+            Log.i("istep", "" + e);
         }
         if (this.model.getState() == FdsUploadState.SUCCESS) {
             this.listener.onSuccess(this.model);

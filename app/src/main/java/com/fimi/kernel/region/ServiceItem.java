@@ -6,7 +6,7 @@ import com.fimi.kernel.Constants;
 
 import java.io.Serializable;
 
-/* loaded from: classes.dex */
+
 public class ServiceItem implements Serializable {
     public static final String chinaService = "https://paas-beijing6.fimi.com/";
     public static final String frankfurtService = "https://paas-frankfurt.fimi.com/fimi-cms-web-interface/";

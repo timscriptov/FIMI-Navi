@@ -15,18 +15,18 @@ import com.fimi.libperson.entity.PersonSetting;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class PersonSettingAdapt extends BaseAdapter {
     public static State[] mMainState = {State.UAV_INSURANCE, State.MESSAGE_NOTICE, State.VERSION_UPDATE, State.CLEAN_CACHE, State.GO_TO_APP_STORE, State.BLACK1, State.SERVICE, State.LANGUAGE, State.BLACK2};
-    private boolean isSub = false;
-    private Context mContext;
+    private final boolean isSub = false;
+    private final Context mContext;
     private List<PersonSetting> mList;
 
     public PersonSettingAdapt(Context context) {
         this.mContext = context;
     }
 
-    @Override // android.widget.Adapter
+    @Override
     public int getCount() {
         if (this.mList == null) {
             return 0;
@@ -34,12 +34,12 @@ public class PersonSettingAdapt extends BaseAdapter {
         return this.mList.size();
     }
 
-    @Override // android.widget.Adapter
+    @Override
     public Object getItem(int position) {
         return Integer.valueOf(position);
     }
 
-    @Override // android.widget.Adapter
+    @Override
     public long getItemId(int position) {
         return position;
     }
@@ -49,7 +49,7 @@ public class PersonSettingAdapt extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    @Override // android.widget.Adapter
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
@@ -124,7 +124,7 @@ public class PersonSettingAdapt extends BaseAdapter {
         return 0;
     }
 
-    /* loaded from: classes.dex */
+
     public enum State {
         UAV_INSURANCE,
         MESSAGE_NOTICE,
@@ -139,7 +139,7 @@ public class PersonSettingAdapt extends BaseAdapter {
         USER_PRIVACY
     }
 
-    /* loaded from: classes.dex */
+
     public class ViewHolder {
         ImageView mIvArrow;
         RelativeLayout mRlBg;
@@ -154,10 +154,10 @@ public class PersonSettingAdapt extends BaseAdapter {
             LayoutInflater inflater = LayoutInflater.from(PersonSettingAdapt.this.mContext);
             View view = inflater.inflate(R.layout.adapt_person_setting, parent, false);
             this.mViewDivide = view.findViewById(R.id.v_divide);
-            this.mRlBg = (RelativeLayout) view.findViewById(R.id.rl_bg);
-            this.mTvItemTitle = (TextView) view.findViewById(R.id.tv_item_title);
-            this.mIvArrow = (ImageView) view.findViewById(R.id.iv_arrow);
-            this.mTvContent = (TextView) view.findViewById(R.id.tv_content);
+            this.mRlBg = view.findViewById(R.id.rl_bg);
+            this.mTvItemTitle = view.findViewById(R.id.tv_item_title);
+            this.mIvArrow = view.findViewById(R.id.iv_arrow);
+            this.mTvContent = view.findViewById(R.id.tv_content);
             FontUtil.changeFontLanTing(PersonSettingAdapt.this.mContext.getAssets(), this.mTvContent, this.mTvItemTitle);
             return view;
         }

@@ -4,14 +4,14 @@ import com.fimi.kernel.utils.BitUtil;
 import com.fimi.x8sdk.dataparser.AutoCameraStateADV;
 import com.fimi.x8sdk.entity.CameraSystemState;
 
-/* loaded from: classes2.dex */
+
 public class CameraState extends BaseState {
     AutoCameraStateADV autoCameraStateADV;
     CameraSystemState cameraSystemState = new CameraSystemState();
     private boolean takingPanoramicPhotos;
     private int token = -1;
 
-    @Override // com.fimi.x8sdk.modulestate.BaseState
+    @Override
     public boolean isAvailable() {
         return getLoginState() == 1;
     }

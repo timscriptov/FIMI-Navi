@@ -3,6 +3,7 @@ package com.fimi.kernel.utils;
 import com.fimi.x8sdk.command.FcCollection;
 import com.fimi.x8sdk.command.FwUpdateCollection;
 
+import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 
 import javax.crypto.Cipher;
@@ -10,7 +11,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 
-/* loaded from: classes.dex */
+
 public class DesEncryptUtil {
     private static volatile DesEncryptUtil desEncryptUtil = null;
     public final byte[] ENCRYPT_KEY_BYTES = {-77, -92, -10, -30, 52, 33, FcCollection.MSG_ID_SET_ENABLE_TRIPOD, 17};
@@ -60,7 +61,7 @@ public class DesEncryptUtil {
 
     public String enCode(String str, String password) {
         try {
-            byte[] by = desCrypto(str.getBytes("utf-8"), password);
+            byte[] by = desCrypto(str.getBytes(StandardCharsets.UTF_8), password);
             String hex = toHex(by);
             return hex;
         } catch (Exception e) {
@@ -72,7 +73,7 @@ public class DesEncryptUtil {
     private byte[] desCrypto(byte[] datasource, String password) {
         try {
             SecureRandom random = new SecureRandom();
-            DESKeySpec desKey = new DESKeySpec(password.getBytes("utf-8"));
+            DESKeySpec desKey = new DESKeySpec(password.getBytes(StandardCharsets.UTF_8));
             SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
             SecretKey securekey = keyFactory.generateSecret(desKey);
             Cipher cipher = Cipher.getInstance("DES");
@@ -86,7 +87,7 @@ public class DesEncryptUtil {
 
     private byte[] decrypt(byte[] src, String password) throws Exception {
         SecureRandom random = new SecureRandom();
-        DESKeySpec desKey = new DESKeySpec(password.getBytes("utf-8"));
+        DESKeySpec desKey = new DESKeySpec(password.getBytes(StandardCharsets.UTF_8));
         SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
         SecretKey securekey = keyFactory.generateSecret(desKey);
         Cipher cipher = Cipher.getInstance("DES");

@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class IOUtils {
     public static final char DIR_SEPARATOR = File.separatorChar;
     public static final char DIR_SEPARATOR_UNIX = '/';
@@ -639,7 +639,7 @@ public class IOUtils {
         BufferedReader br2 = toBufferedReader(input2);
         String line1 = br1.readLine();
         String line2 = br2.readLine();
-        while (line1 != null && line2 != null && line1.equals(line2)) {
+        while (line1 != null && line1.equals(line2)) {
             line1 = br1.readLine();
             line2 = br2.readLine();
         }

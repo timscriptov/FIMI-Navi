@@ -13,7 +13,7 @@ import java.net.DatagramSocket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
-/* loaded from: classes2.dex */
+
 public class UdpConnectThread extends Thread implements IConnectHandler {
     boolean isExit;
     Context mContext;
@@ -26,13 +26,13 @@ public class UdpConnectThread extends Thread implements IConnectHandler {
         start();
     }
 
-    @Override // com.fimi.x8sdk.connect.IConnectHandler
+    @Override
     public void exit() {
         this.isExit = true;
         interrupt();
     }
 
-    @Override // java.lang.Thread, java.lang.Runnable
+    @Override
     public void run() {
         super.run();
         while (!this.isExit) {

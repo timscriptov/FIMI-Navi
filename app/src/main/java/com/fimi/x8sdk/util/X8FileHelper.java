@@ -10,10 +10,10 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes2.dex */
+
 public class X8FileHelper {
     private static final String[] flightLogFileSuffix = {X8FcLogManager.FLIGHT_PLAYBACK, X8FcLogManager.prexSD, X8FcLogManager.getInstance().prexCollect};
-    private static String[] zipFileSuffix = {X8FcLogManager.prexFC, X8FcLogManager.prexCM, X8FcLogManager.prexAPP, X8FcLogManager.prexFcStatus};
+    private static final String[] zipFileSuffix = {X8FcLogManager.prexFC, X8FcLogManager.prexCM, X8FcLogManager.prexAPP, X8FcLogManager.prexFcStatus};
 
     public static void deleteFiles() {
         FileUtil.deleteFile(new File(DirectoryPath.getX8B2oxPath()));

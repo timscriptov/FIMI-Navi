@@ -3,15 +3,13 @@ package com.fimi.x8sdk.dataparser;
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 
 
-
-/* loaded from: classes2.dex */
 public class AutoFcErrCode extends X8BaseMessage {
     public static long p = ((long) Math.pow(2.0d, 32.0d)) - 1;
     long systemStatusCodA;
     long systemStatusCodB;
     long systemStatusCodC;
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         this.systemStatusCodA = packet.getPayLoad4().getInt();
@@ -52,7 +50,7 @@ public class AutoFcErrCode extends X8BaseMessage {
         this.systemStatusCodC = systemStatusCodC;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public String toString() {
         return "AutoFcErrCode{systemStatusCodA=" + this.systemStatusCodA + ", systemStatusCodB=" + this.systemStatusCodB + ", systemStatusCodC=" + this.systemStatusCodC + '}';
     }

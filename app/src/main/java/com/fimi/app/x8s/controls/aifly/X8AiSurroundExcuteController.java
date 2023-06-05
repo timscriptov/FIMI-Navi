@@ -36,13 +36,13 @@ import com.fimi.x8sdk.dataparser.AutoAiSurroundState;
 import com.fimi.x8sdk.dataparser.AutoFcSportState;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes.dex */
+
 public class X8AiSurroundExcuteController extends AbsX8AiController implements View.OnClickListener, X8DoubleCustomDialog.onDialogButtonClickListener, X8AiTrackController.OnAiTrackControllerListener, X8FollowSpeedContainerView.OnSendSpeedListener {
-    private static int MIN = 0;
+    private static final int MIN = 0;
     protected int MAX_WIDTH;
     protected boolean isNextShow;
     protected int width;
-    private X8sMainActivity activity;
+    private final X8sMainActivity activity;
     private View blank;
     private X8DoubleCustomDialog dialog;
     private FcManager fcManager;
@@ -62,7 +62,7 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
     private IX8AiSurroundExcuteControllerListener listener;
     private double log;
     private double log1;
-    private IX8NextViewListener mIX8NextViewListener;
+    private final IX8NextViewListener mIX8NextViewListener;
     private TextView mTvRadius;
     private X8AiSuroundState mX8AiSuroundState;
     private X8AiSurroundToPointExcuteConfirmModule mX8AiSurroundToPointExcuteConfirmModule;
@@ -83,13 +83,13 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
         this.radius = 50.0f;
         this.width = X8Application.ANIMATION_WIDTH;
         this.timeSend = 0;
-        this.mIX8NextViewListener = new IX8NextViewListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiSurroundExcuteController.4
-            @Override // com.fimi.app.x8s.interfaces.IX8NextViewListener
+        this.mIX8NextViewListener = new IX8NextViewListener() {
+            @Override
             public void onBackClick() {
                 X8AiSurroundExcuteController.this.closeNextUiFromNext(true);
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8NextViewListener
+            @Override
             public void onExcuteClick() {
                 X8AiSurroundExcuteController.this.closeNextUi(false);
                 X8AiSurroundExcuteController.this.lat = X8AiSurroundExcuteController.this.lastLat;
@@ -107,7 +107,7 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
                 X8AiSurroundExcuteController.this.listener.onSurroundRunning();
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8NextViewListener
+            @Override
             public void onSaveClick() {
             }
         };
@@ -119,14 +119,14 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
         this.listener = listener;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
     }
 
     public void initViewStubViews(View view) {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
         if (this.handleView != null) {
             this.tvPoint.setOnClickListener(this);
@@ -136,7 +136,7 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
@@ -149,7 +149,7 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
         this.dialog.show();
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.img_ai_follow_back) {
@@ -200,17 +200,17 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
         this.isShow = true;
         LayoutInflater inflater = LayoutInflater.from(this.rootView.getContext());
         this.handleView = inflater.inflate(R.layout.x8_ai_surround_layout, (ViewGroup) this.rootView, true);
-        this.tvPoint = (TextView) this.handleView.findViewById(R.id.img_ai_set_dot);
-        this.imgBack = (ImageView) this.handleView.findViewById(R.id.img_ai_follow_back);
-        this.tvP2PTip = (TextView) this.handleView.findViewById(R.id.img_ai_p2p_tip);
-        this.mTvRadius = (TextView) this.handleView.findViewById(R.id.tv_ai_radius);
-        this.imgSuroundBg = (ImageView) this.handleView.findViewById(R.id.img_ai_suround_bg);
+        this.tvPoint = this.handleView.findViewById(R.id.img_ai_set_dot);
+        this.imgBack = this.handleView.findViewById(R.id.img_ai_follow_back);
+        this.tvP2PTip = this.handleView.findViewById(R.id.img_ai_p2p_tip);
+        this.mTvRadius = this.handleView.findViewById(R.id.tv_ai_radius);
+        this.imgSuroundBg = this.handleView.findViewById(R.id.img_ai_suround_bg);
         this.vRadiusBg = this.handleView.findViewById(R.id.rl_x8_ai_surround_radius);
-        this.imgVcToggle = (ImageView) this.handleView.findViewById(R.id.img_vc_targgle);
+        this.imgVcToggle = this.handleView.findViewById(R.id.img_vc_targgle);
         this.imgVcToggle.setSelected(true);
-        this.tvTip = (X8AiTipWithCloseView) this.handleView.findViewById(R.id.v_content_tip);
+        this.tvTip = this.handleView.findViewById(R.id.v_content_tip);
         this.tvTip.setTipText(this.handleView.getContext().getString(R.string.x8_ai_surround_select_point));
-        this.vSpeed = (X8FollowSpeedContainerView) this.handleView.findViewById(R.id.v_surround_speed);
+        this.vSpeed = this.handleView.findViewById(R.id.v_surround_speed);
         this.vSpeed.setMaxMin(100, MIN, 1);
         this.vSpeed.setOnSendSpeedListener(this);
         this.flagSmall = this.handleView.findViewById(R.id.rl_flag_small);
@@ -220,8 +220,8 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
         this.mX8AiSurroundToPointExcuteConfirmModule = new X8AiSurroundToPointExcuteConfirmModule();
         initActions();
         this.activity.getmX8AiTrackController().setOnAiTrackControllerListener(this);
-        this.activity.getmMapVideoController().getFimiMap().setmX8AiItemMapListener(new IX8AiItemMapListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiSurroundExcuteController.1
-            @Override // com.fimi.app.x8s.interfaces.IX8AiItemMapListener
+        this.activity.getmMapVideoController().getFimiMap().setmX8AiItemMapListener(new IX8AiItemMapListener() {
+            @Override
             public X8AiMapItem getCurrentItem() {
                 return X8AiMapItem.AI_SURROUND;
             }
@@ -282,7 +282,7 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
             ObjectAnimator translationRight = ObjectAnimator.ofFloat(this.nextRootView, "translationX", 0.0f, this.width);
             translationRight.setDuration(300L);
             translationRight.start();
-            translationRight.addListener(new AnimatorListenerAdapter() { // from class: com.fimi.app.x8s.controls.aifly.X8AiSurroundExcuteController.2
+            translationRight.addListener(new AnimatorListenerAdapter() {
                 @Override
                 // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationEnd(Animator animation) {
@@ -332,8 +332,8 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
             return;
         }
         this.mX8AiSuroundState = X8AiSuroundState.SET_TAKE_OFF_POINT;
-        this.fcManager.setAiSurroundCiclePoint(this.lastLog, this.lastLat, alt, log, lat, alt, 1, new UiCallBackListener<AckNormalCmds>() { // from class: com.fimi.app.x8s.controls.aifly.X8AiSurroundExcuteController.3
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.setAiSurroundCiclePoint(this.lastLog, this.lastLat, alt, log, lat, alt, 1, new UiCallBackListener<AckNormalCmds>() {
+            @Override
             public void onComplete(CmdResult cmdResult, AckNormalCmds o) {
                 if (cmdResult.isSuccess()) {
                     X8AiSurroundExcuteController.this.activity.getmMapVideoController().getFimiMap().getAiSurroundManager().setAiSurroundCircle(X8AiSurroundExcuteController.this.lastLat, X8AiSurroundExcuteController.this.lastLog, X8AiSurroundExcuteController.this.radius);
@@ -385,8 +385,8 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
     }
 
     public void sendExiteCmd() {
-        this.fcManager.setAiSurroundExite(new UiCallBackListener<AckNormalCmds>() { // from class: com.fimi.app.x8s.controls.aifly.X8AiSurroundExcuteController.5
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.setAiSurroundExite(new UiCallBackListener<AckNormalCmds>() {
+            @Override
             public void onComplete(CmdResult cmdResult, AckNormalCmds o) {
                 if (cmdResult.isSuccess()) {
                     X8AiSurroundExcuteController.this.taskExit();
@@ -410,8 +410,8 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
     }
 
     public void getPoint() {
-        this.fcManager.getAiSurroundCiclePoint(new UiCallBackListener<AckGetAiSurroundPoint>() { // from class: com.fimi.app.x8s.controls.aifly.X8AiSurroundExcuteController.6
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.getAiSurroundCiclePoint(new UiCallBackListener<AckGetAiSurroundPoint>() {
+            @Override
             public void onComplete(CmdResult cmdResult, AckGetAiSurroundPoint ackGetAiSurroundPoint) {
                 if (!cmdResult.isSuccess()) {
                     X8AiSurroundExcuteController.this.isGetPoint = false;
@@ -452,18 +452,18 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
         }
     }
 
-    @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+    @Override
     public void onLeft() {
     }
 
-    @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+    @Override
     public void onRight() {
         if (this.mX8AiSuroundState == X8AiSuroundState.RUNNING) {
             sendExiteCmd();
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         if (this.isShow) {
             if (!b) {
@@ -475,8 +475,8 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
     }
 
     public void setAiVcNotityFc() {
-        this.fcManager.setAiVcNotityFc(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiSurroundExcuteController.7
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.setAiVcNotityFc(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                 }
@@ -485,8 +485,8 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
     }
 
     public void setAiVcOpen() {
-        this.fcManager.setAiVcOpen(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiSurroundExcuteController.8
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.setAiVcOpen(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8AiSurroundExcuteController.this.imgVcToggle.setSelected(true);
@@ -497,8 +497,8 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
     }
 
     public void setAiVcClose() {
-        this.fcManager.setAiVcClose(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiSurroundExcuteController.9
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.setAiVcClose(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8AiSurroundExcuteController.this.imgVcToggle.setSelected(false);
@@ -508,26 +508,26 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
         });
     }
 
-    @Override // com.fimi.app.x8s.controls.X8AiTrackController.OnAiTrackControllerListener
+    @Override
     public void onChangeGoLocation(float left, float right, float top, float bottom, int w, int h) {
     }
 
-    @Override // com.fimi.app.x8s.controls.X8AiTrackController.OnAiTrackControllerListener
+    @Override
     public void setGoEnabled(boolean b) {
         if (b) {
             setAiVcNotityFc();
         }
     }
 
-    @Override // com.fimi.app.x8s.controls.X8AiTrackController.OnAiTrackControllerListener
+    @Override
     public void onTouchActionDown() {
     }
 
-    @Override // com.fimi.app.x8s.controls.X8AiTrackController.OnAiTrackControllerListener
+    @Override
     public void onTouchActionUp() {
     }
 
-    @Override // com.fimi.app.x8s.controls.X8AiTrackController.OnAiTrackControllerListener
+    @Override
     public void onTracking() {
         this.imgVcToggle.setEnabled(true);
     }
@@ -538,8 +538,8 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
     }
 
     public void getSpeed() {
-        this.fcManager.getAiSurroundSpeed(new UiCallBackListener<AckAiSurrounds>() { // from class: com.fimi.app.x8s.controls.aifly.X8AiSurroundExcuteController.10
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.getAiSurroundSpeed(new UiCallBackListener<AckAiSurrounds>() {
+            @Override
             public void onComplete(CmdResult cmdResult, AckAiSurrounds o) {
                 if (!cmdResult.isSuccess()) {
                     X8AiSurroundExcuteController.this.isGetSpeed = false;
@@ -552,10 +552,10 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
         });
     }
 
-    @Override // com.fimi.app.x8s.widget.X8FollowSpeedContainerView.OnSendSpeedListener
+    @Override
     public void onSendSpeed(int speed) {
-        this.fcManager.setAiSurroundSpeed(speed, new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiSurroundExcuteController.11
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.setAiSurroundSpeed(speed, new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                 }
@@ -569,7 +569,7 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public boolean onClickBackKey() {
         return false;
     }
@@ -640,8 +640,8 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
         if (this.mX8AiSuroundState == X8AiSuroundState.IDLE || this.mX8AiSuroundState == X8AiSuroundState.SET_CIRCLE_POINT || this.mX8AiSuroundState == X8AiSuroundState.SET_TAKE_OFF_POINT || this.mX8AiSuroundState == X8AiSuroundState.SET_PARAMETER) {
             if (this.timeSend == 0) {
                 this.timeSend = 1;
-                this.activity.getFcManager().sysCtrlMode2AiVc(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiSurroundExcuteController.12
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                this.activity.getFcManager().sysCtrlMode2AiVc(new UiCallBackListener() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, Object o) {
                     }
                 }, X8Task.VCM_INTEREST_POINT.ordinal());

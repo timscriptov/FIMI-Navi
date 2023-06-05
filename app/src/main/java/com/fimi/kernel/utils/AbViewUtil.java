@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import org.apache.mina.proxy.handlers.http.ntlm.NTLMConstants;
 
-/* loaded from: classes.dex */
+
 public class AbViewUtil {
     public static final int INVALID = Integer.MIN_VALUE;
     private static final int xMax = 6;
@@ -39,7 +39,7 @@ public class AbViewUtil {
         int w = View.MeasureSpec.makeMeasureSpec(0, 0);
         int h = View.MeasureSpec.makeMeasureSpec(0, 0);
         absListView.measure(w, h);
-        ListAdapter mListAdapter = (ListAdapter) absListView.getAdapter();
+        ListAdapter mListAdapter = absListView.getAdapter();
         if (mListAdapter == null) {
             return 0;
         }
@@ -179,23 +179,20 @@ public class AbViewUtil {
 
     public static void scaleContentView(View parent, int id) {
         View view = parent.findViewById(id);
-        if (view instanceof ViewGroup) {
-            ViewGroup viewGroup = (ViewGroup) view;
+        if (view instanceof ViewGroup viewGroup) {
         }
     }
 
     public static void scaleContentView(Context context, int id) {
         View view = ((Activity) context).findViewById(id);
-        if (view instanceof ViewGroup) {
-            ViewGroup viewGroup = (ViewGroup) view;
+        if (view instanceof ViewGroup viewGroup) {
         }
     }
 
     @SuppressLint({"NewApi"})
     public static void scaleView(View view) {
         ViewGroup.MarginLayoutParams mMarginLayoutParams;
-        if (view instanceof TextView) {
-            TextView textView = (TextView) view;
+        if (view instanceof TextView textView) {
             setTextSize(textView, textView.getTextSize());
         }
         ViewGroup.LayoutParams params = view.getLayoutParams();

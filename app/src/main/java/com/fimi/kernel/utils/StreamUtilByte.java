@@ -3,7 +3,7 @@ package com.fimi.kernel.utils;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
-/* loaded from: classes.dex */
+
 public class StreamUtilByte {
     public static byte[] getbyte(InputStream in) {
         try {

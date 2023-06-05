@@ -1,6 +1,6 @@
 package com.fimi.x8sdk.update.fwpack;
 
-/* loaded from: classes2.dex */
+
 public interface IBuildPackInfo {
     void createUpdatePkg();
 

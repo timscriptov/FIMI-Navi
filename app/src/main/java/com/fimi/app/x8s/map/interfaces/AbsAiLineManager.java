@@ -10,7 +10,7 @@ import com.google.android.gms.maps.model.Polyline;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public abstract class AbsAiLineManager extends AbsBaseManager {
     protected List<Polyline> polylineList = new ArrayList();
 

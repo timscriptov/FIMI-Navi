@@ -9,7 +9,7 @@ import com.fimi.x8sdk.common.Constants;
 import com.fimi.x8sdk.connect.DataChanel;
 import com.fimi.x8sdk.connect.IConnectHandler;
 
-/* loaded from: classes2.dex */
+
 public class TcpConnectThread extends Thread implements IConnectHandler {
     DataChanel filterAdapter = new DataChanel();
     SocketOption option = new SocketOption();
@@ -21,7 +21,7 @@ public class TcpConnectThread extends Thread implements IConnectHandler {
         start();
     }
 
-    @Override // java.lang.Thread, java.lang.Runnable
+    @Override
     public void run() {
         super.run();
         this.tcpConnect = new TcpConnect(this.option, this.filterAdapter);
@@ -29,7 +29,7 @@ public class TcpConnectThread extends Thread implements IConnectHandler {
         SessionManager.getInstance().addSession(this.tcpConnect);
     }
 
-    @Override // com.fimi.x8sdk.connect.IConnectHandler
+    @Override
     public void exit() {
         interrupt();
         this.tcpConnect.closeSession();

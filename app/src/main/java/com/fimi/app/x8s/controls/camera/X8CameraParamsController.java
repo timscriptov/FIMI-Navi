@@ -22,15 +22,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes.dex */
+
 public class X8CameraParamsController extends AbsX8Controllers implements JsonUiCallBackListener {
     CameraParamStatus.CameraModelStatus curStatus;
-    private Context context;
+    private final Context context;
     private boolean isConnected;
-    private LinearLayoutManager layoutManager;
+    private final LinearLayoutManager layoutManager;
     private Context mContext;
-    private List<PhotoParamItemEntity> paramList;
-    private PhotoParamsAdapter paramsAdapter;
+    private final List<PhotoParamItemEntity> paramList;
+    private final PhotoParamsAdapter paramsAdapter;
     private RecyclerView recyclerView;
 
     public X8CameraParamsController(View rootView) {
@@ -111,11 +111,11 @@ public class X8CameraParamsController extends AbsX8Controllers implements JsonUi
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
         this.mContext = rootView.getContext();
         this.handleView = rootView.findViewById(R.id.param_default_view_layout);
-        this.recyclerView = (RecyclerView) rootView.findViewById(R.id.param_recycler);
+        this.recyclerView = rootView.findViewById(R.id.param_recycler);
     }
 
     @Override
@@ -125,18 +125,18 @@ public class X8CameraParamsController extends AbsX8Controllers implements JsonUi
         this.paramsAdapter.updateData(this.paramList);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
-    @Override // com.fimi.kernel.dataparser.usb.JsonUiCallBackListener
+    @Override
     public void onComplete(JSONObject rt, Object o) {
         CameraParamsJson paramsJson;
-        if (rt != null && (paramsJson = (CameraParamsJson) JSON.parseObject(rt.toString(), CameraParamsJson.class)) != null) {
+        if (rt != null && (paramsJson = JSON.parseObject(rt.toString(), CameraParamsJson.class)) != null) {
             paramsJson.getMsg_id();
         }
     }
@@ -209,7 +209,7 @@ public class X8CameraParamsController extends AbsX8Controllers implements JsonUi
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         super.onDroneConnected(b);
         if (b && this.curStatus != CameraParamStatus.modelStatus) {
@@ -224,7 +224,7 @@ public class X8CameraParamsController extends AbsX8Controllers implements JsonUi
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public boolean onClickBackKey() {
         return false;
     }

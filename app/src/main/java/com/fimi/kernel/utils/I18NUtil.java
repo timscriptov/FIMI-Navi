@@ -3,7 +3,7 @@ package com.fimi.kernel.utils;
 import com.fimi.kernel.GlobalConfig;
 import com.fimi.network.entity.FwContenti18N;
 
-/* loaded from: classes.dex */
+
 public class I18NUtil {
     public static String getI18NStrin(FwContenti18N fwContenti18N) {
         if ("zh_CN".equalsIgnoreCase(GlobalConfig.getInstance().getLanguageModel().getCountryLanguage())) {

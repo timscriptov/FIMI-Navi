@@ -10,7 +10,7 @@ import com.fimi.x8sdk.jsonResult.CameraParamsJson;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes2.dex */
+
 public class X8CameraSettings {
     public static boolean hasGetFocusSetting;
     public static boolean hasGetFoucusSettingValues;
@@ -23,12 +23,12 @@ public class X8CameraSettings {
 
     public static void getSettings(CameraManager cameraManager) {
         if (!hasGetFocusSetting) {
-            cameraManager.getCameraFocuse(new JsonUiCallBackListener() { // from class: com.fimi.x8sdk.modulestate.X8CameraSettings.1
-                @Override // com.fimi.kernel.dataparser.usb.JsonUiCallBackListener
+            cameraManager.getCameraFocuse(new JsonUiCallBackListener() {
+                @Override
                 public void onComplete(JSONObject rt, Object o) {
                     CameraParamsJson paramsJson;
                     String param;
-                    if (rt != null && (paramsJson = (CameraParamsJson) JSON.parseObject(rt.toString(), CameraParamsJson.class)) != null && (param = paramsJson.getParam()) != null && !param.equals("")) {
+                    if (rt != null && (paramsJson = JSON.parseObject(rt.toString(), CameraParamsJson.class)) != null && (param = paramsJson.getParam()) != null && !param.equals("")) {
                         String unused = X8CameraSettings.focusSetting = paramsJson.getParam();
                         X8CameraSettings.hasGetFocusSetting = true;
                     }
@@ -36,12 +36,12 @@ public class X8CameraSettings {
             });
         }
         if (!hasGetFoucusSettingValues) {
-            cameraManager.getCameraFocuseValues(new JsonUiCallBackListener() { // from class: com.fimi.x8sdk.modulestate.X8CameraSettings.2
-                @Override // com.fimi.kernel.dataparser.usb.JsonUiCallBackListener
+            cameraManager.getCameraFocuseValues(new JsonUiCallBackListener() {
+                @Override
                 public void onComplete(JSONObject rt, Object o) {
                     CameraParamsJson paramsJson;
                     List<String> param;
-                    if (rt != null && (paramsJson = (CameraParamsJson) JSON.parseObject(rt.toString(), CameraParamsJson.class)) != null && (param = paramsJson.getOptions()) != null && param.size() > 0) {
+                    if (rt != null && (paramsJson = JSON.parseObject(rt.toString(), CameraParamsJson.class)) != null && (param = paramsJson.getOptions()) != null && param.size() > 0) {
                         List unused = X8CameraSettings.focusSettingList = paramsJson.getOptions();
                         X8CameraSettings.hasGetFoucusSettingValues = true;
                     }

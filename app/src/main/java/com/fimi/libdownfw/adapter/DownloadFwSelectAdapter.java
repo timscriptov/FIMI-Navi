@@ -16,10 +16,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class DownloadFwSelectAdapter extends BaseAdapter {
-    private Context context;
-    private List<DownloadFwSelectInfo> list;
+    private final Context context;
+    private final List<DownloadFwSelectInfo> list;
     private SelectListener mSelectListener;
     private List<UpfirewareDto> mUpfirewareDtoList;
 
@@ -36,29 +36,29 @@ public class DownloadFwSelectAdapter extends BaseAdapter {
         this.mSelectListener = mSelectListener;
     }
 
-    @Override // android.widget.Adapter
+    @Override
     public int getCount() {
         return this.mUpfirewareDtoList.size();
     }
 
-    @Override // android.widget.Adapter
+    @Override
     public Object getItem(int position) {
         return this.mUpfirewareDtoList.get(position);
     }
 
-    @Override // android.widget.Adapter
+    @Override
     public long getItemId(int position) {
         return position;
     }
 
-    @Override // android.widget.Adapter
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHandle viewHandle;
         if (convertView == null) {
             viewHandle = new ViewHandle();
-            convertView = LayoutInflater.from(this.context).inflate(R.layout.list_download_fm_select_info_item, (ViewGroup) null);
-            viewHandle.tvTitle = (TextView) convertView.findViewById(R.id.tv_title);
-            viewHandle.tvInfo = (TextView) convertView.findViewById(R.id.tv_info);
+            convertView = LayoutInflater.from(this.context).inflate(R.layout.list_download_fm_select_info_item, null);
+            viewHandle.tvTitle = convertView.findViewById(R.id.tv_title);
+            viewHandle.tvInfo = convertView.findViewById(R.id.tv_info);
             viewHandle.cbSelect = convertView.findViewById(R.id.cb_select);
             viewHandle.vLinOne = convertView.findViewById(R.id.v_lin_one);
             convertView.setTag(viewHandle);
@@ -74,17 +74,13 @@ public class DownloadFwSelectAdapter extends BaseAdapter {
 
     public void update(int position) {
         DownloadFwSelectInfo info = this.list.get(position);
-        if (info.isSelect()) {
-            this.list.get(position).setSelect(false);
-        } else {
-            this.list.get(position).setSelect(true);
-        }
+        this.list.get(position).setSelect(!info.isSelect());
         for (DownloadFwSelectInfo downloadFwSelectInfo : this.list) {
         }
         notifyDataSetChanged();
     }
 
-    @Override // android.widget.BaseAdapter
+    @Override
     public void notifyDataSetChanged() {
         super.notifyDataSetChanged();
         updateSelected();
@@ -117,12 +113,12 @@ public class DownloadFwSelectAdapter extends BaseAdapter {
         return false;
     }
 
-    /* loaded from: classes.dex */
+
     public interface SelectListener {
         void onSelect(boolean z);
     }
 
-    /* loaded from: classes.dex */
+
     private class ViewHandle {
         View cbSelect;
         TextView tvInfo;

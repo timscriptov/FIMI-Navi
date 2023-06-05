@@ -17,7 +17,7 @@ import com.fimi.android.app.R;
 import com.fimi.kernel.base.BaseActivity;
 import com.fimi.kernel.utils.FontUtil;
 
-/* loaded from: classes.dex */
+
 public class MediaActivity extends BaseActivity implements ISelectData {
     private Button btnCancalAll;
     private ImageButton btnQuitActivity;
@@ -32,22 +32,22 @@ public class MediaActivity extends BaseActivity implements ISelectData {
     private RelativeLayout rootViewGroup;
     private TextView tvSelectModeSize;
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     protected void setStatusBarColor() {
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void initData() {
-        this.mProgressBar = (ProgressBar) findViewById(R.id.loading);
-        this.ibQuitMedia = (ImageButton) findViewById(R.id.media_back_btn);
-        this.tvSelectModeSize = (TextView) findViewById(R.id.select_n_tv);
-        this.rlHeadDirection = (RelativeLayout) findViewById(R.id.head_direction);
-        this.rlMediaSelectTop = (RelativeLayout) findViewById(R.id.media_select_top_rl);
-        this.btnSelectAll = (Button) findViewById(R.id.all_select_btn);
-        this.btnCancalAll = (Button) findViewById(R.id.cancel_btn);
-        this.btnmode = (Button) findViewById(R.id.media_select_btn);
-        this.btnQuitActivity = (ImageButton) findViewById(R.id.media_back_btn);
-        this.rootViewGroup = (RelativeLayout) findViewById(R.id.view_group);
+        this.mProgressBar = findViewById(R.id.loading);
+        this.ibQuitMedia = findViewById(R.id.media_back_btn);
+        this.tvSelectModeSize = findViewById(R.id.select_n_tv);
+        this.rlHeadDirection = findViewById(R.id.head_direction);
+        this.rlMediaSelectTop = findViewById(R.id.media_select_top_rl);
+        this.btnSelectAll = findViewById(R.id.all_select_btn);
+        this.btnCancalAll = findViewById(R.id.cancel_btn);
+        this.btnmode = findViewById(R.id.media_select_btn);
+        this.btnQuitActivity = findViewById(R.id.media_back_btn);
+        this.rootViewGroup = findViewById(R.id.view_group);
         FontUtil.changeFontLanTing(getAssets(), this.btnmode, this.btnSelectAll, this.btnCancalAll, this.tvSelectModeSize);
         this.localFragment = (LocalFragment) getSupportFragmentManager().findFragmentById(R.id.media_fragment);
         if (this.localFragment == null) {
@@ -65,23 +65,23 @@ public class MediaActivity extends BaseActivity implements ISelectData {
         }
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void doTrans() {
-        this.ibQuitMedia.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.album.ui.MediaActivity.1
-            @Override // android.view.View.OnClickListener
+        this.ibQuitMedia.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 MediaActivity.this.finish();
             }
         });
-        this.btnmode.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.album.ui.MediaActivity.2
-            @Override // android.view.View.OnClickListener
+        this.btnmode.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 MediaActivity.this.rlMediaSelectTop.setVisibility(0);
                 MediaActivity.this.mMediaPresenter.enterSelectMode(true, true);
             }
         });
-        this.btnSelectAll.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.album.ui.MediaActivity.3
-            @Override // android.view.View.OnClickListener
+        this.btnSelectAll.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 if (MediaActivity.this.btnSelectAll.getText().equals(MediaActivity.this.getString(R.string.media_select_all))) {
                     MediaActivity.this.mMediaPresenter.selectBtn(true);
@@ -92,8 +92,8 @@ public class MediaActivity extends BaseActivity implements ISelectData {
                 MediaActivity.this.changeBtnSelectState(MediaActivity.this.getString(R.string.media_select_all), MediaActivity.this.btnSelectAll);
             }
         });
-        this.btnCancalAll.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.album.ui.MediaActivity.4
-            @Override // android.view.View.OnClickListener
+        this.btnCancalAll.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 MediaActivity.this.rlMediaSelectTop.setVisibility(8);
                 MediaActivity.this.mMediaPresenter.enterSelectMode(false, true);
@@ -101,7 +101,7 @@ public class MediaActivity extends BaseActivity implements ISelectData {
         });
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     protected int getContentViewLayoutID() {
         return R.layout.album_activity_main;
     }
@@ -117,46 +117,46 @@ public class MediaActivity extends BaseActivity implements ISelectData {
         super.onDestroy();
     }
 
-    @Override // com.fimi.album.iview.ISelectData
+    @Override
     public void selectSize(int size, long capacity) {
         changeShowSelectTextView(this.tvSelectModeSize, size, R.string.media_select_n_item);
     }
 
-    @Override // com.fimi.album.iview.ISelectData
+    @Override
     public void enterSelectMode() {
         this.rlMediaSelectTop.setVisibility(0);
         this.mMediaPresenter.enterSelectMode(true, false);
     }
 
-    @Override // com.fimi.album.iview.ISelectData
+    @Override
     public void quitSelectMode() {
         this.rlMediaSelectTop.setVisibility(8);
         this.mMediaPresenter.enterSelectMode(false, false);
     }
 
-    @Override // com.fimi.album.iview.ISelectData
+    @Override
     public void deleteFile() {
         this.rlMediaSelectTop.setVisibility(8);
         this.mMediaPresenter.enterSelectMode(false, false);
     }
 
-    @Override // com.fimi.album.iview.ISelectData
+    @Override
     public void allSelectMode(boolean isAll) {
     }
 
-    @Override // com.fimi.album.iview.ISelectData
+    @Override
     public void startDownload() {
     }
 
-    @Override // com.fimi.album.iview.ISelectData
+    @Override
     public void onDeleteComplete() {
     }
 
-    @Override // com.fimi.album.iview.ISelectData
+    @Override
     public void initComplete(boolean isCamera) {
     }
 
-    @Override // com.fimi.album.iview.ISelectData
+    @Override
     public void addSingleFile() {
     }
 

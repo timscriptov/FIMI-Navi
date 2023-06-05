@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
-/* loaded from: classes2.dex */
 public class AckNoFlyNormal extends X8BaseMessage {
     FLatLng a1;
     FLatLng a2;
@@ -54,7 +52,7 @@ public class AckNoFlyNormal extends X8BaseMessage {
     double startDirAngleLon;
     int userType;
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         LinkPayLoad4 payLoad4 = packet.getPayLoad4();
@@ -417,7 +415,7 @@ public class AckNoFlyNormal extends X8BaseMessage {
         this.heightLimit = heightLimit;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public String toString() {
         return "AckNoFlyNormal{, forbiddenType=" + this.forbiddenType + ", userType=" + this.userType + ", polygonShape=" + this.polygonShape + ", numEudges=" + this.numEudges + ", attributeByte=" + ((int) this.attributeByte) + ", heightLimit=" + this.heightLimit + ", nfzPointLat=" + this.nfzPointLat + ", nfzPointLon=" + this.nfzPointLon + ", heightLimitRadius=" + this.heightLimitRadius + ", noflyRadius=" + this.noflyRadius + ", startDirAngleLat=" + this.startDirAngleLat + ", startDirAngleLon=" + this.startDirAngleLon + ", endDirAngleLat=" + this.endDirAngleLat + ", endDirAngleLon=" + this.endDirAngleLon + ", nfzPointB1Lat=" + this.nfzPointB1Lat + ", nfzPointB1Lon=" + this.nfzPointB1Lon + ", nfzPointC1Lat=" + this.nfzPointC1Lat + ", nfzPointC1Lon=" + this.nfzPointC1Lon + ", nfzPointA1Lat=" + this.nfzPointA1Lat + ", nfzPointA1Lon=" + this.nfzPointA1Lon + ", nfzPointA2Lat=" + this.nfzPointA2Lat + ", nfzPointA2lon=" + this.nfzPointA2lon + ", nfzPointC2Lat=" + this.nfzPointC2Lat + ", nfzPointC2Lon=" + this.nfzPointC2Lon + ", nfzPointB2Lat=" + this.nfzPointB2Lat + ", nfzPointB2Lon=" + this.nfzPointB2Lon + ", nfzPointD1Lat=" + this.nfzPointD1Lat + ", nfzPointD1Lon=" + this.nfzPointD1Lon + ", nfzPointD2Lat=" + this.nfzPointD2Lat + ", nfzPointD2Lon=" + this.nfzPointD2Lon + '}';
     }

@@ -9,15 +9,15 @@ import com.fimi.kernel.base.BaseActivity;
 import com.fimi.kernel.permission.PermissionManager;
 import com.fimi.player.widget.FimiVideoView;
 
-/* loaded from: classes.dex */
+
 public class X8FimiPlayerActivity extends BaseActivity implements FmMediaPlayer.OnActivityHander {
     private FmMediaPlayer mediaPlayer;
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     protected void setStatusBarColor() {
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void initData() {
         if (Build.VERSION.SDK_INT >= 23) {
             PermissionManager.requestFind_LocationPermissions();
@@ -27,28 +27,28 @@ public class X8FimiPlayerActivity extends BaseActivity implements FmMediaPlayer.
         X8FmMediaInfo info = (X8FmMediaInfo) getIntent().getSerializableExtra(FmMediaPlayer.FM_MEDIA_INFO);
         getWindow().setFlags(1024, 1024);
         View controlView = findViewById(R.id.media_layout);
-        FimiVideoView videoView = (FimiVideoView) findViewById(R.id.fimi_video);
+        FimiVideoView videoView = findViewById(R.id.fimi_video);
         this.mediaPlayer = new FmMediaPlayer(videoView, info, this);
         this.mediaPlayer.initFmPlayer(this, controlView);
         this.mediaPlayer.startPlay();
         this.mediaPlayer.setShowContoller(true);
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void doTrans() {
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     protected int getContentViewLayoutID() {
         return R.layout.activity_x8_fimi_player;
     }
 
-    @Override // com.fimi.app.x8s.ui.album.x8s.FmMediaPlayer.OnActivityHander
+    @Override
     public void onBack() {
         finish();
     }
 
-    @Override // android.support.v4.app.FragmentActivity, android.app.Activity
+    @Override
     public void onBackPressed() {
         if (this.mediaPlayer != null) {
             this.mediaPlayer.onDestroy();

@@ -33,22 +33,22 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.OnMapClickListener, GoogleMap.OnMarkerClickListener, GoogleMap.OnMarkerDragListener {
     private final int MAX = 20;
-    private Context context;
-    private GglMapLocationManager gglMapLocationManager;
-    private GoogleMap googleMap;
+    private final Context context;
+    private final GglMapLocationManager gglMapLocationManager;
+    private final GoogleMap googleMap;
     private Circle limitCircle;
     private IX8MarkerListener lineMarkerSelectListener;
-    private List<MapPointLatLng> mMapPointList = new ArrayList();
-    private List<Marker> mMarkerList = new ArrayList();
+    private final List<MapPointLatLng> mMapPointList = new ArrayList();
+    private final List<Marker> mMarkerList = new ArrayList();
     private Marker mSelectMarker = null;
     private boolean isClick = true;
     private int nPos = -1;
-    private List<Marker> interestMarkerList = new ArrayList();
-    private List<Marker> arrowMarkerList = new ArrayList();
-    private GglMapCustomMarkerView gdCustemMarkerView = new GglMapCustomMarkerView();
+    private final List<Marker> interestMarkerList = new ArrayList();
+    private final List<Marker> arrowMarkerList = new ArrayList();
+    private final GglMapCustomMarkerView gdCustemMarkerView = new GglMapCustomMarkerView();
 
     public GglMapAiLineManager(Context context, GoogleMap googleMap, GglMapLocationManager gglMapLocationManager) {
         this.context = context;
@@ -56,7 +56,7 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
         this.gglMapLocationManager = gglMapLocationManager;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsBaseManager
+    @Override
     public void setMarkerViewInfo(float height) {
         if (this.mSelectMarker != null) {
             MapPointLatLng mp = (MapPointLatLng) this.mSelectMarker.getTag();
@@ -67,30 +67,30 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
         }
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsBaseManager
+    @Override
     public float getLineAngleByMapBealing(float angle) {
         return angle - this.googleMap.getCameraPosition().bearing;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsBaseManager
+    @Override
     public void setOnMapClickListener() {
         setOnMarkerListener();
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsBaseManager
+    @Override
     public void removeMapClickListener() {
         this.googleMap.setOnMapClickListener(null);
         this.googleMap.setOnMarkerClickListener(null);
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsBaseManager
+    @Override
     public void resetMapEvent() {
         this.googleMap.setOnMapClickListener(null);
         removeMarkerListener();
         this.googleMap.setOnMarkerDragListener(null);
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsBaseManager
+    @Override
     public void drawAiLimit(double lat, double lng, double radiu) {
         if (this.limitCircle == null) {
             CircleOptions circle = new CircleOptions().center(new LatLng(lat, lng)).radius(radiu).strokeColor(this.lineLimitColor).fillColor(this.fillColor).strokeWidth(this.strokeWidth);
@@ -128,7 +128,7 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
         return ret;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public void setAiLineMark(double latitude, double logitude, float height, float angle) {
         FLatLng fLatLng = GpsCorrect.Earth_To_Mars(latitude, logitude);
         LatLng latLng = new LatLng(fLatLng.latitude, fLatLng.longitude);
@@ -136,17 +136,17 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
         onAiLineAddPoint(latLng, height, angle);
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public void deleteMarker(boolean isMapPoint) {
         deleteMarker(isMapPoint, this.gglMapLocationManager.getDevLocation());
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public int getAiLinePointSize() {
         return this.mMapPointList.size();
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public float getAiLineDistance() {
         float distance = 0.0f;
         if (this.mMarkerList.size() == 2) {
@@ -161,12 +161,12 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
         return distance;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public List<MapPointLatLng> getMapPointList() {
         return this.mMapPointList;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public List<MapPointLatLng> getMapPointList(MapPointLatLng mpl) {
         List<MapPointLatLng> list = new ArrayList<>();
         for (MapPointLatLng p : this.mMapPointList) {
@@ -179,7 +179,7 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
         return list;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public boolean isInterestBeBind(MapPointLatLng mpl) {
         new ArrayList();
         for (MapPointLatLng p : this.mMapPointList) {
@@ -190,7 +190,7 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
         return false;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public void removeInterestUnBebind() {
         Marker tmp = null;
         Iterator<Marker> it = this.interestMarkerList.iterator();
@@ -232,7 +232,7 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
         }
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public boolean hasPointUnBind() {
         new ArrayList();
         for (MapPointLatLng p : this.mMapPointList) {
@@ -243,7 +243,7 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
         return false;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public void updateInterestBindPoint(MapPointLatLng mpl, int index) {
         boolean isRelation;
         int i = 0;
@@ -269,7 +269,7 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
         }
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public List<MapPointLatLng> getInterestPointList() {
         List<MapPointLatLng> list = new ArrayList<>();
         for (int i = 0; i < this.interestMarkerList.size(); i++) {
@@ -278,17 +278,17 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
         return list;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public void setLineMarkerSelectListener(IX8MarkerListener listener) {
         this.lineMarkerSelectListener = listener;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public void clearAiLineMarker() {
         clearPointMark();
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public void startAiLineProcess() {
         if (this.mSelectMarker != null) {
             onMarkerClick(this.mSelectMarker);
@@ -296,7 +296,7 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
         this.nPos = -1;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public void setAiLineIndexPoint(int index) {
         int index2;
         if (this.nPos != index) {
@@ -427,7 +427,7 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
         return line;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public void setAiLineMarkActionByDevice(List<AckGetAiLinePointsAction> points) {
         if (this.mMarkerList != null && this.mMarkerList.size() > 0) {
             for (Marker m : this.mMarkerList) {
@@ -446,7 +446,7 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
         }
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public void setAiLineMarkByHistory(List<X8AiLinePointLatlngInfo> points, int mapTpye) {
         int res;
         for (X8AiLinePointLatlngInfo point : points) {
@@ -474,14 +474,14 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
         }
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public void updataAngle(int i, float angle) {
         Marker marker = this.mMarkerList.get(i);
         MapPointLatLng p = (MapPointLatLng) marker.getTag();
         p.showAngle = angle;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public MapPointLatLng getMapPointLatLng() {
         if (this.mSelectMarker == null) {
             return null;
@@ -489,7 +489,7 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
         return (MapPointLatLng) this.mSelectMarker.getTag();
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public void addInreterstMarker(int x, int y) {
         LatLng latLng = this.googleMap.getProjection().fromScreenLocation(new Point(x, y));
         MapPointLatLng mp = new MapPointLatLng();
@@ -550,19 +550,19 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
         return i;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public MapPointLatLng getInterstMakerLatLng() {
         return null;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public void removeInterstPointByRunning() {
         for (Marker m : this.interestMarkerList) {
             m.setDraggable(false);
         }
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public float getPointAngle(MapPointLatLng from, MapPointLatLng to) {
         float angle = this.mapCalcAngle.getAngle(new LatLng(from.latitude, from.longitude), new LatLng(to.latitude, to.longitude)) % 360.0f;
         if (angle < 0.0f) {
@@ -571,12 +571,12 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
         return angle;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public void notityChangeView(MapPointLatLng des, boolean isRelation) {
         lightPoint(des, isRelation);
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public void notityChangeView(MapPointLatLng des) {
         for (Marker marker : this.mMarkerList) {
             MapPointLatLng p = (MapPointLatLng) marker.getTag();
@@ -607,12 +607,12 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
         clearMarker();
     }
 
-    @Override // com.google.android.gms.maps.GoogleMap.OnMapClickListener
+    @Override
     public void onMapClick(LatLng latLng) {
         onMapClickForAiLine(latLng);
     }
 
-    @Override // com.google.android.gms.maps.GoogleMap.OnMarkerClickListener
+    @Override
     public boolean onMarkerClick(Marker marker) {
         MapPointLatLng mp;
         if (isOnMarkerClickValid() && (mp = (MapPointLatLng) marker.getTag()) != null) {
@@ -679,7 +679,7 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
         }
     }
 
-    @Override // com.google.android.gms.maps.GoogleMap.OnMarkerDragListener
+    @Override
     public void onMarkerDragStart(Marker marker) {
         int res = R.drawable.x8_img_ai_line_inreterst_max2;
         MapPointLatLng mp = (MapPointLatLng) marker.getTag();
@@ -687,7 +687,7 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
         marker.setIcon(mBitmapDescriptor);
     }
 
-    @Override // com.google.android.gms.maps.GoogleMap.OnMarkerDragListener
+    @Override
     public void onMarkerDrag(Marker marker) {
         if (this.lineMarkerSelectListener != null) {
             Rect rect = this.lineMarkerSelectListener.getDeletePosition();
@@ -698,7 +698,7 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
         }
     }
 
-    @Override // com.google.android.gms.maps.GoogleMap.OnMarkerDragListener
+    @Override
     public void onMarkerDragEnd(Marker marker) {
         int res = R.drawable.x8_img_ai_line_inreterst_max1;
         MapPointLatLng mp = (MapPointLatLng) marker.getTag();
@@ -825,7 +825,7 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
         }
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public void updateSmallMarkerAngle(MapPointLatLng target) {
         int index = target.nPos - 1;
         if (index != 0) {
@@ -849,7 +849,7 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
         }
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public void addSmallMarkerByMap(int type) {
         if (type == 0) {
             int i = 0;
@@ -899,7 +899,7 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
         }
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public void clearAllSmallMarker() {
         for (Marker marker : this.arrowMarkerList) {
             marker.remove();
@@ -908,16 +908,13 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
         int i = 0;
         for (Marker marker2 : this.mMarkerList) {
             MapPointLatLng p = (MapPointLatLng) marker2.getTag();
-            p.isSelect = false;
-            if (this.mSelectMarker != null && ((MapPointLatLng) this.mSelectMarker.getTag()) == p) {
-                p.isSelect = true;
-            }
+            p.isSelect = this.mSelectMarker != null && this.mSelectMarker.getTag() == p;
             changeViewBySetPoints(marker2, p, false, false);
             i++;
         }
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public void addOrUpdateSmallMarkerForVideo(int type) {
         clearAllSmallMarker();
         int j = 0;
@@ -942,7 +939,7 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
         }
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public void addSmallMarkerByInterest() {
         clearAllSmallMarker();
         int j = 0;
@@ -975,7 +972,7 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
         }
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public void updateInterestPoint() {
         MapPointLatLng mp = (MapPointLatLng) this.mSelectMarker.getTag();
         if (mp.isIntertestPoint) {
@@ -1012,7 +1009,7 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
         }
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public void changeLine() {
         if (this.mMarkerList != null && this.nPos == -1 && this.polylineList != null && this.polylineList.size() > 0) {
             Polyline c = this.polylineList.get(0);
@@ -1023,7 +1020,7 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
         }
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public void setAiLineMarkByHistory(List<MapPointLatLng> points, List<MapPointLatLng> interests) {
         int i = 0;
         for (MapPointLatLng mpl : interests) {
@@ -1058,7 +1055,7 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
         }
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public void setAiLineMarkByDevice(List<AckGetAiLinePoint> points, List<AckGetAiLinePoint> interestPoints) {
         int res;
         BitmapDescriptor mBitmapDescriptor;
@@ -1101,13 +1098,13 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
         }
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public float getDistance(MapPointLatLng points1, MapPointLatLng points2) {
         float distance = (float) GeoTools.getDistance(new LatLng(points1.latitude, points1.longitude), new LatLng(points2.latitude, points2.longitude)).valueInMeters();
         return distance;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public boolean isFarToHome() {
         for (Marker marker : this.mMarkerList) {
             this.gglMapLocationManager.getHomeLocation();
@@ -1645,7 +1642,7 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
         return marker;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiLineManager
+    @Override
     public void addSmallMakerByHistory() {
         int i = 0;
         for (Marker marker : this.mMarkerList) {

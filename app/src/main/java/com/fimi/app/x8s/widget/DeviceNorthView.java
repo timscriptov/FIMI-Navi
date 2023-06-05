@@ -40,7 +40,7 @@ public class DeviceNorthView extends View {
     private int mMin;
     private int mMax;
     private float mDensity;
-    private RectF e;
+    private final RectF e;
     private Paint mCircle;
     private float north;
     private int h;

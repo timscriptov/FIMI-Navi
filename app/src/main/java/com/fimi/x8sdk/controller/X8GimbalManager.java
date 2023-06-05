@@ -6,7 +6,7 @@ import com.fimi.kernel.dataparser.usb.UiCallBackListener;
 import com.fimi.x8sdk.ivew.IGbAciton;
 import com.fimi.x8sdk.presenter.X8GimbalPresenter;
 
-/* loaded from: classes2.dex */
+
 public class X8GimbalManager {
     IGbAciton gbAction = new X8GimbalPresenter();
 

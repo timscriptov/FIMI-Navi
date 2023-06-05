@@ -13,7 +13,7 @@ import com.fimi.x8sdk.entity.X8CameraParamsValue;
 import java.util.Arrays;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class RightRollerController {
     X8AiTaskManager aiTaskManager;
     CameraManager cameraManager;
@@ -22,8 +22,8 @@ public class RightRollerController {
     int isoIndex;
     X8MainBottomParameterController mX8MainBottomParameterController;
     IRightRollerMoveListener rightRollerMoveListener;
-    private List<String> x8EVOptions = Arrays.asList(CameraJsonCollection.rulerValues);
-    private List<String> x8IsoOptions;
+    private final List<String> x8EVOptions = Arrays.asList(CameraJsonCollection.rulerValues);
+    private final List<String> x8IsoOptions;
 
     public RightRollerController(CameraManager cameraManager, X8AiTaskManager aiTaskManager, Context context, X8MainBottomParameterController mX8MainBottomParameterController, IRightRollerMoveListener rightRollerMoveListener) {
         this.cameraManager = cameraManager;

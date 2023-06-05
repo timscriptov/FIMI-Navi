@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -15,7 +16,7 @@ import com.fimi.album.widget.MediaStrokeTextView;
 import com.fimi.android.app.R;
 import com.fimi.kernel.utils.SizeTool;
 
-/* loaded from: classes.dex */
+
 public class BodyRecycleViewHolder extends RecyclerView.ViewHolder {
     public ImageView ivSelect;
     public DownloadStateView mDownloadStateView;
@@ -30,21 +31,21 @@ public class BodyRecycleViewHolder extends RecyclerView.ViewHolder {
 
     public BodyRecycleViewHolder(View itemView) {
         super(itemView);
-        this.sdvImageView = (SimpleDraweeView) itemView.findViewById(R.id.simpledraweeview);
-        this.ivSelect = (ImageView) itemView.findViewById(R.id.selected_iv);
-        this.tvDuringdate = (MediaStrokeTextView) itemView.findViewById(R.id.duringdate_tv);
+        this.sdvImageView = itemView.findViewById(R.id.simpledraweeview);
+        this.ivSelect = itemView.findViewById(R.id.selected_iv);
+        this.tvDuringdate = itemView.findViewById(R.id.duringdate_tv);
         this.tvDuringdate.getPaint().setFakeBoldText(true);
-        this.mIvDownloadMask = (ImageView) itemView.findViewById(R.id.iv_download_mask);
-        this.mIvSelectMask = (ImageView) itemView.findViewById(R.id.iv_select_mask);
-        this.mIvVideoFlag = (ImageView) itemView.findViewById(R.id.iv_video_flag);
-        this.mFileSize = (TextView) itemView.findViewById(R.id.tv_filesize);
+        this.mIvDownloadMask = itemView.findViewById(R.id.iv_download_mask);
+        this.mIvSelectMask = itemView.findViewById(R.id.iv_select_mask);
+        this.mIvVideoFlag = itemView.findViewById(R.id.iv_video_flag);
+        this.mFileSize = itemView.findViewById(R.id.tv_filesize);
         this.mFileSize.getPaint().setFakeBoldText(true);
-        this.mIvDownloaded = (ImageView) itemView.findViewById(R.id.iv_downloaded);
-        this.mDownloadStateView = (DownloadStateView) itemView.findViewById(R.id.download_state_view);
-        this.mTvDownloadState = (TextView) itemView.findViewById(R.id.tv_download_state);
+        this.mIvDownloaded = itemView.findViewById(R.id.iv_downloaded);
+        this.mDownloadStateView = itemView.findViewById(R.id.download_state_view);
+        this.mTvDownloadState = itemView.findViewById(R.id.tv_download_state);
     }
 
-    private void initSimpleDraweeViewParams(Context context, View view) {
+    private void initSimpleDraweeViewParams(@NonNull Context context, @NonNull View view) {
         DisplayMetrics mDisplayMetrics = context.getResources().getDisplayMetrics();
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
         int screenWidth = mDisplayMetrics.widthPixels;
@@ -57,7 +58,7 @@ public class BodyRecycleViewHolder extends RecyclerView.ViewHolder {
         view.setLayoutParams(layoutParams);
     }
 
-    private void initImageViewParams(Context context, View parentView, View view) {
+    private void initImageViewParams(Context context, @NonNull View parentView, @NonNull View view) {
         parentView.measure(0, 0);
         int currentHeight = parentView.getMeasuredHeight();
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
@@ -67,7 +68,7 @@ public class BodyRecycleViewHolder extends RecyclerView.ViewHolder {
         view.setLayoutParams(layoutParams);
     }
 
-    private void initTextViewParams(Context context, View parentView, View view) {
+    private void initTextViewParams(Context context, @NonNull View parentView, @NonNull View view) {
         parentView.measure(0, 0);
         int currentHeight = parentView.getMeasuredHeight();
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();

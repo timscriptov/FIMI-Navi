@@ -5,7 +5,7 @@ import android.os.Bundle;
 import com.fimi.album.entity.MediaModel;
 import com.fimi.android.app.R;
 
-/* loaded from: classes.dex */
+
 public class LocalFragment extends BaseFragment {
     public static LocalFragment obtaion() {
         return obtaion(null);
@@ -26,12 +26,12 @@ public class LocalFragment extends BaseFragment {
         return R.layout.album_fragment_local_media;
     }
 
-    @Override // android.support.v4.app.Fragment
+    @Override
     public void onStart() {
         super.onStart();
     }
 
-    @Override // com.fimi.album.iview.INodataTip
+    @Override
     public void notifyAddCallback(MediaModel mediaModel) {
     }
 }

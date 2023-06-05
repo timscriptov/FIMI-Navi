@@ -3,7 +3,7 @@ package com.fimi.x8sdk.entity;
 import com.fimi.kernel.fds.FdsUploadState;
 import com.fimi.kernel.fds.IFdsFileModel;
 
-/* loaded from: classes2.dex */
+
 public abstract class X8FdsFile implements IFdsFileModel {
     protected String objectName;
     protected String filefdsUrl = "";

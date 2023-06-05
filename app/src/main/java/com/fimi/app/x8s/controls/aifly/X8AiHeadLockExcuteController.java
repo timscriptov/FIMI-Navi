@@ -23,12 +23,12 @@ import com.fimi.x8sdk.controller.FcCtrlManager;
 import com.fimi.x8sdk.dataparser.AutoFcSportState;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes.dex */
+
 public class X8AiHeadLockExcuteController extends AbsX8AiController implements View.OnClickListener, X8DoubleCustomDialog.onDialogButtonClickListener {
     protected int MAX_WIDTH;
     protected boolean isShow;
     protected int width;
-    private X8sMainActivity activity;
+    private final X8sMainActivity activity;
     private View blank;
     private Button btnOk;
     private X8DoubleCustomDialog dialog;
@@ -51,11 +51,11 @@ public class X8AiHeadLockExcuteController extends AbsX8AiController implements V
         this.activity = activity;
     }
 
-    @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+    @Override
     public void onLeft() {
     }
 
-    @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+    @Override
     public void onRight() {
         setTypeEnable();
     }
@@ -64,27 +64,27 @@ public class X8AiHeadLockExcuteController extends AbsX8AiController implements V
         this.listener = listener;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
     }
 
     public void initViewStubViews(View view) {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public boolean onClickBackKey() {
         return false;
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.img_ai_follow_back) {
@@ -110,24 +110,24 @@ public class X8AiHeadLockExcuteController extends AbsX8AiController implements V
         this.isShow = true;
         LayoutInflater inflater = LayoutInflater.from(this.rootView.getContext());
         this.handleView = inflater.inflate(R.layout.x8_ai_head_lock_excute_layout, (ViewGroup) this.rootView, true);
-        this.imgBack = (ImageView) this.handleView.findViewById(R.id.img_ai_follow_back);
+        this.imgBack = this.handleView.findViewById(R.id.img_ai_follow_back);
         this.nextRootView = this.rootView.findViewById(R.id.v_x8_head_lock_next);
         this.blank = this.rootView.findViewById(R.id.x8_head_lock_next_blank);
-        this.imgChangeAngle = (ImageView) this.handleView.findViewById(R.id.img_change_angle);
-        this.imgLockBg = (ImageView) this.rootView.findViewById(R.id.img_lock_bg);
-        this.imgLockAngle = (ImageView) this.rootView.findViewById(R.id.img_lock_angle);
+        this.imgChangeAngle = this.handleView.findViewById(R.id.img_change_angle);
+        this.imgLockBg = this.rootView.findViewById(R.id.img_lock_bg);
+        this.imgLockAngle = this.rootView.findViewById(R.id.img_lock_angle);
         this.imgLockBg.setImageBitmap(ImageUtils.getBitmapByPath(this.rootView.getContext(), R.drawable.x8_img_head_lock_bg));
         this.imgLockAngle.setImageBitmap(ImageUtils.getBitmapByPath(this.rootView.getContext(), R.drawable.x8_img_head_lock_arrow));
         this.flagSmall = this.handleView.findViewById(R.id.rl_flag_small);
-        this.tvFlag = (TextView) this.handleView.findViewById(R.id.tv_task_tip);
+        this.tvFlag = this.handleView.findViewById(R.id.tv_task_tip);
         this.listener.onAiHeadLockRunning();
         this.imgBack.setOnClickListener(this);
         this.imgChangeAngle.setOnClickListener(this);
         this.blank.setOnClickListener(this);
-        this.btnOk = (Button) this.rootView.findViewById(R.id.btn_ai_follow_confirm_ok);
+        this.btnOk = this.rootView.findViewById(R.id.btn_ai_follow_confirm_ok);
         this.btnOk.setOnClickListener(this);
         this.flagSmall.setOnClickListener(this);
-        this.tvAngle = (TextView) this.rootView.findViewById(R.id.tv_lock_angle);
+        this.tvAngle = this.rootView.findViewById(R.id.tv_lock_angle);
         this.prex = this.rootView.getContext().getString(R.string.x8_ai_heading_lock_tip3);
         this.tvAngle.setText(String.format(this.prex, Float.valueOf(60.0f)));
         this.imgLockAngle.setRotation(60.0f);
@@ -161,7 +161,7 @@ public class X8AiHeadLockExcuteController extends AbsX8AiController implements V
             ObjectAnimator translationRight = ObjectAnimator.ofFloat(this.nextRootView, "translationX", 0.0f, this.width);
             translationRight.setDuration(300L);
             translationRight.start();
-            translationRight.addListener(new AnimatorListenerAdapter() { // from class: com.fimi.app.x8s.controls.aifly.X8AiHeadLockExcuteController.1
+            translationRight.addListener(new AnimatorListenerAdapter() {
                 @Override
                 // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationEnd(Animator animation) {
@@ -177,7 +177,7 @@ public class X8AiHeadLockExcuteController extends AbsX8AiController implements V
         this.mFcCtrlManager = fcManager;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public boolean isShow() {
         if (StateManager.getInstance().getX8Drone().getCtrlMode() == 12) {
             return false;
@@ -196,12 +196,12 @@ public class X8AiHeadLockExcuteController extends AbsX8AiController implements V
         onTaskComplete();
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void cancleByModeChange() {
         onTaskComplete();
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         if (this.isShow && !b) {
             ononDroneDisconnectedTaskComplete();
@@ -238,8 +238,8 @@ public class X8AiHeadLockExcuteController extends AbsX8AiController implements V
     }
 
     public void setTypeEnable() {
-        this.mFcCtrlManager.setDisenableHeadingFree(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiHeadLockExcuteController.2
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.mFcCtrlManager.setDisenableHeadingFree(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8AiHeadLockExcuteController.this.taskExit();
@@ -249,8 +249,8 @@ public class X8AiHeadLockExcuteController extends AbsX8AiController implements V
     }
 
     public void updateHead() {
-        this.mFcCtrlManager.setUpdateHeadingFree(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiHeadLockExcuteController.3
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.mFcCtrlManager.setUpdateHeadingFree(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8AiHeadLockExcuteController.this.closeNextUi();

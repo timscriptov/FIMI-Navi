@@ -17,7 +17,7 @@ import com.fimi.x8sdk.dataparser.AckTakePhoto;
 import com.fimi.x8sdk.ivew.ICamAction;
 import com.fimi.x8sdk.listener.CallBackParamListener;
 
-/* loaded from: classes2.dex */
+
 public class CameraPresenter extends BasePresenter implements ICamAction {
     private CallBackParamListener tfCardStateListener;
 
@@ -25,37 +25,37 @@ public class CameraPresenter extends BasePresenter implements ICamAction {
         addNoticeListener();
     }
 
-    @Override // com.fimi.x8sdk.ivew.ICamAction
+    @Override
     public void takePhoto(UiCallBackListener takePhotoListener) {
         sendCmd(new CameraCollection(this, takePhotoListener).takePhoto());
     }
 
-    @Override // com.fimi.x8sdk.ivew.ICamAction
+    @Override
     public void startRecord(UiCallBackListener startRecordListener) {
         sendCmd(new CameraCollection(this, startRecordListener).startRecord());
     }
 
-    @Override // com.fimi.x8sdk.ivew.ICamAction
+    @Override
     public void endRecord(UiCallBackListener endRecordListener) {
         sendCmd(new CameraCollection(this, endRecordListener).stopRecord());
     }
 
-    @Override // com.fimi.x8sdk.ivew.ICamAction
+    @Override
     public void getTFCardState(CallBackParamListener tfStateListener) {
         this.tfCardStateListener = tfStateListener;
     }
 
-    @Override // com.fimi.x8sdk.ivew.ICamAction
+    @Override
     public void swithVideoMode(UiCallBackListener swithVideoModeListener) {
         sendCmd(new CameraCollection(this, swithVideoModeListener).switchVideoMode());
     }
 
-    @Override // com.fimi.x8sdk.ivew.ICamAction
+    @Override
     public void switchPhotoMode(UiCallBackListener switchPhotoModeListener) {
         sendCmd(new CameraCollection(this, switchPhotoModeListener).switchPhotoMode());
     }
 
-    @Override // com.fimi.x8sdk.ivew.ICamAction
+    @Override
     public void setInterestMetering(byte meteringIndex, UiCallBackListener setInterestMeteringListener) {
         sendCmd(new CameraCollection(this, setInterestMeteringListener).setInterestMetering(meteringIndex));
     }
@@ -85,7 +85,7 @@ public class CameraPresenter extends BasePresenter implements ICamAction {
         onCameraTimeOut(groupId, msgId, bcd);
     }
 
-    @Override // com.fimi.x8sdk.common.BasePresenter
+    @Override
     public void reponseCmd(boolean isAck, int groupId, int msgId, ILinkMessage packet, BaseCommand bcd) {
         if (groupId == 2) {
             if (msgId == 4) {
@@ -151,17 +151,13 @@ public class CameraPresenter extends BasePresenter implements ICamAction {
             if (msgId == 8) {
                 AckTFCarddCap tfCarddCap = (AckTFCarddCap) packet;
                 if (isNotNull(this.tfCardStateListener)) {
-                    if (tfCarddCap.getMsgRpt() == 0) {
-                        this.tfCardStateListener.callbackResult(true, tfCarddCap.getTfCardCap());
-                    } else {
-                        this.tfCardStateListener.callbackResult(false, tfCarddCap.getTfCardCap());
-                    }
+                    this.tfCardStateListener.callbackResult(tfCarddCap.getMsgRpt() == 0, tfCarddCap.getTfCardCap());
                 }
             }
         }
     }
 
-    @Override // com.fimi.x8sdk.common.BasePresenter
+    @Override
     public void onNormalResponse(boolean isAck, ILinkMessage packet, BaseCommand bcd) {
         if (isAck) {
             if (isNotNull(packet.getUiCallBack())) {

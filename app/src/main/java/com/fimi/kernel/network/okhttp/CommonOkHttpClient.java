@@ -15,7 +15,7 @@ import okhttp3.Call;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
-/* loaded from: classes.dex */
+
 public class CommonOkHttpClient {
     private static final int TIME_OUT = 30;
     private static final OkHttpClient mOkHttpClient;

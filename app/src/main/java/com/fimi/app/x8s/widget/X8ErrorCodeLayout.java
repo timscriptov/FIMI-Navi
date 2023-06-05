@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class X8ErrorCodeLayout extends ViewGroup {
     private X8ErrorCode level0;
     private X8ErrorCode level1;
@@ -170,7 +169,7 @@ public class X8ErrorCodeLayout extends ViewGroup {
 
     private void setFlashAnimator(View view) {
         FlashAnimator flashAnimator = new FlashAnimator();
-        YoYo.with(flashAnimator).duration(1200L).repeat(1).pivot(Float.MAX_VALUE, Float.MAX_VALUE).interpolate(new AccelerateDecelerateInterpolator()).withListener(new Animator.AnimatorListener() { // from class: com.fimi.app.x8s.widget.X8ErrorCodeLayout.3
+        YoYo.with(flashAnimator).duration(1200L).repeat(1).pivot(Float.MAX_VALUE, Float.MAX_VALUE).interpolate(new AccelerateDecelerateInterpolator()).withListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
             }

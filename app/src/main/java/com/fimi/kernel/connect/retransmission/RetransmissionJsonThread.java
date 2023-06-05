@@ -8,7 +8,7 @@ import com.fimi.kernel.connect.session.NoticeManager;
 import java.util.Iterator;
 import java.util.concurrent.LinkedBlockingDeque;
 
-/* loaded from: classes.dex */
+
 public class RetransmissionJsonThread extends Thread {
     public LinkedBlockingDeque<BaseCommand> mListReSend = new LinkedBlockingDeque<>();
     private boolean isLoop = true;

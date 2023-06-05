@@ -9,10 +9,10 @@ import com.fimi.android.app.R;
 import com.fimi.app.x8s.controls.X8MainAiFlyController;
 import com.fimi.app.x8s.tools.ImageUtils;
 
-/* loaded from: classes.dex */
+
 public class X8AiTakeoffConfirmUi implements View.OnClickListener {
     private View btnOk;
-    private View contentView;
+    private final View contentView;
     private ImageView imgFlag;
     private View imgReturn;
     private X8MainAiFlyController listener;
@@ -31,7 +31,7 @@ public class X8AiTakeoffConfirmUi implements View.OnClickListener {
     public void initViews(View rootView) {
         this.imgReturn = rootView.findViewById(R.id.img_ai_follow_return);
         this.btnOk = rootView.findViewById(R.id.btn_ai_follow_confirm_ok);
-        this.imgFlag = (ImageView) rootView.findViewById(R.id.img_takeoff_flag);
+        this.imgFlag = rootView.findViewById(R.id.img_takeoff_flag);
         this.imgFlag.setImageBitmap(ImageUtils.getBitmapByPath(rootView.getContext(), R.drawable.x8_img_take_off_flag));
     }
 
@@ -40,7 +40,7 @@ public class X8AiTakeoffConfirmUi implements View.OnClickListener {
         this.btnOk.setOnClickListener(this);
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.img_ai_follow_return) {
@@ -51,10 +51,6 @@ public class X8AiTakeoffConfirmUi implements View.OnClickListener {
     }
 
     public void setFcHeart(boolean isInSky, boolean isLowPower) {
-        if (isLowPower) {
-            this.btnOk.setEnabled(true);
-        } else {
-            this.btnOk.setEnabled(false);
-        }
+        this.btnOk.setEnabled(isLowPower);
     }
 }

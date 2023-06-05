@@ -14,15 +14,15 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/* loaded from: classes.dex */
+
 public class MediaThumDownloadManager implements OnDownloadListener, IMediaDownload {
     private int count;
     private int index;
     private boolean isDownload;
-    private OnDownloadUiListener mUiDownloadListener;
-    private List<MediaModel> data = new ArrayList();
-    private Handler mHanler = new Handler() { // from class: com.fimi.album.download.manager.MediaThumDownloadManager.1
-        @Override // android.os.Handler
+    private final OnDownloadUiListener mUiDownloadListener;
+    private final List<MediaModel> data = new ArrayList();
+    private final Handler mHanler = new Handler() {
+        @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
@@ -37,11 +37,10 @@ public class MediaThumDownloadManager implements OnDownloadListener, IMediaDownl
                     MediaThumDownloadManager.this.mUiDownloadListener.onFailure((MediaModel) msg.obj);
                     return;
                 default:
-                    return;
             }
         }
     };
-    private ExecutorService executorService = Executors.newFixedThreadPool(1);
+    private final ExecutorService executorService = Executors.newFixedThreadPool(1);
 
     public MediaThumDownloadManager(OnDownloadUiListener mUiDownloadListener) {
         this.mUiDownloadListener = mUiDownloadListener;
@@ -53,14 +52,14 @@ public class MediaThumDownloadManager implements OnDownloadListener, IMediaDownl
         return i;
     }
 
-    @Override // com.fimi.album.interfaces.IMediaDownload
+    @Override
     public void addData(MediaModel m) {
         if (!this.data.contains(m)) {
             this.data.add(m);
         }
     }
 
-    @Override // com.fimi.album.interfaces.IMediaDownload
+    @Override
     public void stopDownload() {
         this.isDownload = false;
         this.count = 0;
@@ -72,7 +71,7 @@ public class MediaThumDownloadManager implements OnDownloadListener, IMediaDownl
         return this.data.size();
     }
 
-    @Override // com.fimi.album.interfaces.IMediaDownload
+    @Override
     public void startDownload() {
         this.isDownload = true;
         if (this.data.size() > 0 && this.count < this.data.size()) {
@@ -89,25 +88,25 @@ public class MediaThumDownloadManager implements OnDownloadListener, IMediaDownl
         }
     }
 
-    @Override // com.fimi.album.download.interfaces.OnDownloadListener
+    @Override
     public void onProgress(Object responseObj, long progrss, long currentLength) {
         int pos = (int) (progrss / (currentLength / 100));
         this.mHanler.obtainMessage(0, pos, pos, responseObj).sendToTarget();
     }
 
-    @Override // com.fimi.album.download.interfaces.OnDownloadListener
+    @Override
     public void onSuccess(Object responseObj) {
         this.mHanler.obtainMessage(1, responseObj).sendToTarget();
         next();
     }
 
-    @Override // com.fimi.album.download.interfaces.OnDownloadListener
+    @Override
     public void onFailure(Object reasonObj) {
         this.mHanler.obtainMessage(2, reasonObj).sendToTarget();
         next();
     }
 
-    @Override // com.fimi.album.download.interfaces.OnDownloadListener
+    @Override
     public void onStop(MediaModel reasonObj) {
     }
 }

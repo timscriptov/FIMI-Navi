@@ -7,7 +7,7 @@ import com.fimi.kernel.utils.DirectoryPath;
 import com.fimi.network.entity.UpfirewareDto;
 import com.fimi.network.entity.X8PlaybackLogEntity;
 
-/* loaded from: classes.dex */
+
 public class DownloadManager {
     public void downLoadFw(UpfirewareDto dto, DisposeDataHandle disposeDataHandle) {
         disposeDataHandle.mSource = DirectoryPath.getFwPath(dto.getSysName());

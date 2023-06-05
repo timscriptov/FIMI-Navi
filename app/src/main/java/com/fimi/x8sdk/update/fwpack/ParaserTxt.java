@@ -6,7 +6,7 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
-/* loaded from: classes2.dex */
+
 public class ParaserTxt {
     public static PkgDetl readTxtFile(String filePath) {
         PkgDetl pkgDtl = new PkgDetl();
@@ -74,7 +74,7 @@ public class ParaserTxt {
 
     public static void main(String[] argv) {
         PkgDetl pkg = readTxtFile("D:/fm_package_30.ini");
-        System.out.println("pkg:" + pkg.toString());
+        System.out.println("pkg:" + pkg);
         List<FwInfo> fws = pkg.getFws();
         if (!fws.isEmpty()) {
             for (FwInfo info : fws) {

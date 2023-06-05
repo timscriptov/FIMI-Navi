@@ -3,7 +3,7 @@ package com.fimi.kernel.dataparser.milink;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class ByteArrayToIntArray {
     static int[] CRC32_Table = new int[256];
     private static boolean initTable;
@@ -27,9 +27,7 @@ public class ByteArrayToIntArray {
         int k = Length % 4;
         if (k > 0) {
             byte[] t = new byte[4];
-            for (int j2 = 0; j2 < k; j2++) {
-                t[j2] = pData[(offset * 4) + j2];
-            }
+            System.arraycopy(pData, (offset * 4) + 0, t, 0, k);
             int tmp2 = bytesToInt(t, 0);
             for (int j3 = 3; j3 >= 0; j3--) {
                 int abyte2 = (byte) ((crc >> 24) ^ ((tmp2 >> (j3 * 8)) & 255));

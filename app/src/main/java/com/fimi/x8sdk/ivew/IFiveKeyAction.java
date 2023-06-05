@@ -5,7 +5,7 @@ import com.fimi.x8sdk.presenter.FiveKeyDefinePresenter;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
+
 public interface IFiveKeyAction {
     void isSetCameraContrast();
 

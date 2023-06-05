@@ -95,7 +95,7 @@ public class Constants {
         Factory
     }
 
-    /* loaded from: classes.dex */
+
     public enum UserType {
         Ideal,
         Guest,

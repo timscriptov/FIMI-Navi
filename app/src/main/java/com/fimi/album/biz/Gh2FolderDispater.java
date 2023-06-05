@@ -18,21 +18,21 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* loaded from: classes.dex */
+
 public class Gh2FolderDispater<T extends MediaModel> implements IHandlerCallback {
     public static final int PHOTO = 2;
     public static final String TAG = Gh2FolderDispater.class.getName();
     public static final int VIDEO = 1;
     public boolean isHadForEachFolder;
     private IDateHandler mIDateHandler;
-    private SuffixUtils mSuffixUtils = SuffixUtils.obtain();
-    private String defaultFormatPattern = "yyyy.MM.dd HH:mm:ss";
+    private final SuffixUtils mSuffixUtils = SuffixUtils.obtain();
+    private final String defaultFormatPattern = "yyyy.MM.dd HH:mm:ss";
     private long videoCount = 0;
     private long photoCount = 0;
-    private Handler otherHandler = HandlerManager.obtain().getHandlerInOtherThread(this);
-    private CopyOnWriteArrayList<T> localDataList = new CopyOnWriteArrayList<>();
-    private CopyOnWriteArrayList<T> localDataNoHeadList = new CopyOnWriteArrayList<>();
-    private LinkedHashMap<String, CopyOnWriteArrayList<T>> dataHash = new LinkedHashMap<>();
+    private final Handler otherHandler = HandlerManager.obtain().getHandlerInOtherThread(this);
+    private final CopyOnWriteArrayList<T> localDataList = new CopyOnWriteArrayList<>();
+    private final CopyOnWriteArrayList<T> localDataNoHeadList = new CopyOnWriteArrayList<>();
+    private final LinkedHashMap<String, CopyOnWriteArrayList<T>> dataHash = new LinkedHashMap<>();
 
     public void forEachFolder(String folderPath) {
         if (!this.isHadForEachFolder && !this.otherHandler.hasMessages(3)) {
@@ -43,7 +43,7 @@ public class Gh2FolderDispater<T extends MediaModel> implements IHandlerCallback
         }
     }
 
-    @Override // com.fimi.album.iview.IHandlerCallback, android.os.Handler.Callback
+    @Override
     public boolean handleMessage(Message message) {
         if (message.what == 3) {
             reallyHandlerFolderFile((String) message.obj);
@@ -97,11 +97,7 @@ public class Gh2FolderDispater<T extends MediaModel> implements IHandlerCallback
                         mMediaModel2.setFormatDate(DateFormater.dateString(file2.lastModified(), this.defaultFormatPattern));
                         mMediaModel2.setName(file2.getName());
                         mMediaModel2.setFileLocalPath(filePath2);
-                        if (this.mSuffixUtils.judgeFileType(filePath2)) {
-                            mMediaModel2.setVideo(true);
-                        } else {
-                            mMediaModel2.setVideo(false);
-                        }
+                        mMediaModel2.setVideo(this.mSuffixUtils.judgeFileType(filePath2));
                         cacheList.add((T) mMediaModel2);
                     }
                 }
@@ -129,7 +125,7 @@ public class Gh2FolderDispater<T extends MediaModel> implements IHandlerCallback
         }
         for (T t : cacheList) {
             String lastModifyDate = t.getFormatDate().split(" ")[0];
-            if (cacheFormateDate == null || !lastModifyDate.equals(cacheFormateDate)) {
+            if (!lastModifyDate.equals(cacheFormateDate)) {
                 if (copyOnWriteArrayList != null) {
                     saveHash.put(cacheFormateDate, copyOnWriteArrayList);
                     saveList.addAll(copyOnWriteArrayList);

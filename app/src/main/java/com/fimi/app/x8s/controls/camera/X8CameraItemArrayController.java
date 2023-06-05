@@ -24,20 +24,21 @@ import com.fimi.x8sdk.jsonResult.CameraParamsJson;
 import com.fimi.x8sdk.modulestate.StateManager;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes.dex */
+
 public class X8CameraItemArrayController extends AbsX8Controllers implements JsonUiCallBackListener, PhotoArrayParamsAdapter.PhotoArrayItemClickListener {
     Map<String, String> keyMap;
     List<String> paramList;
     X8CameraParamsValue x8CameraParamsValue;
     private PhotoArrayParamsAdapter arrayParamsAdapter;
-    private CameraManager cameraManager;
+    private final CameraManager cameraManager;
     private Context context;
     private GridLayoutManager layoutManager;
-    private SubParamItemListener listener;
+    private final SubParamItemListener listener;
     private String paramKey;
     private String paramValue;
     private List<String> params;
@@ -55,9 +56,7 @@ public class X8CameraItemArrayController extends AbsX8Controllers implements Jso
         if (paramType.equals("sharpness")) {
             if (StateManager.getInstance().getCamera().getToken() < 0) {
                 String[] styleArray = rootView.getContext().getResources().getStringArray(R.array.x8_style_array);
-                for (String style : styleArray) {
-                    this.params.add(style);
-                }
+                Collections.addAll(this.params, styleArray);
                 this.arrayParamsAdapter.updateData(this.params, null, this.paramKey, 0);
             }
         } else if (paramType.equals(CameraJsonCollection.KEY_RECORD_MODE)) {
@@ -115,11 +114,11 @@ public class X8CameraItemArrayController extends AbsX8Controllers implements Jso
         this.x8RgCameraResolution.setVisibility(8);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
         this.context = rootView.getContext();
-        this.x8RgCameraResolution = (RadioGroup) rootView.findViewById(R.id.x8_rg_camera_resolution);
-        this.recyclerView = (RecyclerView) rootView.findViewById(R.id.paramRecycler);
+        this.x8RgCameraResolution = rootView.findViewById(R.id.x8_rg_camera_resolution);
+        this.recyclerView = rootView.findViewById(R.id.paramRecycler);
         this.arrayParamsAdapter = new PhotoArrayParamsAdapter(this.context, this.params);
         this.arrayParamsAdapter.setItemClickListener(this);
         this.recyclerView.setAdapter(this.arrayParamsAdapter);
@@ -130,10 +129,10 @@ public class X8CameraItemArrayController extends AbsX8Controllers implements Jso
         this.recyclerView.setHasFixedSize(true);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
-        this.x8RgCameraResolution.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() { // from class: com.fimi.app.x8s.controls.camera.X8CameraItemArrayController.1
-            @Override // android.widget.RadioGroup.OnCheckedChangeListener
+        this.x8RgCameraResolution.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 String systemType = X8CameraItemArrayController.this.x8CameraParamsValue.getCurParamsJson().getSystem_type();
                 if (R.id.x8_rbtn_4k == i) {
@@ -159,14 +158,14 @@ public class X8CameraItemArrayController extends AbsX8Controllers implements Jso
         });
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
-    @Override // com.fimi.kernel.dataparser.usb.JsonUiCallBackListener
+    @Override
     public void onComplete(JSONObject rt, Object o) {
         CameraParamsJson paramsJson;
-        if (rt != null && (paramsJson = (CameraParamsJson) JSON.parseObject(rt.toString(), CameraParamsJson.class)) != null) {
+        if (rt != null && (paramsJson = JSON.parseObject(rt.toString(), CameraParamsJson.class)) != null) {
             if (paramsJson.getMsg_id() == 9) {
                 if (paramsJson.getParam().equals("sharpness")) {
                     this.params = paramsJson.getOptions();
@@ -203,7 +202,7 @@ public class X8CameraItemArrayController extends AbsX8Controllers implements Jso
         }
     }
 
-    @Override // com.fimi.app.x8s.adapter.PhotoArrayParamsAdapter.PhotoArrayItemClickListener
+    @Override
     public void onItemClickListener(String paramKey, String paramValue) {
         this.paramValue = paramValue;
         if (paramKey.equalsIgnoreCase("capture_mode")) {
@@ -224,7 +223,7 @@ public class X8CameraItemArrayController extends AbsX8Controllers implements Jso
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public boolean onClickBackKey() {
         return false;
     }

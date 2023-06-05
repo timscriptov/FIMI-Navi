@@ -6,7 +6,7 @@ import com.fimi.kernel.store.shared.SPStoreManager;
 import com.fimi.x8sdk.connect.ConnectType;
 import com.fimi.x8sdk.map.MapType;
 
-/* loaded from: classes2.dex */
+
 public final class GlobalConfig {
     private static GlobalConfig globalConfig = new GlobalConfig();
     boolean isRectification;
@@ -165,7 +165,7 @@ public final class GlobalConfig {
         this.isNewHand = newHand;
     }
 
-    /* loaded from: classes2.dex */
+
     public static class Builder {
         int lowPowerOperation;
         int lowPowerValue;

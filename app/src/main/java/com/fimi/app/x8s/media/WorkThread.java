@@ -7,7 +7,7 @@ import com.fimi.app.x8s.X8Application;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
-/* loaded from: classes.dex */
+
 public class WorkThread extends Thread {
     private final FimiH264Video mFimiH264Video;
     boolean isLoop;
@@ -21,7 +21,7 @@ public class WorkThread extends Thread {
         this.isLoop = true;
     }
 
-    @Override // java.lang.Thread, java.lang.Runnable
+    @Override
     public void run() {
         if (!X8Application.Type2) {
             readType1();

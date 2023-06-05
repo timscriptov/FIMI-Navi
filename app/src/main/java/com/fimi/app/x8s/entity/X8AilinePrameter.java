@@ -1,14 +1,12 @@
 package com.fimi.app.x8s.entity;
 
 
-
-/* loaded from: classes.dex */
 public class X8AilinePrameter {
     private int autoRecorde;
     private int disconnectActioin;
     private int endAction;
     private int orientation;
-    private float DEFAULE_SPEED = 2.0f;
+    private final float DEFAULE_SPEED = 2.0f;
     private float speed = this.DEFAULE_SPEED;
 
     public int getOrientation() {

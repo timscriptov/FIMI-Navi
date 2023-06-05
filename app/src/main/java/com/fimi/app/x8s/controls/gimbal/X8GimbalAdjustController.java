@@ -15,7 +15,7 @@ import com.fimi.widget.X8ToastUtil;
 import com.fimi.x8sdk.controller.X8GimbalManager;
 import com.fimi.x8sdk.dataparser.AckCloudParams;
 
-/* loaded from: classes.dex */
+
 public class X8GimbalAdjustController {
     Button btnCalibrate;
     Button btnGet;
@@ -28,16 +28,16 @@ public class X8GimbalAdjustController {
     GimbalAdjustRelayout rlYaw;
 
     public X8GimbalAdjustController(View rootView) {
-        this.btnGet = (Button) rootView.findViewById(R.id.btn_get);
-        this.btnSave = (Button) rootView.findViewById(R.id.btn_save);
-        this.relayoutPitch = (GimbalAdjustRelayout) rootView.findViewById(R.id.rl_pitch);
+        this.btnGet = rootView.findViewById(R.id.btn_get);
+        this.btnSave = rootView.findViewById(R.id.btn_save);
+        this.relayoutPitch = rootView.findViewById(R.id.rl_pitch);
         this.relayoutPitch.getTvGimbalModel().setText("Pitch");
-        this.relayoutRoll = (GimbalAdjustRelayout) rootView.findViewById(R.id.rl_roll);
+        this.relayoutRoll = rootView.findViewById(R.id.rl_roll);
         this.relayoutRoll.getTvGimbalModel().setText("Roll");
-        this.rlYaw = (GimbalAdjustRelayout) rootView.findViewById(R.id.rl_yaw);
+        this.rlYaw = rootView.findViewById(R.id.rl_yaw);
         this.rlYaw.getTvGimbalModel().setText("Yaw");
         this.mContext = rootView.getContext();
-        this.btnCalibrate = (Button) rootView.findViewById(R.id.btn_calibrate);
+        this.btnCalibrate = rootView.findViewById(R.id.btn_calibrate);
         if (!Constants.isFactoryApp()) {
             rootView.findViewById(R.id.rl_gc_calibrate).setVisibility(8);
         }
@@ -49,19 +49,19 @@ public class X8GimbalAdjustController {
     }
 
     private void initClickAction() {
-        this.btnCalibrate.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.gimbal.X8GimbalAdjustController.1
-            @Override // android.view.View.OnClickListener
+        this.btnCalibrate.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 if (X8GimbalAdjustController.this.listener != null) {
                     X8GimbalAdjustController.this.listener.onGcClick();
                 }
             }
         });
-        this.btnSave.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.gimbal.X8GimbalAdjustController.2
-            @Override // android.view.View.OnClickListener
+        this.btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
-                X8GimbalAdjustController.this.mX8GimbalManager.setGcParams(1, 0.0f, new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.gimbal.X8GimbalAdjustController.2.1
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                X8GimbalAdjustController.this.mX8GimbalManager.setGcParams(1, 0.0f, new UiCallBackListener() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, Object o) {
                         if (cmdResult.isSuccess()) {
                             X8ToastUtil.showToast(X8GimbalAdjustController.this.mContext, "保存云台参数成功", 0);
@@ -72,11 +72,11 @@ public class X8GimbalAdjustController {
                 });
             }
         });
-        this.btnGet.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.gimbal.X8GimbalAdjustController.3
-            @Override // android.view.View.OnClickListener
+        this.btnGet.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
-                X8GimbalAdjustController.this.mX8GimbalManager.getGcParams(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.gimbal.X8GimbalAdjustController.3.1
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                X8GimbalAdjustController.this.mX8GimbalManager.getGcParams(new UiCallBackListener() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, Object o) {
                         if (cmdResult.isSuccess()) {
                             AckCloudParams params = (AckCloudParams) o;
@@ -92,12 +92,12 @@ public class X8GimbalAdjustController {
                 });
             }
         });
-        this.relayoutPitch.getBtnAdd().setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.gimbal.X8GimbalAdjustController.4
-            @Override // android.view.View.OnClickListener
+        this.relayoutPitch.getBtnAdd().setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 final float value = (float) (Float.valueOf(X8GimbalAdjustController.this.relayoutPitch.getEtxValue().getText().toString()).floatValue() + 0.004d);
-                X8GimbalAdjustController.this.mX8GimbalManager.setGcParams(2, value, new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.gimbal.X8GimbalAdjustController.4.1
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                X8GimbalAdjustController.this.mX8GimbalManager.setGcParams(2, value, new UiCallBackListener() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, Object o) {
                         if (cmdResult.isSuccess()) {
                             X8GimbalAdjustController.this.relayoutPitch.getEtxValue().setText(NumberUtil.decimalPointStr(value, 4));
@@ -108,12 +108,12 @@ public class X8GimbalAdjustController {
                 });
             }
         });
-        this.relayoutPitch.getBtnSub().setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.gimbal.X8GimbalAdjustController.5
-            @Override // android.view.View.OnClickListener
+        this.relayoutPitch.getBtnSub().setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 final float value = (float) (Float.valueOf(X8GimbalAdjustController.this.relayoutPitch.getEtxValue().getText().toString()).floatValue() - 0.004d);
-                X8GimbalAdjustController.this.mX8GimbalManager.setGcParams(2, value, new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.gimbal.X8GimbalAdjustController.5.1
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                X8GimbalAdjustController.this.mX8GimbalManager.setGcParams(2, value, new UiCallBackListener() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, Object o) {
                         if (cmdResult.isSuccess()) {
                             X8GimbalAdjustController.this.relayoutPitch.getEtxValue().setText(NumberUtil.decimalPointStr(value, 4));
@@ -124,12 +124,12 @@ public class X8GimbalAdjustController {
                 });
             }
         });
-        this.relayoutRoll.getBtnAdd().setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.gimbal.X8GimbalAdjustController.6
-            @Override // android.view.View.OnClickListener
+        this.relayoutRoll.getBtnAdd().setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 final float value = (float) (Float.valueOf(X8GimbalAdjustController.this.relayoutRoll.getEtxValue().getText().toString()).floatValue() + 0.004d);
-                X8GimbalAdjustController.this.mX8GimbalManager.setGcParams(4, value, new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.gimbal.X8GimbalAdjustController.6.1
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                X8GimbalAdjustController.this.mX8GimbalManager.setGcParams(4, value, new UiCallBackListener() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, Object o) {
                         if (cmdResult.isSuccess()) {
                             X8GimbalAdjustController.this.relayoutRoll.getEtxValue().setText(NumberUtil.decimalPointStr(value, 4));
@@ -140,12 +140,12 @@ public class X8GimbalAdjustController {
                 });
             }
         });
-        this.relayoutRoll.getBtnSub().setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.gimbal.X8GimbalAdjustController.7
-            @Override // android.view.View.OnClickListener
+        this.relayoutRoll.getBtnSub().setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 final float value = (float) (Float.valueOf(X8GimbalAdjustController.this.relayoutRoll.getEtxValue().getText().toString()).floatValue() - 0.004d);
-                X8GimbalAdjustController.this.mX8GimbalManager.setGcParams(4, value, new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.gimbal.X8GimbalAdjustController.7.1
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                X8GimbalAdjustController.this.mX8GimbalManager.setGcParams(4, value, new UiCallBackListener() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, Object o) {
                         if (cmdResult.isSuccess()) {
                             X8GimbalAdjustController.this.relayoutRoll.getEtxValue().setText(NumberUtil.decimalPointStr(value, 4));
@@ -156,12 +156,12 @@ public class X8GimbalAdjustController {
                 });
             }
         });
-        this.rlYaw.getBtnAdd().setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.gimbal.X8GimbalAdjustController.8
-            @Override // android.view.View.OnClickListener
+        this.rlYaw.getBtnAdd().setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 final float value = (float) (Float.valueOf(X8GimbalAdjustController.this.rlYaw.getEtxValue().getText().toString()).floatValue() - 0.004d);
-                X8GimbalAdjustController.this.mX8GimbalManager.setGcParams(8, value, new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.gimbal.X8GimbalAdjustController.8.1
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                X8GimbalAdjustController.this.mX8GimbalManager.setGcParams(8, value, new UiCallBackListener() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, Object o) {
                         if (cmdResult.isSuccess()) {
                             X8GimbalAdjustController.this.rlYaw.getEtxValue().setText(NumberUtil.decimalPointStr(value, 4));
@@ -172,12 +172,12 @@ public class X8GimbalAdjustController {
                 });
             }
         });
-        this.rlYaw.getBtnSub().setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.gimbal.X8GimbalAdjustController.9
-            @Override // android.view.View.OnClickListener
+        this.rlYaw.getBtnSub().setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 final float value = (float) (Float.valueOf(X8GimbalAdjustController.this.rlYaw.getEtxValue().getText().toString()).floatValue() + 0.004d);
-                X8GimbalAdjustController.this.mX8GimbalManager.setGcParams(8, value, new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.gimbal.X8GimbalAdjustController.9.1
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                X8GimbalAdjustController.this.mX8GimbalManager.setGcParams(8, value, new UiCallBackListener() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, Object o) {
                         if (cmdResult.isSuccess()) {
                             X8GimbalAdjustController.this.rlYaw.getEtxValue().setText(NumberUtil.decimalPointStr(value, 4));

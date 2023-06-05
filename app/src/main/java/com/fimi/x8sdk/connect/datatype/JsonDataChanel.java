@@ -10,12 +10,12 @@ import com.fimi.kernel.connect.session.NoticeManager;
 import com.fimi.kernel.dataparser.JsonMessage;
 import com.fimi.x8sdk.jsonResult.CameraParamsJson;
 
-/* loaded from: classes2.dex */
+
 public class JsonDataChanel implements IDataChanel {
     public static String testString = "";
     IRetransmissionJsonHandle retransmissionHandle;
 
-    @Override // com.fimi.x8sdk.connect.datatype.IDataChanel
+    @Override
     public void forwardData(byte[] data) {
         CameraParamsJson paramsJson;
         String param;
@@ -32,7 +32,7 @@ public class JsonDataChanel implements IDataChanel {
             if (msg_id == 7 && camKey != null && camKey.equals("temp")) {
                 JsonMessage jsonMsg2 = new JsonMessage(msg_id, rtJson, null);
                 JSONObject rt = jsonMsg2.getJsonRt();
-                if (rt != null && (paramsJson = (CameraParamsJson) JSON.parseObject(rt.toString(), CameraParamsJson.class)) != null && (param = paramsJson.getParam()) != null && !param.equals("")) {
+                if (rt != null && (paramsJson = JSON.parseObject(rt.toString(), CameraParamsJson.class)) != null && (param = paramsJson.getParam()) != null && !param.equals("")) {
                     String s = paramsJson.getParam();
                     testString = s;
                 }

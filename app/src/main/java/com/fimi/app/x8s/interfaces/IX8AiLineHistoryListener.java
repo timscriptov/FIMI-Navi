@@ -2,7 +2,7 @@ package com.fimi.app.x8s.interfaces;
 
 import com.fimi.kernel.store.sqlite.entity.X8AiLinePointInfo;
 
-/* loaded from: classes.dex */
+
 public interface IX8AiLineHistoryListener {
     void addLineItem(X8AiLinePointInfo x8AiLinePointInfo);
 

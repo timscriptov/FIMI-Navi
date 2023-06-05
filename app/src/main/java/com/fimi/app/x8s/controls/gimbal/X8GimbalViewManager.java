@@ -10,14 +10,14 @@ import com.fimi.app.x8s.interfaces.IX8GimbalHorizontalTrimListener;
 import com.fimi.app.x8s.interfaces.IX8GimbalXYZAdjustListener;
 import com.fimi.app.x8s.ui.activity.X8sMainActivity;
 
-/* loaded from: classes.dex */
+
 public class X8GimbalViewManager {
-    private X8sMainActivity activity;
+    private final X8sMainActivity activity;
     private X8GimbalHorizontalTrimController mX8GimbalHorizontalTrimController;
-    private View mainShowView;
+    private final View mainShowView;
     private X8GimbalXYZAdjustController x8GimbalXYZAdjustController;
-    private IX8GimbalHorizontalTrimListener mIX8GimbalHorizontalTrimListener = new IX8GimbalHorizontalTrimListener() { // from class: com.fimi.app.x8s.controls.gimbal.X8GimbalViewManager.1
-        @Override // com.fimi.app.x8s.interfaces.IX8GimbalHorizontalTrimListener
+    private final IX8GimbalHorizontalTrimListener mIX8GimbalHorizontalTrimListener = new IX8GimbalHorizontalTrimListener() {
+        @Override
         public void onSettingReady(float value) {
             X8GimbalViewManager.this.mX8GimbalHorizontalTrimController.closeUi();
             X8GimbalViewManager.this.mX8GimbalHorizontalTrimController.onSettingReady();
@@ -25,8 +25,8 @@ public class X8GimbalViewManager {
             X8GimbalViewManager.this.activity.showTopByGimbalHorizontalTrim();
         }
     };
-    private IX8GimbalXYZAdjustListener ix8GimbalXYZAdjustListener = new IX8GimbalXYZAdjustListener() { // from class: com.fimi.app.x8s.controls.gimbal.X8GimbalViewManager.2
-        @Override // com.fimi.app.x8s.interfaces.IX8GimbalXYZAdjustListener
+    private final IX8GimbalXYZAdjustListener ix8GimbalXYZAdjustListener = new IX8GimbalXYZAdjustListener() {
+        @Override
         public void gimbalXYZAdjustExit() {
             X8GimbalViewManager.this.x8GimbalXYZAdjustController.closeUi();
             X8GimbalViewManager.this.activity.appFullSceen(false);

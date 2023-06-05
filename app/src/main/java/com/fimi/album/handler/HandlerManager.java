@@ -4,7 +4,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 
-/* loaded from: classes.dex */
+
 public class HandlerManager {
     public static final String TAG = "otherThreadHandler";
     private static HandlerManager mHandlerManager;

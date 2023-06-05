@@ -12,14 +12,14 @@ import com.fimi.app.x8s.interfaces.AbsX8MenuBoxControllers;
 import com.fimi.kernel.utils.AbViewUtil;
 import com.fimi.x8sdk.controller.CameraManager;
 
-/* loaded from: classes.dex */
+
 public class X8CameraInterestMeteringController extends AbsX8MenuBoxControllers implements View.OnClickListener {
     private final int DELAYED_TIME;
     private final int MSG_LOCK_EV;
     private final int MSG_METERING;
     private CameraManager cameraManager;
     @SuppressLint({"HandlerLeak"})
-    private Handler handler;
+    private final Handler handler;
     private int interestMeteringIndex;
     private boolean isLockEv;
     private int leftX;
@@ -32,8 +32,8 @@ public class X8CameraInterestMeteringController extends AbsX8MenuBoxControllers 
         this.MSG_METERING = 1;
         this.MSG_LOCK_EV = 2;
         this.DELAYED_TIME = 5000;
-        this.handler = new Handler() { // from class: com.fimi.app.x8s.controls.camera.X8CameraInterestMeteringController.1
-            @Override // android.os.Handler
+        this.handler = new Handler() {
+            @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 int msgID = msg.what;
@@ -50,7 +50,7 @@ public class X8CameraInterestMeteringController extends AbsX8MenuBoxControllers 
         this.cameraManager = cameraManager;
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View view) {
         int id = view.getId();
         if (id == R.id.x8_iv_interest_metering) {
@@ -68,18 +68,18 @@ public class X8CameraInterestMeteringController extends AbsX8MenuBoxControllers 
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
         this.parentView = rootView.findViewById(R.id.x8_rl_interest_merering);
-        this.x8IvInterestMetering = (ImageView) this.parentView.findViewById(R.id.x8_iv_interest_metering);
+        this.x8IvInterestMetering = this.parentView.findViewById(R.id.x8_iv_interest_metering);
         this.x8IvInterestMetering.setOnClickListener(this);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 

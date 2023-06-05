@@ -7,14 +7,14 @@ import com.fimi.app.x8s.widget.X8AiTipWithCloseView;
 import com.fimi.x8sdk.dataparser.AckAccurateLandingState;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes.dex */
+
 public class X8AccurateLandingController {
-    private X8AiTipWithCloseView mTipBgView;
-    private View root;
+    private final X8AiTipWithCloseView mTipBgView;
+    private final View root;
 
     public X8AccurateLandingController(View root) {
         this.root = root;
-        this.mTipBgView = (X8AiTipWithCloseView) root.findViewById(R.id.v_accurate_landing_tip);
+        this.mTipBgView = root.findViewById(R.id.v_accurate_landing_tip);
     }
 
     public void onDroneConnected(boolean b) {

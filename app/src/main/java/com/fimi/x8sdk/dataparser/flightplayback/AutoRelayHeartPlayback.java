@@ -5,13 +5,11 @@ import com.fimi.x8sdk.cmdsenum.X8FpvSignalState;
 import com.fimi.x8sdk.dataparser.X8BaseMessage;
 
 
-
-/* loaded from: classes2.dex */
 public class AutoRelayHeartPlayback extends X8BaseMessage {
     int channel;
     short status;
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         this.status = packet.getPayLoad4().getShort();
@@ -52,7 +50,7 @@ public class AutoRelayHeartPlayback extends X8BaseMessage {
         this.status = status;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public String toString() {
         return "AutoRelayHeartPlayback{status=" + ((int) this.status) + '}';
     }

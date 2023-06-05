@@ -2,14 +2,14 @@ package com.fimi.app.x8s.media;
 
 import android.util.Log;
 
-/* loaded from: classes.dex */
+
 public class H264Packet {
     int len = 0;
     int index = 0;
     int MAX_SHORT = 65535;
     int lastSeq = -1;
     byte[] h264Frame = new byte[1048576];
-    private IH264DataListener ih264DataListener;
+    private final IH264DataListener ih264DataListener;
     private int seq;
 
     public H264Packet(IH264DataListener ih264DataListener) {

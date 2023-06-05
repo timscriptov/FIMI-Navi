@@ -2,7 +2,7 @@ package com.fimi.album;
 
 import com.fimi.album.download.interfaces.IMediaFileLoad;
 
-/* loaded from: classes.dex */
+
 public class MediaLoadProxy implements IMediaFileLoad {
     IMediaFileLoad load;
 
@@ -10,12 +10,12 @@ public class MediaLoadProxy implements IMediaFileLoad {
         this.load = load;
     }
 
-    @Override // com.fimi.album.download.interfaces.IMediaFileLoad
+    @Override
     public void startLoad() {
         this.load.startLoad();
     }
 
-    @Override // com.fimi.album.download.interfaces.IMediaFileLoad
+    @Override
     public void stopLoad() {
         this.load.stopLoad();
     }

@@ -7,7 +7,7 @@ import android.view.WindowManager;
 
 import java.lang.reflect.Method;
 
-/* loaded from: classes.dex */
+
 public class VirtualkeyboardHeight {
     public static int getScreenDPI(Context context) {
         WindowManager windowManager = (WindowManager) context.getSystemService("window");

@@ -6,7 +6,7 @@ import com.fimi.album.iview.IDateHandler;
 import java.util.LinkedHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* loaded from: classes.dex */
+
 public interface ICameraDeviceDispater<T extends MediaModel> {
     void forCameraFolder();
 

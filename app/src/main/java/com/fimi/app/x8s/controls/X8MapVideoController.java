@@ -47,14 +47,14 @@ import java.io.IOException;
 
 public class X8MapVideoController implements View.OnClickListener, IControllers, VideodDataListener, NoFlyLinstener {
     public static FileOutputStream outputStream;
+    private final Activity mActivity;
+    private final Context mContext;
     AbsFimiMap mFimiMap;
     private X8GimbalAdjustController adjustController;
     private int drawNoFlightZoneCount;
     private FimiH264Video fimiVideoView;
     private boolean isPushDataToPlayer;
     private IX8MapVideoControllerListerner listener;
-    private final Activity mActivity;
-    private final Context mContext;
     private ViewGroup.LayoutParams mLayoutParams;
     private X8MapVideoCardView mapVideoCardView;
     private ViewGroup.MarginLayoutParams marginLayoutParams;
@@ -64,6 +64,7 @@ public class X8MapVideoController implements View.OnClickListener, IControllers,
     private RelativeLayout rlSwitchScreen;
     private TextView tvVedioFrame;
     private VideoManager videoManager;
+    private ImageButton mapSwitchPoseBallButton;
 
     public X8MapVideoController(@NonNull View rootView, Bundle savedInstanceState, Activity activity) {
         this.mActivity = activity;
@@ -123,8 +124,6 @@ public class X8MapVideoController implements View.OnClickListener, IControllers,
     public boolean onClickBackKey() {
         return false;
     }
-
-    private ImageButton mapSwitchPoseBallButton;
 
     @Override
     public void initViews(View rootView) {

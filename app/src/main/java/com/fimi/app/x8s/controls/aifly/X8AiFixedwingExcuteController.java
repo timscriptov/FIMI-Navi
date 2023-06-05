@@ -20,13 +20,13 @@ import com.fimi.x8sdk.controller.FcCtrlManager;
 import com.fimi.x8sdk.dataparser.AutoFixedwingState;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes.dex */
+
 public class X8AiFixedwingExcuteController extends AbsX8AiController implements View.OnClickListener, X8DoubleCustomDialog.onDialogButtonClickListener {
     protected int MAX_WIDTH;
     protected boolean isShow;
     protected int width;
     int speedState;
-    private Activity activity;
+    private final Activity activity;
     private X8DoubleCustomDialog dialog;
     private View flagSmall;
     private ImageView imgBack;
@@ -42,11 +42,11 @@ public class X8AiFixedwingExcuteController extends AbsX8AiController implements 
         this.activity = activity;
     }
 
-    @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+    @Override
     public void onLeft() {
     }
 
-    @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+    @Override
     public void onRight() {
         setTypeDisEnable();
     }
@@ -55,27 +55,27 @@ public class X8AiFixedwingExcuteController extends AbsX8AiController implements 
         this.listener = listener;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
     }
 
     public void initViewStubViews(View view) {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public boolean onClickBackKey() {
         return false;
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.img_ai_follow_back) {
@@ -95,10 +95,10 @@ public class X8AiFixedwingExcuteController extends AbsX8AiController implements 
         this.isShow = true;
         LayoutInflater inflater = LayoutInflater.from(this.rootView.getContext());
         this.handleView = inflater.inflate(R.layout.x8_ai_fixedwing_excute_layout, (ViewGroup) this.rootView, true);
-        this.mTipBgView = (X8AiTipWithCloseView) this.handleView.findViewById(R.id.v_content_tip);
-        this.imgBack = (ImageView) this.handleView.findViewById(R.id.img_ai_follow_back);
+        this.mTipBgView = this.handleView.findViewById(R.id.v_content_tip);
+        this.imgBack = this.handleView.findViewById(R.id.img_ai_follow_back);
         this.flagSmall = this.handleView.findViewById(R.id.rl_flag_small);
-        this.tvFlag = (TextView) this.handleView.findViewById(R.id.tv_task_tip);
+        this.tvFlag = this.handleView.findViewById(R.id.tv_task_tip);
         this.listener.onFixedwingRunning();
         this.imgBack.setOnClickListener(this);
         this.flagSmall.setOnClickListener(this);
@@ -116,7 +116,7 @@ public class X8AiFixedwingExcuteController extends AbsX8AiController implements 
         this.mFcCtrlManager = fcManager;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public boolean isShow() {
         if (StateManager.getInstance().getX8Drone().getCtrlMode() == 13) {
             return false;
@@ -135,12 +135,12 @@ public class X8AiFixedwingExcuteController extends AbsX8AiController implements 
         onTaskComplete();
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void cancleByModeChange() {
         onTaskComplete();
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         if (this.isShow) {
             if (!b) {
@@ -196,8 +196,8 @@ public class X8AiFixedwingExcuteController extends AbsX8AiController implements 
     }
 
     public void setTypeDisEnable() {
-        this.mFcCtrlManager.setDisenableFixwing(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.X8AiFixedwingExcuteController.1
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.mFcCtrlManager.setDisenableFixwing(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8AiFixedwingExcuteController.this.taskExit();

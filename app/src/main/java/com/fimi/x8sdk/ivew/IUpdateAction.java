@@ -5,7 +5,7 @@ import com.fimi.x8sdk.update.fwpack.FwInfo;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
+
 public interface IUpdateAction {
     void firmwareBuildPack(List<FwInfo> list);
 

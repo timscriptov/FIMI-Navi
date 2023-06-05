@@ -2,7 +2,7 @@ package com.fimi.x8sdk.entity;
 
 import java.io.Serializable;
 
-/* loaded from: classes2.dex */
+
 public class CameraSystemState implements Serializable {
     private String awbVal;
     private String evVal;

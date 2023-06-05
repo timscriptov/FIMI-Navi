@@ -5,7 +5,7 @@ import android.net.wifi.WifiInfo;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class WiFiEvent {
     public static int CONNECT_OKAY_MSG = 1;
     public static int PASSWORD_ERROR_MSG = 0;

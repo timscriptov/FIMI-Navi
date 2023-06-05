@@ -4,7 +4,7 @@ import com.fimi.x8sdk.common.GlobalConfig;
 import com.fimi.x8sdk.entity.FLatLng;
 import com.fimi.x8sdk.map.MapType;
 
-/* loaded from: classes2.dex */
+
 public class GpsCorrect {
     static final double a = 6378245.0d;
     static final double ee = 0.006693421622965943d;

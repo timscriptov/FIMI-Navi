@@ -14,20 +14,20 @@ import androidx.annotation.Nullable;
 import com.fimi.android.app.R;
 
 public class X8FollowSpeedView extends View {
-    private int cursorColor;
+    private final int cursorColor;
     private int cursorH;
     private int cursorW;
     private boolean isClick;
     private boolean isInit;
     private boolean isRight;
     private boolean isSet;
-    private int lineBgColor;
+    private final int lineBgColor;
     private int lineH;
     private OnChangeListener listener;
     private Paint paint;
     private int panding;
     private float pos;
-    private int progessColor;
+    private final int progessColor;
     private RectF rectF;
     private int s;
     private int thumW;
@@ -81,7 +81,7 @@ public class X8FollowSpeedView extends View {
                 setInitSpeed(this.s, this.v);
                 this.isInit = true;
             }
-            this.rectF = new RectF(this.panding + 0, (h / 2) - (this.lineH / 2), this.w - this.panding, (h / 2) + (this.lineH / 2));
+            this.rectF = new RectF(this.panding, (h / 2) - (this.lineH / 2), this.w - this.panding, (h / 2) + (this.lineH / 2));
             this.paint.setColor(getContext().getResources().getColor(this.lineBgColor));
             canvas.drawRoundRect(this.rectF, 3.0f, 3.0f, this.paint);
             if (this.isRight) {
@@ -105,7 +105,7 @@ public class X8FollowSpeedView extends View {
                     this.listener.onChange(this.v == 0 ? 0.0f : (Math.abs(this.s) * 1.0f) / this.v, this.isRight);
                     this.isSet = false;
                 } else {
-                    this.listener.onChange((this.pos * 1.0f) / ((this.w / 2) - this.panding), this.isRight);
+                    this.listener.onChange((this.pos) / ((this.w / 2) - this.panding), this.isRight);
                 }
             }
             if (this.isClick) {
@@ -143,8 +143,8 @@ public class X8FollowSpeedView extends View {
             this.isRight = true;
             this.pos = x - (this.w / 2);
         } else {
-            if (x < this.panding + 0) {
-                x = this.panding + 0;
+            if (x < this.panding) {
+                x = this.panding;
             }
             this.isRight = false;
             this.pos = (this.w / 2) - x;

@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.HashMap;
 
-/* loaded from: classes2.dex */
+
 public class ErrorTransBean {
     public static final int X8_LANGUAGE_CHINESE = 0;
     public static final int X8_LANGUAGE_ENGLISH = 1;
@@ -16,8 +16,8 @@ public class ErrorTransBean {
     private final String X8_ROOT_PATH = Environment.getExternalStorageDirectory() + File.separator;
     private final String X8_CHINESE_TRANS_FILE_PATH = this.X8_ROOT_PATH + "cn.txt";
     private final String X8_ENGLISH_TRANS_FILE_PATH = this.X8_ROOT_PATH + "en.txt";
-    private HashMap<Integer, String> chineseMap = new HashMap<>();
-    private HashMap<Integer, String> englishMap = new HashMap<>();
+    private final HashMap<Integer, String> chineseMap = new HashMap<>();
+    private final HashMap<Integer, String> englishMap = new HashMap<>();
 
     private ErrorTransBean() {
     }

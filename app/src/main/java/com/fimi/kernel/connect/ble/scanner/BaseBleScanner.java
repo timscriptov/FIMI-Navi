@@ -2,13 +2,13 @@ package com.fimi.kernel.connect.ble.scanner;
 
 import android.os.Handler;
 
-/* loaded from: classes.dex */
+
 public abstract class BaseBleScanner {
     public static final long defaultTimeout = 10000;
     protected boolean isScanning;
     protected Handler timeoutHandler = new Handler();
-    protected Runnable timeoutRunnable = new Runnable() { // from class: com.fimi.kernel.connect.ble.scanner.BaseBleScanner.1
-        @Override // java.lang.Runnable
+    protected Runnable timeoutRunnable = new Runnable() {
+        @Override
         public void run() {
             BaseBleScanner.this.onStopBleScan();
             BaseBleScanner.this.onBleScanFailed(BleScanState.SCAN_TIMEOUT);

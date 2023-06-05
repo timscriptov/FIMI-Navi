@@ -100,7 +100,6 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
                         sendEmptyMessageDelayed(1, 1000L);
                         return;
                     }
-                    return;
                 }
             }
         };
@@ -166,7 +165,7 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
         this.mUrl = url;
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View view) {
         if (view.getId() == R.id.play_video_textureview) {
             if (this.mTopBarLl.getVisibility() == View.VISIBLE) {
@@ -205,7 +204,7 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
         }
     }
 
-    @Override // android.view.TextureView.SurfaceTextureListener
+    @Override
     public void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture, int i, int i1) {
         LogUtil.d(TAG, "onSurfaceTextureAvailable");
         this.videoSurface = new Surface(surfaceTexture);
@@ -214,26 +213,26 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
         load();
     }
 
-    @Override // android.view.TextureView.SurfaceTextureListener
+    @Override
     public void onSurfaceTextureSizeChanged(SurfaceTexture surfaceTexture, int i, int i1) {
         LogUtil.d(TAG, "onSurfaceTextureSizeChanged");
     }
 
-    @Override // android.view.TextureView.SurfaceTextureListener
+    @Override
     public boolean onSurfaceTextureDestroyed(SurfaceTexture surfaceTexture) {
         return false;
     }
 
-    @Override // android.view.TextureView.SurfaceTextureListener
+    @Override
     public void onSurfaceTextureUpdated(SurfaceTexture surfaceTexture) {
     }
 
-    @Override // android.view.View
+    @Override
     public boolean onTouchEvent(MotionEvent event) {
         return true;
     }
 
-    @Override // android.view.View
+    @Override
     protected void onVisibilityChanged(View changedView, int visibility) {
         Log.d(TAG, "onVisibilityChanged: " + visibility + "," + this.mMiniPlayBtn.getVisibility());
         super.onVisibilityChanged(changedView, visibility);
@@ -249,7 +248,7 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
         pause();
     }
 
-    @Override // android.media.MediaPlayer.OnPreparedListener
+    @Override
     public void onPrepared(MediaPlayer mediaPlayer) {
         LogUtil.i(TAG, "onPrepare");
         showPlayView();
@@ -267,7 +266,7 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
         }
     }
 
-    @Override // android.media.MediaPlayer.OnCompletionListener
+    @Override
     public void onCompletion(MediaPlayer mp) {
         LogUtil.i(TAG, "onCompletion");
         if (this.listener != null) {
@@ -278,12 +277,12 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
         setIsRealPause(true);
     }
 
-    @Override // android.media.MediaPlayer.OnInfoListener
+    @Override
     public boolean onInfo(MediaPlayer mediaPlayer, int i, int i1) {
         return false;
     }
 
-    @Override // android.media.MediaPlayer.OnErrorListener
+    @Override
     public boolean onError(MediaPlayer mp, int what, int extra) {
         LogUtil.i(TAG, "do error:" + what + ",extra:" + extra);
         this.playerState = 1;
@@ -456,8 +455,8 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
             showPauseView(true);
             entryResumeState();
             this.mediaPlayer.seekTo(position);
-            this.mediaPlayer.setOnSeekCompleteListener(new MediaPlayer.OnSeekCompleteListener() { // from class: com.fimi.album.widget.CustomVideoView.2
-                @Override // android.media.MediaPlayer.OnSeekCompleteListener
+            this.mediaPlayer.setOnSeekCompleteListener(new MediaPlayer.OnSeekCompleteListener() {
+                @Override
                 public void onSeekComplete(MediaPlayer mp) {
                     LogUtil.d(CustomVideoView.TAG, "do seek and resume");
                     CustomVideoView.this.mediaPlayer.start();
@@ -473,8 +472,8 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
             setCurrentPlayState(2);
             if (isPlaying()) {
                 this.mediaPlayer.seekTo(position);
-                this.mediaPlayer.setOnSeekCompleteListener(new MediaPlayer.OnSeekCompleteListener() { // from class: com.fimi.album.widget.CustomVideoView.3
-                    @Override // android.media.MediaPlayer.OnSeekCompleteListener
+                this.mediaPlayer.setOnSeekCompleteListener(new MediaPlayer.OnSeekCompleteListener() {
+                    @Override
                     public void onSeekComplete(MediaPlayer mp) {
                         LogUtil.d(CustomVideoView.TAG, "do seek and pause");
                         CustomVideoView.this.mediaPlayer.pause();
@@ -538,11 +537,11 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
         return this.mIsComplete;
     }
 
-    @Override // android.media.MediaPlayer.OnBufferingUpdateListener
+    @Override
     public void onBufferingUpdate(MediaPlayer mediaPlayer, int i) {
     }
 
-    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+    @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         if (fromUser) {
             LogUtil.i(TAG, "onProgressChanged:" + this.isUpdateProgressed);
@@ -552,14 +551,14 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
         }
     }
 
-    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+    @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
         LogUtil.i(TAG, "onStartTrackingTouch:" + this.isUpdateProgressed);
         this.isUpdateProgressed = true;
         this.showTopBottomBarTime = 0;
     }
 
-    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+    @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
         LogUtil.i(TAG, "onStopTrackingTouch:" + this.isUpdateProgressed);
         this.isUpdateProgressed = false;
@@ -602,7 +601,7 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
         private ScreenEventReciver() {
         }
 
-        @Override // android.content.BroadcastReceiver
+        @Override
         public void onReceive(Context context, Intent intent) {
             Log.i(CustomVideoView.TAG, "onReceive: " + intent.getAction());
             String action = intent.getAction();

@@ -51,33 +51,33 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import me.relex.photodraweeview.OnPhotoTapListener;
 
-/* loaded from: classes.dex */
+
 public class X8MediaDetailPresenter<T extends X8MediaDetailActivity> implements IViewpaper, OnPhotoTapListener {
     protected String perfix = "file://";
-    private int defaultDisplayHeight;
-    private int defaultDisplayWidth;
+    private final int defaultDisplayHeight;
+    private final int defaultDisplayWidth;
     private ViewGroup mCacheContainer;
     private int mCurrentPosition;
-    private X8MediaDetailActivity mMediaActivity;
+    private final X8MediaDetailActivity mMediaActivity;
     private MediaModel mediaModel;
     private CopyOnWriteArrayList<? extends MediaModel> modelList;
     private MediaDetialViewHolder viewHolder;
-    private ViewPager viewPaper;
-    private WeakReference<T> weakReference;
-    private DataManager<MediaModel> mDataManager = DataManager.obtain();
-    private IPersonalDataCallBack personalDataCallBack = new IPersonalDataCallBack() { // from class: com.fimi.app.x8s.ui.presenter.X8MediaDetailPresenter.3
-        @Override // com.fimi.kernel.connect.interfaces.IPersonalDataCallBack
+    private final ViewPager viewPaper;
+    private final WeakReference<T> weakReference;
+    private final DataManager<MediaModel> mDataManager = DataManager.obtain();
+    private final IPersonalDataCallBack personalDataCallBack = new IPersonalDataCallBack() {
+        @Override
         public void onPersonalDataCallBack(int groupId, int cmdId, ILinkMessage packet) {
             LogUtil.i("media", "onPersonalDataCallBack: ");
         }
 
-        @Override // com.fimi.kernel.connect.interfaces.IPersonalDataCallBack
+        @Override
         public void onPersonalSendTimeOut(int groupId, int cmdId, BaseCommand bcd) {
             LogUtil.i("media", "onPersonalSendTimeOut: ");
         }
     };
-    private OnDownloadUiListener mOnOriginalDownloadUiListener = new OnDownloadUiListener() { // from class: com.fimi.app.x8s.ui.presenter.X8MediaDetailPresenter.4
-        @Override // com.fimi.album.interfaces.OnDownloadUiListener
+    private OnDownloadUiListener mOnOriginalDownloadUiListener = new OnDownloadUiListener() {
+        @Override
         public void onProgress(MediaModel model, int progrss) {
             if (X9HandleType.isCameraView() && X8MediaDetailPresenter.this.isCurrentModel(model)) {
                 model.setProgress(progrss);
@@ -94,7 +94,7 @@ public class X8MediaDetailPresenter<T extends X8MediaDetailActivity> implements 
             }
         }
 
-        @Override // com.fimi.album.interfaces.OnDownloadUiListener
+        @Override
         public void onSuccess(MediaModel model) {
             Intent intent = new Intent();
             intent.setAction(X8LocalFragmentPresenter.UPDATELOCALITEMRECEIVER);
@@ -109,7 +109,7 @@ public class X8MediaDetailPresenter<T extends X8MediaDetailActivity> implements 
             }
         }
 
-        @Override // com.fimi.album.interfaces.OnDownloadUiListener
+        @Override
         public void onFailure(MediaModel model) {
             if (X9HandleType.isCameraView() && X8MediaDetailPresenter.this.isCurrentModel(model)) {
                 HostLogBack.getInstance().writeLog("Alanqiu  =============downloadFile333:" + X8MediaDetailPresenter.this.mediaModel.toString());
@@ -117,7 +117,7 @@ public class X8MediaDetailPresenter<T extends X8MediaDetailActivity> implements 
             }
         }
 
-        @Override // com.fimi.album.interfaces.OnDownloadUiListener
+        @Override
         public void onStop(MediaModel model) {
             if (X9HandleType.isCameraView() && X8MediaDetailPresenter.this.isCurrentModel(model)) {
                 HostLogBack.getInstance().writeLog("Alanqiu  =============downloadFile444:" + X8MediaDetailPresenter.this.mediaModel.toString());
@@ -147,7 +147,7 @@ public class X8MediaDetailPresenter<T extends X8MediaDetailActivity> implements 
         this.modelList = this.mDataManager.getLocalDataNoHeadList();
     }
 
-    @Override // com.fimi.album.iview.IViewpaper
+    @Override
     public Object instantiateItem(ViewGroup container, int position) {
         MediaModel mediaModel = this.modelList.get(position);
         View view = LayoutInflater.from(this.mMediaActivity.getApplicationContext()).inflate(R.layout.album_adapter_detail_item, container, false);
@@ -249,20 +249,20 @@ public class X8MediaDetailPresenter<T extends X8MediaDetailActivity> implements 
             imagePipeline.evictFromDiskCache(Uri.parse(fileUrl));
             imagePipeline.evictFromCache(Uri.parse(fileUrl));
         }
-        FrescoUtils.displayPhoto(mMediaDetialViewHolder.mPhotoDraweeView, fileUrl, this.defaultDisplayWidth, this.defaultDisplayHeight, new FrescoControllerListener() { // from class: com.fimi.app.x8s.ui.presenter.X8MediaDetailPresenter.1
+        FrescoUtils.displayPhoto(mMediaDetialViewHolder.mPhotoDraweeView, fileUrl, this.defaultDisplayWidth, this.defaultDisplayHeight, new FrescoControllerListener() {
             @Override
             // com.fimi.album.biz.FrescoControllerListener, com.facebook.drawee.controller.ControllerListener
             public void onFailure(String id, Throwable throwable) {
                 super.onFailure(id, throwable);
                 mMediaDetialViewHolder.mProgressBar.setVisibility(8);
-                HostLogBack.getInstance().writeLog("Alanqiu  ===========initItemData onFailure:" + isReload + "mediaModel:" + mediaModel.toString());
+                HostLogBack.getInstance().writeLog("Alanqiu  ===========initItemData onFailure:" + isReload + "mediaModel:" + mediaModel);
             }
 
             @Override
             // com.fimi.album.biz.FrescoControllerListener, com.facebook.drawee.controller.ControllerListener
             public void onFinalImageSet(String id, ImageInfo imageInfo, Animatable animatable) {
                 super.onFinalImageSet(id, imageInfo, animatable);
-                HostLogBack.getInstance().writeLog("Alanqiu  ===========initItemData:" + isReload + "mediaModel:" + mediaModel.toString());
+                HostLogBack.getInstance().writeLog("Alanqiu  ===========initItemData:" + isReload + "mediaModel:" + mediaModel);
                 mMediaDetialViewHolder.mProgressBar.setVisibility(8);
                 mMediaDetialViewHolder.mPhotoDraweeView.update(imageInfo.getWidth(), imageInfo.getHeight());
             }
@@ -271,11 +271,11 @@ public class X8MediaDetailPresenter<T extends X8MediaDetailActivity> implements 
 
     public void deleteItem(int position) {
         if (X9HandleType.isCameraView()) {
-            CameraManager.getInstansCameraManager().deleteOnlineFile(this.modelList.get(position).getFileUrl(), new JsonUiCallBackListener() { // from class: com.fimi.app.x8s.ui.presenter.X8MediaDetailPresenter.2
-                @Override // com.fimi.kernel.dataparser.usb.JsonUiCallBackListener
+            CameraManager.getInstansCameraManager().deleteOnlineFile(this.modelList.get(position).getFileUrl(), new JsonUiCallBackListener() {
+                @Override
                 public void onComplete(JSONObject rt, Object o) {
                     if (X8MediaDetailPresenter.this.mCurrentPosition < X8MediaDetailPresenter.this.modelList.size()) {
-                        MediaModel mediaModel = (MediaModel) X8MediaDetailPresenter.this.modelList.get(X8MediaDetailPresenter.this.mCurrentPosition);
+                        MediaModel mediaModel = X8MediaDetailPresenter.this.modelList.get(X8MediaDetailPresenter.this.mCurrentPosition);
                         ((MediaDetailViewPaperAdapter) X8MediaDetailPresenter.this.viewPaper.getAdapter()).deleteItem(X8MediaDetailPresenter.this.mCurrentPosition);
                         X8MediaDetailPresenter.this.notifyMediaBroardcast(mediaModel);
                         if (X8MediaDetailPresenter.this.modelList.size() == 0) {
@@ -349,7 +349,7 @@ public class X8MediaDetailPresenter<T extends X8MediaDetailActivity> implements 
         }
     }
 
-    @Override // me.relex.photodraweeview.OnPhotoTapListener
+    @Override
     public void onPhotoTap(View view, float x, float y) {
         if (this.mMediaActivity.getIvTopBar().isShown()) {
             this.mMediaActivity.showTopBar(false);

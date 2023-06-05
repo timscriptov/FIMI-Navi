@@ -30,7 +30,7 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class X8UpdatingActivity extends BaseActivity {
     private Button btnReconnect;
     private DownRoundProgress downRoundProgress;
@@ -42,7 +42,7 @@ public class X8UpdatingActivity extends BaseActivity {
     private TextView x8TvUpdateFailureHint;
     private TextView x8sTvUpdatingProgress;
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     protected void setStatusBarColor() {
         requestWindowFeature(1);
         getWindow().setFlags(1024, 1024);
@@ -50,7 +50,7 @@ public class X8UpdatingActivity extends BaseActivity {
         StatusBarUtil.StatusBarLightMode(this);
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void initData() {
         Intent intent = getIntent();
         if (intent != null) {
@@ -66,28 +66,28 @@ public class X8UpdatingActivity extends BaseActivity {
     }
 
     void initView() {
-        this.downRoundProgress = (DownRoundProgress) findViewById(R.id.rpb_update_progress);
-        this.imgUpdateResult = (ImageView) findViewById(R.id.img_update_result);
-        this.tvUpdating = (TextView) findViewById(R.id.tv_updating);
-        this.x8TvUpdateFailureHint = (TextView) findViewById(R.id.x8_tv_update_failure_hint);
-        this.tvUpdateWarnming = (TextView) findViewById(R.id.tv_update_warnming);
-        this.x8sTvUpdatingProgress = (TextView) findViewById(R.id.x8s_tv_updating_progress);
-        this.btnReconnect = (Button) findViewById(R.id.btn_reconnect);
+        this.downRoundProgress = findViewById(R.id.rpb_update_progress);
+        this.imgUpdateResult = findViewById(R.id.img_update_result);
+        this.tvUpdating = findViewById(R.id.tv_updating);
+        this.x8TvUpdateFailureHint = findViewById(R.id.x8_tv_update_failure_hint);
+        this.tvUpdateWarnming = findViewById(R.id.tv_update_warnming);
+        this.x8sTvUpdatingProgress = findViewById(R.id.x8s_tv_updating_progress);
+        this.btnReconnect = findViewById(R.id.btn_reconnect);
         X8FpvManager.isUpdateing = true;
         FontUtil.changeFontLanTing(getAssets(), this.tvUpdateWarnming, this.tvUpdating);
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void doTrans() {
-        this.btnReconnect.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.ui.activity.update.X8UpdatingActivity.1
-            @Override // android.view.View.OnClickListener
+        this.btnReconnect.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 X8FpvManager.isUpdateing = false;
                 X8UpdatingActivity.this.finish();
             }
         });
-        this.updateManager.setOnUpdateProgress(new IX8UpdateProgressView() { // from class: com.fimi.app.x8s.ui.activity.update.X8UpdatingActivity.2
-            @Override // com.fimi.x8sdk.ivew.IX8UpdateProgressView
+        this.updateManager.setOnUpdateProgress(new IX8UpdateProgressView() {
+            @Override
             public void showUpdateProgress(boolean isSuccess, int progress, final List<FwInfo> dtos, String name) {
                 String tempString;
                 if (!isSuccess) {
@@ -111,8 +111,8 @@ public class X8UpdatingActivity extends BaseActivity {
                         X8UpdatingActivity.this.tvUpdateWarnming.setText(X8UpdatingActivity.this.getString(R.string.x8_update_warning));
                     }
                 } else {
-                    X8UpdatingActivity.this.btnReconnect.postDelayed(new Runnable() { // from class: com.fimi.app.x8s.ui.activity.update.X8UpdatingActivity.2.1
-                        @Override // java.lang.Runnable
+                    X8UpdatingActivity.this.btnReconnect.postDelayed(new Runnable() {
+                        @Override
                         public void run() {
                             HostConstants.clearLocalFwEntitys();
                             RelayProcess.getRelayProcess().getAllVersion();
@@ -152,11 +152,11 @@ public class X8UpdatingActivity extends BaseActivity {
         }
         StringBuilder info = new StringBuilder();
         if (!TextUtils.isEmpty(failedSb.toString())) {
-            info.append(failedSb.toString() + IOUtils.LINE_SEPARATOR_UNIX);
+            info.append(failedSb + IOUtils.LINE_SEPARATOR_UNIX);
             hasFailed = true;
         }
         if (!TextUtils.isEmpty(sucessSb.toString())) {
-            info.append(sucessSb.toString());
+            info.append(sucessSb);
         }
         if (hasFailed) {
             this.imgUpdateResult.setImageResource(R.drawable.x8s_update_error_4);
@@ -183,12 +183,12 @@ public class X8UpdatingActivity extends BaseActivity {
         StateManager.getInstance().getVersionState().setModuleFcAckVersion(null);
     }
 
-    @Override // android.support.v4.app.FragmentActivity, android.app.Activity
+    @Override
     public void onBackPressed() {
         X8FpvManager.isUpdateing = false;
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     protected int getContentViewLayoutID() {
         return R.layout.x8_activity_updating;
     }

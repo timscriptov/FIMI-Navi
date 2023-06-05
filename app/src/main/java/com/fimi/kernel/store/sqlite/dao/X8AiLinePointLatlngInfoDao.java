@@ -11,7 +11,7 @@ import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.database.DatabaseStatement;
 import org.greenrobot.greendao.internal.DaoConfig;
 
-/* loaded from: classes.dex */
+
 public class X8AiLinePointLatlngInfoDao extends AbstractDao<X8AiLinePointLatlngInfo, Long> {
     public static final String TABLENAME = "X8_AI_LINE_POINT_LATLNG_INFO";
 
@@ -33,7 +33,7 @@ public class X8AiLinePointLatlngInfoDao extends AbstractDao<X8AiLinePointLatlngI
         db.execSQL(sql);
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public final void bindValues(DatabaseStatement stmt, X8AiLinePointLatlngInfo entity) {
         stmt.clearBindings();
         Long id = entity.getId();
@@ -61,7 +61,7 @@ public class X8AiLinePointLatlngInfoDao extends AbstractDao<X8AiLinePointLatlngI
         stmt.bindLong(20, entity.getRoration());
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public final void bindValues(SQLiteStatement stmt, X8AiLinePointLatlngInfo entity) {
         stmt.clearBindings();
         Long id = entity.getId();
@@ -89,23 +89,23 @@ public class X8AiLinePointLatlngInfoDao extends AbstractDao<X8AiLinePointLatlngI
         stmt.bindLong(20, entity.getRoration());
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public Long readKey(Cursor cursor, int offset) {
-        if (cursor.isNull(offset + 0)) {
+        if (cursor.isNull(offset)) {
             return null;
         }
-        return Long.valueOf(cursor.getLong(offset + 0));
+        return Long.valueOf(cursor.getLong(offset));
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public X8AiLinePointLatlngInfo readEntity(Cursor cursor, int offset) {
-        X8AiLinePointLatlngInfo entity = new X8AiLinePointLatlngInfo(cursor.isNull(offset + 0) ? null : Long.valueOf(cursor.getLong(offset + 0)), cursor.getInt(offset + 1), cursor.getInt(offset + 2), cursor.getDouble(offset + 3), cursor.getDouble(offset + 4), cursor.getInt(offset + 5), cursor.getFloat(offset + 6), cursor.getInt(offset + 7), cursor.getInt(offset + 8), cursor.getInt(offset + 9), cursor.getInt(offset + 10), cursor.getInt(offset + 11), cursor.getInt(offset + 12), cursor.getInt(offset + 13), cursor.getDouble(offset + 14), cursor.getDouble(offset + 15), cursor.getInt(offset + 16), cursor.getLong(offset + 17), cursor.getInt(offset + 18), cursor.getInt(offset + 19));
+        X8AiLinePointLatlngInfo entity = new X8AiLinePointLatlngInfo(cursor.isNull(offset) ? null : Long.valueOf(cursor.getLong(offset)), cursor.getInt(offset + 1), cursor.getInt(offset + 2), cursor.getDouble(offset + 3), cursor.getDouble(offset + 4), cursor.getInt(offset + 5), cursor.getFloat(offset + 6), cursor.getInt(offset + 7), cursor.getInt(offset + 8), cursor.getInt(offset + 9), cursor.getInt(offset + 10), cursor.getInt(offset + 11), cursor.getInt(offset + 12), cursor.getInt(offset + 13), cursor.getDouble(offset + 14), cursor.getDouble(offset + 15), cursor.getInt(offset + 16), cursor.getLong(offset + 17), cursor.getInt(offset + 18), cursor.getInt(offset + 19));
         return entity;
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public void readEntity(Cursor cursor, X8AiLinePointLatlngInfo entity, int offset) {
-        entity.setId(cursor.isNull(offset + 0) ? null : Long.valueOf(cursor.getLong(offset + 0)));
+        entity.setId(cursor.isNull(offset) ? null : Long.valueOf(cursor.getLong(offset)));
         entity.setNumber(cursor.getInt(offset + 1));
         entity.setTotalnumber(cursor.getInt(offset + 2));
         entity.setLongitude(cursor.getDouble(offset + 3));
@@ -127,13 +127,13 @@ public class X8AiLinePointLatlngInfoDao extends AbstractDao<X8AiLinePointLatlngI
         entity.setRoration(cursor.getInt(offset + 19));
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public final Long updateKeyAfterInsert(X8AiLinePointLatlngInfo entity, long rowId) {
         entity.setId(Long.valueOf(rowId));
         return Long.valueOf(rowId);
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public Long getKey(X8AiLinePointLatlngInfo entity) {
         if (entity != null) {
             return entity.getId();
@@ -141,17 +141,17 @@ public class X8AiLinePointLatlngInfoDao extends AbstractDao<X8AiLinePointLatlngI
         return null;
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public boolean hasKey(X8AiLinePointLatlngInfo entity) {
         return entity.getId() != null;
     }
 
-    @Override // org.greenrobot.greendao.AbstractDao
+    @Override
     public final boolean isEntityUpdateable() {
         return true;
     }
 
-    /* loaded from: classes.dex */
+
     public static class Properties {
         public static final Property Id = new Property(0, Long.class, "id", true, "_id");
         public static final Property Number = new Property(1, Integer.TYPE, "number", false, "NUMBER");

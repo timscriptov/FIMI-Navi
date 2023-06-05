@@ -44,7 +44,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.LinkedList;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class X8MediaActivity extends BaseActivity implements ISelectData, X8MediaPresenter.IMediaCameraConnected {
     private static final String TAG = "X8MediaActivity";
     Button mBtnCancle;
@@ -63,7 +63,7 @@ public class X8MediaActivity extends BaseActivity implements ISelectData, X8Medi
     private X8LocalMediaLocalFragment mX8LocalMediaFragment;
     private X8MediaPresenter mX8MediaPresenter;
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     protected void setStatusBarColor() {
     }
 
@@ -81,7 +81,7 @@ public class X8MediaActivity extends BaseActivity implements ISelectData, X8Medi
         X8sNavigationBarUtils.hideBottomUIMenu(this);
     }
 
-    @Override // android.app.Activity, android.view.Window.Callback
+    @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus) {
@@ -89,12 +89,12 @@ public class X8MediaActivity extends BaseActivity implements ISelectData, X8Medi
         }
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     protected int getContentViewLayoutID() {
         return R.layout.activity_x8_media;
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void initData() {
         getWindow().setFlags(1024, 1024);
         getWindow().addFlags(128);
@@ -112,7 +112,7 @@ public class X8MediaActivity extends BaseActivity implements ISelectData, X8Medi
         this.mHackyViewPager.setOverScrollMode(2);
         this.mTlTitleCategoly.setupWithViewPager(this.mHackyViewPager);
         for (int index = 0; index < this.mTlTitleCategoly.getTabCount(); index++) {
-            View tabItem = LayoutInflater.from(this).inflate(R.layout.x8_tab_view, (ViewGroup) null);
+            View tabItem = LayoutInflater.from(this).inflate(R.layout.x8_tab_view, null);
             if (StateManager.getInstance().getCamera().getToken() > 0) {
                 if (index == 0) {
                     changeViewVariablw(tabItem, getResources().getColor(R.color.x8_media_tab_select), 0, R.string.x8_online_media);
@@ -136,21 +136,21 @@ public class X8MediaActivity extends BaseActivity implements ISelectData, X8Medi
     }
 
     private void initView() {
-        this.mIbtnReturn = (ImageButton) findViewById(R.id.ibtn_return);
-        this.mTvMediaSelect = (TextView) findViewById(R.id.tv_media_select);
-        this.mTlTitleCategoly = (TabLayout) findViewById(R.id.tl_title_categoly);
-        this.mRlHead = (RelativeLayout) findViewById(R.id.rl_head);
-        this.mHackyViewPager = (HackyViewPager) findViewById(R.id.viewpaper);
-        this.mBtnCancle = (Button) findViewById(R.id.btn_cancle);
-        this.mBtnIsSelect = (Button) findViewById(R.id.btn_is_select);
-        this.mTvSelectTitle = (TextView) findViewById(R.id.tv_select_title);
-        this.mRlTopBar = (RelativeLayout) findViewById(R.id.rl_top_bar);
+        this.mIbtnReturn = findViewById(R.id.ibtn_return);
+        this.mTvMediaSelect = findViewById(R.id.tv_media_select);
+        this.mTlTitleCategoly = findViewById(R.id.tl_title_categoly);
+        this.mRlHead = findViewById(R.id.rl_head);
+        this.mHackyViewPager = findViewById(R.id.viewpaper);
+        this.mBtnCancle = findViewById(R.id.btn_cancle);
+        this.mBtnIsSelect = findViewById(R.id.btn_is_select);
+        this.mTvSelectTitle = findViewById(R.id.tv_select_title);
+        this.mRlTopBar = findViewById(R.id.rl_top_bar);
         this.mBtnIsSelect.setBackgroundResource(R.drawable.x8_ablum_top_select);
         FontUtil.changeFontLanTing(getAssets(), this.mTvMediaSelect, this.mBtnCancle, this.mBtnIsSelect, this.mTvSelectTitle);
     }
 
     public void changeViewVariablw(View view, int resColor, int indicatorState, int resStr) {
-        TextView tvTitleDescription = (TextView) view.findViewById(R.id.tv_title_desprition);
+        TextView tvTitleDescription = view.findViewById(R.id.tv_title_desprition);
         tvTitleDescription.setTextColor(resColor);
         if (resStr != 0) {
             tvTitleDescription.setText(resStr);
@@ -158,10 +158,10 @@ public class X8MediaActivity extends BaseActivity implements ISelectData, X8Medi
         FontUtil.changeFontLanTing(getAssets(), tvTitleDescription);
     }
 
-    @Override // com.fimi.kernel.base.BaseActivity
+    @Override
     public void doTrans() {
-        this.mIbtnReturn.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.ui.album.x8s.X8MediaActivity.1
-            @Override // android.view.View.OnClickListener
+        this.mIbtnReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 if (X8MediaFileDownloadManager.getInstance().hasDownloading()) {
                     X8MediaActivity.this.showDialogTip();
@@ -170,8 +170,8 @@ public class X8MediaActivity extends BaseActivity implements ISelectData, X8Medi
                 }
             }
         });
-        this.mTlTitleCategoly.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() { // from class: com.fimi.app.x8s.ui.album.x8s.X8MediaActivity.2
-            @Override // android.support.design.widget.TabLayout.OnTabSelectedListener
+        this.mTlTitleCategoly.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 X8MediaActivity.this.changeViewVariablw(tab.getCustomView(), X8MediaActivity.this.getResources().getColor(R.color.x8_media_tab_select), 0, 0);
                 X8MediaActivity.this.getX9MediaPresenter().currentFragmentType();
@@ -182,23 +182,23 @@ public class X8MediaActivity extends BaseActivity implements ISelectData, X8Medi
                 }
             }
 
-            @Override // android.support.design.widget.TabLayout.OnTabSelectedListener
+            @Override
             public void onTabUnselected(TabLayout.Tab tab) {
                 X8MediaActivity.this.changeViewVariablw(tab.getCustomView(), X8MediaActivity.this.getResources().getColor(R.color.x8_media_tab_unselect), 4, 0);
             }
 
-            @Override // android.support.design.widget.TabLayout.OnTabSelectedListener
+            @Override
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
-        this.mTvMediaSelect.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.ui.album.x8s.X8MediaActivity.3
-            @Override // android.view.View.OnClickListener
+        this.mTvMediaSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 X8MediaActivity.this.getX9MediaPresenter().enterSelectMode(true, true);
                 if (X9HandleType.isCameraView()) {
-                    X8MediaActivity.this.mTvSelectTitle.setText(X8MediaActivity.this.getString(R.string.album_select_camera_title, new Object[]{"0", "0KB"}));
+                    X8MediaActivity.this.mTvSelectTitle.setText(X8MediaActivity.this.getString(R.string.album_select_camera_title, "0", "0KB"));
                 } else {
-                    X8MediaActivity.this.mTvSelectTitle.setText(X8MediaActivity.this.getString(R.string.album_select_title, new Object[]{"0"}));
+                    X8MediaActivity.this.mTvSelectTitle.setText(X8MediaActivity.this.getString(R.string.album_select_title, "0"));
                 }
                 X8MediaActivity.this.mRlTopBar.setVisibility(View.VISIBLE);
                 X8MediaActivity.this.mHackyViewPager.setScrollble(false);
@@ -206,16 +206,16 @@ public class X8MediaActivity extends BaseActivity implements ISelectData, X8Medi
                 X8MediaActivity.this.mBtnIsSelect.setBackgroundResource(R.drawable.x8_ablum_top_select_unclick);
             }
         });
-        this.mBtnCancle.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.ui.album.x8s.X8MediaActivity.4
-            @Override // android.view.View.OnClickListener
+        this.mBtnCancle.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 X8MediaActivity.this.getX9MediaPresenter().enterSelectMode(false, true);
                 X8MediaActivity.this.mHackyViewPager.setScrollble(true);
                 X8MediaActivity.this.mRlTopBar.setVisibility(View.GONE);
             }
         });
-        this.mBtnIsSelect.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.ui.album.x8s.X8MediaActivity.5
-            @Override // android.view.View.OnClickListener
+        this.mBtnIsSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 if (X8MediaActivity.this.mBtnIsSelect.getText().equals(X8MediaActivity.this.getString(R.string.media_select_all))) {
                     X8MediaActivity.this.getX9MediaPresenter().selectBtn(true);
@@ -248,7 +248,7 @@ public class X8MediaActivity extends BaseActivity implements ISelectData, X8Medi
         EventBus.getDefault().unregister(this);
     }
 
-    @Override // com.fimi.album.iview.ISelectData
+    @Override
     public void selectSize(int size, long capacity) {
         String capacityStr;
         float capacityfloat = 0; // TODO
@@ -264,38 +264,38 @@ public class X8MediaActivity extends BaseActivity implements ISelectData, X8Medi
                 capacityStr = NumberUtil.decimalPointStr(capacityfloat2, 1) + "KB";
             }
             if (size == 0) {
-                this.mTvSelectTitle.setText(getString(R.string.album_select_camera_title, new Object[]{size + "", "0KB"}));
+                this.mTvSelectTitle.setText(getString(R.string.album_select_camera_title, size + "", "0KB"));
             } else {
-                this.mTvSelectTitle.setText(getString(R.string.album_select_camera_title, new Object[]{size + "", capacityStr}));
+                this.mTvSelectTitle.setText(getString(R.string.album_select_camera_title, size + "", capacityStr));
             }
         } else {
-            this.mTvSelectTitle.setText(getString(R.string.album_select_title, new Object[]{size + ""}));
+            this.mTvSelectTitle.setText(getString(R.string.album_select_title, size + ""));
         }
         getX9MediaPresenter().selectFileSize(size);
     }
 
-    @Override // com.fimi.album.iview.ISelectData
+    @Override
     public void enterSelectMode() {
         this.mRlTopBar.setVisibility(0);
         getX9MediaPresenter().enterSelectMode(true, true);
         LogUtil.i(TAG, "enterSelectMode: ");
     }
 
-    @Override // com.fimi.album.iview.ISelectData
+    @Override
     public void quitSelectMode() {
         this.mRlTopBar.setVisibility(8);
         this.mHackyViewPager.setScrollble(true);
         getX9MediaPresenter().enterSelectMode(false, false);
     }
 
-    @Override // com.fimi.album.iview.ISelectData
+    @Override
     public void deleteFile() {
         this.mRlTopBar.setVisibility(8);
         this.mHackyViewPager.setScrollble(true);
         getX9MediaPresenter().enterSelectMode(false, false);
     }
 
-    @Override // com.fimi.album.iview.ISelectData
+    @Override
     public void allSelectMode(boolean isAll) {
         if (isAll) {
             changeBtnSelectState(getString(R.string.media_select_all_no), this.mBtnIsSelect);
@@ -306,19 +306,19 @@ public class X8MediaActivity extends BaseActivity implements ISelectData, X8Medi
         this.mBtnIsSelect.setBackgroundResource(R.drawable.x8_ablum_top_select_unclick);
     }
 
-    @Override // com.fimi.album.iview.ISelectData
+    @Override
     public void startDownload() {
         this.mRlTopBar.setVisibility(8);
         this.mHackyViewPager.setScrollble(true);
         getX9MediaPresenter().enterSelectMode(false, false);
     }
 
-    @Override // com.fimi.album.iview.ISelectData
+    @Override
     public void onDeleteComplete() {
         showSelectBtn();
     }
 
-    @Override // com.fimi.album.iview.ISelectData
+    @Override
     public void initComplete(boolean isCamera) {
         if (isCamera) {
             getX9MediaPresenter().removeCameraDefaultVaribale();
@@ -335,7 +335,7 @@ public class X8MediaActivity extends BaseActivity implements ISelectData, X8Medi
         }
     }
 
-    @Override // com.fimi.album.iview.ISelectData
+    @Override
     public void addSingleFile() {
         this.mTvMediaSelect.setVisibility(0);
         getmX8LocalMediaFragment().noDataTipCallback(false);
@@ -367,12 +367,12 @@ public class X8MediaActivity extends BaseActivity implements ISelectData, X8Medi
     }
 
     public void showDialogTip() {
-        X8DoubleCustomDialog doubleCustomDialog = new X8DoubleCustomDialog(this, getString(R.string.x8_album_warn_tip), getString(R.string.x8_album_exit_tip), new X8DoubleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.ui.album.x8s.X8MediaActivity.6
-            @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+        X8DoubleCustomDialog doubleCustomDialog = new X8DoubleCustomDialog(this, getString(R.string.x8_album_warn_tip), getString(R.string.x8_album_exit_tip), new X8DoubleCustomDialog.onDialogButtonClickListener() {
+            @Override
             public void onLeft() {
             }
 
-            @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+            @Override
             public void onRight() {
                 X8MediaActivity.this.finish();
             }
@@ -399,11 +399,11 @@ public class X8MediaActivity extends BaseActivity implements ISelectData, X8Medi
         return this.mRlTopBar;
     }
 
-    @Override // android.app.Activity
+    @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
     }
 
-    @Override // android.app.Activity
+    @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
     }
 
@@ -415,7 +415,7 @@ public class X8MediaActivity extends BaseActivity implements ISelectData, X8Medi
         return this.mX8LocalMediaFragment;
     }
 
-    @Override // com.fimi.app.x8s.ui.presenter.X8MediaPresenter.IMediaCameraConnected
+    @Override
     public void onCameraConnectedState(boolean isConnected) {
         if (!isConnected) {
             this.mX8MediaPresenter.onDisConnect();

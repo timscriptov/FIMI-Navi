@@ -1,6 +1,6 @@
 package com.fimi.kernel.fds;
 
-/* loaded from: classes.dex */
+
 public interface IFdsUploadListener {
     void onFailure(Object obj);
 

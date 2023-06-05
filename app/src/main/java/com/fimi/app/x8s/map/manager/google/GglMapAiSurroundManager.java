@@ -30,16 +30,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class GglMapAiSurroundManager extends AbsAiSurroundManager {
     private static final PatternItem DASH = new Dash(20.0f);
     private static final PatternItem GAP = new Gap(20.0f);
     private static final List<PatternItem> PATTERN_POLYLINE_DOTTED = Arrays.asList(GAP, DASH);
     List<LatLng> latLngs = new ArrayList();
     MapPointLatLng mp;
-    private Context context;
-    private GglMapLocationManager gglMapLocationManager;
-    private GoogleMap googleMap;
+    private final Context context;
+    private final GglMapLocationManager gglMapLocationManager;
+    private final GoogleMap googleMap;
     private Circle limitCircle;
     private Polyline line;
     private Polygon mPolygon;
@@ -53,7 +53,7 @@ public class GglMapAiSurroundManager extends AbsAiSurroundManager {
         this.gglMapLocationManager = gglMapLocationManager;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiSurroundManager
+    @Override
     public void clearSurroundMarker() {
         if (this.pointMarker != null) {
             this.pointMarker.remove();
@@ -85,7 +85,7 @@ public class GglMapAiSurroundManager extends AbsAiSurroundManager {
         this.mp = null;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiSurroundManager
+    @Override
     public void setAiSurroundMark(double latitude, double logitude) {
         FLatLng fLatLng = GpsCorrect.Earth_To_Mars(latitude, logitude);
         LatLng latLng = new LatLng(fLatLng.latitude, fLatLng.longitude);
@@ -100,7 +100,7 @@ public class GglMapAiSurroundManager extends AbsAiSurroundManager {
         this.pointMarker.setPosition(latLng);
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiSurroundManager
+    @Override
     public float getSurroundRadius(double lastLogitude, double lastLatitude, double currentLogitude, double currentLatitude) {
         FLatLng last = GpsCorrect.Earth_To_Mars(lastLatitude, lastLogitude);
         FLatLng currrent = GpsCorrect.Earth_To_Mars(currentLatitude, currentLogitude);
@@ -108,31 +108,31 @@ public class GglMapAiSurroundManager extends AbsAiSurroundManager {
         return distance;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiSurroundManager
+    @Override
     public void setAiSurroundCircle(double latitude, double logitude, float radius) {
         FLatLng fLatLng = GpsCorrect.Earth_To_Mars(latitude, logitude);
         LatLng lats = new LatLng(fLatLng.latitude, fLatLng.longitude);
         drawAiSurroundCircle(lats.latitude, lats.longitude, radius);
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsBaseManager
+    @Override
     public float getLineAngleByMapBealing(float angle) {
         return 0.0f;
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsBaseManager
+    @Override
     public void setOnMapClickListener() {
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsBaseManager
+    @Override
     public void removeMapClickListener() {
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsBaseManager
+    @Override
     public void resetMapEvent() {
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsBaseManager
+    @Override
     public void drawAiLimit(double lat, double lng, double radiu) {
         if (this.limitCircle == null) {
             CircleOptions circle = new CircleOptions().center(new LatLng(lat, lng)).radius(radiu).strokePattern(PATTERN_POLYLINE_DOTTED).strokeColor(this.context.getResources().getColor(R.color.x8_drone_inface_line)).fillColor(this.fillColor).strokeWidth(this.strokeWidth);
@@ -142,7 +142,7 @@ public class GglMapAiSurroundManager extends AbsAiSurroundManager {
         this.limitCircle.setCenter(new LatLng(lat, lng));
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiSurroundManager
+    @Override
     public void addEllipse(double lat, double lng, float horizontalDistance, float startNosePoint) {
         if (this.mPolygon != null) {
             this.mPolygon.remove();
@@ -179,7 +179,7 @@ public class GglMapAiSurroundManager extends AbsAiSurroundManager {
         this.mPolygon.setStrokeColor(this.context.getResources().getColor(R.color.x8_drone_inface_line));
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiSurroundManager
+    @Override
     public void drawAiSurroundCircle(double lat, double lnt, double radiu) {
         if (this.surroundCircle == null) {
             CircleOptions circle = new CircleOptions().center(new LatLng(lat, lnt)).radius(radiu).strokeColor(this.context.getResources().getColor(R.color.x8_drone_inface_line)).fillColor(this.fillColor).strokeWidth(this.strokeWidth);
@@ -189,7 +189,7 @@ public class GglMapAiSurroundManager extends AbsAiSurroundManager {
         this.surroundCircle.setCenter(new LatLng(lat, lnt));
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiSurroundManager
+    @Override
     public void addPolylinescircle(boolean cw, double lat, double lng, double lat1, double lng2, int radius, int maxRadius) {
         float startAngle;
         if (this.line != null) {
@@ -237,7 +237,7 @@ public class GglMapAiSurroundManager extends AbsAiSurroundManager {
         this.line.setColor(this.context.getResources().getColor(R.color.x8_drone_inface_line));
     }
 
-    @Override // com.fimi.app.x8s.map.interfaces.AbsAiSurroundManager
+    @Override
     public void reSetAiSurroundCircle(double latitude, double logitude, float radius) {
         if (this.limitCircle != null) {
             this.limitCircle.remove();

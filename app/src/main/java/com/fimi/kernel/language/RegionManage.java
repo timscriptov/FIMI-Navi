@@ -4,13 +4,13 @@ import com.fimi.kernel.Constants;
 import com.fimi.kernel.region.ServiceItem;
 import com.fimi.kernel.store.shared.SPStoreManager;
 
-/* loaded from: classes.dex */
+
 public class RegionManage {
     private String mCountrySelect;
     private int mServiceType = -1;
 
     public int getCountryType() {
-        ServiceItem serviceItem = (ServiceItem) SPStoreManager.getInstance().getObject(Constants.SERVICE_ITEM_KEY, ServiceItem.class);
+        ServiceItem serviceItem = SPStoreManager.getInstance().getObject(Constants.SERVICE_ITEM_KEY, ServiceItem.class);
         int i = 0;
         while (true) {
             if (i >= ServiceItem.getServicename().length) {

@@ -5,7 +5,7 @@ import com.twitter.sdk.android.core.internal.scribe.EventsFilesManager;
 import java.io.Serializable;
 import java.util.Locale;
 
-/* loaded from: classes.dex */
+
 public class LanguageModel implements Serializable {
     Locale locale;
     private String country;

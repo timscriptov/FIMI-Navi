@@ -13,15 +13,15 @@ import com.fimi.x8sdk.listener.IX8FiveKeyDefine;
 
 import java.util.List;
 
-/* loaded from: classes2.dex */
+
 public class FiveKeyDefinePresenter extends BasePresenter implements IFiveKeyAction {
     private final int SATURATION_INDEX = 5;
     private final int CONTRASTRATIO_INDEX = 6;
     private final int CANCEL_PARAMETER_SETTING_INDEX = 9;
-    private CameraManager cameraManager;
+    private final CameraManager cameraManager;
     private boolean isFiveKeyContrastRatioAdd;
     private boolean isFiveKeySaturationAdd;
-    private IX8FiveKeyDefine ix8FiveKeyDefine;
+    private final IX8FiveKeyDefine ix8FiveKeyDefine;
 
     public FiveKeyDefinePresenter(IX8FiveKeyDefine ix8FiveKeyDefine, CameraManager cameraManager) {
         this.ix8FiveKeyDefine = ix8FiveKeyDefine;
@@ -36,7 +36,7 @@ public class FiveKeyDefinePresenter extends BasePresenter implements IFiveKeyAct
         reponseCmd(true, groupId, msgId, packet, null);
     }
 
-    @Override // com.fimi.x8sdk.common.BasePresenter
+    @Override
     public void reponseCmd(boolean isAck, int group, int msgId, ILinkMessage packet, BaseCommand bcd) {
         if (group == 11 && msgId == 16) {
             AckFiveKeyDefine ackFiveKeyDefine = (AckFiveKeyDefine) packet;
@@ -104,7 +104,7 @@ public class FiveKeyDefinePresenter extends BasePresenter implements IFiveKeyAct
         this.cameraManager.setCameraKeyParams(param, paramKey, jsonUiCallBackListener);
     }
 
-    @Override // com.fimi.x8sdk.ivew.IFiveKeyAction
+    @Override
     public String setCameraContrast(String paramKey, int param, ParameterType parameterType, JsonUiCallBackListener jsonUiCallBackListener) {
         if (parameterType == ParameterType.ADD_VALUE) {
             param++;
@@ -121,7 +121,7 @@ public class FiveKeyDefinePresenter extends BasePresenter implements IFiveKeyAct
         return currentParam;
     }
 
-    @Override // com.fimi.x8sdk.ivew.IFiveKeyAction
+    @Override
     public String setCameraSaturation(String paramKey, int param, ParameterType parameterType, JsonUiCallBackListener jsonUiCallBackListener) {
         if (parameterType == ParameterType.ADD_VALUE) {
             param++;
@@ -138,7 +138,7 @@ public class FiveKeyDefinePresenter extends BasePresenter implements IFiveKeyAct
         return currentParam;
     }
 
-    @Override // com.fimi.x8sdk.ivew.IFiveKeyAction
+    @Override
     public String setFiveKeyCameraKeyParams(String paramKey, List list, String currentParams, JsonUiCallBackListener jsonUiCallBackListener) {
         int currentIndex = 0;
         for (int i = 0; i < list.size(); i++) {
@@ -150,23 +150,23 @@ public class FiveKeyDefinePresenter extends BasePresenter implements IFiveKeyAct
         return list.get(currentIndex).toString();
     }
 
-    @Override // com.fimi.x8sdk.ivew.IFiveKeyAction
+    @Override
     public void restoreUpDownKey(boolean isRestore) {
         this.isFiveKeySaturationAdd = isRestore;
         this.isFiveKeyContrastRatioAdd = isRestore;
     }
 
-    @Override // com.fimi.x8sdk.ivew.IFiveKeyAction
+    @Override
     public void isSetCameraContrast() {
         this.isFiveKeyContrastRatioAdd = true;
     }
 
-    @Override // com.fimi.x8sdk.ivew.IFiveKeyAction
+    @Override
     public void isSetCameraSaturation() {
         this.isFiveKeySaturationAdd = true;
     }
 
-    /* loaded from: classes2.dex */
+
     public enum ParameterType {
         ORIGINAL_VALUE,
         ADD_VALUE,

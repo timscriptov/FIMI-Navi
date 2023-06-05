@@ -1,6 +1,6 @@
 package com.fimi.kernel.base;
 
-/* loaded from: classes.dex */
+
 public abstract class BasePresenter<T> {
     public T mView;
 

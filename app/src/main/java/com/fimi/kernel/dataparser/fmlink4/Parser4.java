@@ -1,6 +1,6 @@
 package com.fimi.kernel.dataparser.fmlink4;
 
-/* loaded from: classes.dex */
+
 public class Parser4 {
     static boolean messageReceived;
     byte typeAndRes1Encry;
@@ -144,7 +144,6 @@ public class Parser4 {
                     }
                 } catch (Exception e) {
                     String x = null;
-                    x.toString();
                     break;
                 }
                 break;
@@ -171,7 +170,7 @@ public class Parser4 {
         this.typeAndRes1Encry = (byte) 0;
     }
 
-    /* loaded from: classes.dex */
+
     public enum State {
         UnUnit,
         Idle,

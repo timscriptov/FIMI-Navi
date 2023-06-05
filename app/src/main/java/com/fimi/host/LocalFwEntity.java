@@ -3,8 +3,6 @@ package com.fimi.host;
 import java.io.Serializable;
 
 
-
-/* loaded from: classes.dex */
 public class LocalFwEntity implements Serializable {
     private long logicVersion;
     private int model;

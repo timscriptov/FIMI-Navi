@@ -4,7 +4,7 @@ import android.util.Log;
 
 import java.util.Locale;
 
-/* loaded from: classes.dex */
+
 public class DebugLog {
     public static final boolean ENABLE_DEBUG = true;
     public static final boolean ENABLE_ERROR = true;

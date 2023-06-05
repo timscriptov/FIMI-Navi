@@ -3,7 +3,7 @@ package com.fimi.kernel.connect.interfaces;
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 import com.fimi.kernel.dataparser.milink.LinkPacket;
 
-/* loaded from: classes.dex */
+
 public interface IRetransmissionHandle {
     boolean removeFromListByCmdID(int i, int i2, int i3, LinkPacket linkPacket);
 

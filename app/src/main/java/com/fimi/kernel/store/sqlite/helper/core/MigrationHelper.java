@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class MigrationHelper {
     private static final String CONVERSION_CLASS_NOT_FOUND_EXCEPTION = "MIGRATION HELPER - CLASS DOESN'T MATCH WITH THE CURRENT PARAMETERS";
     private static MigrationHelper instance;
@@ -61,13 +61,12 @@ public class MigrationHelper {
             }
             createTableStringBuilder.append(");");
             db.execSQL(createTableStringBuilder.toString());
-            StringBuilder insertTableStringBuilder = new StringBuilder();
-            insertTableStringBuilder.append("INSERT INTO ").append(tempTableName).append(" (");
-            insertTableStringBuilder.append(TextUtils.join(",", properties));
-            insertTableStringBuilder.append(") SELECT ");
-            insertTableStringBuilder.append(TextUtils.join(",", properties));
-            insertTableStringBuilder.append(" FROM ").append(tableName).append(";");
-            db.execSQL(insertTableStringBuilder.toString());
+            String insertTableStringBuilder = "INSERT INTO " + tempTableName + " (" +
+                    TextUtils.join(",", properties) +
+                    ") SELECT " +
+                    TextUtils.join(",", properties) +
+                    " FROM " + tableName + ";";
+            db.execSQL(insertTableStringBuilder);
         }
     }
 
@@ -83,16 +82,13 @@ public class MigrationHelper {
                     properties.add(columnName);
                 }
             }
-            StringBuilder insertTableStringBuilder = new StringBuilder();
-            insertTableStringBuilder.append("INSERT INTO ").append(tableName).append(" (");
-            insertTableStringBuilder.append(TextUtils.join(",", properties));
-            insertTableStringBuilder.append(") SELECT ");
-            insertTableStringBuilder.append(TextUtils.join(",", properties));
-            insertTableStringBuilder.append(" FROM ").append(tempTableName).append(";");
-            StringBuilder dropTableStringBuilder = new StringBuilder();
-            dropTableStringBuilder.append("DROP TABLE ").append(tempTableName);
-            db.execSQL(insertTableStringBuilder.toString());
-            db.execSQL(dropTableStringBuilder.toString());
+            String insertTableStringBuilder = "INSERT INTO " + tableName + " (" +
+                    TextUtils.join(",", properties) +
+                    ") SELECT " +
+                    TextUtils.join(",", properties) +
+                    " FROM " + tempTableName + ";";
+            db.execSQL(insertTableStringBuilder);
+            db.execSQL("DROP TABLE " + tempTableName);
         }
     }
 

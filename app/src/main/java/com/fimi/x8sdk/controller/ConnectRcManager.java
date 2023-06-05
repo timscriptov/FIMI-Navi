@@ -11,10 +11,10 @@ import com.fimi.kernel.connect.session.SessionManager;
 import com.fimi.x8sdk.connect.CommunicationManager;
 import com.fimi.x8sdk.connect.ConnectType;
 
-/* loaded from: classes2.dex */
+
 public class ConnectRcManager {
     private static final String ACTION_USB_PERMISSION = "com.google.android.DemoKit.action.USB_PERMISSION";
-    private static ConnectRcManager instance = new ConnectRcManager();
+    private static final ConnectRcManager instance = new ConnectRcManager();
     boolean isRequestPermission = false;
     boolean isTryConnect;
     private PendingIntent mPermissionIntent;

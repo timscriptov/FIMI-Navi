@@ -11,7 +11,7 @@ import com.fimi.x8sdk.listener.JsonCallBackListener;
 import com.fimi.x8sdk.presenter.CameraJsonPresenter;
 import com.fimi.x8sdk.presenter.CameraPresenter;
 
-/* loaded from: classes2.dex */
+
 public class CameraManager {
     private static volatile CameraManager cameraManager = null;
     ICamAction camAction = new CameraPresenter();

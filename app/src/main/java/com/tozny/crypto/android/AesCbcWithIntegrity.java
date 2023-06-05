@@ -327,7 +327,7 @@ public class AesCbcWithIntegrity {
             String ivString = Base64.encodeToString(this.iv, 2);
             String cipherTextString = Base64.encodeToString(this.cipherText, 2);
             String macString = Base64.encodeToString(this.mac, 2);
-            return String.format(ivString + ":" + macString + ":" + cipherTextString, new Object[0]);
+            return String.format(ivString + ":" + macString + ":" + cipherTextString);
         }
 
         public int hashCode() {

@@ -12,7 +12,7 @@ import com.fimi.app.x8s.widget.X8FrequencyPoint;
 
 import java.util.Random;
 
-/* loaded from: classes.dex */
+
 public class X8FrequencyPointController extends AbsX8MenuBoxControllers implements View.OnClickListener {
     private View imgRetruen;
     private IX8FrequencyPointListener listener;
@@ -23,18 +23,18 @@ public class X8FrequencyPointController extends AbsX8MenuBoxControllers implemen
         super(rootView);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
         LayoutInflater inflater = LayoutInflater.from(rootView.getContext());
         this.contentView = inflater.inflate(R.layout.x8_main_general_frepoint_setting, (ViewGroup) rootView, true);
         this.views = new Button[5];
         this.imgRetruen = this.contentView.findViewById(R.id.img_return);
-        this.vFrePoint = (X8FrequencyPoint) this.contentView.findViewById(R.id.v_fre_point);
-        this.views[0] = (Button) this.contentView.findViewById(R.id.tv_point1);
-        this.views[1] = (Button) this.contentView.findViewById(R.id.tv_point2);
-        this.views[2] = (Button) this.contentView.findViewById(R.id.tv_point3);
-        this.views[3] = (Button) this.contentView.findViewById(R.id.tv_point4);
-        this.views[4] = (Button) this.contentView.findViewById(R.id.tv_point5);
+        this.vFrePoint = this.contentView.findViewById(R.id.v_fre_point);
+        this.views[0] = this.contentView.findViewById(R.id.tv_point1);
+        this.views[1] = this.contentView.findViewById(R.id.tv_point2);
+        this.views[2] = this.contentView.findViewById(R.id.tv_point3);
+        this.views[3] = this.contentView.findViewById(R.id.tv_point4);
+        this.views[4] = this.contentView.findViewById(R.id.tv_point5);
         updateUi();
         initActions();
     }
@@ -47,11 +47,7 @@ public class X8FrequencyPointController extends AbsX8MenuBoxControllers implemen
 
     public void setSelectIndex(int index) {
         for (int i = 0; i < this.views.length; i++) {
-            if (i == index - 1) {
-                this.views[i].setSelected(true);
-            } else {
-                this.views[i].setSelected(false);
-            }
+            this.views[i].setSelected(i == index - 1);
         }
     }
 
@@ -61,7 +57,7 @@ public class X8FrequencyPointController extends AbsX8MenuBoxControllers implemen
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
         this.imgRetruen.setOnClickListener(this);
         this.views[0].setOnClickListener(this);
@@ -71,7 +67,7 @@ public class X8FrequencyPointController extends AbsX8MenuBoxControllers implemen
         this.views[4].setOnClickListener(this);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         updateUi();
     }
@@ -93,11 +89,11 @@ public class X8FrequencyPointController extends AbsX8MenuBoxControllers implemen
         setSelectDisenable();
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.img_return) {

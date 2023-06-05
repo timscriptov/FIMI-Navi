@@ -10,9 +10,9 @@ import com.fimi.kernel.connect.interfaces.IConnectResultListener;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* loaded from: classes.dex */
+
 public class SessionManager {
-    private static SessionManager mSessionManager = new SessionManager();
+    private static final SessionManager mSessionManager = new SessionManager();
     private final int CONNECT_NETWORK = 0;
     private final int DISCONNECT_NETWORK = 1;
     private final int DEVICE_CONNECT = 3;
@@ -20,9 +20,9 @@ public class SessionManager {
     private final int DEVICE_CONNECT_ERROR = 5;
     public boolean CONNECTION_SUCCEED = false;
     private BaseConnect mSession;
-    private CopyOnWriteArrayList<IConnectResultListener> list = new CopyOnWriteArrayList<>();
-    private Handler mHanlder = new Handler() { // from class: com.fimi.kernel.connect.session.SessionManager.1
-        @Override // android.os.Handler
+    private final CopyOnWriteArrayList<IConnectResultListener> list = new CopyOnWriteArrayList<>();
+    private final Handler mHanlder = new Handler() {
+        @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
@@ -66,7 +66,6 @@ public class SessionManager {
                         IConnectResultListener l5 = (IConnectResultListener) it5.next();
                         l5.onConnectError("");
                     }
-                    return;
             }
         }
     };

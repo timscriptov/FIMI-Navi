@@ -24,7 +24,7 @@ import com.fimi.kernel.utils.DataValidatorUtil;
 import com.fimi.libperson.ivew.IForgetIphonePasswordView;
 import com.fimi.libperson.presenter.ForgetIphonePasswordPresenter;
 
-/* loaded from: classes.dex */
+
 public class ForgetIphonePasswordFragment extends BaseFragment implements IForgetIphonePasswordView {
     private static final String TAG = "ForgetIphonePasswordFra";
     Button mBtnFiLoginIphone;
@@ -53,8 +53,8 @@ public class ForgetIphonePasswordFragment extends BaseFragment implements IForge
     private ForgetIphonePasswordPresenter mForgetIphonePasswordPresenter;
     private OnResetIphonePasswordListerner mListerner;
     private State mState = State.IPHONE;
-    private TextView.OnEditorActionListener mOnEditorActionListener = new TextView.OnEditorActionListener() { // from class: com.fimi.libperson.ui.me.login.ForgetIphonePasswordFragment.5
-        @Override // android.widget.TextView.OnEditorActionListener
+    private final TextView.OnEditorActionListener mOnEditorActionListener = new TextView.OnEditorActionListener() {
+        @Override
         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
             if (actionId == 4 || actionId == 6 || (event != null && 66 == event.getKeyCode() && event.getAction() == 0)) {
                 AbAppUtil.closeSoftInput(ForgetIphonePasswordFragment.this.mContext);
@@ -75,40 +75,40 @@ public class ForgetIphonePasswordFragment extends BaseFragment implements IForge
         this.mListerner = listerner;
     }
 
-    @Override // com.fimi.kernel.base.BaseFragment, android.support.v4.app.Fragment
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         this.mListerner = (OnResetIphonePasswordListerner) context;
     }
 
-    @Override // com.fimi.kernel.base.BaseFragment
+    @Override
     public int getLayoutId() {
         return R.layout.fragment_forget_iphone;
     }
 
-    @Override // com.fimi.kernel.base.BaseFragment
+    @Override
     protected void initData(View view) {
-        this.mTvFiTitleSubName = (TextView) view.findViewById(R.id.tv_fi_title_sub_name);
-        this.mTvFiSelectCountry = (TextView) view.findViewById(R.id.tv_fi_select_country);
-        this.mEtFiAccount = (EditText) view.findViewById(R.id.et_fi_account);
-        this.mEtFiVerification = (EditText) view.findViewById(R.id.et_fi_verification);
-        this.mTvFiGetValidationCode = (TextView) view.findViewById(R.id.btn_fi_get_validation_code);
-        this.mTvTitleSubName = (TextView) view.findViewById(R.id.tv_title_sub_name);
-        this.mTvFiErrorHint = (TextView) view.findViewById(R.id.tv_fi_error_hint);
-        this.mTvFiPasswordErrorHint = (TextView) view.findViewById(R.id.tv_fi_password_error_hint);
-        this.mBtnFiLoginIphone = (Button) view.findViewById(R.id.btn_fi_login_phone);
-        this.mTvFiAreaCode = (TextView) view.findViewById(R.id.tv_fi_area_code);
+        this.mTvFiTitleSubName = view.findViewById(R.id.tv_fi_title_sub_name);
+        this.mTvFiSelectCountry = view.findViewById(R.id.tv_fi_select_country);
+        this.mEtFiAccount = view.findViewById(R.id.et_fi_account);
+        this.mEtFiVerification = view.findViewById(R.id.et_fi_verification);
+        this.mTvFiGetValidationCode = view.findViewById(R.id.btn_fi_get_validation_code);
+        this.mTvTitleSubName = view.findViewById(R.id.tv_title_sub_name);
+        this.mTvFiErrorHint = view.findViewById(R.id.tv_fi_error_hint);
+        this.mTvFiPasswordErrorHint = view.findViewById(R.id.tv_fi_password_error_hint);
+        this.mBtnFiLoginIphone = view.findViewById(R.id.btn_fi_login_phone);
+        this.mTvFiAreaCode = view.findViewById(R.id.tv_fi_area_code);
         this.mView1 = view.findViewById(R.id.view1);
         this.mView2 = view.findViewById(R.id.view2);
         this.mViewDivide = view.findViewById(R.id.v_divide);
-        this.mEtNewPassword = (EditText) view.findViewById(R.id.et_new_password);
-        this.mEtNewPasswordAgain = (EditText) view.findViewById(R.id.et_new_password_again);
-        this.mIvNewPasswordUnified = (ImageView) view.findViewById(R.id.iv_new_password_unified);
-        this.mIvNewPasswordAgainUnified = (ImageView) view.findViewById(R.id.iv_new_password_again_unified);
+        this.mEtNewPassword = view.findViewById(R.id.et_new_password);
+        this.mEtNewPasswordAgain = view.findViewById(R.id.et_new_password_again);
+        this.mIvNewPasswordUnified = view.findViewById(R.id.iv_new_password_unified);
+        this.mIvNewPasswordAgainUnified = view.findViewById(R.id.iv_new_password_again_unified);
         this.mVNpDivider = view.findViewById(R.id.v_np_divider);
         this.mVNpDividerAgain = view.findViewById(R.id.v_np_again_divider);
-        this.mIvShowPassword = (ImageView) view.findViewById(R.id.iv_show_password);
-        this.mIvShowPasswordAgain = (ImageView) view.findViewById(R.id.iv_show_password_again);
+        this.mIvShowPassword = view.findViewById(R.id.iv_show_password);
+        this.mIvShowPasswordAgain = view.findViewById(R.id.iv_show_password_again);
         this.mTvFiSelectCountry.setText(getResources().getString(R.string.libperson_service_china));
         this.mTvFiGetValidationCode.setTextColor(getResources().getColor(R.color.login_get_verfication_unclick));
         this.mTvFiGetValidationCode.setEnabled(false);
@@ -126,21 +126,21 @@ public class ForgetIphonePasswordFragment extends BaseFragment implements IForge
         showState();
     }
 
-    @Override // com.fimi.kernel.base.BaseFragment
+    @Override
     protected void doTrans() {
         OnClickListerner();
     }
 
     private void OnClickListerner() {
-        this.mTvFiGetValidationCode.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.libperson.ui.me.login.ForgetIphonePasswordFragment.1
-            @Override // android.view.View.OnClickListener
+        this.mTvFiGetValidationCode.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 AbAppUtil.closeSoftInput(ForgetIphonePasswordFragment.this.mContext);
                 ForgetIphonePasswordFragment.this.mForgetIphonePasswordPresenter.sendIphone(ForgetIphonePasswordFragment.this.mEtFiAccount.getText().toString());
             }
         });
-        this.mBtnFiLoginIphone.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.libperson.ui.me.login.ForgetIphonePasswordFragment.2
-            @Override // android.view.View.OnClickListener
+        this.mBtnFiLoginIphone.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 AbAppUtil.closeSoftInput(ForgetIphonePasswordFragment.this.mContext);
                 ForgetIphonePasswordFragment.this.mBtnFiLoginIphone.setEnabled(true);
@@ -151,8 +151,8 @@ public class ForgetIphonePasswordFragment extends BaseFragment implements IForge
                 }
             }
         });
-        this.mIvShowPassword.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.libperson.ui.me.login.ForgetIphonePasswordFragment.3
-            @Override // android.view.View.OnClickListener
+        this.mIvShowPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 if (ForgetIphonePasswordFragment.this.isShowPassword) {
                     ForgetIphonePasswordFragment.this.isShowPassword = false;
@@ -167,8 +167,8 @@ public class ForgetIphonePasswordFragment extends BaseFragment implements IForge
                 ForgetIphonePasswordFragment.this.mEtNewPassword.setSelection(ForgetIphonePasswordFragment.this.mEtNewPassword.getText().length());
             }
         });
-        this.mIvShowPasswordAgain.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.libperson.ui.me.login.ForgetIphonePasswordFragment.4
-            @Override // android.view.View.OnClickListener
+        this.mIvShowPasswordAgain.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 if (ForgetIphonePasswordFragment.this.isShowPasswordAgain) {
                     ForgetIphonePasswordFragment.this.isShowPasswordAgain = false;
@@ -189,15 +189,15 @@ public class ForgetIphonePasswordFragment extends BaseFragment implements IForge
         this.mEtNewPasswordAgain.setOnEditorActionListener(this.mOnEditorActionListener);
     }
 
-    @Override // com.fimi.kernel.base.BaseFragment
+    @Override
     protected void initMVP() {
     }
 
-    @Override // com.fimi.libperson.ivew.IForgetIphonePasswordView
+    @Override
     public void sendIphone(boolean isSuccess, String error) {
         this.mBtnFiLoginIphone.setEnabled(true);
         if (isSuccess) {
-            this.mTvFiErrorHint.setText((CharSequence) null);
+            this.mTvFiErrorHint.setText(null);
             showState();
         } else if (error != null) {
             this.mTvFiErrorHint.setText(error);
@@ -205,15 +205,15 @@ public class ForgetIphonePasswordFragment extends BaseFragment implements IForge
         }
     }
 
-    @Override // com.fimi.libperson.ivew.IForgetIphonePasswordView
+    @Override
     public void sendVerfication(boolean isSuccess, String error) {
         if (isSuccess) {
-            this.mTvFiErrorHint.setText((CharSequence) null);
+            this.mTvFiErrorHint.setText(null);
             this.mTvFiGetValidationCode.setEnabled(true);
             this.mTvFiGetValidationCode.setTextColor(getResources().getColorStateList(R.color.selector_btn_register_get_verfication_code));
             this.mTvFiGetValidationCode.setText(R.string.login_btn_verification);
             this.mForgetIphonePasswordPresenter.setStopTime();
-            this.mTvFiPasswordErrorHint.setText((CharSequence) null);
+            this.mTvFiPasswordErrorHint.setText(null);
             showClickState(false);
             this.mState = State.NEW_PASSWORD;
             showState();
@@ -223,14 +223,14 @@ public class ForgetIphonePasswordFragment extends BaseFragment implements IForge
         }
     }
 
-    @Override // com.fimi.libperson.ivew.IForgetIphonePasswordView
+    @Override
     public void resetPassword(boolean isSuccess, String error) {
         if (isSuccess) {
             if (this.mListerner != null) {
-                this.mEtFiAccount.setText((CharSequence) null);
-                this.mEtFiVerification.setText((CharSequence) null);
-                this.mEtNewPassword.setText((CharSequence) null);
-                this.mEtNewPasswordAgain.setText((CharSequence) null);
+                this.mEtFiAccount.setText(null);
+                this.mEtFiVerification.setText(null);
+                this.mEtNewPassword.setText(null);
+                this.mEtNewPasswordAgain.setText(null);
                 this.mState = State.IPHONE;
                 showState();
                 this.mListerner.resetIphoneSuccess();
@@ -241,7 +241,7 @@ public class ForgetIphonePasswordFragment extends BaseFragment implements IForge
         }
     }
 
-    @Override // com.fimi.libperson.ivew.IForgetIphonePasswordView
+    @Override
     public void updateSeconds(boolean isComplete, int seconds) {
         if (isComplete) {
             this.mTvFiGetValidationCode.setEnabled(true);
@@ -276,11 +276,7 @@ public class ForgetIphonePasswordFragment extends BaseFragment implements IForge
             this.mVNpDivider.setVisibility(4);
             this.mVNpDividerAgain.setVisibility(4);
             this.mViewDivide.setVisibility(4);
-            if (DataValidatorUtil.isMobile(this.mEtFiAccount.getText().toString().trim()) && this.mEtFiVerification.getText().length() == 4) {
-                showClickState(true);
-            } else {
-                showClickState(false);
-            }
+            showClickState(DataValidatorUtil.isMobile(this.mEtFiAccount.getText().toString().trim()) && this.mEtFiVerification.getText().length() == 4);
             if (DataValidatorUtil.isMobile(this.mEtFiAccount.getText().toString())) {
                 Log.i(TAG, "showState: 1");
                 this.mTvFiGetValidationCode.setEnabled(true);
@@ -311,11 +307,7 @@ public class ForgetIphonePasswordFragment extends BaseFragment implements IForge
             this.mEtNewPasswordAgain.setVisibility(0);
             this.mVNpDivider.setVisibility(0);
             this.mVNpDividerAgain.setVisibility(0);
-            if (this.mEtNewPasswordAgain.getText().toString().trim().equals(this.mEtNewPassword.getText().toString().trim()) && this.mEtNewPasswordAgain.getText().toString().length() >= 8) {
-                setIvShowPassword(false);
-            } else {
-                setIvShowPassword(true);
-            }
+            setIvShowPassword(!this.mEtNewPasswordAgain.getText().toString().trim().equals(this.mEtNewPassword.getText().toString().trim()) || this.mEtNewPasswordAgain.getText().toString().length() < 8);
         }
     }
 
@@ -342,23 +334,19 @@ public class ForgetIphonePasswordFragment extends BaseFragment implements IForge
             this.mTvFiGetValidationCode.setTextColor(getResources().getColorStateList(R.color.selector_btn_register_get_verfication_code));
             this.mTvFiGetValidationCode.setText(R.string.login_btn_verification);
             this.mForgetIphonePasswordPresenter.setStopTime();
-            this.mEtFiAccount.setText((CharSequence) null);
-            this.mEtFiVerification.setText((CharSequence) null);
+            this.mEtFiAccount.setText(null);
+            this.mEtFiVerification.setText(null);
         } else if (this.mState == State.NEW_PASSWORD) {
-            this.mEtNewPassword.setText((CharSequence) null);
-            this.mEtNewPasswordAgain.setText((CharSequence) null);
+            this.mEtNewPassword.setText(null);
+            this.mEtNewPasswordAgain.setText(null);
             this.mState = State.IPHONE;
-            this.mEtFiVerification.setText((CharSequence) null);
+            this.mEtFiVerification.setText(null);
             showState();
         }
     }
 
     public void showClickState(boolean isClick) {
-        if (isClick) {
-            this.mBtnFiLoginIphone.setEnabled(true);
-        } else {
-            this.mBtnFiLoginIphone.setEnabled(false);
-        }
+        this.mBtnFiLoginIphone.setEnabled(isClick);
     }
 
     private SpannableString getSpannableString() {
@@ -368,15 +356,15 @@ public class ForgetIphonePasswordFragment extends BaseFragment implements IForge
         SpannableString spannableString = new SpannableString(str1 + str2 + str3);
         spannableString.setSpan(new ForegroundColorSpan(this.mContext.getResources().getColor(R.color.register_agreement)), 0, str1.length(), 33);
         spannableString.setSpan(new ForegroundColorSpan(this.mContext.getResources().getColor(R.color.register_agreement)), str1.length() + str2.length(), str1.length() + str2.length() + str3.length(), 33);
-        spannableString.setSpan(new ClickableSpan() { // from class: com.fimi.libperson.ui.me.login.ForgetIphonePasswordFragment.6
-            @Override // android.text.style.ClickableSpan, android.text.style.CharacterStyle
+        spannableString.setSpan(new ClickableSpan() {
+            @Override
             public void updateDrawState(TextPaint ds) {
                 super.updateDrawState(ds);
                 ds.setColor(ForgetIphonePasswordFragment.this.getResources().getColor(R.color.register_agreement_click));
                 ds.setUnderlineText(false);
             }
 
-            @Override // android.text.style.ClickableSpan
+            @Override
             public void onClick(View widget) {
             }
         }, str1.length(), str1.length() + str2.length(), 33);
@@ -389,49 +377,49 @@ public class ForgetIphonePasswordFragment extends BaseFragment implements IForge
         SpannableString spannableString = new SpannableString(str1 + str2);
         spannableString.setSpan(new ForegroundColorSpan(this.mContext.getResources().getColor(R.color.register_agreement)), 0, str1.length(), 33);
         spannableString.setSpan(new ForegroundColorSpan(this.mContext.getResources().getColor(R.color.register_agreement)), str1.length() + str2.length(), str1.length() + str2.length(), 33);
-        spannableString.setSpan(new ClickableSpan() { // from class: com.fimi.libperson.ui.me.login.ForgetIphonePasswordFragment.7
-            @Override // android.text.style.ClickableSpan, android.text.style.CharacterStyle
+        spannableString.setSpan(new ClickableSpan() {
+            @Override
             public void updateDrawState(TextPaint ds) {
                 super.updateDrawState(ds);
                 ds.setColor(ForgetIphonePasswordFragment.this.getResources().getColor(R.color.register_agreement_click));
                 ds.setUnderlineText(false);
             }
 
-            @Override // android.text.style.ClickableSpan
+            @Override
             public void onClick(View widget) {
             }
         }, str1.length(), str1.length() + str2.length(), 33);
         return spannableString;
     }
 
-    /* loaded from: classes.dex */
+
     public enum State {
         IPHONE,
         NEW_PASSWORD
     }
 
-    /* loaded from: classes.dex */
+
     interface OnResetIphonePasswordListerner {
         void resetIphoneSuccess();
     }
 
-    /* loaded from: classes.dex */
+
     class EditTextWatcher implements TextWatcher {
-        private EditText mEditText;
+        private final EditText mEditText;
 
         public EditTextWatcher(EditText editText) {
             this.mEditText = editText;
         }
 
-        @Override // android.text.TextWatcher
+        @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         }
 
-        @Override // android.text.TextWatcher
+        @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
         }
 
-        @Override // android.text.TextWatcher
+        @Override
         public void afterTextChanged(Editable s) {
             if (s.length() > 0) {
                 if (R.id.et_fi_account == this.mEditText.getId()) {
@@ -443,12 +431,8 @@ public class ForgetIphonePasswordFragment extends BaseFragment implements IForge
                     ForgetIphonePasswordFragment.this.mTvFiGetValidationCode.setEnabled(true);
                     ForgetIphonePasswordFragment.this.mTvFiGetValidationCode.setTextColor(ForgetIphonePasswordFragment.this.getResources().getColorStateList(R.color.selector_btn_register_get_verfication_code));
                 } else if (R.id.et_fi_verification == this.mEditText.getId()) {
-                    if (s.length() != 4 || !DataValidatorUtil.isMobile(ForgetIphonePasswordFragment.this.mEtFiAccount.getText().toString().trim())) {
-                        ForgetIphonePasswordFragment.this.showClickState(false);
-                    } else {
-                        ForgetIphonePasswordFragment.this.showClickState(true);
-                    }
-                    ForgetIphonePasswordFragment.this.mTvFiErrorHint.setText((CharSequence) null);
+                    ForgetIphonePasswordFragment.this.showClickState(s.length() == 4 && DataValidatorUtil.isMobile(ForgetIphonePasswordFragment.this.mEtFiAccount.getText().toString().trim()));
+                    ForgetIphonePasswordFragment.this.mTvFiErrorHint.setText(null);
                 } else if (R.id.et_new_password == this.mEditText.getId()) {
                     if (ForgetIphonePasswordFragment.this.mEtNewPassword.getText().toString().trim().equals(ForgetIphonePasswordFragment.this.mEtNewPasswordAgain.getText().toString().trim()) && s.length() >= 8) {
                         ForgetIphonePasswordFragment.this.mIvNewPasswordUnified.setVisibility(0);

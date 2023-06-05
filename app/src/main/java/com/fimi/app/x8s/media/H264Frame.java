@@ -1,12 +1,12 @@
 package com.fimi.app.x8s.media;
 
-/* loaded from: classes.dex */
+
 public class H264Frame {
     private int index;
     private boolean isFirstFrame;
     private boolean isFrame;
     private State state = State.a1;
-    private byte[] data = new byte[1048576];
+    private final byte[] data = new byte[1048576];
 
     public void onSeqErrorReset() {
         if (!this.isFirstFrame) {
@@ -127,7 +127,7 @@ public class H264Frame {
         return buf;
     }
 
-    /* loaded from: classes.dex */
+
     public enum State {
         a1,
         a2,

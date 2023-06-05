@@ -15,12 +15,12 @@ import com.fimi.android.app.R;
 import com.fimi.kernel.utils.AbViewUtil;
 import com.fimi.kernel.utils.FontUtil;
 
-/* loaded from: classes.dex */
+
 public class MediaDetailDownloadStateView extends View {
-    private static int DOWNLOADING_COLOR = Color.parseColor("#38bbff");
-    private static int DOWNLOAD_FAIL_COLOR = Color.parseColor("#f23206");
-    private static int TEXT_COLOR = Color.parseColor("#ffffffff");
-    private Context mContext;
+    private static final int DOWNLOADING_COLOR = Color.parseColor("#38bbff");
+    private static final int DOWNLOAD_FAIL_COLOR = Color.parseColor("#f23206");
+    private static final int TEXT_COLOR = Color.parseColor("#ffffffff");
+    private final Context mContext;
     private Paint mPaint;
     private DownloadStateView.State mState;
     private Paint mTextPaint;
@@ -65,7 +65,7 @@ public class MediaDetailDownloadStateView extends View {
         setBackgroundResource(R.drawable.album_btn_media_pause);
     }
 
-    @Override // android.view.View
+    @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         RectF rectF = new RectF(2.0f, 2.0f, getWidth() - 2, getWidth() - 2);
@@ -106,7 +106,7 @@ public class MediaDetailDownloadStateView extends View {
         }
     }
 
-    /* loaded from: classes.dex */
+
     public enum State {
         PAUSE,
         DOWNLOADING,

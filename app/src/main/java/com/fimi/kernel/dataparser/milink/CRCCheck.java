@@ -1,6 +1,6 @@
 package com.fimi.kernel.dataparser.milink;
 
-/* loaded from: classes.dex */
+
 public class CRCCheck {
     public static long CRC16calc(int[] ptr, int len) {
         long crc = -1;

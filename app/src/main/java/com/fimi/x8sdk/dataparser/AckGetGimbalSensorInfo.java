@@ -3,8 +3,6 @@ package com.fimi.x8sdk.dataparser;
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 
 
-
-/* loaded from: classes2.dex */
 public class AckGetGimbalSensorInfo extends X8BaseMessage {
     private short accelMagnitude;
     private short accelerationX;
@@ -30,7 +28,7 @@ public class AckGetGimbalSensorInfo extends X8BaseMessage {
     private short motor3IV;
     private short temp;
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         this.gyroX = packet.getPayLoad4().getShort();
@@ -242,7 +240,7 @@ public class AckGetGimbalSensorInfo extends X8BaseMessage {
         this.accelMagnitude = accelMagnitude;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public String toString() {
         return "AckGetGimbalSensorInfo{gyroX=" + ((int) this.gyroX) + ", gyroY=" + ((int) this.gyroY) + ", gyroZ=" + ((int) this.gyroZ) + ", accelerationX=" + ((int) this.accelerationX) + ", accelerationY=" + ((int) this.accelerationY) + ", accelerationZ=" + ((int) this.accelerationZ) + ", gyroVarianceX=" + ((int) this.gyroVarianceX) + ", gyroVarianceY=" + ((int) this.gyroVarianceY) + ", gyroVarianceZ=" + ((int) this.gyroVarianceZ) + ", motor1IU=" + ((int) this.motor1IU) + ", motor1IV=" + ((int) this.motor1IV) + ", motor2IU=" + ((int) this.motor2IU) + ", motor2IV=" + ((int) this.motor2IV) + ", motor3IU=" + ((int) this.motor3IU) + ", motor3IV=" + ((int) this.motor3IV) + ", motor1HallX=" + ((int) this.motor1HallX) + ", motor1HallY=" + ((int) this.motor1HallY) + ", motor2HallX=" + ((int) this.motor2HallX) + ", motor2HallY=" + ((int) this.motor2HallY) + ", motor3HallX=" + ((int) this.motor3HallX) + ", motor3HallY=" + ((int) this.motor3HallY) + ", temp=" + ((int) this.temp) + '}';
     }

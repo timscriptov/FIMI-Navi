@@ -3,8 +3,6 @@ package com.fimi.x8sdk.entity;
 import com.fimi.x8sdk.modulestate.StateManager;
 
 
-
-/* loaded from: classes2.dex */
 public class ConectState {
     private boolean isCameraConnect;
     private boolean isConnectDrone;

@@ -9,13 +9,13 @@ import com.fimi.kernel.connect.usb.IUSBStatusListener;
 import com.fimi.x8sdk.connect.DataChanel;
 import com.fimi.x8sdk.connect.IConnectHandler;
 
-/* loaded from: classes2.dex */
+
 public class UsbConnectThread extends Thread implements IConnectHandler {
     UsbAccessory accessory;
     AOAConnect aoaConnect;
     DataChanel dataChanel = new DataChanel();
     Context mContext;
-    private IUSBStatusListener mIAoaConnectListener;
+    private final IUSBStatusListener mIAoaConnectListener;
 
     public UsbConnectThread(Context mContext, UsbAccessory accessory, IUSBStatusListener mIAoaConnectListener) {
         this.mContext = mContext;
@@ -24,7 +24,7 @@ public class UsbConnectThread extends Thread implements IConnectHandler {
         start();
     }
 
-    @Override // java.lang.Thread, java.lang.Runnable
+    @Override
     public void run() {
         super.run();
         if (this.aoaConnect == null) {
@@ -38,7 +38,7 @@ public class UsbConnectThread extends Thread implements IConnectHandler {
         }
     }
 
-    @Override // com.fimi.x8sdk.connect.IConnectHandler
+    @Override
     public void exit() {
         interrupt();
         if (this.aoaConnect != null) {

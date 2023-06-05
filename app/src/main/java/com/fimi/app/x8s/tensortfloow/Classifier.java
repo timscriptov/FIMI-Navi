@@ -5,7 +5,7 @@ import android.graphics.RectF;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public interface Classifier {
     void close();
 
@@ -15,8 +15,8 @@ public interface Classifier {
 
     List<Recognition> recognizeImage(Bitmap bitmap);
 
-    /* loaded from: classes.dex */
-    public static class Recognition {
+
+    class Recognition {
         private final Float confidence;
         private final String id;
         private final String title;

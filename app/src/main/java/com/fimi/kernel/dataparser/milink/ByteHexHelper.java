@@ -16,11 +16,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ByteHexHelper {
-    private static boolean D = false;
+    private static final boolean D = false;
 
     @NonNull
     public static String bytesToHexString(byte[] src) {
-        StringBuilder stringBuilder = new StringBuilder("");
+        StringBuilder stringBuilder = new StringBuilder();
         if (src == null || src.length <= 0) {
             return "";
         }
@@ -38,7 +38,7 @@ public class ByteHexHelper {
 
     @NonNull
     public static String byteToHexString(byte src) {
-        StringBuilder stringBuilder = new StringBuilder("");
+        StringBuilder stringBuilder = new StringBuilder();
         int v = src & 255;
         String hv = Integer.toHexString(v);
         if (hv.length() < 2) {
@@ -198,8 +198,8 @@ public class ByteHexHelper {
         String minute = decimalFormat.format(calendar.get(12));
         String second = decimalFormat.format(calendar.get(13));
         String week = decimalFormat.format(calendar.get(7) - 1);
-        stringBuffer.append(year.substring(2, year.length())).append(month).append(day).append(hour).append(minute).append(second).append(week);
-        System.out.println(stringBuffer.toString());
+        stringBuffer.append(year.substring(2)).append(month).append(day).append(hour).append(minute).append(second).append(week);
+        System.out.println(stringBuffer);
         return stringBuffer.toString();
     }
 
@@ -296,7 +296,7 @@ public class ByteHexHelper {
             }
             tmp.append(Integer.toHexString(iTmp));
         }
-        System.out.println("tmp.toString() = " + tmp.toString());
+        System.out.println("tmp.toString() = " + tmp);
         return tmp.toString();
     }
 

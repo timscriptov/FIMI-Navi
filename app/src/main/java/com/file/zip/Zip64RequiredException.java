@@ -15,6 +15,6 @@ public class Zip64RequiredException extends ZipException {
 
     @NonNull
     public static String getEntryTooBigMessage(@NonNull ZipEntry ze) {
-        return String.valueOf(ze.getName()) + "'s size exceeds the limit of 4GByte.";
+        return ze.getName() + "'s size exceeds the limit of 4GByte.";
     }
 }

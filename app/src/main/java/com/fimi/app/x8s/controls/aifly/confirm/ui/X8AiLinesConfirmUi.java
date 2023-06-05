@@ -19,12 +19,12 @@ import com.fimi.app.x8s.tools.X8NumberUtil;
 import com.fimi.app.x8s.ui.activity.X8AiLineHistoryActivity;
 import com.fimi.app.x8s.ui.activity.X8sMainActivity;
 
-/* loaded from: classes.dex */
+
 public class X8AiLinesConfirmUi extends AbsX8BaseConnectView implements View.OnClickListener {
-    private Activity activity;
+    private final Activity activity;
     private View btnOk;
     private CheckBox cbTip;
-    private View contentView;
+    private final View contentView;
     private ImageView imgFlag;
     private View imgReturn;
     private X8MainAiFlyController listener;
@@ -64,21 +64,21 @@ public class X8AiLinesConfirmUi extends AbsX8BaseConnectView implements View.OnC
     public void initViews(View rootView) {
         this.imgReturn = rootView.findViewById(R.id.img_ai_follow_return);
         this.btnOk = rootView.findViewById(R.id.btn_ai_follow_confirm_ok);
-        this.cbTip = (CheckBox) rootView.findViewById(R.id.cb_ai_follow_confirm_ok);
+        this.cbTip = rootView.findViewById(R.id.cb_ai_follow_confirm_ok);
         this.vConfirm = rootView.findViewById(R.id.rl_ai_confirm);
-        this.tvTitle = (TextView) rootView.findViewById(R.id.tv_ai_follow_title);
-        this.tvContentTip1 = (TextView) rootView.findViewById(R.id.tv_ai_follow_confirm_title1);
-        this.mStraightSettingPonit = (ImageView) rootView.findViewById(R.id.img_ai_straight_line_setting_point);
-        this.mCurveSettingPonit = (ImageView) rootView.findViewById(R.id.img_ai_curve_setting_point);
-        this.mFlyPoint = (ImageView) rootView.findViewById(R.id.img_ai_fly_point);
-        this.mHistory = (ImageView) rootView.findViewById(R.id.img_ai_line_history);
+        this.tvTitle = rootView.findViewById(R.id.tv_ai_follow_title);
+        this.tvContentTip1 = rootView.findViewById(R.id.tv_ai_follow_confirm_title1);
+        this.mStraightSettingPonit = rootView.findViewById(R.id.img_ai_straight_line_setting_point);
+        this.mCurveSettingPonit = rootView.findViewById(R.id.img_ai_curve_setting_point);
+        this.mFlyPoint = rootView.findViewById(R.id.img_ai_fly_point);
+        this.mHistory = rootView.findViewById(R.id.img_ai_line_history);
         this.vItemSelect = rootView.findViewById(R.id.ll_ai_line_item);
-        this.svTips = (ScrollView) rootView.findViewById(R.id.sv_ai_items);
-        this.imgFlag = (ImageView) rootView.findViewById(R.id.img_ai_line_flag);
-        this.mTvStraightSettingPonit = (TextView) rootView.findViewById(R.id.tv_ai_straight_line_setting_point);
-        this.mTvCurveSettingPoint = (TextView) rootView.findViewById(R.id.tv_ai_curve_setting_point);
-        this.mTvFlyPoint = (TextView) rootView.findViewById(R.id.tv_ai_fly_point);
-        this.mTvHistory = (TextView) rootView.findViewById(R.id.tv_ai_line_history);
+        this.svTips = rootView.findViewById(R.id.sv_ai_items);
+        this.imgFlag = rootView.findViewById(R.id.img_ai_line_flag);
+        this.mTvStraightSettingPonit = rootView.findViewById(R.id.tv_ai_straight_line_setting_point);
+        this.mTvCurveSettingPoint = rootView.findViewById(R.id.tv_ai_curve_setting_point);
+        this.mTvFlyPoint = rootView.findViewById(R.id.tv_ai_fly_point);
+        this.mTvHistory = rootView.findViewById(R.id.tv_ai_line_history);
         this.vItemSelect.setVisibility(0);
         this.vConfirm.setVisibility(8);
         this.tvTitle.setText(this.contentView.getContext().getString(R.string.x8_ai_fly_route));
@@ -94,10 +94,10 @@ public class X8AiLinesConfirmUi extends AbsX8BaseConnectView implements View.OnC
             this.mTvFlyPoint.setEnabled(false);
             this.mTvHistory.setEnabled(false);
         }
-        this.tvTip1 = (TextView) rootView.findViewById(R.id.tv_ai_follow_confirm_title1);
-        this.tvTip2 = (TextView) rootView.findViewById(R.id.tv_ai_follow_confirm_title2);
-        this.tvTip3 = (TextView) rootView.findViewById(R.id.tv_ai_follow_confirm_title3);
-        this.tvTip4 = (TextView) rootView.findViewById(R.id.tv_ai_follow_confirm_title4);
+        this.tvTip1 = rootView.findViewById(R.id.tv_ai_follow_confirm_title1);
+        this.tvTip2 = rootView.findViewById(R.id.tv_ai_follow_confirm_title2);
+        this.tvTip3 = rootView.findViewById(R.id.tv_ai_follow_confirm_title3);
+        this.tvTip4 = rootView.findViewById(R.id.tv_ai_follow_confirm_title4);
     }
 
     public void initActions() {
@@ -109,7 +109,7 @@ public class X8AiLinesConfirmUi extends AbsX8BaseConnectView implements View.OnC
         this.mHistory.setOnClickListener(this);
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.img_ai_follow_return) {
@@ -124,33 +124,17 @@ public class X8AiLinesConfirmUi extends AbsX8BaseConnectView implements View.OnC
             this.tvTitle.setText(this.contentView.getContext().getString(R.string.x8_ai_fly_route));
         } else if (id == R.id.btn_ai_follow_confirm_ok) {
             if (this.menuIndex == 1) {
-                if (this.cbTip.isChecked()) {
-                    X8AiConfig.getInstance().setAiLineCourse(false);
-                } else {
-                    X8AiConfig.getInstance().setAiLineCourse(true);
-                }
+                X8AiConfig.getInstance().setAiLineCourse(!this.cbTip.isChecked());
                 this.mX8MainAiFlyController.onLinesConfirmOkClick(this.menuIndex - 1);
             } else if (this.menuIndex == 2) {
-                if (this.cbTip.isChecked()) {
-                    X8AiConfig.getInstance().setAiLineCourseFpv(false);
-                } else {
-                    X8AiConfig.getInstance().setAiLineCourseFpv(true);
-                }
+                X8AiConfig.getInstance().setAiLineCourseFpv(!this.cbTip.isChecked());
                 this.mX8MainAiFlyController.onLinesConfirmOkClick(this.menuIndex - 1);
             } else if (this.menuIndex == 3) {
-                if (this.cbTip.isChecked()) {
-                    X8AiConfig.getInstance().setAiLineCourseHistory(false);
-                } else {
-                    X8AiConfig.getInstance().setAiLineCourseHistory(true);
-                }
+                X8AiConfig.getInstance().setAiLineCourseHistory(!this.cbTip.isChecked());
                 Intent intent = new Intent(this.activity, X8AiLineHistoryActivity.class);
                 this.activity.startActivityForResult(intent, X8sMainActivity.X8GETAILINEID);
             } else if (this.menuIndex == 4) {
-                if (this.cbTip.isChecked()) {
-                    X8AiConfig.getInstance().setAiLineCurve(false);
-                } else {
-                    X8AiConfig.getInstance().setAiLineCurve(true);
-                }
+                X8AiConfig.getInstance().setAiLineCurve(!this.cbTip.isChecked());
                 this.mX8MainAiFlyController.onLinesConfirmOkClick(this.menuIndex - 1);
             }
         } else if (id == R.id.img_ai_straight_line_setting_point) {
@@ -233,15 +217,7 @@ public class X8AiLinesConfirmUi extends AbsX8BaseConnectView implements View.OnC
         this.mTvHistory.setEnabled(inSky);
         this.mTvFlyPoint.setEnabled(inSky);
         if ((this.menuIndex == 1) | (this.menuIndex == 4)) {
-            if (isLowPower) {
-                this.btnOk.setEnabled(true);
-            } else {
-                this.btnOk.setEnabled(false);
-            }
-        } else if (inSky && isLowPower) {
-            this.btnOk.setEnabled(true);
-        } else {
-            this.btnOk.setEnabled(false);
-        }
+            this.btnOk.setEnabled(isLowPower);
+        } else this.btnOk.setEnabled(inSky && isLowPower);
     }
 }

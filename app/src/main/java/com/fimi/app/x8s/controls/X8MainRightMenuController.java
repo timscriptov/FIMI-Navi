@@ -37,13 +37,13 @@ import com.fimi.x8sdk.modulestate.CameraState;
 import com.fimi.x8sdk.modulestate.StateManager;
 import com.fimi.x8sdk.rtp.X8Rtp;
 
-/* loaded from: classes.dex */
+
 public class X8MainRightMenuController extends AbsX8Controllers implements View.OnClickListener {
     public IX8PanoramicInformationListener ix8PanoramicInformationListener;
     AutoCameraStateADV autoCameraStateADV;
     CameraManager cameraManager;
     CameraParamStatus.CameraModelStatus curMode;
-    private X8sMainActivity activity;
+    private final X8sMainActivity activity;
     private CameraState cameraState;
     private Context context;
     private int curModeType;
@@ -54,7 +54,7 @@ public class X8MainRightMenuController extends AbsX8Controllers implements View.
     private X8ModuleSwitcher imbSwitchPhotoVideo;
     private ImageView mIvHotDot;
     private StrokeTextView mTvRecordTime;
-    private X8AiModeState mX8AiModeState;
+    private final X8AiModeState mX8AiModeState;
     private IX8MainRightMenuListener mainRightMenuListener;
     private IX8CameraPersonLacationListener personLacationListener;
     private boolean pivTake;
@@ -64,14 +64,14 @@ public class X8MainRightMenuController extends AbsX8Controllers implements View.
     public X8MainRightMenuController(View rootView, X8sMainActivity activity, X8AiModeState mX8AiModeState) {
         super(rootView);
         this.pivTake = false;
-        this.ix8PanoramicInformationListener = new IX8PanoramicInformationListener() { // from class: com.fimi.app.x8s.controls.X8MainRightMenuController.8
-            @Override // com.fimi.x8sdk.listener.IX8PanoramicInformationListener
+        this.ix8PanoramicInformationListener = new IX8PanoramicInformationListener() {
+            @Override
             public void onPanoramicInformationChange(AckPanoramaPhotographType ackPanoramaPhotographType) {
                 HostLogBack.getInstance().writeLog("Alanqiu  ============reponseCmd:" + ackPanoramaPhotographType.toString());
                 if (ackPanoramaPhotographType.getCurrentNum() >= 1) {
                     if (ackPanoramaPhotographType.getCurrentNum() >= ackPanoramaPhotographType.getTotalNum()) {
-                        X8MainRightMenuController.this.tvPanoramaNumber.postDelayed(new Runnable() { // from class: com.fimi.app.x8s.controls.X8MainRightMenuController.8.1
-                            @Override // java.lang.Runnable
+                        X8MainRightMenuController.this.tvPanoramaNumber.postDelayed(new Runnable() {
+                            @Override
                             public void run() {
                                 X8MainRightMenuController.this.tvPanoramaNumber.setVisibility(8);
                                 StateManager.getInstance().getCamera().setTakingPanoramicPhotos(false);
@@ -90,20 +90,20 @@ public class X8MainRightMenuController extends AbsX8Controllers implements View.
         this.mX8AiModeState = mX8AiModeState;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
         this.context = rootView.getContext();
         this.handleView = rootView.findViewById(R.id.main_right_menu);
-        this.imbCameraTools = (ImageButton) rootView.findViewById(R.id.imb_camera_tools);
-        this.imbSwitchPhotoVideo = (X8ModuleSwitcher) rootView.findViewById(R.id.imb_switch_photo_video_module);
-        this.imbPhotoVideo = (X8ShutterImageView) rootView.findViewById(R.id.imb_photo_video);
-        this.imbMedia = (ImageButton) rootView.findViewById(R.id.imb_meida);
-        this.mTvRecordTime = (StrokeTextView) rootView.findViewById(R.id.tv_record_time);
-        this.tvPanoramaNumber = (StrokeTextView) rootView.findViewById(R.id.tv_panorama_number);
-        this.mIvHotDot = (ImageView) rootView.findViewById(R.id.iv_record_hot_dot);
+        this.imbCameraTools = rootView.findViewById(R.id.imb_camera_tools);
+        this.imbSwitchPhotoVideo = rootView.findViewById(R.id.imb_switch_photo_video_module);
+        this.imbPhotoVideo = rootView.findViewById(R.id.imb_photo_video);
+        this.imbMedia = rootView.findViewById(R.id.imb_meida);
+        this.mTvRecordTime = rootView.findViewById(R.id.tv_record_time);
+        this.tvPanoramaNumber = rootView.findViewById(R.id.tv_panorama_number);
+        this.mIvHotDot = rootView.findViewById(R.id.iv_record_hot_dot);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
         this.imbCameraTools.setOnClickListener(this);
         this.imbSwitchPhotoVideo.setOnClickListener(this);
@@ -112,7 +112,7 @@ public class X8MainRightMenuController extends AbsX8Controllers implements View.
         this.cameraState = StateManager.getInstance().getCamera();
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
@@ -128,7 +128,7 @@ public class X8MainRightMenuController extends AbsX8Controllers implements View.
         }
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == this.imbCameraTools.getId()) {
@@ -165,15 +165,15 @@ public class X8MainRightMenuController extends AbsX8Controllers implements View.
         boolean isConnect = StateManager.getInstance().getCamera().isConnect();
         if (isConnect) {
             if (CameraParamStatus.modelStatus == CameraParamStatus.CameraModelStatus.takePhoto) {
-                this.cameraManager.swithVideoMode(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.X8MainRightMenuController.1
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                this.cameraManager.swithVideoMode(new UiCallBackListener() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, Object o) {
                         X8MainRightMenuController.this.mainRightMenuListener.onCameraSwitching();
                     }
                 });
             } else {
-                this.cameraManager.swithPhotoMode(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.X8MainRightMenuController.2
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                this.cameraManager.swithPhotoMode(new UiCallBackListener() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, Object o) {
                         X8MainRightMenuController.this.mainRightMenuListener.onCameraSwitching();
                     }
@@ -205,8 +205,8 @@ public class X8MainRightMenuController extends AbsX8Controllers implements View.
     private void takePhoto() {
         if (this.autoCameraStateADV.getMode() == 20) {
             if (StateManager.getInstance().getCamera().isTakingPanoramicPhotos()) {
-                this.fcCtrlManager.setPanoramaPhotographState(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.X8MainRightMenuController.3
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                this.fcCtrlManager.setPanoramaPhotographState(new UiCallBackListener() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, Object o) {
                         if (cmdResult.isSuccess) {
                             X8MainRightMenuController.this.tvPanoramaNumber.setVisibility(8);
@@ -216,8 +216,8 @@ public class X8MainRightMenuController extends AbsX8Controllers implements View.
                 }, FcCollection.MSG_ID_SET_PANORAMA_PHOTOGRAPH_STOP);
                 return;
             } else if (StateManager.getInstance().getX8Drone().isInSky()) {
-                this.fcCtrlManager.setPanoramaPhotographType(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.X8MainRightMenuController.4
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                this.fcCtrlManager.setPanoramaPhotographType(new UiCallBackListener() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, Object o) {
                     }
                 }, Constants.panoramaType + 1);
@@ -227,8 +227,8 @@ public class X8MainRightMenuController extends AbsX8Controllers implements View.
                 return;
             }
         }
-        this.cameraManager.takePhoto(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.X8MainRightMenuController.5
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.cameraManager.takePhoto(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 X8MainRightMenuController.this.imbPhotoVideo.setClickable(true);
                 if (!cmdResult.isSuccess()) {
@@ -242,8 +242,8 @@ public class X8MainRightMenuController extends AbsX8Controllers implements View.
     }
 
     private void startRecord() {
-        this.cameraManager.startVideo(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.X8MainRightMenuController.6
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.cameraManager.startVideo(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 X8MainRightMenuController.this.imbPhotoVideo.setClickable(true);
                 if (!cmdResult.isSuccess()) {
@@ -260,8 +260,8 @@ public class X8MainRightMenuController extends AbsX8Controllers implements View.
     }
 
     private void stopRecord() {
-        this.cameraManager.stopVideo(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.X8MainRightMenuController.7
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.cameraManager.stopVideo(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8MainRightMenuController.this.imbMedia.setBackgroundResource(R.drawable.x8_main_btn_media_select);
@@ -468,7 +468,7 @@ public class X8MainRightMenuController extends AbsX8Controllers implements View.
         return StateManager.getInstance().getCamera().isTakingPanoramicPhotos();
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         super.onDroneConnected(b);
         this.imbPhotoVideo.setClickable(b);
@@ -487,7 +487,7 @@ public class X8MainRightMenuController extends AbsX8Controllers implements View.
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public boolean onClickBackKey() {
         return false;
     }

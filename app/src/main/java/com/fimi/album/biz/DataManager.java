@@ -7,11 +7,11 @@ import com.fimi.album.iview.IDateHandler;
 import java.util.LinkedHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* loaded from: classes.dex */
+
 public class DataManager<T extends MediaModel> {
     private static DataManager mDataManager;
     private ICameraDeviceDispater mCameraDispater;
-    private FolderDispater mFolderDispater = new FolderDispater();
+    private final FolderDispater mFolderDispater = new FolderDispater();
 
     private DataManager() {
     }

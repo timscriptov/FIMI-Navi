@@ -3,8 +3,6 @@ package com.fimi.network.entity;
 import java.util.Date;
 
 
-
-/* loaded from: classes.dex */
 public class UserDto extends BaseModel {
     private Date createTime;
     private String email;

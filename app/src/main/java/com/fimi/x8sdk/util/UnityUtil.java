@@ -1,6 +1,6 @@
 package com.fimi.x8sdk.util;
 
-/* loaded from: classes2.dex */
+
 public class UnityUtil {
     public static float meterToFoot(float meter) {
         return 3.2808f * meter;

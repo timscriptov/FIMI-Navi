@@ -27,7 +27,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.Arrays;
 
-/* loaded from: classes.dex */
+
 public class XiaomiLoginManager implements ILogin {
     LoginCallback loginCallback;
     XiaoMiEntity xiaoMiEntity;
@@ -48,7 +48,7 @@ public class XiaomiLoginManager implements ILogin {
         return xiaoMiEntity;
     }
 
-    @Override // com.fimi.thirdpartysdk.login.ILogin
+    @Override
     public void login(Context context, LoginCallback listener) {
         this.mContext = context;
         this.loginCallback = listener;
@@ -65,23 +65,23 @@ public class XiaomiLoginManager implements ILogin {
         }
     }
 
-    @Override // com.fimi.thirdpartysdk.login.ILogin
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
     }
 
-    /* JADX WARN: Type inference failed for: r0v0, types: [com.fimi.thirdpartysdk.login.xiaomi.XiaomiLoginManager$1] */
+
     private <V> void waitAndShowFutureResult(final XiaomiOAuthFuture<V> future) {
-        new AsyncTask<Void, Void, V>() { // from class: com.fimi.thirdpartysdk.login.xiaomi.XiaomiLoginManager.1
+        new AsyncTask<Void, Void, V>() {
             Exception e;
 
-            @Override // android.os.AsyncTask
+            @Override
             protected void onPreExecute() {
             }
 
-            @Override // android.os.AsyncTask
+            @Override
             public V doInBackground(Void... params) {
                 try {
-                    V v = (V) future.getResult();
+                    V v = future.getResult();
                     return v;
                 } catch (OperationCanceledException e1) {
                     this.e = e1;
@@ -95,7 +95,7 @@ public class XiaomiLoginManager implements ILogin {
                 }
             }
 
-            @Override // android.os.AsyncTask
+            @Override
             protected void onPostExecute(V v) {
                 if (v != null) {
                     if (v instanceof XiaomiOAuthResults) {
@@ -121,23 +121,23 @@ public class XiaomiLoginManager implements ILogin {
                     XiaomiLoginManager.this.loginCallback.loginFail(XiaomiLoginManager.this.mContext.getResources().getString(R.string.login_result));
                 }
             }
-        }.execute(new Void[0]);
+        }.execute();
     }
 
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.fimi.thirdpartysdk.login.xiaomi.XiaomiLoginManager$2] */
+
     public void loginAuth() {
         final XiaomiOAuthFuture<String> futureProfile = new XiaomiOAuthorize().callOpenApi(this.mContext, Long.parseLong(this.xiaoMiEntity.appId), XiaomiOAuthConstants.OPEN_API_PATH_PROFILE, this.mResults.getAccessToken(), this.mResults.getMacKey(), this.mResults.getMacAlgorithm());
-        new AsyncTask<Void, Void, String>() { // from class: com.fimi.thirdpartysdk.login.xiaomi.XiaomiLoginManager.2
+        new AsyncTask<Void, Void, String>() {
             Exception e;
 
-            @Override // android.os.AsyncTask
+            @Override
             protected void onPreExecute() {
             }
 
-            @Override // android.os.AsyncTask
+            @Override
             public String doInBackground(Void... params) {
                 try {
-                    String v = (String) futureProfile.getResult();
+                    String v = futureProfile.getResult();
                     return v;
                 } catch (OperationCanceledException e1) {
                     this.e = e1;
@@ -151,7 +151,7 @@ public class XiaomiLoginManager implements ILogin {
                 }
             }
 
-            @Override // android.os.AsyncTask
+            @Override
             public void onPostExecute(String result) {
                 if (TextUtils.isEmpty(result)) {
                     if (XiaomiLoginManager.this.loginCallback != null) {
@@ -168,10 +168,10 @@ public class XiaomiLoginManager implements ILogin {
                     XiaomiLoginManager.this.loginCallback.loginFail(e.getMessage());
                 }
             }
-        }.execute(new Void[0]);
+        }.execute();
     }
 
-    /* loaded from: classes.dex */
+
     public class XiaoMiEntity {
         public String appId;
         public String redirectUri;

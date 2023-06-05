@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 import org.jetbrains.annotations.Contract;
 
-/* loaded from: classes.dex */
+
 public final class ZipShort implements Cloneable {
     private static final int BYTE_1_MASK = 65280;
     private static final int BYTE_1_SHIFT = 8;

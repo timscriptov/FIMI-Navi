@@ -8,7 +8,7 @@ import com.fimi.thirdpartysdk.login.xiaomi.FaceBookManager;
 import com.fimi.thirdpartysdk.login.xiaomi.TwitterManager;
 import com.fimi.thirdpartysdk.login.xiaomi.XiaomiLoginManager;
 
-/* loaded from: classes.dex */
+
 public class ThirdLoginManager {
     private static ThirdLoginManager thirdLoginManager;
     ILogin login;

@@ -19,15 +19,15 @@ import java.util.Arrays;
 import java.util.List;
 
 @SuppressLint({"UseValueOf", "DefaultLocale"})
-/* loaded from: classes.dex */
+
 public class ByteUtil {
-    private static ByteBuffer buffer = ByteBuffer.allocate(8);
+    private static final ByteBuffer buffer = ByteBuffer.allocate(8);
 
     public static byte[] shortToByte(short number) {
         int temp = number;
         byte[] b = new byte[2];
         for (int i = 0; i < b.length; i++) {
-            b[i] = new Integer(temp & 255).byteValue();
+            b[i] = Integer.valueOf(temp & 255).byteValue();
             temp >>= 8;
         }
         return b;
@@ -48,7 +48,7 @@ public class ByteUtil {
     public static String byteToString(byte[] data) {
         ByteBuffer bbuf = ByteBuffer.allocate(data.length);
         for (int i = 0; i < data.length; i++) {
-            bbuf.put(data[i + 0]);
+            bbuf.put(data[i]);
         }
         return new String(bbuf.array());
     }
@@ -66,7 +66,7 @@ public class ByteUtil {
     }
 
     public static String bytesToHexString(byte[] src) {
-        StringBuilder stringBuilder = new StringBuilder("");
+        StringBuilder stringBuilder = new StringBuilder();
         if (src == null || src.length <= 0) {
             return "";
         }
@@ -82,7 +82,7 @@ public class ByteUtil {
     }
 
     public static String bytesToHexString2(byte[] src) {
-        StringBuilder sb = new StringBuilder("");
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < src.length; i++) {
             sb.append(Character.forDigit((src[i] & 240) >> 4, 16));
             sb.append(Character.forDigit(src[i] & 15, 16));
@@ -182,15 +182,15 @@ public class ByteUtil {
     }
 
     public static float byte2float(byte[] b, int index) {
-        int l = b[index + 0];
-        return Float.intBitsToFloat((int) ((((int) ((((int) ((l & 255) | (b[index + 1] << 8))) & 65535) | (b[index + 2] << 16))) & ViewCompat.MEASURED_SIZE_MASK) | (b[index + 3] << 24)));
+        int l = b[index];
+        return Float.intBitsToFloat((((((l & 255) | (b[index + 1] << 8)) & 65535) | (b[index + 2] << 16)) & ViewCompat.MEASURED_SIZE_MASK) | (b[index + 3] << 24));
     }
 
     public static long longFrom8Bytes(byte[] input, int offset, boolean littleEndian) {
         long value = 0;
         for (int count = 0; count < 8; count++) {
             int shift = (littleEndian ? count : 7 - count) << 3;
-            value |= (255 << shift) & (input[offset + count] << shift);
+            value |= (255L << shift) & ((long) input[offset + count] << shift);
         }
         return value;
     }

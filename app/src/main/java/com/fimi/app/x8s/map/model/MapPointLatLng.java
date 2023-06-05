@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
-/* loaded from: classes.dex */
 public class MapPointLatLng {
     public int action;
     public float altitude;

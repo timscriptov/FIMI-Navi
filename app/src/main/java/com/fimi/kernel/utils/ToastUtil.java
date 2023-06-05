@@ -3,7 +3,7 @@ package com.fimi.kernel.utils;
 import android.content.Context;
 import android.widget.Toast;
 
-/* loaded from: classes.dex */
+
 public class ToastUtil {
     public static final int LENGTH_LONG = 1;
     public static final int LENGTH_SHORT = 0;

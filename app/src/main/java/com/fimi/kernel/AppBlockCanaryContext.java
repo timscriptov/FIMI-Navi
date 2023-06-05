@@ -9,76 +9,76 @@ import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class AppBlockCanaryContext extends BlockCanaryContext {
-    @Override // com.github.moduth.blockcanary.BlockCanaryContext
+    @Override
     public String provideQualifier() {
         return "unknown";
     }
 
-    @Override // com.github.moduth.blockcanary.BlockCanaryContext
+    @Override
     public String provideUid() {
         return BlockInfo.KEY_UID;
     }
 
-    @Override // com.github.moduth.blockcanary.BlockCanaryContext
+    @Override
     public String provideNetworkType() {
         return "unknown";
     }
 
-    @Override // com.github.moduth.blockcanary.BlockCanaryContext
+    @Override
     public int provideMonitorDuration() {
         return -1;
     }
 
-    @Override // com.github.moduth.blockcanary.BlockCanaryContext
+    @Override
     public int provideBlockThreshold() {
         return 500;
     }
 
-    @Override // com.github.moduth.blockcanary.BlockCanaryContext
+    @Override
     public int provideDumpInterval() {
         return provideBlockThreshold();
     }
 
-    @Override // com.github.moduth.blockcanary.BlockCanaryContext
+    @Override
     public String providePath() {
         return "/blockcanary/";
     }
 
-    @Override // com.github.moduth.blockcanary.BlockCanaryContext
+    @Override
     public boolean displayNotification() {
         return true;
     }
 
-    @Override // com.github.moduth.blockcanary.BlockCanaryContext
+    @Override
     public boolean zip(File[] src, File dest) {
         return false;
     }
 
-    @Override // com.github.moduth.blockcanary.BlockCanaryContext
+    @Override
     public void upload(File zippedFile) {
         throw new UnsupportedOperationException();
     }
 
-    @Override // com.github.moduth.blockcanary.BlockCanaryContext
+    @Override
     public List<String> concernPackages() {
         return null;
     }
 
-    @Override // com.github.moduth.blockcanary.BlockCanaryContext
+    @Override
     public boolean filterNonConcernStack() {
         return false;
     }
 
-    @Override // com.github.moduth.blockcanary.BlockCanaryContext
+    @Override
     public List<String> provideWhiteList() {
         LinkedList<String> whiteList = new LinkedList<>();
         whiteList.add("org.chromium");
         return whiteList;
     }
 
-    @Override // com.github.moduth.blockcanary.BlockCanaryContext
+    @Override
     public boolean deleteFilesInWhiteList() {
         return true;
     }

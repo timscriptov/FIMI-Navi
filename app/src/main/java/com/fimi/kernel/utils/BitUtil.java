@@ -1,6 +1,6 @@
 package com.fimi.kernel.utils;
 
-/* loaded from: classes.dex */
+
 public class BitUtil {
     public static int getBitByByte(int num, int index) {
         return Math.abs(((1 << index) & num) >> index);

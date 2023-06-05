@@ -11,11 +11,11 @@ import com.fimi.album.ui.MediaActivity;
 import java.io.File;
 import java.lang.ref.WeakReference;
 
-/* loaded from: classes.dex */
+
 public class MediaPresenter<T extends Activity> implements IDateHandler {
-    private DataManager<MediaModel> mDataManager = DataManager.obtain();
-    private MediaActivity mMediaActivity;
-    private WeakReference<T> weakReference;
+    private final DataManager<MediaModel> mDataManager = DataManager.obtain();
+    private final MediaActivity mMediaActivity;
+    private final WeakReference<T> weakReference;
 
     public MediaPresenter(T activity) {
         this.weakReference = new WeakReference<>(activity);
@@ -23,10 +23,10 @@ public class MediaPresenter<T extends Activity> implements IDateHandler {
         this.mDataManager.setIdataImpl(this);
     }
 
-    @Override // com.fimi.album.iview.IDateHandler
+    @Override
     public void loadDateComplete(boolean isCamera, boolean isSuccess) {
-        HandlerManager.obtain().getHandlerInMainThread().post(new Runnable() { // from class: com.fimi.album.presenter.MediaPresenter.1
-            @Override // java.lang.Runnable
+        HandlerManager.obtain().getHandlerInMainThread().post(new Runnable() {
+            @Override
             public void run() {
                 MediaPresenter.this.mMediaActivity.getmProgressBar().setVisibility(8);
             }
@@ -34,7 +34,7 @@ public class MediaPresenter<T extends Activity> implements IDateHandler {
         onStartReshAdapter();
     }
 
-    @Override // com.fimi.album.iview.IDateHandler
+    @Override
     public void refreshLoadDataComplete() {
     }
 

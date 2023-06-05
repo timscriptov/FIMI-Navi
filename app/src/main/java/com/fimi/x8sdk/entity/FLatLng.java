@@ -1,6 +1,6 @@
 package com.fimi.x8sdk.entity;
 
-/* loaded from: classes2.dex */
+
 public class FLatLng {
     public double latitude;
     public double longitude;

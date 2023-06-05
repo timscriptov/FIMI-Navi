@@ -14,17 +14,17 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.util.concurrent.LinkedBlockingDeque;
 
-/* loaded from: classes.dex */
+
 public class TcpConnect extends BaseConnect implements Runnable {
     boolean autoConnect;
     Socket socket;
     com.fimi.kernel.connect.SocketOption socketOption;
     private CmdSession cmdSession;
-    private LinkedBlockingDeque<Object> dataQue = new LinkedBlockingDeque<>();
+    private final LinkedBlockingDeque<Object> dataQue = new LinkedBlockingDeque<>();
     private boolean exitTcp = false;
     private ReadThread readThread;
     private WriteThread writeThread;
-    private ResultListener x9ResultListener;
+    private final ResultListener x9ResultListener;
 
     public TcpConnect(com.fimi.kernel.connect.SocketOption option, ResultListener listener) {
         this.autoConnect = false;
@@ -33,7 +33,7 @@ public class TcpConnect extends BaseConnect implements Runnable {
         this.x9ResultListener = listener;
     }
 
-    @Override // java.lang.Runnable
+    @Override
     public void run() {
     }
 
@@ -42,12 +42,12 @@ public class TcpConnect extends BaseConnect implements Runnable {
             Log.d("moweiru", "cmd tcp connect success");
             this.socket = new Socket(option.getHost(), option.getPort());
         } catch (IOException ex) {
-            Log.d("moweiru", "fail to connect tcp ,exception:" + ex.getMessage().toString());
+            Log.d("moweiru", "fail to connect tcp ,exception:" + ex.getMessage());
             ex.printStackTrace();
         }
     }
 
-    @Override // com.fimi.kernel.connect.BaseConnect
+    @Override
     public void startSession() {
         connectSocket(this.socketOption);
         this.readThread = new ReadThread();
@@ -56,7 +56,7 @@ public class TcpConnect extends BaseConnect implements Runnable {
         this.writeThread.start();
     }
 
-    @Override // com.fimi.kernel.connect.BaseConnect
+    @Override
     public void closeSession() {
         this.exitTcp = false;
         if (this.readThread != null) {
@@ -74,12 +74,12 @@ public class TcpConnect extends BaseConnect implements Runnable {
         }
     }
 
-    @Override // com.fimi.kernel.connect.BaseConnect
+    @Override
     public void sendCmd(BaseCommand cmd) {
         this.dataQue.add(cmd);
     }
 
-    @Override // com.fimi.kernel.connect.BaseConnect
+    @Override
     public boolean isDeviceConnected() {
         return false;
     }
@@ -88,18 +88,18 @@ public class TcpConnect extends BaseConnect implements Runnable {
         this.dataQue.add(null);
     }
 
-    @Override // com.fimi.kernel.connect.BaseConnect
+    @Override
     public void sendJsonCmd(BaseCommand cmd) {
     }
 
-    /* loaded from: classes.dex */
+
     public class ReadThread extends Thread {
         private InputStream mInputStream;
 
         public ReadThread() {
         }
 
-        @Override // java.lang.Thread, java.lang.Runnable
+        @Override
         public void run() {
             try {
                 this.mInputStream = TcpConnect.this.socket.getInputStream();
@@ -116,13 +116,13 @@ public class TcpConnect extends BaseConnect implements Runnable {
                     }
                 }
             } catch (IOException e1) {
-                Log.d("moweiru==>", e1.getMessage().toString());
+                Log.d("moweiru==>", e1.getMessage());
                 e1.printStackTrace();
             }
         }
     }
 
-    /* loaded from: classes.dex */
+
     public class WriteThread extends Thread {
         OutputStream mOutput;
         private int count;
@@ -130,7 +130,7 @@ public class TcpConnect extends BaseConnect implements Runnable {
         public WriteThread() {
         }
 
-        @Override // java.lang.Thread, java.lang.Runnable
+        @Override
         public void run() {
             try {
                 this.mOutput = TcpConnect.this.socket.getOutputStream();

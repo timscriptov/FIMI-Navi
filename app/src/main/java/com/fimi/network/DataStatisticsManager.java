@@ -12,7 +12,7 @@ import com.fimi.network.entity.DataStatistics;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class DataStatisticsManager extends BaseManager {
     private static DataStatisticsManager sDataStatisticsManager;
 

@@ -23,7 +23,7 @@ import com.fimi.kernel.utils.FontUtil;
 import com.fimi.libperson.ivew.IForgetPasswordView;
 import com.fimi.libperson.presenter.ForgetPasswordPresenter;
 
-/* loaded from: classes.dex */
+
 public class ForgetPasswordFragment extends BaseFragment implements IForgetPasswordView {
     Button mBtnSendEmail;
     Button mBtnVerfication;
@@ -49,36 +49,36 @@ public class ForgetPasswordFragment extends BaseFragment implements IForgetPassw
     private OnResetPasswordListerner mOnResetPasswordListerner;
     private State mState = State.EMAIL;
 
-    @Override // com.fimi.kernel.base.BaseFragment, android.support.v4.app.Fragment
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         this.mOnResetPasswordListerner = (OnResetPasswordListerner) context;
     }
 
-    @Override // com.fimi.kernel.base.BaseFragment
+    @Override
     public int getLayoutId() {
         return R.layout.fragment_forget_email;
     }
 
-    @Override // com.fimi.kernel.base.BaseFragment
+    @Override
     protected void initData(View view) {
-        this.mEtFpEmailAccount = (EditText) view.findViewById(R.id.et_fp_email_account);
-        this.mEtNewPassword = (EditText) view.findViewById(R.id.et_new_password);
-        this.mEtNewPasswordAgain = (EditText) view.findViewById(R.id.et_new_password_again);
+        this.mEtFpEmailAccount = view.findViewById(R.id.et_fp_email_account);
+        this.mEtNewPassword = view.findViewById(R.id.et_new_password);
+        this.mEtNewPasswordAgain = view.findViewById(R.id.et_new_password_again);
         this.mViewDivide = view.findViewById(R.id.v_divide);
-        this.mIvNewPasswordUnified = (ImageView) view.findViewById(R.id.iv_new_password_unified);
-        this.mIvNewPasswordAgainUnified = (ImageView) view.findViewById(R.id.iv_new_password_again_unified);
-        this.mEtInputVerficationCode = (EditText) view.findViewById(R.id.et_input_verfication_code);
-        this.mTvFpHint = (TextView) view.findViewById(R.id.tv_fp_hint);
-        this.mTvFpVerficationHint = (TextView) view.findViewById(R.id.tv_fp_verfication_hint);
-        this.mBtnSendEmail = (Button) view.findViewById(R.id.btn_send_email);
-        this.mBtnVerfication = (Button) view.findViewById(R.id.btn_verfication);
-        this.mTvEmailaddress = (TextView) view.findViewById(R.id.tv_emailaddress);
-        this.mTvTitleSubNmae = (TextView) view.findViewById(R.id.tv_title_sub_name);
+        this.mIvNewPasswordUnified = view.findViewById(R.id.iv_new_password_unified);
+        this.mIvNewPasswordAgainUnified = view.findViewById(R.id.iv_new_password_again_unified);
+        this.mEtInputVerficationCode = view.findViewById(R.id.et_input_verfication_code);
+        this.mTvFpHint = view.findViewById(R.id.tv_fp_hint);
+        this.mTvFpVerficationHint = view.findViewById(R.id.tv_fp_verfication_hint);
+        this.mBtnSendEmail = view.findViewById(R.id.btn_send_email);
+        this.mBtnVerfication = view.findViewById(R.id.btn_verfication);
+        this.mTvEmailaddress = view.findViewById(R.id.tv_emailaddress);
+        this.mTvTitleSubNmae = view.findViewById(R.id.tv_title_sub_name);
         this.mVNpDivider = view.findViewById(R.id.v_np_divider);
         this.mVNpDividerAgain = view.findViewById(R.id.v_np_again_divider);
-        this.mIvShowPassword = (ImageView) view.findViewById(R.id.iv_show_password);
-        this.mIvShowPasswordAgain = (ImageView) view.findViewById(R.id.iv_show_password_again);
+        this.mIvShowPassword = view.findViewById(R.id.iv_show_password);
+        this.mIvShowPasswordAgain = view.findViewById(R.id.iv_show_password_again);
         FontUtil.changeFontLanTing(getActivity().getAssets(), this.mTvEmailaddress, this.mTvFpHint, this.mEtFpEmailAccount, this.mEtNewPasswordAgain, this.mEtNewPassword, this.mEtInputVerficationCode, this.mBtnVerfication, this.mTvTitleSubNmae);
         this.mIvNewPasswordUnified.setVisibility(8);
         this.mIvNewPasswordAgainUnified.setVisibility(8);
@@ -95,14 +95,14 @@ public class ForgetPasswordFragment extends BaseFragment implements IForgetPassw
         showState();
     }
 
-    @Override // com.fimi.kernel.base.BaseFragment
+    @Override
     protected void doTrans() {
         OnClickListerner();
     }
 
     private void OnClickListerner() {
-        this.mBtnSendEmail.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.libperson.ui.me.login.ForgetPasswordFragment.1
-            @Override // android.view.View.OnClickListener
+        this.mBtnSendEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 AbAppUtil.closeSoftInput(ForgetPasswordFragment.this.mContext);
                 ForgetPasswordFragment.this.mBtnSendEmail.setEnabled(false);
@@ -112,8 +112,8 @@ public class ForgetPasswordFragment extends BaseFragment implements IForgetPassw
                 }
             }
         });
-        this.mBtnVerfication.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.libperson.ui.me.login.ForgetPasswordFragment.2
-            @Override // android.view.View.OnClickListener
+        this.mBtnVerfication.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 AbAppUtil.closeSoftInput(ForgetPasswordFragment.this.mContext);
                 ForgetPasswordFragment.this.mBtnVerfication.setEnabled(false);
@@ -124,8 +124,8 @@ public class ForgetPasswordFragment extends BaseFragment implements IForgetPassw
                 }
             }
         });
-        this.mIvShowPassword.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.libperson.ui.me.login.ForgetPasswordFragment.3
-            @Override // android.view.View.OnClickListener
+        this.mIvShowPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 if (ForgetPasswordFragment.this.isShowPassword) {
                     ForgetPasswordFragment.this.isShowPassword = false;
@@ -140,8 +140,8 @@ public class ForgetPasswordFragment extends BaseFragment implements IForgetPassw
                 ForgetPasswordFragment.this.mEtNewPassword.setSelection(ForgetPasswordFragment.this.mEtNewPassword.getText().length());
             }
         });
-        this.mIvShowPasswordAgain.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.libperson.ui.me.login.ForgetPasswordFragment.4
-            @Override // android.view.View.OnClickListener
+        this.mIvShowPasswordAgain.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 if (ForgetPasswordFragment.this.isShowPasswordAgain) {
                     ForgetPasswordFragment.this.isShowPasswordAgain = false;
@@ -158,11 +158,11 @@ public class ForgetPasswordFragment extends BaseFragment implements IForgetPassw
         });
     }
 
-    @Override // com.fimi.kernel.base.BaseFragment
+    @Override
     protected void initMVP() {
     }
 
-    @Override // com.fimi.libperson.ivew.IForgetPasswordView
+    @Override
     public void sendEmail(boolean isSuccess, String error) {
         this.mBtnSendEmail.setEnabled(true);
         if (isSuccess) {
@@ -175,7 +175,7 @@ public class ForgetPasswordFragment extends BaseFragment implements IForgetPassw
         }
     }
 
-    @Override // com.fimi.libperson.ivew.IForgetPasswordView
+    @Override
     public void inputVerfication(boolean isSuccess, String error) {
         this.mBtnVerfication.setEnabled(true);
         if (isSuccess) {
@@ -190,15 +190,15 @@ public class ForgetPasswordFragment extends BaseFragment implements IForgetPassw
         }
     }
 
-    @Override // com.fimi.libperson.ivew.IForgetPasswordView
+    @Override
     public void resetPassword(boolean isSuccess, String error) {
         this.mBtnVerfication.setEnabled(true);
         if (isSuccess) {
             if (this.mOnResetPasswordListerner != null) {
-                this.mEtFpEmailAccount.setText((CharSequence) null);
-                this.mEtInputVerficationCode.setText((CharSequence) null);
-                this.mEtNewPassword.setText((CharSequence) null);
-                this.mEtNewPasswordAgain.setText((CharSequence) null);
+                this.mEtFpEmailAccount.setText(null);
+                this.mEtInputVerficationCode.setText(null);
+                this.mEtNewPassword.setText(null);
+                this.mEtNewPasswordAgain.setText(null);
                 this.mState = State.EMAIL;
                 showState();
                 this.mOnResetPasswordListerner.resetSuccess();
@@ -227,11 +227,7 @@ public class ForgetPasswordFragment extends BaseFragment implements IForgetPassw
             this.mTvFpVerficationHint.setVisibility(8);
             this.mTvFpHint.setVisibility(0);
             setIvShowPassword(false);
-            if (DataValidatorUtil.isEmail(this.mEtFpEmailAccount.getText().toString().trim())) {
-                showClickState(true);
-            } else {
-                showClickState(false);
-            }
+            showClickState(DataValidatorUtil.isEmail(this.mEtFpEmailAccount.getText().toString().trim()));
         } else if (this.mState == State.VERIFICATION_CODE) {
             this.mEtFpEmailAccount.setVisibility(4);
             this.mEtInputVerficationCode.setVisibility(0);
@@ -249,11 +245,7 @@ public class ForgetPasswordFragment extends BaseFragment implements IForgetPassw
             this.mTvFpVerficationHint.setVisibility(0);
             this.mTvFpHint.setVisibility(8);
             setIvShowPassword(false);
-            if (this.mEtInputVerficationCode.getText().length() == 6) {
-                showBtnVerficationClickState(true);
-            } else {
-                showBtnVerficationClickState(false);
-            }
+            showBtnVerficationClickState(this.mEtInputVerficationCode.getText().length() == 6);
         } else if (this.mState == State.NEW_PASSWORD) {
             this.mEtFpEmailAccount.setVisibility(4);
             this.mEtInputVerficationCode.setVisibility(4);
@@ -268,11 +260,7 @@ public class ForgetPasswordFragment extends BaseFragment implements IForgetPassw
             this.mTvFpVerficationHint.setVisibility(0);
             this.mTvFpHint.setVisibility(8);
             setIvShowPassword(true);
-            if (this.mEtNewPasswordAgain.getText().toString().trim().equals(this.mEtNewPassword.getText().toString().trim()) && this.mEtNewPasswordAgain.getText().toString().length() >= 8) {
-                showBtnVerficationClickState(true);
-            } else {
-                showBtnVerficationClickState(false);
-            }
+            showBtnVerficationClickState(this.mEtNewPasswordAgain.getText().toString().trim().equals(this.mEtNewPassword.getText().toString().trim()) && this.mEtNewPasswordAgain.getText().toString().length() >= 8);
         }
     }
 
@@ -299,34 +287,26 @@ public class ForgetPasswordFragment extends BaseFragment implements IForgetPassw
 
     public void setBack() {
         if (this.mState == State.EMAIL) {
-            this.mEtFpEmailAccount.setText((CharSequence) null);
+            this.mEtFpEmailAccount.setText(null);
         } else if (this.mState == State.VERIFICATION_CODE) {
             this.mState = State.EMAIL;
-            this.mEtInputVerficationCode.setText((CharSequence) null);
-            this.mTvEmailaddress.setText((CharSequence) null);
+            this.mEtInputVerficationCode.setText(null);
+            this.mTvEmailaddress.setText(null);
             showState();
         } else if (this.mState == State.NEW_PASSWORD) {
             this.mState = State.VERIFICATION_CODE;
-            this.mEtNewPassword.setText((CharSequence) null);
-            this.mEtNewPasswordAgain.setText((CharSequence) null);
+            this.mEtNewPassword.setText(null);
+            this.mEtNewPasswordAgain.setText(null);
             showState();
         }
     }
 
     public void showClickState(boolean isClick) {
-        if (isClick) {
-            this.mBtnSendEmail.setEnabled(true);
-        } else {
-            this.mBtnSendEmail.setEnabled(false);
-        }
+        this.mBtnSendEmail.setEnabled(isClick);
     }
 
     public void showBtnVerficationClickState(boolean isClick) {
-        if (isClick) {
-            this.mBtnVerfication.setEnabled(true);
-        } else {
-            this.mBtnVerfication.setEnabled(false);
-        }
+        this.mBtnVerfication.setEnabled(isClick);
     }
 
     public SpannableString getSpannableString() {
@@ -336,15 +316,15 @@ public class ForgetPasswordFragment extends BaseFragment implements IForgetPassw
         SpannableString spannableString = new SpannableString(str1 + str2 + str3);
         spannableString.setSpan(new ForegroundColorSpan(this.mContext.getResources().getColor(R.color.register_agreement)), 0, str1.length(), 33);
         spannableString.setSpan(new ForegroundColorSpan(this.mContext.getResources().getColor(R.color.register_agreement)), str1.length() + str2.length(), str1.length() + str2.length() + str3.length(), 33);
-        spannableString.setSpan(new ClickableSpan() { // from class: com.fimi.libperson.ui.me.login.ForgetPasswordFragment.5
-            @Override // android.text.style.ClickableSpan, android.text.style.CharacterStyle
+        spannableString.setSpan(new ClickableSpan() {
+            @Override
             public void updateDrawState(TextPaint ds) {
                 super.updateDrawState(ds);
                 ds.setColor(ForgetPasswordFragment.this.getResources().getColor(R.color.register_agreement_click));
                 ds.setUnderlineText(false);
             }
 
-            @Override // android.text.style.ClickableSpan
+            @Override
             public void onClick(View widget) {
             }
         }, str1.length(), str1.length() + str2.length(), 33);
@@ -357,65 +337,57 @@ public class ForgetPasswordFragment extends BaseFragment implements IForgetPassw
         SpannableString spannableString = new SpannableString(str1 + str2);
         spannableString.setSpan(new ForegroundColorSpan(this.mContext.getResources().getColor(R.color.register_agreement)), 0, str1.length(), 33);
         spannableString.setSpan(new ForegroundColorSpan(this.mContext.getResources().getColor(R.color.register_agreement)), str1.length() + str2.length(), str1.length() + str2.length(), 33);
-        spannableString.setSpan(new ClickableSpan() { // from class: com.fimi.libperson.ui.me.login.ForgetPasswordFragment.6
-            @Override // android.text.style.ClickableSpan, android.text.style.CharacterStyle
+        spannableString.setSpan(new ClickableSpan() {
+            @Override
             public void updateDrawState(TextPaint ds) {
                 super.updateDrawState(ds);
                 ds.setColor(ForgetPasswordFragment.this.getResources().getColor(R.color.register_agreement_click));
                 ds.setUnderlineText(false);
             }
 
-            @Override // android.text.style.ClickableSpan
+            @Override
             public void onClick(View widget) {
             }
         }, str1.length(), str1.length() + str2.length(), 33);
         return spannableString;
     }
 
-    /* loaded from: classes.dex */
+
     public enum State {
         EMAIL,
         VERIFICATION_CODE,
         NEW_PASSWORD
     }
 
-    /* loaded from: classes.dex */
+
     interface OnResetPasswordListerner {
         void resetSuccess();
     }
 
-    /* loaded from: classes.dex */
+
     class EditTextWatcher implements TextWatcher {
-        private EditText mEditText;
+        private final EditText mEditText;
 
         public EditTextWatcher(EditText editText) {
             this.mEditText = editText;
         }
 
-        @Override // android.text.TextWatcher
+        @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         }
 
-        @Override // android.text.TextWatcher
+        @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
         }
 
-        @Override // android.text.TextWatcher
+        @Override
         public void afterTextChanged(Editable s) {
             if (s.length() > 0) {
                 if (R.id.et_fp_email_account == this.mEditText.getId()) {
-                    if (DataValidatorUtil.isEmail(this.mEditText.getText().toString().trim())) {
-                        ForgetPasswordFragment.this.showClickState(true);
-                    } else {
-                        ForgetPasswordFragment.this.showClickState(false);
-                    }
+                    ForgetPasswordFragment.this.showClickState(DataValidatorUtil.isEmail(this.mEditText.getText().toString().trim()));
                     ForgetPasswordFragment.this.mTvFpHint.setText(ForgetPasswordFragment.this.getSpannableString());
                 } else if (R.id.et_input_verfication_code == this.mEditText.getId()) {
-                    if (s.length() == 6) {
-                        ForgetPasswordFragment.this.showBtnVerficationClickState(true);
-                    } else {
-                        ForgetPasswordFragment.this.showBtnVerficationClickState(false);
-                    }
+                    ForgetPasswordFragment.this.showBtnVerficationClickState(s.length() == 6);
                     ForgetPasswordFragment.this.mTvFpVerficationHint.setText(ForgetPasswordFragment.this.getEmailVerficationSpannableString());
                 } else if (R.id.et_new_password == this.mEditText.getId()) {
                     if (ForgetPasswordFragment.this.mEtNewPassword.getText().toString().trim().equals(ForgetPasswordFragment.this.mEtNewPasswordAgain.getText().toString().trim()) && s.length() >= 8) {

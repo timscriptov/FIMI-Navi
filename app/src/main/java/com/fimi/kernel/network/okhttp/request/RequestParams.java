@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* loaded from: classes.dex */
+
 public class RequestParams {
     public ConcurrentHashMap<String, Object> fileParams;
     public ConcurrentHashMap<String, String> urlParams;
@@ -25,7 +25,7 @@ public class RequestParams {
     }
 
     public RequestParams(final String key, final String value) {
-        this(new HashMap<String, String>() { // from class: com.fimi.kernel.network.okhttp.request.RequestParams.1
+        this(new HashMap<String, String>() {
             {
                 put(key, value);
             }

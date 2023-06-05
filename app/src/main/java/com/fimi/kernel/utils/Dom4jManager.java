@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class Dom4jManager {
     public <T> List<T> readXML(String xmlPath, String elementName, Class cls) {
         long lasting = System.currentTimeMillis();

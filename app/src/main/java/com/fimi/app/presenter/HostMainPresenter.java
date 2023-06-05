@@ -44,7 +44,7 @@ import java.util.List;
 
 import router.Router;
 
-/* loaded from: classes.dex */
+
 public class HostMainPresenter implements IDownProgress {
     static List<UpfirewareDto> list = new ArrayList();
     DialogManager dialogManager;
@@ -52,7 +52,7 @@ public class HostMainPresenter implements IDownProgress {
     boolean isProviderEnabled;
     int position = 0;
     private LocationManager lm;
-    private Context mContext;
+    private final Context mContext;
     private IProductControllers productControler;
 
     public HostMainPresenter(Context mContext, IFirmwareDownView iFirmwareDownView) {
@@ -170,13 +170,13 @@ public class HostMainPresenter implements IDownProgress {
                     boolean isStartBegnnerGuide = SPStoreManager.getInstance().getBoolean(com.fimi.kernel.Constants.X9_BEGNNER_GUIDE);
                     this.productControler.stopAnimation();
                     if (isStartBegnnerGuide) {
-                        Intent it = (Intent) Router.invoke(this.mContext, "activity://x9.main");
+                        Intent it = Router.invoke(this.mContext, "activity://x9.main");
                         this.mContext.startActivity(it);
                         ((Activity) this.mContext).overridePendingTransition(17432576, 17432577);
                         return;
                     }
                     SPStoreManager.getInstance().saveBoolean(com.fimi.kernel.Constants.X9_BEGNNER_GUIDE_SETTING, false);
-                    Intent it2 = (Intent) Router.invoke(this.mContext, "activity://x9.guide");
+                    Intent it2 = Router.invoke(this.mContext, "activity://x9.guide");
                     this.mContext.startActivity(it2);
                     return;
                 }
@@ -193,13 +193,13 @@ public class HostMainPresenter implements IDownProgress {
                 boolean isStartBegnnerGuide2 = SPStoreManager.getInstance().getBoolean(com.fimi.kernel.Constants.X9_BEGNNER_GUIDE);
                 this.productControler.stopAnimation();
                 if (isStartBegnnerGuide2) {
-                    Intent it3 = (Intent) Router.invoke(this.mContext, "activity://x9.main");
+                    Intent it3 = Router.invoke(this.mContext, "activity://x9.main");
                     this.mContext.startActivity(it3);
                     ((Activity) this.mContext).overridePendingTransition(17432576, 17432577);
                     return;
                 }
                 SPStoreManager.getInstance().saveBoolean(com.fimi.kernel.Constants.X9_BEGNNER_GUIDE_SETTING, false);
-                Intent it4 = (Intent) Router.invoke(this.mContext, "activity://x9.guide");
+                Intent it4 = Router.invoke(this.mContext, "activity://x9.guide");
                 this.mContext.startActivity(it4);
                 return;
             }
@@ -224,7 +224,7 @@ public class HostMainPresenter implements IDownProgress {
             openCameraDialog(this.mContext.getString(R.string.fimi_sdk_open_gps_permission_hint));
             return;
         }
-        Intent it = (Intent) Router.invoke(this.mContext, "activity://gh2.main");
+        Intent it = Router.invoke(this.mContext, "activity://gh2.main");
         this.mContext.startActivity(it);
     }
 
@@ -233,9 +233,9 @@ public class HostMainPresenter implements IDownProgress {
     }
 
     private void openCameraDialog(final String dialoghint) {
-        this.dialogManager = new DialogManager(this.mContext, (String) null, dialoghint, this.mContext.getString(R.string.fimi_sdk_go_setting), this.mContext.getString(R.string.cancel));
-        this.dialogManager.setOnDiaLogListener(new DialogManager.OnDialogListener() { // from class: com.fimi.app.presenter.HostMainPresenter.1
-            @Override // com.fimi.widget.DialogManager.OnDialogListener
+        this.dialogManager = new DialogManager(this.mContext, null, dialoghint, this.mContext.getString(R.string.fimi_sdk_go_setting), this.mContext.getString(R.string.cancel));
+        this.dialogManager.setOnDiaLogListener(new DialogManager.OnDialogListener() {
+            @Override
             public void dialogBtnRightOrSingleListener(View customView, DialogInterface dialogInterface, int which) {
                 if (!dialoghint.equals(HostMainPresenter.this.mContext.getString(R.string.fimi_sdk_open_gps_permission_hint))) {
                     ((Activity) HostMainPresenter.this.mContext).startActivityForResult(new Intent("android.settings.SETTINGS"), 0);
@@ -246,7 +246,7 @@ public class HostMainPresenter implements IDownProgress {
                 ((Activity) HostMainPresenter.this.mContext).startActivityForResult(intent, PermissionManager.ACTION_LOCATION_SOURCE_SETTINGS);
             }
 
-            @Override // com.fimi.widget.DialogManager.OnDialogListener
+            @Override
             public void dialogBtnLeftListener(View customView, DialogInterface dialogInterface, int which) {
                 if (dialoghint.equals(HostMainPresenter.this.mContext.getString(R.string.fimi_sdk_open_gps_permission_hint))) {
                     HostMainPresenter.this.isProviderEnabled = true;
@@ -259,7 +259,7 @@ public class HostMainPresenter implements IDownProgress {
         }
     }
 
-    @Override // com.fimi.network.IDownProgress
+    @Override
     public void onProgress(DownFwService.DownState downState, int progrss, String fileName) {
         this.iFirmwareDownView.showDownFwProgress(downState, progrss, fileName);
     }
@@ -273,15 +273,15 @@ public class HostMainPresenter implements IDownProgress {
     }
 
     public void showGpsDialog() {
-        DialogManager gpsDialogManager = new DialogManager(this.mContext, (String) null, this.mContext.getString(R.string.fimi_sdk_open_gps_permission_hint), this.mContext.getString(R.string.fimi_sdk_go_setting), this.mContext.getString(R.string.fimi_sdk_update_ignore));
-        gpsDialogManager.setOnDiaLogListener(new DialogManager.OnDialogListener() { // from class: com.fimi.app.presenter.HostMainPresenter.2
-            @Override // com.fimi.widget.DialogManager.OnDialogListener
+        DialogManager gpsDialogManager = new DialogManager(this.mContext, null, this.mContext.getString(R.string.fimi_sdk_open_gps_permission_hint), this.mContext.getString(R.string.fimi_sdk_go_setting), this.mContext.getString(R.string.fimi_sdk_update_ignore));
+        gpsDialogManager.setOnDiaLogListener(new DialogManager.OnDialogListener() {
+            @Override
             public void dialogBtnRightOrSingleListener(View customView, DialogInterface dialogInterface, int which) {
                 Intent intent = new Intent("android.settings.LOCATION_SOURCE_SETTINGS");
                 HostMainPresenter.this.mContext.startActivity(intent);
             }
 
-            @Override // com.fimi.widget.DialogManager.OnDialogListener
+            @Override
             public void dialogBtnLeftListener(View customView, DialogInterface dialogInterface, int which) {
             }
         });
@@ -300,11 +300,11 @@ public class HostMainPresenter implements IDownProgress {
                 activity.startActivityForResult(intent, 1);
                 return;
             }
-            Intent intent2 = (Intent) Router.invoke(this.mContext, pattern);
+            Intent intent2 = Router.invoke(this.mContext, pattern);
             this.mContext.startActivity(intent2);
             return;
         }
-        Intent intent3 = (Intent) Router.invoke(this.mContext, pattern);
+        Intent intent3 = Router.invoke(this.mContext, pattern);
         this.mContext.startActivity(intent3);
     }
 }

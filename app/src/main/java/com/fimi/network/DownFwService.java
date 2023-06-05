@@ -19,7 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* loaded from: classes.dex */
+
 public class DownFwService extends Service {
     private static final int PROGRESS_MAX = 100;
     public static volatile int checkingTaskCount = 0;
@@ -37,12 +37,28 @@ public class DownFwService extends Service {
         DisposeDataHandle.isStop = state2 == DownState.StopDown;
     }
 
-    @Override // android.app.Service
+    @Override
     @Nullable
     public IBinder onBind(Intent intent) {
         return null;
-    }    public DisposeDataHandle dataHandle = new DisposeDataHandle(new DisposeDownloadListener() { // from class: com.fimi.network.DownFwService.1
-        @Override // com.fimi.kernel.network.okhttp.listener.DisposeDownloadListener
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        if (intent != null) {
+            this.mSelectList = (ArrayList) intent.getSerializableExtra("listDownloadFwSelectInfo");
+            if (this.mSelectList != null) {
+                this.needDownDto = HostConstants.getNeedDownFw(false, this.mSelectList);
+            } else {
+                this.needDownDto = HostConstants.getNeedDownFw(true, this.mSelectList);
+            }
+            X9UpdateUtil.setDownList(this.needDownDto);
+            state = DownState.Start;
+            downFirmware();
+        }
+        return super.onStartCommand(intent, flags, startId);
+    }    public DisposeDataHandle dataHandle = new DisposeDataHandle(new DisposeDownloadListener() {
+        @Override
         public void onProgress(int progrss, int currentLength) {
             int pro = ((DownFwService.checkingTaskCount * 100) + progrss) / DownFwService.this.needDownDto.size();
             if (progrss == 100) {
@@ -64,7 +80,7 @@ public class DownFwService extends Service {
             }
         }
 
-        @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+        @Override
         public void onSuccess(Object responseObj) {
             if (X9UpdateUtil.getDownList() != null && X9UpdateUtil.getDownList().size() > DownFwService.checkingTaskCount) {
                 X9UpdateUtil.getDownList().get(DownFwService.checkingTaskCount).setDownResult("0");
@@ -76,7 +92,7 @@ public class DownFwService extends Service {
             DownFwService.this.reportProgress(DownFwService.state, pro, "");
         }
 
-        @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+        @Override
         public void onFailure(Object reasonObj) {
             int pro = 0;
             if (X9UpdateUtil.getDownList() != null && X9UpdateUtil.getDownList().size() > DownFwService.checkingTaskCount) {
@@ -90,22 +106,6 @@ public class DownFwService extends Service {
             DownFwService.this.downFirmware();
         }
     });
-
-    @Override // android.app.Service
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        if (intent != null) {
-            this.mSelectList = (ArrayList) intent.getSerializableExtra("listDownloadFwSelectInfo");
-            if (this.mSelectList != null) {
-                this.needDownDto = HostConstants.getNeedDownFw(false, this.mSelectList);
-            } else {
-                this.needDownDto = HostConstants.getNeedDownFw(true, this.mSelectList);
-            }
-            X9UpdateUtil.setDownList(this.needDownDto);
-            state = DownState.Start;
-            downFirmware();
-        }
-        return super.onStartCommand(intent, flags, startId);
-    }
 
     public synchronized void startCheckingTask() {
         checkingTaskCount++;
@@ -135,7 +135,6 @@ public class DownFwService extends Service {
         }
     }
 
-    /* loaded from: classes.dex */
     public enum DownState {
         UnStart,
         Start,
@@ -144,6 +143,7 @@ public class DownFwService extends Service {
         DownFail,
         StopDown
     }
+
 
 
 

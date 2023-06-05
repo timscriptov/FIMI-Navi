@@ -6,8 +6,6 @@ import com.fimi.kernel.utils.NumberUtil;
 import com.fimi.x8sdk.entity.X8AppSettingLog;
 
 
-
-/* loaded from: classes2.dex */
 public class AutoFcBattery extends X8BaseMessage {
     private int cc;
     private int cell1Voltage;
@@ -34,7 +32,7 @@ public class AutoFcBattery extends X8BaseMessage {
         this.landingCapacity = landingCapacity;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         LinkPayLoad4 payLoad4 = packet.getPayLoad4();
@@ -180,7 +178,7 @@ public class AutoFcBattery extends X8BaseMessage {
         this.rhtCapacity = rhtCapacity;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public String toString() {
         return "AutoFcBattery{cell1Voltage=" + this.cell1Voltage + ", cell2Voltage=" + this.cell2Voltage + ", cell3Voltage=" + this.cell3Voltage + ", cell4Voltage=" + this.cell4Voltage + ", currentCapacity=" + this.currentCapacity + ", totalCapacity=" + this.totalCapacity + ", currents=" + this.currents + ", temperature=" + this.temperature + ", remainingTime=" + this.remainingTime + ", remainPercentage=" + this.remainPercentage + ", uvc=" + this.uvc + ", rcNotUpdateCnt=" + this.rcNotUpdateCnt + ", cc=" + this.cc + '}';
     }

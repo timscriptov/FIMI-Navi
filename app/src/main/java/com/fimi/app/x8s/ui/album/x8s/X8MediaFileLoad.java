@@ -31,7 +31,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-/* loaded from: classes.dex */
+
 public class X8MediaFileLoad<T extends MediaModel> implements IMediaFileLoad, MediaDataListener {
     public SuffixUtils mSuffixUtils = SuffixUtils.obtain();
     X8MediaFileInfo downingFileInfo;
@@ -40,19 +40,19 @@ public class X8MediaFileLoad<T extends MediaModel> implements IMediaFileLoad, Me
     long fileLength = 0;
     boolean isAwait = false;
     X8FileInfo info = new X8FileInfo();
-    private List<MediaModel> listData;
-    private OnX8MediaFileListener listener;
-    private String X8_MEDIA_DES = "media.xml";
-    private String rootPath = Environment.getExternalStorageDirectory().getPath() + "/x8/media";
+    private final List<MediaModel> listData;
+    private final OnX8MediaFileListener listener;
+    private final String X8_MEDIA_DES = "media.xml";
+    private final String rootPath = Environment.getExternalStorageDirectory().getPath() + "/x8/media";
     public final String xmlPath = this.rootPath + "/" + this.X8_MEDIA_DES;
     File rootFile = new File(this.xmlPath);
     public final String thumPath = this.rootPath + "/thum";
     public final String orginPath = this.rootPath + "/orgin";
     public final String tempPath = this.rootPath + "/temp";
     private short max_size = NTLMConstants.TARGET_INFORMATION_SUBBLOCK_DNS_DOMAIN_NAME_TYPE;
-    private boolean isErr = false;
-    private Handler mHandler = new Handler() { // from class: com.fimi.app.x8s.ui.album.x8s.X8MediaFileLoad.2
-        @Override // android.os.Handler
+    private final boolean isErr = false;
+    private final Handler mHandler = new Handler() {
+        @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
@@ -63,17 +63,16 @@ public class X8MediaFileLoad<T extends MediaModel> implements IMediaFileLoad, Me
                     X8MediaFileLoad.this.listener.onComplete(true);
                     return;
                 default:
-                    return;
             }
         }
     };
-    DownMediaFileLinstener fileLinstener = new DownMediaFileLinstener() { // from class: com.fimi.app.x8s.ui.album.x8s.X8MediaFileLoad.1
-        @Override // com.fimi.app.x8s.ui.album.x8s.listener.DownMediaFileLinstener
+    DownMediaFileLinstener fileLinstener = new DownMediaFileLinstener() {
+        @Override
         public void onSartFile() {
             X8MediaFileLoad.this.sendCmd(new X8DownLoadCmd().getMediaXmlFile(X8MediaFileLoad.this.X8_MEDIA_DES));
         }
 
-        @Override // com.fimi.app.x8s.ui.album.x8s.listener.DownMediaFileLinstener
+        @Override
         public void onProgress(MediaFileDownLoadPacket downLoadPacket) {
             if (X8MediaFileLoad.this.randomAccessFile != null) {
                 try {
@@ -86,8 +85,8 @@ public class X8MediaFileLoad<T extends MediaModel> implements IMediaFileLoad, Me
                         }
                     } else if (!X8MediaFileLoad.this.isAwait) {
                         X8MediaFileLoad.this.isAwait = true;
-                        HandlerManager.obtain().getHandlerInMainThread().postDelayed(new Runnable() { // from class: com.fimi.app.x8s.ui.album.x8s.X8MediaFileLoad.1.1
-                            @Override // java.lang.Runnable
+                        HandlerManager.obtain().getHandlerInMainThread().postDelayed(new Runnable() {
+                            @Override
                             public void run() {
                                 X8MediaFileLoad.this.reqNextPacket(X8MediaFileLoad.this.fileLength);
                                 X8MediaFileLoad.this.isAwait = false;
@@ -101,13 +100,13 @@ public class X8MediaFileLoad<T extends MediaModel> implements IMediaFileLoad, Me
             }
         }
 
-        @Override // com.fimi.app.x8s.ui.album.x8s.listener.DownMediaFileLinstener
+        @Override
         public void onDownFilePre(X8MediaFileInfo fileInfo) {
             X8MediaFileLoad.this.createRootFile();
             X8MediaFileLoad.this.startDownloadTask(fileInfo);
         }
 
-        @Override // com.fimi.app.x8s.ui.album.x8s.listener.DownMediaFileLinstener
+        @Override
         public void onEndFile(DownFileResultEnum resultEnum) {
             switch (AnonymousClass3.$SwitchMap$com$fimi$app$x8s$ui$album$x8s$DownFileResultEnum[resultEnum.ordinal()]) {
                 case 1:
@@ -121,7 +120,6 @@ public class X8MediaFileLoad<T extends MediaModel> implements IMediaFileLoad, Me
                     X8MediaFileLoad.this.parseOnlineData();
                     NoticeManager.getInstance().removeMediaListener(X8MediaFileLoad.this);
                     X8MediaFileLoad.this.mHandler.sendEmptyMessageDelayed(1, 500L);
-                    return;
             }
         }
     };
@@ -132,7 +130,7 @@ public class X8MediaFileLoad<T extends MediaModel> implements IMediaFileLoad, Me
         NoticeManager.getInstance().addMediaListener(this);
     }
 
-    @Override // com.fimi.album.download.interfaces.IMediaFileLoad
+    @Override
     public void startLoad() {
         this.fileLinstener.onSartFile();
     }
@@ -143,12 +141,12 @@ public class X8MediaFileLoad<T extends MediaModel> implements IMediaFileLoad, Me
         }
     }
 
-    @Override // com.fimi.album.download.interfaces.IMediaFileLoad
+    @Override
     public void stopLoad() {
         this.info.setStop(true);
     }
 
-    @Override // com.fimi.kernel.connect.session.MediaDataListener
+    @Override
     public void mediaDataCallBack(byte[] data) {
         if (data != null && data.length > 0) {
             byte cmdType = data[0];
@@ -270,9 +268,7 @@ public class X8MediaFileLoad<T extends MediaModel> implements IMediaFileLoad, Me
                                     model.setDownLoadOriginalFile(isExits(this.orginPath, fileName));
                                     model.setDownLoadThum(isExits(this.thumPath, fileName, Long.parseLong(fileSize)));
                                 }
-                                if (this.listData.contains(model)) {
-                                    this.listData.remove(model);
-                                }
+                                this.listData.remove(model);
                                 this.listData.add(model);
                             }
                         } catch (Exception e) {
@@ -318,18 +314,12 @@ public class X8MediaFileLoad<T extends MediaModel> implements IMediaFileLoad, Me
 
     public boolean isExits(String path, String name) {
         File file = new File(path, name);
-        if (!file.exists()) {
-            return false;
-        }
-        return true;
+        return file.exists();
     }
 
     public boolean isExits(String path, String name, long fileSize) {
         File file = new File(path, name);
-        if (!file.exists() || file.length() <= 0) {
-            return false;
-        }
-        return true;
+        return file.exists() && file.length() > 0;
     }
 
     public void closeWriteStream() {
@@ -343,7 +333,7 @@ public class X8MediaFileLoad<T extends MediaModel> implements IMediaFileLoad, Me
     }
 
     /* renamed from: com.fimi.app.x8s.ui.album.x8s.X8MediaFileLoad$3 */
-    /* loaded from: classes.dex */
+
     public static /* synthetic */ class AnonymousClass3 {
         static final /* synthetic */ int[] $SwitchMap$com$fimi$app$x8s$ui$album$x8s$DownFileResultEnum = new int[DownFileResultEnum.values().length];
 

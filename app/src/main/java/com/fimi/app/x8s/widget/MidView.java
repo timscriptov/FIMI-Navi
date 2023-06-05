@@ -172,7 +172,7 @@ public class MidView extends View {
         postInvalidate();
     }
 
-    @Override // android.view.View
+    @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         int wSpecMode = View.MeasureSpec.getMode(widthMeasureSpec);
@@ -205,7 +205,7 @@ public class MidView extends View {
         invalidate();
     }
 
-    /* loaded from: classes.dex */
+
     public enum clipType {
         left,
         top,

@@ -3,10 +3,10 @@ package com.fimi.kernel.utils;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-/* loaded from: classes.dex */
+
 public class DNSLookupThread extends Thread {
     private InetAddress addr;
-    private String hostname;
+    private final String hostname;
 
     public DNSLookupThread(String hostname) {
         this.hostname = hostname;
@@ -19,13 +19,10 @@ public class DNSLookupThread extends Thread {
             dnsTh.join(500L);
         } catch (Exception e) {
         }
-        if (dnsTh.getIP() == null) {
-            return false;
-        }
-        return true;
+        return dnsTh.getIP() != null;
     }
 
-    @Override // java.lang.Thread, java.lang.Runnable
+    @Override
     public void run() {
         try {
             InetAddress add = InetAddress.getByName(this.hostname);

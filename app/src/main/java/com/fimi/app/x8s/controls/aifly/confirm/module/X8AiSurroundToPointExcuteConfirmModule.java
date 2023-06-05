@@ -8,7 +8,7 @@ import com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiSurroundToPointExcuteConfi
 import com.fimi.app.x8s.interfaces.IX8NextViewListener;
 import com.fimi.x8sdk.controller.FcManager;
 
-/* loaded from: classes.dex */
+
 public class X8AiSurroundToPointExcuteConfirmModule extends X8BaseModule {
     private X8AiSurroundToPointExcuteConfirmUi mUi;
 
@@ -16,7 +16,7 @@ public class X8AiSurroundToPointExcuteConfirmModule extends X8BaseModule {
         this.mUi = new X8AiSurroundToPointExcuteConfirmUi(activity, rootView, radius);
     }
 
-    @Override // com.fimi.app.x8s.controls.aifly.confirm.module.X8BaseModule
+    @Override
     public void setFcHeart(boolean isInSky, boolean isLowPower) {
         this.mUi.setFcHeart(isInSky, isLowPower);
     }

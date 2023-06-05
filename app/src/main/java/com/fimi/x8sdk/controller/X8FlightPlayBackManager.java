@@ -7,7 +7,7 @@ import com.fimi.kernel.network.okhttp.request.CommonRequest;
 import com.fimi.kernel.network.okhttp.request.RequestParams;
 import com.fimi.network.BaseManager;
 
-/* loaded from: classes2.dex */
+
 public class X8FlightPlayBackManager extends BaseManager {
     private static volatile X8FlightPlayBackManager x8FlightPlayBackManager = null;
 

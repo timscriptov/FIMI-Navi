@@ -16,9 +16,9 @@ public class X8MainReturnTimeTextView extends View {
 
     private static final String TAG = "X8MainReturnTimeTextVie";
     private float fontSize;
-    private Paint mPaint;
-    private Paint mPaintStrock;
-    private Paint mPaintText;
+    private final Paint mPaint;
+    private final Paint mPaintStrock;
+    private final Paint mPaintText;
     private String mStrTime;
     private int percent;
     private float photoWidth;

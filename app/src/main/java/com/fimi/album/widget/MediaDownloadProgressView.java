@@ -10,7 +10,7 @@ import android.view.View;
 import androidx.core.internal.view.SupportMenu;
 import androidx.core.view.InputDeviceCompat;
 
-/* loaded from: classes.dex */
+
 public class MediaDownloadProgressView extends View {
     private static final int[] SECTION_COLORS = {-16711936, InputDeviceCompat.SOURCE_ANY, SupportMenu.CATEGORY_MASK};
     private int backColor;
@@ -45,7 +45,7 @@ public class MediaDownloadProgressView extends View {
     private void initView(Context context) {
     }
 
-    @Override // android.view.View
+    @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         this.mPaint = new Paint();
@@ -101,7 +101,7 @@ public class MediaDownloadProgressView extends View {
         this.backColor = backColor;
     }
 
-    @Override // android.view.View
+    @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int widthSpecMode = View.MeasureSpec.getMode(widthMeasureSpec);
         int widthSpecSize = View.MeasureSpec.getSize(widthMeasureSpec);

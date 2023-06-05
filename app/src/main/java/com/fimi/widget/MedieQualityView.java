@@ -53,8 +53,8 @@ public class MedieQualityView extends FrameLayout {
             }
         };
         LayoutInflater.from(context).inflate(R.layout.item_media_quality, this);
-        this.tvArg1 = (TextView) findViewById(R.id.tv_arg1);
-        this.tvArg2 = (TextView) findViewById(R.id.tv_arg2);
+        this.tvArg1 = findViewById(R.id.tv_arg1);
+        this.tvArg2 = findViewById(R.id.tv_arg2);
     }
 
     public void setMediaQuality(int arg1, int arg2) {

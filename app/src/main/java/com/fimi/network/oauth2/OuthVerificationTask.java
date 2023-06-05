@@ -15,7 +15,7 @@ import com.twitter.sdk.android.core.internal.oauth.OAuthConstants;
 
 import okhttp3.HttpUrl;
 
-/* loaded from: classes.dex */
+
 public class OuthVerificationTask {
     public void getAuthorizationCode(final CallBackListner backListner) {
         OAuthClientRequest oAuthClientRequest = new OAuthClientRequest();
@@ -27,8 +27,8 @@ public class OuthVerificationTask {
         requestParams.put(ServerProtocol.DIALOG_PARAM_RESPONSE_TYPE, oAuthClientRequest.getResponseType());
         requestParams.put("redirect_uri", oAuthClientRequest.getRedirectURI());
         String url = HostConstants.HostURL + "v1/oauth/authorize";
-        CommonOkHttpClient.getUrl(CommonRequest.createGetOriginalRequest(url, requestParams), new DisposeDataHandle(new DisposeDataListener() { // from class: com.fimi.network.oauth2.OuthVerificationTask.1
-            @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+        CommonOkHttpClient.getUrl(CommonRequest.createGetOriginalRequest(url, requestParams), new DisposeDataHandle(new DisposeDataListener() {
+            @Override
             public void onSuccess(Object responseObj) {
                 HttpUrl httpUrl = (HttpUrl) responseObj;
                 String code = httpUrl.queryParameter("code");
@@ -37,7 +37,7 @@ public class OuthVerificationTask {
                 }
             }
 
-            @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+            @Override
             public void onFailure(Object reasonObj) {
             }
         }));
@@ -59,22 +59,22 @@ public class OuthVerificationTask {
         RequestParams headers = new RequestParams();
         headers.put("Content-Type", "application/x-www-form-urlencoded");
         String url = HostConstants.HostURL + "v1/oauth/accessToken";
-        CommonOkHttpClient.postUrl(CommonRequest.createPostOriginalRequest(url, requestParams, headers), new DisposeDataHandle(new DisposeDataListener() { // from class: com.fimi.network.oauth2.OuthVerificationTask.2
-            @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+        CommonOkHttpClient.postUrl(CommonRequest.createPostOriginalRequest(url, requestParams, headers), new DisposeDataHandle(new DisposeDataListener() {
+            @Override
             public void onSuccess(Object responseObj) {
                 if (responseObj != null) {
                     try {
-                        AccessTokenEntity entity = (AccessTokenEntity) JSONObject.parseObject(responseObj.toString(), AccessTokenEntity.class);
+                        AccessTokenEntity entity = JSONObject.parseObject(responseObj.toString(), AccessTokenEntity.class);
                         SPStoreManager.getInstance().saveString(OauthConstant.ACCESS_TOKEN_SP, entity.getAccess_token());
                         HostLogBack.getInstance().writeLog("获取access_token 成功！");
                     } catch (Exception e) {
-                        HostLogBack.getInstance().writeLog("获取access_token 失败 ==> " + e.getMessage().toString());
+                        HostLogBack.getInstance().writeLog("获取access_token 失败 ==> " + e.getMessage());
                         e.printStackTrace();
                     }
                 }
             }
 
-            @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+            @Override
             public void onFailure(Object reasonObj) {
             }
         }));

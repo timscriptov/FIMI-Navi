@@ -16,7 +16,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 
-
 public class ApkVersionManager extends BaseManager {
     public final String OPEN_SIXPOINT_CALIBRATE = "open_sixpoint_calibrate";
     public final String OPEN_FLY_LOG = "open_fly_log";

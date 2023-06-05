@@ -13,11 +13,11 @@ import com.fimi.kernel.base.BaseApplication;
 
 import java.lang.ref.SoftReference;
 
-/* loaded from: classes.dex */
+
 public class AnimationsContainer {
     private static AnimationsContainer mInstance;
     public int FPS = 58;
-    private Context mContext = BaseApplication.getContext();
+    private final Context mContext = BaseApplication.getContext();
     private int resId;
 
     public static AnimationsContainer getInstance(int resId, int fps) {
@@ -48,23 +48,23 @@ public class AnimationsContainer {
         return intArray;
     }
 
-    /* loaded from: classes.dex */
+
     public interface OnAnimationStoppedListener {
         void AnimationStopped();
     }
 
-    /* loaded from: classes.dex */
+
     public class FramesSequenceAnimation {
         private Bitmap mBitmap;
         private BitmapFactory.Options mBitmapOptions;
-        private int[] mFrames;
+        private final int[] mFrames;
         private OnAnimationStoppedListener mOnAnimationStoppedListener;
-        private SoftReference<ImageView> mSoftReferenceImageView;
-        private Handler mHandler = new Handler();
+        private final SoftReference<ImageView> mSoftReferenceImageView;
+        private final Handler mHandler = new Handler();
         private int mIndex = -1;
         private boolean mShouldRun = false;
         private boolean mIsRunning = false;
-        private int mDelayMillis = 100;
+        private final int mDelayMillis = 100;
 
         public FramesSequenceAnimation(ImageView imageView, int[] frames, int fps) {
             this.mBitmap = null;
@@ -100,10 +100,10 @@ public class AnimationsContainer {
         public synchronized void start() {
             this.mShouldRun = true;
             if (!this.mIsRunning) {
-                Runnable runnable = new Runnable() { // from class: com.fimi.kernel.animutils.AnimationsContainer.FramesSequenceAnimation.1
-                    @Override // java.lang.Runnable
+                Runnable runnable = new Runnable() {
+                    @Override
                     public void run() {
-                        ImageView imageView = (ImageView) FramesSequenceAnimation.this.mSoftReferenceImageView.get();
+                        ImageView imageView = FramesSequenceAnimation.this.mSoftReferenceImageView.get();
                         if (!FramesSequenceAnimation.this.mShouldRun || imageView == null) {
                             FramesSequenceAnimation.this.mIsRunning = false;
                             if (FramesSequenceAnimation.this.mOnAnimationStoppedListener != null) {

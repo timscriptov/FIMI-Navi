@@ -6,14 +6,14 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-/* loaded from: classes.dex */
+
 public abstract class NetworkStateReceiver extends BroadcastReceiver {
     public static final String ACTION_CONNECTIVITY_CHANGE = "android.net.conn.CONNECTIVITY_CHANGE";
     public static final String ACTION_WIFISTATE_CHANGE = "android.net.wifi.STATE_CHANGE";
 
     public abstract void onNetworkStateChange(NetworkType networkType, Context context);
 
-    @Override // android.content.BroadcastReceiver
+    @Override
     public void onReceive(Context context, Intent intent) {
         if (ACTION_CONNECTIVITY_CHANGE.equals(intent.getAction()) || intent.getAction().equals(ACTION_WIFISTATE_CHANGE)) {
             ConnectivityManager cm = (ConnectivityManager) context.getSystemService("connectivity");
@@ -35,7 +35,7 @@ public abstract class NetworkStateReceiver extends BroadcastReceiver {
         return state != null && NetworkInfo.State.CONNECTED == state;
     }
 
-    /* loaded from: classes.dex */
+
     public enum NetworkType {
         Wifi,
         Mobile,

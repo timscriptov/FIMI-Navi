@@ -1,10 +1,10 @@
 package com.fimi.kernel.network.okhttp.exception;
 
-/* loaded from: classes.dex */
+
 public class OkHttpException extends Exception {
     private static final long serialVersionUID = 1;
-    private int ecode;
-    private Object emsg;
+    private final int ecode;
+    private final Object emsg;
 
     public OkHttpException(int ecode, Object emsg) {
         this.ecode = ecode;

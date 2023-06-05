@@ -11,14 +11,14 @@ import com.fimi.kernel.utils.LogUtil;
 import java.util.List;
 
 @TargetApi(21)
-/* loaded from: classes.dex */
+
 public class LollipopBleScanner extends BaseBleScanner {
     private static final String TAG = LollipopBleScanner.class.getName();
     private BluetoothAdapter mBluetoothAdapter;
     private BluetoothLeScanner mBluetoothScanner;
     private SimpleScanCallback mScanCallback;
-    private ScanCallback scanCallback = new ScanCallback() { // from class: com.fimi.kernel.connect.ble.scanner.LollipopBleScanner.1
-        @Override // android.bluetooth.le.ScanCallback
+    private final ScanCallback scanCallback = new ScanCallback() {
+        @Override
         public void onScanResult(int callbackType, ScanResult result) {
             super.onScanResult(callbackType, result);
             LogUtil.i(LollipopBleScanner.TAG, "onScanResult: " + callbackType + " ScanResult:" + result);
@@ -27,13 +27,13 @@ public class LollipopBleScanner extends BaseBleScanner {
             }
         }
 
-        @Override // android.bluetooth.le.ScanCallback
+        @Override
         public void onBatchScanResults(List<ScanResult> results) {
             super.onBatchScanResults(results);
             LogUtil.i(LollipopBleScanner.TAG, "onBatchScanResults()");
         }
 
-        @Override // android.bluetooth.le.ScanCallback
+        @Override
         public void onScanFailed(int errorCode) {
             if (errorCode != 3 && errorCode != 1) {
                 LogUtil.i(LollipopBleScanner.TAG, "onScanFailed: " + errorCode);
@@ -53,7 +53,7 @@ public class LollipopBleScanner extends BaseBleScanner {
         }
     }
 
-    @Override // com.fimi.kernel.connect.ble.scanner.BaseBleScanner
+    @Override
     public void onStartBleScan(long timeoutMillis) {
         long delay = timeoutMillis == 0 ? 10000L : timeoutMillis;
         if (this.mBluetoothScanner != null && this.mBluetoothAdapter != null && this.mBluetoothAdapter.isEnabled()) {
@@ -71,7 +71,7 @@ public class LollipopBleScanner extends BaseBleScanner {
         LogUtil.i(TAG, "mBluetoothScanner.startScan()");
     }
 
-    @Override // com.fimi.kernel.connect.ble.scanner.BaseBleScanner
+    @Override
     public void onStartBleScan() {
         if (this.mBluetoothScanner != null && this.mBluetoothAdapter != null && this.mBluetoothAdapter.isEnabled()) {
             try {
@@ -88,7 +88,7 @@ public class LollipopBleScanner extends BaseBleScanner {
         LogUtil.i(TAG, "mBluetoothScanner.startScan()");
     }
 
-    @Override // com.fimi.kernel.connect.ble.scanner.BaseBleScanner
+    @Override
     public void onStopBleScan() {
         this.isScanning = false;
         if (this.mBluetoothScanner != null && this.mBluetoothAdapter != null && this.mBluetoothAdapter.isEnabled()) {
@@ -100,7 +100,7 @@ public class LollipopBleScanner extends BaseBleScanner {
         }
     }
 
-    @Override // com.fimi.kernel.connect.ble.scanner.BaseBleScanner
+    @Override
     public void onBleScanFailed(BleScanState scanState) {
         this.mScanCallback.onBleScanFailed(scanState);
     }

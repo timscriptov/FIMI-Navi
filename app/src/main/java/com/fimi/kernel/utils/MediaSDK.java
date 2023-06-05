@@ -4,10 +4,10 @@ import android.content.Context;
 
 import java.util.HashMap;
 
-/* loaded from: classes.dex */
+
 public class MediaSDK {
     private static MediaSDK mediaSDK = null;
-    private static HashMap mapDur = new HashMap();
+    private static final HashMap mapDur = new HashMap();
 
     public static MediaSDK getInstance() {
         if (mediaSDK == null) {

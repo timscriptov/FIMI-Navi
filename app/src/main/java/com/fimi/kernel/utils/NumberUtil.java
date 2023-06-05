@@ -2,7 +2,7 @@ package com.fimi.kernel.utils;
 
 import java.text.DecimalFormat;
 
-/* loaded from: classes.dex */
+
 public class NumberUtil {
     public static String decimalPointStr(double decimal, int number) {
         String str;
@@ -37,7 +37,7 @@ public class NumberUtil {
     }
 
     public static String bytesToHexString(byte[] src) {
-        StringBuilder stringBuilder = new StringBuilder("");
+        StringBuilder stringBuilder = new StringBuilder();
         if (src == null || src.length <= 0) {
             return null;
         }
@@ -72,20 +72,20 @@ public class NumberUtil {
     }
 
     public static float convertToFloat(String value, int defaultValue) {
-        if (value == null || "".equals(value.toString().trim())) {
+        if (value == null || "".equals(value.trim())) {
             return defaultValue;
         }
         try {
-            return Float.valueOf(value.toString()).floatValue();
+            return Float.valueOf(value).floatValue();
         } catch (Exception e) {
             return defaultValue;
         }
     }
 
     public static Double convertToDouble(String value, Double defaultValue) {
-        if (value != null && !"".equals(value.toString().trim())) {
+        if (value != null && !"".equals(value.trim())) {
             try {
-                return Double.valueOf(value.toString());
+                return Double.valueOf(value);
             } catch (Exception e) {
                 return defaultValue;
             }

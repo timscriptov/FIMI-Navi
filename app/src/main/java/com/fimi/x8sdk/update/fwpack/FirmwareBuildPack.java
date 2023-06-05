@@ -15,7 +15,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.List;
 
-/* loaded from: classes2.dex */
+
 public class FirmwareBuildPack implements IBuildPackInfo {
     public static final int BUFSIZE = 8192;
     public static final int ERROR = 1;
@@ -26,8 +26,8 @@ public class FirmwareBuildPack implements IBuildPackInfo {
     public static final String PKG_UPDATE_FILE = DirectoryPath.getFirmwarePath() + "/all_chips.bin";
     public static final String PKG_CRC = DirectoryPath.getFwTempFilePath() + "/pgk_crc";
     MergFileListener listener;
-    Handler mHandler = new Handler(Looper.getMainLooper()) { // from class: com.fimi.x8sdk.update.fwpack.FirmwareBuildPack.1
-        @Override // android.os.Handler
+    Handler mHandler = new Handler(Looper.getMainLooper()) {
+        @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == 0 && FirmwareBuildPack.this.listener != null) {
@@ -35,7 +35,7 @@ public class FirmwareBuildPack implements IBuildPackInfo {
             }
         }
     };
-    private List<FwInfo> fws;
+    private final List<FwInfo> fws;
 
     public FirmwareBuildPack(MergFileListener listener, List<FwInfo> fws) {
         this.listener = listener;
@@ -43,7 +43,7 @@ public class FirmwareBuildPack implements IBuildPackInfo {
         FileUtil.createFileAndPaperFile(DirectoryPath.getFwTempFilePath());
     }
 
-    @Override // com.fimi.x8sdk.update.fwpack.IBuildPackInfo
+    @Override
     public void createUpdatePkg() {
         mergFwDataFile(PKG_UPDATE_OUTFILE);
         FileUtil.createFile(PKG_HEADER_FILE);
@@ -59,7 +59,7 @@ public class FirmwareBuildPack implements IBuildPackInfo {
         this.mHandler.sendEmptyMessage(0);
     }
 
-    @Override // com.fimi.x8sdk.update.fwpack.IBuildPackInfo
+    @Override
     public byte[] getfwPackInfo() {
         byte[] packInfo = new byte[124];
         byte[] mainver = ByteHexHelper.shortToBytes((short) 0);
@@ -72,7 +72,7 @@ public class FirmwareBuildPack implements IBuildPackInfo {
         return packInfo;
     }
 
-    @Override // com.fimi.x8sdk.update.fwpack.IBuildPackInfo
+    @Override
     public byte[] getPackCRC(String fileName) {
         byte[] fileBytes = FileUtil.getFileBytes(fileName);
         int crc = ByteArrayToIntArray.CRC32Software(fileBytes, fileBytes.length);
@@ -80,7 +80,7 @@ public class FirmwareBuildPack implements IBuildPackInfo {
         return byteCrc;
     }
 
-    @Override // com.fimi.x8sdk.update.fwpack.IBuildPackInfo
+    @Override
     public byte[] getFwInfo() {
         int count = this.fws.size();
         byte[] fwInfos = new byte[count * 64];
@@ -100,7 +100,7 @@ public class FirmwareBuildPack implements IBuildPackInfo {
         return fwInfos;
     }
 
-    @Override // com.fimi.x8sdk.update.fwpack.IBuildPackInfo
+    @Override
     public byte[] getOneFwInfo(FwInfo fw) {
         byte[] iByte = new byte[64];
         byte[] size = ByteHexHelper.intToFourHexBytes((int) FileUtil.getFileLenght(DirectoryPath.getFirmwarePath() + "/" + fw.getSysName()));
@@ -114,7 +114,7 @@ public class FirmwareBuildPack implements IBuildPackInfo {
         return iByte;
     }
 
-    @Override // com.fimi.x8sdk.update.fwpack.IBuildPackInfo
+    @Override
     public void mergFwDataFile(String outFile) {
         FileChannel outChannel = null;
         try {
@@ -156,7 +156,7 @@ public class FirmwareBuildPack implements IBuildPackInfo {
         }
     }
 
-    /* loaded from: classes2.dex */
+
     public interface MergFileListener {
         void mergResult(int i);
     }

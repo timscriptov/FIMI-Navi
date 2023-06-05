@@ -31,7 +31,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-/* loaded from: classes.dex */
+
 public class StatusBarUtil {
     public static final int DEFAULT_STATUS_BAR_ALPHA = 0;
     public static final int FLAG_NOTCH_SUPPORT = 65536;
@@ -67,7 +67,7 @@ public class StatusBarUtil {
 
     public static void setColorForSwipeBack(Activity activity, @ColorInt int color, int statusBarAlpha) {
         if (Build.VERSION.SDK_INT >= 19) {
-            ViewGroup contentView = (ViewGroup) activity.findViewById(16908290);
+            ViewGroup contentView = activity.findViewById(16908290);
             contentView.setPadding(0, getStatusBarHeight(activity), 0, 0);
             contentView.setBackgroundColor(calculateStatusColor(color, statusBarAlpha));
             setTransparentForWindow(activity);
@@ -82,7 +82,7 @@ public class StatusBarUtil {
     public static void setColorDiff(Activity activity, @ColorInt int color) {
         if (Build.VERSION.SDK_INT >= 19) {
             transparentStatusBar(activity);
-            ViewGroup contentView = (ViewGroup) activity.findViewById(16908290);
+            ViewGroup contentView = activity.findViewById(16908290);
             if (contentView.getChildCount() > 1) {
                 contentView.getChildAt(1).setBackgroundColor(color);
             } else {
@@ -270,7 +270,7 @@ public class StatusBarUtil {
     }
 
     private static void addTranslucentView(Activity activity, int statusBarAlpha) {
-        ViewGroup contentView = (ViewGroup) activity.findViewById(16908290);
+        ViewGroup contentView = activity.findViewById(16908290);
         if (contentView.getChildCount() > 1) {
             contentView.getChildAt(1).setBackgroundColor(Color.argb(statusBarAlpha, 0, 0, 0));
         } else {
@@ -295,7 +295,7 @@ public class StatusBarUtil {
     }
 
     private static void setRootView(Activity activity) {
-        ViewGroup parent = (ViewGroup) activity.findViewById(16908290);
+        ViewGroup parent = activity.findViewById(16908290);
         int count = parent.getChildCount();
         for (int i = 0; i < count; i++) {
             View childView = parent.getChildAt(i);
@@ -538,7 +538,7 @@ public class StatusBarUtil {
             Class SystemProperties = cl.loadClass("android.os.SystemProperties");
             Class[] paramTypes = {String.class, Integer.TYPE};
             Method getInt = SystemProperties.getMethod("getInt", paramTypes);
-            Object[] params = {new String(key), new Integer(def)};
+            Object[] params = {key, Integer.valueOf(def)};
             Integer ret = (Integer) getInt.invoke(SystemProperties, params);
             return ret;
         } catch (IllegalArgumentException iAE) {
@@ -563,7 +563,7 @@ public class StatusBarUtil {
                     try {
                         ClassLoader cl = context.getClassLoader();
                         Class HwNotchSizeUtil = cl.loadClass("com.huawei.android.util.HwNotchSizeUtil");
-                        Method get = HwNotchSizeUtil.getMethod("hasNotchInScreen", new Class[0]);
+                        Method get = HwNotchSizeUtil.getMethod("hasNotchInScreen");
                         ret = ((Boolean) get.invoke(HwNotchSizeUtil, new Object[0])).booleanValue();
                         z = ret;
                     } catch (ClassNotFoundException e) {
@@ -591,7 +591,7 @@ public class StatusBarUtil {
             try {
                 ClassLoader cl = context.getClassLoader();
                 Class HwNotchSizeUtil = cl.loadClass("com.huawei.android.util.HwNotchSizeUtil");
-                Method get = HwNotchSizeUtil.getMethod("getNotchSize", new Class[0]);
+                Method get = HwNotchSizeUtil.getMethod("getNotchSize");
                 ret2 = (int[]) get.invoke(HwNotchSizeUtil, new Object[0]);
                 ret = ret2;
             } catch (ClassNotFoundException e) {

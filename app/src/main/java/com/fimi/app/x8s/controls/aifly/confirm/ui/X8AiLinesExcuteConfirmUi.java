@@ -51,19 +51,19 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class X8AiLinesExcuteConfirmUi implements View.OnClickListener, SeekBar.OnSeekBarChangeListener, SwitchButton.OnSwitchListener, X8DoubleCustomDialog.onDialogButtonClickListener {
     private static final int CURVE_MODE = 3;
     boolean isInSky;
     int i = 4;
     private Button btnGo;
-    private View contentView;
+    private final View contentView;
     private X8AiLinePointInfo dataByHistory;
     private X8DoubleCustomDialog dialog;
     private FcManager fcManager;
     private ImageView imgBack;
     private IX8NextViewListener listener;
-    private CameraManager mCameraManager;
+    private final CameraManager mCameraManager;
     private X8TabHost mCurveVidotape;
     private RelativeLayout mRlCurveVideotape;
     private SwitchButton mSbCurve;
@@ -72,7 +72,7 @@ public class X8AiLinesExcuteConfirmUi implements View.OnClickListener, SeekBar.O
     private TextView mTvLineFollowTitle;
     private X8AiLineExcuteController mX8AiLineExcuteController;
     private X8AilinePrameter mX8AilinePrameter;
-    private X8sMainActivity mX8sMainActivity;
+    private final X8sMainActivity mX8sMainActivity;
     private List<MapPointLatLng> mapPointList;
     private X8MapVideoController mapVideoController;
     private X8AiLineExcuteController.LineModel model;
@@ -87,13 +87,13 @@ public class X8AiLinesExcuteConfirmUi implements View.OnClickListener, SeekBar.O
     private TextView tvTime;
     private View vMinus;
     private View vPlus;
-    private float MIN = 1.0f;
-    private float MAX = 10.0f;
-    private int MAX_PROGRESS = (int) ((this.MAX - this.MIN) * 10.0f);
+    private final float MIN = 1.0f;
+    private final float MAX = 10.0f;
+    private final int MAX_PROGRESS = (int) ((this.MAX - this.MIN) * 10.0f);
     private float distance = 0.0f;
     private int successCount = 0;
-    private SaveData mSaveData = new SaveData();
-    private float DEFAULE_SPEED = 2.0f;
+    private final SaveData mSaveData = new SaveData();
+    private final float DEFAULE_SPEED = 2.0f;
     private int aiLineMode = 0;
 
     public X8AiLinesExcuteConfirmUi(Activity activity, View parent, CameraManager cameraManager) {
@@ -115,23 +115,23 @@ public class X8AiLinesExcuteConfirmUi implements View.OnClickListener, SeekBar.O
     }
 
     public void initView(View rootView) {
-        this.imgBack = (ImageView) rootView.findViewById(R.id.img_ai_follow_return);
-        this.mTvLineFollowTitle = (TextView) rootView.findViewById(R.id.tv_ai_follow_title);
-        this.tvDistance = (TextView) rootView.findViewById(R.id.tv_ai_follow_distance);
-        this.mTvDistanceTitle = (TextView) rootView.findViewById(R.id.tv_ai_follow_confirm_title1);
-        this.tvTime = (TextView) rootView.findViewById(R.id.tv_ai_follow_time);
-        this.tvSpeed = (TextView) rootView.findViewById(R.id.tv_ai_follow_speed);
-        this.tvPointSize = (TextView) rootView.findViewById(R.id.tv_ai_follow_size);
+        this.imgBack = rootView.findViewById(R.id.img_ai_follow_return);
+        this.mTvLineFollowTitle = rootView.findViewById(R.id.tv_ai_follow_title);
+        this.tvDistance = rootView.findViewById(R.id.tv_ai_follow_distance);
+        this.mTvDistanceTitle = rootView.findViewById(R.id.tv_ai_follow_confirm_title1);
+        this.tvTime = rootView.findViewById(R.id.tv_ai_follow_time);
+        this.tvSpeed = rootView.findViewById(R.id.tv_ai_follow_speed);
+        this.tvPointSize = rootView.findViewById(R.id.tv_ai_follow_size);
         this.vMinus = rootView.findViewById(R.id.rl_minus);
-        this.sbSeekBar = (SeekBar) rootView.findViewById(R.id.sb_value);
+        this.sbSeekBar = rootView.findViewById(R.id.sb_value);
         this.vPlus = rootView.findViewById(R.id.rl_plus);
-        this.btnGo = (Button) rootView.findViewById(R.id.btn_ai_follow_confirm_ok);
-        this.mRlCurveVideotape = (RelativeLayout) rootView.findViewById(R.id.rl_ai_line_curve_videotape);
-        this.mCurveVidotape = (X8TabHost) rootView.findViewById(R.id.x8_ai_line_curve_videotape);
+        this.btnGo = rootView.findViewById(R.id.btn_ai_follow_confirm_ok);
+        this.mRlCurveVideotape = rootView.findViewById(R.id.rl_ai_line_curve_videotape);
+        this.mCurveVidotape = rootView.findViewById(R.id.x8_ai_line_curve_videotape);
         this.mCurveVidotape.setSelect(0);
-        this.tvOrientation1 = (X8TabHost) rootView.findViewById(R.id.x8_ai_line_rorate1);
-        this.tvOrientation1.setOnSelectListener(new X8TabHost.OnSelectListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiLinesExcuteConfirmUi.1
-            @Override // com.fimi.app.x8s.widget.X8TabHost.OnSelectListener
+        this.tvOrientation1 = rootView.findViewById(R.id.x8_ai_line_rorate1);
+        this.tvOrientation1.setOnSelectListener(new X8TabHost.OnSelectListener() {
+            @Override
             public void onSelect(int index, String text, int last) {
                 if (index != last) {
                     if (index == 1) {
@@ -150,9 +150,9 @@ public class X8AiLinesExcuteConfirmUi implements View.OnClickListener, SeekBar.O
                 }
             }
         });
-        this.tvOrientation2 = (X8TabHost) rootView.findViewById(R.id.x8_ai_line_rorate2);
-        this.tvOrientation2.setOnSelectListener(new X8TabHost.OnSelectListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiLinesExcuteConfirmUi.2
-            @Override // com.fimi.app.x8s.widget.X8TabHost.OnSelectListener
+        this.tvOrientation2 = rootView.findViewById(R.id.x8_ai_line_rorate2);
+        this.tvOrientation2.setOnSelectListener(new X8TabHost.OnSelectListener() {
+            @Override
             public void onSelect(int index, String text, int last) {
                 if (index != last) {
                     if (index == 2) {
@@ -165,46 +165,33 @@ public class X8AiLinesExcuteConfirmUi implements View.OnClickListener, SeekBar.O
                 }
             }
         });
-        this.tbDisconnect = (X8TabHost) rootView.findViewById(R.id.tb_disconnect);
-        this.tbDisconnect.setOnSelectListener(new X8TabHost.OnSelectListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiLinesExcuteConfirmUi.3
-            @Override // com.fimi.app.x8s.widget.X8TabHost.OnSelectListener
+        this.tbDisconnect = rootView.findViewById(R.id.tb_disconnect);
+        this.tbDisconnect.setOnSelectListener(new X8TabHost.OnSelectListener() {
+            @Override
             public void onSelect(int index, String text, int last) {
                 if (index != last) {
                     X8AiLinesExcuteConfirmUi.this.mX8AilinePrameter.setDisconnectActioin(index);
                 }
             }
         });
-        this.tbEnd = (X8TabHost) rootView.findViewById(R.id.tb_ai_excute_end);
-        this.tbEnd.setOnSelectListener(new X8TabHost.OnSelectListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiLinesExcuteConfirmUi.4
-            @Override // com.fimi.app.x8s.widget.X8TabHost.OnSelectListener
+        this.tbEnd = rootView.findViewById(R.id.tb_ai_excute_end);
+        this.tbEnd.setOnSelectListener(new X8TabHost.OnSelectListener() {
+            @Override
             public void onSelect(int index, String text, int last) {
                 if (index != last) {
                     X8AiLinesExcuteConfirmUi.this.mX8AilinePrameter.setEndAction(index);
                 }
             }
         });
-        this.mSbRecord = (SwitchButton) rootView.findViewById(R.id.sb_ai_auto_record);
-        this.mSbCurve = (SwitchButton) rootView.findViewById(R.id.swb_ai_curve);
+        this.mSbRecord = rootView.findViewById(R.id.sb_ai_auto_record);
+        this.mSbCurve = rootView.findViewById(R.id.swb_ai_curve);
         this.sbSeekBar.setMax(this.MAX_PROGRESS);
         this.mSbCurve.setEnabled(true);
         this.mSbRecord.setEnabled(true);
         if (!this.isInSky) {
             this.btnGo.setText(rootView.getContext().getString(R.string.x8_ai_fly_line_save));
         }
-    }    Handler mHandler = new Handler() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiLinesExcuteConfirmUi.11
-        @Override // android.os.Handler
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if (X8AiLinesExcuteConfirmUi.this.i < X8AiLinesExcuteConfirmUi.this.mapPointList.size()) {
-                X8AiLinesExcuteConfirmUi.this.mHandler.sendEmptyMessageDelayed(0, 2000L);
-                AbsAiLineManager aiLineManager = X8AiLinesExcuteConfirmUi.this.mapVideoController.getFimiMap().getAiLineManager();
-                X8AiLinesExcuteConfirmUi x8AiLinesExcuteConfirmUi = X8AiLinesExcuteConfirmUi.this;
-                int i = x8AiLinesExcuteConfirmUi.i;
-                x8AiLinesExcuteConfirmUi.i = i + 1;
-                aiLineManager.setAiLineIndexPoint(i);
-            }
-        }
-    };
+    }
 
     public void changeOrientation(int orientation) {
         float angle;
@@ -229,7 +216,20 @@ public class X8AiLinesExcuteConfirmUi implements View.OnClickListener, SeekBar.O
         if (orientation != 0) {
             this.mapVideoController.getFimiMap().getAiLineManager().addSmallMarkerByMap(0);
         }
-    }
+    }    Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (X8AiLinesExcuteConfirmUi.this.i < X8AiLinesExcuteConfirmUi.this.mapPointList.size()) {
+                X8AiLinesExcuteConfirmUi.this.mHandler.sendEmptyMessageDelayed(0, 2000L);
+                AbsAiLineManager aiLineManager = X8AiLinesExcuteConfirmUi.this.mapVideoController.getFimiMap().getAiLineManager();
+                X8AiLinesExcuteConfirmUi x8AiLinesExcuteConfirmUi = X8AiLinesExcuteConfirmUi.this;
+                int i = x8AiLinesExcuteConfirmUi.i;
+                x8AiLinesExcuteConfirmUi.i = i + 1;
+                aiLineManager.setAiLineIndexPoint(i);
+            }
+        }
+    };
 
     public void changeOrientationForVideo(int orientation) {
         float angle;
@@ -271,8 +271,8 @@ public class X8AiLinesExcuteConfirmUi implements View.OnClickListener, SeekBar.O
         this.vPlus.setOnClickListener(this);
         this.btnGo.setOnClickListener(this);
         this.mSbCurve.setOnSwitchListener(this);
-        this.mSbRecord.setOnSwitchListener(new SwitchButton.OnSwitchListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiLinesExcuteConfirmUi.5
-            @Override // com.fimi.widget.SwitchButton.OnSwitchListener
+        this.mSbRecord.setOnSwitchListener(new SwitchButton.OnSwitchListener() {
+            @Override
             public void onSwitch(View view, boolean on) {
                 if (on) {
                     X8AiLinesExcuteConfirmUi.this.mSbRecord.setSwitchState(false);
@@ -285,7 +285,7 @@ public class X8AiLinesExcuteConfirmUi implements View.OnClickListener, SeekBar.O
         });
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.rl_minus) {
@@ -313,12 +313,12 @@ public class X8AiLinesExcuteConfirmUi implements View.OnClickListener, SeekBar.O
         }
     }
 
-    @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+    @Override
     public void onLeft() {
         sendRecordMode();
     }
 
-    @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+    @Override
     public void onRight() {
         startAiLineSetPoint(true);
     }
@@ -335,16 +335,16 @@ public class X8AiLinesExcuteConfirmUi implements View.OnClickListener, SeekBar.O
     private void sendRecordMode() {
         if (this.aiLineMode == 3) {
             if (this.mCurveVidotape.getSelectIndex() == 0) {
-                this.mCameraManager.setCameraKeyParams("normal_record", CameraJsonCollection.KEY_RECORD_MODE, new JsonUiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiLinesExcuteConfirmUi.6
-                    @Override // com.fimi.kernel.dataparser.usb.JsonUiCallBackListener
+                this.mCameraManager.setCameraKeyParams("normal_record", CameraJsonCollection.KEY_RECORD_MODE, new JsonUiCallBackListener() {
+                    @Override
                     public void onComplete(JSONObject rt, Object o) {
                         X8AiLinesExcuteConfirmUi.this.startVideo();
                     }
                 });
                 return;
             } else if (this.mCurveVidotape.getSelectIndex() == 1) {
-                this.mCameraManager.setCameraKeyParams("5s", CameraJsonCollection.KEY_VIDEO_TIMELAPSE, new JsonUiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiLinesExcuteConfirmUi.7
-                    @Override // com.fimi.kernel.dataparser.usb.JsonUiCallBackListener
+                this.mCameraManager.setCameraKeyParams("5s", CameraJsonCollection.KEY_VIDEO_TIMELAPSE, new JsonUiCallBackListener() {
+                    @Override
                     public void onComplete(JSONObject rt, Object o) {
                         X8AiLinesExcuteConfirmUi.this.startVideo();
                     }
@@ -359,8 +359,8 @@ public class X8AiLinesExcuteConfirmUi implements View.OnClickListener, SeekBar.O
     }
 
     public void startVideo() {
-        this.mCameraManager.startVideo(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiLinesExcuteConfirmUi.8
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.mCameraManager.startVideo(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess) {
                     X8AiLinesExcuteConfirmUi.this.startAiLineSetPoint(false);
@@ -375,8 +375,8 @@ public class X8AiLinesExcuteConfirmUi implements View.OnClickListener, SeekBar.O
     }
 
     public void stopVideo() {
-        this.mCameraManager.stopVideo(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiLinesExcuteConfirmUi.9
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.mCameraManager.stopVideo(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (!cmdResult.isSuccess) {
                     String rtpCamera = X8Rtp.getRtpStringCamera(X8AiLinesExcuteConfirmUi.this.contentView.getContext(), cmdResult.getmMsgRpt());
@@ -513,8 +513,8 @@ public class X8AiLinesExcuteConfirmUi implements View.OnClickListener, SeekBar.O
     }
 
     public void sendPointCmdOneByOne(final List<CmdAiLinePoints> mCmdAiLinePoints, final int index, final int size) {
-        this.fcManager.setAiLinePoints(mCmdAiLinePoints.get(index), new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiLinesExcuteConfirmUi.10
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.setAiLinePoints(mCmdAiLinePoints.get(index), new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (!cmdResult.isSuccess()) {
                     X8AiLinesExcuteConfirmUi.this.stopVideo();
@@ -576,8 +576,8 @@ public class X8AiLinesExcuteConfirmUi implements View.OnClickListener, SeekBar.O
     }
 
     public void startExcute() {
-        this.fcManager.setAiLineExcute(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiLinesExcuteConfirmUi.12
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.setAiLineExcute(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (!cmdResult.isSuccess()) {
                     X8AiLinesExcuteConfirmUi.this.stopVideo();
@@ -623,7 +623,7 @@ public class X8AiLinesExcuteConfirmUi implements View.OnClickListener, SeekBar.O
         }
     }
 
-    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+    @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         float speed = this.MIN + (progress / 10.0f);
         this.tvSpeed.setText(X8NumberUtil.getSpeedNumberString(speed, 1, true));
@@ -687,21 +687,17 @@ public class X8AiLinesExcuteConfirmUi implements View.OnClickListener, SeekBar.O
         return tv;
     }
 
-    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+    @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
     }
 
-    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+    @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
     }
 
-    @Override // com.fimi.widget.SwitchButton.OnSwitchListener
+    @Override
     public void onSwitch(View view, boolean on) {
-        if (on) {
-            this.mSbCurve.setSwitchState(false);
-        } else {
-            this.mSbCurve.setSwitchState(true);
-        }
+        this.mSbCurve.setSwitchState(!on);
     }
 
     public void setPointSizeAndDistance(int aiLinePointSize, float aiLineDistance, List<MapPointLatLng> mapPointList, X8AiLineExcuteController.LineModel model) {
@@ -821,8 +817,8 @@ public class X8AiLinesExcuteConfirmUi implements View.OnClickListener, SeekBar.O
     }
 
     public void sendActionCmdOneByOne(final List<CmdAiLinePointsAction> list, final int index, final int size) {
-        this.fcManager.setAiLinePointsAction(list.get(index), new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiLinesExcuteConfirmUi.13
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcManager.setAiLinePointsAction(list.get(index), new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (!cmdResult.isSuccess()) {
                     X8AiLinesExcuteConfirmUi.this.stopVideo();
@@ -841,18 +837,13 @@ public class X8AiLinesExcuteConfirmUi implements View.OnClickListener, SeekBar.O
     }
 
     public void setFcHeart(boolean isInSky, boolean isLowPower) {
-        if (isInSky && isLowPower) {
-            this.btnGo.setEnabled(true);
-        } else {
-            this.btnGo.setEnabled(false);
-        }
+        this.btnGo.setEnabled(isInSky && isLowPower);
     }
 
     public CameraManager getCameraManager() {
         return this.mCameraManager;
     }
 
-    /* loaded from: classes.dex */
     public class SaveData {
         public int disConnectType;
         public int endType;
@@ -863,6 +854,7 @@ public class X8AiLinesExcuteConfirmUi implements View.OnClickListener, SeekBar.O
         private SaveData() {
         }
     }
+
 
 
 

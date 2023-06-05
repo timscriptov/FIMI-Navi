@@ -31,17 +31,17 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import me.relex.photodraweeview.OnPhotoTapListener;
 
-/* loaded from: classes.dex */
+
 public class MediaDetailPresenter<T extends MediaDetailActivity> implements IViewpaper, OnPhotoTapListener {
     protected String perfix = "file://";
     private ViewGroup cacheContainer;
-    private int defaultDisplayHeight;
-    private int defaultDisplayWidth;
-    private MediaDetailActivity mMediaActivity;
+    private final int defaultDisplayHeight;
+    private final int defaultDisplayWidth;
+    private final MediaDetailActivity mMediaActivity;
     private CopyOnWriteArrayList<? extends MediaModel> modelList;
-    private ViewPager viewPaper;
-    private WeakReference<T> weakReference;
-    private DataManager<MediaModel> mDataManager = DataManager.obtain();
+    private final ViewPager viewPaper;
+    private final WeakReference<T> weakReference;
+    private final DataManager<MediaModel> mDataManager = DataManager.obtain();
 
     public MediaDetailPresenter(T activity, ViewPager viewPaper) {
         this.weakReference = new WeakReference<>(activity);
@@ -63,7 +63,7 @@ public class MediaDetailPresenter<T extends MediaDetailActivity> implements IVie
         this.modelList = this.mDataManager.getLocalDataNoHeadList();
     }
 
-    @Override // com.fimi.album.iview.IViewpaper
+    @Override
     public Object instantiateItem(ViewGroup container, int position) {
         MediaModel mediaModel = this.modelList.get(position);
         View view = LayoutInflater.from(this.mMediaActivity.getApplicationContext()).inflate(R.layout.album_adapter_detail_item, container, false);
@@ -94,7 +94,7 @@ public class MediaDetailPresenter<T extends MediaDetailActivity> implements IVie
         }
         mMediaDetialViewHolder.mProgressBar.setVisibility(0);
         mMediaDetialViewHolder.mPhotoDraweeView.setOnPhotoTapListener(this);
-        FrescoUtils.displayPhoto(mMediaDetialViewHolder.mPhotoDraweeView, fileUrl, this.defaultDisplayWidth, this.defaultDisplayHeight, new FrescoControllerListener() { // from class: com.fimi.album.presenter.MediaDetailPresenter.1
+        FrescoUtils.displayPhoto(mMediaDetialViewHolder.mPhotoDraweeView, fileUrl, this.defaultDisplayWidth, this.defaultDisplayHeight, new FrescoControllerListener() {
             @Override
             // com.fimi.album.biz.FrescoControllerListener, com.facebook.drawee.controller.ControllerListener
             public void onFailure(String id, Throwable throwable) {
@@ -141,7 +141,7 @@ public class MediaDetailPresenter<T extends MediaDetailActivity> implements IVie
         this.mMediaActivity.finish();
     }
 
-    @Override // me.relex.photodraweeview.OnPhotoTapListener
+    @Override
     public void onPhotoTap(View view, float x, float y) {
         if (this.mMediaActivity.getLlHeadViewGroup().isShown()) {
             this.mMediaActivity.getLlHeadViewGroup().setVisibility(8);

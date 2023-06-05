@@ -1,6 +1,6 @@
 package com.fimi.x8sdk.dataparser.cmd;
 
-/* loaded from: classes2.dex */
+
 public class CmdAiLinePointsAction {
     public int cmd0;
     public int cmd1;
@@ -10,7 +10,7 @@ public class CmdAiLinePointsAction {
     public int pos;
     public int time;
 
-    /* loaded from: classes2.dex */
+
     public enum Cmd {
         NULL,
         HOVER,

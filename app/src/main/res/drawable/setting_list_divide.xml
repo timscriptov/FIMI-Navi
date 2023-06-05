@@ -1,2 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<inset xmlns:android="http://schemas.android.com/apk/res/android" android:drawable="@color/x1bh_setting_divide" android:insetLeft="10dp" android:insetRight="10dp"/>
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@color/x1bh_setting_divide"
+    android:insetLeft="10dp"
+    android:insetRight="10dp" />

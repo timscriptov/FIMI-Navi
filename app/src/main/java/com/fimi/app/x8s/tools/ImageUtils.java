@@ -8,9 +8,9 @@ import java.lang.ref.SoftReference;
 import java.util.HashMap;
 import java.util.Map;
 
-/* loaded from: classes.dex */
+
 public class ImageUtils {
-    private static Map<String, SoftReference<Bitmap>> imageCache = new HashMap();
+    private static final Map<String, SoftReference<Bitmap>> imageCache = new HashMap();
 
     public static SoftReference<Bitmap> addBitmapToCache(Context context, int res) {
         Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), res);

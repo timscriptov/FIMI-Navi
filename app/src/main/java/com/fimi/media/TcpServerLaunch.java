@@ -8,12 +8,12 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-/* loaded from: classes.dex */
+
 public class TcpServerLaunch extends Thread {
     static StringBuffer s = new StringBuffer();
     private static TextView logView;
-    public static Handler mHandler = new Handler() { // from class: com.fimi.media.TcpServerLaunch.1
-        @Override // android.os.Handler
+    public static Handler mHandler = new Handler() {
+        @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (TcpServerLaunch.s.length() > 300) {
@@ -28,7 +28,7 @@ public class TcpServerLaunch extends Thread {
         logView = logView2;
     }
 
-    @Override // java.lang.Thread, java.lang.Runnable
+    @Override
     public void run() {
         main();
     }

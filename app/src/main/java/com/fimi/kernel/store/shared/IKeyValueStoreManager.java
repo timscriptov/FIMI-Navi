@@ -2,7 +2,7 @@ package com.fimi.kernel.store.shared;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public interface IKeyValueStoreManager extends IStoreManager {
     boolean contain(String str);
 

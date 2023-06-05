@@ -30,17 +30,17 @@ public class ApkVersionPrenster {
         String packageName = SystemParamUtil.getPackageName();
         String splitName = packageName.substring(packageName.lastIndexOf(".") + 1);
         final String savePath = DirectoryPath.getApkPath() + "/" + splitName;
-        this.mApkVersionManager.getOnlineNewApkFileInfo(packageName, new DisposeDataHandle(new DisposeDataListener() { // from class: com.fimi.apk.presenter.ApkVersionPrenster.1
-            @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+        this.mApkVersionManager.getOnlineNewApkFileInfo(packageName, new DisposeDataHandle(new DisposeDataListener() {
+            @Override
             public void onSuccess(Object responseObj) {
                 try {
-                    NetModel netModel = (NetModel) JSON.parseObject(responseObj.toString(), NetModel.class);
+                    NetModel netModel = JSON.parseObject(responseObj.toString(), NetModel.class);
                     if (!netModel.isSuccess()) {
                         if (ApkVersionPrenster.this.mOnApkUpdateListerner != null) {
                             ApkVersionPrenster.this.mOnApkUpdateListerner.haveUpdate(false);
                         }
                     } else if (netModel.getData() != null) {
-                        ApkVersionDto dto = (ApkVersionDto) JSON.parseObject(netModel.getData().toString(), ApkVersionDto.class);
+                        ApkVersionDto dto = JSON.parseObject(netModel.getData().toString(), ApkVersionDto.class);
                         new URL(dto.getUrl());
                         ApkVersionPrenster.this.compareApkVersion(dto, savePath);
                     }
@@ -51,7 +51,7 @@ public class ApkVersionPrenster {
                 }
             }
 
-            @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+            @Override
             public void onFailure(Object reasonObj) {
                 if (ApkVersionPrenster.this.mOnApkUpdateListerner != null) {
                     ApkVersionPrenster.this.mOnApkUpdateListerner.haveUpdate(false);
@@ -87,12 +87,12 @@ public class ApkVersionPrenster {
         this.mOnShowDialogListerner = onShowDialogListerner2;
     }
 
-    /* loaded from: classes.dex */
+
     public interface onApkUpdateListerner {
         void haveUpdate(boolean z);
     }
 
-    /* loaded from: classes.dex */
+
     public interface onShowDialogListerner {
         void showDialog(ApkVersionDto apkVersionDto, String str);
     }

@@ -5,10 +5,10 @@ import com.fimi.kernel.connect.usb.AOAConnect;
 
 import java.util.concurrent.LinkedBlockingDeque;
 
-/* loaded from: classes.dex */
+
 public class X8JsonCmdDeque {
-    private AOAConnect aoaConnect;
-    private LinkedBlockingDeque<BaseCommand> cmdQueue = new LinkedBlockingDeque<>();
+    private final AOAConnect aoaConnect;
+    private final LinkedBlockingDeque<BaseCommand> cmdQueue = new LinkedBlockingDeque<>();
     private long lastSendTime;
 
     public X8JsonCmdDeque(AOAConnect aoaConnect) {

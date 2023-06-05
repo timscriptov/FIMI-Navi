@@ -8,23 +8,23 @@ import com.fimi.app.x8s.widget.X8CustomSeekBar;
 import com.fimi.app.x8s.widget.X8PlusMinusSeekBar;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes.dex */
+
 public class X8AiAerialPhotographNextUi implements X8CustomSeekBar.onSeekValueSetListener {
-    private View rootView;
-    private X8PlusMinusSeekBar sbBraking;
-    private X8PlusMinusSeekBar sbYaw;
-    private TextView tvBrakingValue;
-    private TextView tvTitle;
-    private TextView tvYawValue;
+    private final View rootView;
+    private final X8PlusMinusSeekBar sbBraking;
+    private final X8PlusMinusSeekBar sbYaw;
+    private final TextView tvBrakingValue;
+    private final TextView tvTitle;
+    private final TextView tvYawValue;
     private int type;
 
     public X8AiAerialPhotographNextUi(View rootView) {
         this.rootView = rootView;
-        this.tvTitle = (TextView) rootView.findViewById(R.id.tv_ai_aerail_graph_title);
-        this.tvBrakingValue = (TextView) rootView.findViewById(R.id.tv_braking_sensity_value);
-        this.tvYawValue = (TextView) rootView.findViewById(R.id.tv_yaw_sensity_value);
-        this.sbBraking = (X8PlusMinusSeekBar) rootView.findViewById(R.id.sb_braking);
-        this.sbYaw = (X8PlusMinusSeekBar) rootView.findViewById(R.id.sb_yaw);
+        this.tvTitle = rootView.findViewById(R.id.tv_ai_aerail_graph_title);
+        this.tvBrakingValue = rootView.findViewById(R.id.tv_braking_sensity_value);
+        this.tvYawValue = rootView.findViewById(R.id.tv_yaw_sensity_value);
+        this.sbBraking = rootView.findViewById(R.id.sb_braking);
+        this.sbYaw = rootView.findViewById(R.id.sb_yaw);
         this.sbBraking.setListener(this);
         this.sbYaw.setListener(this);
     }
@@ -33,7 +33,7 @@ public class X8AiAerialPhotographNextUi implements X8CustomSeekBar.onSeekValueSe
         this.tvTitle.setText(s);
     }
 
-    @Override // com.fimi.app.x8s.widget.X8CustomSeekBar.onSeekValueSetListener
+    @Override
     public void onSeekValueSet(int viewId, int value) {
         if (viewId == R.id.sb_braking) {
             this.tvBrakingValue.setText("" + value);

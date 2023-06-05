@@ -34,14 +34,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/* loaded from: classes.dex */
+
 public class ThirdLoginPresenter {
     private static final int DELAY = 50000;
     private static final int sUPDATE_PROGRESS = 1;
     IThirdLoginView loginView;
     Context mContext;
-    private Handler mHandler = new Handler() { // from class: com.fimi.libperson.presenter.ThirdLoginPresenter.1
-        @Override // android.os.Handler
+    private final Handler mHandler = new Handler() {
+        @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == 1) {
@@ -49,7 +49,7 @@ public class ThirdLoginPresenter {
             }
         }
     };
-    private ThirdLoginManager mThirdLoginManager = ThirdLoginManager.getInstance();
+    private final ThirdLoginManager mThirdLoginManager = ThirdLoginManager.getInstance();
 
     public ThirdLoginPresenter(IThirdLoginView loginView) {
         this.loginView = loginView;
@@ -76,8 +76,8 @@ public class ThirdLoginPresenter {
             }
             this.mHandler.removeMessages(1);
             this.mHandler.sendEmptyMessageDelayed(1, 50000L);
-            this.mThirdLoginManager.login("2", this.mContext, new LoginCallback() { // from class: com.fimi.libperson.presenter.ThirdLoginPresenter.2
-                @Override // com.fimi.thirdpartysdk.login.LoginCallback
+            this.mThirdLoginManager.login("2", this.mContext, new LoginCallback() {
+                @Override
                 public void loginSuccess(Object object) {
                     if (ThirdLoginPresenter.this.loginView != null) {
                         ThirdLoginPresenter.this.loginView.updateProgress(true);
@@ -89,10 +89,10 @@ public class ThirdLoginPresenter {
                     thirdAcountDto.setThirdId(db.get(BlockInfo.KEY_UID));
                     thirdAcountDto.setUserImgUrl(db.get("iconurl"));
                     thirdAcountDto.setLoginChannel("2");
-                    UserManager.getIntance(ThirdLoginPresenter.this.mContext).thirdUserLogin(thirdAcountDto, new DisposeDataHandle(new DisposeDataListener() { // from class: com.fimi.libperson.presenter.ThirdLoginPresenter.2.1
-                        @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+                    UserManager.getIntance(ThirdLoginPresenter.this.mContext).thirdUserLogin(thirdAcountDto, new DisposeDataHandle(new DisposeDataListener() {
+                        @Override
                         public void onSuccess(Object responseObj) {
-                            NetModel netModel = (NetModel) JSON.parseObject(responseObj.toString(), NetModel.class);
+                            NetModel netModel = JSON.parseObject(responseObj.toString(), NetModel.class);
                             if (netModel.isSuccess()) {
                                 HostConstants.saveUserDetail(netModel.getData());
                                 HostConstants.saveUserInfo(null, null);
@@ -102,14 +102,14 @@ public class ThirdLoginPresenter {
                             ThirdLoginPresenter.this.loginView.loginThirdListener(false, ErrorMessage.getUserModeErrorMessage(ThirdLoginPresenter.this.mContext, netModel.getErrCode()));
                         }
 
-                        @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+                        @Override
                         public void onFailure(Object reasonObj) {
                             ThirdLoginPresenter.this.loginView.loginThirdListener(false, reasonObj.toString());
                         }
                     }));
                 }
 
-                @Override // com.fimi.thirdpartysdk.login.LoginCallback
+                @Override
                 public void loginFail(String error) {
                     if (error.contains("net::ERR_CONNECTION_RESET")) {
                         error = ThirdLoginPresenter.this.mContext.getResources().getString(R.string.libperson_facebook_connection);
@@ -131,24 +131,22 @@ public class ThirdLoginPresenter {
             }
             this.mHandler.removeMessages(1);
             this.mHandler.sendEmptyMessageDelayed(1, 50000L);
-            this.mThirdLoginManager.login(ThirdPartyConstants.LOGIN_CHANNEL_TW, this.mContext, new LoginCallback() { // from class: com.fimi.libperson.presenter.ThirdLoginPresenter.3
-                @Override // com.fimi.thirdpartysdk.login.LoginCallback
+            this.mThirdLoginManager.login(ThirdPartyConstants.LOGIN_CHANNEL_TW, this.mContext, new LoginCallback() {
+                @Override
                 public void loginSuccess(Object object) {
                     if (ThirdLoginPresenter.this.loginView != null) {
                         ThirdLoginPresenter.this.loginView.updateProgress(true);
                     }
                     Map<String, String> db = (Map) object;
                     ThirdAcountDto thirdAcountDto = new ThirdAcountDto();
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(db.get("name") + " ");
-                    thirdAcountDto.setName(sb.toString());
+                    thirdAcountDto.setName(db.get("name") + " ");
                     thirdAcountDto.setThirdId(db.get("userId"));
                     thirdAcountDto.setUserImgUrl(db.get("iconurl"));
                     thirdAcountDto.setLoginChannel(ThirdPartyConstants.LOGIN_CHANNEL_TW);
-                    UserManager.getIntance(ThirdLoginPresenter.this.mContext).thirdUserLogin(thirdAcountDto, new DisposeDataHandle(new DisposeDataListener() { // from class: com.fimi.libperson.presenter.ThirdLoginPresenter.3.1
-                        @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+                    UserManager.getIntance(ThirdLoginPresenter.this.mContext).thirdUserLogin(thirdAcountDto, new DisposeDataHandle(new DisposeDataListener() {
+                        @Override
                         public void onSuccess(Object responseObj) {
-                            NetModel netModel = (NetModel) JSON.parseObject(responseObj.toString(), NetModel.class);
+                            NetModel netModel = JSON.parseObject(responseObj.toString(), NetModel.class);
                             if (netModel.isSuccess()) {
                                 HostConstants.saveUserDetail(netModel.getData());
                                 HostConstants.saveUserInfo(null, null);
@@ -158,14 +156,14 @@ public class ThirdLoginPresenter {
                             ThirdLoginPresenter.this.loginView.loginThirdListener(false, ErrorMessage.getUserModeErrorMessage(ThirdLoginPresenter.this.mContext, netModel.getErrCode()));
                         }
 
-                        @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+                        @Override
                         public void onFailure(Object reasonObj) {
                             ThirdLoginPresenter.this.loginView.loginThirdListener(false, ThirdLoginPresenter.this.mContext.getString(R.string.login_result));
                         }
                     }));
                 }
 
-                @Override // com.fimi.thirdpartysdk.login.LoginCallback
+                @Override
                 public void loginFail(String error) {
                     ThirdLoginPresenter.this.loginView.loginThirdListener(false, error);
                 }
@@ -186,8 +184,8 @@ public class ThirdLoginPresenter {
             }
             this.mHandler.removeMessages(1);
             this.mHandler.sendEmptyMessageDelayed(1, 50000L);
-            this.mThirdLoginManager.login("1", this.mContext, new LoginCallback() { // from class: com.fimi.libperson.presenter.ThirdLoginPresenter.4
-                @Override // com.fimi.thirdpartysdk.login.LoginCallback
+            this.mThirdLoginManager.login("1", this.mContext, new LoginCallback() {
+                @Override
                 public void loginSuccess(Object object) {
                     if (ThirdLoginPresenter.this.loginView != null) {
                         ThirdLoginPresenter.this.loginView.updateProgress(true);
@@ -205,11 +203,11 @@ public class ThirdLoginPresenter {
                             thirdAcountDto.setName(dataJsonObject.getString("miliaoNick"));
                             thirdAcountDto.setNickName(dataJsonObject.getString("miliaoNick"));
                             thirdAcountDto.setLoginChannel("1");
-                            UserManager.getIntance(ThirdLoginPresenter.this.mContext).thirdUserLogin(thirdAcountDto, new DisposeDataHandle(new DisposeDataListener() { // from class: com.fimi.libperson.presenter.ThirdLoginPresenter.4.1
+                            UserManager.getIntance(ThirdLoginPresenter.this.mContext).thirdUserLogin(thirdAcountDto, new DisposeDataHandle(new DisposeDataListener() {
                                 @Override
                                 // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
                                 public void onSuccess(Object responseObj) {
-                                    NetModel netModel = (NetModel) JSON.parseObject(responseObj.toString(), NetModel.class);
+                                    NetModel netModel = JSON.parseObject(responseObj.toString(), NetModel.class);
                                     if (netModel.isSuccess()) {
                                         HostConstants.saveUserDetail(netModel.getData());
                                         HostConstants.saveUserInfo(null, null);
@@ -231,7 +229,7 @@ public class ThirdLoginPresenter {
                     }
                 }
 
-                @Override // com.fimi.thirdpartysdk.login.LoginCallback
+                @Override
                 public void loginFail(String error) {
                     ThirdLoginPresenter.this.loginView.loginThirdListener(false, error);
                 }
@@ -248,12 +246,12 @@ public class ThirdLoginPresenter {
     public void getFwDetail() {
         FwManager x9FwManager = new FwManager();
         HostConstants.saveFirmwareDetail(new ArrayList());
-        x9FwManager.getX9FwNetDetail(new DisposeDataHandle(new DisposeDataListener() { // from class: com.fimi.libperson.presenter.ThirdLoginPresenter.5
-            @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+        x9FwManager.getX9FwNetDetail(new DisposeDataHandle(new DisposeDataListener() {
+            @Override
             public void onSuccess(Object responseObj) {
                 try {
                     try {
-                        NetModel netModel = (NetModel) JSON.parseObject(responseObj.toString(), NetModel.class);
+                        NetModel netModel = JSON.parseObject(responseObj.toString(), NetModel.class);
                         LogUtil.d("moweiru", "responseObj:" + responseObj);
                         if (netModel.isSuccess() && netModel.getData() != null) {
                             List<UpfirewareDto> fwDtos = JSON.parseArray(netModel.getData().toString(), UpfirewareDto.class);
@@ -277,7 +275,7 @@ public class ThirdLoginPresenter {
                 }
             }
 
-            @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+            @Override
             public void onFailure(Object reasonObj) {
                 if (ThirdLoginPresenter.this.loginView != null) {
                     ThirdLoginPresenter.this.loginView.loginSuccess();

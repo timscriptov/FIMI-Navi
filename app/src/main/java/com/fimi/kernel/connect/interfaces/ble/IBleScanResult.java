@@ -4,7 +4,7 @@ import android.bluetooth.BluetoothDevice;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public interface IBleScanResult {
     void autoConnect(BluetoothDevice bluetoothDevice);
 

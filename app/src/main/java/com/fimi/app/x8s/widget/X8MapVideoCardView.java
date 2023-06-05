@@ -100,7 +100,7 @@ public class X8MapVideoCardView extends ViewGroup {
         return i2;
     }
 
-    @Override // android.view.View
+    @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
         this.indexs[0] = getChildAt(0);

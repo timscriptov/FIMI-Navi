@@ -2,7 +2,7 @@ package com.fimi.x8sdk.ivew;
 
 import com.fimi.kernel.dataparser.usb.UiCallBackListener;
 
-/* loaded from: classes2.dex */
+
 public interface IGbAciton {
     void getGcGain(UiCallBackListener uiCallBackListener);
 

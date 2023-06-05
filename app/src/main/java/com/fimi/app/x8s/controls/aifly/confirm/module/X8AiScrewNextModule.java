@@ -9,16 +9,16 @@ import com.fimi.app.x8s.interfaces.IX8NextViewListener;
 import com.fimi.x8sdk.controller.FcManager;
 import com.fimi.x8sdk.dataparser.AutoFcSportState;
 
-/* loaded from: classes.dex */
+
 public class X8AiScrewNextModule extends X8BaseModule {
     private X8AiScrewNextUi mUi;
 
-    @Override // com.fimi.app.x8s.controls.aifly.confirm.module.X8BaseModule
+    @Override
     public void init(Activity activity, View rootView) {
         this.mUi = new X8AiScrewNextUi(activity, rootView);
     }
 
-    @Override // com.fimi.app.x8s.controls.aifly.confirm.module.X8BaseModule
+    @Override
     public void setFcHeart(boolean isInSky, boolean isLowPower) {
     }
 

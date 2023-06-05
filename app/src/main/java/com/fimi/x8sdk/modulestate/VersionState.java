@@ -3,7 +3,7 @@ package com.fimi.x8sdk.modulestate;
 import com.fimi.kernel.animutils.IOUtils;
 import com.fimi.x8sdk.dataparser.AckVersion;
 
-/* loaded from: classes2.dex */
+
 public class VersionState {
     private AckVersion moduleBatteryVersion;
     private AckVersion moduleCameraVersion;

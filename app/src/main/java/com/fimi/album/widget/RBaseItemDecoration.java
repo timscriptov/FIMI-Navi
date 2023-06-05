@@ -11,11 +11,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-/* loaded from: classes.dex */
+
 public class RBaseItemDecoration extends RecyclerView.ItemDecoration {
     private Drawable mDivider;
     private int mDividerHeight;
-    private Paint mPaint = new Paint(1);
+    private final Paint mPaint = new Paint(1);
 
     public RBaseItemDecoration(Context context, int dividerHeight, int dividerColor) {
         this.mDividerHeight = 2;
@@ -24,7 +24,7 @@ public class RBaseItemDecoration extends RecyclerView.ItemDecoration {
         this.mPaint.setStyle(Paint.Style.FILL);
     }
 
-    @Override // android.support.v7.widget.RecyclerView.ItemDecoration
+    @Override
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
         drawHorizontal(c, parent);
         drawVertical(c, parent);
@@ -84,18 +84,12 @@ public class RBaseItemDecoration extends RecyclerView.ItemDecoration {
     private boolean isLastColum(RecyclerView parent, int pos, int spanCount, int childCount) {
         RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
         if (layoutManager instanceof GridLayoutManager) {
-            if ((pos + 1) % spanCount == 0 && pos >= spanCount - 1) {
-                return true;
-            }
+            return (pos + 1) % spanCount == 0 && pos >= spanCount - 1;
         } else if (layoutManager instanceof StaggeredGridLayoutManager) {
             int orientation = ((StaggeredGridLayoutManager) layoutManager).getOrientation();
             if (orientation == 1) {
-                if ((pos + 1) % spanCount == 0) {
-                    return true;
-                }
-            } else if (pos >= childCount - (childCount % spanCount)) {
-                return true;
-            }
+                return (pos + 1) % spanCount == 0;
+            } else return pos >= childCount - (childCount % spanCount);
         }
         return false;
     }
@@ -103,23 +97,17 @@ public class RBaseItemDecoration extends RecyclerView.ItemDecoration {
     private boolean isLastRaw(RecyclerView parent, int pos, int spanCount, int childCount) {
         RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
         if (layoutManager instanceof GridLayoutManager) {
-            if (pos >= childCount - (childCount % spanCount)) {
-                return true;
-            }
+            return pos >= childCount - (childCount % spanCount);
         } else if (layoutManager instanceof StaggeredGridLayoutManager) {
             int orientation = ((StaggeredGridLayoutManager) layoutManager).getOrientation();
             if (orientation == 1) {
-                if (pos >= childCount - (childCount % spanCount)) {
-                    return true;
-                }
-            } else if ((pos + 1) % spanCount == 0) {
-                return true;
-            }
+                return pos >= childCount - (childCount % spanCount);
+            } else return (pos + 1) % spanCount == 0;
         }
         return false;
     }
 
-    @Override // android.support.v7.widget.RecyclerView.ItemDecoration
+    @Override
     public void getItemOffsets(Rect outRect, int itemPosition, RecyclerView parent) {
         int spanCount = getSpanCount(parent);
         int childCount = parent.getAdapter().getItemCount();

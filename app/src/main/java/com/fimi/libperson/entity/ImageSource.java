@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
-/* loaded from: classes.dex */
+
 public class ImageSource {
     private final Bitmap bitmap;
     private final Integer resource;

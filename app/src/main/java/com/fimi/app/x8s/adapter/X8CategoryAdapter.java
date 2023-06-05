@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class X8CategoryAdapter extends FragmentStatePagerAdapter {
     private List<Fragment> fragments;
 
@@ -21,7 +21,7 @@ public class X8CategoryAdapter extends FragmentStatePagerAdapter {
         this.fragments = fragmentList;
     }
 
-    @Override // android.support.v4.app.FragmentStatePagerAdapter
+    @Override
     public Fragment getItem(int position) {
         if (this.fragments == null) {
             return null;
@@ -29,7 +29,7 @@ public class X8CategoryAdapter extends FragmentStatePagerAdapter {
         return this.fragments.get(position);
     }
 
-    @Override // android.support.v4.view.PagerAdapter
+    @Override
     public int getCount() {
         if (this.fragments == null) {
             return 0;

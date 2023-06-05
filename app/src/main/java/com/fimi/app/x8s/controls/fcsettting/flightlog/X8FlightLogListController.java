@@ -43,14 +43,14 @@ import com.fimi.x8sdk.service.DownFlightPlaybackService;
 
 import org.greenrobot.eventbus.EventBus;
 
-/* loaded from: classes.dex */
+
 public class X8FlightLogListController extends AbsX8MenuBoxControllers implements IX8FlightLogListAction, IX8FlightlogRenameFile {
     private final int FLIGHT_DATA_REFRESH;
     private final int TEST_NET_WORK;
     private X8DoubleCustomDialog dialog;
-    private FdsCount fdsCount;
+    private final FdsCount fdsCount;
     private View handleView;
-    private Handler handler;
+    private final Handler handler;
     private ImageView imgDelete;
     private boolean isShowNotDNSDialog;
     private IX8GeneraModifyModeControllerListener modeControllerListener;
@@ -58,7 +58,7 @@ public class X8FlightLogListController extends AbsX8MenuBoxControllers implement
     private TextView tvNoFiles;
     private Button x8BtnPlayback;
     private X8FlightLogAdapter x8FlightLogAdapter;
-    private X8FlightLogListPresenter x8FlightLogListPresenter;
+    private final X8FlightLogListPresenter x8FlightLogListPresenter;
     private X8IMUCustomDialog x8IMUCustomDialog;
     private ImageView x8ImgPlaybackReturn;
     private ImageView x8ImgPlaybackSyn;
@@ -79,8 +79,8 @@ public class X8FlightLogListController extends AbsX8MenuBoxControllers implement
         this.FLIGHT_DATA_REFRESH = 4;
         this.x8FlightLogListPresenter = new X8FlightLogListPresenter(rootView.getContext(), this);
         this.x8FlightLogListPresenter.setFdsCount(this.fdsCount);
-        this.handler = new Handler() { // from class: com.fimi.app.x8s.controls.fcsettting.flightlog.X8FlightLogListController.1
-            @Override // android.os.Handler
+        this.handler = new Handler() {
+            @Override
             @SuppressLint({"SetTextI18n"})
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
@@ -130,24 +130,24 @@ public class X8FlightLogListController extends AbsX8MenuBoxControllers implement
     }
 
     private void initView(View handleView) {
-        this.x8ImgPlaybackReturn = (ImageView) handleView.findViewById(R.id.x8_img_playback_return);
-        this.imgDelete = (ImageView) handleView.findViewById(R.id.img_delete);
-        this.tvNoFiles = (TextView) handleView.findViewById(R.id.tv_no_files);
+        this.x8ImgPlaybackReturn = handleView.findViewById(R.id.x8_img_playback_return);
+        this.imgDelete = handleView.findViewById(R.id.img_delete);
+        this.tvNoFiles = handleView.findViewById(R.id.tv_no_files);
         this.imgDelete.setEnabled(false);
-        RecyclerView recyclerView = (RecyclerView) handleView.findViewById(R.id.x8_ryv_flight_log);
+        RecyclerView recyclerView = handleView.findViewById(R.id.x8_ryv_flight_log);
         LinearLayoutManager linearLayoutManager = new WrapContentLinearLayoutManager(handleView.getContext(), 1, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         ((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
         recyclerView.setAdapter(this.x8FlightLogAdapter);
-        this.x8BtnPlayback = (Button) handleView.findViewById(R.id.x8_btn_playback);
-        this.x8RlFlightLogListContent = (PercentRelativeLayout) handleView.findViewById(R.id.x8_rl_flight_log_list_content);
-        this.x8PrlFlightLogListInfo = (PercentRelativeLayout) handleView.findViewById(R.id.x8_prl_flight_log_list_info);
-        this.x8TvPlaybackNumberValue = (TextView) handleView.findViewById(R.id.x8_tv_playback_number_value);
-        this.x8TvPlaybackTotalTimeValue = (TextView) handleView.findViewById(R.id.x8_tv_playback_total_time_value);
-        this.x8TvPlaybackDistanceValue = (TextView) handleView.findViewById(R.id.x8_tv_playback_distance_value);
-        this.x8ViewAiAutoPhotoLoading = (X8AiAutoPhotoLoadingView) handleView.findViewById(R.id.x8_view_ai_auto_photo_loading);
+        this.x8BtnPlayback = handleView.findViewById(R.id.x8_btn_playback);
+        this.x8RlFlightLogListContent = handleView.findViewById(R.id.x8_rl_flight_log_list_content);
+        this.x8PrlFlightLogListInfo = handleView.findViewById(R.id.x8_prl_flight_log_list_info);
+        this.x8TvPlaybackNumberValue = handleView.findViewById(R.id.x8_tv_playback_number_value);
+        this.x8TvPlaybackTotalTimeValue = handleView.findViewById(R.id.x8_tv_playback_total_time_value);
+        this.x8TvPlaybackDistanceValue = handleView.findViewById(R.id.x8_tv_playback_distance_value);
+        this.x8ViewAiAutoPhotoLoading = handleView.findViewById(R.id.x8_view_ai_auto_photo_loading);
         this.x8ViewAiAutoPhotoLoading.setX8TvLoadingHint(getString(R.string.x8_playback_delete_loading_hint));
-        this.x8ImgPlaybackSyn = (ImageView) handleView.findViewById(R.id.x8_img_playback_syn);
+        this.x8ImgPlaybackSyn = handleView.findViewById(R.id.x8_img_playback_syn);
     }
 
     public void testNetWorkOnSynProgress() {
@@ -156,7 +156,7 @@ public class X8FlightLogListController extends AbsX8MenuBoxControllers implement
             DownFlightPlaybackService.setState(DownFwService.DownState.StopDown);
             FdsManager.getInstance().stopAll();
             if (this.x8IMUCustomDialog == null) {
-                this.x8IMUCustomDialog = new X8IMUCustomDialog(this.handleView.getContext(), getString(R.string.x8_playback_syn_failure), getString(R.string.x8_playback_syn_failure_hint), R.drawable.x8_calibration_fail_icon, new X8IMUCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.flightlog.X8FlightLogListController.2
+                this.x8IMUCustomDialog = new X8IMUCustomDialog(this.handleView.getContext(), getString(R.string.x8_playback_syn_failure), getString(R.string.x8_playback_syn_failure_hint), R.drawable.x8_calibration_fail_icon, new X8IMUCustomDialog.onDialogButtonClickListener() {
                     @Override
                     // com.fimi.app.x8s.widget.X8IMUCustomDialog.onDialogButtonClickListener
                     public void onSingleButtonClick() {
@@ -186,12 +186,12 @@ public class X8FlightLogListController extends AbsX8MenuBoxControllers implement
         String checkStr = getString(R.string.x8_playback_delete_hint);
         String l = getString(R.string.x8_setting_fc_loastaction_tips_content_cancel);
         String r = getString(R.string.x8_playback_delete);
-        this.dialog = new X8DoubleCustomDialog(this.handleView.getContext(), t, m, l, r, checkStr, new X8DoubleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.flightlog.X8FlightLogListController.3
-            @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+        this.dialog = new X8DoubleCustomDialog(this.handleView.getContext(), t, m, l, r, checkStr, new X8DoubleCustomDialog.onDialogButtonClickListener() {
+            @Override
             public void onLeft() {
             }
 
-            @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+            @Override
             public void onRight() {
                 X8FlightLogListController.this.x8ViewAiAutoPhotoLoading.setVisibility(0);
                 X8FlightLogListController.this.x8ViewAiAutoPhotoLoading.playLoading();
@@ -202,7 +202,7 @@ public class X8FlightLogListController extends AbsX8MenuBoxControllers implement
         this.dialog.setCanceledOnTouchOutside(false);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public String getString(int id) {
         return this.handleView.getContext().getString(id);
     }
@@ -212,12 +212,12 @@ public class X8FlightLogListController extends AbsX8MenuBoxControllers implement
         String m = getString(R.string.x8_modify_black_box_upload_exit_content);
         String l = getString(R.string.x8_setting_fc_loastaction_tips_content_cancel);
         String r = getString(R.string.x8_setting_fc_loastaction_tips_content_confirm);
-        this.dialog = new X8DoubleCustomDialog(this.handleView.getContext(), t, m, l, r, new X8DoubleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.flightlog.X8FlightLogListController.4
-            @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+        this.dialog = new X8DoubleCustomDialog(this.handleView.getContext(), t, m, l, r, new X8DoubleCustomDialog.onDialogButtonClickListener() {
+            @Override
             public void onLeft() {
             }
 
-            @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+            @Override
             public void onRight() {
                 FdsManager.getInstance().stopAll();
                 X8FlightLogListController.this.handleView.setVisibility(8);
@@ -228,7 +228,7 @@ public class X8FlightLogListController extends AbsX8MenuBoxControllers implement
         this.dialog.show();
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8MenuBoxControllers
+    @Override
     public boolean isRunningTask() {
         if (FdsManager.getInstance().hasUpload()) {
             showUploadingEixtDialog();
@@ -237,7 +237,7 @@ public class X8FlightLogListController extends AbsX8MenuBoxControllers implement
         return true;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
         LayoutInflater inflater = LayoutInflater.from(rootView.getContext());
         this.handleView = inflater.inflate(R.layout.x8_flight_log_list_layout, (ViewGroup) rootView, true);
@@ -245,10 +245,10 @@ public class X8FlightLogListController extends AbsX8MenuBoxControllers implement
         initView(this.handleView);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
-        this.x8ImgPlaybackReturn.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.flightlog.X8FlightLogListController.5
-            @Override // android.view.View.OnClickListener
+        this.x8ImgPlaybackReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 if (X8FlightLogListController.this.x8RlFlightLogListContent.getVisibility() == 0) {
                     X8FlightLogListController.this.x8RlFlightLogListContent.setVisibility(8);
@@ -265,16 +265,16 @@ public class X8FlightLogListController extends AbsX8MenuBoxControllers implement
                 }
             }
         });
-        this.imgDelete.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.flightlog.X8FlightLogListController.6
-            @Override // android.view.View.OnClickListener
+        this.imgDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 if (!FdsManager.getInstance().hasUpload()) {
                     X8FlightLogListController.this.showDeleteDialog();
                 }
             }
         });
-        this.x8BtnPlayback.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.flightlog.X8FlightLogListController.7
-            @Override // android.view.View.OnClickListener
+        this.x8BtnPlayback.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 X8FlightLogListController.this.x8RlFlightLogListContent.setVisibility(View.VISIBLE);
                 X8FlightLogListController.this.x8RlFlightLogListContent.animate().translationYBy(0.0f).setDuration(500L).setInterpolator(new BounceInterpolator());
@@ -285,26 +285,26 @@ public class X8FlightLogListController extends AbsX8MenuBoxControllers implement
         this.x8ImgPlaybackSyn.setOnClickListener(new AnonymousClass8(500));
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void showItem() {
         super.showItem();
         this.handleView.setVisibility(0);
     }
 
-    @Override // com.fimi.x8sdk.ivew.IX8FlightLogListAction
+    @Override
     public void startSyn() {
-        this.x8SingleCustomPlaybackSynDialog = new X8SingleCustomPlaybackSynDialog(this.handleView.getContext(), getString(R.string.x8_playback_syn_are_title), new X8SingleCustomPlaybackSynDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.flightlog.X8FlightLogListController.9
+        this.x8SingleCustomPlaybackSynDialog = new X8SingleCustomPlaybackSynDialog(this.handleView.getContext(), getString(R.string.x8_playback_syn_are_title), new X8SingleCustomPlaybackSynDialog.onDialogButtonClickListener() {
             @Override
             // com.fimi.app.x8s.widget.X8SingleCustomPlaybackSynDialog.onDialogButtonClickListener
             public void onSingleButtonClick() {
                 DownFlightPlaybackService.setState(DownFwService.DownState.StopDown);
                 FdsManager.getInstance().stopAll();
                 if (X8FlightLogListController.this.x8IMUCustomDialog == null) {
-                    X8FlightLogListController.this.x8IMUCustomDialog = new X8IMUCustomDialog(X8FlightLogListController.this.handleView.getContext(), X8FlightLogListController.this.getString(R.string.x8_playback_syn_cancle), X8FlightLogListController.this.getString(R.string.x8_playback_syn_end_cancle), R.drawable.x8_calibration_fail_icon, new X8IMUCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.flightlog.X8FlightLogListController.9.1
+                    X8FlightLogListController.this.x8IMUCustomDialog = new X8IMUCustomDialog(X8FlightLogListController.this.handleView.getContext(), X8FlightLogListController.this.getString(R.string.x8_playback_syn_cancle), X8FlightLogListController.this.getString(R.string.x8_playback_syn_end_cancle), R.drawable.x8_calibration_fail_icon, new X8IMUCustomDialog.onDialogButtonClickListener() {
                         @Override
                         // com.fimi.app.x8s.widget.X8IMUCustomDialog.onDialogButtonClickListener
                         public void onSingleButtonClick() {
@@ -320,17 +320,17 @@ public class X8FlightLogListController extends AbsX8MenuBoxControllers implement
         this.x8SingleCustomPlaybackSynDialog.setCanceledOnTouchOutside(false);
     }
 
-    @Override // com.fimi.x8sdk.ivew.IX8FlightLogListAction
+    @Override
     public void synTotalProgress(int progrss) {
         if (this.x8SingleCustomPlaybackSynDialog != null) {
             this.x8SingleCustomPlaybackSynDialog.setX8PbPlaybackPlanValue(progrss);
         }
     }
 
-    @Override // com.fimi.x8sdk.ivew.IX8FlightLogListAction
+    @Override
     public void synCompleteRefreshUI(final boolean isSucceed) {
-        this.handler.postDelayed(new Runnable() { // from class: com.fimi.app.x8s.controls.fcsettting.flightlog.X8FlightLogListController.10
-            @Override // java.lang.Runnable
+        this.handler.postDelayed(new Runnable() {
+            @Override
             public void run() {
                 if (X8FlightLogListController.this.handleView != null && X8FlightLogListController.this.handleView.getVisibility() == 0) {
                     if (X8FlightLogListController.this.x8SingleCustomPlaybackSynDialog != null) {
@@ -341,7 +341,7 @@ public class X8FlightLogListController extends AbsX8MenuBoxControllers implement
                     }
                     if (!isSucceed) {
                         if (X8FlightLogListController.this.x8IMUCustomDialog == null) {
-                            X8FlightLogListController.this.x8IMUCustomDialog = new X8IMUCustomDialog(X8FlightLogListController.this.handleView.getContext(), X8FlightLogListController.this.getString(R.string.x8_playback_syn_failure), X8FlightLogListController.this.getString(R.string.x8_playback_syn_failure_hint_one), R.drawable.x8_calibration_fail_icon, new X8IMUCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.flightlog.X8FlightLogListController.10.2
+                            X8FlightLogListController.this.x8IMUCustomDialog = new X8IMUCustomDialog(X8FlightLogListController.this.handleView.getContext(), X8FlightLogListController.this.getString(R.string.x8_playback_syn_failure), X8FlightLogListController.this.getString(R.string.x8_playback_syn_failure_hint_one), R.drawable.x8_calibration_fail_icon, new X8IMUCustomDialog.onDialogButtonClickListener() {
                                 @Override
                                 // com.fimi.app.x8s.widget.X8IMUCustomDialog.onDialogButtonClickListener
                                 public void onSingleButtonClick() {
@@ -370,7 +370,7 @@ public class X8FlightLogListController extends AbsX8MenuBoxControllers implement
                                 break;
                         }
                         if (X8FlightLogListController.this.x8IMUCustomDialog == null) {
-                            X8FlightLogListController.this.x8IMUCustomDialog = new X8IMUCustomDialog(X8FlightLogListController.this.handleView.getContext(), X8FlightLogListController.this.getString(R.string.x8_playback_syn_complete), synCompleteHint, R.drawable.x8_calibration_success_icon, new X8IMUCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.flightlog.X8FlightLogListController.10.1
+                            X8FlightLogListController.this.x8IMUCustomDialog = new X8IMUCustomDialog(X8FlightLogListController.this.handleView.getContext(), X8FlightLogListController.this.getString(R.string.x8_playback_syn_complete), synCompleteHint, R.drawable.x8_calibration_success_icon, new X8IMUCustomDialog.onDialogButtonClickListener() {
                                 @Override
                                 // com.fimi.app.x8s.widget.X8IMUCustomDialog.onDialogButtonClickListener
                                 public void onSingleButtonClick() {
@@ -391,13 +391,13 @@ public class X8FlightLogListController extends AbsX8MenuBoxControllers implement
         }, ToolTipPopup.DEFAULT_POPUP_DISPLAY_TIME);
     }
 
-    @Override // com.fimi.x8sdk.ivew.IX8FlightLogListAction
+    @Override
     public void noDataHint() {
         X8ToastUtil.showToast(this.handleView.getContext(), getString(R.string.x8_playback_syn_no_data_hint), 1);
         this.x8FlightLogAdapter.unregister();
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IX8FlightlogRenameFile
+    @Override
     public void onRenameFileSuccess() {
         EventBus.getDefault().post(new EventMessage(Constants.X8_FLIGHTLOG_RENAME_FILE_EVENT_KEY, false));
         seachFile(false);
@@ -409,14 +409,14 @@ public class X8FlightLogListController extends AbsX8MenuBoxControllers implement
     }
 
     public class AnonymousClass8 extends NoDoubleClickListener {
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+
         AnonymousClass8(int x0) {
             super(x0);
         }
 
-        @Override // com.fimi.widget.impl.NoDoubleClickListener
+        @Override
         protected void onNoDoubleClick(View v) {
-            X8FlightLogListController.this.x8PlaybackDoubleCustomDialog = new X8PlaybackDoubleCustomDialog(X8FlightLogListController.this.handleView.getContext(), new X8PlaybackDoubleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.flightlog.X8FlightLogListController.8.1
+            X8FlightLogListController.this.x8PlaybackDoubleCustomDialog = new X8PlaybackDoubleCustomDialog(X8FlightLogListController.this.handleView.getContext(), new X8PlaybackDoubleCustomDialog.onDialogButtonClickListener() {
                 @Override
                 // com.fimi.app.x8s.widget.X8PlaybackDoubleCustomDialog.onDialogButtonClickListener
                 public void onLeft() {
@@ -427,7 +427,7 @@ public class X8FlightLogListController extends AbsX8MenuBoxControllers implement
                 public void onRight() {
                     if (!DNSLookupThread.isDSNSuceess()) {
                         if (X8FlightLogListController.this.x8IMUCustomDialog == null) {
-                            X8FlightLogListController.this.x8IMUCustomDialog = new X8IMUCustomDialog(X8FlightLogListController.this.handleView.getContext(), X8FlightLogListController.this.getString(R.string.x8_playback_syn_failure), X8FlightLogListController.this.getString(R.string.x8_playback_syn_failure_hint), R.drawable.x8_calibration_fail_icon, new X8IMUCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.flightlog.X8FlightLogListController.8.1.1
+                            X8FlightLogListController.this.x8IMUCustomDialog = new X8IMUCustomDialog(X8FlightLogListController.this.handleView.getContext(), X8FlightLogListController.this.getString(R.string.x8_playback_syn_failure), X8FlightLogListController.this.getString(R.string.x8_playback_syn_failure_hint), R.drawable.x8_calibration_fail_icon, new X8IMUCustomDialog.onDialogButtonClickListener() {
                                 @Override
                                 // com.fimi.app.x8s.widget.X8IMUCustomDialog.onDialogButtonClickListener
                                 public void onSingleButtonClick() {

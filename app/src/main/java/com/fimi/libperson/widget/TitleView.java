@@ -12,20 +12,20 @@ import android.widget.TextView;
 import com.fimi.android.app.R;
 import com.fimi.kernel.utils.FontUtil;
 
-/* loaded from: classes.dex */
+
 public class TitleView extends FrameLayout {
-    private ImageView mIvLeft;
-    private TextView mTvRight;
-    private TextView mTvTitle;
+    private final ImageView mIvLeft;
+    private final TextView mTvRight;
+    private final TextView mTvTitle;
 
     public TitleView(Context context, AttributeSet attrs) {
         super(context, attrs);
         LayoutInflater.from(context).inflate(R.layout.sub_login_title, this);
-        this.mTvTitle = (TextView) findViewById(R.id.tv_title);
-        this.mIvLeft = (ImageView) findViewById(R.id.iv_return);
-        this.mTvRight = (TextView) findViewById(R.id.tv_right);
-        this.mIvLeft.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.libperson.widget.TitleView.1
-            @Override // android.view.View.OnClickListener
+        this.mTvTitle = findViewById(R.id.tv_title);
+        this.mIvLeft = findViewById(R.id.iv_return);
+        this.mTvRight = findViewById(R.id.tv_right);
+        this.mIvLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 ((Activity) TitleView.this.getContext()).finish();
             }

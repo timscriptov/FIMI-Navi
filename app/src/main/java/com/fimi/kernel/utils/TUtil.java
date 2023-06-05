@@ -2,7 +2,7 @@ package com.fimi.kernel.utils;
 
 import java.lang.reflect.ParameterizedType;
 
-/* loaded from: classes.dex */
+
 public class TUtil {
     public static <T> T getT(Object o, int i) {
         try {

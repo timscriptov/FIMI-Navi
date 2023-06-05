@@ -10,11 +10,11 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/* loaded from: classes.dex */
+
 public class MediaThumDownloadTask implements Runnable {
     private int finished = 0;
-    private OnDownloadListener listener;
-    private MediaModel model;
+    private final OnDownloadListener listener;
+    private final MediaModel model;
 
     public MediaThumDownloadTask(MediaModel model, OnDownloadListener listener) {
         this.model = model;
@@ -22,7 +22,7 @@ public class MediaThumDownloadTask implements Runnable {
         model.setThumDownloading(true);
     }
 
-    @Override // java.lang.Runnable
+    @Override
     public void run() {
         startDownload();
     }

@@ -6,11 +6,11 @@ import android.os.Message;
 import com.fimi.album.handler.HandlerManager;
 import com.fimi.album.iview.IVideoPlayer;
 
-/* loaded from: classes.dex */
+
 public class VideoPlayerPresneter implements Handler.Callback {
     private static final int TIME = 1;
-    private IVideoPlayer mIVideoPlayer;
-    private Handler mainHandler = HandlerManager.obtain().getHandlerInMainThread(this);
+    private final IVideoPlayer mIVideoPlayer;
+    private final Handler mainHandler = HandlerManager.obtain().getHandlerInMainThread(this);
 
     public VideoPlayerPresneter(IVideoPlayer mIVideoPlayer) {
         this.mIVideoPlayer = mIVideoPlayer;
@@ -24,7 +24,7 @@ public class VideoPlayerPresneter implements Handler.Callback {
         this.mainHandler.removeCallbacksAndMessages(null);
     }
 
-    @Override // android.os.Handler.Callback
+    @Override
     public boolean handleMessage(Message msg) {
         if (msg.what == 1) {
             if (this.mIVideoPlayer != null) {

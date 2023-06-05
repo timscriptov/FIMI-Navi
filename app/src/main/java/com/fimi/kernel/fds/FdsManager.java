@@ -9,18 +9,18 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-/* loaded from: classes.dex */
+
 public class FdsManager implements IFdsUploadListener {
     private static final int DOWNLOAD_FAIL = 2;
     private static final int DOWNLOAD_PROGRESS = 0;
     private static final int DOWNLOAD_STOP = 3;
     private static final int DOWNLOAD_SUCCESS = 1;
-    private static FdsManager fdsManager = new FdsManager();
+    private static final FdsManager fdsManager = new FdsManager();
     private IFdsCountListener countListener;
     private IFdsUiListener uiListener;
-    private List<IFdsFileModel> dataAll = new ArrayList();
-    private Handler mHanler = new Handler() { // from class: com.fimi.kernel.fds.FdsManager.1
-        @Override // android.os.Handler
+    private final List<IFdsFileModel> dataAll = new ArrayList();
+    private final Handler mHanler = new Handler() {
+        @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (FdsManager.this.uiListener != null) {
@@ -38,12 +38,11 @@ public class FdsManager implements IFdsUploadListener {
                         FdsManager.this.uiListener.onStop((IFdsFileModel) msg.obj);
                         return;
                     default:
-                        return;
                 }
             }
         }
     };
-    private ExecutorService executorService = Executors.newFixedThreadPool(1);
+    private final ExecutorService executorService = Executors.newFixedThreadPool(1);
 
     public static FdsManager getInstance() {
         return fdsManager;
@@ -101,23 +100,23 @@ public class FdsManager implements IFdsUploadListener {
         this.countListener.onUploadingCountChange(this.dataAll.size());
     }
 
-    @Override // com.fimi.kernel.fds.IFdsUploadListener
+    @Override
     public void onProgress(Object responseObj, long progrss, long currentLength) {
         int p = (int) ((100 * progrss) / currentLength);
         this.mHanler.obtainMessage(0, p, p, responseObj).sendToTarget();
     }
 
-    @Override // com.fimi.kernel.fds.IFdsUploadListener
+    @Override
     public void onSuccess(Object responseObj) {
         this.mHanler.obtainMessage(1, responseObj).sendToTarget();
     }
 
-    @Override // com.fimi.kernel.fds.IFdsUploadListener
+    @Override
     public void onFailure(Object reasonObj) {
         this.mHanler.obtainMessage(2, reasonObj).sendToTarget();
     }
 
-    @Override // com.fimi.kernel.fds.IFdsUploadListener
+    @Override
     public void onStop(Object reasonObj) {
         this.mHanler.obtainMessage(3, reasonObj).sendToTarget();
     }

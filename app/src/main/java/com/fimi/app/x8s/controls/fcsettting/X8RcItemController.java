@@ -20,7 +20,7 @@ import com.fimi.x8sdk.controller.FcCtrlManager;
 import com.fimi.x8sdk.dataparser.AckGetRcMode;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-/* loaded from: classes.dex */
+
 public class X8RcItemController extends AbsX8Controllers implements View.OnClickListener {
     public static final int FIVE_KEY_CENTER = 4;
     public static final int FIVE_KEY_DOWN = 1;
@@ -40,7 +40,7 @@ public class X8RcItemController extends AbsX8Controllers implements View.OnClick
     private Button btnRockerMode;
     private FcCtrlManager fcCtrlManager;
     private IX8RcItemControllerListener listener;
-    private Context mConext;
+    private final Context mConext;
     private View rlFcItem;
     private ViewStub stubFcItem;
     private X8TabItem thApModule;
@@ -50,8 +50,8 @@ public class X8RcItemController extends AbsX8Controllers implements View.OnClick
     public X8RcItemController(View rootView) {
         super(rootView);
         this.currAPModel = 0;
-        this.rcCtrlModelListener = new IX8RcRockerListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8RcItemController.3
-            @Override // com.fimi.app.x8s.interfaces.IX8RcRockerListener
+        this.rcCtrlModelListener = new IX8RcRockerListener() {
+            @Override
             public void onRcCtrlModelListener(int result) {
                 X8RcItemController.this.showRcCtrlModel(result);
             }
@@ -59,29 +59,29 @@ public class X8RcItemController extends AbsX8Controllers implements View.OnClick
         this.mConext = rootView.getContext();
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
-        this.stubFcItem = (ViewStub) rootView.findViewById(R.id.stub_rc_item);
+        this.stubFcItem = rootView.findViewById(R.id.stub_rc_item);
         FIVE_KEY_DATA_ARRAY = rootView.getContext().getResources().getStringArray(R.array.x8_five_key_define_option);
     }
 
     public void showApDialog(final int index) {
-        X8DoubleCustomDialog apDialog = new X8DoubleCustomDialog(this.rootView.getContext(), getString(R.string.x8_rc_setting_ap_dialog_title), getString(R.string.x8_rc_setting_ap_dialog_content), new X8DoubleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8RcItemController.1
-            @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+        X8DoubleCustomDialog apDialog = new X8DoubleCustomDialog(this.rootView.getContext(), getString(R.string.x8_rc_setting_ap_dialog_title), getString(R.string.x8_rc_setting_ap_dialog_content), new X8DoubleCustomDialog.onDialogButtonClickListener() {
+            @Override
             public void onLeft() {
                 X8RcItemController.this.thApModule.setSelect(X8RcItemController.this.currAPModel);
             }
 
-            @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+            @Override
             public void onRight() {
-                X8RcItemController.this.fcCtrlManager.setApMode((byte) index, new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8RcItemController.1.1
-                    @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                X8RcItemController.this.fcCtrlManager.setApMode((byte) index, new UiCallBackListener() {
+                    @Override
                     public void onComplete(CmdResult cmdResult, Object o) {
                         if (cmdResult.isSuccess()) {
                             X8RcItemController.this.thApModule.setSelect(index);
                             X8RcItemController.this.currAPModel = index;
-                            X8RcItemController.this.fcCtrlManager.setApModeRestart(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8RcItemController.1.1.1
-                                @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+                            X8RcItemController.this.fcCtrlManager.setApModeRestart(new UiCallBackListener() {
+                                @Override
                                 public void onComplete(CmdResult cmdResult2, Object o2) {
                                     if (cmdResult2.isSuccess()) {
                                     }
@@ -95,11 +95,11 @@ public class X8RcItemController extends AbsX8Controllers implements View.OnClick
         apDialog.show();
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
         if (this.rlFcItem != null) {
-            this.thApModule.setOnSelectListener(new X8TabItem.OnSelectListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8RcItemController.2
-                @Override // com.fimi.app.x8s.widget.X8TabItem.OnSelectListener
+            this.thApModule.setOnSelectListener(new X8TabItem.OnSelectListener() {
+                @Override
                 public void onSelect(int index, String text) {
                     if (X8RcItemController.this.currAPModel != index) {
                         if (index == 0) {
@@ -114,14 +114,14 @@ public class X8RcItemController extends AbsX8Controllers implements View.OnClick
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
     public void requestRcCtrlModeValue() {
         if (this.fcCtrlManager != null) {
-            this.fcCtrlManager.getRcCtrlMode(new UiCallBackListener<AckGetRcMode>() { // from class: com.fimi.app.x8s.controls.fcsettting.X8RcItemController.4
-                @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+            this.fcCtrlManager.getRcCtrlMode(new UiCallBackListener<AckGetRcMode>() {
+                @Override
                 public void onComplete(CmdResult cmdResult, AckGetRcMode obj) {
                     if (obj != null) {
                         X8RcItemController.this.showRcCtrlModel(obj.getMode());
@@ -143,28 +143,27 @@ public class X8RcItemController extends AbsX8Controllers implements View.OnClick
                 this.btnRockerMode.setText(R.string.x8_rc_setting_chinese_rocker);
                 return;
             default:
-                return;
         }
     }
 
     public void onRcConnected(boolean isConnect) {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void showItem() {
         if (this.rlFcItem == null) {
             View view = this.stubFcItem.inflate();
             this.rlFcItem = view.findViewById(R.id.x8_rl_main_rc_item);
-            this.thApModule = (X8TabItem) this.rlFcItem.findViewById(R.id.th_ap_module);
-            this.btnRcCalibration = (Button) this.rlFcItem.findViewById(R.id.btn_rc_calibration);
-            this.btnRockerMode = (Button) this.rlFcItem.findViewById(R.id.btn_rocker_mode);
-            this.btnRcCode = (Button) this.rlFcItem.findViewById(R.id.btn_rc_code);
-            this.btnFiveKeyUp = (Button) this.rlFcItem.findViewById(R.id.btn_five_key_up);
-            this.btnFiveKeyDown = (Button) this.rlFcItem.findViewById(R.id.btn_five_key_down);
-            this.btnFiveKeyLeft = (Button) this.rlFcItem.findViewById(R.id.btn_five_key_left);
-            this.btnFiveKeyRight = (Button) this.rlFcItem.findViewById(R.id.btn_five_key_right);
-            this.btnFiveKeyCenter = (Button) this.rlFcItem.findViewById(R.id.btn_five_key_center);
-            this.x8RcBtnRestParams = (Button) this.rlFcItem.findViewById(R.id.x8_rc_btn_rest_params);
+            this.thApModule = this.rlFcItem.findViewById(R.id.th_ap_module);
+            this.btnRcCalibration = this.rlFcItem.findViewById(R.id.btn_rc_calibration);
+            this.btnRockerMode = this.rlFcItem.findViewById(R.id.btn_rocker_mode);
+            this.btnRcCode = this.rlFcItem.findViewById(R.id.btn_rc_code);
+            this.btnFiveKeyUp = this.rlFcItem.findViewById(R.id.btn_five_key_up);
+            this.btnFiveKeyDown = this.rlFcItem.findViewById(R.id.btn_five_key_down);
+            this.btnFiveKeyLeft = this.rlFcItem.findViewById(R.id.btn_five_key_left);
+            this.btnFiveKeyRight = this.rlFcItem.findViewById(R.id.btn_five_key_right);
+            this.btnFiveKeyCenter = this.rlFcItem.findViewById(R.id.btn_five_key_center);
+            this.x8RcBtnRestParams = this.rlFcItem.findViewById(R.id.x8_rc_btn_rest_params);
             this.btnRcCalibration.setOnClickListener(this);
             this.btnRockerMode.setOnClickListener(this);
             this.btnRcCode.setOnClickListener(this);
@@ -190,7 +189,7 @@ public class X8RcItemController extends AbsX8Controllers implements View.OnClick
         this.btnFiveKeyCenter.setText(FIVE_KEY_DATA_ARRAY[SPStoreManager.getInstance().getInt(Constants.FIVE_KEY_CENTRE_KEY, 4)]);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         float f = 1.0f;
         boolean z = true;
@@ -200,7 +199,7 @@ public class X8RcItemController extends AbsX8Controllers implements View.OnClick
                 this.thApModule.setAlpha(canSet ? 1.0f : 0.4f);
                 this.thApModule.setEnabled(canSet);
             }
-            boolean isOpenRockerModer = (b && StateManager.getInstance().getX8Drone().isInSky()) ? false : true;
+            boolean isOpenRockerModer = !b || !StateManager.getInstance().getX8Drone().isInSky();
             if (this.btnRockerMode != null) {
                 this.btnRockerMode.setAlpha(isOpenRockerModer ? 1.0f : 0.4f);
                 this.btnRockerMode.setEnabled(isOpenRockerModer);
@@ -243,7 +242,7 @@ public class X8RcItemController extends AbsX8Controllers implements View.OnClick
         this.btnFiveKeyCenter.setAlpha(isEnabled ? 1.0f : 0.4f);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void closeItem() {
         if (this.rlFcItem != null) {
             this.rlFcItem.setVisibility(8);
@@ -255,7 +254,7 @@ public class X8RcItemController extends AbsX8Controllers implements View.OnClick
         this.fcCtrlManager = fcCtrlManager;
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.btn_rocker_mode) {
@@ -299,7 +298,7 @@ public class X8RcItemController extends AbsX8Controllers implements View.OnClick
 
     public void showRestParamDialog() {
         if (this.x8DoubleCustomDialog == null) {
-            this.x8DoubleCustomDialog = new X8DoubleCustomDialog(this.rootView.getContext(), this.rootView.getContext().getString(R.string.x8_rc_reset_params), this.rootView.getContext().getString(R.string.x8_rc_reset_params_hint), this.rootView.getContext().getString(R.string.x8_general_rest), new X8DoubleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8RcItemController.5
+            this.x8DoubleCustomDialog = new X8DoubleCustomDialog(this.rootView.getContext(), this.rootView.getContext().getString(R.string.x8_rc_reset_params), this.rootView.getContext().getString(R.string.x8_rc_reset_params_hint), this.rootView.getContext().getString(R.string.x8_general_rest), new X8DoubleCustomDialog.onDialogButtonClickListener() {
                 @Override
                 // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
                 public void onLeft() {
@@ -316,8 +315,8 @@ public class X8RcItemController extends AbsX8Controllers implements View.OnClick
     }
 
     public void restRcSystemParams() {
-        this.fcCtrlManager.setRcCtrlMode(new UiCallBackListener() { // from class: com.fimi.app.x8s.controls.fcsettting.X8RcItemController.6
-            @Override // com.fimi.kernel.dataparser.usb.UiCallBackListener
+        this.fcCtrlManager.setRcCtrlMode(new UiCallBackListener() {
+            @Override
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8RcItemController.this.setDefaultFiveKey();
@@ -361,11 +360,10 @@ public class X8RcItemController extends AbsX8Controllers implements View.OnClick
                 this.btnFiveKeyCenter.setText(FIVE_KEY_DATA_ARRAY[position]);
                 return;
             default:
-                return;
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public boolean onClickBackKey() {
         return false;
     }

@@ -34,7 +34,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 import ch.qos.logback.core.util.CloseUtil;
 
-/* loaded from: classes.dex */
+
 public class AOAConnect extends BaseConnect implements IDataTransfer, IRetransmissionHandle, ITimerSendQueueHandle, IRetransmissionJsonHandle, IRetransmissionUsbHandle {
     FileInputStream inputStream;
     UsbAccessory mAccessory;
@@ -49,12 +49,12 @@ public class AOAConnect extends BaseConnect implements IDataTransfer, IRetransmi
     LinkedBlockingDeque<Object> dataQue = new LinkedBlockingDeque<>();
     boolean isWait = false;
     private boolean isAoaDeviceConecect;
-    private IUSBStatusListener mIAoaConnectListener;
+    private final IUSBStatusListener mIAoaConnectListener;
     private RetransmissionJsonThread retransmissionJsonThread;
     private RetransmissionThread retransmissionThread;
     private RetransmissionUsbThread retransmissionUsbThread;
     private TimerSendQueueThread timerSendQueueThread;
-    private boolean mPermissionRequestPending = false;
+    private final boolean mPermissionRequestPending = false;
     private boolean isConnect = false;
     private X8JsonCmdDeque mX8JsonCmdDeque = new X8JsonCmdDeque(this);
 
@@ -87,12 +87,12 @@ public class AOAConnect extends BaseConnect implements IDataTransfer, IRetransmi
         }
     }
 
-    @Override // com.fimi.kernel.connect.interfaces.IDataTransfer
+    @Override
     public void sendRestransmissionData(BaseCommand bcd) {
         sendData(bcd);
     }
 
-    @Override // com.fimi.kernel.connect.interfaces.IDataTransfer
+    @Override
     public void onSendTimeOut(int groupId, int cmdId, BaseCommand bcd) {
         if (bcd.getPersonalDataCallBack() == null) {
             NoticeManager.getInstance().onSendTimeOut(groupId, cmdId, bcd);
@@ -101,7 +101,7 @@ public class AOAConnect extends BaseConnect implements IDataTransfer, IRetransmi
         }
     }
 
-    @Override // com.fimi.kernel.connect.interfaces.IRetransmissionHandle
+    @Override
     public boolean removeFromListByCmdID(int groupId, int cmdId, int seq, LinkPacket packet) {
         if (this.retransmissionThread == null) {
             return false;
@@ -109,7 +109,7 @@ public class AOAConnect extends BaseConnect implements IDataTransfer, IRetransmi
         return this.retransmissionThread.removeFromListByCmdID(groupId, cmdId, seq, packet);
     }
 
-    @Override // com.fimi.kernel.connect.interfaces.IRetransmissionHandle
+    @Override
     public boolean removeFromListByCmdIDLinkPacket4(int groupId, int cmdId, int seq, LinkPacket4 packet) {
         if (this.retransmissionThread == null) {
             return false;
@@ -117,7 +117,7 @@ public class AOAConnect extends BaseConnect implements IDataTransfer, IRetransmi
         return this.retransmissionThread.removeFromListByCmdIDLinkPacket4(groupId, cmdId, seq, packet);
     }
 
-    @Override // com.fimi.kernel.connect.interfaces.ITimerSendQueueHandle
+    @Override
     public boolean removeFromTimerSendQueueByCmdID(int groupId, int cmdId, int seq, LinkPacket packet) {
         if (this.timerSendQueueThread == null) {
             return false;
@@ -125,7 +125,7 @@ public class AOAConnect extends BaseConnect implements IDataTransfer, IRetransmi
         return this.timerSendQueueThread.removeFromListByCmdID(groupId, cmdId, seq, packet);
     }
 
-    @Override // com.fimi.kernel.connect.interfaces.IRetransmissionJsonHandle
+    @Override
     public BaseCommand removeFromListByCmdID(int cmdId, String camKey) {
         if (this.retransmissionJsonThread == null) {
             return null;
@@ -133,7 +133,7 @@ public class AOAConnect extends BaseConnect implements IDataTransfer, IRetransmi
         return this.retransmissionJsonThread.removeFromListByCmdID(cmdId, camKey);
     }
 
-    @Override // com.fimi.kernel.connect.interfaces.IRetransmissionUsbHandle
+    @Override
     public boolean removeFromListByUsbCmdKey(int cmdKey) {
         if (this.retransmissionUsbThread == null) {
             return false;
@@ -141,7 +141,7 @@ public class AOAConnect extends BaseConnect implements IDataTransfer, IRetransmi
         return this.retransmissionUsbThread.removeFromListByUsbCmdKey(cmdKey);
     }
 
-    @Override // com.fimi.kernel.connect.interfaces.IRetransmissionUsbHandle
+    @Override
     public boolean removeFormListByOffset(int fileOffset) {
         if (this.retransmissionUsbThread == null) {
             return false;
@@ -182,7 +182,7 @@ public class AOAConnect extends BaseConnect implements IDataTransfer, IRetransmi
         return this.isAoaDeviceConecect;
     }
 
-    @Override // com.fimi.kernel.connect.BaseConnect
+    @Override
     public void startSession() {
         this.isConnect = true;
         this.readThread = new ReadThread();
@@ -225,7 +225,7 @@ public class AOAConnect extends BaseConnect implements IDataTransfer, IRetransmi
         }
     }
 
-    @Override // com.fimi.kernel.connect.BaseConnect
+    @Override
     public void closeSession() {
         this.isConnect = false;
         if (this.readThread != null) {
@@ -256,7 +256,7 @@ public class AOAConnect extends BaseConnect implements IDataTransfer, IRetransmi
         closeUsbAccessory();
     }
 
-    @Override // com.fimi.kernel.connect.BaseConnect
+    @Override
     public void sendCmd(BaseCommand cmd) {
         switch (cmd.getLinkMsgType()) {
             case FmLink4:
@@ -275,7 +275,6 @@ public class AOAConnect extends BaseConnect implements IDataTransfer, IRetransmi
             default:
                 this.dataQue.add(cmd);
                 sendSignal();
-                return;
         }
     }
 
@@ -284,24 +283,24 @@ public class AOAConnect extends BaseConnect implements IDataTransfer, IRetransmi
         sendSignal();
     }
 
-    @Override // com.fimi.kernel.connect.BaseConnect
+    @Override
     public void sendJsonCmd(BaseCommand cmd) {
         if (this.mX8JsonCmdDeque != null) {
             this.mX8JsonCmdDeque.addJsonCmd(cmd);
         }
     }
 
-    @Override // com.fimi.kernel.connect.BaseConnect
+    @Override
     public boolean isDeviceConnected() {
         return false;
     }
 
-    /* loaded from: classes.dex */
+
     public class ReadThread extends Thread {
         ReadThread() {
         }
 
-        @Override // java.lang.Thread, java.lang.Runnable
+        @Override
         public void run() {
             super.run();
             if (AOAConnect.this.inputStream != null) {
@@ -329,12 +328,12 @@ public class AOAConnect extends BaseConnect implements IDataTransfer, IRetransmi
         }
     }
 
-    /* loaded from: classes.dex */
+
     public class WriteThread extends Thread {
         WriteThread() {
         }
 
-        @Override // java.lang.Thread, java.lang.Runnable
+        @Override
         public void run() {
             super.run();
             if (AOAConnect.this.outputStream != null) {

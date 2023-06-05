@@ -41,7 +41,7 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes.dex */
+
 public class FileUtil {
     public static final int BUFSIZE = 8192;
 
@@ -106,8 +106,8 @@ public class FileUtil {
 
     public static List<File> listFiles(File file, final String extension, final String content) {
         File[] files;
-        if (file == null || !file.exists() || !file.isDirectory() || (files = file.listFiles(new FilenameFilter() { // from class: com.fimi.kernel.utils.FileUtil.1
-            @Override // java.io.FilenameFilter
+        if (file == null || !file.exists() || !file.isDirectory() || (files = file.listFiles(new FilenameFilter() {
+            @Override
             public boolean accept(File arg0, String arg1) {
                 if (content == null || content.equals("")) {
                     return arg1.endsWith(extension);
@@ -124,8 +124,8 @@ public class FileUtil {
 
     public static List<File> listFiles2(File file, final String endwith1, final String endwith2) {
         File[] files;
-        if (file == null || !file.exists() || !file.isDirectory() || (files = file.listFiles(new FilenameFilter() { // from class: com.fimi.kernel.utils.FileUtil.2
-            @Override // java.io.FilenameFilter
+        if (file == null || !file.exists() || !file.isDirectory() || (files = file.listFiles(new FilenameFilter() {
+            @Override
             public boolean accept(File arg0, String arg1) {
                 return arg1.endsWith(endwith2) || arg1.endsWith(endwith1);
             }
@@ -138,8 +138,8 @@ public class FileUtil {
     }
 
     public static void sortList(List<File> list, final boolean asc) {
-        Collections.sort(list, new Comparator<File>() { // from class: com.fimi.kernel.utils.FileUtil.3
-            @Override // java.util.Comparator
+        Collections.sort(list, new Comparator<File>() {
+            @Override
             public int compare(File file, File newFile) {
                 long diff = file.lastModified() - newFile.lastModified();
                 if (asc) {
@@ -302,10 +302,10 @@ public class FileUtil {
             }
             Movie result = new Movie();
             if (audioTracks.size() > 0) {
-                result.addTrack(new AppendTrack((Track[]) audioTracks.toArray(new Track[audioTracks.size()])));
+                result.addTrack(new AppendTrack(audioTracks.toArray(new Track[audioTracks.size()])));
             }
             if (videoTracks.size() > 0) {
-                result.addTrack(new AppendTrack((Track[]) videoTracks.toArray(new Track[videoTracks.size()])));
+                result.addTrack(new AppendTrack(videoTracks.toArray(new Track[videoTracks.size()])));
             }
             writeMergeNewFile(outPath, result);
             deleteFile(new File(videoPath1));
@@ -496,8 +496,8 @@ public class FileUtil {
     public static List<File> listDirs(File file, final String endwith2, final String endwith1) {
         if (file != null && file.exists() && file.isDirectory()) {
             final Pattern p = Pattern.compile("\\d{4}-\\d{2}-\\d{2}-\\d{2}-\\d{2}-\\d{2}-\\d{3}");
-            File[] files = file.listFiles(new FilenameFilter() { // from class: com.fimi.kernel.utils.FileUtil.4
-                @Override // java.io.FilenameFilter
+            File[] files = file.listFiles(new FilenameFilter() {
+                @Override
                 public boolean accept(File arg0, String arg1) {
                     File f = new File(arg0.getAbsolutePath() + "/" + arg1);
                     if (!f.isDirectory() || arg1.equals(endwith1)) {
@@ -511,10 +511,7 @@ public class FileUtil {
                     if (!m.find()) {
                         return false;
                     }
-                    if (len != 23 && !arg1.endsWith(endwith2)) {
-                        return false;
-                    }
-                    return true;
+                    return len == 23 || arg1.endsWith(endwith2);
                 }
             });
             if (files != null) {
@@ -529,8 +526,8 @@ public class FileUtil {
 
     public static List<File> listFiles3(File file, final String[] suffix) {
         File[] files;
-        if (file == null || !file.exists() || !file.isDirectory() || (files = file.listFiles(new FilenameFilter() { // from class: com.fimi.kernel.utils.FileUtil.5
-            @Override // java.io.FilenameFilter
+        if (file == null || !file.exists() || !file.isDirectory() || (files = file.listFiles(new FilenameFilter() {
+            @Override
             public boolean accept(File arg0, String arg1) {
                 String[] strArr;
                 for (String endwith : suffix) {

@@ -28,19 +28,19 @@ import com.fimi.kernel.fds.IFdsUiListener;
 import com.fimi.kernel.utils.DNSLookupThread;
 import com.fimi.widget.X8ToastUtil;
 
-/* loaded from: classes.dex */
+
 public class X8BlackBoxController implements IFdsUiListener, IFdsCountListener {
     private Button btnUploadToggle;
-    private View contentView;
-    private FdsCount fdsCount = new FdsCount();
+    private final View contentView;
+    private final FdsCount fdsCount = new FdsCount();
     private ImageView imgDelete;
     private ImageView imgReturn;
-    private X8ModifyModeController listener;
-    private X8B2oxAdapter mX8B2oxAdapter;
+    private final X8ModifyModeController listener;
+    private final X8B2oxAdapter mX8B2oxAdapter;
     private TextView tvNoFiles;
     private RelativeLayout x8ProgressLoading;
-    public Handler handler = new Handler() { // from class: com.fimi.app.x8s.controls.fcsettting.maintain.X8BlackBoxController.1
-        @Override // android.os.Handler
+    public Handler handler = new Handler() {
+        @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             X8BlackBoxController.this.x8ProgressLoading.setVisibility(8);
@@ -64,7 +64,6 @@ public class X8BlackBoxController implements IFdsUiListener, IFdsCountListener {
                     X8BlackBoxController.this.mX8B2oxAdapter.clear();
                     return;
                 default:
-                    return;
             }
         }
     };
@@ -80,8 +79,8 @@ public class X8BlackBoxController implements IFdsUiListener, IFdsCountListener {
     }
 
     private void initAction() {
-        this.imgReturn.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.maintain.X8BlackBoxController.2
-            @Override // android.view.View.OnClickListener
+        this.imgReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 if (!FdsManager.getInstance().hasUpload()) {
                     X8BlackBoxController.this.listener.onBlackBoxBack();
@@ -90,16 +89,16 @@ public class X8BlackBoxController implements IFdsUiListener, IFdsCountListener {
                 }
             }
         });
-        this.imgDelete.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.maintain.X8BlackBoxController.3
-            @Override // android.view.View.OnClickListener
+        this.imgDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 if (!FdsManager.getInstance().hasUpload()) {
                     X8BlackBoxController.this.showDeleteDialog();
                 }
             }
         });
-        this.btnUploadToggle.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.maintain.X8BlackBoxController.4
-            @Override // android.view.View.OnClickListener
+        this.btnUploadToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 if (!DNSLookupThread.isDSNSuceess()) {
                     X8ToastUtil.showToast(X8BlackBoxController.this.contentView.getContext(), X8BlackBoxController.this.getString(R.string.x8_fds_connect_internet), 0);
@@ -119,7 +118,6 @@ public class X8BlackBoxController implements IFdsUiListener, IFdsCountListener {
                         X8BlackBoxController.this.mX8B2oxAdapter.notifyDataSetChanged();
                         return;
                     default:
-                        return;
                 }
             }
         });
@@ -128,14 +126,14 @@ public class X8BlackBoxController implements IFdsUiListener, IFdsCountListener {
     }
 
     private void initView(View contentView) {
-        this.imgReturn = (ImageView) contentView.findViewById(R.id.img_return);
-        this.imgDelete = (ImageView) contentView.findViewById(R.id.img_delete);
-        this.btnUploadToggle = (Button) contentView.findViewById(R.id.btn_upload_toggle);
-        this.tvNoFiles = (TextView) contentView.findViewById(R.id.tv_no_files);
-        this.x8ProgressLoading = (RelativeLayout) contentView.findViewById(R.id.x8_progress_loading);
+        this.imgReturn = contentView.findViewById(R.id.img_return);
+        this.imgDelete = contentView.findViewById(R.id.img_delete);
+        this.btnUploadToggle = contentView.findViewById(R.id.btn_upload_toggle);
+        this.tvNoFiles = contentView.findViewById(R.id.tv_no_files);
+        this.x8ProgressLoading = contentView.findViewById(R.id.x8_progress_loading);
         this.imgDelete.setEnabled(false);
         this.btnUploadToggle.setEnabled(false);
-        RecyclerView recyclerView = (RecyclerView) contentView.findViewById(R.id.ryv_black_box);
+        RecyclerView recyclerView = contentView.findViewById(R.id.ryv_black_box);
         recyclerView.setLayoutManager(new LinearLayoutManager(contentView.getContext()));
         ((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
         recyclerView.setAdapter(this.mX8B2oxAdapter);
@@ -149,25 +147,25 @@ public class X8BlackBoxController implements IFdsUiListener, IFdsCountListener {
         new X8FileSeachDeleteThread(this.mX8B2oxAdapter, this.handler, false).start();
     }
 
-    @Override // com.fimi.kernel.fds.IFdsUiListener
+    @Override
     public void onProgress(IFdsFileModel model, int progrss) {
         this.mX8B2oxAdapter.notifyItemChanged(((X8B2oxFile) model).getItemPostion());
     }
 
-    @Override // com.fimi.kernel.fds.IFdsUiListener
+    @Override
     public void onSuccess(IFdsFileModel responseObj) {
         this.fdsCount.completeIncrease();
         FdsManager.getInstance().remove(responseObj);
         this.mX8B2oxAdapter.notifyItemChanged(((X8B2oxFile) responseObj).getItemPostion());
     }
 
-    @Override // com.fimi.kernel.fds.IFdsUiListener
+    @Override
     public void onFailure(IFdsFileModel responseObj) {
         FdsManager.getInstance().remove(responseObj);
         this.mX8B2oxAdapter.notifyItemChanged(((X8B2oxFile) responseObj).getItemPostion());
     }
 
-    @Override // com.fimi.kernel.fds.IFdsUiListener
+    @Override
     public void onStop(IFdsFileModel reasonObj) {
         FdsManager.getInstance().remove(reasonObj);
         this.mX8B2oxAdapter.notifyItemChanged(((X8B2oxFile) reasonObj).getItemPostion());
@@ -178,12 +176,12 @@ public class X8BlackBoxController implements IFdsUiListener, IFdsCountListener {
         String m = getString(R.string.x8_modify_black_box_delete_content);
         String l = getString(R.string.x8_setting_fc_loastaction_tips_content_cancel);
         String r = getString(R.string.x8_setting_fc_loastaction_tips_content_confirm);
-        X8DoubleCustomDialog dialog = new X8DoubleCustomDialog(this.contentView.getContext(), t, m, l, r, new X8DoubleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.maintain.X8BlackBoxController.5
-            @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+        X8DoubleCustomDialog dialog = new X8DoubleCustomDialog(this.contentView.getContext(), t, m, l, r, new X8DoubleCustomDialog.onDialogButtonClickListener() {
+            @Override
             public void onLeft() {
             }
 
-            @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+            @Override
             public void onRight() {
                 X8BlackBoxController.this.deleteFile();
             }
@@ -195,7 +193,7 @@ public class X8BlackBoxController implements IFdsUiListener, IFdsCountListener {
         return this.contentView.getContext().getString(id);
     }
 
-    @Override // com.fimi.kernel.fds.IFdsCountListener
+    @Override
     public void onUploadingCountChange(int uploading) {
         if (this.fdsCount.getTotal() - this.fdsCount.getComplete() == uploading) {
             if (uploading == 0) {
@@ -209,11 +207,7 @@ public class X8BlackBoxController implements IFdsUiListener, IFdsCountListener {
             this.fdsCount.setState(0);
             this.btnUploadToggle.setText(getString(R.string.x8_modify_black_box_upload_start_all));
         }
-        if (uploading != 0) {
-            this.imgDelete.setEnabled(false);
-        } else {
-            this.imgDelete.setEnabled(true);
-        }
+        this.imgDelete.setEnabled(uploading == 0);
     }
 
     public void showUploadingEixtDialog() {
@@ -221,12 +215,12 @@ public class X8BlackBoxController implements IFdsUiListener, IFdsCountListener {
         String m = getString(R.string.x8_modify_black_box_upload_exit_content);
         String l = getString(R.string.x8_setting_fc_loastaction_tips_content_cancel);
         String r = getString(R.string.x8_setting_fc_loastaction_tips_content_confirm);
-        X8DoubleCustomDialog dialog = new X8DoubleCustomDialog(this.contentView.getContext(), t, m, l, r, new X8DoubleCustomDialog.onDialogButtonClickListener() { // from class: com.fimi.app.x8s.controls.fcsettting.maintain.X8BlackBoxController.6
-            @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+        X8DoubleCustomDialog dialog = new X8DoubleCustomDialog(this.contentView.getContext(), t, m, l, r, new X8DoubleCustomDialog.onDialogButtonClickListener() {
+            @Override
             public void onLeft() {
             }
 
-            @Override // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
+            @Override
             public void onRight() {
                 FdsManager.getInstance().stopAll();
                 X8BlackBoxController.this.listener.onBlackBoxBack();

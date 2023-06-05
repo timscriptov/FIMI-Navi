@@ -27,7 +27,7 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class X8AiLineHistoryActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener, View.OnClickListener {
     private ImageView imgReturn;
     private X8CategoryAdapter mCategolyAdapter;
@@ -54,13 +54,13 @@ public class X8AiLineHistoryActivity extends AppCompatActivity implements TabLay
         initView();
     }
 
-    @Override // android.support.v4.app.FragmentActivity, android.app.Activity
+    @Override
     public void onResume() {
         super.onResume();
         X8sNavigationBarUtils.hideBottomUIMenu(this);
     }
 
-    @Override // android.app.Activity, android.view.Window.Callback
+    @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus) {
@@ -69,67 +69,67 @@ public class X8AiLineHistoryActivity extends AppCompatActivity implements TabLay
     }
 
     public void initView() {
-        this.mTlTitleCategoly = (TabLayout) findViewById(R.id.tl_title_categoly);
-        this.mHackyViewPager = (HackyViewPager) findViewById(R.id.viewpaper);
-        this.imgReturn = (ImageView) findViewById(R.id.img_return);
+        this.mTlTitleCategoly = findViewById(R.id.tl_title_categoly);
+        this.mHackyViewPager = findViewById(R.id.viewpaper);
+        this.imgReturn = findViewById(R.id.img_return);
         this.mRecentFragment = new X8AiLineRecentFragment();
         this.mFavoritesFragment = new X8AiLineFavoritesFragment();
-        this.mRecentFragment.setOnX8AiLineSelectListener(new IX8AiLineHistoryListener() { // from class: com.fimi.app.x8s.ui.activity.X8AiLineHistoryActivity.1
-            @Override // com.fimi.app.x8s.interfaces.IX8AiLineHistoryListener
+        this.mRecentFragment.setOnX8AiLineSelectListener(new IX8AiLineHistoryListener() {
+            @Override
             public void onSelectId(long id, int type) {
                 X8AiLineHistoryActivity.this.onSelectEvent(id, type);
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8AiLineHistoryListener
+            @Override
             public void onItemChange(long id, int saveFlag, int potion) {
                 X8AiLineHistoryActivity.this.mFavoritesFragment.notityItemChange(id, saveFlag);
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8AiLineHistoryListener
+            @Override
             public void addLineItem(X8AiLinePointInfo info) {
                 X8AiLineHistoryActivity.this.mFavoritesFragment.addLineItem(info);
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8AiLineHistoryListener
+            @Override
             public int favoritesCapacity() {
                 return X8AiLineHistoryActivity.this.mFavoritesFragment.favoritesCapacity();
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8AiLineHistoryListener
+            @Override
             public void goFavorites() {
                 X8AiLineHistoryActivity.this.mTlTitleCategoly.getTabAt(1).select();
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8AiLineHistoryListener
+            @Override
             public void onItemChange(long id, String name, int position) {
                 X8AiLineHistoryActivity.this.mFavoritesFragment.notityItemChange(id, name);
             }
         });
-        this.mFavoritesFragment.setOnX8AiLineSelectListener(new IX8AiLineHistoryListener() { // from class: com.fimi.app.x8s.ui.activity.X8AiLineHistoryActivity.2
-            @Override // com.fimi.app.x8s.interfaces.IX8AiLineHistoryListener
+        this.mFavoritesFragment.setOnX8AiLineSelectListener(new IX8AiLineHistoryListener() {
+            @Override
             public void onSelectId(long id, int type) {
                 X8AiLineHistoryActivity.this.onSelectEvent(id, type);
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8AiLineHistoryListener
+            @Override
             public void onItemChange(long id, int saveFlag, int position) {
                 X8AiLineHistoryActivity.this.mRecentFragment.notityItemChange(id);
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8AiLineHistoryListener
+            @Override
             public void addLineItem(X8AiLinePointInfo info) {
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8AiLineHistoryListener
+            @Override
             public int favoritesCapacity() {
                 return 0;
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8AiLineHistoryListener
+            @Override
             public void goFavorites() {
             }
 
-            @Override // com.fimi.app.x8s.interfaces.IX8AiLineHistoryListener
+            @Override
             public void onItemChange(long id, String name, int position) {
             }
         });
@@ -142,7 +142,7 @@ public class X8AiLineHistoryActivity extends AppCompatActivity implements TabLay
         this.mTlTitleCategoly.setupWithViewPager(this.mHackyViewPager);
         int[] tabStringRes = {R.string.x8_ai_fly_line_history_title, R.string.x8_ai_fly_line_favorites_title};
         for (int index = 0; index < this.mTlTitleCategoly.getTabCount(); index++) {
-            View tabItem = LayoutInflater.from(this).inflate(R.layout.x8_tab_ai_line_history_view, (ViewGroup) null);
+            View tabItem = LayoutInflater.from(this).inflate(R.layout.x8_tab_ai_line_history_view, null);
             if (index == 0) {
                 changeViewVariablw(tabItem, getResources().getColor(R.color.x8_value_select), 0, tabStringRes[index]);
             } else {
@@ -158,14 +158,14 @@ public class X8AiLineHistoryActivity extends AppCompatActivity implements TabLay
     }
 
     private void changeViewVariablw(View view, int resColor, int indicatorState, int resStr) {
-        TextView tvTitleDescription = (TextView) view.findViewById(R.id.tv_title_desprition);
+        TextView tvTitleDescription = view.findViewById(R.id.tv_title_desprition);
         tvTitleDescription.setTextColor(resColor);
         if (resStr != 0) {
             tvTitleDescription.setText(resStr);
         }
     }
 
-    @Override // android.support.design.widget.TabLayout.OnTabSelectedListener
+    @Override
     public void onTabSelected(TabLayout.Tab tab) {
         changeViewVariablw(tab.getCustomView(), getResources().getColor(R.color.x8_value_select), 4, 0);
         this.mHackyViewPager.setCurrentItem(tab.getPosition());
@@ -174,16 +174,16 @@ public class X8AiLineHistoryActivity extends AppCompatActivity implements TabLay
         }
     }
 
-    @Override // android.support.design.widget.TabLayout.OnTabSelectedListener
+    @Override
     public void onTabUnselected(TabLayout.Tab tab) {
         changeViewVariablw(tab.getCustomView(), getResources().getColor(R.color.white_100), 4, 0);
     }
 
-    @Override // android.support.design.widget.TabLayout.OnTabSelectedListener
+    @Override
     public void onTabReselected(TabLayout.Tab tab) {
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.img_return) {

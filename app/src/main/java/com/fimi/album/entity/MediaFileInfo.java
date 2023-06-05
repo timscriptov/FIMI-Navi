@@ -1,6 +1,6 @@
 package com.fimi.album.entity;
 
-/* loaded from: classes.dex */
+
 public class MediaFileInfo {
     private String attr;
     private String gentime;

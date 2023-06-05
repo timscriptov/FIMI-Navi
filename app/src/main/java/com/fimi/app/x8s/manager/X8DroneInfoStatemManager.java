@@ -2,7 +2,7 @@ package com.fimi.app.x8s.manager;
 
 import com.fimi.app.x8s.controls.X8MainErrorCodePowerPitchAngleController;
 
-/* loaded from: classes.dex */
+
 public class X8DroneInfoStatemManager {
     private static final String BAT = "BAT";
     private static final String COMPASS = "Compass";

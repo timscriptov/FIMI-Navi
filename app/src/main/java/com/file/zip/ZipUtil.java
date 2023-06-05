@@ -26,7 +26,7 @@ public abstract class ZipUtil {
             return copy(DOS_TIME_MIN);
         }
         int month = c.get(2) + 1;
-        long value = ((year - 1980) << 25) | (month << 21) | (c.get(5) << 16) | (c.get(11) << 11) | (c.get(12) << 5) | (c.get(13) >> 1);
+        long value = ((long) (year - 1980) << 25) | (month << 21) | (c.get(5) << 16) | (c.get(11) << 11) | (c.get(12) << 5) | (c.get(13) >> 1);
         return ZipLong.getBytes(value);
     }
 

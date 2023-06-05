@@ -12,10 +12,10 @@ import com.fimi.album.iview.IViewpaper;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* loaded from: classes.dex */
+
 public class MediaDetailViewPaperAdapter extends PagerAdapter {
-    private IViewpaper mIViewpaper;
-    private DataManager mdataManager = DataManager.obtain();
+    private final IViewpaper mIViewpaper;
+    private final DataManager mdataManager = DataManager.obtain();
     private CopyOnWriteArrayList<? extends MediaModel> modelList;
 
     public MediaDetailViewPaperAdapter(IViewpaper mIViewpaper) {
@@ -34,7 +34,7 @@ public class MediaDetailViewPaperAdapter extends PagerAdapter {
         this.modelList = this.mdataManager.getLocalDataNoHeadList();
     }
 
-    @Override // android.support.v4.view.PagerAdapter
+    @Override
     public int getCount() {
         if (this.modelList == null) {
             return 0;
@@ -42,17 +42,17 @@ public class MediaDetailViewPaperAdapter extends PagerAdapter {
         return this.modelList.size();
     }
 
-    @Override // android.support.v4.view.PagerAdapter
+    @Override
     public boolean isViewFromObject(View view, Object object) {
         return view == object;
     }
 
-    @Override // android.support.v4.view.PagerAdapter
+    @Override
     public Object instantiateItem(ViewGroup container, int position) {
         return this.mIViewpaper != null ? this.mIViewpaper.instantiateItem(container, position) : super.instantiateItem(container, position);
     }
 
-    @Override // android.support.v4.view.PagerAdapter
+    @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView((View) object);
     }
@@ -62,7 +62,7 @@ public class MediaDetailViewPaperAdapter extends PagerAdapter {
         notifyDataSetChanged();
     }
 
-    @Override // android.support.v4.view.PagerAdapter
+    @Override
     public int getItemPosition(Object object) {
         return -2;
     }

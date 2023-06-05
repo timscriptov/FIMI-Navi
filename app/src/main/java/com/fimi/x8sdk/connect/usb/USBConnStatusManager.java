@@ -1,8 +1,8 @@
 package com.fimi.x8sdk.connect.usb;
 
-/* loaded from: classes2.dex */
+
 public class USBConnStatusManager {
-    private static USBConnStatusManager statusManager = new USBConnStatusManager();
+    private static final USBConnStatusManager statusManager = new USBConnStatusManager();
     UsbStatus status = UsbStatus.UnConnect;
 
     private USBConnStatusManager() {
@@ -20,7 +20,7 @@ public class USBConnStatusManager {
         this.status = status;
     }
 
-    /* loaded from: classes2.dex */
+
     public enum UsbStatus {
         UnConnect,
         Attach,

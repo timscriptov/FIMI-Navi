@@ -3,8 +3,6 @@ package com.fimi.x8sdk.dataparser;
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 
 
-
-/* loaded from: classes2.dex */
 public class AutoCameraStateADV extends X8BaseMessage {
     public static final byte CAMERA_STATE_DELAY_PHOTOGRAPHY_START = 11;
     public static final byte CAMERA_STATE_DELAY_PHOTOGRAPHY_SUCCEED = 12;
@@ -45,7 +43,7 @@ public class AutoCameraStateADV extends X8BaseMessage {
     private int state;
     private int totalSpace;
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         this.state = packet.getPayLoad4().getByte();
@@ -115,7 +113,7 @@ public class AutoCameraStateADV extends X8BaseMessage {
         return this.state == 11 || this.state == 12;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public String toString() {
         return "AutoCameraStateADV{state=" + this.state + ", mode=" + this.mode + ", info=" + this.info + ", recTime=" + ((int) this.recTime) + ", recSecond=" + this.recSecond + ", recMinute=" + this.recMinute + ", recHour=" + this.recHour + ", freeSpace=" + this.freeSpace + ", totalSpace=" + this.totalSpace + '}';
     }

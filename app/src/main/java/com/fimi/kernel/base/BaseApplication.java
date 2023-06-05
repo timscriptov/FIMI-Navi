@@ -22,7 +22,7 @@ public abstract class BaseApplication extends Application {
         return mContext;
     }
 
-    @Override // android.app.Application
+    @Override
     public void onCreate() {
         super.onCreate();
         mContext = getApplicationContext();
@@ -31,7 +31,7 @@ public abstract class BaseApplication extends Application {
 
     private void initGlobalConfig() {
         GlobalConfig.Builder builder = new GlobalConfig.Builder();
-        LanguageModel model = (LanguageModel) SPStoreManager.getInstance().getObject(Constants.LANGUAGETYPE, LanguageModel.class);
+        LanguageModel model = SPStoreManager.getInstance().getObject(Constants.LANGUAGETYPE, LanguageModel.class);
         if (model == null) {
             model = LanguageUtil.getLanguageModel(Locale.getDefault());
         }
@@ -39,13 +39,13 @@ public abstract class BaseApplication extends Application {
         GlobalConfig.getInstance().init(builder);
     }
 
-    @Override // android.app.Application, android.content.ComponentCallbacks
+    @Override
     @RequiresApi(api = 24)
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
     }
 
-    @Override // android.content.ContextWrapper
+    @Override
     @RequiresApi(api = 24)
     protected void attachBaseContext(Context base) {
         FimiAppContext.initKernel(base);

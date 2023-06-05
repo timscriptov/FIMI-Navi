@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Enumeration;
 
-/* loaded from: classes.dex */
+
 public class ZipTool {
     public static final int EXIST_UNZIPFILE = 2;
     public static final int EXIST_ZIPFILE = 4;
@@ -60,7 +60,7 @@ public class ZipTool {
         }
         int index = name.lastIndexOf(File.separator);
         if (index != -1) {
-            fileName = name.substring(index, name.length());
+            fileName = name.substring(index);
             tempDir = name.substring(0, index);
             File tempDirFile = new File(unzipAbpath + File.separator + tempDir);
             if (!tempDirFile.exists()) {

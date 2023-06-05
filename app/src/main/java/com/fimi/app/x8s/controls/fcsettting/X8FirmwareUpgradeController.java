@@ -31,33 +31,33 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* loaded from: classes.dex */
+
 public class X8FirmwareUpgradeController extends AbsX8MenuBoxControllers implements View.OnClickListener {
     boolean currentConnectedState;
-    private FirmwareUpgradeAdapter adapter;
+    private final FirmwareUpgradeAdapter adapter;
     private boolean availableUpgrades;
-    private ImageView imgReturn;
-    private ArrayList<VersionEntity> items;
+    private final ImageView imgReturn;
+    private final ArrayList<VersionEntity> items;
     private IX8FirmwareUpgradeControllerListener listener;
-    private RecyclerView mRecyclerList;
-    private TextView tvFirmwareUpgrade;
+    private final RecyclerView mRecyclerList;
+    private final TextView tvFirmwareUpgrade;
 
     public X8FirmwareUpgradeController(View rootView) {
         super(rootView);
         this.items = new ArrayList<>();
         LayoutInflater inflater = LayoutInflater.from(rootView.getContext());
         this.contentView = inflater.inflate(R.layout.x8_main_general_item_firmware_upgrade, (ViewGroup) rootView, true);
-        this.imgReturn = (ImageView) this.contentView.findViewById(R.id.btn_return);
-        this.tvFirmwareUpgrade = (TextView) this.contentView.findViewById(R.id.tv_firmware_upgrade);
-        this.mRecyclerList = (RecyclerView) this.contentView.findViewById(R.id.recycler_version_list);
+        this.imgReturn = this.contentView.findViewById(R.id.btn_return);
+        this.tvFirmwareUpgrade = this.contentView.findViewById(R.id.tv_firmware_upgrade);
+        this.mRecyclerList = this.contentView.findViewById(R.id.recycler_version_list);
         initData();
         GridLayoutManager layoutManager = new GridLayoutManager(rootView.getContext(), 2);
         this.mRecyclerList.setLayoutManager(layoutManager);
         this.adapter = new FirmwareUpgradeAdapter(this.items);
         this.mRecyclerList.setAdapter(this.adapter);
         this.imgReturn.setOnClickListener(this);
-        this.tvFirmwareUpgrade.setOnClickListener(new NoDoubleClickListener(800) { // from class: com.fimi.app.x8s.controls.fcsettting.X8FirmwareUpgradeController.1
-            @Override // com.fimi.widget.impl.NoDoubleClickListener
+        this.tvFirmwareUpgrade.setOnClickListener(new NoDoubleClickListener(800) {
+            @Override
             protected void onNoDoubleClick(View v) {
                 if (X8FirmwareUpgradeController.this.listener != null) {
                     X8FirmwareUpgradeController.this.listener.onFirmwareUpgradeClick();
@@ -66,7 +66,7 @@ public class X8FirmwareUpgradeController extends AbsX8MenuBoxControllers impleme
         });
     }
 
-    @Override // android.view.View.OnClickListener
+    @Override
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.btn_return) {
@@ -77,26 +77,26 @@ public class X8FirmwareUpgradeController extends AbsX8MenuBoxControllers impleme
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initViews(View rootView) {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void showItem() {
         super.showItem();
         this.contentView.setVisibility(0);
         EventBus.getDefault().register(this);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void closeItem() {
         super.closeItem();
         this.contentView.setVisibility(8);
@@ -196,7 +196,7 @@ public class X8FirmwareUpgradeController extends AbsX8MenuBoxControllers impleme
         this.tvFirmwareUpgrade.setEnabled(false);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.AbsX8Controllers
+    @Override
     public void onDroneConnected(boolean b) {
         super.onDroneConnected(b);
         if (this.currentConnectedState != b) {

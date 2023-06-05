@@ -3,8 +3,6 @@ package com.fimi.x8sdk.dataparser;
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 
 
-
-/* loaded from: classes2.dex */
 public class AckGetCaliState extends X8BaseMessage {
     private int caliErrorCode;
     private int caliStep;
@@ -106,12 +104,12 @@ public class AckGetCaliState extends X8BaseMessage {
         this.sixthPointPercent = sixthPointPercent;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public String toString() {
         return "AckGetAircrftCalistate{sensorType=" + this.sensorType + ", caliType=" + this.caliType + ", caliStep=" + this.caliStep + ", status=" + this.status + ", caliErrorCode=" + this.caliErrorCode + ", firstPointPercent=" + this.firstPointPercent + ", secondPointPercent=" + this.secondPointPercent + ", thridPointPercent=" + this.thridPointPercent + ", fourthPointPercent=" + this.fourthPointPercent + ", fifthPointPercent=" + this.fifthPointPercent + ", sixthPointPercent=" + this.sixthPointPercent + '}';
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @Override
     public void unPacket(LinkPacket4 packet) {
         super.decrypt(packet);
         this.sensorType = packet.getPayLoad4().getByte();

@@ -1,6 +1,6 @@
 package com.fimi.kernel.dataparser;
 
-/* loaded from: classes.dex */
+
 public class BaseRespJson {
     public static final int ERROR_APP_NOT_READY = -22;
     public static final int ERROR_CARD_PROTECTED = -18;

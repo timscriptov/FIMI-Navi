@@ -13,7 +13,7 @@ import com.fimi.network.ErrorMessage;
 import com.fimi.network.UserManager;
 import com.fimi.network.entity.NetModel;
 
-/* loaded from: classes.dex */
+
 public class LibPersonRightApplyPresenter {
     Context context;
     ILibpersonRightApplyView iLibpersonRightApplyView;
@@ -29,11 +29,11 @@ public class LibPersonRightApplyPresenter {
         } else if (!DataValidatorUtil.isEmail(email)) {
             this.iLibpersonRightApplyView.sendFailure(this.context.getString(R.string.register_input_right_email));
         } else {
-            UserManager.getIntance(this.context).sendEmail(email, language, whatApp, new DisposeDataHandle(new DisposeDataListener() { // from class: com.fimi.libperson.presenter.LibPersonRightApplyPresenter.1
-                @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+            UserManager.getIntance(this.context).sendEmail(email, language, whatApp, new DisposeDataHandle(new DisposeDataListener() {
+                @Override
                 public void onSuccess(Object responseObj) {
                     try {
-                        NetModel netModel = (NetModel) JSON.parseObject(responseObj.toString(), NetModel.class);
+                        NetModel netModel = JSON.parseObject(responseObj.toString(), NetModel.class);
                         if (netModel.isSuccess()) {
                             LibPersonRightApplyPresenter.this.iLibpersonRightApplyView.sendSuccess(LibPersonRightApplyPresenter.this.context.getString(R.string.libperson_send_hint_one));
                         } else {
@@ -44,7 +44,7 @@ public class LibPersonRightApplyPresenter {
                     }
                 }
 
-                @Override // com.fimi.kernel.network.okhttp.listener.DisposeDataListener
+                @Override
                 public void onFailure(Object reasonObj) {
                     LibPersonRightApplyPresenter.this.iLibpersonRightApplyView.sendFailure(LibPersonRightApplyPresenter.this.context.getString(R.string.network_exception));
                 }

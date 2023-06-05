@@ -5,8 +5,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 
-
-/* loaded from: classes.dex */
 public class PhotoSubParamItemEntity implements Serializable {
     private List<String> options;
     private String paramKey;

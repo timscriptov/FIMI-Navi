@@ -28,76 +28,73 @@ import com.fimi.x8sdk.modulestate.StateManager;
 
 import java.util.Map;
 
-/* loaded from: classes.dex */
+
 public class SubParamsViewHolder extends RecyclerView.ViewHolder implements JsonUiCallBackListener, SeekBar.OnSeekBarChangeListener {
     private final int delaySend;
     SubParamItemListener listener;
     ImageView resetBtn;
     private X8CameraItemArrayController arrayController;
     private X8CameraAwbItemController awbController;
-    private RelativeLayout contentLayout;
-    private Context context;
+    private final RelativeLayout contentLayout;
+    private final Context context;
     private String contrast;
     private boolean fromUser;
-    private Handler handler;
+    private final Handler handler;
     private TextView normalTv;
-    private TextView optionValue;
+    private final TextView optionValue;
     private String paramKey;
     private String saturation;
-    private SeekBar seekBar;
+    private final SeekBar seekBar;
     private TextView sharpTv;
     private View sharpView;
-    private ViewStub sharpViewStub;
-    private View styleView;
+    private final ViewStub sharpViewStub;
+    private final View styleView;
     private PhotoSubParamItemEntity subParamItemEntity;
-    private TextView sub_options;
-    private ViewStub viewStub;
+    private final TextView sub_options;
+    private final ViewStub viewStub;
 
     public SubParamsViewHolder(View itemView, SubParamItemListener itemListener) {
         super(itemView);
         this.delaySend = 1;
-        this.handler = new Handler() { // from class: com.fimi.app.x8s.viewHolder.SubParamsViewHolder.2
-            @Override // android.os.Handler
+        this.handler = new Handler() {
+            @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                switch (msg.what) {
-                    case 1:
-                        if (SubParamsViewHolder.this.listener != null && SubParamsViewHolder.this.optionValue != null) {
-                            SubParamsViewHolder.this.listener.setRecyclerScroller(true);
-                            if (SubParamsViewHolder.this.paramKey.equals(SubParamsViewHolder.this.context.getResources().getString(R.string.x8_camera_saturation))) {
-                                if (SubParamsViewHolder.this.optionValue.getText().toString() != null) {
-                                    SubParamsViewHolder.this.listener.styleParam("saturation", Integer.parseInt(SubParamsViewHolder.this.optionValue.getText().toString()));
-                                    return;
-                                }
-                                return;
-                            } else if (SubParamsViewHolder.this.paramKey.equals(SubParamsViewHolder.this.context.getResources().getString(R.string.x8_camera_contrast)) && SubParamsViewHolder.this.optionValue.getText().toString() != null) {
-                                SubParamsViewHolder.this.listener.styleParam("contrast", Integer.parseInt(SubParamsViewHolder.this.optionValue.getText().toString()));
-                                return;
-                            } else {
+                if (msg.what == 1) {
+                    if (SubParamsViewHolder.this.listener != null && SubParamsViewHolder.this.optionValue != null) {
+                        SubParamsViewHolder.this.listener.setRecyclerScroller(true);
+                        if (SubParamsViewHolder.this.paramKey.equals(SubParamsViewHolder.this.context.getResources().getString(R.string.x8_camera_saturation))) {
+                            if (SubParamsViewHolder.this.optionValue.getText().toString() != null) {
+                                SubParamsViewHolder.this.listener.styleParam("saturation", Integer.parseInt(SubParamsViewHolder.this.optionValue.getText().toString()));
                                 return;
                             }
+                            return;
+                        } else if (SubParamsViewHolder.this.paramKey.equals(SubParamsViewHolder.this.context.getResources().getString(R.string.x8_camera_contrast)) && SubParamsViewHolder.this.optionValue.getText().toString() != null) {
+                            SubParamsViewHolder.this.listener.styleParam("contrast", Integer.parseInt(SubParamsViewHolder.this.optionValue.getText().toString()));
+                            return;
+                        } else {
+                            return;
                         }
-                        return;
-                    default:
-                        return;
+                    }
+                    return;
                 }
             }
         };
         this.context = itemView.getContext();
         this.listener = itemListener;
-        this.sub_options = (TextView) itemView.findViewById(R.id.sub_option_name);
-        this.optionValue = (TextView) itemView.findViewById(R.id.sub_option_value);
-        this.contentLayout = (RelativeLayout) itemView.findViewById(R.id.sub_content_layout);
-        this.viewStub = (ViewStub) itemView.findViewById(R.id.camera_style_layout);
+        this.sub_options = itemView.findViewById(R.id.sub_option_name);
+        this.optionValue = itemView.findViewById(R.id.sub_option_value);
+        this.contentLayout = itemView.findViewById(R.id.sub_content_layout);
+        this.viewStub = itemView.findViewById(R.id.camera_style_layout);
         this.styleView = this.viewStub.inflate();
-        this.seekBar = (SeekBar) this.styleView.findViewById(R.id.style_seekBar);
+        this.seekBar = this.styleView.findViewById(R.id.style_seekBar);
         this.seekBar.setOnSeekBarChangeListener(this);
         if (!StateManager.getInstance().getConectState().isCameraConnect()) {
             this.seekBar.setProgress(64);
             this.optionValue.setText("64");
         }
-        this.resetBtn = (ImageView) this.styleView.findViewById(R.id.x8_btn_reset);
-        this.sharpViewStub = (ViewStub) itemView.findViewById(R.id.camera_sharp_layout);
+        this.resetBtn = this.styleView.findViewById(R.id.x8_btn_reset);
+        this.sharpViewStub = itemView.findViewById(R.id.camera_sharp_layout);
     }
 
     public void initItemData(PhotoSubParamItemEntity itemEntity, int index, boolean enable, int select_index) {
@@ -111,16 +108,8 @@ public class SubParamsViewHolder extends RecyclerView.ViewHolder implements Json
             this.paramKey = itemEntity.getOptions().get(index);
             if (itemEntity.getParamValue() != null) {
                 if (!isMultilevelMenuView(itemEntity.getParamKey())) {
-                    if (itemEntity.getParamValue().contains(this.paramKey)) {
-                        this.sub_options.setSelected(true);
-                    } else {
-                        this.sub_options.setSelected(false);
-                    }
-                } else if (itemEntity.getParamValue().equals(this.paramKey)) {
-                    this.sub_options.setSelected(true);
-                } else {
-                    this.sub_options.setSelected(false);
-                }
+                    this.sub_options.setSelected(itemEntity.getParamValue().contains(this.paramKey));
+                } else this.sub_options.setSelected(itemEntity.getParamValue().equals(this.paramKey));
             } else if (this.paramKey.equals(CameraJsonCollection.KEY_CAMERA_STYLE)) {
             }
             Map<String, String> nickMap = itemEntity.getOptionMap();
@@ -175,17 +164,11 @@ public class SubParamsViewHolder extends RecyclerView.ViewHolder implements Json
     }
 
     private boolean isMultilevelMenuView(String paramKey) {
-        if (paramKey.equals("capture_mode") || paramKey.equals(CameraJsonCollection.KEY_RECORD_MODE) || paramKey.equals("video_resolution")) {
-            return false;
-        }
-        return true;
+        return !paramKey.equals("capture_mode") && !paramKey.equals(CameraJsonCollection.KEY_RECORD_MODE) && !paramKey.equals("video_resolution");
     }
 
     private boolean isMultilevelMenuViewTwo(String paramKey) {
-        if (paramKey.equals("capture_mode") || paramKey.equals(CameraJsonCollection.KEY_RECORD_MODE)) {
-            return false;
-        }
-        return true;
+        return !paramKey.equals("capture_mode") && !paramKey.equals(CameraJsonCollection.KEY_RECORD_MODE);
     }
 
     private String paramKey2Title(String paramKey) {
@@ -211,7 +194,7 @@ public class SubParamsViewHolder extends RecyclerView.ViewHolder implements Json
 
     public void addParamContent(Context context, CameraManager cameraManager, int layout_id, String... optionName) {
         this.contentLayout.removeAllViews();
-        View paramView = LayoutInflater.from(context).inflate(layout_id, (ViewGroup) this.contentLayout, false);
+        View paramView = LayoutInflater.from(context).inflate(layout_id, this.contentLayout, false);
         this.contentLayout.addView(paramView);
         if (optionName[0].equals(context.getResources().getString(R.string.x8_camera_awb))) {
             this.awbController = new X8CameraAwbItemController(paramView, cameraManager);
@@ -246,8 +229,8 @@ public class SubParamsViewHolder extends RecyclerView.ViewHolder implements Json
         }
         this.optionValue.setVisibility(0);
         this.styleView.setVisibility(0);
-        this.resetBtn.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.viewHolder.SubParamsViewHolder.1
-            @Override // android.view.View.OnClickListener
+        this.resetBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 if (SubParamsViewHolder.this.listener != null) {
                     SubParamsViewHolder.this.listener.setRecyclerScroller(true);
@@ -273,15 +256,15 @@ public class SubParamsViewHolder extends RecyclerView.ViewHolder implements Json
             this.sharpView = this.sharpViewStub.inflate();
         }
         this.sharpView.setVisibility(0);
-        this.normalTv = (TextView) this.sharpView.findViewById(R.id.normal_v);
-        this.sharpTv = (TextView) this.sharpView.findViewById(R.id.sharp_v);
+        this.normalTv = this.sharpView.findViewById(R.id.normal_v);
+        this.sharpTv = this.sharpView.findViewById(R.id.sharp_v);
     }
 
-    @Override // com.fimi.kernel.dataparser.usb.JsonUiCallBackListener
+    @Override
     public void onComplete(JSONObject rt, Object o) {
     }
 
-    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+    @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         this.fromUser = fromUser;
         if (this.styleView != null) {
@@ -294,12 +277,12 @@ public class SubParamsViewHolder extends RecyclerView.ViewHolder implements Json
         this.handler.sendEmptyMessageDelayed(1, 400L);
     }
 
-    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+    @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
         this.fromUser = false;
     }
 
-    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+    @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
         if (this.fromUser) {
             if (this.listener != null) {
@@ -381,10 +364,7 @@ public class SubParamsViewHolder extends RecyclerView.ViewHolder implements Json
     }
 
     private boolean isSubOptionsSetTextColor(String titleName) {
-        if (titleName.equals(this.context.getResources().getString(R.string.x8_camera_style))) {
-            return false;
-        }
-        return true;
+        return !titleName.equals(this.context.getResources().getString(R.string.x8_camera_style));
     }
 
     public RelativeLayout getContentLayout() {
@@ -393,20 +373,14 @@ public class SubParamsViewHolder extends RecyclerView.ViewHolder implements Json
 
     public boolean isRecordingUnclickableItem(String titleName) {
         if (CameraParamStatus.modelStatus == CameraParamStatus.CameraModelStatus.recording) {
-            if (titleName.equals(this.context.getResources().getString(R.string.x8_record_mode)) || titleName.equals(this.context.getResources().getString(R.string.x8_video_type)) || titleName.equals(this.context.getResources().getString(R.string.x8_video_resolution)) || titleName.equals(this.context.getResources().getString(R.string.x8_record_quality))) {
-                return true;
-            }
-            return false;
+            return titleName.equals(this.context.getResources().getString(R.string.x8_record_mode)) || titleName.equals(this.context.getResources().getString(R.string.x8_video_type)) || titleName.equals(this.context.getResources().getString(R.string.x8_video_resolution)) || titleName.equals(this.context.getResources().getString(R.string.x8_record_quality));
         }
         return false;
     }
 
     public boolean isDelayedPhotographyUnclickableItem(String titleName) {
         if (StateManager.getInstance().getCamera().isDelayedPhotography()) {
-            if (titleName.equals(this.context.getResources().getString(R.string.x8_photo_mode)) || titleName.equals(this.context.getResources().getString(R.string.x8_photo_size)) || titleName.equals(this.context.getResources().getString(R.string.x8_photo_format)) || titleName.equals(this.context.getResources().getString(R.string.x8_camera_awb)) || titleName.equals(this.context.getResources().getString(R.string.x8_camera_digita)) || titleName.equals(this.context.getResources().getString(R.string.x8_camera_style))) {
-                return true;
-            }
-            return false;
+            return titleName.equals(this.context.getResources().getString(R.string.x8_photo_mode)) || titleName.equals(this.context.getResources().getString(R.string.x8_photo_size)) || titleName.equals(this.context.getResources().getString(R.string.x8_photo_format)) || titleName.equals(this.context.getResources().getString(R.string.x8_camera_awb)) || titleName.equals(this.context.getResources().getString(R.string.x8_camera_digita)) || titleName.equals(this.context.getResources().getString(R.string.x8_camera_style));
         }
         return false;
     }

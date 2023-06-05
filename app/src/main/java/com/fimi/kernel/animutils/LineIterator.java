@@ -6,7 +6,7 @@ import java.io.Reader;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-/* loaded from: classes.dex */
+
 public class LineIterator implements Iterator<String> {
     private final BufferedReader bufferedReader;
     private String cachedLine;
@@ -29,7 +29,7 @@ public class LineIterator implements Iterator<String> {
         }
     }
 
-    @Override // java.util.Iterator
+    @Override
     public boolean hasNext() {
         boolean z = true;
         if (this.cachedLine != null) {
@@ -61,7 +61,7 @@ public class LineIterator implements Iterator<String> {
         return true;
     }
 
-    @Override // java.util.Iterator
+    @Override
     public String next() {
         return nextLine();
     }
@@ -77,11 +77,11 @@ public class LineIterator implements Iterator<String> {
 
     public void close() {
         this.finished = true;
-        IOUtils.closeQuietly((Reader) this.bufferedReader);
+        IOUtils.closeQuietly(this.bufferedReader);
         this.cachedLine = null;
     }
 
-    @Override // java.util.Iterator
+    @Override
     public void remove() {
         throw new UnsupportedOperationException("Remove unsupported on LineIterator");
     }

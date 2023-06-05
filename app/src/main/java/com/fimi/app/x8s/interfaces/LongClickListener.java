@@ -4,13 +4,13 @@ import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 
-/* loaded from: classes.dex */
+
 public abstract class LongClickListener implements View.OnTouchListener {
     private int viewId;
     private boolean isClickDown = false;
-    private Handler handler = new Handler();
-    private Runnable longClickRunnable = new Runnable() { // from class: com.fimi.app.x8s.interfaces.LongClickListener.1
-        @Override // java.lang.Runnable
+    private final Handler handler = new Handler();
+    private final Runnable longClickRunnable = new Runnable() {
+        @Override
         public void run() {
             if (LongClickListener.this.isClickDown) {
                 LongClickListener.this.handler.postDelayed(this, 50L);
@@ -23,7 +23,7 @@ public abstract class LongClickListener implements View.OnTouchListener {
 
     public abstract void onFingerUp(int i);
 
-    @Override // android.view.View.OnTouchListener
+    @Override
     public boolean onTouch(View v, MotionEvent event) {
         this.viewId = v.getId();
         int action = event.getAction();
