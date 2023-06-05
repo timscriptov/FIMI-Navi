@@ -1150,11 +1150,16 @@ public class X8sMainActivity extends X8BaseActivity implements ConnectListener, 
             this.mMapVideoController.getFimiMap().addDeviceLocation(state.getLatitude(), state.getLongitude());
             this.fcManager.getNoFlyNormal((cmdResult, o) -> {
             });
-            this.mMapVideoController.getFimiMap().addFlyPolyline(state.getLatitude(), state.getLongitude());
-            this.mMapVideoController.getFimiMap().chaneDeviceAngle(state.getDeviceAngle());
+            final double longitude = state.getLongitude();
+            this.mMapVideoController.getFimiMap().addFlyPolyline(state.getLatitude(), longitude);
+            final float angle = state.getDeviceAngle();
+            this.mMapVideoController.getFimiMap().chaneDeviceAngle(angle);
             if (this.mMapVideoController.isFullVideo()) {
                 this.mMapVideoController.getFimiMap().moveCameraByDevice();
             }
+            mX8MainDeviceNorthView.setBankAngle(longitude);
+            mX8MainDeviceNorthView.setAircraft(state.getHeadingAngle());
+            mX8MainDeviceNorthView.setAircraftAzimuth((int) angle);
         }
         this.mX8AiTaskManager.showAiView();
         this.mX8AiTaskManager.showSportState(state);

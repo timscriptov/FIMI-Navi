@@ -21,6 +21,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.fimi.android.app.R;
+import com.fimi.app.x8s.tools.StringHelper;
 
 /**
  * После компиляции замени в smali класс полностью
@@ -36,11 +37,11 @@ public class DeviceNorthView extends View {
     // Угол камеры
     public float cameraAngle = 0f;
     private int a;
-    private int b;
-    private int c;
-    private float d;
+    private int mMin;
+    private int mMax;
+    private float mDensity;
     private RectF e;
-    private Paint f;
+    private Paint mCircle;
     private float north;
     private int h;
     private int i;
@@ -51,15 +52,15 @@ public class DeviceNorthView extends View {
     private float radianAngle;
     private float northText = 0f;
     private float aircraft = 0f;
-    private float bankAngle = 0f;
+    private double bankAngle = 0;
 
     public DeviceNorthView(Context context) {
         super(context);
         mContext = context;
         this.a = 0;
-        this.b = 0;
-        this.c = 100;
-        this.d = 1.0f;
+        this.mMin = 0;
+        this.mMax = 100;
+        this.mDensity = 1.0f;
         this.e = new RectF();
         a(context, null);
     }
@@ -68,9 +69,9 @@ public class DeviceNorthView extends View {
         super(context, attributeSet);
         mContext = context;
         this.a = 0;
-        this.b = 0;
-        this.c = 100;
-        this.d = 1.0f;
+        this.mMin = 0;
+        this.mMax = 100;
+        this.mDensity = 1.0f;
         this.e = new RectF();
         a(context, attributeSet);
     }
@@ -84,42 +85,6 @@ public class DeviceNorthView extends View {
         }
         char firstChar = str.charAt(0);
         return Character.isDigit(firstChar);
-    }
-
-    /**
-     * Извлекает float число из текста, при условие что текст начинается с цифры
-     */
-    public static float parseFloat(String inputString) {
-        String floatString = "";
-        boolean isNegative = false;
-        boolean foundDecimalPoint = false;
-
-        for (int i = 0; i < inputString.length(); i++) {
-            char currentChar = inputString.charAt(i);
-
-            if (currentChar == '-') {
-                isNegative = true;
-            } else if (currentChar == '.') {
-                if (!foundDecimalPoint) {
-                    foundDecimalPoint = true;
-                    floatString += currentChar;
-                } else {
-                    break;
-                }
-            } else if (Character.isDigit(currentChar)) {
-                floatString += currentChar;
-            } else {
-                break;
-            }
-        }
-
-        if (floatString.isEmpty()) {
-            return 0;
-        } else if (isNegative) {
-            return Float.parseFloat("-" + floatString);
-        } else {
-            return Float.parseFloat(floatString);
-        }
     }
 
     /**
@@ -142,24 +107,24 @@ public class DeviceNorthView extends View {
     private void a(@NonNull Context context, AttributeSet attributeSet) {
         float f = context.getResources().getDisplayMetrics().density;
         int color = getResources().getColor(R.color.x8s_main_north);
-        this.d = f * this.d;
+        this.mDensity = f * this.mDensity;
         this.drawable = getResources().getDrawable(R.drawable.x8s_main_north);
         if (attributeSet != null) {
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet,R.styleable.DeviceNorthView, 0, 0);
+            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.DeviceNorthView, 0, 0);
             this.l = obtainStyledAttributes.getDimensionPixelSize(3, 50);
-            this.b = obtainStyledAttributes.getInteger(1, this.b);
-            this.c = obtainStyledAttributes.getInteger(0, this.c);
+            this.mMin = obtainStyledAttributes.getInteger(1, this.mMin);
+            this.mMax = obtainStyledAttributes.getInteger(0, this.mMax);
             this.m = (((((getPaddingLeft() + getPaddingRight()) + getPaddingBottom()) + getPaddingTop()) + getPaddingEnd()) + getPaddingStart()) / 6;
             obtainStyledAttributes.recycle();
         }
         int i = this.a;
-        int i2 = this.c;
+        int i2 = this.mMax;
         if (i > i2) {
             i = i2;
         }
         this.a = i;
         int i3 = this.a;
-        int i4 = this.b;
+        int i4 = this.mMin;
         if (i3 < i4) {
             i3 = i4;
         }
@@ -167,24 +132,24 @@ public class DeviceNorthView extends View {
 
         this.north = this.a / a();
         this.radianAngle = (float) (1.5707963267948966d - ((this.north * 3.141592653589793d) / 180.0d));
-        this.f = new Paint();
-        this.f.setColor(color);
-        this.f.setAntiAlias(true);
-        this.f.setStyle(Paint.Style.STROKE);
-        this.f.setStrokeWidth(this.d);
+        this.mCircle = new Paint();
+        this.mCircle.setColor(color);
+        this.mCircle.setAntiAlias(true);
+        this.mCircle.setStyle(Paint.Style.STROKE);
+        this.mCircle.setStrokeWidth(this.mDensity);
     }
 
     public int getMax() {
-        return this.c;
+        return this.mMax;
     }
 
     public int getMin() {
-        return this.b;
+        return this.mMin;
     }
 
     @Override
     protected void onDraw(@NonNull Canvas canvas) {
-        canvas.drawCircle(this.h, this.i, this.j, this.f);
+        canvas.drawCircle(this.h, this.i, this.j, this.mCircle);
         if (this.drawable instanceof RotateDrawable) {
             int cos = (int) (this.h + (this.j * Math.cos(this.radianAngle)));
             int sin = (int) (this.i - (this.j * Math.sin(this.radianAngle)));
@@ -225,13 +190,13 @@ public class DeviceNorthView extends View {
         }
         this.a = (int) ((f2 / 1.2d) / 3.0d);
         int i = this.a;
-        int i2 = this.c;
+        int i2 = this.mMax;
         if (i > i2) {
             i = i2;
         }
         this.a = i;
         int i3 = this.a;
-        int i4 = this.b;
+        int i4 = this.mMin;
         if (i3 < i4) {
             i3 = i4;
         }
@@ -298,7 +263,7 @@ public class DeviceNorthView extends View {
         canvas.restore();
     }
 
-    public void setBankAngle(float f) {
+    public void setBankAngle(double f) {
         bankAngle = f;
         updateDistance();
         invalidate();
@@ -359,36 +324,32 @@ public class DeviceNorthView extends View {
     public void updateDistance() {
         final FrameLayout frameLayout = findRootView(this);
         if (frameLayout != null) {
-            final TextView tvDistance = frameLayout.findViewById(R.id.tv_hight); // 0x7f0905d1
+            final TextView tvDistance = frameLayout.findViewById(R.id.tv_hight);
             if (tvDistance != null) {
                 // Получаем текст у вьюхи
                 final String distanceText = tvDistance.getText().toString().trim();
-                if (distanceText != null) {
-                    // Если текст начинается с цифры
-                    if (distanceText.charAt(0) == '-' || isFirstCharDigit(distanceText)) {
-                        // Извлекаем число из текста
-                        final float hight = parseFloat(distanceText);
-                        droneHeight = hight;
-                        // Ищем TextView с id R.id.tv_cloud
-                        final TextView tvCloud = frameLayout.findViewById(R.id.tv_bottom_cloud); // 0x7f090585
-                        if (tvCloud != null) {
-                            // Получаем текст у вьюхи
-                            final String cloudText = tvCloud.getText().toString().trim();
-                            if (cloudText != null) {
-                                // Если текст начинается с цифры
-                                if (cloudText.charAt(0) == '-' || isFirstCharDigit(cloudText)) {
-                                    // Извлекаем число из текста
-                                    final float course = parseFloat(cloudText);
-                                    cameraAngle = course;
+                // Если текст начинается с цифры
+                if (distanceText.charAt(0) == '-' || isFirstCharDigit(distanceText)) {
+                    // Извлекаем число из текста
+                    final float hight = StringHelper.parseFloat(distanceText);
+                    droneHeight = hight;
+                    // Ищем TextView с id R.id.tv_cloud
+                    final TextView tvCloud = frameLayout.findViewById(R.id.tv_bottom_cloud);
+                    if (tvCloud != null) {
+                        // Получаем текст у вьюхи
+                        final String cloudText = tvCloud.getText().toString().trim();
+                        // Если текст начинается с цифры
+                        if (cloudText.charAt(0) == '-' || isFirstCharDigit(cloudText)) {
+                            // Извлекаем число из текста
+                            final float course = StringHelper.parseFloat(cloudText);
+                            cameraAngle = course;
 
-                                    if (course > -5 && course < 10) {
-                                        distance = 0;
-                                        return;
-                                    }
-                                    final double dist = hight / Math.tan((course * (-1)) * Math.PI / 180);
-                                    distance = (float) dist;
-                                }
+                            if (course > -5 && course < 10) {
+                                distance = 0;
+                                return;
                             }
+                            final double dist = hight / Math.tan((course * (-1)) * Math.PI / 180);
+                            distance = (float) dist;
                         }
                     }
                 }
@@ -413,6 +374,6 @@ public class DeviceNorthView extends View {
     }
 
     private float a() {
-        return this.c / 360.0f;
+        return this.mMax / 360.0f;
     }
 }
