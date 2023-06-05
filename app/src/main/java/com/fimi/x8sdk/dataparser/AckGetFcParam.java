@@ -2,7 +2,7 @@ package com.fimi.x8sdk.dataparser;
 
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes2.dex */
 public class AckGetFcParam extends X8BaseMessage {
@@ -35,6 +35,6 @@ public class AckGetFcParam extends X8BaseMessage {
     @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
     public String toString() {
         super.toString();
-        return "AckGetFcParam{paramData=" + this.paramData + ", paramIndex=" + this.paramIndex + CoreConstants.CURLY_RIGHT;
+        return "AckGetFcParam{paramData=" + this.paramData + ", paramIndex=" + this.paramIndex + '}';
     }
 }

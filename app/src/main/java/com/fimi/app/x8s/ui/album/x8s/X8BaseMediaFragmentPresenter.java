@@ -47,7 +47,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import ch.qos.logback.core.net.SyslogConstants;
 
 /* loaded from: classes.dex */
 public abstract class X8BaseMediaFragmentPresenter<T extends MediaModel> implements IRecycleAdapter, IHandlerCallback, IBroadcastPreform {
@@ -67,8 +66,8 @@ public abstract class X8BaseMediaFragmentPresenter<T extends MediaModel> impleme
     protected List<T> selectList = new ArrayList();
     protected List<T> deleteList = new ArrayList();
     protected String perfix = "file://";
-    protected int defaultPhtotHeight = SyslogConstants.LOG_CLOCK;
-    protected int defaultPhtotWidth = SyslogConstants.LOG_CLOCK;
+    protected int defaultPhtotHeight = 120;
+    protected int defaultPhtotWidth = 120;
     protected boolean isResh = true;
     private Handler mHandler = new Handler() { // from class: com.fimi.app.x8s.ui.album.x8s.X8BaseMediaFragmentPresenter.1
         @Override // android.os.Handler

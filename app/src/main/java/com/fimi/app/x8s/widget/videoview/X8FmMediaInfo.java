@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 import java.io.Serializable;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 public class X8FmMediaInfo implements Serializable {
     private String duration;
@@ -37,6 +37,6 @@ public class X8FmMediaInfo implements Serializable {
 
     @NonNull
     public String toString() {
-        return "X8FmMediaInfo{name='" + this.name + CoreConstants.SINGLE_QUOTE_CHAR + ", duration='" + this.duration + CoreConstants.SINGLE_QUOTE_CHAR + ", path='" + this.path + CoreConstants.SINGLE_QUOTE_CHAR + CoreConstants.CURLY_RIGHT;
+        return "X8FmMediaInfo{name='" + this.name + "'" + ", duration='" + this.duration + "'" + ", path='" + this.path + "'" + '}';
     }
 }

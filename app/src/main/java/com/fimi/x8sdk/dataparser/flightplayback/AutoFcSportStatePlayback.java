@@ -5,7 +5,7 @@ import com.fimi.x8sdk.dataparser.X8BaseMessage;
 import com.fimi.x8sdk.entity.FLatLng;
 import com.fimi.x8sdk.util.GpsCorrect;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes2.dex */
 public class AutoFcSportStatePlayback extends X8BaseMessage {
@@ -141,6 +141,6 @@ public class AutoFcSportStatePlayback extends X8BaseMessage {
 
     @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
     public String toString() {
-        return "AutoFcSportStatePlayback{longitude=" + this.longitude + ", latitude=" + this.latitude + ", height=" + this.height + ", groupSpeed=" + this.groupSpeed + ", downVelocity=" + this.downVelocity + ", rollAngle=" + this.rollAngle + ", pitchAngle=" + this.pitchAngle + ", headingAngle=" + this.headingAngle + ", reserve1=" + this.reserve1 + ", reserve2=" + this.reserve2 + ", homeDistance=" + this.homeDistance + ", fLatLng=" + this.fLatLng + CoreConstants.CURLY_RIGHT;
+        return "AutoFcSportStatePlayback{longitude=" + this.longitude + ", latitude=" + this.latitude + ", height=" + this.height + ", groupSpeed=" + this.groupSpeed + ", downVelocity=" + this.downVelocity + ", rollAngle=" + this.rollAngle + ", pitchAngle=" + this.pitchAngle + ", headingAngle=" + this.headingAngle + ", reserve1=" + this.reserve1 + ", reserve2=" + this.reserve2 + ", homeDistance=" + this.homeDistance + ", fLatLng=" + this.fLatLng + '}';
     }
 }

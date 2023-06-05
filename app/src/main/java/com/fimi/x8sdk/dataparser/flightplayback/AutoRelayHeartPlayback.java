@@ -4,7 +4,7 @@ import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 import com.fimi.x8sdk.cmdsenum.X8FpvSignalState;
 import com.fimi.x8sdk.dataparser.X8BaseMessage;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes2.dex */
 public class AutoRelayHeartPlayback extends X8BaseMessage {
@@ -54,6 +54,6 @@ public class AutoRelayHeartPlayback extends X8BaseMessage {
 
     @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
     public String toString() {
-        return "AutoRelayHeartPlayback{status=" + ((int) this.status) + CoreConstants.CURLY_RIGHT;
+        return "AutoRelayHeartPlayback{status=" + ((int) this.status) + '}';
     }
 }

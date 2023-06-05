@@ -2,7 +2,7 @@ package com.fimi.x8sdk.jsonResult;
 
 import java.io.Serializable;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes2.dex */
 public class CurParamsJson implements Serializable {
@@ -188,6 +188,6 @@ public class CurParamsJson implements Serializable {
     }
 
     public String toString() {
-        return "CurParamsJson{video_quality='" + this.video_quality + CoreConstants.SINGLE_QUOTE_CHAR + ", video_resolution='" + this.video_resolution + CoreConstants.SINGLE_QUOTE_CHAR + ", photo_format='" + this.photo_format + CoreConstants.SINGLE_QUOTE_CHAR + ", photo_size='" + this.photo_size + CoreConstants.SINGLE_QUOTE_CHAR + ", ae_bias='" + this.ae_bias + CoreConstants.SINGLE_QUOTE_CHAR + ", iso='" + this.iso + CoreConstants.SINGLE_QUOTE_CHAR + ", shutter_time='" + this.shutter_time + CoreConstants.SINGLE_QUOTE_CHAR + ", awb='" + this.awb + CoreConstants.SINGLE_QUOTE_CHAR + ", metering_mode='" + this.metering_mode + CoreConstants.SINGLE_QUOTE_CHAR + ", digital_effect='" + this.digital_effect + CoreConstants.SINGLE_QUOTE_CHAR + ", saturation='" + this.saturation + CoreConstants.SINGLE_QUOTE_CHAR + ", contrast='" + this.contrast + CoreConstants.SINGLE_QUOTE_CHAR + ", sharpness='" + this.sharpness + CoreConstants.SINGLE_QUOTE_CHAR + ", system_type='" + this.system_type + CoreConstants.SINGLE_QUOTE_CHAR + ", default_setting='" + this.default_setting + CoreConstants.SINGLE_QUOTE_CHAR + CoreConstants.CURLY_RIGHT;
+        return "CurParamsJson{video_quality='" + this.video_quality + "'" + ", video_resolution='" + this.video_resolution + "'" + ", photo_format='" + this.photo_format + "'" + ", photo_size='" + this.photo_size + "'" + ", ae_bias='" + this.ae_bias + "'" + ", iso='" + this.iso + "'" + ", shutter_time='" + this.shutter_time + "'" + ", awb='" + this.awb + "'" + ", metering_mode='" + this.metering_mode + "'" + ", digital_effect='" + this.digital_effect + "'" + ", saturation='" + this.saturation + "'" + ", contrast='" + this.contrast + "'" + ", sharpness='" + this.sharpness + "'" + ", system_type='" + this.system_type + "'" + ", default_setting='" + this.default_setting + "'" + '}';
     }
 }

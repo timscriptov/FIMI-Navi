@@ -5,7 +5,7 @@ import com.fimi.x8sdk.update.fwpack.ByteHexHelper;
 
 import java.util.Arrays;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes2.dex */
 public class MediaFileDownLoadPacket {
@@ -136,6 +136,6 @@ public class MediaFileDownLoadPacket {
     }
 
     public String toString() {
-        return "MediaFileDownLoadPacket{cmdType=" + ((int) this.cmdType) + ", msgLen=" + this.msgLen + ", errorCode=" + ((int) this.errorCode) + ", offSet=" + this.offSet + ", resultFlag=" + this.resultFlag + ", crcFlag=" + this.crcFlag + ", nameLen=" + ((int) this.nameLen) + ", fileName='" + this.fileName + CoreConstants.SINGLE_QUOTE_CHAR + ", playloadSize=" + ((int) this.playloadSize) + ", playData=" + Arrays.toString(this.playData) + CoreConstants.CURLY_RIGHT;
+        return "MediaFileDownLoadPacket{cmdType=" + ((int) this.cmdType) + ", msgLen=" + this.msgLen + ", errorCode=" + ((int) this.errorCode) + ", offSet=" + this.offSet + ", resultFlag=" + this.resultFlag + ", crcFlag=" + this.crcFlag + ", nameLen=" + ((int) this.nameLen) + ", fileName='" + this.fileName + "'" + ", playloadSize=" + ((int) this.playloadSize) + ", playData=" + Arrays.toString(this.playData) + '}';
     }
 }

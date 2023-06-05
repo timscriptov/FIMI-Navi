@@ -18,8 +18,6 @@ import androidx.core.view.ViewCompat;
 import com.fimi.android.app.R;
 import com.fimi.app.x8s.tools.X8NumberUtil;
 
-import ch.qos.logback.core.net.SyslogConstants;
-
 public class X8MainPitchingAngle extends View {
     private static final String TAG = "X8MainPitchingAngle";
     private final int mProjectionColor;
@@ -49,7 +47,7 @@ public class X8MainPitchingAngle extends View {
         this.mPercent = 0.0f;
         this.mBounds = new Rect();
         this.MIN = 5;
-        this.MAX = SyslogConstants.LOG_CLOCK;
+        this.MAX = 120;
         this.MAXPROGRESS = this.MAX - this.MIN;
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.X8MainPitching, 0, 0);
         this.mBgColor = typedArray.getColor(R.styleable.X8MainPitching_bg_color, ViewCompat.MEASURED_STATE_MASK);

@@ -35,7 +35,7 @@ public class RetransmissionJsonThread extends Thread {
         return removeCmd;
     }
 
-    @Override // java.lang.Thread, java.lang.Runnable
+    @Override
     public void run() {
         while (this.isLoop) {
             if (!this.mListReSend.isEmpty()) {

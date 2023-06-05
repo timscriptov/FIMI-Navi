@@ -15,7 +15,7 @@ import com.fimi.network.entity.NetModel;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import ch.qos.logback.core.joran.action.Action;
+
 
 public class ApkVersionManager extends BaseManager {
     public final String OPEN_SIXPOINT_CALIBRATE = "open_sixpoint_calibrate";
@@ -44,7 +44,7 @@ public class ApkVersionManager extends BaseManager {
                         Iterator<Object> iterator = jsonArray.iterator();
                         while (iterator.hasNext()) {
                             JSONObject jsonObjectData = (JSONObject) iterator.next();
-                            String key = jsonObjectData.getString(Action.KEY_ATTRIBUTE);
+                            String key = jsonObjectData.getString("key");
                             String value = jsonObjectData.getString("value");
                             appSettingHashMap.put(key, value);
                         }

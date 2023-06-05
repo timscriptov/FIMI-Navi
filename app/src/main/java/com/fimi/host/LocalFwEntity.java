@@ -2,7 +2,7 @@ package com.fimi.host;
 
 import java.io.Serializable;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes.dex */
 public class LocalFwEntity implements Serializable {
@@ -54,6 +54,6 @@ public class LocalFwEntity implements Serializable {
     }
 
     public String toString() {
-        return "LocalFwEntity{type=" + this.type + ", model=" + this.model + ", logicVersion=" + this.logicVersion + ", userVersion='" + this.userVersion + CoreConstants.SINGLE_QUOTE_CHAR + CoreConstants.CURLY_RIGHT;
+        return "LocalFwEntity{type=" + this.type + ", model=" + this.model + ", logicVersion=" + this.logicVersion + ", userVersion='" + this.userVersion + "'" + '}';
     }
 }

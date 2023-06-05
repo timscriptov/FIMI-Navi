@@ -2,7 +2,7 @@ package com.fimi.x8sdk.dataparser;
 
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes2.dex */
 public class AckRcPlaybackState extends X8BaseMessage {
@@ -56,6 +56,6 @@ public class AckRcPlaybackState extends X8BaseMessage {
 
     @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
     public String toString() {
-        return "AckRcCilbrationState{, status=" + this.buttonState + ", rc0=" + ((int) this.rc0) + ", rc1=" + ((int) this.rc1) + ", rc2=" + ((int) this.rc2) + ", rc3=" + ((int) this.rc3) + ", rc4=" + ((int) this.rc4) + ", rc5=" + ((int) this.rc5) + CoreConstants.CURLY_RIGHT;
+        return "AckRcCilbrationState{, status=" + this.buttonState + ", rc0=" + ((int) this.rc0) + ", rc1=" + ((int) this.rc1) + ", rc2=" + ((int) this.rc2) + ", rc3=" + ((int) this.rc3) + ", rc4=" + ((int) this.rc4) + ", rc5=" + ((int) this.rc5) + '}';
     }
 }

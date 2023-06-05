@@ -3,9 +3,6 @@ package com.fimi.x8sdk.dataparser;
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 import com.twitter.sdk.android.core.internal.scribe.EventsFilesManager;
 
-import ch.qos.logback.core.CoreConstants;
-
-/* loaded from: classes2.dex */
 public class AckVersion extends X8BaseMessage {
     int hardwareVersion;
     int idA;
@@ -171,7 +168,7 @@ public class AckVersion extends X8BaseMessage {
 
     @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
     public String toString() {
-        String v = "AckVersion{type=" + this.type + ", model=" + this.model + ", reserved1=" + this.reserved1 + ", reserved2=" + this.reserved2 + ", hardwareVersion=" + this.hardwareVersion + ", softVersion=" + this.softVersion + ", idA=" + this.idA + ", idB=" + this.idB + ", idC=" + this.idC + ", idD=" + this.idD + ", versionDetails='" + this.versionDetails + CoreConstants.SINGLE_QUOTE_CHAR + CoreConstants.CURLY_RIGHT;
+        String v = "AckVersion{type=" + this.type + ", model=" + this.model + ", reserved1=" + this.reserved1 + ", reserved2=" + this.reserved2 + ", hardwareVersion=" + this.hardwareVersion + ", softVersion=" + this.softVersion + ", idA=" + this.idA + ", idB=" + this.idB + ", idC=" + this.idC + ", idD=" + this.idD + ", versionDetails='" + this.versionDetails + '\'' +'}';
         return v;
     }
 

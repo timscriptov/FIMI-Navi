@@ -5,7 +5,7 @@ import com.fimi.kernel.dataparser.usb.JsonUiCallBackListener;
 
 import java.io.Serializable;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes.dex */
 public class JsonMessage implements Serializable {
@@ -44,6 +44,6 @@ public class JsonMessage implements Serializable {
     }
 
     public String toString() {
-        return "JsonMessage{msg_id=" + this.msg_id + ", jsonRt=" + this.jsonRt.toJSONString() + ", uiCallBackListener=" + this.uiCallBackListener + CoreConstants.CURLY_RIGHT;
+        return "JsonMessage{msg_id=" + this.msg_id + ", jsonRt=" + this.jsonRt.toJSONString() + ", uiCallBackListener=" + this.uiCallBackListener + '}';
     }
 }

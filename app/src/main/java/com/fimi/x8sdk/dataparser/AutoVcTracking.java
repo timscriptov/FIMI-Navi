@@ -2,7 +2,7 @@ package com.fimi.x8sdk.dataparser;
 
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes2.dex */
 public class AutoVcTracking extends X8BaseMessage {
@@ -100,6 +100,6 @@ public class AutoVcTracking extends X8BaseMessage {
 
     @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
     public String toString() {
-        return "AutoVcTracking{time=" + this.time + ", x=" + this.x + ", y=" + this.y + ", h=" + this.h + ", w=" + this.w + ", confidence=" + this.confidence + ", trackErrorCode=" + this.trackErrorCode + CoreConstants.CURLY_RIGHT;
+        return "AutoVcTracking{time=" + this.time + ", x=" + this.x + ", y=" + this.y + ", h=" + this.h + ", w=" + this.w + ", confidence=" + this.confidence + ", trackErrorCode=" + this.trackErrorCode + '}';
     }
 }

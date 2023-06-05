@@ -28,7 +28,7 @@ import java.lang.reflect.Method;
 import java.util.Formatter;
 import java.util.Locale;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes.dex */
 public class FmMediaController extends FrameLayout {
@@ -130,7 +130,7 @@ public class FmMediaController extends FrameLayout {
             @Override // android.widget.SeekBar.OnSeekBarChangeListener
             public void onStartTrackingTouch(SeekBar bar) {
                 Log.d(VineCardUtils.PLAYER_CARD, "onStartTrackingTouch");
-                FmMediaController.this.show((int) CoreConstants.MILLIS_IN_ONE_HOUR);
+                FmMediaController.this.show((int) 3600000);
                 FmMediaController.this.mDragging = true;
                 FmMediaController.this.mHandler.removeMessages(2);
             }
@@ -243,7 +243,7 @@ public class FmMediaController extends FrameLayout {
             @Override // android.widget.SeekBar.OnSeekBarChangeListener
             public void onStartTrackingTouch(SeekBar bar) {
                 Log.d(VineCardUtils.PLAYER_CARD, "onStartTrackingTouch");
-                FmMediaController.this.show((int) CoreConstants.MILLIS_IN_ONE_HOUR);
+                FmMediaController.this.show((int) 3600000);
                 FmMediaController.this.mDragging = true;
                 FmMediaController.this.mHandler.removeMessages(2);
             }

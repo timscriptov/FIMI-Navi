@@ -56,7 +56,9 @@ import com.fimi.app.x8s.manager.X8MapGetCityManager;
 import com.fimi.app.x8s.manager.X8PressureGpsManger;
 import com.fimi.app.x8s.manager.X8SensorManager;
 import com.fimi.app.x8s.ui.album.x8s.X8MediaActivity;
+import com.fimi.app.x8s.widget.BallProgress;
 import com.fimi.app.x8s.widget.DeviceNorthView;
+import com.fimi.app.x8s.widget.PlaneAngleSeekBar;
 import com.fimi.kernel.Constants;
 import com.fimi.kernel.base.EventMessage;
 import com.fimi.kernel.connect.interfaces.IConnectResultListener;
@@ -140,6 +142,18 @@ public class X8sMainActivity extends X8BaseActivity implements ConnectListener, 
     private X8MainBottomParameterController mX8MainBottomParameterController;
     private X8MainCameraSettingController mX8MainCameraSettingController;
     public DeviceNorthView mX8MainDeviceNorthView;
+    private BallProgress mX8MainBallProgress;
+    private PlaneAngleSeekBar mX8MainPlaneAngleSeekBar;
+
+    private void i(boolean z2) {
+        this.mX8MainPlaneAngleSeekBar.setVisibility(z2 ? View.VISIBLE : View.GONE);
+        if (z2) {
+            return;
+        }
+        this.mX8MainBallProgress.setProgress(0.0f);
+        this.mX8MainBallProgress.setAngle(0.0f);
+    }
+
 
     IRightRollerMoveListener rightRollerMoveListener = new IRightRollerMoveListener() {
         @Override
@@ -731,6 +745,9 @@ public class X8sMainActivity extends X8BaseActivity implements ConnectListener, 
         this.mainAiExcuteView = findViewById(R.id.rl_x8_ai_excute);
         this.mainSettingShowView = findViewById(R.id.rl_x8_setting_show_view);
         this.mX8MainDeviceNorthView = findViewById(R.id.device_north_view);
+        this.mX8MainBallProgress = findViewById(R.id.plane_pitching_progress);
+        this.mX8MainPlaneAngleSeekBar = findViewById(R.id.plane_angle_seek_bar);
+
         this.mMapVideoController = new X8MapVideoController(this.mainRootView, savedInstanceState, this);
         this.mMapVideoController.setListener(this.mIX8MapVideoControllerListerner);
         this.mMapVideoController.setListener(this.mainTopBarListener);
@@ -1145,6 +1162,10 @@ public class X8sMainActivity extends X8BaseActivity implements ConnectListener, 
 
     @Override
     public void showSportState(AutoFcSportState state) {
+        int orientation = (int) this.mX8MainPlaneAngleSeekBar.a(state.getLongitude(), state.getLatitude());
+        this.mX8MainPlaneAngleSeekBar.setPlaneOrientation(orientation);
+
+
         this.mX8MainTopBarController.showSportState(state);
         if (this.mMapVideoController.getFimiMap().isMapInit()) {
             this.mMapVideoController.getFimiMap().addDeviceLocation(state.getLatitude(), state.getLongitude());
@@ -1157,6 +1178,10 @@ public class X8sMainActivity extends X8BaseActivity implements ConnectListener, 
             if (this.mMapVideoController.isFullVideo()) {
                 this.mMapVideoController.getFimiMap().moveCameraByDevice();
             }
+
+            PlaneAngleSeekBar planeAngleSeekBar = mX8MainPlaneAngleSeekBar;
+            planeAngleSeekBar.setHeadOrientation((int) angle);
+
             mX8MainDeviceNorthView.setBankAngle(longitude);
             mX8MainDeviceNorthView.setAircraft(state.getHeadingAngle());
             mX8MainDeviceNorthView.setAircraftAzimuth((int) angle);

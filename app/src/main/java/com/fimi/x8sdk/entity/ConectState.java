@@ -2,7 +2,7 @@ package com.fimi.x8sdk.entity;
 
 import com.fimi.x8sdk.modulestate.StateManager;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes2.dex */
 public class ConectState {
@@ -42,6 +42,6 @@ public class ConectState {
     }
 
     public String toString() {
-        return "ConectState{isConnectDrone=" + this.isConnectDrone + ", isConnectRelay=" + this.isConnectRelay + ", isCameraConnect=" + this.isCameraConnect + CoreConstants.CURLY_RIGHT;
+        return "ConectState{isConnectDrone=" + this.isConnectDrone + ", isConnectRelay=" + this.isConnectRelay + ", isCameraConnect=" + this.isCameraConnect + '}';
     }
 }

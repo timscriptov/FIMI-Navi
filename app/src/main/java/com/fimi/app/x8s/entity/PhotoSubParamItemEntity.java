@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes.dex */
 public class PhotoSubParamItemEntity implements Serializable {
@@ -70,6 +70,6 @@ public class PhotoSubParamItemEntity implements Serializable {
     }
 
     public String toString() {
-        return "PhotoSubParamItemEntity{paramKey='" + this.paramKey + CoreConstants.SINGLE_QUOTE_CHAR + ", paramValue='" + this.paramValue + CoreConstants.SINGLE_QUOTE_CHAR + ", options=" + this.options + ", titleName='" + this.titleName + CoreConstants.SINGLE_QUOTE_CHAR + ", optionMap=" + this.optionMap.toString() + ", iselected=" + this.iselected + CoreConstants.CURLY_RIGHT;
+        return "PhotoSubParamItemEntity{paramKey='" + this.paramKey + "'" + ", paramValue='" + this.paramValue + "'" + ", options=" + this.options + ", titleName='" + this.titleName + "'" + ", optionMap=" + this.optionMap.toString() + ", iselected=" + this.iselected + '}';
     }
 }

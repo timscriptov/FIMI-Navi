@@ -2,7 +2,7 @@ package com.fimi.x8sdk.dataparser;
 
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes2.dex */
 public class AckGetAircrftCalistate extends X8BaseMessage {
@@ -108,7 +108,7 @@ public class AckGetAircrftCalistate extends X8BaseMessage {
 
     @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
     public String toString() {
-        return "AckGetAircrftCalistate{sensorType=" + this.sensorType + ", caliType=" + this.caliType + ", caliStep=" + this.caliStep + ", status=" + this.status + ", caliErrorCode=" + this.caliErrorCode + ", firstPointPercent=" + this.firstPointPercent + ", secondPointPercent=" + this.secondPointPercent + ", thridPointPercent=" + this.thridPointPercent + ", fourthPointPercent=" + this.fourthPointPercent + ", fifthPointPercent=" + this.fifthPointPercent + ", sixthPointPercent=" + this.sixthPointPercent + CoreConstants.CURLY_RIGHT;
+        return "AckGetAircrftCalistate{sensorType=" + this.sensorType + ", caliType=" + this.caliType + ", caliStep=" + this.caliStep + ", status=" + this.status + ", caliErrorCode=" + this.caliErrorCode + ", firstPointPercent=" + this.firstPointPercent + ", secondPointPercent=" + this.secondPointPercent + ", thridPointPercent=" + this.thridPointPercent + ", fourthPointPercent=" + this.fourthPointPercent + ", fifthPointPercent=" + this.fifthPointPercent + ", sixthPointPercent=" + this.sixthPointPercent + '}';
     }
 
     @Override // com.fimi.x8sdk.dataparser.X8BaseMessage

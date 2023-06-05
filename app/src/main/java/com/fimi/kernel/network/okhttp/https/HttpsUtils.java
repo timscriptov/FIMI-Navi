@@ -1,5 +1,7 @@
 package com.fimi.kernel.network.okhttp.https;
 
+import androidx.annotation.NonNull;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.KeyManagementException;
@@ -20,15 +22,12 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
 
-import ch.qos.logback.core.net.ssl.SSL;
-
-/* loaded from: classes.dex */
 public class HttpsUtils {
     public static SSLSocketFactory getSslSocketFactory(InputStream[] certificates, InputStream bksFile, String password) {
         try {
             TrustManager[] trustManagers = prepareTrustManager(certificates);
             KeyManager[] keyManagers = prepareKeyManager(bksFile, password);
-            SSLContext sslContext = SSLContext.getInstance(SSL.DEFAULT_PROTOCOL);
+            SSLContext sslContext = SSLContext.getInstance("SSL");
             sslContext.init(keyManagers, new TrustManager[]{new MyTrustManager(chooseTrustManager(trustManagers))}, new SecureRandom());
             return sslContext.getSocketFactory();
         } catch (KeyManagementException e) {
@@ -126,7 +125,7 @@ public class HttpsUtils {
     public static SSLSocketFactory initSSLSocketFactory() {
         SSLContext sslContext = null;
         try {
-            sslContext = SSLContext.getInstance(SSL.DEFAULT_PROTOCOL);
+            sslContext = SSLContext.getInstance("SSL");
             X509TrustManager[] xTrustArray = {initTrustManager()};
             sslContext.init(null, xTrustArray, new SecureRandom());
         } catch (Exception e) {
@@ -135,6 +134,7 @@ public class HttpsUtils {
         return sslContext.getSocketFactory();
     }
 
+    @NonNull
     public static X509TrustManager initTrustManager() {
         X509TrustManager mTrustManager = new X509TrustManager() { // from class: com.fimi.kernel.network.okhttp.https.HttpsUtils.1
             @Override // javax.net.ssl.X509TrustManager

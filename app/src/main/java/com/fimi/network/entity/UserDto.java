@@ -2,7 +2,7 @@ package com.fimi.network.entity;
 
 import java.util.Date;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes.dex */
 public class UserDto extends BaseModel {
@@ -89,6 +89,6 @@ public class UserDto extends BaseModel {
     }
 
     public String toString() {
-        return "UserDto{fimiId='" + this.fimiId + CoreConstants.SINGLE_QUOTE_CHAR + ", thirdId='" + this.thirdId + CoreConstants.SINGLE_QUOTE_CHAR + ", nickName='" + this.nickName + CoreConstants.SINGLE_QUOTE_CHAR + ", name='" + this.name + CoreConstants.SINGLE_QUOTE_CHAR + ", email='" + this.email + CoreConstants.SINGLE_QUOTE_CHAR + ", phone='" + this.phone + CoreConstants.SINGLE_QUOTE_CHAR + ", userImgUrl='" + this.userImgUrl + CoreConstants.SINGLE_QUOTE_CHAR + ", status='" + this.status + CoreConstants.SINGLE_QUOTE_CHAR + ", createTime=" + this.createTime + CoreConstants.CURLY_RIGHT;
+        return "UserDto{fimiId='" + this.fimiId + "'" + ", thirdId='" + this.thirdId + "'" + ", nickName='" + this.nickName + "'" + ", name='" + this.name + "'" + ", email='" + this.email + "'" + ", phone='" + this.phone + "'" + ", userImgUrl='" + this.userImgUrl + "'" + ", status='" + this.status + "'" + ", createTime=" + this.createTime + '}';
     }
 }

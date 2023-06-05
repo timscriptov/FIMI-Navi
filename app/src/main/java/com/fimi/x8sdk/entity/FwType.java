@@ -1,6 +1,6 @@
 package com.fimi.x8sdk.entity;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes2.dex */
 public class FwType {
@@ -33,6 +33,6 @@ public class FwType {
     }
 
     public String toString() {
-        return "FwType{devTargetId=" + this.devTargetId + ", devMouduleId=" + this.devMouduleId + ", msgModuleId=" + this.msgModuleId + CoreConstants.CURLY_RIGHT;
+        return "FwType{devTargetId=" + this.devTargetId + ", devMouduleId=" + this.devMouduleId + ", msgModuleId=" + this.msgModuleId + '}';
     }
 }

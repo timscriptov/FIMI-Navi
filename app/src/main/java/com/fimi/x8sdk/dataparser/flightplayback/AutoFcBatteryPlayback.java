@@ -5,7 +5,7 @@ import com.fimi.kernel.dataparser.fmlink4.LinkPayLoad4;
 import com.fimi.kernel.utils.NumberUtil;
 import com.fimi.x8sdk.dataparser.X8BaseMessage;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes2.dex */
 public class AutoFcBatteryPlayback extends X8BaseMessage {
@@ -179,6 +179,6 @@ public class AutoFcBatteryPlayback extends X8BaseMessage {
 
     @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
     public String toString() {
-        return "AutoFcBatteryPlayback{cell1Voltage=" + this.cell1Voltage + ", cell2Voltage=" + this.cell2Voltage + ", cell3Voltage=" + this.cell3Voltage + ", cell4Voltage=" + this.cell4Voltage + ", currentCapacity=" + this.currentCapacity + ", totalCapacity=" + this.totalCapacity + ", currents=" + this.currents + ", temperature=" + this.temperature + ", remainingTime=" + this.remainingTime + ", remainPercentage=" + this.remainPercentage + ", uvc=" + this.uvc + ", rcNotUpdateCnt=" + this.rcNotUpdateCnt + ", cc=" + this.cc + CoreConstants.CURLY_RIGHT;
+        return "AutoFcBatteryPlayback{cell1Voltage=" + this.cell1Voltage + ", cell2Voltage=" + this.cell2Voltage + ", cell3Voltage=" + this.cell3Voltage + ", cell4Voltage=" + this.cell4Voltage + ", currentCapacity=" + this.currentCapacity + ", totalCapacity=" + this.totalCapacity + ", currents=" + this.currents + ", temperature=" + this.temperature + ", remainingTime=" + this.remainingTime + ", remainPercentage=" + this.remainPercentage + ", uvc=" + this.uvc + ", rcNotUpdateCnt=" + this.rcNotUpdateCnt + ", cc=" + this.cc + '}';
     }
 }

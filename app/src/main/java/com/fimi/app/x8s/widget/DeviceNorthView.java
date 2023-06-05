@@ -110,7 +110,7 @@ public class DeviceNorthView extends View {
         this.mDensity = f * this.mDensity;
         this.drawable = getResources().getDrawable(R.drawable.x8s_main_north);
         if (attributeSet != null) {
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.DeviceNorthView, 0, 0);
+            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.DrawableStyleable, 0, 0);
             this.l = obtainStyledAttributes.getDimensionPixelSize(3, 50);
             this.mMin = obtainStyledAttributes.getInteger(1, this.mMin);
             this.mMax = obtainStyledAttributes.getInteger(0, this.mMax);

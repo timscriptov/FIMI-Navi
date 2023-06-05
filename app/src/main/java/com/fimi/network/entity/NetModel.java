@@ -2,7 +2,7 @@ package com.fimi.network.entity;
 
 import java.io.Serializable;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes.dex */
 public class NetModel implements Serializable {
@@ -46,6 +46,6 @@ public class NetModel implements Serializable {
     }
 
     public String toString() {
-        return "NetModel{errCode='" + this.errCode + CoreConstants.SINGLE_QUOTE_CHAR + ", success=" + this.success + ", data=" + this.data + ", errMsg='" + this.errMsg + CoreConstants.SINGLE_QUOTE_CHAR + CoreConstants.CURLY_RIGHT;
+        return "NetModel{errCode='" + this.errCode + "'" + ", success=" + this.success + ", data=" + this.data + ", errMsg='" + this.errMsg + "'" + '}';
     }
 }

@@ -27,7 +27,7 @@ import java.lang.reflect.Method;
 import java.util.Formatter;
 import java.util.Locale;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes.dex */
 public class FmMediaController extends FrameLayout {
@@ -129,7 +129,7 @@ public class FmMediaController extends FrameLayout {
             @Override // android.widget.SeekBar.OnSeekBarChangeListener
             public void onStartTrackingTouch(SeekBar bar) {
                 Log.d(VineCardUtils.PLAYER_CARD, "onStartTrackingTouch");
-                FmMediaController.this.show((int) CoreConstants.MILLIS_IN_ONE_HOUR);
+                FmMediaController.this.show((int) 3600000);
                 FmMediaController.this.mDragging = true;
                 FmMediaController.this.mHandler.removeMessages(2);
             }
@@ -242,7 +242,7 @@ public class FmMediaController extends FrameLayout {
             @Override // android.widget.SeekBar.OnSeekBarChangeListener
             public void onStartTrackingTouch(SeekBar bar) {
                 Log.d(VineCardUtils.PLAYER_CARD, "onStartTrackingTouch");
-                FmMediaController.this.show((int) CoreConstants.MILLIS_IN_ONE_HOUR);
+                FmMediaController.this.show((int) 3600000);
                 FmMediaController.this.mDragging = true;
                 FmMediaController.this.mHandler.removeMessages(2);
             }
@@ -304,6 +304,7 @@ public class FmMediaController extends FrameLayout {
 
     @Override // android.view.View
     public void onFinishInflate() {
+        super.onFinishInflate();
         if (this.mRoot != null) {
             initControllerView(this.mRoot);
         }
@@ -326,7 +327,7 @@ public class FmMediaController extends FrameLayout {
     }
 
     private void initFloatingWindow() {
-        this.mWindowManager = (WindowManager) this.mContext.getSystemService("window");
+        this.mWindowManager = (WindowManager) this.mContext.getSystemService(Context.WINDOW_SERVICE);
         initWindow();
         this.mWindow.setWindowManager(this.mWindowManager, null, null);
         this.mWindow.requestFeature(1);
@@ -348,7 +349,7 @@ public class FmMediaController extends FrameLayout {
         p.height = -2;
         p.x = 0;
         p.format = -3;
-        p.type = 1000;
+        p.type = WindowManager.LayoutParams.TYPE_APPLICATION_PANEL;
         p.flags |= 8519712;
         p.token = null;
         p.windowAnimations = 0;
@@ -357,7 +358,7 @@ public class FmMediaController extends FrameLayout {
     public void updateFloatingWindowLayout() {
         int[] anchorPos = new int[2];
         this.mAnchor.getLocationOnScreen(anchorPos);
-        this.mDecor.measure(View.MeasureSpec.makeMeasureSpec(this.mAnchor.getWidth(), Integer.MIN_VALUE), View.MeasureSpec.makeMeasureSpec(this.mAnchor.getHeight(), Integer.MIN_VALUE));
+        this.mDecor.measure(View.MeasureSpec.makeMeasureSpec(this.mAnchor.getWidth(), MeasureSpec.AT_MOST), View.MeasureSpec.makeMeasureSpec(this.mAnchor.getHeight(), MeasureSpec.AT_MOST));
         WindowManager.LayoutParams p = this.mDecorLayoutParams;
         p.width = this.mAnchor.getWidth();
         p.x = anchorPos[0] + ((this.mAnchor.getWidth() - p.width) / 2);
@@ -384,7 +385,7 @@ public class FmMediaController extends FrameLayout {
     }
 
     protected View makeControllerView() {
-        LayoutInflater inflate = (LayoutInflater) this.mContext.getSystemService("layout_inflater");
+        LayoutInflater inflate = (LayoutInflater) this.mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.mRoot = inflate.inflate(R.layout.fm_media_controller, (ViewGroup) null);
         initControllerView(this.mRoot);
         return this.mRoot;
@@ -412,11 +413,11 @@ public class FmMediaController extends FrameLayout {
         }
         this.mNextButton = (ImageButton) v.findViewById(R.id.next);
         if (this.mNextButton != null && !this.mFromXml && !this.mListenersSet) {
-            this.mNextButton.setVisibility(8);
+            this.mNextButton.setVisibility(View.GONE);
         }
         this.mPrevButton = (ImageButton) v.findViewById(R.id.prev);
         if (this.mPrevButton != null && !this.mFromXml && !this.mListenersSet) {
-            this.mPrevButton.setVisibility(8);
+            this.mPrevButton.setVisibility(View.GONE);
         }
         this.mProgress = (SeekBar) v.findViewById(R.id.fmmediacontroller_progress);
         if (this.mProgress != null) {
@@ -674,10 +675,10 @@ public class FmMediaController extends FrameLayout {
         if (this.mRoot != null) {
             installPrevNextListeners();
             if (this.mNextButton != null && !this.mFromXml) {
-                this.mNextButton.setVisibility(0);
+                this.mNextButton.setVisibility(View.VISIBLE);
             }
             if (this.mPrevButton != null && !this.mFromXml) {
-                this.mPrevButton.setVisibility(0);
+                this.mPrevButton.setVisibility(View.VISIBLE);
             }
         }
     }

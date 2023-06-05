@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes2.dex */
 public class ErrorCodeBean implements Serializable {
@@ -28,7 +28,7 @@ public class ErrorCodeBean implements Serializable {
     }
 
     public String toString() {
-        return "ErrorCodeBean{Version=" + this.Version + ", Configs=" + this.Configs + CoreConstants.CURLY_RIGHT;
+        return "ErrorCodeBean{Version=" + this.Version + ", Configs=" + this.Configs + '}';
     }
 
     /* loaded from: classes2.dex */
@@ -62,7 +62,7 @@ public class ErrorCodeBean implements Serializable {
         }
 
         public String toString() {
-            return "ConstraintBit{GroupID='" + this.GroupID + CoreConstants.SINGLE_QUOTE_CHAR + ", BitOffset=" + this.BitOffset + ", Value=" + this.Value + CoreConstants.CURLY_RIGHT;
+            return "ConstraintBit{GroupID='" + this.GroupID + "'" + ", BitOffset=" + this.BitOffset + ", Value=" + this.Value + '}';
         }
 
         public boolean equals(Object o) {
@@ -210,7 +210,7 @@ public class ErrorCodeBean implements Serializable {
         }
 
         public String toString() {
-            return "VersionBean{Format='" + this.Format + CoreConstants.SINGLE_QUOTE_CHAR + ", Content='" + this.Content + CoreConstants.SINGLE_QUOTE_CHAR + CoreConstants.CURLY_RIGHT;
+            return "VersionBean{Format='" + this.Format + "'" + ", Content='" + this.Content + "'" + '}';
         }
     }
 
@@ -411,7 +411,7 @@ public class ErrorCodeBean implements Serializable {
         }
 
         public String toString() {
-            return "ActionBean{speaking=" + this.speaking + ", vibrating=" + this.vibrating + ", GroupID='" + this.GroupID + CoreConstants.SINGLE_QUOTE_CHAR + ", Label='" + this.Label + CoreConstants.SINGLE_QUOTE_CHAR + ", OffsetBit=" + this.OffsetBit + ", Severity=" + this.Severity + ", Text=" + this.Text + ", Speak=" + this.Speak + ", Vibrate=" + this.Vibrate + ", IsInFlight=" + this.IsInFlight + ", Value=" + this.Value + CoreConstants.CURLY_RIGHT;
+            return "ActionBean{speaking=" + this.speaking + ", vibrating=" + this.vibrating + ", GroupID='" + this.GroupID + "'" + ", Label='" + this.Label + "'" + ", OffsetBit=" + this.OffsetBit + ", Severity=" + this.Severity + ", Text=" + this.Text + ", Speak=" + this.Speak + ", Vibrate=" + this.Vibrate + ", IsInFlight=" + this.IsInFlight + ", Value=" + this.Value + '}';
         }
     }
 }

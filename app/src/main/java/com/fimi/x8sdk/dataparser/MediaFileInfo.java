@@ -1,6 +1,6 @@
 package com.fimi.x8sdk.dataparser;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes2.dex */
 public class MediaFileInfo {
@@ -81,6 +81,6 @@ public class MediaFileInfo {
     }
 
     public String toString() {
-        return "MediaFileInfo{cmdType=" + ((int) this.cmdType) + ", msg_len=" + this.msg_len + ", error_code=" + ((int) this.error_code) + ", fileSize=" + this.fileSize + ", nameLen=" + ((int) this.nameLen) + ", fileName='" + this.fileName + CoreConstants.SINGLE_QUOTE_CHAR + CoreConstants.CURLY_RIGHT;
+        return "MediaFileInfo{cmdType=" + ((int) this.cmdType) + ", msg_len=" + this.msg_len + ", error_code=" + ((int) this.error_code) + ", fileSize=" + this.fileSize + ", nameLen=" + ((int) this.nameLen) + ", fileName='" + this.fileName + "'" + '}';
     }
 }

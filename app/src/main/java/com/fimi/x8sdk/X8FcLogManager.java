@@ -24,8 +24,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.UUID;
 
-import ch.qos.logback.classic.turbo.ReconfigureOnChangeFilter;
-
 public class X8FcLogManager {
     public static final String FLIGHT_PLAYBACK = "playback";
     public static final byte FLIGHT_PLAYBACK_SIGN = -3;
@@ -246,7 +244,7 @@ public class X8FcLogManager {
         if (bytes != null) {
             if (isFc) {
                 this.handler.removeMessages(1);
-                this.handler.sendEmptyMessageDelayed(1, ReconfigureOnChangeFilter.DEFAULT_REFRESH_PERIOD);
+                this.handler.sendEmptyMessageDelayed(1, 60000);
             }
             if (this.flightPlaybackLogOutputStream != null && this.state == LogState.INSKY) {
                 try {
@@ -275,7 +273,7 @@ public class X8FcLogManager {
 
     public void fcLogWrite(byte[] bytes) {
         this.handler.removeMessages(0);
-        this.handler.sendEmptyMessageDelayed(0, ReconfigureOnChangeFilter.DEFAULT_REFRESH_PERIOD);
+        this.handler.sendEmptyMessageDelayed(0, 60000);
         if (this.fcOutputStream != null && this.state == LogState.INSKY) {
             try {
                 this.fcOutputStream.write(logDesData(bytes));

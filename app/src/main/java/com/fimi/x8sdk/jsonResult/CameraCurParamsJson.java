@@ -3,7 +3,7 @@ package com.fimi.x8sdk.jsonResult;
 import java.io.Serializable;
 import java.util.List;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes2.dex */
 public class CameraCurParamsJson implements Serializable {
@@ -36,6 +36,6 @@ public class CameraCurParamsJson implements Serializable {
     }
 
     public String toString() {
-        return "CameraCurParamsJson{rval=" + this.rval + ", msg_id=" + this.msg_id + ", param=" + this.param + CoreConstants.CURLY_RIGHT;
+        return "CameraCurParamsJson{rval=" + this.rval + ", msg_id=" + this.msg_id + ", param=" + this.param + '}';
     }
 }

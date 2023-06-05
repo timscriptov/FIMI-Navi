@@ -2,7 +2,7 @@ package com.fimi.x8sdk.dataparser;
 
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes2.dex */
 public class AckGetIMUInfo extends X8BaseMessage {
@@ -124,6 +124,6 @@ public class AckGetIMUInfo extends X8BaseMessage {
 
     @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
     public String toString() {
-        return "AckGetIMUInfo{imuType=" + ((int) this.imuType) + ", iMUTempe=" + ((int) this.iMUTempe) + ", gyroX=" + ((int) this.gyroX) + ", gyroY=" + ((int) this.gyroY) + ", gyroZ=" + ((int) this.gyroZ) + ", accelX=" + ((int) this.accelX) + ", accelY=" + ((int) this.accelY) + ", accelZ=" + ((int) this.accelZ) + ", magX=" + ((int) this.magX) + ", magY=" + ((int) this.magY) + ", magZ=" + ((int) this.magZ) + CoreConstants.CURLY_RIGHT;
+        return "AckGetIMUInfo{imuType=" + ((int) this.imuType) + ", iMUTempe=" + ((int) this.iMUTempe) + ", gyroX=" + ((int) this.gyroX) + ", gyroY=" + ((int) this.gyroY) + ", gyroZ=" + ((int) this.gyroZ) + ", accelX=" + ((int) this.accelX) + ", accelY=" + ((int) this.accelY) + ", accelZ=" + ((int) this.accelZ) + ", magX=" + ((int) this.magX) + ", magY=" + ((int) this.magY) + ", magZ=" + ((int) this.magZ) + '}';
     }
 }

@@ -1,6 +1,6 @@
 package com.fimi.network.entity;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes.dex */
 public class Download {
@@ -96,6 +96,6 @@ public class Download {
     }
 
     public String toString() {
-        return "Download{fileEncode='" + this.fileEncode + CoreConstants.SINGLE_QUOTE_CHAR + ", forceSign='" + this.forceSign + CoreConstants.SINGLE_QUOTE_CHAR + ", sysid='" + this.sysid + CoreConstants.SINGLE_QUOTE_CHAR + ", newVersion='" + this.newVersion + CoreConstants.SINGLE_QUOTE_CHAR + ", pushFireType='" + this.pushFireType + CoreConstants.SINGLE_QUOTE_CHAR + ", sysname='" + this.sysname + CoreConstants.SINGLE_QUOTE_CHAR + ", updcontents='" + this.updcontents + CoreConstants.SINGLE_QUOTE_CHAR + ", modelID='" + this.modelID + CoreConstants.SINGLE_QUOTE_CHAR + ", status='" + this.status + CoreConstants.SINGLE_QUOTE_CHAR + ", url='" + this.url + CoreConstants.SINGLE_QUOTE_CHAR + CoreConstants.CURLY_RIGHT;
+        return "Download{fileEncode='" + this.fileEncode + "'" + ", forceSign='" + this.forceSign + "'" + ", sysid='" + this.sysid + "'" + ", newVersion='" + this.newVersion + "'" + ", pushFireType='" + this.pushFireType + "'" + ", sysname='" + this.sysname + "'" + ", updcontents='" + this.updcontents + "'" + ", modelID='" + this.modelID + "'" + ", status='" + this.status + "'" + ", url='" + this.url + "'" + '}';
     }
 }

@@ -2,7 +2,7 @@ package com.fimi.x8sdk.modulestate;
 
 import com.fimi.x8sdk.dataparser.AutoGimbalState;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes2.dex */
 public class GimbalState extends BaseState {
@@ -46,6 +46,6 @@ public class GimbalState extends BaseState {
     }
 
     public String toString() {
-        return "GimbalState{errorCode=" + this.errorCode + ", stateCode=" + this.stateCode + ", rollAngle=" + this.rollAngle + ", pitchAngle=" + this.pitchAngle + ", yawAnagle=" + this.yawAnagle + CoreConstants.CURLY_RIGHT;
+        return "GimbalState{errorCode=" + this.errorCode + ", stateCode=" + this.stateCode + ", rollAngle=" + this.rollAngle + ", pitchAngle=" + this.pitchAngle + ", yawAnagle=" + this.yawAnagle + '}';
     }
 }

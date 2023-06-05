@@ -7,6 +7,50 @@
 
     <include layout="@layout/x8s_map_video_cardview" />
 
+    <RelativeLayout
+        android:id="@+id/pose_ball_container"
+        android:layout_width="150.33dp"
+        android:layout_height="150.33dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="8dp"
+        app:layout_marginBottomPercent="10.46875%w"
+        app:layout_marginLeftPercent="10.46875%w">
+
+        <com.fimi.app.x8s.widget.BallProgress
+            android:id="@+id/plane_pitching_progress"
+            android:layout_width="57.33dp"
+            android:layout_height="57.33dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/x8h_main_plane_pitching_progress" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:scaleType="center"
+            android:src="@drawable/x8s_main_pose_orientation" />
+
+        <com.fimi.app.x8s.widget.DeviceNorthView
+            android:id="@+id/device_north_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            app:csb_max="100"
+            app:csb_thumbDrawable="@drawable/x8s_main_north" />
+
+        <com.fimi.app.x8s.widget.PlaneAngleSeekBar
+            android:id="@+id/plane_angle_seek_bar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="20dp"
+            android:visibility="gone"
+            app:csb_max="100"
+            app:csb_thumbDrawable="@drawable/x8s_main_plane_angle"
+            app:csb_thumbSize="26dp" />
+    </RelativeLayout>
+
+
     <include layout="@layout/x8_camera_interest_merering_contering" />
 
     <include

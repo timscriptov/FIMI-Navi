@@ -6,7 +6,7 @@ import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 import com.fimi.x8sdk.entity.FLatLng;
 import com.fimi.x8sdk.util.GpsCorrect;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes2.dex */
 public class AckGetAiLinePoint extends X8BaseMessage implements Comparable<AckGetAiLinePoint> {
@@ -213,7 +213,7 @@ public class AckGetAiLinePoint extends X8BaseMessage implements Comparable<AckGe
 
     @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
     public String toString() {
-        return "AckGetAiLinePoint{number=" + this.number + ", totalnumber=" + this.totalnumber + ", longitude=" + this.longitude + ", latitude=" + this.latitude + ", fLatLng=" + this.fLatLng + ", altitude=" + this.altitude + ", yaw=" + this.yaw + ", gimbalPitch=" + this.gimbalPitch + ", speed=" + this.speed + ", yawMode=" + ((int) this.yawMode) + ", gimbalMode=" + ((int) this.gimbalMode) + ", trajectoryMode=" + ((int) this.trajectoryMode) + ", missionFinishAction=" + ((int) this.missionFinishAction) + ", rCLostAction=" + ((int) this.rCLostAction) + ", longitudePOI=" + this.longitudePOI + ", latitudePOI=" + this.latitudePOI + ", altitudePOI=" + this.altitudePOI + ", angle=" + this.angle + CoreConstants.CURLY_RIGHT;
+        return "AckGetAiLinePoint{number=" + this.number + ", totalnumber=" + this.totalnumber + ", longitude=" + this.longitude + ", latitude=" + this.latitude + ", fLatLng=" + this.fLatLng + ", altitude=" + this.altitude + ", yaw=" + this.yaw + ", gimbalPitch=" + this.gimbalPitch + ", speed=" + this.speed + ", yawMode=" + ((int) this.yawMode) + ", gimbalMode=" + ((int) this.gimbalMode) + ", trajectoryMode=" + ((int) this.trajectoryMode) + ", missionFinishAction=" + ((int) this.missionFinishAction) + ", rCLostAction=" + ((int) this.rCLostAction) + ", longitudePOI=" + this.longitudePOI + ", latitudePOI=" + this.latitudePOI + ", altitudePOI=" + this.altitudePOI + ", angle=" + this.angle + '}';
     }
 
     @Override // java.lang.Comparable

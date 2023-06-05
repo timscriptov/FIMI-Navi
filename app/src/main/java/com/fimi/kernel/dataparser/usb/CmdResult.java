@@ -2,7 +2,7 @@ package com.fimi.kernel.dataparser.usb;
 
 import com.fimi.kernel.FimiAppContext;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes.dex */
 public class CmdResult {
@@ -75,6 +75,6 @@ public class CmdResult {
     }
 
     public String toString() {
-        return "CmdResult{isSuccess=" + this.isSuccess + ", errCode=" + this.errCode + ", descption=" + this.descption + ", errDes='" + this.errDes + CoreConstants.SINGLE_QUOTE_CHAR + CoreConstants.CURLY_RIGHT;
+        return "CmdResult{isSuccess=" + this.isSuccess + ", errCode=" + this.errCode + ", descption=" + this.descption + ", errDes='" + this.errDes + "'" + '}';
     }
 }

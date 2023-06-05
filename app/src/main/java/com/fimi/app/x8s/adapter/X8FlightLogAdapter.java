@@ -32,7 +32,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import ch.qos.logback.core.pattern.color.ANSIConstants;
+
 
 /* loaded from: classes.dex */
 public class X8FlightLogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -124,7 +124,7 @@ public class X8FlightLogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         } else if (flightMileage < 0.0f) {
             ((X8B2oxViewHolder) holder).x8FlightlogItemMileage.setText("N/A");
         } else {
-            ((X8B2oxViewHolder) holder).x8FlightlogItemMileage.setText(file.getFlightMileage() + ANSIConstants.ESC_END);
+            ((X8B2oxViewHolder) holder).x8FlightlogItemMileage.setText(file.getFlightMileage() + "m");
         }
         ((X8B2oxViewHolder) holder).x8FlightlogItemTime.setText(TimerUtil.getInstance().stringForTime(file.getFlightDuration(), false));
         int i = R.drawable.x8_img_upload_success;
@@ -140,18 +140,15 @@ public class X8FlightLogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 break;
         }
         if (file.isFileLogCollect()) {
-            ((X8B2oxViewHolder) holder).x8IvFlightlogCollect.setVisibility(0);
+            ((X8B2oxViewHolder) holder).x8IvFlightlogCollect.setVisibility(View.VISIBLE);
         } else {
-            ((X8B2oxViewHolder) holder).x8IvFlightlogCollect.setVisibility(4);
+            ((X8B2oxViewHolder) holder).x8IvFlightlogCollect.setVisibility(View.INVISIBLE);
         }
-        ((X8B2oxViewHolder) holder).rlRootView.setOnClickListener(new View.OnClickListener() { // from class: com.fimi.app.x8s.adapter.X8FlightLogAdapter.1
-            @Override // android.view.View.OnClickListener
-            public void onClick(View view) {
-                X8FlightLogAdapter.this.furrentFile = file;
-                Intent intent = new Intent(X8FlightLogAdapter.this.context, X8FlightPlaybackActivity.class);
-                intent.putExtra(Constants.X8_FLIGHTLOG_PATH, file.getPlaybackFile().getAbsolutePath());
-                X8FlightLogAdapter.this.context.startActivity(intent);
-            }
+        ((X8B2oxViewHolder) holder).rlRootView.setOnClickListener(view -> {
+            X8FlightLogAdapter.this.furrentFile = file;
+            Intent intent = new Intent(X8FlightLogAdapter.this.context, X8FlightPlaybackActivity.class);
+            intent.putExtra(Constants.X8_FLIGHTLOG_PATH, file.getPlaybackFile().getAbsolutePath());
+            X8FlightLogAdapter.this.context.startActivity(intent);
         });
     }
 

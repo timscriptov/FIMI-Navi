@@ -6,9 +6,6 @@ import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 import com.fimi.kernel.dataparser.milink.ByteHexHelper;
 import com.fimi.kernel.dataparser.usb.UiCallBackListener;
 
-import ch.qos.logback.core.CoreConstants;
-
-/* loaded from: classes2.dex */
 public abstract class X8BaseMessage extends ILinkMessage {
     private int desId;
     private int groupID;
@@ -80,7 +77,7 @@ public abstract class X8BaseMessage extends ILinkMessage {
     }
 
     public String toString() {
-        return "X8BaseMessage{srcId=" + this.srcId + ", desId=" + this.desId + ", version=" + this.version + ", groupID=" + this.groupID + ", msgId=" + this.msgId + ", msgRpt=" + this.msgRpt + CoreConstants.CURLY_RIGHT;
+        return "X8BaseMessage{srcId=" + this.srcId + ", desId=" + this.desId + ", version=" + this.version + ", groupID=" + this.groupID + ", msgId=" + this.msgId + ", msgRpt=" + this.msgRpt + '}';
     }
 
     @Override // com.fimi.kernel.dataparser.ILinkMessage

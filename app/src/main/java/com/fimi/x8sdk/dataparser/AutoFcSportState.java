@@ -1,10 +1,12 @@
 package com.fimi.x8sdk.dataparser;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 import com.fimi.x8sdk.entity.FLatLng;
 import com.fimi.x8sdk.util.GpsCorrect;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes2.dex */
 public class AutoFcSportState extends X8BaseMessage {
@@ -138,8 +140,9 @@ public class AutoFcSportState extends X8BaseMessage {
         this.homeDistance = homeDistance;
     }
 
-    @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
+    @NonNull
+    @Override
     public String toString() {
-        return "AutoFcSportState{longitude=" + this.longitude + ", latitude=" + this.latitude + ", height=" + this.height + ", groupSpeed=" + this.groupSpeed + ", downVelocity=" + this.downVelocity + ", rollAngle=" + this.rollAngle + ", pitchAngle=" + this.pitchAngle + ", headingAngle=" + this.headingAngle + ", reserve1=" + this.reserve1 + ", reserve2=" + this.reserve2 + ", homeDistance=" + this.homeDistance + ", fLatLng=" + this.fLatLng + CoreConstants.CURLY_RIGHT;
+        return "AutoFcSportState{longitude=" + this.longitude + ", latitude=" + this.latitude + ", height=" + this.height + ", groupSpeed=" + this.groupSpeed + ", downVelocity=" + this.downVelocity + ", rollAngle=" + this.rollAngle + ", pitchAngle=" + this.pitchAngle + ", headingAngle=" + this.headingAngle + ", reserve1=" + this.reserve1 + ", reserve2=" + this.reserve2 + ", homeDistance=" + this.homeDistance + ", fLatLng=" + this.fLatLng + '}';
     }
 }

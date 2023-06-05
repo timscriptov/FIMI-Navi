@@ -6,7 +6,7 @@ import com.fimi.x8sdk.entity.UpdateCurrentProgressEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes2.dex */
 public class AckUpdateCurrentProgress extends X8BaseMessage {
@@ -60,6 +60,6 @@ public class AckUpdateCurrentProgress extends X8BaseMessage {
         for (UpdateCurrentProgressEntity updateCurrentProgressEntity : this.updateCurrentProgressEntitys) {
             updateCurrentProgressEntityStr.append("updateCurrentProgressEntity:" + updateCurrentProgressEntity.toString());
         }
-        return "AckUpdateCurrentProgress{deviceNumber=" + this.deviceNumber + ", updateCurrentProgressEntitys=" + updateCurrentProgressEntityStr.toString() + CoreConstants.CURLY_RIGHT;
+        return "AckUpdateCurrentProgress{deviceNumber=" + this.deviceNumber + ", updateCurrentProgressEntitys=" + updateCurrentProgressEntityStr.toString() + '}';
     }
 }

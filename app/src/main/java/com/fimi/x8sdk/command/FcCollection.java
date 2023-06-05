@@ -17,7 +17,7 @@ import com.fimi.x8sdk.entity.GpsInfoCmd;
 
 import java.util.Calendar;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes2.dex */
 public class FcCollection extends X8BaseCmd {
@@ -832,7 +832,7 @@ public class FcCollection extends X8BaseCmd {
         payload[i5] = (byte) type;
         sendCmd.setPayLoad(payload);
         sendCmd.packSendCmd();
-        sendCmd.setOutTime((int) CoreConstants.MILLIS_IN_ONE_MINUTE);
+        sendCmd.setOutTime((int) 3600000);
         sendCmd.setReSendNum(10);
         return sendCmd;
     }

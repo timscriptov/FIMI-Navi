@@ -1,6 +1,6 @@
 package com.fimi.network.entity;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes.dex */
 public class DataStatistics {
@@ -132,6 +132,6 @@ public class DataStatistics {
     }
 
     public String toString() {
-        return "DataStatistics{appType='" + this.appType + CoreConstants.SINGLE_QUOTE_CHAR + ", userId='" + this.userId + CoreConstants.SINGLE_QUOTE_CHAR + ", handleVersion='" + this.handleVersion + CoreConstants.SINGLE_QUOTE_CHAR + ", gimbalVersion='" + this.gimbalVersion + CoreConstants.SINGLE_QUOTE_CHAR + ", useTime='" + this.useTime + CoreConstants.SINGLE_QUOTE_CHAR + ", longitude='" + this.longitude + CoreConstants.SINGLE_QUOTE_CHAR + ", latitude='" + this.latitude + CoreConstants.SINGLE_QUOTE_CHAR + ", productModel='" + this.productModel + CoreConstants.SINGLE_QUOTE_CHAR + ", sysVersion='" + this.sysVersion + CoreConstants.SINGLE_QUOTE_CHAR + ", mcuVersion='" + this.mcuVersion + CoreConstants.SINGLE_QUOTE_CHAR + ", flyTime='" + this.flyTime + CoreConstants.SINGLE_QUOTE_CHAR + ", flyDistance='" + this.flyDistance + CoreConstants.SINGLE_QUOTE_CHAR + ", flyHeight='" + this.flyHeight + CoreConstants.SINGLE_QUOTE_CHAR + ", createTime='" + this.createTime + CoreConstants.SINGLE_QUOTE_CHAR + CoreConstants.CURLY_RIGHT;
+        return "DataStatistics{appType='" + this.appType + "'" + ", userId='" + this.userId + "'" + ", handleVersion='" + this.handleVersion + "'" + ", gimbalVersion='" + this.gimbalVersion + "'" + ", useTime='" + this.useTime + "'" + ", longitude='" + this.longitude + "'" + ", latitude='" + this.latitude + "'" + ", productModel='" + this.productModel + "'" + ", sysVersion='" + this.sysVersion + "'" + ", mcuVersion='" + this.mcuVersion + "'" + ", flyTime='" + this.flyTime + "'" + ", flyDistance='" + this.flyDistance + "'" + ", flyHeight='" + this.flyHeight + "'" + ", createTime='" + this.createTime + "'" + '}';
     }
 }

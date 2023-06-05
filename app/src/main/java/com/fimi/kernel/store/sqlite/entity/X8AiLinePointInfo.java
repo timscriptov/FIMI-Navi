@@ -1,6 +1,6 @@
 package com.fimi.kernel.store.sqlite.entity;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes.dex */
 public class X8AiLinePointInfo {
@@ -122,7 +122,7 @@ public class X8AiLinePointInfo {
     }
 
     public String toString() {
-        return "X8AiLinePointInfo{id=" + this.id + ", time=" + this.time + ", name='" + this.name + CoreConstants.SINGLE_QUOTE_CHAR + ", type=" + this.type + ", speed=" + this.speed + ", saveFlag=" + this.saveFlag + ", distance=" + this.distance + ", isCurve=" + this.isCurve + ", mapType=" + this.mapType + ", runByMapOrVedio=" + this.runByMapOrVedio + CoreConstants.CURLY_RIGHT;
+        return "X8AiLinePointInfo{id=" + this.id + ", time=" + this.time + ", name='" + this.name + "'" + ", type=" + this.type + ", speed=" + this.speed + ", saveFlag=" + this.saveFlag + ", distance=" + this.distance + ", isCurve=" + this.isCurve + ", mapType=" + this.mapType + ", runByMapOrVedio=" + this.runByMapOrVedio + '}';
     }
 
     public int getAutoRecord() {

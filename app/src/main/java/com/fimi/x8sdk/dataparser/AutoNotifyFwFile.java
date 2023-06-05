@@ -6,7 +6,7 @@ import com.fimi.x8sdk.entity.FwType;
 import java.util.ArrayList;
 import java.util.List;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes2.dex */
 public class AutoNotifyFwFile extends X8BaseMessage {
@@ -124,6 +124,6 @@ public class AutoNotifyFwFile extends X8BaseMessage {
 
     @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
     public String toString() {
-        return "AutoNotifyFwFile{notifyType=" + this.notifyType + ", result=" + this.result + ", fwNumber=" + this.fwNumber + ", devTargetId=" + this.devTargetId + ", devModuleId=" + this.devModuleId + ", msgModuleId=" + this.msgModuleId + ", stage=" + this.stage + ", schedule=" + this.schedule + ", reserve=" + this.reserve + CoreConstants.CURLY_RIGHT;
+        return "AutoNotifyFwFile{notifyType=" + this.notifyType + ", result=" + this.result + ", fwNumber=" + this.fwNumber + ", devTargetId=" + this.devTargetId + ", devModuleId=" + this.devModuleId + ", msgModuleId=" + this.msgModuleId + ", stage=" + this.stage + ", schedule=" + this.schedule + ", reserve=" + this.reserve + '}';
     }
 }

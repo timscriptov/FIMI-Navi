@@ -1,6 +1,6 @@
 package com.fimi.app.x8s.entity;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes.dex */
 public class X8AilinePrameter {
@@ -52,6 +52,6 @@ public class X8AilinePrameter {
     }
 
     public String toString() {
-        return "X8AilinePrameter{DEFAULE_SPEED=" + this.DEFAULE_SPEED + ", speed=" + this.speed + ", orientation=" + this.orientation + ", disconnectActioin=" + this.disconnectActioin + ", endAction=" + this.endAction + ", autoRecorde=" + this.autoRecorde + CoreConstants.CURLY_RIGHT;
+        return "X8AilinePrameter{DEFAULE_SPEED=" + this.DEFAULE_SPEED + ", speed=" + this.speed + ", orientation=" + this.orientation + ", disconnectActioin=" + this.disconnectActioin + ", endAction=" + this.endAction + ", autoRecorde=" + this.autoRecorde + '}';
     }
 }

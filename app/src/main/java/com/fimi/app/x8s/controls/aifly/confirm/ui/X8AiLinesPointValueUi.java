@@ -29,8 +29,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import ch.qos.logback.core.net.SyslogConstants;
-
 /* loaded from: classes.dex */
 public class X8AiLinesPointValueUi implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
     int count = 0;
@@ -71,7 +69,7 @@ public class X8AiLinesPointValueUi implements View.OnClickListener, SeekBar.OnSe
     private View vThreePhoto;
     private View[] arraysView = new View[7];
     private int index = 0;
-    private int MAX = SyslogConstants.LOG_CLOCK;
+    private int MAX = 120;
     private int MIN = 5;
     private int SB_MAX = this.MAX - this.MIN;
 
@@ -173,7 +171,7 @@ public class X8AiLinesPointValueUi implements View.OnClickListener, SeekBar.OnSe
                     view.findViewById(R.id.rl_rorate).setVisibility(0);
                     return;
                 } else {
-                    view.findViewById(R.id.rl_rorate).setVisibility(8);
+                    view.findViewById(R.id.rl_rorate).setVisibility(View.GONE);
                     return;
                 }
             } else if (this.mode == 3) {

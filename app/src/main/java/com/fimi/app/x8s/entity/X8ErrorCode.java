@@ -2,7 +2,7 @@ package com.fimi.app.x8s.entity;
 
 import com.fimi.app.x8s.enums.X8ErrorCodeEnum;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes.dex */
 public class X8ErrorCode {
@@ -80,6 +80,6 @@ public class X8ErrorCode {
     }
 
     public String toString() {
-        return "X8ErrorCode{level=" + this.level + ", title='" + this.title + CoreConstants.SINGLE_QUOTE_CHAR + ", detail='" + this.detail + CoreConstants.SINGLE_QUOTE_CHAR + ", bgId=" + this.bgId + ", titleImgId=" + this.titleImgId + ", speakStr='" + this.speakStr + CoreConstants.SINGLE_QUOTE_CHAR + ", isShow=" + this.isShow + CoreConstants.CURLY_RIGHT;
+        return "X8ErrorCode{level=" + this.level + ", title='" + this.title + "'" + ", detail='" + this.detail + "'" + ", bgId=" + this.bgId + ", titleImgId=" + this.titleImgId + ", speakStr='" + this.speakStr + "'" + ", isShow=" + this.isShow + '}';
     }
 }

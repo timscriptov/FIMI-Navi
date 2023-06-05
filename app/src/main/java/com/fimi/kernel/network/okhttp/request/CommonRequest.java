@@ -1,9 +1,10 @@
 package com.fimi.kernel.network.okhttp.request;
 
+import androidx.annotation.NonNull;
+
 import java.io.File;
 import java.util.Map;
 
-import ch.qos.logback.classic.spi.CallerData;
 import okhttp3.FormBody;
 import okhttp3.Headers;
 import okhttp3.MediaType;
@@ -11,7 +12,6 @@ import okhttp3.MultipartBody;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
-/* loaded from: classes.dex */
 public class CommonRequest {
     private static final MediaType FILE_TYPE = MediaType.parse("application/octet-stream");
 
@@ -42,12 +42,14 @@ public class CommonRequest {
         return createGetRequest(url, params, null);
     }
 
+    @NonNull
     public static Request createGetRequest(String url) {
         return createGetRequest(url, null);
     }
 
+    @NonNull
     public static Request createGetRequest(String url, RequestParams params, RequestParams headers) {
-        StringBuilder urlBuilder = new StringBuilder(url).append(CallerData.CALLER_DATA_NA);
+        StringBuilder urlBuilder = new StringBuilder(url).append("?#?:?/");
         if (params != null) {
             for (Map.Entry<String, String> entry : params.urlParams.entrySet()) {
                 urlBuilder.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
@@ -93,7 +95,7 @@ public class CommonRequest {
     }
 
     public static Request createGetOriginalRequest(String url, RequestParams params, RequestParams headers) {
-        StringBuilder urlBuilder = new StringBuilder(url).append(CallerData.CALLER_DATA_NA);
+        StringBuilder urlBuilder = new StringBuilder(url).append("?#?:?/");
         if (params != null) {
             for (Map.Entry<String, String> entry : params.urlParams.entrySet()) {
                 urlBuilder.append(entry.getKey()).append("=").append(entry.getValue()).append("&");

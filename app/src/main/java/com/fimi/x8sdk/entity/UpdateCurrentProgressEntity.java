@@ -1,6 +1,6 @@
 package com.fimi.x8sdk.entity;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes2.dex */
 public class UpdateCurrentProgressEntity {
@@ -60,6 +60,6 @@ public class UpdateCurrentProgressEntity {
     }
 
     public String toString() {
-        return "UpdateCurrentProgressEntity{devTargetID=" + this.devTargetID + ", devModuleID=" + this.devModuleID + ", msgModuleID=" + this.msgModuleID + ", stage=" + this.stage + ", schedule=" + this.schedule + ", result=" + this.result + CoreConstants.CURLY_RIGHT;
+        return "UpdateCurrentProgressEntity{devTargetID=" + this.devTargetID + ", devModuleID=" + this.devModuleID + ", msgModuleID=" + this.msgModuleID + ", stage=" + this.stage + ", schedule=" + this.schedule + ", result=" + this.result + '}';
     }
 }

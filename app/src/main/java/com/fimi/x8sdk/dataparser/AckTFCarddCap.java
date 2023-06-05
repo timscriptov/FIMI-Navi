@@ -2,7 +2,7 @@ package com.fimi.x8sdk.dataparser;
 
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes2.dex */
 public class AckTFCarddCap extends X8BaseMessage {
@@ -28,6 +28,6 @@ public class AckTFCarddCap extends X8BaseMessage {
 
     @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
     public String toString() {
-        return "AckTFCarddCap{tfCardCap='" + this.tfCardCap + CoreConstants.SINGLE_QUOTE_CHAR + CoreConstants.CURLY_RIGHT;
+        return "AckTFCarddCap{tfCardCap='" + this.tfCardCap + "'" + '}';
     }
 }

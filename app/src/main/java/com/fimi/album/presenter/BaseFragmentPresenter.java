@@ -22,9 +22,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import ch.qos.logback.core.net.SyslogConstants;
-
-/* loaded from: classes.dex */
 public abstract class BaseFragmentPresenter<T extends MediaModel> implements IBroadcastPreform, IRecycleAdapter {
     public static final String TAG = BaseFragmentPresenter.class.getName();
     protected static boolean isScrollRecycle;
@@ -37,8 +34,8 @@ public abstract class BaseFragmentPresenter<T extends MediaModel> implements IBr
     protected LinkedHashMap<String, CopyOnWriteArrayList<T>> stateHashMap;
     protected List<T> selectList = new ArrayList();
     protected String perfix = "file://";
-    protected int defaultPhtotHeight = SyslogConstants.LOG_CLOCK;
-    protected int defaultPhtotWidth = SyslogConstants.LOG_CLOCK;
+    protected int defaultPhtotHeight = 120;
+    protected int defaultPhtotWidth = 120;
 
     public BaseFragmentPresenter(RecyclerView mRecyclerView, PanelRecycleAdapter mPanelRecycleAdapter, ISelectData mISelectData, Context context) {
         this.mRecyclerView = mRecyclerView;

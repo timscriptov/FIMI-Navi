@@ -2,7 +2,7 @@ package com.fimi.x8sdk.dataparser;
 
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes2.dex */
 public class AckGetLowPowerOpt extends X8BaseMessage {
@@ -54,6 +54,6 @@ public class AckGetLowPowerOpt extends X8BaseMessage {
 
     @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
     public String toString() {
-        return "AckGetLowPowerOpt{lowPowerValue=" + this.lowPowerValue + ", seriousLowPowerValue=" + this.seriousLowPowerValue + ", lowPowerOpt=" + this.lowPowerOpt + ", seriousLowPowerOpt=" + this.seriousLowPowerOpt + CoreConstants.CURLY_RIGHT;
+        return "AckGetLowPowerOpt{lowPowerValue=" + this.lowPowerValue + ", seriousLowPowerValue=" + this.seriousLowPowerValue + ", lowPowerOpt=" + this.lowPowerOpt + ", seriousLowPowerOpt=" + this.seriousLowPowerOpt + '}';
     }
 }

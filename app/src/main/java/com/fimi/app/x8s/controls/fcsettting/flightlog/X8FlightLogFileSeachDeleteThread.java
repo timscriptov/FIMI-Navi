@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import ch.qos.logback.core.pattern.color.ANSIConstants;
+
 
 /* loaded from: classes.dex */
 public class X8FlightLogFileSeachDeleteThread extends Thread {
@@ -155,7 +155,7 @@ public class X8FlightLogFileSeachDeleteThread extends Thread {
                 if (this.flightMileageNumber >= 1000.0f) {
                     this.x8FlightLogAdapter.setPlaybackDistance(X8NumberUtil.getDistanceNumberNoPrexString(this.flightMileageNumber / 1000.0f, 1) + "km");
                 } else {
-                    this.x8FlightLogAdapter.setPlaybackDistance(Float.valueOf(this.flightMileageNumber).intValue() + ANSIConstants.ESC_END);
+                    this.x8FlightLogAdapter.setPlaybackDistance(Float.valueOf(this.flightMileageNumber).intValue() + "m");
                 }
                 String totalTime = TimerUtil.getInstance().stringForTime(this.flightDurationNumber);
                 this.x8FlightLogAdapter.setPlaybackTotalTime(totalTime);

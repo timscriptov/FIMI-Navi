@@ -1,6 +1,9 @@
 package com.fimi.kernel.dataparser.milink;
 
+import androidx.annotation.NonNull;
 import androidx.core.view.InputDeviceCompat;
+
+import org.jetbrains.annotations.Contract;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,10 +15,10 @@ import java.util.Formatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* loaded from: classes.dex */
 public class ByteHexHelper {
     private static boolean D = false;
 
+    @NonNull
     public static String bytesToHexString(byte[] src) {
         StringBuilder stringBuilder = new StringBuilder("");
         if (src == null || src.length <= 0) {
@@ -33,6 +36,7 @@ public class ByteHexHelper {
         return stringBuilder.toString().toUpperCase();
     }
 
+    @NonNull
     public static String byteToHexString(byte src) {
         StringBuilder stringBuilder = new StringBuilder("");
         int v = src & 255;
@@ -48,6 +52,7 @@ public class ByteHexHelper {
         return src & 255;
     }
 
+    @NonNull
     public static byte[] intToHexBytes(int id) {
         String hexString = Integer.toHexString(id);
         int len = hexString.length();
@@ -58,6 +63,7 @@ public class ByteHexHelper {
         return hexStringToBytes(hexString);
     }
 
+    @NonNull
     public static byte[] intToTwoHexBytes(int id) {
         String hexString = Integer.toHexString(id);
         int len = hexString.length();
@@ -68,6 +74,7 @@ public class ByteHexHelper {
         return hexStringToBytes(hexString);
     }
 
+    @NonNull
     public static byte[] intToFourHexBytes(int id) {
         String hexString = Integer.toHexString(id);
         int len = hexString.length();
@@ -78,6 +85,7 @@ public class ByteHexHelper {
         return hexStringToBytes(hexString);
     }
 
+    @NonNull
     public static byte[] intToFourHexBytesTwo(int id) {
         String hexString = Integer.toHexString(id);
         int len = hexString.length();
@@ -102,10 +110,10 @@ public class ByteHexHelper {
         return hexStringToByte(hexString);
     }
 
+    @NonNull
     public static byte[] hexStringToBytes2(String hexString) {
         if (hexString == null || hexString.equals("")) {
-            byte[] bytes = new byte[0];
-            return bytes;
+            return new byte[0];
         }
         String hexString2 = hexString.toUpperCase();
         int length = hexString2.length() / 2;
@@ -118,7 +126,7 @@ public class ByteHexHelper {
         return d;
     }
 
-    public static byte hexStringToByte(String hexString) {
+    public static byte hexStringToByte(@NonNull String hexString) {
         String hexString2 = hexString.toUpperCase();
         int length = hexString2.length() / 2;
         char[] hexChars = hexString2.toCharArray();
@@ -130,7 +138,8 @@ public class ByteHexHelper {
         return d[0];
     }
 
-    public static byte[] hexStringToBytes(String str) {
+    @NonNull
+    public static byte[] hexStringToBytes(@NonNull String str) {
         int c;
         int i;
         String str1 = str.replace(" ", "");
@@ -165,7 +174,8 @@ public class ByteHexHelper {
         return (byte) "0123456789ABCDEF".indexOf(c);
     }
 
-    public static String XOR(String hex) {
+    @NonNull
+    public static String XOR(@NonNull String hex) {
         byte bytes = 0;
         if (hex.length() > 0) {
             for (int i = 0; i < hex.length() / 2; i++) {
@@ -176,8 +186,9 @@ public class ByteHexHelper {
         return bytesToHexString(bbb);
     }
 
+    @NonNull
     public static String currentData() {
-        StringBuffer stringBuffer = new StringBuffer();
+        StringBuilder stringBuffer = new StringBuilder();
         DecimalFormat decimalFormat = new DecimalFormat("00");
         Calendar calendar = Calendar.getInstance();
         String year = decimalFormat.format(calendar.get(1));
@@ -192,63 +203,65 @@ public class ByteHexHelper {
         return stringBuffer.toString();
     }
 
+    @NonNull
     public static String RandomMethod() {
         int random = (int) (Math.random() * 100.0d);
-        String hexString = Integer.toHexString(random);
+        StringBuilder hexString = new StringBuilder(Integer.toHexString(random));
         int len = hexString.length();
         while (len < 2) {
-            hexString = "0" + hexString;
+            hexString.insert(0, "0");
             len = hexString.length();
         }
-        return hexString;
+        return hexString.toString();
     }
 
-    public static String packLength(String str) {
-        String hexLength = Integer.toHexString(str.length() / 2);
+    public static String packLength(@NonNull String str) {
+        StringBuilder hexLength = new StringBuilder(Integer.toHexString(str.length() / 2));
         int len = hexLength.length();
         while (len < 4) {
-            hexLength = "0" + hexLength;
+            hexLength.insert(0, "0");
             len = hexLength.length();
         }
-        return hexLength;
+        return hexLength.toString();
     }
 
+    @NonNull
     public static String checkedSite(int site) {
-        String hexLength = Integer.toHexString(site);
+        StringBuilder hexLength = new StringBuilder(Integer.toHexString(site));
         int len = hexLength.length();
         while (len < 2) {
-            hexLength = "0" + hexLength;
+            hexLength.insert(0, "0");
             len = hexLength.length();
         }
-        return hexLength;
+        return hexLength.toString();
     }
 
+    @NonNull
     public static String packLength(int dataLen) {
-        String hexLength = Integer.toHexString(dataLen);
+        StringBuilder hexLength = new StringBuilder(Integer.toHexString(dataLen));
         int len = hexLength.length();
         while (len < 4) {
-            hexLength = "0" + hexLength;
+            hexLength.insert(0, "0");
             len = hexLength.length();
         }
-        return hexLength;
+        return hexLength.toString();
     }
 
     public static int intPackLength(String str) {
-        int intLength = Integer.valueOf(str, 16).intValue();
-        return intLength;
+        return Integer.valueOf(str, 16).intValue();
     }
 
     public static int intPackLength(byte[] str) {
         String byteStr = bytesToHexString(str);
-        int intLength = Integer.valueOf(byteStr, 16).intValue();
-        return intLength;
+        return Integer.valueOf(byteStr, 16).intValue();
     }
 
+    @NonNull
     public static String packVerify(String target, String source, String packLengths, String counter, String commandWord, String dataArea) {
-        String verify = XOR(target + source + packLengths + counter + commandWord + dataArea);
-        return verify;
+        return XOR(target + source + packLengths + counter + commandWord + dataArea);
     }
 
+    @NonNull
     public static String dpuString(String str) {
         if (str == null || str.length() <= 0) {
             return "";
@@ -261,18 +274,21 @@ public class ByteHexHelper {
         return buffer;
     }
 
+    @NonNull
     public static String binaryString2hexString(String bString) {
         if (bString == null || bString.equals("")) {
             return "";
         }
         if (bString.length() % 8 != 0) {
             int addLen = 8 - (bString.length() % 8);
+            StringBuilder bStringBuilder = new StringBuilder(bString);
             for (int i = 0; i < addLen; i++) {
-                bString = bString + "0";
+                bStringBuilder.append("0");
             }
+            bString = bStringBuilder.toString();
             System.out.println("choiceItem = " + bString);
         }
-        StringBuffer tmp = new StringBuffer();
+        StringBuilder tmp = new StringBuilder();
         for (int i2 = 0; i2 < bString.length(); i2 += 4) {
             int iTmp = 0;
             for (int j = 0; j < 4; j++) {
@@ -288,14 +304,15 @@ public class ByteHexHelper {
         if (hexString == null || hexString.length() % 2 != 0) {
             return null;
         }
-        String bString = "";
+        StringBuilder bString = new StringBuilder();
         for (int i = 0; i < hexString.length(); i++) {
             String tmp = "0000" + Integer.toBinaryString(Integer.parseInt(hexString.substring(i, i + 1), 16));
-            bString = bString + tmp.substring(tmp.length() - 4);
+            bString.append(tmp.substring(tmp.length() - 4));
         }
-        return bString;
+        return bString.toString();
     }
 
+    @NonNull
     public static String replaceBlank(String str) {
         String dest = "";
         if (str != null) {
@@ -323,7 +340,8 @@ public class ByteHexHelper {
         return null;
     }
 
-    public static byte[] appendByteArray(byte[] src, byte[] data) {
+    @NonNull
+    public static byte[] appendByteArray(@NonNull byte[] src, byte[] data) {
         if (src.length > 0 && data.length > 0) {
             byte[] ret = new byte[src.length + data.length];
             System.arraycopy(src, 0, ret, 0, src.length);
@@ -333,6 +351,7 @@ public class ByteHexHelper {
         throw new IllegalArgumentException("字节数组参数错误");
     }
 
+    @NonNull
     public static String calculateSingleFileMD5sum(File file) throws Exception {
         MessageDigest md5 = MessageDigest.getInstance("MD5");
         FileInputStream fis = new FileInputStream(file);
@@ -348,12 +367,13 @@ public class ByteHexHelper {
         StringBuilder sb = new StringBuilder();
         byte[] data = md5.digest();
         for (byte b : data) {
-            sb.append(new Formatter().format("%02x", Byte.valueOf(b)));
+            sb.append(new Formatter().format("%02x", b));
         }
         return sb.toString();
     }
 
-    public static String parseAscii(String str) {
+    @NonNull
+    public static String parseAscii(@NonNull String str) {
         StringBuilder sb = new StringBuilder();
         byte[] bs = str.getBytes();
         for (byte b : bs) {
@@ -373,32 +393,29 @@ public class ByteHexHelper {
         return sb.toString();
     }
 
+    @NonNull
+    @Contract(pure = true)
     private static String toHexUtil(int n) {
         switch (n) {
             case 10:
-                String rt = "A";
-                return rt;
+                return "A";
             case 11:
-                String rt2 = "B";
-                return rt2;
+                return "B";
             case 12:
-                String rt3 = "C";
-                return rt3;
+                return "C";
             case 13:
-                String rt4 = "D";
-                return rt4;
+                return "D";
             case 14:
-                String rt5 = "E";
-                return rt5;
+                return "E";
             case 15:
-                String rt6 = "F";
-                return rt6;
+                return "F";
             default:
-                String rt7 = "" + n;
-                return rt7;
+                return "" + n;
         }
     }
 
+    @NonNull
+    @Contract(pure = true)
     public static byte[] getBooleanArray(byte b) {
         byte[] array = new byte[8];
         for (int i = 7; i >= 0; i--) {
@@ -408,14 +425,19 @@ public class ByteHexHelper {
         return array;
     }
 
+    @NonNull
+    @Contract(pure = true)
     public static String byteToBit(byte b) {
         return "" + ((int) ((byte) ((b >> 7) & 1))) + ((int) ((byte) ((b >> 6) & 1))) + ((int) ((byte) ((b >> 5) & 1))) + ((int) ((byte) ((b >> 4) & 1))) + ((int) ((byte) ((b >> 3) & 1))) + ((int) ((byte) ((b >> 2) & 1))) + ((int) ((byte) ((b >> 1) & 1))) + ((int) ((byte) ((b >> 0) & 1)));
     }
 
+    @NonNull
     public static byte[] getDoubleBytes(double data) {
         return getLongBytes(Double.doubleToLongBits(data));
     }
 
+    @NonNull
+    @Contract(pure = true)
     public static byte[] getLongBytes(long data) {
         byte[] buffer = new byte[8];
         for (int i = 0; i < 8; i++) {
@@ -424,6 +446,8 @@ public class ByteHexHelper {
         return buffer;
     }
 
+    @NonNull
+    @Contract(value = "_ -> new", pure = true)
     public static byte[] intToByteArray(int a) {
         return new byte[]{(byte) (a & 255), (byte) ((a >> 8) & 255), (byte) ((a >> 16) & 255), (byte) ((a >> 24) & 255)};
     }

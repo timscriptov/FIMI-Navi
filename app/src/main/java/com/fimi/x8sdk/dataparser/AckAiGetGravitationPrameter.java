@@ -2,7 +2,7 @@ package com.fimi.x8sdk.dataparser;
 
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes2.dex */
 public class AckAiGetGravitationPrameter extends X8BaseMessage {
@@ -114,6 +114,6 @@ public class AckAiGetGravitationPrameter extends X8BaseMessage {
 
     @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
     public String toString() {
-        return "AckAiGetGravitationPrameter{rotateDirecetion=" + this.rotateDirecetion + ", rotateSpeed=" + this.rotateSpeed + ", horizontalDistance=" + this.horizontalDistance + ", riseHeight=" + this.riseHeight + ", ellipseInclinal=" + this.ellipseInclinal + ", eccentricWheel=" + this.eccentricWheel + ", startLng=" + this.startLng + ", startLat=" + this.startLat + ", startHeight=" + this.startHeight + ", startNosePoint=" + this.startNosePoint + CoreConstants.CURLY_RIGHT;
+        return "AckAiGetGravitationPrameter{rotateDirecetion=" + this.rotateDirecetion + ", rotateSpeed=" + this.rotateSpeed + ", horizontalDistance=" + this.horizontalDistance + ", riseHeight=" + this.riseHeight + ", ellipseInclinal=" + this.ellipseInclinal + ", eccentricWheel=" + this.eccentricWheel + ", startLng=" + this.startLng + ", startLat=" + this.startLat + ", startHeight=" + this.startHeight + ", startNosePoint=" + this.startNosePoint + '}';
     }
 }

@@ -1,6 +1,6 @@
 package com.fimi.app.x8s.entity;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes.dex */
 public class X8PressureGpsInfo {
@@ -114,6 +114,6 @@ public class X8PressureGpsInfo {
     }
 
     public String toString() {
-        return "X8PressureGpsInfo{hasPressure=" + this.hasPressure + ", hasLocation=" + this.hasLocation + ", hPa=" + this.hPa + ", mLongitude=" + this.mLongitude + ", mLatitude=" + this.mLatitude + ", mAltitude=" + this.mAltitude + ", mHorizontalAccuracyMeters=" + this.mHorizontalAccuracyMeters + ", mVerticalAccuracyMeters=" + this.mVerticalAccuracyMeters + ", mSpeed=" + this.mSpeed + ", mBearing=" + this.mBearing + CoreConstants.CURLY_RIGHT;
+        return "X8PressureGpsInfo{hasPressure=" + this.hasPressure + ", hasLocation=" + this.hasLocation + ", hPa=" + this.hPa + ", mLongitude=" + this.mLongitude + ", mLatitude=" + this.mLatitude + ", mAltitude=" + this.mAltitude + ", mHorizontalAccuracyMeters=" + this.mHorizontalAccuracyMeters + ", mVerticalAccuracyMeters=" + this.mVerticalAccuracyMeters + ", mSpeed=" + this.mSpeed + ", mBearing=" + this.mBearing + '}';
     }
 }

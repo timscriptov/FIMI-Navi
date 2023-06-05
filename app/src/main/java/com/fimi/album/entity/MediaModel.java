@@ -3,9 +3,6 @@ package com.fimi.album.entity;
 import java.io.Serializable;
 import java.util.concurrent.Future;
 
-import ch.qos.logback.core.CoreConstants;
-
-/* loaded from: classes.dex */
 public class MediaModel implements Serializable, Cloneable {
     Future<?> taskFutrue;
     private long createDate;
@@ -358,10 +355,9 @@ public class MediaModel implements Serializable, Cloneable {
     }
 
     public String toString() {
-        return "MediaModel{name='" + this.name + CoreConstants.SINGLE_QUOTE_CHAR + ", createDate=" + this.createDate + ", formatDate='" + this.formatDate + CoreConstants.SINGLE_QUOTE_CHAR + ", fileLocalPath='" + this.fileLocalPath + CoreConstants.SINGLE_QUOTE_CHAR + ", thumLocalFilePath='" + this.thumLocalFilePath + CoreConstants.SINGLE_QUOTE_CHAR + ", fileUrl='" + this.fileUrl + CoreConstants.SINGLE_QUOTE_CHAR + ", thumFileUrl='" + this.thumFileUrl + CoreConstants.SINGLE_QUOTE_CHAR + ", isVideo=" + this.isVideo + ", downLoadOriginalPath='" + this.downLoadOriginalPath + CoreConstants.SINGLE_QUOTE_CHAR + ", downLoadSmallPath='" + this.downLoadSmallPath + CoreConstants.SINGLE_QUOTE_CHAR + ", fileSize=" + this.fileSize + ", isDownLoadOriginalFile=" + this.isDownLoadOriginalFile + ", isDownloadFail=" + this.isDownloadFail + ", isDownLoadSmallFile=" + this.isDownLoadSmallFile + ", isDownLoadThum=" + this.isDownLoadThum + ", isCategory=" + this.isCategory + ", isSelect=" + this.isSelect + ", videoDuration='" + this.videoDuration + CoreConstants.SINGLE_QUOTE_CHAR + ", isLoadThulm=" + this.isLoadThulm + ", isHeadView=" + this.isHeadView + ", itemPosition=" + this.itemPosition + ", md5='" + this.md5 + CoreConstants.SINGLE_QUOTE_CHAR + ", downloading=" + this.downloading + ", progress=" + this.progress + ", downloadName='" + this.downloadName + CoreConstants.SINGLE_QUOTE_CHAR + ", isStop=" + this.isStop + ", total=" + this.total + ", isDownloadFinish=" + this.isDownloadFinish + ", thumSize=" + this.thumSize + ", thumName='" + this.thumName + CoreConstants.SINGLE_QUOTE_CHAR + ", localFileDir='" + this.localFileDir + CoreConstants.SINGLE_QUOTE_CHAR + ", localThumFileDir='" + this.localThumFileDir + CoreConstants.SINGLE_QUOTE_CHAR + CoreConstants.CURLY_RIGHT;
+        return "MediaModel{name='" + this.name + '\'' + ", createDate=" + this.createDate + ", formatDate='" + this.formatDate + '\'' + ", fileLocalPath='" + this.fileLocalPath + "'" + ", thumLocalFilePath='" + this.thumLocalFilePath + "'" + ", fileUrl='" + this.fileUrl + "'" + ", thumFileUrl='" + this.thumFileUrl + "'" + ", isVideo=" + this.isVideo + ", downLoadOriginalPath='" + this.downLoadOriginalPath + "'" + ", downLoadSmallPath='" + this.downLoadSmallPath + "'" + ", fileSize=" + this.fileSize + ", isDownLoadOriginalFile=" + this.isDownLoadOriginalFile + ", isDownloadFail=" + this.isDownloadFail + ", isDownLoadSmallFile=" + this.isDownLoadSmallFile + ", isDownLoadThum=" + this.isDownLoadThum + ", isCategory=" + this.isCategory + ", isSelect=" + this.isSelect + ", videoDuration='" + this.videoDuration + "'" + ", isLoadThulm=" + this.isLoadThulm + ", isHeadView=" + this.isHeadView + ", itemPosition=" + this.itemPosition + ", md5='" + this.md5 + "'" + ", downloading=" + this.downloading + ", progress=" + this.progress + ", downloadName='" + this.downloadName + "'" + ", isStop=" + this.isStop + ", total=" + this.total + ", isDownloadFinish=" + this.isDownloadFinish + ", thumSize=" + this.thumSize + ", thumName='" + this.thumName + "'" + ", localFileDir='" + this.localFileDir + "'" + ", localThumFileDir='" + this.localThumFileDir + "'" + '}';
     }
 
-    /* renamed from: clone */
     public MediaModel m7clone() {
         try {
             MediaModel mediaModel = (MediaModel) super.clone();
@@ -371,7 +367,6 @@ public class MediaModel implements Serializable, Cloneable {
         }
     }
 
-    /* loaded from: classes.dex */
     public enum recordType {
         normal_record,
         delay_record,

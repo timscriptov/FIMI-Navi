@@ -90,7 +90,6 @@ public class Constants {
         return modelTag;
     }
 
-    /* loaded from: classes.dex */
     public enum APPType {
         Online,
         Factory

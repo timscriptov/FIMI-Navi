@@ -14,7 +14,7 @@ import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 
-import ch.qos.logback.classic.net.SyslogAppender;
+
 
 public class LogSaveLocalHelper {
     private static LogSaveLocalHelper instance = null;
@@ -85,7 +85,7 @@ public class LogSaveLocalHelper {
                         if (line == null) {
                             break;
                         } else if (line.length() != 0 && this.fos != null && line.contains(this.mPid) && (LogSaveLocalHelper.tag == null || (LogSaveLocalHelper.tag != null && line.contains(LogSaveLocalHelper.tag)))) {
-                            this.fos.write((FormatDate.getFormatTime() + SyslogAppender.DEFAULT_STACKTRACE_PATTERN + line + "\r\n").getBytes());
+                            this.fos.write((FormatDate.getFormatTime() + "\t" + line + "\r\n").getBytes());
                         }
                     }
                     if (this.mProcess != null) {

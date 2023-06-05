@@ -1,5 +1,7 @@
 package com.fimi.x8sdk.connect;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.host.CmdLogBack;
 import com.fimi.kernel.connect.ResultListener;
 import com.fimi.kernel.connect.interfaces.IRetransmissionHandle;
@@ -12,7 +14,6 @@ import com.fimi.x8sdk.connect.datatype.JsonDataChanel;
 import com.fimi.x8sdk.connect.datatype.MediaDataChanel;
 import com.fimi.x8sdk.connect.datatype.VideoDataChanel;
 
-/* loaded from: classes2.dex */
 public class DataChanel implements ResultListener {
     VideoDataChanel videoDataChanel = new VideoDataChanel();
     FmLinkDataChanel fmLinkDataChanel = new FmLinkDataChanel();
@@ -20,8 +21,8 @@ public class DataChanel implements ResultListener {
     MediaDataChanel mediaDataChanel = new MediaDataChanel();
     FwUploadDataChanel fwUploadDataChanel = new FwUploadDataChanel();
 
-    @Override // com.fimi.kernel.connect.ResultListener
-    public void messageReceived(byte[] buffer) {
+    @Override
+    public void messageReceived(@NonNull byte[] buffer) {
         if (buffer.length > 5) {
             int ver = buffer[2] & 15;
             if (ver != 0) {
@@ -63,28 +64,28 @@ public class DataChanel implements ResultListener {
         CmdLogBack.getInstance().writeLog(bytes, false);
     }
 
-    @Override // com.fimi.kernel.connect.ResultListener
+    @Override
     public void setRetransmissionHandle(IRetransmissionHandle handle) {
         this.fmLinkDataChanel.setRetransmissionHandle(handle);
     }
 
-    @Override // com.fimi.kernel.connect.ResultListener
+    @Override
     public void setTimerSendQueueHandle(ITimerSendQueueHandle handle) {
         this.fmLinkDataChanel.setTimerSendQueueHandle(handle);
     }
 
-    @Override // com.fimi.kernel.connect.ResultListener
+    @Override
     public void setRetransmissionJsonHandle(IRetransmissionJsonHandle handle) {
         this.jsonDataChanel.setRetransmissionHandle(handle);
     }
 
-    @Override // com.fimi.kernel.connect.ResultListener
+    @Override
     public void setRetransmissionUsbHandle(IRetransmissionUsbHandle handle) {
         this.fwUploadDataChanel.setRetransmissionHandle(handle);
         this.mediaDataChanel.setRetransmissionUsbHandle(handle);
     }
 
-    @Override // com.fimi.kernel.connect.ResultListener
+    @Override
     public boolean isAppRequestCmd(int groupId, int msgId) {
         return false;
     }

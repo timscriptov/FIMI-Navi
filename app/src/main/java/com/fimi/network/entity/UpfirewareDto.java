@@ -2,9 +2,6 @@ package com.fimi.network.entity;
 
 import com.fimi.kernel.utils.I18NUtil;
 
-import ch.qos.logback.core.CoreConstants;
-
-/* loaded from: classes.dex */
 public class UpfirewareDto extends BaseModel {
     public static final String FW_DOWN_FAILED = "1";
     public static final String FW_DOWN_SUCCESS = "0";
@@ -176,6 +173,6 @@ public class UpfirewareDto extends BaseModel {
     }
 
     public String toString() {
-        return "UpfirewareDto{type=" + this.type + ", sysNameI18N='" + this.sysNameI18N.toString() + CoreConstants.SINGLE_QUOTE_CHAR + ", updateContentI18N='" + this.updateContentI18N.toString() + CoreConstants.SINGLE_QUOTE_CHAR + ", logicVersion=" + this.logicVersion + ", userVersion='" + this.userVersion + CoreConstants.SINGLE_QUOTE_CHAR + ", fileUrl='" + this.fileUrl + CoreConstants.SINGLE_QUOTE_CHAR + ", fileSize=" + this.fileSize + ", fileEncode='" + this.fileEncode + CoreConstants.SINGLE_QUOTE_CHAR + ", status='" + this.status + CoreConstants.SINGLE_QUOTE_CHAR + ", model=" + this.model + ", pushFireType=" + this.pushFireType + ", forceSign='" + this.forceSign + CoreConstants.SINGLE_QUOTE_CHAR + ", startVersion=" + this.startVersion + ", endVersion=" + this.endVersion + ", updateResult='" + this.updateResult + CoreConstants.SINGLE_QUOTE_CHAR + ", downResult='" + this.downResult + CoreConstants.SINGLE_QUOTE_CHAR + ", forceOta='" + this.forceOta + CoreConstants.SINGLE_QUOTE_CHAR + CoreConstants.CURLY_RIGHT;
+        return "UpfirewareDto{type=" + this.type + ", sysNameI18N='" + this.sysNameI18N.toString() + '\'' + ", updateContentI18N='" + this.updateContentI18N.toString() + "'" + ", logicVersion=" + this.logicVersion + ", userVersion='" + this.userVersion + "'" + ", fileUrl='" + this.fileUrl + "'" + ", fileSize=" + this.fileSize + ", fileEncode='" + this.fileEncode + "'" + ", status='" + this.status + "'" + ", model=" + this.model + ", pushFireType=" + this.pushFireType + ", forceSign='" + this.forceSign + "'" + ", startVersion=" + this.startVersion + ", endVersion=" + this.endVersion + ", updateResult='" + this.updateResult + "'" + ", downResult='" + this.downResult + "'" + ", forceOta='" + this.forceOta + "'" + '}';
     }
 }

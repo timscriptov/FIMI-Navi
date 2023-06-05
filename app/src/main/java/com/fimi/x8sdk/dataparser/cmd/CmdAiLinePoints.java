@@ -1,6 +1,6 @@
 package com.fimi.x8sdk.dataparser.cmd;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes2.dex */
 public class CmdAiLinePoints {
@@ -24,6 +24,6 @@ public class CmdAiLinePoints {
     public int speed;
 
     public String toString() {
-        return "CmdAiLinePoints{speed=" + this.speed + ", angle=" + this.angle + ", orientation=" + this.orientation + ", rotation=" + this.rotation + ", latitude=" + this.latitude + ", longitude=" + this.longitude + ", altitude=" + this.altitude + ", count=" + this.count + ", nPos=" + this.nPos + ", latitudePIO=" + this.latitudePIO + ", longitudePIO=" + this.longitudePIO + ", altitudePIO=" + this.altitudePIO + ", disconnectEvent=" + this.disconnectEvent + ", compeletEvent=" + this.compeletEvent + ", autoRecord=" + this.autoRecord + ", coordinatedTurnOff=" + this.coordinatedTurnOff + ", pioEnbale=" + this.pioEnbale + ", gimbalPitch=" + this.gimbalPitch + CoreConstants.CURLY_RIGHT;
+        return "CmdAiLinePoints{speed=" + this.speed + ", angle=" + this.angle + ", orientation=" + this.orientation + ", rotation=" + this.rotation + ", latitude=" + this.latitude + ", longitude=" + this.longitude + ", altitude=" + this.altitude + ", count=" + this.count + ", nPos=" + this.nPos + ", latitudePIO=" + this.latitudePIO + ", longitudePIO=" + this.longitudePIO + ", altitudePIO=" + this.altitudePIO + ", disconnectEvent=" + this.disconnectEvent + ", compeletEvent=" + this.compeletEvent + ", autoRecord=" + this.autoRecord + ", coordinatedTurnOff=" + this.coordinatedTurnOff + ", pioEnbale=" + this.pioEnbale + ", gimbalPitch=" + this.gimbalPitch + '}';
     }
 }

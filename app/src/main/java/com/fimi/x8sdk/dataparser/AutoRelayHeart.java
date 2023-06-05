@@ -5,7 +5,7 @@ import com.fimi.x8sdk.X8FcLogManager;
 import com.fimi.x8sdk.cmdsenum.X8FpvSignalState;
 import com.fimi.x8sdk.modulestate.StateManager;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes2.dex */
 public class AutoRelayHeart extends X8BaseMessage {
@@ -62,6 +62,6 @@ public class AutoRelayHeart extends X8BaseMessage {
 
     @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
     public String toString() {
-        return "AutoRelayHeart{status=" + ((int) this.status) + CoreConstants.CURLY_RIGHT;
+        return "AutoRelayHeart{status=" + ((int) this.status) + '}';
     }
 }

@@ -1,6 +1,6 @@
 package com.fimi.x8sdk.entity;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes2.dex */
 public class X8ErrorCodeInfo {
@@ -43,6 +43,6 @@ public class X8ErrorCodeInfo {
     }
 
     public String toString() {
-        return "X8ErrorCodeInfo{type=" + this.type + ", index=" + this.index + CoreConstants.CURLY_RIGHT;
+        return "X8ErrorCodeInfo{type=" + this.type + ", index=" + this.index + '}';
     }
 }

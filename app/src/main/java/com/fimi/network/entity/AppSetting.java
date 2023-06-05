@@ -1,6 +1,6 @@
 package com.fimi.network.entity;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes.dex */
 public class AppSetting extends BaseModel {
@@ -24,6 +24,6 @@ public class AppSetting extends BaseModel {
     }
 
     public String toString() {
-        return "AppSetting{key='" + this.key + CoreConstants.SINGLE_QUOTE_CHAR + ", value='" + this.value + CoreConstants.SINGLE_QUOTE_CHAR + CoreConstants.CURLY_RIGHT;
+        return "AppSetting{key='" + this.key + "'" + ", value='" + this.value + "'" + '}';
     }
 }

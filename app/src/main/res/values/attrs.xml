@@ -176,7 +176,7 @@
         </attr>
     </declare-styleable>
 
-    <declare-styleable name="DeviceNorthView">
+    <declare-styleable name="DrawableStyleable">
         <attr name="csb_max" format="integer" />
         <attr name="csb_min" format="integer" />
         <attr name="csb_thumbDrawable" format="reference" />

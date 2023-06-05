@@ -5,7 +5,7 @@ import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 import com.fimi.x8sdk.dataparser.X8BaseMessage;
 import com.fimi.x8sdk.entity.X8AppSettingLog;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 public class AutoFcHeartPlayback extends X8BaseMessage {
     public static final int VEHICLE_CTRL_TYPE_ACRO = 5;
@@ -129,7 +129,7 @@ public class AutoFcHeartPlayback extends X8BaseMessage {
 
     @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
     public String toString() {
-        return "AutoFcHeartPlayback{flightTime=" + this.flightTime + ", startUpTime=" + this.startUpTime + ", ctrlType=" + this.ctrlType + ", candidateCtrlType=" + this.candidateCtrlType + ", flightPhase=" + this.flightPhase + ", ctrlModel=" + this.ctrlModel + ", systenPhase=" + this.systenPhase + ", disarmCount=" + this.disarmCount + ", powerConRate=" + this.powerConRate + ", takeOffCap=" + this.takeOffCap + ", autoTakeOffCap=" + this.autoTakeOffCap + CoreConstants.CURLY_RIGHT;
+        return "AutoFcHeartPlayback{flightTime=" + this.flightTime + ", startUpTime=" + this.startUpTime + ", ctrlType=" + this.ctrlType + ", candidateCtrlType=" + this.candidateCtrlType + ", flightPhase=" + this.flightPhase + ", ctrlModel=" + this.ctrlModel + ", systenPhase=" + this.systenPhase + ", disarmCount=" + this.disarmCount + ", powerConRate=" + this.powerConRate + ", takeOffCap=" + this.takeOffCap + ", autoTakeOffCap=" + this.autoTakeOffCap + '}';
     }
 
     public int getDisarmCount() {

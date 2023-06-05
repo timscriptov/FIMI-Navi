@@ -145,4 +145,5 @@
     <color name="x8_value_select">#ff00e8fd</color>
     <color name="x8_value_unselected">#ffffffff</color>
     <color name="x8s_main_north">#99b9b9b9</color>
+    <color name="x8s_main_seek_bar">#00000000</color>
 </resources>

@@ -5,7 +5,6 @@ import com.fimi.kernel.connect.interfaces.IRetransmissionJsonHandle;
 import com.fimi.kernel.connect.interfaces.IRetransmissionUsbHandle;
 import com.fimi.kernel.connect.interfaces.ITimerSendQueueHandle;
 
-/* loaded from: classes.dex */
 public interface ResultListener {
     boolean isAppRequestCmd(int i, int i2);
 

@@ -2,7 +2,7 @@ package com.fimi.x8sdk.dataparser;
 
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes2.dex */
 public class AckPanoramaPhotographType extends X8BaseMessage {
@@ -44,6 +44,6 @@ public class AckPanoramaPhotographType extends X8BaseMessage {
 
     @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
     public String toString() {
-        return "AckPanoramaPhotographType{mode=" + ((int) this.mode) + ", currentNum=" + ((int) this.currentNum) + ", totalNum=" + ((int) this.totalNum) + CoreConstants.CURLY_RIGHT;
+        return "AckPanoramaPhotographType{mode=" + ((int) this.mode) + ", currentNum=" + ((int) this.currentNum) + ", totalNum=" + ((int) this.totalNum) + '}';
     }
 }

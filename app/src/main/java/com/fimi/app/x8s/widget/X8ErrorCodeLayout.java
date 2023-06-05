@@ -24,7 +24,7 @@ import com.fimi.app.x8s.interfaces.IX8ErrorTextIsFinishShow;
 import java.util.ArrayList;
 import java.util.List;
 
-import ch.qos.logback.core.net.SyslogConstants;
+
 
 public class X8ErrorCodeLayout extends ViewGroup {
     private X8ErrorCode level0;
@@ -119,7 +119,7 @@ public class X8ErrorCodeLayout extends ViewGroup {
             }
             view.setVisibility(View.VISIBLE);
             textView2.setResources(stringList2, () -> {
-                X8ErrorCodeLayout.this.getChildAt(0).setVisibility(8);
+                X8ErrorCodeLayout.this.getChildAt(0).setVisibility(View.GONE);
                 if (isFinishShow != null) {
                     isFinishShow.isFinish();
                 }
@@ -148,7 +148,7 @@ public class X8ErrorCodeLayout extends ViewGroup {
         View v = LayoutInflater.from(getContext()).inflate(R.layout.x8_error_code_item_view, this, false);
         ViewGroup.LayoutParams lp = v.getLayoutParams();
         lp.width = getWidth() / 2;
-        lp.height = SyslogConstants.LOG_CLOCK;
+        lp.height = 120;
         v.setLayoutParams(lp);
         return v;
     }

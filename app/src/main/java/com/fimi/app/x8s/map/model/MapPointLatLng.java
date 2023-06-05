@@ -3,7 +3,7 @@ package com.fimi.app.x8s.map.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes.dex */
 public class MapPointLatLng {
@@ -39,7 +39,7 @@ public class MapPointLatLng {
     }
 
     public String toString() {
-        return "MapPointLatLng{latitude=" + this.latitude + ", longitude=" + this.longitude + ", isSelect=" + this.isSelect + ", distance=" + this.distance + ", altitude=" + this.altitude + ", angle=" + this.angle + ", showAngle=" + this.showAngle + ", nPos=" + this.nPos + ", isMapPoint=" + this.isMapPoint + ", isIntertestPoint=" + this.isIntertestPoint + ", isInrertestPointActive=" + this.isInrertestPointActive + ", action=" + this.action + ", isActionSave=" + this.isActionSave + ", mInrertestPoint=" + this.mInrertestPoint + ", pointList=" + this.pointList + ", yawMode=" + this.yawMode + ", roration=" + this.roration + CoreConstants.CURLY_RIGHT;
+        return "MapPointLatLng{latitude=" + this.latitude + ", longitude=" + this.longitude + ", isSelect=" + this.isSelect + ", distance=" + this.distance + ", altitude=" + this.altitude + ", angle=" + this.angle + ", showAngle=" + this.showAngle + ", nPos=" + this.nPos + ", isMapPoint=" + this.isMapPoint + ", isIntertestPoint=" + this.isIntertestPoint + ", isInrertestPointActive=" + this.isInrertestPointActive + ", action=" + this.action + ", isActionSave=" + this.isActionSave + ", mInrertestPoint=" + this.mInrertestPoint + ", pointList=" + this.pointList + ", yawMode=" + this.yawMode + ", roration=" + this.roration + '}';
     }
 
     public void setAngle(float angle) {

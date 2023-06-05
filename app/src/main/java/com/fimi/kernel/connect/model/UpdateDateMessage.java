@@ -2,7 +2,7 @@ package com.fimi.kernel.connect.model;
 
 import java.io.Serializable;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes.dex */
 public class UpdateDateMessage implements Serializable {
@@ -35,6 +35,6 @@ public class UpdateDateMessage implements Serializable {
     }
 
     public String toString() {
-        return "UpdateDateMessage{msgLen=" + this.msgLen + ", faultMessage=" + ((int) this.faultMessage) + ", fileOffset=" + this.fileOffset + CoreConstants.CURLY_RIGHT;
+        return "UpdateDateMessage{msgLen=" + this.msgLen + ", faultMessage=" + ((int) this.faultMessage) + ", fileOffset=" + this.fileOffset + '}';
     }
 }

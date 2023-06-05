@@ -2,7 +2,7 @@ package com.fimi.x8sdk.dataparser;
 
 import com.fimi.kernel.dataparser.fmlink4.LinkPacket4;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes2.dex */
 public class AckAiScrewPrameter extends X8BaseMessage {
@@ -83,6 +83,6 @@ public class AckAiScrewPrameter extends X8BaseMessage {
 
     @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
     public String toString() {
-        return "AckAiScrewPrameter{distance=" + this.distance + ", ciclePeriod=" + this.ciclePeriod + ", vertSpeed=" + this.vertSpeed + ", RTHTostart=" + this.RTHTostart + ", rev1=" + this.rev1 + ", pev2=" + this.pev2 + ", rev3=" + this.rev3 + CoreConstants.CURLY_RIGHT;
+        return "AckAiScrewPrameter{distance=" + this.distance + ", ciclePeriod=" + this.ciclePeriod + ", vertSpeed=" + this.vertSpeed + ", RTHTostart=" + this.RTHTostart + ", rev1=" + this.rev1 + ", pev2=" + this.pev2 + ", rev3=" + this.rev3 + '}';
     }
 }

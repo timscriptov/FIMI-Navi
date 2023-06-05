@@ -38,9 +38,6 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
-import ch.qos.logback.core.net.ssl.SSL;
-
-/* loaded from: classes.dex */
 public class AesCbcWithIntegrity {
     public static final int BASE64_FLAGS = 2;
     static final AtomicBoolean prngFixed = new AtomicBoolean(false);
@@ -364,7 +361,7 @@ public class AesCbcWithIntegrity {
                     }
                     SecureRandom rng2 = null;
                     try {
-                        rng2 = SecureRandom.getInstance(SSL.DEFAULT_SECURE_RANDOM_ALGORITHM);
+                        rng2 = SecureRandom.getInstance("SHA1PRNG");
                     } catch (NoSuchAlgorithmException e) {
                         new SecurityException("SHA1PRNG not available", e);
                     }

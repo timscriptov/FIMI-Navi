@@ -15,7 +15,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 
-import ch.qos.logback.core.pattern.color.ANSIConstants;
+
 
 /* loaded from: classes.dex */
 public class FimiMediaCodecInfo {
@@ -182,9 +182,9 @@ public class FimiMediaCodecInfo {
             case 256:
                 return ThirdPartyConstants.LOGIN_CHANNEL_TW;
             case 512:
-                return ANSIConstants.RED_FG;
+                return "31";
             case 1024:
-                return ANSIConstants.GREEN_FG;
+                return "32";
             case 2048:
                 return "4";
             case 4096:

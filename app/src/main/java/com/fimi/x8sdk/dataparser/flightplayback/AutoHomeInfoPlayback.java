@@ -5,7 +5,7 @@ import com.fimi.x8sdk.dataparser.X8BaseMessage;
 import com.fimi.x8sdk.entity.FLatLng;
 import com.fimi.x8sdk.util.GpsCorrect;
 
-import ch.qos.logback.core.CoreConstants;
+
 
 /* loaded from: classes2.dex */
 public class AutoHomeInfoPlayback extends X8BaseMessage {
@@ -81,6 +81,6 @@ public class AutoHomeInfoPlayback extends X8BaseMessage {
 
     @Override // com.fimi.x8sdk.dataparser.X8BaseMessage
     public String toString() {
-        return "AutoHomeInfoPlayback{homeLongitude=" + this.homeLongitude + ", homeLatitude=" + this.homeLatitude + ", height=" + this.height + ", homePointAccuracy=" + this.homePointAccuracy + ", homePointType=" + this.homePointType + ", homePointStatus=" + this.homePointStatus + CoreConstants.CURLY_RIGHT;
+        return "AutoHomeInfoPlayback{homeLongitude=" + this.homeLongitude + ", homeLatitude=" + this.homeLatitude + ", height=" + this.height + ", homePointAccuracy=" + this.homePointAccuracy + ", homePointType=" + this.homePointType + ", homePointStatus=" + this.homePointStatus + '}';
     }
 }
