@@ -145,6 +145,11 @@ public class X8sMainActivity extends X8BaseActivity implements ConnectListener, 
     private BallProgress mX8MainBallProgress;
     private PlaneAngleSeekBar mX8MainPlaneAngleSeekBar;
 
+
+    private volatile boolean mHidePoseBallAndMap = true;
+
+    private RelativeLayout mX8MainPoseBallContainer;
+
     private void i(boolean z2) {
         this.mX8MainPlaneAngleSeekBar.setVisibility(z2 ? View.VISIBLE : View.GONE);
         if (z2) {
@@ -574,6 +579,8 @@ public class X8sMainActivity extends X8BaseActivity implements ConnectListener, 
             mX8MainRightMenuController.showCameraView(!isVideo);
             mX8RightIconForMapController.switch2Map(!isVideo);
             mX8AiTaskManager.switchMapVideo(isVideo);
+            mX8MainDeviceNorthView.setVisibility(isVideo ? View.GONE : View.VISIBLE);
+            mX8MainPoseBallContainer.setVisibility(isVideo ? View.GONE : View.VISIBLE);
             if (!isVideo) {
                 x8CameraInterestMeteringController.setIvInterestMeteringVisibility(ivInterestMeteringVisibilityState);
                 mX8MainBottomParameterController.openUiByMapChange();
@@ -583,7 +590,16 @@ public class X8sMainActivity extends X8BaseActivity implements ConnectListener, 
             x8CameraInterestMeteringController.setIvInterestMeteringVisibility(8);
             mX8MainBottomParameterController.closeUi();
         }
+
+        @Override
+        public void hidePoseBallAndMap() {
+            mHidePoseBallAndMap = !mHidePoseBallAndMap;
+            mMapVideoController.getRlSmallScreen().setVisibility(!mHidePoseBallAndMap ? View.GONE : View.VISIBLE);
+            mX8MainDeviceNorthView.setVisibility(mHidePoseBallAndMap ? View.VISIBLE : View.GONE);
+            mX8MainPoseBallContainer.setVisibility(mHidePoseBallAndMap ? View.VISIBLE : View.GONE);;
+        }
     };
+
     private X8UpdateHintController x8UpdateHintController;
     private X8ScreenEnum mAppScreen = X8ScreenEnum.NORMAL;
     public IX8GestureListener mIX8GestureListener = new IX8GestureListener() {
@@ -747,6 +763,7 @@ public class X8sMainActivity extends X8BaseActivity implements ConnectListener, 
         this.mX8MainDeviceNorthView = findViewById(R.id.device_north_view);
         this.mX8MainBallProgress = findViewById(R.id.plane_pitching_progress);
         this.mX8MainPlaneAngleSeekBar = findViewById(R.id.plane_angle_seek_bar);
+        mX8MainPoseBallContainer = findViewById(R.id.pose_ball_container);
 
         this.mMapVideoController = new X8MapVideoController(this.mainRootView, savedInstanceState, this);
         this.mMapVideoController.setListener(this.mIX8MapVideoControllerListerner);
@@ -1161,7 +1178,7 @@ public class X8sMainActivity extends X8BaseActivity implements ConnectListener, 
     }
 
     @Override
-    public void showSportState(AutoFcSportState state) {
+    public void showSportState(@NonNull AutoFcSportState state) {
         int orientation = (int) this.mX8MainPlaneAngleSeekBar.a(state.getLongitude(), state.getLatitude());
         this.mX8MainPlaneAngleSeekBar.setPlaneOrientation(orientation);
 

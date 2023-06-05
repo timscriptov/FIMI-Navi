@@ -23,10 +23,10 @@ public abstract class AbsX8Controllers implements IControllers {
         getDroneState();
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void openUi() {
         if (this.handleView != null) {
-            this.handleView.setVisibility(0);
+            this.handleView.setVisibility(View.VISIBLE);
         }
     }
 
@@ -44,10 +44,10 @@ public abstract class AbsX8Controllers implements IControllers {
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void closeUi() {
         if (this.handleView != null) {
-            this.handleView.setVisibility(8);
+            this.handleView.setVisibility(View.GONE);
         }
     }
 
@@ -78,25 +78,16 @@ public abstract class AbsX8Controllers implements IControllers {
     }
 
     public boolean isGpsOrVpu() {
-        if (this.ctrlType != 2 && this.ctrlType != 3) {
-            return false;
-        }
-        return true;
+        return this.ctrlType == 2 || this.ctrlType == 3;
     }
 
     public boolean isAtti() {
         getDroneState();
-        if (this.ctrlType != 1) {
-            return false;
-        }
-        return true;
+        return this.ctrlType == 1;
     }
 
     public boolean isVpu() {
         getDroneState();
-        if (this.ctrlType != 3) {
-            return false;
-        }
-        return true;
+        return this.ctrlType == 3;
     }
 }

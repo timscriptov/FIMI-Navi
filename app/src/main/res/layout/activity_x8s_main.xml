@@ -11,11 +11,11 @@
         android:id="@+id/pose_ball_container"
         android:layout_width="150.33dp"
         android:layout_height="150.33dp"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="8dp"
-        app:layout_marginBottomPercent="10.46875%w"
-        app:layout_marginLeftPercent="10.46875%w">
+        app:layout_marginLeftPercent="10.46875%w"
+        app:layout_marginTopPercent="5.46875%w">
 
         <com.fimi.app.x8s.widget.BallProgress
             android:id="@+id/plane_pitching_progress"
@@ -49,7 +49,6 @@
             app:csb_thumbDrawable="@drawable/x8s_main_plane_angle"
             app:csb_thumbSize="26dp" />
     </RelativeLayout>
-
 
     <include layout="@layout/x8_camera_interest_merering_contering" />
 

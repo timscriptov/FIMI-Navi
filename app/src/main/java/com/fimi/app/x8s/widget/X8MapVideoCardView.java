@@ -196,11 +196,11 @@ public class X8MapVideoCardView extends ViewGroup {
     }
 
     public void resetShow() {
-        this.indexs[1].setVisibility(0);
+        this.indexs[1].setVisibility(View.VISIBLE);
     }
 
     public void disShowSmall() {
-        this.indexs[1].setVisibility(4);
+        this.indexs[1].setVisibility(View.INVISIBLE);
     }
 
     @Override

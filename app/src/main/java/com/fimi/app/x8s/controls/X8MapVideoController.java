@@ -9,9 +9,11 @@ import android.os.Environment;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 
 import com.fimi.android.app.R;
 import com.fimi.app.x8s.controls.gimbal.X8GimbalAdjustController;
@@ -25,7 +27,6 @@ import com.fimi.app.x8s.interfaces.IX8MapVideoControllerListerner;
 import com.fimi.app.x8s.map.GglMap;
 import com.fimi.app.x8s.map.interfaces.AbsFimiMap;
 import com.fimi.app.x8s.media.FimiH264Video;
-import com.fimi.app.x8s.media.IFrameDataListener;
 import com.fimi.app.x8s.tools.X8sNavigationBarUtils;
 import com.fimi.app.x8s.widget.X8MapVideoCardView;
 import com.fimi.kernel.Constants;
@@ -44,32 +45,27 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-/* loaded from: classes.dex */
 public class X8MapVideoController implements View.OnClickListener, IControllers, VideodDataListener, NoFlyLinstener {
     public static FileOutputStream outputStream;
     AbsFimiMap mFimiMap;
     private X8GimbalAdjustController adjustController;
     private int drawNoFlightZoneCount;
     private FimiH264Video fimiVideoView;
-    private int h;
     private boolean isPushDataToPlayer;
     private IX8MapVideoControllerListerner listener;
-    private Activity mActivity;
-    private Context mContext;
+    private final Activity mActivity;
+    private final Context mContext;
     private ViewGroup.LayoutParams mLayoutParams;
     private X8MapVideoCardView mapVideoCardView;
     private ViewGroup.MarginLayoutParams marginLayoutParams;
-    private int oldh;
-    private int oldw;
     private RelativeLayout rlFullScreen;
     private RelativeLayout rlShotScreen;
     private RelativeLayout rlSmallScreen;
     private RelativeLayout rlSwitchScreen;
     private TextView tvVedioFrame;
     private VideoManager videoManager;
-    private int w;
 
-    public X8MapVideoController(View rootView, Bundle savedInstanceState, Activity activity) {
+    public X8MapVideoController(@NonNull View rootView, Bundle savedInstanceState, Activity activity) {
         this.mActivity = activity;
         this.mContext = rootView.getContext();
         if (GlobalConfig.getInstance().getMapType() != MapType.AMap && !Constants.isFactoryApp()) {
@@ -100,49 +96,49 @@ public class X8MapVideoController implements View.OnClickListener, IControllers,
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void initActions() {
         this.rlSwitchScreen.setOnClickListener(this);
+        this.mapSwitchPoseBallButton.setOnClickListener(this);
         StateManager.getInstance().registerNoFlyListener(this);
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void openUi() {
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void closeUi() {
         this.drawNoFlightZoneCount = 0;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public void defaultVal() {
         if (this.mFimiMap != null) {
             this.mFimiMap.defaultMapValue();
         }
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    @Override
     public boolean onClickBackKey() {
         return false;
     }
 
-    @Override // com.fimi.app.x8s.interfaces.IControllers
+    private ImageButton mapSwitchPoseBallButton;
+
+    @Override
     public void initViews(View rootView) {
         this.adjustController = new X8GimbalAdjustController(rootView);
-        this.rlSwitchScreen = (RelativeLayout) rootView.findViewById(R.id.rl_switchscreen);
-        this.rlFullScreen = (RelativeLayout) rootView.findViewById(R.id.rl_fullscreen);
-        this.rlSmallScreen = (RelativeLayout) rootView.findViewById(R.id.rl_smallscreen);
-        this.rlShotScreen = (RelativeLayout) rootView.findViewById(R.id.rl_fullscreen_shot);
-        this.rlSmallScreen.setVisibility(0);
-        this.mapVideoCardView = (X8MapVideoCardView) rootView.findViewById(R.id.cv_map_video);
+        this.rlSwitchScreen = rootView.findViewById(R.id.rl_switchscreen);
+        this.rlFullScreen = rootView.findViewById(R.id.rl_fullscreen);
+        this.rlSmallScreen = rootView.findViewById(R.id.rl_smallscreen);
+        this.rlShotScreen = rootView.findViewById(R.id.rl_fullscreen_shot);
+        this.rlSmallScreen.setVisibility(View.VISIBLE);
+        this.mapVideoCardView = rootView.findViewById(R.id.cv_map_video);
         this.fimiVideoView = new FimiH264Video(rootView.getContext());
-        this.tvVedioFrame = (TextView) rootView.findViewById(R.id.tv_vedio_frame);
-        this.fimiVideoView.setmIFrameDataListener(new IFrameDataListener() { // from class: com.fimi.app.x8s.controls.X8MapVideoController.1
-            @Override // com.fimi.app.x8s.media.IFrameDataListener
-            public void onCountFrame(int count, int remainder, int fpvSize) {
-                X8MapVideoController.this.tvVedioFrame.setText(count + " / " + remainder + " / " + fpvSize + "/" + JsonDataChanel.testString);
-            }
+        this.tvVedioFrame = rootView.findViewById(R.id.tv_vedio_frame);
+        this.fimiVideoView.setmIFrameDataListener((count, remainder, fpvSize) -> {
+            X8MapVideoController.this.tvVedioFrame.setText(count + " / " + remainder + " / " + fpvSize + "/" + JsonDataChanel.testString);
         });
         this.rlSmallScreen.addView(this.mFimiMap.getMapView());
         this.rlFullScreen.addView(this.fimiVideoView);
@@ -158,29 +154,40 @@ public class X8MapVideoController implements View.OnClickListener, IControllers,
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        this.mapSwitchPoseBallButton = rootView.findViewById(R.id.map_switch_pose_ball_button);
+
         setSmallViewListener();
     }
 
+    public ImageButton getMapSwitchPoseBallButton() {
+        return mapSwitchPoseBallButton;
+    }
+
+
     public AbsFimiMap getFimiMap() {
-        return this.mFimiMap;
+        return mFimiMap;
     }
 
     public void changeCamera() {
-        if (this.mFimiMap instanceof GglMap) {
+        if (mFimiMap instanceof GglMap) {
         }
     }
 
-    @Override // android.view.View.OnClickListener
-    public void onClick(View v) {
+    @Override
+    public void onClick(@NonNull View v) {
         int id = v.getId();
         if (id == R.id.rl_switchscreen) {
             switchMapVideo();
+        } else if (id == R.id.map_switch_pose_ball_button) {
+            listener.hidePoseBallAndMap();
         }
     }
 
     public void switchMapVideo() {
-        this.listener.switchMapVideo(this.mapVideoCardView.isFullVideo());
-        if (!this.mapVideoCardView.isFullVideo()) {
+        boolean isFullVideo = mapVideoCardView.isFullVideo();
+        this.listener.switchMapVideo(isFullVideo);
+        mapSwitchPoseBallButton.setVisibility(isFullVideo ? View.GONE : View.VISIBLE);
+        if (!isFullVideo) {
             adjustFullScreenFimiVideoLayout();
         } else {
             adjustSmallScreenFimiVideoLayout();
@@ -192,50 +199,39 @@ public class X8MapVideoController implements View.OnClickListener, IControllers,
         this.listener = listener;
     }
 
-    public void drawNoFlightZone(AckNoFlyNormal flyNormal) {
+    public void drawNoFlightZone(@NonNull AckNoFlyNormal flyNormal) {
         this.mFimiMap.clearNoFlightZone();
         switch (flyNormal.getPolygonShape()) {
-            case 0:
-                this.mFimiMap.drawNoFlightZone(flyNormal, NoFlyZoneEnum.CIRCLE);
-                return;
-            case 1:
-                this.mFimiMap.drawNoFlightZone(flyNormal, NoFlyZoneEnum.CIRCLE);
-                return;
-            case 2:
-                this.mFimiMap.drawNoFlightZone(flyNormal, NoFlyZoneEnum.CANDY);
-                return;
-            case 3:
-                this.mFimiMap.drawNoFlightZone(flyNormal, NoFlyZoneEnum.IRREGULAR);
-                return;
-            default:
-                this.mFimiMap.clearNoFlightZone();
-                return;
+            case 0, 1 -> this.mFimiMap.drawNoFlightZone(flyNormal, NoFlyZoneEnum.CIRCLE);
+            case 2 -> this.mFimiMap.drawNoFlightZone(flyNormal, NoFlyZoneEnum.CANDY);
+            case 3 -> this.mFimiMap.drawNoFlightZone(flyNormal, NoFlyZoneEnum.IRREGULAR);
+            default -> this.mFimiMap.clearNoFlightZone();
         }
     }
 
     public void switchDrawingOrderForAiFollow() {
         this.mapVideoCardView.switchDrawingOrderForAiFollow();
-        this.rlSwitchScreen.setVisibility(8);
+        this.rlSwitchScreen.setVisibility(View.GONE);
     }
 
     public void disShowSmall() {
         this.mapVideoCardView.disShowSmall();
-        this.rlSwitchScreen.setVisibility(8);
+        this.rlSwitchScreen.setVisibility(View.GONE);
     }
 
     public void resetShow() {
         this.mapVideoCardView.resetShow();
-        this.rlSwitchScreen.setVisibility(0);
+        this.rlSwitchScreen.setVisibility(View.VISIBLE);
     }
 
-    @Override // com.fimi.kernel.connect.session.VideodDataListener
+    @Override
     public void onRawdataCallBack(byte[] data) {
         if (isPushDataToPlayer()) {
             this.fimiVideoView.onRawdataCallBack(data);
         }
     }
 
-    public void writeData(byte[] cmd) {
+    public void writeData(@NonNull byte[] cmd) {
         try {
             int length = cmd.length;
             byte[] bytes = new byte[14];
@@ -249,7 +245,7 @@ public class X8MapVideoController implements View.OnClickListener, IControllers,
         }
     }
 
-    @Override // com.fimi.x8sdk.listener.NoFlyLinstener
+    @Override
     public void showNoFly(AckNoFlyNormal flyNormal) {
         this.drawNoFlightZoneCount++;
         if (this.drawNoFlightZoneCount % 19 == 3) {
@@ -290,6 +286,22 @@ public class X8MapVideoController implements View.OnClickListener, IControllers,
 
     public FimiH264Video getVideoView() {
         return this.fimiVideoView;
+    }
+
+    public RelativeLayout getRlFullScreen() {
+        return rlFullScreen;
+    }
+
+    public RelativeLayout getRlSmallScreen() {
+        return rlSmallScreen;
+    }
+
+    public X8MapVideoCardView getMapVideoCardView() {
+        return mapVideoCardView;
+    }
+
+    public RelativeLayout getRlSwitchScreen() {
+        return rlSwitchScreen;
     }
 
     public void showVideoBg(boolean b) {
@@ -343,12 +355,7 @@ public class X8MapVideoController implements View.OnClickListener, IControllers,
     }
 
     public void setSmallViewListener() {
-        this.rlSwitchScreen.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() { // from class: com.fimi.app.x8s.controls.X8MapVideoController.2
-            @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
-            public void onGlobalLayout() {
-                X8MapVideoController.this.mapVideoCardView.changeSmallSize();
-            }
-        });
+        this.rlSwitchScreen.getViewTreeObserver().addOnGlobalLayoutListener(() -> X8MapVideoController.this.mapVideoCardView.changeSmallSize());
     }
 
     private void adjustFullScreenFimiVideoLayout() {
