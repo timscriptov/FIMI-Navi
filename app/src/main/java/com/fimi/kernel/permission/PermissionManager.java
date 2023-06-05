@@ -123,7 +123,7 @@ public class PermissionManager {
 
     public static final boolean isLocationEnable(Context context) {
         if (Build.VERSION.SDK_INT >= 23) {
-            LocationManager locationManager = (LocationManager) context.getSystemService("location");
+            LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
             boolean networkProvider = locationManager.isProviderEnabled(BlockInfo.KEY_NETWORK);
             boolean gpsProvider = locationManager.isProviderEnabled("gps");
             return networkProvider || gpsProvider;

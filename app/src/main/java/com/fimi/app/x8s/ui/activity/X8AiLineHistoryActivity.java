@@ -38,13 +38,11 @@ public class X8AiLineHistoryActivity extends AppCompatActivity implements TabLay
     private TabLayout mTlTitleCategoly;
 
     @Override
-    // android.app.Activity, android.view.ContextThemeWrapper, android.content.ContextWrapper
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(LanguageUtil.attachBaseContext(newBase));
     }
 
     @Override
-    // android.support.v7.app.AppCompatActivity, android.support.v4.app.FragmentActivity, android.support.v4.app.SupportActivity, android.app.Activity
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(1);

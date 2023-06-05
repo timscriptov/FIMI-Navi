@@ -109,13 +109,11 @@ public class X8GimbalPresenter extends BasePresenter implements IGbAciton {
     }
 
     @Override
-    // com.fimi.x8sdk.common.BasePresenter, com.fimi.kernel.connect.interfaces.IPersonalDataCallBack
     public void onPersonalDataCallBack(int groupId, int msgId, ILinkMessage packet) {
         reponseCmd(true, groupId, msgId, packet, null);
     }
 
     @Override
-    // com.fimi.x8sdk.common.BasePresenter, com.fimi.kernel.connect.interfaces.IPersonalDataCallBack
     public void onPersonalSendTimeOut(int groupId, int msgId, BaseCommand bcd) {
         reponseCmd(false, groupId, msgId, null, bcd);
     }

@@ -122,7 +122,6 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
     }
 
     @Override
-    // com.fimi.app.x8s.interfaces.AbsX8AiController, com.fimi.app.x8s.interfaces.AbsX8Controllers, com.fimi.app.x8s.interfaces.IControllers
     public void openUi() {
         LayoutInflater inflater = LayoutInflater.from(this.rootView.getContext());
         this.handleView = inflater.inflate(R.layout.x8_ai_gravitation_layout, (ViewGroup) this.rootView, true);
@@ -158,7 +157,6 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
     }
 
     @Override
-    // com.fimi.app.x8s.interfaces.AbsX8AiController, com.fimi.app.x8s.interfaces.AbsX8Controllers, com.fimi.app.x8s.interfaces.IControllers
     public void closeUi() {
         super.closeUi();
         this.activity.getmX8AiTrackController().closeUi();

@@ -228,7 +228,6 @@ public class LoginActivity extends BaseActivity implements IThirdLoginView, Bitm
     }
 
     @Override
-    // com.fimi.kernel.base.BaseActivity, android.support.v4.app.FragmentActivity, android.app.Activity
     public void onResume() {
         super.onResume();
         if (Constants.isShowUserProtocol && !SPStoreManager.getInstance().getBoolean(HostConstants.USER_PROTOCOL, false)) {
@@ -282,7 +281,6 @@ public class LoginActivity extends BaseActivity implements IThirdLoginView, Bitm
     }
 
     @Override
-    // com.fimi.kernel.base.BaseActivity, android.support.v7.app.AppCompatActivity, android.support.v4.app.FragmentActivity, android.app.Activity
     public void onDestroy() {
         super.onDestroy();
         if (this.mLargeView != null) {
@@ -292,21 +290,18 @@ public class LoginActivity extends BaseActivity implements IThirdLoginView, Bitm
     }
 
     @Override
-    // android.support.v7.app.AppCompatActivity, android.support.v4.app.FragmentActivity, android.app.Activity
     public void onStop() {
         super.onStop();
         NetworkLoadManage.dismiss();
     }
 
     @Override
-    // com.fimi.kernel.base.BaseActivity, android.support.v4.app.FragmentActivity, android.app.Activity
     public void onPause() {
         super.onPause();
         NetworkLoadManage.dismiss();
     }
 
     @Override
-    // android.support.v7.app.AppCompatActivity, android.support.v4.app.FragmentActivity, android.support.v4.app.SupportActivity, android.app.Activity
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
     }

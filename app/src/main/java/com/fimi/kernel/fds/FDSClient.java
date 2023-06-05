@@ -2,6 +2,8 @@ package com.fimi.kernel.fds;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.alibaba.fastjson.JSON;
 import com.fimi.host.HostConstants;
 import com.fimi.kernel.network.okhttp.CommonOkHttpClient;
@@ -37,7 +39,7 @@ public class FDSClient extends BaseManager {
     private Call postFdsUrlCall;
     private Call reqeuestFdsUrlCall;
 
-    public void startUpload(IFdsFileModel model, IFdsUploadListener listener) throws IOException {
+    public void startUpload(@NonNull IFdsFileModel model, IFdsUploadListener listener) throws IOException {
         this.mZip2Fds = new Zip2Fds();
         boolean b = this.mZip2Fds.log2Zip(model.getFile(), model.getNeedZipFileBySuffix());
         Log.i("istep", "mZip2Fds=" + b);
@@ -63,7 +65,7 @@ public class FDSClient extends BaseManager {
         }
     }
 
-    public void requesetFdsUrl(String fileName, final IFdsFileModel model) {
+    public void requesetFdsUrl(String fileName, @NonNull final IFdsFileModel model) {
         String name;
         RequestParams requestParams = getRequestParams();
         requestParams.put("bucketName", "x8-fclog");
@@ -93,7 +95,7 @@ public class FDSClient extends BaseManager {
         lockedModel();
     }
 
-    public void upload2Fds(IFdsFileModel model, IFdsUploadListener listener) throws IOException {
+    public void upload2Fds(@NonNull IFdsFileModel model, IFdsUploadListener listener) throws IOException {
         String url = model.getFileFdsUrl();
         OkHttpClient client = new OkHttpClient();
         MultipartBody.Builder builder = new MultipartBody.Builder();
@@ -134,7 +136,7 @@ public class FDSClient extends BaseManager {
         }
     }
 
-    public void saveFdsUrl2Fimi(String fileName, final IFdsFileModel model) {
+    public void saveFdsUrl2Fimi(@NonNull String fileName, final IFdsFileModel model) {
         RequestParams requestParams = getRequestParams();
         requestParams.put("droneId", "x8");
         requestParams.put("logOwnerId", HostConstants.getUserDetail().getFimiId());
@@ -173,7 +175,7 @@ public class FDSClient extends BaseManager {
         lockedModel();
     }
 
-    public void saveFdsUrl2FimiPlayback(final IFdsFileModel model) {
+    public void saveFdsUrl2FimiPlayback(@NonNull final IFdsFileModel model) {
         String fileName;
         RequestParams requestParams = getRequestParams();
         requestParams.put("fimiId", HostConstants.getUserDetail().getFimiId());

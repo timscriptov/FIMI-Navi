@@ -1,5 +1,7 @@
 package com.fimi.kernel.fds;
 
+import androidx.annotation.NonNull;
+
 import com.file.zip.ZipEntry;
 import com.file.zip.ZipOutputStream;
 import com.fimi.kernel.utils.FileUtil;
@@ -23,7 +25,7 @@ public class Zip2Fds {
     private boolean isStop;
     private ZipOutputStream zos = null;
 
-    public boolean log2Zip(File file, String[] suffix) {
+    public boolean log2Zip(@NonNull File file, String[] suffix) {
         String zipName = file.getName() + ".zip";
         List<File> list = FileUtil.listFiles3(file, suffix);
         if (list == null || list.size() <= 0) {

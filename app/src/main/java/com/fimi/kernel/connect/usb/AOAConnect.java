@@ -7,6 +7,8 @@ import android.hardware.usb.UsbManager;
 import android.os.ParcelFileDescriptor;
 import android.os.SystemClock;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.host.CmdLogBack;
 import com.fimi.kernel.connect.BaseCommand;
 import com.fimi.kernel.connect.BaseConnect;
@@ -58,11 +60,11 @@ public class AOAConnect extends BaseConnect implements IDataTransfer, IRetransmi
     private boolean isConnect = false;
     private X8JsonCmdDeque mX8JsonCmdDeque = new X8JsonCmdDeque(this);
 
-    public AOAConnect(Context mContext, UsbAccessory usbAccessory, ResultListener resultListener, IUSBStatusListener mIAoaConnectListener) {
+    public AOAConnect(@NonNull Context mContext, UsbAccessory usbAccessory, ResultListener resultListener, IUSBStatusListener mIAoaConnectListener) {
         this.isAoaDeviceConecect = false;
         this.mContext = mContext;
         this.resultListener = resultListener;
-        this.usbManager = (UsbManager) mContext.getSystemService("usb");
+        this.usbManager = (UsbManager) mContext.getSystemService(Context.USB_SERVICE);
         this.mAccessory = usbAccessory;
         this.mIAoaConnectListener = mIAoaConnectListener;
         this.isAoaDeviceConecect = false;

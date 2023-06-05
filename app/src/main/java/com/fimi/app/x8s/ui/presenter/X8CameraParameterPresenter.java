@@ -7,12 +7,10 @@ import com.fimi.x8sdk.common.BasePresenter;
 
 public class X8CameraParameterPresenter extends BasePresenter {
     @Override
-    // com.fimi.x8sdk.common.BasePresenter, com.fimi.kernel.connect.interfaces.IPersonalDataCallBack
     public void onPersonalDataCallBack(int groupId, int cmdId, ILinkMessage packet) {
     }
 
     @Override
-    // com.fimi.x8sdk.common.BasePresenter, com.fimi.kernel.connect.interfaces.IPersonalDataCallBack
     public void onPersonalSendTimeOut(int groupId, int cmdId, BaseCommand bcd) {
     }
 
@@ -29,7 +27,6 @@ public class X8CameraParameterPresenter extends BasePresenter {
     }
 
     @Override
-    // com.fimi.x8sdk.common.BasePresenter, com.fimi.kernel.connect.interfaces.IDataCallBack
     public void onDataCallBack(int groupId, int cmdId, ILinkMessage packet) {
     }
 }

@@ -6,6 +6,8 @@ import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import androidx.annotation.NonNull;
+
 
 public class PercentFrameLayout extends FrameLayout {
     private final PercentLayoutHelper mHelper;
@@ -70,12 +72,12 @@ public class PercentFrameLayout extends FrameLayout {
             super(source);
         }
 
-        public LayoutParams(FrameLayout.LayoutParams source) {
+        public LayoutParams(@NonNull FrameLayout.LayoutParams source) {
             super((ViewGroup.MarginLayoutParams) source);
             this.gravity = source.gravity;
         }
 
-        public LayoutParams(LayoutParams source) {
+        public LayoutParams(@NonNull LayoutParams source) {
             this((FrameLayout.LayoutParams) source);
             this.mPercentLayoutInfo = source.mPercentLayoutInfo;
         }

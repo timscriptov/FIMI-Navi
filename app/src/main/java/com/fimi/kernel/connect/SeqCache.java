@@ -7,10 +7,9 @@ public class SeqCache {
     private final int[] seqIndex = new int[100];
 
     public void add2SeqCache(int seq) {
-        int[] iArr = this.seqIndex;
         int i = this.index;
         this.index = i + 1;
-        iArr[i] = seq;
+        this.seqIndex[i] = seq;
         if (this.index == 100) {
             this.index = 0;
         }

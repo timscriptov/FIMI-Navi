@@ -19,23 +19,19 @@ public class X8LocalMediaLocalFragment extends X8MediaBaseFragment {
     }
 
     @Override
-    // com.fimi.app.x8s.ui.album.x8s.X8MediaBaseFragment, com.fimi.kernel.base.BaseFragment
     protected void initData(View view) {
     }
 
     @Override
-    // com.fimi.app.x8s.ui.album.x8s.X8MediaBaseFragment, com.fimi.kernel.base.BaseFragment
     public int getLayoutId() {
         return 0;
     }
 
     @Override
-    // com.fimi.app.x8s.ui.album.x8s.X8MediaBaseFragment, com.fimi.kernel.base.BaseFragment
     protected void doTrans() {
     }
 
     @Override
-    // com.fimi.app.x8s.ui.album.x8s.X8MediaBaseFragment, com.fimi.kernel.base.BaseFragment
     protected void initMVP() {
     }
 

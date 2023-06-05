@@ -69,7 +69,6 @@ public class X8UpdateDetailActivity extends BaseActivity implements IUpdateCheck
     }
 
     @Override
-    // com.fimi.kernel.base.BaseActivity, android.support.v4.app.FragmentActivity, android.app.Activity
     public void onResume() {
         super.onResume();
         X8UpdateCheckManager.getInstance().setOnIUpdateCheckAction(this, this);
@@ -92,7 +91,6 @@ public class X8UpdateDetailActivity extends BaseActivity implements IUpdateCheck
     }
 
     @Override
-    // com.fimi.kernel.base.BaseActivity, android.support.v7.app.AppCompatActivity, android.support.v4.app.FragmentActivity, android.app.Activity
     public void onDestroy() {
         super.onDestroy();
     }

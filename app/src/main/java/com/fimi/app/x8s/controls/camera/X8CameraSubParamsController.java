@@ -76,7 +76,6 @@ public class X8CameraSubParamsController extends AbsX8Controllers implements Sub
     }
 
     @Override
-    // com.fimi.app.x8s.interfaces.AbsX8Controllers, com.fimi.app.x8s.interfaces.IControllers
     public void openUi() {
         super.openUi();
         this.paramsAdapter.updateData(this.subParam);

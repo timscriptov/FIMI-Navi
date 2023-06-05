@@ -279,20 +279,17 @@ public class FindeNewFwDownActivity extends BaseActivity implements IFirmwareDow
     }
 
     @Override
-    // android.support.v7.app.AppCompatActivity, android.support.v4.app.FragmentActivity, android.app.Activity
     public void onStop() {
         super.onStop();
     }
 
     @Override
-    // com.fimi.kernel.base.BaseActivity, android.support.v7.app.AppCompatActivity, android.support.v4.app.FragmentActivity, android.app.Activity
     public void onDestroy() {
         super.onDestroy();
         this.downFirmwarePresenter.removerDownNoticeLisnter();
     }
 
     @Override
-    // android.support.v7.app.AppCompatActivity, android.app.Activity, android.view.KeyEvent.Callback
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == 4) {
             finish();

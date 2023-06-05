@@ -7,7 +7,6 @@ import org.apache.mina.core.session.IoSession;
 
 public class ProtocolObjFilter extends IoFilterAdapter {
     @Override
-    // org.apache.mina.core.filterchain.IoFilterAdapter, org.apache.mina.core.filterchain.IoFilter
     public void messageReceived(IoFilter.NextFilter nextFilter, IoSession session, Object message) throws Exception {
     }
 }

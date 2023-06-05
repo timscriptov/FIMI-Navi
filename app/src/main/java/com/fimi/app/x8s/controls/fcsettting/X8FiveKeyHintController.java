@@ -51,7 +51,6 @@ public class X8FiveKeyHintController extends AbsX8MenuBoxControllers implements 
     }
 
     @Override
-    // com.fimi.app.x8s.interfaces.AbsX8Controllers, com.fimi.app.x8s.interfaces.IControllers
     public void closeUi() {
         super.closeUi();
         this.isShow = false;
@@ -62,7 +61,6 @@ public class X8FiveKeyHintController extends AbsX8MenuBoxControllers implements 
     }
 
     @Override
-    // com.fimi.app.x8s.interfaces.AbsX8Controllers, com.fimi.app.x8s.interfaces.IControllers
     public void openUi() {
         super.openUi();
         this.isShow = true;

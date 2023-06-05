@@ -84,7 +84,6 @@ public class AppBlockCanaryContext extends BlockCanaryContext {
     }
 
     @Override
-    // com.github.moduth.blockcanary.BlockCanaryContext, com.github.moduth.blockcanary.BlockInterceptor
     public void onBlock(Context context, BlockInfo blockInfo) {
     }
 }

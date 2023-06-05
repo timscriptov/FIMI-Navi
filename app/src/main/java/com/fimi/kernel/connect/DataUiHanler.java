@@ -4,13 +4,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.kernel.connect.interfaces.IPersonalDataCallBack;
 import com.fimi.kernel.dataparser.ILinkMessage;
 
 
 public class DataUiHanler extends Handler {
     @Override
-    public void handleMessage(Message msg) {
+    public void handleMessage(@NonNull Message msg) {
         Bundle bundle = msg.getData();
         IPersonalDataCallBack callBack = (IPersonalDataCallBack) msg.obj;
         switch (msg.what) {

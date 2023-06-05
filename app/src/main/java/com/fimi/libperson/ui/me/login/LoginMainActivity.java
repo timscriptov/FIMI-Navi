@@ -301,7 +301,6 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
     }
 
     @Override
-    // android.support.v7.app.AppCompatActivity, android.app.Activity, android.view.KeyEvent.Callback
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == 4) {
             if (this.mForgetPasswordFragment != null && this.mForgetPasswordFragment.isVisible()) {
@@ -355,7 +354,6 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
     }
 
     @Override
-    // com.fimi.libperson.ui.me.login.ForgetIphonePasswordFragment.OnResetIphonePasswordListerner
     public void resetIphoneSuccess() {
         this.fragmentManager.beginTransaction().hide(this.mForgetIphonePasswordFragment).commit();
         this.mForgetIphonePasswordFragment.setState(ForgetIphonePasswordFragment.State.IPHONE);

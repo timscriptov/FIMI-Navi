@@ -42,7 +42,6 @@ public class VideoPlayActivity extends BaseActivity implements CustomVideoView.V
     }
 
     @Override
-    // com.fimi.kernel.base.BaseActivity, android.support.v4.app.FragmentActivity, android.app.Activity
     public void onResume() {
         super.onResume();
         if (this.mVideoPlayerPresneter != null) {
@@ -51,7 +50,6 @@ public class VideoPlayActivity extends BaseActivity implements CustomVideoView.V
     }
 
     @Override
-    // android.support.v7.app.AppCompatActivity, android.support.v4.app.FragmentActivity, android.app.Activity
     public void onStop() {
         super.onStop();
         if (this.mVideoPlayerPresneter != null) {
@@ -60,7 +58,6 @@ public class VideoPlayActivity extends BaseActivity implements CustomVideoView.V
     }
 
     @Override
-    // com.fimi.kernel.base.BaseActivity, android.support.v7.app.AppCompatActivity, android.support.v4.app.FragmentActivity, android.app.Activity
     public void onDestroy() {
         super.onDestroy();
         this.mCustomVideoView.destory();
@@ -68,7 +65,6 @@ public class VideoPlayActivity extends BaseActivity implements CustomVideoView.V
     }
 
     @Override
-    // android.support.v7.app.AppCompatActivity, android.app.Activity, android.view.KeyEvent.Callback
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == 4) {
             finish();

@@ -11,14 +11,12 @@ public abstract class AbsX8AiController extends AbsX8Controllers {
     }
 
     @Override
-    // com.fimi.app.x8s.interfaces.AbsX8Controllers, com.fimi.app.x8s.interfaces.IControllers
     public void openUi() {
         super.openUi();
         X8Application.enableGesture = false;
     }
 
     @Override
-    // com.fimi.app.x8s.interfaces.AbsX8Controllers, com.fimi.app.x8s.interfaces.IControllers
     public void closeUi() {
         super.closeUi();
         X8Application.enableGesture = true;

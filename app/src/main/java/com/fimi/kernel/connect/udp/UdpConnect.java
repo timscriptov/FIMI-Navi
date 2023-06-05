@@ -2,6 +2,8 @@ package com.fimi.kernel.connect.udp;
 
 import android.os.SystemClock;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.kernel.connect.BaseCommand;
 import com.fimi.kernel.connect.BaseConnect;
 import com.fimi.kernel.connect.ResultListener;
@@ -59,7 +61,7 @@ public class UdpConnect extends BaseConnect implements IDataTransfer, IRetransmi
     }
 
     @Override
-    public void onSendTimeOut(int group_id, int cmdId, BaseCommand bcd) {
+    public void onSendTimeOut(int group_id, int cmdId, @NonNull BaseCommand bcd) {
         if (bcd.getPersonalDataCallBack() == null) {
             NoticeManager.getInstance().onSendTimeOut(group_id, cmdId, bcd);
         } else {
@@ -88,7 +90,7 @@ public class UdpConnect extends BaseConnect implements IDataTransfer, IRetransmi
         return this.mTimerSendQueueThread.removeFromListByCmdID(groupId, cmdId, seq, packet);
     }
 
-    public void sendDatas(BaseCommand cmd) {
+    public void sendDatas(@NonNull BaseCommand cmd) {
         if (cmd.getCmdData().length >= 1024) {
             Object[] newCmd = ByteUtil.splitAry(cmd.getCmdData(), 1024);
             for (Object object : newCmd) {

@@ -389,7 +389,6 @@ public class X8MainBottomParameterController extends AbsX8Controllers {
     }
 
     @Override
-    // com.fimi.app.x8s.interfaces.AbsX8Controllers, com.fimi.app.x8s.interfaces.IControllers
     public void openUi() {
         if (this.activity.getmMapVideoController().isFullVideo()) {
             super.openUi();

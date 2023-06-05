@@ -1,5 +1,7 @@
 package com.fimi.kernel.connect;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.kernel.connect.interfaces.IPersonalDataCallBack;
 import com.fimi.kernel.connect.usb.LinkMsgType;
 import com.fimi.kernel.dataparser.milink.LinkMessage;
@@ -70,7 +72,7 @@ public abstract class BaseCommand extends LinkMessage {
         this.unEncryptData = unEncryptData;
     }
 
-    public void fillUnEncryptData(LinkPacket packet) {
+    public void fillUnEncryptData(@NonNull LinkPacket packet) {
         if (packet.payload != null) {
             packet.payload.putBytes(this.unEncryptData);
         }
@@ -156,13 +158,11 @@ public abstract class BaseCommand extends LinkMessage {
     }
 
     @Override
-    // com.fimi.kernel.dataparser.milink.LinkMessage, com.fimi.kernel.dataparser.ILinkMessage
     public UiCallBackListener getUiCallBack() {
         return this.uiCallBack;
     }
 
     @Override
-    // com.fimi.kernel.dataparser.milink.LinkMessage, com.fimi.kernel.dataparser.ILinkMessage
     public void setUiCallBack(UiCallBackListener uiCallBack) {
         this.uiCallBack = uiCallBack;
     }

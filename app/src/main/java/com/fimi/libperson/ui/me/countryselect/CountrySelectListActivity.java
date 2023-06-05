@@ -46,7 +46,6 @@ public class CountrySelectListActivity extends BaseActivity implements StickyLis
     }
 
     @Override
-    // com.fimi.kernel.base.BaseActivity, android.support.v7.app.AppCompatActivity, android.support.v4.app.FragmentActivity, android.support.v4.app.SupportActivity, android.app.Activity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }

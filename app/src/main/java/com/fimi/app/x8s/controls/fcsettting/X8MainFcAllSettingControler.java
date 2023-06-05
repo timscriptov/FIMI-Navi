@@ -728,7 +728,6 @@ public class X8MainFcAllSettingControler extends AbsX8MenuBoxControllers impleme
     }
 
     @Override
-    // com.fimi.app.x8s.interfaces.AbsX8MenuBoxControllers, com.fimi.app.x8s.interfaces.IControllers
     public boolean onClickBackKey() {
         return false;
     }

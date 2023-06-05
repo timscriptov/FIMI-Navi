@@ -66,7 +66,6 @@ public class X8TestPresenter extends BasePresenter {
     }
 
     @Override
-    // com.fimi.x8sdk.common.BasePresenter, com.fimi.kernel.connect.interfaces.IDataCallBack
     public void onDataCallBack(int groupId, int msgId, ILinkMessage packet) {
         super.onDataCallBack(groupId, msgId, packet);
         if (groupId == 16) {

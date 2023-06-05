@@ -5,6 +5,8 @@ import android.bluetooth.BluetoothGattCharacteristic;
 import android.content.Context;
 import android.os.SystemClock;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.kernel.Constants;
 import com.fimi.kernel.connect.BaseCommand;
 import com.fimi.kernel.connect.BaseConnect;
@@ -79,7 +81,7 @@ public class BleConnect extends BaseConnect implements IDataTransfer, IRetransmi
     }
 
     @Override
-    public void sendTimeCmd(BaseCommand cmd) {
+    public void sendTimeCmd(@NonNull BaseCommand cmd) {
         sendDividedData(cmd.getMsgGroudId(), cmd.getMsgId(), cmd.getCmdData(), cmd.getCmdData().length);
     }
 
@@ -221,7 +223,7 @@ public class BleConnect extends BaseConnect implements IDataTransfer, IRetransmi
     }
 
     @Override
-    public void sendRestransmissionData(BaseCommand cmd) {
+    public void sendRestransmissionData(@NonNull BaseCommand cmd) {
         sendLog("" + hashCode() + " 重发数据 seq =" + cmd.getMsgSeq() + " " + Integer.toHexString(cmd.getMsgId()));
         sendDividedData(cmd.getMsgGroudId(), cmd.getMsgId(), cmd.getCmdData(), cmd.getCmdData().length);
     }

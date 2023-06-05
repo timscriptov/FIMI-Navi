@@ -162,19 +162,16 @@ public class X8UpdatePresenter extends BasePresenter implements IUpdateAction, U
     }
 
     @Override
-    // com.fimi.x8sdk.common.BasePresenter, com.fimi.kernel.connect.interfaces.IPersonalDataCallBack
     public void onPersonalDataCallBack(int groupId, int msgId, ILinkMessage packet) {
         reponseCmd(true, groupId, msgId, packet, null);
     }
 
     @Override
-    // com.fimi.x8sdk.common.BasePresenter, com.fimi.kernel.connect.interfaces.IDataCallBack
     public void onDataCallBack(int groupId, int msgId, ILinkMessage packet) {
         reponseCmd(true, groupId, msgId, packet, null);
     }
 
     @Override
-    // com.fimi.x8sdk.common.BasePresenter, com.fimi.kernel.connect.interfaces.IPersonalDataCallBack
     public void onPersonalSendTimeOut(int groupId, int msgId, BaseCommand bcd) {
         reponseCmd(false, groupId, msgId, null, bcd);
     }

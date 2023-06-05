@@ -195,7 +195,6 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
     }
 
     @Override
-    // com.fimi.app.x8s.interfaces.AbsX8AiController, com.fimi.app.x8s.interfaces.AbsX8Controllers, com.fimi.app.x8s.interfaces.IControllers
     public void openUi() {
         this.isShow = true;
         LayoutInflater inflater = LayoutInflater.from(this.rootView.getContext());
@@ -246,7 +245,6 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
     }
 
     @Override
-    // com.fimi.app.x8s.interfaces.AbsX8AiController, com.fimi.app.x8s.interfaces.AbsX8Controllers, com.fimi.app.x8s.interfaces.IControllers
     public void closeUi() {
         this.mX8AiSuroundState = X8AiSuroundState.IDLE;
         this.isShow = false;

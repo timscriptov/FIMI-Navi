@@ -2,6 +2,8 @@ package com.fimi.kernel.connect.tcp;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.kernel.connect.BaseCommand;
 import com.fimi.kernel.connect.BaseConnect;
 import com.fimi.kernel.connect.ResultListener;
@@ -26,7 +28,7 @@ public class TcpConnect extends BaseConnect implements Runnable {
     private WriteThread writeThread;
     private final ResultListener x9ResultListener;
 
-    public TcpConnect(com.fimi.kernel.connect.SocketOption option, ResultListener listener) {
+    public TcpConnect(@NonNull com.fimi.kernel.connect.SocketOption option, ResultListener listener) {
         this.autoConnect = false;
         this.socketOption = option;
         this.autoConnect = option.isAutoReconnect();
@@ -37,7 +39,7 @@ public class TcpConnect extends BaseConnect implements Runnable {
     public void run() {
     }
 
-    private void connectSocket(com.fimi.kernel.connect.SocketOption option) {
+    private void connectSocket(@NonNull com.fimi.kernel.connect.SocketOption option) {
         try {
             Log.d("moweiru", "cmd tcp connect success");
             this.socket = new Socket(option.getHost(), option.getPort());

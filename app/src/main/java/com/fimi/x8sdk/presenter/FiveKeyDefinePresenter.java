@@ -30,7 +30,6 @@ public class FiveKeyDefinePresenter extends BasePresenter implements IFiveKeyAct
     }
 
     @Override
-    // com.fimi.x8sdk.common.BasePresenter, com.fimi.kernel.connect.interfaces.IDataCallBack
     public void onDataCallBack(int groupId, int msgId, ILinkMessage packet) {
         super.onDataCallBack(groupId, msgId, packet);
         reponseCmd(true, groupId, msgId, packet, null);

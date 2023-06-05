@@ -1,7 +1,10 @@
 package com.fimi.kernel.connect.session;
 
+import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Message;
+
+import androidx.annotation.NonNull;
 
 import com.fimi.kernel.connect.BaseCommand;
 import com.fimi.kernel.connect.BaseConnect;
@@ -21,25 +24,26 @@ public class SessionManager {
     public boolean CONNECTION_SUCCEED = false;
     private BaseConnect mSession;
     private final CopyOnWriteArrayList<IConnectResultListener> list = new CopyOnWriteArrayList<>();
+    @SuppressLint("HandlerLeak")
     private final Handler mHanlder = new Handler() {
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(@NonNull Message msg) {
             switch (msg.what) {
                 case 0:
                     String clientMessage = (String) msg.obj;
                     if (clientMessage == null) {
                         clientMessage = "startSession";
                     }
-                    Iterator it = SessionManager.this.list.iterator();
+                    Iterator<IConnectResultListener> it = SessionManager.this.list.iterator();
                     while (it.hasNext()) {
-                        IConnectResultListener l = (IConnectResultListener) it.next();
+                        IConnectResultListener l = it.next();
                         l.onConnected(clientMessage);
                     }
                     return;
                 case 1:
-                    Iterator it2 = SessionManager.this.list.iterator();
+                    Iterator<IConnectResultListener> it2 = SessionManager.this.list.iterator();
                     while (it2.hasNext()) {
-                        IConnectResultListener l2 = (IConnectResultListener) it2.next();
+                        IConnectResultListener l2 = it2.next();
                         l2.onDisconnect("removeSession");
                     }
                     return;
@@ -47,23 +51,23 @@ public class SessionManager {
                 default:
                     return;
                 case 3:
-                    Iterator it3 = SessionManager.this.list.iterator();
+                    Iterator<IConnectResultListener> it3 = SessionManager.this.list.iterator();
                     while (it3.hasNext()) {
-                        IConnectResultListener l3 = (IConnectResultListener) it3.next();
+                        IConnectResultListener l3 = it3.next();
                         l3.onDeviceConnect();
                     }
                     return;
                 case 4:
-                    Iterator it4 = SessionManager.this.list.iterator();
+                    Iterator<IConnectResultListener> it4 = SessionManager.this.list.iterator();
                     while (it4.hasNext()) {
-                        IConnectResultListener l4 = (IConnectResultListener) it4.next();
+                        IConnectResultListener l4 = it4.next();
                         l4.onDeviceDisConnnect();
                     }
                     return;
                 case 5:
-                    Iterator it5 = SessionManager.this.list.iterator();
+                    Iterator<IConnectResultListener> it5 = SessionManager.this.list.iterator();
                     while (it5.hasNext()) {
-                        IConnectResultListener l5 = (IConnectResultListener) it5.next();
+                        IConnectResultListener l5 = it5.next();
                         l5.onConnectError("");
                     }
             }

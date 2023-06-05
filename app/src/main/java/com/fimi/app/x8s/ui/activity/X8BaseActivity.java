@@ -17,7 +17,6 @@ public class X8BaseActivity extends Activity {
     }
 
     @Override
-    // android.app.Activity, android.view.ContextThemeWrapper, android.content.ContextWrapper
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(LanguageUtil.attachBaseContext(newBase));
     }

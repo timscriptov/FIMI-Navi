@@ -74,7 +74,6 @@ public class X8UpdateCheckPresenter extends BasePresenter {
     }
 
     @Override
-    // com.fimi.x8sdk.common.BasePresenter, com.fimi.kernel.connect.interfaces.IDataCallBack
     public void onDataCallBack(int groupId, int msgId, ILinkMessage packet) {
         reponseCmd(true, groupId, msgId, packet, null);
     }

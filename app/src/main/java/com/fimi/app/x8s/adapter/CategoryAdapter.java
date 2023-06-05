@@ -38,13 +38,11 @@ public class CategoryAdapter extends FragmentStatePagerAdapter {
     }
 
     @Override
-    // android.support.v4.app.FragmentStatePagerAdapter, android.support.v4.view.PagerAdapter
     public Object instantiateItem(ViewGroup container, int position) {
         return super.instantiateItem(container, position);
     }
 
     @Override
-    // android.support.v4.app.FragmentStatePagerAdapter, android.support.v4.view.PagerAdapter
     public void destroyItem(ViewGroup container, int position, Object object) {
         super.destroyItem(container, position, object);
     }

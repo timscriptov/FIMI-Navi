@@ -445,7 +445,6 @@ public class X8CameraTakePhotoSettingContoller extends AbsX8Controllers implemen
     }
 
     @Override
-    // com.fimi.app.x8s.interfaces.AbsX8Controllers, com.fimi.app.x8s.interfaces.IControllers
     public void openUi() {
         super.openUi();
         this.paramController.openUi();
@@ -455,7 +454,6 @@ public class X8CameraTakePhotoSettingContoller extends AbsX8Controllers implemen
     }
 
     @Override
-    // com.fimi.app.x8s.interfaces.AbsX8Controllers, com.fimi.app.x8s.interfaces.IControllers
     public void closeUi() {
         super.closeUi();
         if (this.subParamsController != null) {

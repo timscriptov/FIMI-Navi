@@ -194,7 +194,6 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
     }
 
     @Override
-    // com.fimi.app.x8s.interfaces.AbsX8AiController, com.fimi.app.x8s.interfaces.AbsX8Controllers, com.fimi.app.x8s.interfaces.IControllers
     public void openUi() {
         this.isShow = true;
         LayoutInflater inflater = LayoutInflater.from(this.rootView.getContext());
@@ -242,7 +241,6 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
     }
 
     @Override
-    // com.fimi.app.x8s.interfaces.AbsX8AiController, com.fimi.app.x8s.interfaces.AbsX8Controllers, com.fimi.app.x8s.interfaces.IControllers
     public void closeUi() {
         this.isShow = false;
         this.activity.getmX8AiTrackController().closeUi();

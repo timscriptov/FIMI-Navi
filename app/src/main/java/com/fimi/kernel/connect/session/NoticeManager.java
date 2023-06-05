@@ -1,8 +1,11 @@
 package com.fimi.kernel.connect.session;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+
+import androidx.annotation.NonNull;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fimi.kernel.connect.BaseCommand;
@@ -30,21 +33,22 @@ public class NoticeManager implements IDataCallBack {
     private final CopyOnWriteArrayList<MediaDataListener> mediaIist = new CopyOnWriteArrayList<>();
     private final CopyOnWriteArrayList<JsonListener> jsonListeners = new CopyOnWriteArrayList<>();
     private final DataUiHanler mDataUiHanler = new DataUiHanler();
+    @SuppressLint("HandlerLeak")
     private final Handler mHanlder = new Handler() {
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(@NonNull Message msg) {
             switch (msg.what) {
                 case 0:
-                    Iterator it = NoticeManager.this.list.iterator();
+                    Iterator<IDataCallBack> it = NoticeManager.this.list.iterator();
                     while (it.hasNext()) {
-                        IDataCallBack l = (IDataCallBack) it.next();
+                        IDataCallBack l = it.next();
                         l.onDataCallBack(msg.arg1, msg.arg2, (ILinkMessage) msg.obj);
                     }
                     return;
                 case 1:
-                    Iterator it2 = NoticeManager.this.list.iterator();
+                    Iterator<IDataCallBack> it2 = NoticeManager.this.list.iterator();
                     while (it2.hasNext()) {
-                        IDataCallBack l2 = (IDataCallBack) it2.next();
+                        IDataCallBack l2 = it2.next();
                         l2.onSendTimeOut(msg.arg1, msg.arg2, (BaseCommand) msg.obj);
                     }
                     return;
@@ -57,9 +61,9 @@ public class NoticeManager implements IDataCallBack {
                     return;
                 case 3:
                     if (!NoticeManager.this.jsonListeners.isEmpty()) {
-                        Iterator it3 = NoticeManager.this.jsonListeners.iterator();
+                        Iterator<JsonListener> it3 = NoticeManager.this.jsonListeners.iterator();
                         while (it3.hasNext()) {
-                            JsonListener l3 = (JsonListener) it3.next();
+                            JsonListener l3 = it3.next();
                             l3.onProcess(msg.arg1, (JSONObject) msg.obj);
                         }
                         return;

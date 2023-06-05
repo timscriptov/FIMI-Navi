@@ -84,7 +84,6 @@ public class CameraJsonPresenter extends BasePresenter implements ICamJsonAction
     }
 
     @Override
-    // com.fimi.x8sdk.common.BasePresenter, com.fimi.kernel.connect.interfaces.IDataCallBack
     public void onSendTimeOut(int groupId, int msgId, BaseCommand bcd) {
         super.onSendTimeOut(groupId, msgId, bcd);
         JsonNoticeManager.getNoticeManager().sendOutTime();

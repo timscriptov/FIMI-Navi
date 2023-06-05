@@ -68,7 +68,6 @@ public class X8MediaDetailActivity extends BaseActivity implements X8CustomVideo
     }
 
     @Override
-    // com.fimi.kernel.base.BaseActivity, android.support.v4.app.FragmentActivity, android.app.Activity
     public void onResume() {
         super.onResume();
         X8sNavigationBarUtils.hideBottomUIMenu(this);
@@ -78,7 +77,6 @@ public class X8MediaDetailActivity extends BaseActivity implements X8CustomVideo
     }
 
     @Override
-    // android.support.v7.app.AppCompatActivity, android.support.v4.app.FragmentActivity, android.app.Activity
     public void onStop() {
         super.onStop();
         this.isDataRefresh = true;
@@ -325,7 +323,6 @@ public class X8MediaDetailActivity extends BaseActivity implements X8CustomVideo
     }
 
     @Override
-    // android.support.v7.app.AppCompatActivity, android.app.Activity, android.view.KeyEvent.Callback
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == 4) {
             this.mMediaDetailPresenter.setOnDestory();

@@ -308,7 +308,6 @@ public class RegisterActivity extends BasePersonActivity implements IRegisterVie
     }
 
     @Override
-    // com.fimi.kernel.base.BaseActivity, android.support.v7.app.AppCompatActivity, android.support.v4.app.FragmentActivity, android.support.v4.app.SupportActivity, android.app.Activity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
@@ -470,7 +469,6 @@ public class RegisterActivity extends BasePersonActivity implements IRegisterVie
     }
 
     @Override
-    // android.support.v7.app.AppCompatActivity, android.app.Activity, android.view.KeyEvent.Callback
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == 121) {
             finish();

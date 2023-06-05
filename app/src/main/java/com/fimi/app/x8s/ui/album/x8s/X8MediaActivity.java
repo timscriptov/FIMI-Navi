@@ -68,14 +68,12 @@ public class X8MediaActivity extends BaseActivity implements ISelectData, X8Medi
     }
 
     @Override
-    // com.fimi.kernel.base.BaseActivity, android.support.v7.app.AppCompatActivity, android.support.v4.app.FragmentActivity, android.support.v4.app.SupportActivity, android.app.Activity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
     }
 
     @Override
-    // com.fimi.kernel.base.BaseActivity, android.support.v4.app.FragmentActivity, android.app.Activity
     public void onResume() {
         super.onResume();
         X8sNavigationBarUtils.hideBottomUIMenu(this);
@@ -235,7 +233,6 @@ public class X8MediaActivity extends BaseActivity implements ISelectData, X8Medi
     }
 
     @Override
-    // com.fimi.kernel.base.BaseActivity, android.support.v7.app.AppCompatActivity, android.support.v4.app.FragmentActivity, android.app.Activity
     public void onDestroy() {
         super.onDestroy();
         this.mHackyViewPager.setCurrentItem(0);
@@ -350,7 +347,6 @@ public class X8MediaActivity extends BaseActivity implements ISelectData, X8Medi
     }
 
     @Override
-    // android.support.v7.app.AppCompatActivity, android.app.Activity, android.view.KeyEvent.Callback
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == 4) {
             if (this.mRlTopBar.getVisibility() == 0) {

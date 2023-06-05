@@ -61,26 +61,22 @@ public class CameraPresenter extends BasePresenter implements ICamAction {
     }
 
     @Override
-    // com.fimi.x8sdk.common.BasePresenter, com.fimi.kernel.connect.interfaces.IDataCallBack
     public void onSendTimeOut(int groupId, int msgId, BaseCommand bcd) {
         super.onSendTimeOut(groupId, msgId, bcd);
     }
 
     @Override
-    // com.fimi.x8sdk.common.BasePresenter, com.fimi.kernel.connect.interfaces.IDataCallBack
     public void onDataCallBack(int groupId, int msgId, ILinkMessage packet) {
         super.onDataCallBack(groupId, msgId, packet);
         reponseCmd(true, groupId, msgId, packet, null);
     }
 
     @Override
-    // com.fimi.x8sdk.common.BasePresenter, com.fimi.kernel.connect.interfaces.IPersonalDataCallBack
     public void onPersonalDataCallBack(int groupId, int msgId, ILinkMessage packet) {
         reponseCmd(true, groupId, msgId, packet, null);
     }
 
     @Override
-    // com.fimi.x8sdk.common.BasePresenter, com.fimi.kernel.connect.interfaces.IPersonalDataCallBack
     public void onPersonalSendTimeOut(int groupId, int msgId, BaseCommand bcd) {
         onCameraTimeOut(groupId, msgId, bcd);
     }

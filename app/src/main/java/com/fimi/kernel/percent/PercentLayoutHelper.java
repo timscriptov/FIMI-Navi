@@ -336,7 +336,7 @@ public class PercentLayoutHelper {
         }
     }
 
-    private void supportTextSize(int widthHint, int heightHint, View view, PercentLayoutInfo info) {
+    private void supportTextSize(int widthHint, int heightHint, View view, @NonNull PercentLayoutInfo info) {
         PercentLayoutInfo.PercentVal textSizePercent = info.textSizePercent;
         if (textSizePercent != null) {
             int base = textSizePercent.isBaseWidth ? widthHint : heightHint;

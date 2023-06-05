@@ -111,7 +111,6 @@ public class MediaActivity extends BaseActivity implements ISelectData {
     }
 
     @Override
-    // com.fimi.kernel.base.BaseActivity, android.support.v7.app.AppCompatActivity, android.support.v4.app.FragmentActivity, android.app.Activity
     public void onDestroy() {
         this.mMediaPresenter.reDefaultVaribale();
         super.onDestroy();

@@ -8,6 +8,10 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 
+import androidx.annotation.NonNull;
+
+import org.jetbrains.annotations.Contract;
+
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -25,7 +29,7 @@ public class WiFiUtils {
             return false;
         }
         scanResult = device;
-        WifiManager mWifiManager = (WifiManager) context.getSystemService("wifi");
+        WifiManager mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         WifiConfiguration wifiConfiguration = new WifiConfiguration();
         wifiConfiguration.allowedAuthAlgorithms.clear();
         wifiConfiguration.allowedGroupCiphers.clear();
@@ -71,7 +75,7 @@ public class WiFiUtils {
         return mWifiManager.enableNetwork(netId, true);
     }
 
-    public static int isConfiguration(ScanResult scanResult2, Context context) {
+    public static int isConfiguration(ScanResult scanResult2, @NonNull Context context) {
         WifiManager wifiManager = (WifiManager) context.getSystemService("wifi");
         List<WifiConfiguration> wifiConfigList = wifiManager.getConfiguredNetworks();
         if (wifiConfigList == null || scanResult2 == null) {
@@ -129,13 +133,13 @@ public class WiFiUtils {
     }
 
     public static boolean isWifi(Context context) {
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService("connectivity");
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetInfo != null && activeNetInfo.getType() == 1;
     }
 
     public static boolean isPhoneNet(Context context) {
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService("connectivity");
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo mMobileNetworkInfo = connectivityManager.getNetworkInfo(0);
         if (mMobileNetworkInfo != null) {
             return (mMobileNetworkInfo.getState() == NetworkInfo.State.CONNECTED) & mMobileNetworkInfo.isAvailable();
@@ -144,7 +148,7 @@ public class WiFiUtils {
     }
 
     public static boolean netOkay(Context context) {
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService("connectivity");
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo mMobileNetworkInfo = connectivityManager.getNetworkInfo(0);
         NetworkInfo wifiWorkInfo = connectivityManager.getNetworkInfo(1);
         if (mMobileNetworkInfo != null) {
@@ -155,7 +159,7 @@ public class WiFiUtils {
 
     public static void disConnectCurWifi(Context context) {
         try {
-            WifiManager wifiManager = (WifiManager) context.getSystemService("wifi");
+            WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
             WifiInfo wifiInfo = wifiManager.getConnectionInfo();
             wifiManager.disableNetwork(wifiInfo.getNetworkId());
             wifiManager.disconnect();
@@ -165,7 +169,7 @@ public class WiFiUtils {
     }
 
     public static String getPhoneIp(Context application) {
-        WifiManager wifiManager = (WifiManager) application.getSystemService("wifi");
+        WifiManager wifiManager = (WifiManager) application.getSystemService(Context.WIFI_SERVICE);
         if (!wifiManager.isWifiEnabled()) {
             try {
                 Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces();
@@ -189,13 +193,15 @@ public class WiFiUtils {
         return intToIp(ipAddress);
     }
 
+    @NonNull
+    @Contract(pure = true)
     private static String intToIp(int i) {
         return (i & 255) + "." + ((i >> 8) & 255) + "." + ((i >> 16) & 255) + "." + ((i >> 24) & 255);
     }
 
     public static void removeNetId(Context context, String ssid) {
         if (context != null && ssid != null) {
-            WifiManager wifiManager = (WifiManager) context.getSystemService("wifi");
+            WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
             List<WifiConfiguration> configurationList = wifiManager.getConfiguredNetworks();
             if (configurationList != null) {
                 Iterator<WifiConfiguration> it = configurationList.iterator();
@@ -217,7 +223,7 @@ public class WiFiUtils {
 
     public static void removeNetId(Context context) {
         if (context != null && netId > 0) {
-            WifiManager wifiManager = (WifiManager) context.getSystemService("wifi");
+            WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
             wifiManager.removeNetwork(netId);
             wifiManager.saveConfiguration();
             netId = -1;

@@ -61,7 +61,6 @@ public class X8MainAiFollowConfirmController extends AbsX8MenuBoxControllers imp
     }
 
     @Override
-    // com.fimi.app.x8s.interfaces.AbsX8Controllers, com.fimi.app.x8s.interfaces.IControllers
     public void openUi() {
         this.mainLayout.setVisibility(0);
         this.blank.setVisibility(0);

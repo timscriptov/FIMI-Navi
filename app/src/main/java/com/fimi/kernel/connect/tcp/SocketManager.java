@@ -1,5 +1,7 @@
 package com.fimi.kernel.connect.tcp;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.kernel.utils.ThreadUtils;
 
 import java.io.DataInputStream;
@@ -67,7 +69,7 @@ public class SocketManager {
         }
     }
 
-    public void send(String content) {
+    public void send(@NonNull String content) {
         send(content.getBytes());
     }
 

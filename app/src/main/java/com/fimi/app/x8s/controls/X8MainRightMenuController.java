@@ -411,7 +411,6 @@ public class X8MainRightMenuController extends AbsX8Controllers implements View.
     }
 
     @Override
-    // com.fimi.app.x8s.interfaces.AbsX8Controllers, com.fimi.app.x8s.interfaces.IControllers
     public void openUi() {
         this.selfShow = true;
         super.openUi();
@@ -420,7 +419,6 @@ public class X8MainRightMenuController extends AbsX8Controllers implements View.
     }
 
     @Override
-    // com.fimi.app.x8s.interfaces.AbsX8Controllers, com.fimi.app.x8s.interfaces.IControllers
     public void closeUi() {
         this.selfShow = false;
         this.curMode = null;

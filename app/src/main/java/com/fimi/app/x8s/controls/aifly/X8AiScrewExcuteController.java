@@ -188,7 +188,6 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
     }
 
     @Override
-    // com.fimi.app.x8s.interfaces.AbsX8AiController, com.fimi.app.x8s.interfaces.AbsX8Controllers, com.fimi.app.x8s.interfaces.IControllers
     public void openUi() {
         this.isShow = true;
         LayoutInflater inflater = LayoutInflater.from(this.rootView.getContext());
@@ -223,7 +222,6 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
     }
 
     @Override
-    // com.fimi.app.x8s.interfaces.AbsX8AiController, com.fimi.app.x8s.interfaces.AbsX8Controllers, com.fimi.app.x8s.interfaces.IControllers
     public void closeUi() {
         this.isShow = false;
         this.activity.getmMapVideoController().getFimiMap().getAiSurroundManager().clearSurroundMarker();
