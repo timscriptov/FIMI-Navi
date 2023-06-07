@@ -151,12 +151,12 @@ public class LogSaveLocalHelper {
 
         public static String getFormatDate() {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHH");
-            return sdf.format(Long.valueOf(System.currentTimeMillis()));
+            return sdf.format(System.currentTimeMillis());
         }
 
         public static String getFormatTime() {
             SimpleDateFormat sdf = new SimpleDateFormat(HostConstants.FORMATDATE);
-            return sdf.format(Long.valueOf(System.currentTimeMillis()));
+            return sdf.format(System.currentTimeMillis());
         }
     }
 }

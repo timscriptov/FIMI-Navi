@@ -2,6 +2,8 @@ package com.fimi.x8sdk.process;
 
 import android.os.SystemClock;
 
+import androidx.annotation.NonNull;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.fimi.host.HostConstants;
@@ -11,7 +13,6 @@ import com.fimi.kernel.connect.BaseCommand;
 import com.fimi.kernel.connect.session.JsonListener;
 import com.fimi.kernel.connect.session.NoticeManager;
 import com.fimi.kernel.connect.session.SessionManager;
-import com.fimi.kernel.dataparser.usb.CmdResult;
 import com.fimi.kernel.dataparser.usb.UiCallBackListener;
 import com.fimi.kernel.utils.BitUtil;
 import com.fimi.x8sdk.command.CameraJsonCollection;
@@ -76,7 +77,7 @@ public class RelayProcess implements JsonListener {
         return this.relayHeart;
     }
 
-    public void setRelayHeart(AutoRelayHeart relayHeart) {
+    public void setRelayHeart(@NonNull AutoRelayHeart relayHeart) {
         this.relayHeart = relayHeart;
         int isConnect = BitUtil.getBitByByte(relayHeart.getStatus(), 2);
         int token = StateManager.getInstance().getCamera().getToken();
@@ -110,7 +111,7 @@ public class RelayProcess implements JsonListener {
             String param = jsonInfo.getParam();
             if (retVal == 0) {
                 if (msgId == 257) {
-                    int token = Integer.valueOf(param).intValue();
+                    int token = Integer.valueOf(param);
                     StateManager.getInstance().getCamera().setToken(token);
                     StateManager.getInstance().setCameraToken(token);
                     return;
@@ -130,123 +131,96 @@ public class RelayProcess implements JsonListener {
     public void getAllVersion() {
         if (this.fcManager != null) {
             if (StateManager.getInstance().getVersionState().getModuleRepeaterRcVersion() == null) {
-                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_REPEATER_RC.ordinal(), (byte) 11, new UiCallBackListener<AckVersion>() {
-                    @Override
-                    public void onComplete(CmdResult cmdResult, AckVersion o) {
-                        if (cmdResult.isSuccess()) {
-                            StateManager.getInstance().getVersionState().setModuleRepeaterRcVersion(o);
-                            RelayProcess.this.onGetVersionResult();
-                            return;
-                        }
-                        StateManager.getInstance().getVersionState().setModuleRepeaterRcVersion(null);
+                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_REPEATER_RC.ordinal(), (byte) 11, (UiCallBackListener<AckVersion>) (cmdResult, o) -> {
+                    if (cmdResult.isSuccess()) {
+                        StateManager.getInstance().getVersionState().setModuleRepeaterRcVersion(o);
+                        RelayProcess.this.onGetVersionResult();
+                        return;
                     }
+                    StateManager.getInstance().getVersionState().setModuleRepeaterRcVersion(null);
                 });
             }
             if (StateManager.getInstance().getVersionState().getModuleRcVersion() == null) {
-                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_RC.ordinal(), (byte) 1, new UiCallBackListener<AckVersion>() {
-                    @Override
-                    public void onComplete(CmdResult cmdResult, AckVersion o) {
-                        if (cmdResult.isSuccess()) {
-                            StateManager.getInstance().getVersionState().setModuleRcVersion(o);
-                            RelayProcess.this.onGetVersionResult();
-                            HostLogBack.getInstance().writeLog("ALanqiu  ============MODULE_RC");
-                            return;
-                        }
-                        StateManager.getInstance().getVersionState().setModuleRcVersion(null);
-                        HostLogBack.getInstance().writeLog("ALanqiu  ============MODULE_RC 失败");
+                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_RC.ordinal(), (byte) 1, (UiCallBackListener<AckVersion>) (cmdResult, o) -> {
+                    if (cmdResult.isSuccess()) {
+                        StateManager.getInstance().getVersionState().setModuleRcVersion(o);
+                        RelayProcess.this.onGetVersionResult();
+                        HostLogBack.getInstance().writeLog("ALanqiu  ============MODULE_RC");
+                        return;
                     }
+                    StateManager.getInstance().getVersionState().setModuleRcVersion(null);
+                    HostLogBack.getInstance().writeLog("ALanqiu  ============MODULE_RC 失败");
                 });
             }
             if (StateManager.getInstance().getVersionState().getModuleRepeaterVehicleVersion() == null) {
-                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_REPEATER_VEHICLE.ordinal(), (byte) 12, new UiCallBackListener<AckVersion>() {
-                    @Override
-                    public void onComplete(CmdResult cmdResult, AckVersion o) {
-                        if (cmdResult.isSuccess()) {
-                            StateManager.getInstance().getVersionState().setModuleRepeaterVehicleVersion(o);
-                            RelayProcess.this.onGetVersionResult();
-                            return;
-                        }
-                        StateManager.getInstance().getVersionState().setModuleRepeaterVehicleVersion(null);
+                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_REPEATER_VEHICLE.ordinal(), (byte) 12, (UiCallBackListener<AckVersion>) (cmdResult, o) -> {
+                    if (cmdResult.isSuccess()) {
+                        StateManager.getInstance().getVersionState().setModuleRepeaterVehicleVersion(o);
+                        RelayProcess.this.onGetVersionResult();
+                        return;
                     }
+                    StateManager.getInstance().getVersionState().setModuleRepeaterVehicleVersion(null);
                 });
             }
             if (StateManager.getInstance().getVersionState().getModuleEscVersion() == null) {
-                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_ESC.ordinal(), (byte) 14, new UiCallBackListener<AckVersion>() {
-                    @Override
-                    public void onComplete(CmdResult cmdResult, AckVersion o) {
-                        if (cmdResult.isSuccess()) {
-                            StateManager.getInstance().getVersionState().setModuleEscVersion(o);
-                            RelayProcess.this.onGetVersionResult();
-                            return;
-                        }
-                        StateManager.getInstance().getVersionState().setModuleEscVersion(null);
+                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_ESC.ordinal(), (byte) 14, (UiCallBackListener<AckVersion>) (cmdResult, o) -> {
+                    if (cmdResult.isSuccess()) {
+                        StateManager.getInstance().getVersionState().setModuleEscVersion(o);
+                        RelayProcess.this.onGetVersionResult();
+                        return;
                     }
+                    StateManager.getInstance().getVersionState().setModuleEscVersion(null);
                 });
             }
             if (StateManager.getInstance().getVersionState().getModuleGimbalVersion() == null) {
-                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_GIMBAL.ordinal(), (byte) 3, new UiCallBackListener<AckVersion>() {
-                    @Override
-                    public void onComplete(CmdResult cmdResult, AckVersion o) {
-                        if (cmdResult.isSuccess()) {
-                            StateManager.getInstance().getVersionState().setModuleGimbalVersion(o);
-                            RelayProcess.this.onGetVersionResult();
-                            return;
-                        }
-                        StateManager.getInstance().getVersionState().setModuleGimbalVersion(null);
+                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_GIMBAL.ordinal(), (byte) 3, (UiCallBackListener<AckVersion>) (cmdResult, o) -> {
+                    if (cmdResult.isSuccess()) {
+                        StateManager.getInstance().getVersionState().setModuleGimbalVersion(o);
+                        RelayProcess.this.onGetVersionResult();
+                        return;
                     }
+                    StateManager.getInstance().getVersionState().setModuleGimbalVersion(null);
                 });
             }
             if (StateManager.getInstance().getVersionState().getModuleBatteryVersion() == null) {
-                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_BATTERY.ordinal(), (byte) 5, new UiCallBackListener<AckVersion>() {
-                    @Override
-                    public void onComplete(CmdResult cmdResult, AckVersion o) {
-                        if (cmdResult.isSuccess()) {
-                            StateManager.getInstance().getVersionState().setModuleBatteryVersion(o);
-                            RelayProcess.this.onGetVersionResult();
-                            return;
-                        }
-                        HostLogBack.getInstance().writeLog("Alanqiu ==============MODULE_BATTERY:");
-                        StateManager.getInstance().getVersionState().setModuleBatteryVersion(null);
+                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_BATTERY.ordinal(), (byte) 5, (UiCallBackListener<AckVersion>) (cmdResult, o) -> {
+                    if (cmdResult.isSuccess()) {
+                        StateManager.getInstance().getVersionState().setModuleBatteryVersion(o);
+                        RelayProcess.this.onGetVersionResult();
+                        return;
                     }
+                    HostLogBack.getInstance().writeLog("Alanqiu ==============MODULE_BATTERY:");
+                    StateManager.getInstance().getVersionState().setModuleBatteryVersion(null);
                 });
             }
             if (StateManager.getInstance().getVersionState().getModuleNfzVersion() == null) {
-                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_NFZ.ordinal(), (byte) 10, new UiCallBackListener<AckVersion>() {
-                    @Override
-                    public void onComplete(CmdResult cmdResult, AckVersion o) {
-                        if (cmdResult.isSuccess()) {
-                            StateManager.getInstance().getVersionState().setModuleNfzVersion(o);
-                            RelayProcess.this.onGetVersionResult();
-                            return;
-                        }
-                        StateManager.getInstance().getVersionState().setModuleNfzVersion(null);
+                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_NFZ.ordinal(), (byte) 10, (UiCallBackListener<AckVersion>) (cmdResult, o) -> {
+                    if (cmdResult.isSuccess()) {
+                        StateManager.getInstance().getVersionState().setModuleNfzVersion(o);
+                        RelayProcess.this.onGetVersionResult();
+                        return;
                     }
+                    StateManager.getInstance().getVersionState().setModuleNfzVersion(null);
                 });
             }
             if (StateManager.getInstance().getVersionState().getModuleUltrasonic() == null) {
-                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_ULTRASONIC.ordinal(), (byte) 13, new UiCallBackListener<AckVersion>() {
-                    @Override
-                    public void onComplete(CmdResult cmdResult, AckVersion o) {
-                        if (cmdResult.isSuccess()) {
-                            StateManager.getInstance().getVersionState().setModuleUltrasonic(o);
-                            RelayProcess.this.onGetVersionResult();
-                            return;
-                        }
-                        StateManager.getInstance().getVersionState().setModuleUltrasonic(null);
+                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_ULTRASONIC.ordinal(), (byte) 13, (UiCallBackListener<AckVersion>) (cmdResult, o) -> {
+                    if (cmdResult.isSuccess()) {
+                        StateManager.getInstance().getVersionState().setModuleUltrasonic(o);
+                        RelayProcess.this.onGetVersionResult();
+                        return;
                     }
+                    StateManager.getInstance().getVersionState().setModuleUltrasonic(null);
                 });
             }
             if (!X8Rtp.simulationTest) {
-                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal(), (byte) 0, new UiCallBackListener<AckVersion>() {
-                    @Override
-                    public void onComplete(CmdResult cmdResult, AckVersion o) {
-                        if (cmdResult.isSuccess()) {
-                            StateManager.getInstance().getVersionState().setModuleFcAckVersion(o);
-                            RelayProcess.this.onGetVersionResult();
-                            return;
-                        }
-                        StateManager.getInstance().getVersionState().setModuleFcAckVersion(null);
+                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_FC.ordinal(), (byte) 0, (UiCallBackListener<AckVersion>) (cmdResult, o) -> {
+                    if (cmdResult.isSuccess()) {
+                        StateManager.getInstance().getVersionState().setModuleFcAckVersion(o);
+                        RelayProcess.this.onGetVersionResult();
+                        return;
                     }
+                    StateManager.getInstance().getVersionState().setModuleFcAckVersion(null);
                 });
             }
         }
@@ -255,29 +229,23 @@ public class RelayProcess implements JsonListener {
     void getCameraVersion() {
         if (this.fcManager != null) {
             if (StateManager.getInstance().getVersionState().getModuleCameraVersion() == null) {
-                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_CAMERA.ordinal(), (byte) 4, new UiCallBackListener<AckVersion>() {
-                    @Override
-                    public void onComplete(CmdResult cmdResult, AckVersion o) {
-                        if (cmdResult.isSuccess()) {
-                            StateManager.getInstance().getVersionState().setModuleCameraVersion(o);
-                        } else {
-                            StateManager.getInstance().getVersionState().setModuleCameraVersion(null);
-                        }
-                        RelayProcess.this.onGetVersionResult();
+                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_CAMERA.ordinal(), (byte) 4, (UiCallBackListener<AckVersion>) (cmdResult, o) -> {
+                    if (cmdResult.isSuccess()) {
+                        StateManager.getInstance().getVersionState().setModuleCameraVersion(o);
+                    } else {
+                        StateManager.getInstance().getVersionState().setModuleCameraVersion(null);
                     }
+                    RelayProcess.this.onGetVersionResult();
                 });
             }
             if (StateManager.getInstance().getVersionState().getModuleCvVersion() == null) {
-                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_CV.ordinal(), (byte) 9, new UiCallBackListener<AckVersion>() {
-                    @Override
-                    public void onComplete(CmdResult cmdResult, AckVersion o) {
-                        if (cmdResult.isSuccess()) {
-                            StateManager.getInstance().getVersionState().setModuleCvVersion(o);
-                        } else {
-                            StateManager.getInstance().getVersionState().setModuleCvVersion(null);
-                        }
-                        RelayProcess.this.onGetVersionResult();
+                this.fcManager.getFwVersion((byte) X8BaseCmd.X8S_Module.MODULE_CV.ordinal(), (byte) 9, (UiCallBackListener<AckVersion>) (cmdResult, o) -> {
+                    if (cmdResult.isSuccess()) {
+                        StateManager.getInstance().getVersionState().setModuleCvVersion(o);
+                    } else {
+                        StateManager.getInstance().getVersionState().setModuleCvVersion(null);
                     }
+                    RelayProcess.this.onGetVersionResult();
                 });
             }
         }
