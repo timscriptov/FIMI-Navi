@@ -34,9 +34,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.concurrent.LinkedBlockingDeque;
 
-import ch.qos.logback.core.util.CloseUtil;
-
-
 public class AOAConnect extends BaseConnect implements IDataTransfer, IRetransmissionHandle, ITimerSendQueueHandle, IRetransmissionJsonHandle, IRetransmissionUsbHandle {
     FileInputStream inputStream;
     UsbAccessory mAccessory;
@@ -206,19 +203,31 @@ public class AOAConnect extends BaseConnect implements IDataTransfer, IRetransmi
     public void closeUsbAccessory() {
         if (this.parcelFileDescriptor != null) {
             synchronized (this.parcelFileDescriptor) {
-                CloseUtil.closeQuietly(this.parcelFileDescriptor);
+                try {
+                    parcelFileDescriptor.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
             this.parcelFileDescriptor = null;
         }
         if (this.inputStream != null) {
             synchronized (this.inputStream) {
-                CloseUtil.closeQuietly(this.inputStream);
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
             this.inputStream = null;
         }
         if (this.outputStream != null) {
             synchronized (this.outputStream) {
-                CloseUtil.closeQuietly(this.outputStream);
+                try {
+                    this.outputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
             this.outputStream = null;
         }

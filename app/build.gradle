@@ -44,8 +44,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation("ch.qos.logback:logback-classic:1.4.6")
-    implementation("ch.qos.logback:logback-core:1.4.6")
     implementation("com.davemorrissey.labs:subsampling-scale-image-view:3.10.0")
     implementation("org.apache.mina:mina-core:2.2.1")
     implementation("org.jdom:jdom2:2.0.6")
