@@ -139,7 +139,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:gravity="center"
-                android:text="获取"
+                android:text="Get"
                 android:textColor="@color/white_100"
                 android:textSize="14.0dip" />
 
@@ -150,7 +150,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:gravity="center"
-                android:text="保存"
+                android:text="Save"
                 android:textColor="@color/white_100"
                 android:textSize="14.0dip" />
 
@@ -161,7 +161,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:gravity="center"
-                android:text="校准"
+                android:text="Calibrate"
                 android:textColor="@color/white_100"
                 android:textSize="14.0dip" />
 
