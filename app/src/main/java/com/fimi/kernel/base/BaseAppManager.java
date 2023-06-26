@@ -8,8 +8,8 @@ import java.util.List;
 
 public class BaseAppManager {
     private static final String TAG = BaseAppManager.class.getSimpleName();
-    private static BaseAppManager instance = null;
     private static final List<Activity> mActivities = new LinkedList();
+    private static BaseAppManager instance = null;
 
     public static BaseAppManager getInstance() {
         if (instance == null) {

@@ -13,6 +13,11 @@ import java.util.List;
 
 
 public class GglMapNoFlyZone extends AbsMapNoFlyZone {
+    private final GoogleMap googleMap;
+    private final List<Polygon> polygonList = new ArrayList();
+    private final List<Circle> circleList = new ArrayList();
+    private final List<LatLng> latLngsNofly = new ArrayList();
+    private final List<LatLng> latLngs = new ArrayList();
     private LatLng A3;
     private LatLng A4;
     private LatLng B3;
@@ -23,17 +28,12 @@ public class GglMapNoFlyZone extends AbsMapNoFlyZone {
     private LatLng D4;
     private PolygonOptions candyPolygonOptions;
     private CircleOptions circleOptions;
-    private final GoogleMap googleMap;
     private PolygonOptions options;
     private double[][] pointArcs1;
     private double[][] pointArcs2;
     private double[][] pointArcs3;
     private double[][] pointArcs4;
     private PolygonOptions polygonOptions;
-    private final List<Polygon> polygonList = new ArrayList();
-    private final List<Circle> circleList = new ArrayList();
-    private final List<LatLng> latLngsNofly = new ArrayList();
-    private final List<LatLng> latLngs = new ArrayList();
 
     public GglMapNoFlyZone(GoogleMap map) {
         this.googleMap = map;

@@ -16,8 +16,8 @@ import java.lang.ref.SoftReference;
 
 public class AnimationsContainer {
     private static AnimationsContainer mInstance;
-    public int FPS = 58;
     private final Context mContext = BaseApplication.getContext();
+    public int FPS = 58;
     private int resId;
 
     public static AnimationsContainer getInstance(int resId, int fps) {
@@ -55,16 +55,16 @@ public class AnimationsContainer {
 
 
     public class FramesSequenceAnimation {
-        private Bitmap mBitmap;
-        private BitmapFactory.Options mBitmapOptions;
         private final int[] mFrames;
-        private OnAnimationStoppedListener mOnAnimationStoppedListener;
         private final SoftReference<ImageView> mSoftReferenceImageView;
         private final Handler mHandler = new Handler();
+        private final int mDelayMillis = 100;
+        private Bitmap mBitmap;
+        private BitmapFactory.Options mBitmapOptions;
+        private OnAnimationStoppedListener mOnAnimationStoppedListener;
         private int mIndex = -1;
         private boolean mShouldRun = false;
         private boolean mIsRunning = false;
-        private final int mDelayMillis = 100;
 
         public FramesSequenceAnimation(ImageView imageView, int[] frames, int fps) {
             this.mBitmap = null;

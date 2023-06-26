@@ -17,6 +17,7 @@ import java.util.List;
 
 public class UpgradeFileData {
     public static final int PACKETLENGHT = 176;
+    private final List<BufferData> mList = new ArrayList();
     byte[] ida_crc;
     byte[] idb_crc;
     byte[] idc_crc;
@@ -24,7 +25,6 @@ public class UpgradeFileData {
     private long currentLen;
     private int index;
     private long totalLen;
-    private final List<BufferData> mList = new ArrayList();
 
     public int getIndex() {
         return this.index;

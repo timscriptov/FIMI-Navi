@@ -4,9 +4,9 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 
 public class H264StreamParseThread extends Thread {
+    private final IH264DataListener mH264DataListener;
     public LinkedBlockingDeque<byte[]> cmdQuene = new LinkedBlockingDeque<>();
     private boolean isWait;
-    private final IH264DataListener mH264DataListener;
     private boolean mStopFlag;
 
     public H264StreamParseThread(IH264DataListener mH264DataListener) {

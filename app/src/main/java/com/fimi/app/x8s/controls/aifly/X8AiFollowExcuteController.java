@@ -81,7 +81,7 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
         this.vModeImtes = view.findViewById(R.id.v_mode_item);
         this.vSpeedContainer = view.findViewById(R.id.v_lock_mode_speed);
         this.mTipBgView = view.findViewById(R.id.v_content_tip);
-        this.mTipBgView.setVisibility(0);
+        this.mTipBgView.setVisibility(View.VISIBLE);
         if (this.type == 0) {
             this.mTipBgView.setTipText(getString(R.string.x8_ai_fly_follow_normal_tip));
         } else if (this.type == 1) {
@@ -126,8 +126,8 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
         initViewStubViews(this.handleView);
         initActions();
         if (this.mX8AiFollowState == X8AiFollowState.IDLE) {
-            this.vModeImtes.setVisibility(8);
-            this.vSpeedContainer.setVisibility(8);
+            this.vModeImtes.setVisibility(View.GONE);
+            this.vSpeedContainer.setVisibility(View.GONE);
             this.vModeImtes.findIndexByMode(this.type);
             setTitle();
             this.mX8AiFollowState = X8AiFollowState.OEPNVIEW;
@@ -164,9 +164,9 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
             showExitDialog();
         } else if (id == R.id.rl_flag_small) {
             if (this.tvTitle.getVisibility() == 0) {
-                this.tvTitle.setVisibility(8);
+                this.tvTitle.setVisibility(View.GONE);
             } else {
-                this.tvTitle.setVisibility(0);
+                this.tvTitle.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -174,7 +174,7 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
     @Override
     public void onTouchActionDown() {
         this.isTou = false;
-        this.imgGo.setVisibility(4);
+        this.imgGo.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -189,7 +189,7 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
         int t;
         if (this.isShowGo || right - left <= 5.0f) {
             if (left == right && top == bottom && top == right && right == 0.0f) {
-                this.imgGo.setVisibility(4);
+                this.imgGo.setVisibility(View.INVISIBLE);
                 return;
             }
             return;
@@ -220,7 +220,7 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
         lp.setMargins(l, t, 0, 0);
         this.imgGo.setLayoutParams(lp);
         if (this.mX8AiFollowState != X8AiFollowState.IDLE) {
-            this.imgGo.setVisibility(0);
+            this.imgGo.setVisibility(View.VISIBLE);
         }
     }
 
@@ -242,7 +242,7 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
     @Override
     public void onTracking() {
         if (this.isShow && this.isTou && this.isShowGo && this.imgGo.getVisibility() == 0) {
-            this.imgGo.setVisibility(4);
+            this.imgGo.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -256,7 +256,7 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
             public void onComplete(CmdResult cmdResult, Object o) {
                 if (cmdResult.isSuccess()) {
                     X8AiFollowExcuteController.this.listener.onAiFollowRunning();
-                    X8AiFollowExcuteController.this.mTipBgView.setVisibility(8);
+                    X8AiFollowExcuteController.this.mTipBgView.setVisibility(View.GONE);
                     X8AiFollowExcuteController.this.activity.getmMapVideoController().resetShow();
                     X8AiFollowExcuteController.this.mX8AiFollowState = X8AiFollowState.RUNNING;
                     X8AiFollowExcuteController.this.isShowGo = true;
@@ -279,7 +279,7 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
                         X8AiFollowExcuteController.this.isSwitchMode = false;
                         X8AiFollowExcuteController.this.setTitle();
                         if (mode != 2) {
-                            X8AiFollowExcuteController.this.vSpeedContainer.setVisibility(8);
+                            X8AiFollowExcuteController.this.vSpeedContainer.setVisibility(View.GONE);
                             return;
                         }
                         return;
@@ -451,10 +451,10 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
                 if (!this.isGetMode) {
                     getFollowMode();
                 } else if (this.vModeImtes.getVisibility() != 0) {
-                    this.vModeImtes.setVisibility(0);
+                    this.vModeImtes.setVisibility(View.VISIBLE);
                 }
                 if (this.isGetSpeed && this.isGetMode && this.type == 2 && this.vSpeedContainer.getVisibility() != 0) {
-                    this.vSpeedContainer.setVisibility(0);
+                    this.vSpeedContainer.setVisibility(View.VISIBLE);
                 }
             } else {
                 sysAiVcCtrlMode();

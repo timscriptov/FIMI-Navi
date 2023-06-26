@@ -27,16 +27,16 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 
 public class X9CameraDispater<T extends MediaModel> implements IHandlerCallback, OnX9MediaFileListener, ICameraDeviceDispater {
-    private IDateHandler mIDateHandler;
     private final MediaLoadProxy mMediaLoadProxy = new MediaLoadProxy();
-    private boolean isLoadCompleteSuccess = false;
-    private boolean isLoading = false;
-    private long videoCount = 0;
-    private long photoCount = 0;
     private final Handler otherHandler = HandlerManager.obtain().getHandlerInOtherThread(this);
     private final CopyOnWriteArrayList<T> cameraDataList = new CopyOnWriteArrayList<>();
     private final CopyOnWriteArrayList<T> cameraDataNoHeadList = new CopyOnWriteArrayList<>();
     private final LinkedHashMap<String, CopyOnWriteArrayList<T>> cameraDateHash = new LinkedHashMap<>();
+    private IDateHandler mIDateHandler;
+    private boolean isLoadCompleteSuccess = false;
+    private boolean isLoading = false;
+    private long videoCount = 0;
+    private long photoCount = 0;
 
     @Override
     public void forCameraFolder() {

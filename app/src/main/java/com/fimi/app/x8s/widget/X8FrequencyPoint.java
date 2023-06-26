@@ -12,6 +12,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 
 public class X8FrequencyPoint extends View {
+    private final int[] pencent;
     int colorG;
     int colorR;
     int colorW;
@@ -20,7 +21,6 @@ public class X8FrequencyPoint extends View {
     int pW;
     private Paint dashPaint;
     private Paint mPaint;
-    private final int[] pencent;
 
     public X8FrequencyPoint(Context context) {
         super(context);

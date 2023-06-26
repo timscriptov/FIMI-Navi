@@ -13,8 +13,8 @@ import java.util.Iterator;
 
 
 public class AndroidMediaController extends FmMediaController implements IMediaController {
-    private ActionBar mActionBar;
     private final ArrayList<View> mShowOnceArray;
+    private ActionBar mActionBar;
 
     public AndroidMediaController(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -55,7 +55,7 @@ public class AndroidMediaController extends FmMediaController implements IMediaC
         Iterator<View> it = this.mShowOnceArray.iterator();
         while (it.hasNext()) {
             View view = it.next();
-            view.setVisibility(0);
+            view.setVisibility(View.VISIBLE);
         }
     }
 
@@ -68,14 +68,14 @@ public class AndroidMediaController extends FmMediaController implements IMediaC
         Iterator<View> it = this.mShowOnceArray.iterator();
         while (it.hasNext()) {
             View view = it.next();
-            view.setVisibility(8);
+            view.setVisibility(View.GONE);
         }
     }
 
     @Override
     public void showOnce(@NonNull View view) {
         this.mShowOnceArray.add(view);
-        view.setVisibility(0);
+        view.setVisibility(View.VISIBLE);
         show();
     }
 }

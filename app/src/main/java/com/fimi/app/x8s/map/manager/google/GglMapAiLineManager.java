@@ -39,16 +39,16 @@ public class GglMapAiLineManager extends AbsAiLineManager implements GoogleMap.O
     private final Context context;
     private final GglMapLocationManager gglMapLocationManager;
     private final GoogleMap googleMap;
-    private Circle limitCircle;
-    private IX8MarkerListener lineMarkerSelectListener;
     private final List<MapPointLatLng> mMapPointList = new ArrayList();
     private final List<Marker> mMarkerList = new ArrayList();
-    private Marker mSelectMarker = null;
-    private boolean isClick = true;
-    private int nPos = -1;
     private final List<Marker> interestMarkerList = new ArrayList();
     private final List<Marker> arrowMarkerList = new ArrayList();
     private final GglMapCustomMarkerView gdCustemMarkerView = new GglMapCustomMarkerView();
+    private Circle limitCircle;
+    private IX8MarkerListener lineMarkerSelectListener;
+    private Marker mSelectMarker = null;
+    private boolean isClick = true;
+    private int nPos = -1;
 
     public GglMapAiLineManager(Context context, GoogleMap googleMap, GglMapLocationManager gglMapLocationManager) {
         this.context = context;

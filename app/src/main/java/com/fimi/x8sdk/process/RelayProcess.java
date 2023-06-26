@@ -31,14 +31,14 @@ import com.fimi.x8sdk.rtp.X8Rtp;
 
 public class RelayProcess implements JsonListener {
     private static volatile RelayProcess relayProcess = null;
+    private final int countFw = 0;
+    private final int MAXFW = 11;
     DeviceMonitorThread monitorThread;
     AutoRelayHeart relayHeart;
     private int cameraState;
     private long curTime;
     private FcManager fcManager;
     private boolean getSetting;
-    private final int countFw = 0;
-    private final int MAXFW = 11;
     private boolean isShowUpdateView = true;
 
     public static RelayProcess getRelayProcess() {

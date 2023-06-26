@@ -24,13 +24,13 @@ import java.util.Map;
 
 
 public class X8CameraParamsController extends AbsX8Controllers implements JsonUiCallBackListener {
-    CameraParamStatus.CameraModelStatus curStatus;
     private final Context context;
-    private boolean isConnected;
     private final LinearLayoutManager layoutManager;
-    private Context mContext;
     private final List<PhotoParamItemEntity> paramList;
     private final PhotoParamsAdapter paramsAdapter;
+    CameraParamStatus.CameraModelStatus curStatus;
+    private boolean isConnected;
+    private Context mContext;
     private RecyclerView recyclerView;
 
     public X8CameraParamsController(View rootView) {

@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -157,7 +156,7 @@ public class GglMapCustomMarkerView extends AbsMapCustomMarkerView {
             imageView.setRotation(angle);
         }
         if (!isShow) {
-            imageView.setVisibility(4);
+            imageView.setVisibility(View.INVISIBLE);
         }
         return BitmapDescriptorFactory.fromBitmap(loadBitmapFromView(view, context));
     }

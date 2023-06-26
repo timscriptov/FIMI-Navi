@@ -21,8 +21,8 @@ import java.util.List;
 public class X8ErrorTextSwitchView1 extends TextSwitcher implements ViewSwitcher.ViewFactory {
     private final int colorRes;
     private final Context context;
-    private int index;
     private final Handler mHandler;
+    private int index;
     private IX8ErrorTextSwitchView mRotationText;
     private TextView mTv;
     private List<String> resString;

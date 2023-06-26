@@ -76,7 +76,7 @@ public class MediaActivity extends BaseActivity implements ISelectData {
         this.btnmode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MediaActivity.this.rlMediaSelectTop.setVisibility(0);
+                MediaActivity.this.rlMediaSelectTop.setVisibility(View.VISIBLE);
                 MediaActivity.this.mMediaPresenter.enterSelectMode(true, true);
             }
         });
@@ -95,7 +95,7 @@ public class MediaActivity extends BaseActivity implements ISelectData {
         this.btnCancalAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MediaActivity.this.rlMediaSelectTop.setVisibility(8);
+                MediaActivity.this.rlMediaSelectTop.setVisibility(View.GONE);
                 MediaActivity.this.mMediaPresenter.enterSelectMode(false, true);
             }
         });
@@ -123,19 +123,19 @@ public class MediaActivity extends BaseActivity implements ISelectData {
 
     @Override
     public void enterSelectMode() {
-        this.rlMediaSelectTop.setVisibility(0);
+        this.rlMediaSelectTop.setVisibility(View.VISIBLE);
         this.mMediaPresenter.enterSelectMode(true, false);
     }
 
     @Override
     public void quitSelectMode() {
-        this.rlMediaSelectTop.setVisibility(8);
+        this.rlMediaSelectTop.setVisibility(View.GONE);
         this.mMediaPresenter.enterSelectMode(false, false);
     }
 
     @Override
     public void deleteFile() {
-        this.rlMediaSelectTop.setVisibility(8);
+        this.rlMediaSelectTop.setVisibility(View.GONE);
         this.mMediaPresenter.enterSelectMode(false, false);
     }
 

@@ -33,9 +33,9 @@ import okhttp3.Response;
 
 
 public class FDSClient extends BaseManager {
+    private final Object object = new Object();
     private Call call;
     private Zip2Fds mZip2Fds;
-    private final Object object = new Object();
     private Call postFdsUrlCall;
     private Call reqeuestFdsUrlCall;
 

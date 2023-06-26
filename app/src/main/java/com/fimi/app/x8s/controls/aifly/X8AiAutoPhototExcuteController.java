@@ -32,10 +32,13 @@ import com.fimi.x8sdk.modulestate.StateManager;
 
 
 public class X8AiAutoPhototExcuteController extends AbsX8AiController implements View.OnClickListener, X8DoubleCustomDialog.onDialogButtonClickListener, X8AiTrackController.OnAiTrackControllerListener, IX8AiAutoPhototExcuteListener {
+    private final X8sMainActivity activity;
+    private final IX8NextViewListener mIX8NextViewListener;
+    private final TimeHandler mTimeHandler;
+    private final int type;
     protected boolean isNextShow;
     protected boolean isShow;
     protected int width;
-    private final X8sMainActivity activity;
     private View blank;
     private int count;
     private X8DoubleCustomDialog dialog;
@@ -46,8 +49,6 @@ public class X8AiAutoPhototExcuteController extends AbsX8AiController implements
     private ImageView imgNext;
     private IX8AiAutoPhotoExcuteControllerListener listener;
     private View mAngle;
-    private final IX8NextViewListener mIX8NextViewListener;
-    private final TimeHandler mTimeHandler;
     private X8AiAutoPhotoExcuteConfirmModule mX8AiAutoPhotoExcuteConfirmModule;
     private View nextRootView;
     private int pitchAngle;
@@ -57,7 +58,6 @@ public class X8AiAutoPhototExcuteController extends AbsX8AiController implements
     private TextView tvP2PTip;
     private TextView tvTime;
     private X8AiTipWithCloseView tvTip;
-    private final int type;
 
     public X8AiAutoPhototExcuteController(X8sMainActivity activity, View rootView, X8AiAutoPhotoState state, int type) {
         super(rootView);
@@ -151,9 +151,9 @@ public class X8AiAutoPhototExcuteController extends AbsX8AiController implements
             closeNextUi(true);
         } else if (id == R.id.rl_flag_small) {
             if (this.tvP2PTip.getVisibility() == 0) {
-                this.tvP2PTip.setVisibility(8);
+                this.tvP2PTip.setVisibility(View.GONE);
             } else {
-                this.tvP2PTip.setVisibility(0);
+                this.tvP2PTip.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -182,21 +182,21 @@ public class X8AiAutoPhototExcuteController extends AbsX8AiController implements
             if (this.type == 0) {
                 String s = this.rootView.getContext().getString(R.string.x8_ai_auto_photo_tip5);
                 if (this.activity.getmMapVideoController().isFullVideo()) {
-                    this.imgAutoBg.setVisibility(0);
+                    this.imgAutoBg.setVisibility(View.VISIBLE);
                 } else {
-                    this.imgAutoBg.setVisibility(8);
+                    this.imgAutoBg.setVisibility(View.GONE);
                 }
                 this.tvTip.setTipText(s);
             } else {
                 String s2 = this.rootView.getContext().getString(R.string.x8_ai_auto_photo_tip5);
-                this.imgAutoBg.setVisibility(8);
+                this.imgAutoBg.setVisibility(View.GONE);
                 this.tvTip.setTipText(s2);
             }
         } else if (this.state == X8AiAutoPhotoState.RUNNING) {
-            this.imgNext.setVisibility(8);
-            this.imgAutoBg.setVisibility(8);
-            this.mAngle.setVisibility(8);
-            this.tvTip.setVisibility(8);
+            this.imgNext.setVisibility(View.GONE);
+            this.imgAutoBg.setVisibility(View.GONE);
+            this.mAngle.setVisibility(View.GONE);
+            this.tvTip.setVisibility(View.GONE);
             if (this.listener != null) {
                 this.listener.onAutoPhotoRunning();
             }
@@ -219,8 +219,8 @@ public class X8AiAutoPhototExcuteController extends AbsX8AiController implements
     }
 
     public void openNextUi() {
-        this.nextRootView.setVisibility(0);
-        this.blank.setVisibility(0);
+        this.nextRootView.setVisibility(View.VISIBLE);
+        this.blank.setVisibility(View.VISIBLE);
         closeIconByNextUi();
         this.mX8AiAutoPhotoExcuteConfirmModule.init(this.activity, this.nextRootView, this.type, this.pitchAngle);
         this.mX8AiAutoPhotoExcuteConfirmModule.setListener(this.mIX8NextViewListener, this.activity.getFcManager(), this);
@@ -235,7 +235,7 @@ public class X8AiAutoPhototExcuteController extends AbsX8AiController implements
     }
 
     public void closeNextUi(final boolean b) {
-        this.blank.setVisibility(8);
+        this.blank.setVisibility(View.GONE);
         if (this.isNextShow) {
             this.isNextShow = false;
             ObjectAnimator translationRight = ObjectAnimator.ofFloat(this.nextRootView, "translationX", 0.0f, this.width);
@@ -246,12 +246,12 @@ public class X8AiAutoPhototExcuteController extends AbsX8AiController implements
                 // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
-                    X8AiAutoPhototExcuteController.this.nextRootView.setVisibility(8);
+                    X8AiAutoPhototExcuteController.this.nextRootView.setVisibility(View.GONE);
                     ((ViewGroup) X8AiAutoPhototExcuteController.this.nextRootView).removeAllViews();
-                    X8AiAutoPhototExcuteController.this.imgBack.setVisibility(0);
-                    X8AiAutoPhototExcuteController.this.flagSmall.setVisibility(0);
+                    X8AiAutoPhototExcuteController.this.imgBack.setVisibility(View.VISIBLE);
+                    X8AiAutoPhototExcuteController.this.flagSmall.setVisibility(View.VISIBLE);
                     if (b) {
-                        X8AiAutoPhototExcuteController.this.imgNext.setVisibility(0);
+                        X8AiAutoPhototExcuteController.this.imgNext.setVisibility(View.VISIBLE);
                     }
                 }
             });
@@ -312,14 +312,14 @@ public class X8AiAutoPhototExcuteController extends AbsX8AiController implements
     @Override
     public void autoPhototExcute(boolean isExcute) {
         if (isExcute) {
-            this.imgAutoBg.setVisibility(8);
-            this.mAngle.setVisibility(8);
-            this.tvTip.setVisibility(8);
+            this.imgAutoBg.setVisibility(View.GONE);
+            this.mAngle.setVisibility(View.GONE);
+            this.tvTip.setVisibility(View.GONE);
             this.state = X8AiAutoPhotoState.RUNNING;
             this.listener.onAutoPhotoRunning();
             this.mTimeHandler.sendEmptyMessage(1);
             this.count = 3;
-            this.tvTime.setVisibility(0);
+            this.tvTime.setVisibility(View.VISIBLE);
             return;
         }
         taskExit();
@@ -394,17 +394,17 @@ public class X8AiAutoPhototExcuteController extends AbsX8AiController implements
     public void switchMapVideo(boolean isVideo) {
         if (this.state == X8AiAutoPhotoState.IDLE && this.type == 0) {
             if (!isVideo) {
-                this.imgAutoBg.setVisibility(0);
+                this.imgAutoBg.setVisibility(View.VISIBLE);
             } else {
-                this.imgAutoBg.setVisibility(8);
+                this.imgAutoBg.setVisibility(View.GONE);
             }
         }
     }
 
     public void closeIconByNextUi() {
-        this.imgNext.setVisibility(8);
-        this.imgBack.setVisibility(8);
-        this.flagSmall.setVisibility(8);
+        this.imgNext.setVisibility(View.GONE);
+        this.imgBack.setVisibility(View.GONE);
+        this.flagSmall.setVisibility(View.GONE);
     }
 
     public void sysAiVcCtrlMode() {
@@ -441,7 +441,7 @@ public class X8AiAutoPhototExcuteController extends AbsX8AiController implements
                     sendEmptyMessageDelayed(1, 1000L);
                     return;
                 }
-                X8AiAutoPhototExcuteController.this.tvTime.setVisibility(8);
+                X8AiAutoPhototExcuteController.this.tvTime.setVisibility(View.GONE);
                 return;
             }
         }

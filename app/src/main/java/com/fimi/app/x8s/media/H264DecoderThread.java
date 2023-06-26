@@ -2,12 +2,15 @@ package com.fimi.app.x8s.media;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.app.x8s.X8Application;
 
 import java.util.concurrent.LinkedBlockingDeque;
 
 
 public class H264DecoderThread extends Thread implements IH264DataListener {
+    private final IFrameDataListener mIFrameDataListener;
     public LinkedBlockingDeque<byte[]> cmdQuene = new LinkedBlockingDeque<>();
     H264Decoder mDecoder;
     int startIndex;
@@ -18,30 +21,26 @@ public class H264DecoderThread extends Thread implements IH264DataListener {
     private int count;
     private boolean isCount;
     private H264Player mH264Player;
-    private final IFrameDataListener mIFrameDataListener;
     private long time;
+    private final H264Packet mPacket = new H264Packet(data -> {
+        if (!H264DecoderThread.this.isCount) {
+            H264DecoderThread.this.isCount = true;
+            H264DecoderThread.this.time = System.currentTimeMillis();
+            H264DecoderThread.access$208(H264DecoderThread.this);
+        } else {
+            H264DecoderThread.access$208(H264DecoderThread.this);
+            if (System.currentTimeMillis() - H264DecoderThread.this.time > 1000) {
+                H264DecoderThread.this.isCount = false;
+                if (H264DecoderThread.this.mIFrameDataListener != null) {
+                    H264DecoderThread.this.mIFrameDataListener.onCountFrame(H264DecoderThread.this.count, 0, 0);
+                }
+                H264DecoderThread.this.count = 0;
+            }
+        }
+        H264DecoderThread.this.cmdQuene.offer(data);
+    });
     private boolean mStopFlag = false;
     private boolean isWait = false;
-    private final H264Packet mPacket = new H264Packet(new IH264DataListener() {
-        @Override
-        public void onH264Frame(byte[] data) {
-            if (!H264DecoderThread.this.isCount) {
-                H264DecoderThread.this.isCount = true;
-                H264DecoderThread.this.time = System.currentTimeMillis();
-                H264DecoderThread.access$208(H264DecoderThread.this);
-            } else {
-                H264DecoderThread.access$208(H264DecoderThread.this);
-                if (System.currentTimeMillis() - H264DecoderThread.this.time > 1000) {
-                    H264DecoderThread.this.isCount = false;
-                    if (H264DecoderThread.this.mIFrameDataListener != null) {
-                        H264DecoderThread.this.mIFrameDataListener.onCountFrame(H264DecoderThread.this.count, 0, 0);
-                    }
-                    H264DecoderThread.this.count = 0;
-                }
-            }
-            H264DecoderThread.this.cmdQuene.offer(data);
-        }
-    });
 
     public H264DecoderThread(H264Decoder h264Decoder, IFrameDataListener mIFrameDataListener) {
         this.startIndex = 0;
@@ -61,7 +60,7 @@ public class H264DecoderThread extends Thread implements IH264DataListener {
         }
     }
 
-    static /* synthetic */ int access$208(H264DecoderThread x0) {
+    static int access$208(@NonNull H264DecoderThread x0) {
         int i = x0.count;
         x0.count = i + 1;
         return i;
@@ -101,7 +100,7 @@ public class H264DecoderThread extends Thread implements IH264DataListener {
         this.mPacket.onPacket(data);
     }
 
-    private void notityDecode1(byte[] data) {
+    private void notityDecode1(@NonNull byte[] data) {
         for (int i = this.startIndex; i < data.length; i++) {
             if (this.mH264Frame.parse(data[i])) {
                 if (!this.isCount) {
@@ -124,7 +123,7 @@ public class H264DecoderThread extends Thread implements IH264DataListener {
         }
     }
 
-    public void packetData(byte[] data) {
+    public void packetData(@NonNull byte[] data) {
         if (data.length > 14 && data[0] == 128) {
             this.seq = ((data[2] & 255) << 8) | (data[3] & 255);
             if (this.lastSeq == -1) {

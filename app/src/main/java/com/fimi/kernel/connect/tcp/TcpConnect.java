@@ -18,15 +18,15 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 
 public class TcpConnect extends BaseConnect implements Runnable {
+    private final LinkedBlockingDeque<Object> dataQue = new LinkedBlockingDeque<>();
+    private final ResultListener x9ResultListener;
     boolean autoConnect;
     Socket socket;
     com.fimi.kernel.connect.SocketOption socketOption;
     private CmdSession cmdSession;
-    private final LinkedBlockingDeque<Object> dataQue = new LinkedBlockingDeque<>();
     private boolean exitTcp = false;
     private ReadThread readThread;
     private WriteThread writeThread;
-    private final ResultListener x9ResultListener;
 
     public TcpConnect(@NonNull com.fimi.kernel.connect.SocketOption option, ResultListener listener) {
         this.autoConnect = false;

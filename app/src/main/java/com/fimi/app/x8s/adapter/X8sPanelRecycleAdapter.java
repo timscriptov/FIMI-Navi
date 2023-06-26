@@ -34,17 +34,17 @@ public class X8sPanelRecycleAdapter<T extends MediaModel> extends RecyclerView.A
     private final Context context;
     private final boolean isCamera;
     private final INodataTip mINodataTip;
-    private IRecycleAdapter mIRecycleAdapter;
     private final Handler mainHandler;
-    private CopyOnWriteArrayList<T> modelList;
-    private CopyOnWriteArrayList<T> modelNoHeadList;
     private final Handler otherHandler;
-    private HashMap<String, CopyOnWriteArrayList<T>> stateHashMap;
     private final DataManager mdataManager = DataManager.obtain();
     private final int headSpanCount = 4;
     private final int headCount = 4;
     private final int bodySpanCount = 1;
     private final int internalListBound = 2;
+    private IRecycleAdapter mIRecycleAdapter;
+    private CopyOnWriteArrayList<T> modelList;
+    private CopyOnWriteArrayList<T> modelNoHeadList;
+    private HashMap<String, CopyOnWriteArrayList<T>> stateHashMap;
 
     public X8sPanelRecycleAdapter(Context context, boolean isCamera, INodataTip mINodataTip) {
         this.isCamera = isCamera;
@@ -59,14 +59,15 @@ public class X8sPanelRecycleAdapter<T extends MediaModel> extends RecyclerView.A
         this.mIRecycleAdapter = mIRecycleAdapter;
     }
 
+    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder rvViewHolder;
-        if (viewType == 48) {
+        if (viewType == HEADTYPE) {
             View inflate = LayoutInflater.from(this.context).inflate(R.layout.x8_recyleview_head, parent, false);
             return new HeadRecyleViewHolder(inflate);
         }
-        if (viewType == 16) {
+        if (viewType == ITEMHEADTYPE) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.x8_panel_view_holder, parent, false);
             rvViewHolder = new PanelRecycleViewHolder(view);
         } else {
@@ -77,18 +78,18 @@ public class X8sPanelRecycleAdapter<T extends MediaModel> extends RecyclerView.A
     }
 
     @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
         RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
         if (manager instanceof GridLayoutManager mGridLayoutManager) {
             mGridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                 @Override
                 public int getSpanSize(int position) {
-                    if (X8sPanelRecycleAdapter.this.isHeadView(position)) {
-                        return X8sPanelRecycleAdapter.this.headCount;
+                    if (isHeadView(position)) {
+                        return headCount;
                     }
-                    boolean isCategory = X8sPanelRecycleAdapter.this.isCategoryType(position);
-                    return isCategory ? X8sPanelRecycleAdapter.this.headSpanCount : X8sPanelRecycleAdapter.this.bodySpanCount;
+                    boolean isCategory = isCategoryType(position);
+                    return isCategory ? headSpanCount : bodySpanCount;
                 }
             });
         }
@@ -167,7 +168,7 @@ public class X8sPanelRecycleAdapter<T extends MediaModel> extends RecyclerView.A
         }
     }
 
-    private void statisticalFileCount(MediaModel mediaModel, boolean isAdd) {
+    private void statisticalFileCount(@NonNull MediaModel mediaModel, boolean isAdd) {
         int count;
         if (!mediaModel.isCategory() && !mediaModel.isHeadView()) {
             if (isAdd) {
@@ -263,8 +264,8 @@ public class X8sPanelRecycleAdapter<T extends MediaModel> extends RecyclerView.A
                 this.modelList.add(inserterPosition + 1, mediaModel);
                 this.stateHashMap.put(currentFormatData, newList);
             } else {
-                CopyOnWriteArrayList internalList = this.stateHashMap.get(currentFormatData);
-                if (internalList.size() > 0) {
+                CopyOnWriteArrayList<T> internalList = this.stateHashMap.get(currentFormatData);
+                if (internalList != null && internalList.size() > 0) {
                     int position = this.modelList.indexOf(internalList.get(0));
                     internalList.add(mediaModel);
                     this.modelList.add(position + 1, mediaModel);
@@ -278,7 +279,7 @@ public class X8sPanelRecycleAdapter<T extends MediaModel> extends RecyclerView.A
         this.mainHandler.sendMessage(message);
     }
 
-    private void changeMediaModelState(T mediaModel) {
+    private void changeMediaModelState(@NonNull T mediaModel) {
         File file = new File(mediaModel.getFileLocalPath());
         if (file.exists()) {
             long createTime = file.lastModified();

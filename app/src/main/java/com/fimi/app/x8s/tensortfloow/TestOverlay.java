@@ -3,13 +3,14 @@ package com.fimi.app.x8s.tensortfloow;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
-import androidx.core.internal.view.SupportMenu;
+import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,6 @@ import java.util.List;
 
 public class TestOverlay extends View {
     private final String TAG;
-    RectF rf;
     private final boolean enableCustomTestOverlay;
     private final int endX;
     private final int endY;
@@ -30,12 +30,13 @@ public class TestOverlay extends View {
     private final int selectedColor;
     private final int startX;
     private final int startY;
-    private int viewH;
-    private int viewW;
     private final int x1;
     private final int x2;
     private final int y1;
     private final int y2;
+    RectF rf;
+    private int viewH;
+    private int viewW;
 
     public TestOverlay(Context context) {
         super(context);
@@ -45,7 +46,7 @@ public class TestOverlay extends View {
         this.isTracking = false;
         this.isLost = true;
         this.selectedColor = -15935891;
-        this.lostColor = SupportMenu.CATEGORY_MASK;
+        this.lostColor = Color.RED;
         this.viewW = 0;
         this.viewH = 0;
         this.startX = 0;
@@ -56,7 +57,7 @@ public class TestOverlay extends View {
         this.y1 = 0;
         this.x2 = 0;
         this.y2 = 0;
-        this.mRectF = new ArrayList();
+        this.mRectF = new ArrayList<>();
         this.rf = new RectF();
     }
 
@@ -68,7 +69,7 @@ public class TestOverlay extends View {
         this.isTracking = false;
         this.isLost = true;
         this.selectedColor = -15935891;
-        this.lostColor = SupportMenu.CATEGORY_MASK;
+        this.lostColor = Color.RED;
         this.viewW = 0;
         this.viewH = 0;
         this.startX = 0;
@@ -79,7 +80,7 @@ public class TestOverlay extends View {
         this.y1 = 0;
         this.x2 = 0;
         this.y2 = 0;
-        this.mRectF = new ArrayList();
+        this.mRectF = new ArrayList<>();
         this.rf = new RectF();
         this.viewW = w;
         this.viewH = h;
@@ -93,7 +94,7 @@ public class TestOverlay extends View {
         this.isTracking = false;
         this.isLost = true;
         this.selectedColor = -15935891;
-        this.lostColor = SupportMenu.CATEGORY_MASK;
+        this.lostColor = Color.RED;
         this.viewW = 0;
         this.viewH = 0;
         this.startX = 0;
@@ -104,7 +105,7 @@ public class TestOverlay extends View {
         this.y1 = 0;
         this.x2 = 0;
         this.y2 = 0;
-        this.mRectF = new ArrayList();
+        this.mRectF = new ArrayList<>();
         this.rf = new RectF();
     }
 
@@ -126,7 +127,7 @@ public class TestOverlay extends View {
         this.mRectF.clear();
     }
 
-    public void onTracking(RectF r) {
+    public void onTracking(@NonNull RectF r) {
         this.rf.left = r.left;
         this.rf.top = r.top;
         this.rf.right = r.right;

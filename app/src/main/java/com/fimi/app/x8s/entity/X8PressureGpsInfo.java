@@ -1,6 +1,8 @@
 package com.fimi.app.x8s.entity;
 
 
+import androidx.annotation.NonNull;
+
 public class X8PressureGpsInfo {
     private static final X8PressureGpsInfo instance = new X8PressureGpsInfo();
     private float hPa;
@@ -111,6 +113,7 @@ public class X8PressureGpsInfo {
         this.mBearing = mBearing;
     }
 
+    @NonNull
     public String toString() {
         return "X8PressureGpsInfo{hasPressure=" + this.hasPressure + ", hasLocation=" + this.hasLocation + ", hPa=" + this.hPa + ", mLongitude=" + this.mLongitude + ", mLatitude=" + this.mLatitude + ", mAltitude=" + this.mAltitude + ", mHorizontalAccuracyMeters=" + this.mHorizontalAccuracyMeters + ", mVerticalAccuracyMeters=" + this.mVerticalAccuracyMeters + ", mSpeed=" + this.mSpeed + ", mBearing=" + this.mBearing + '}';
     }

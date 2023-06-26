@@ -3,6 +3,8 @@ package com.fimi.app.x8s.entity;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.view.animation.Animation;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.kernel.fds.FdsUploadState;
 import com.fimi.kernel.fds.FdsUploadTask;
 import com.fimi.kernel.utils.DateUtil;
@@ -177,7 +179,7 @@ public class X8B2oxFile extends X8FdsFile {
         this.state = state;
     }
 
-    public boolean setFile(File file, String prx) {
+    public boolean setFile(@NonNull File file, String prx) {
         this.file = file;
         this.fileName = file.getName();
         boolean ret = false;
@@ -211,22 +213,17 @@ public class X8B2oxFile extends X8FdsFile {
             if (fileS == 0) {
                 return "0.00B";
             }
-            String size = df.format(fileS) + "B";
-            return size;
+            return df.format(fileS) + "B";
         } else if (fileS < PlaybackStateCompat.ACTION_SET_CAPTIONING_ENABLED) {
-            String size2 = df.format(fileS / 1024.0d) + "K";
-            return size2;
+            return df.format(fileS / 1024.0d) + "K";
         } else if (fileS < 1073741824) {
-            String size3 = df.format(fileS / 1048576.0d) + "M";
-            return size3;
+            return df.format(fileS / 1048576.0d) + "M";
         } else {
-            String size4 = df.format(fileS / 1.073741824E9d) + "G";
-            return size4;
+            return df.format(fileS / 1.073741824E9d) + "G";
         }
     }
 
     public String getFilePrexName() {
-        String tmp = this.fileName.substring(0, this.fileName.lastIndexOf("."));
-        return tmp;
+        return this.fileName.substring(0, this.fileName.lastIndexOf("."));
     }
 }

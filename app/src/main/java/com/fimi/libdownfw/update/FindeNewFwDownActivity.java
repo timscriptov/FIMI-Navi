@@ -83,62 +83,62 @@ public class FindeNewFwDownActivity extends BaseActivity implements IFirmwareDow
     }
 
     private void notifyView() {
-        this.rt_layout.setVisibility(8);
+        this.rt_layout.setVisibility(View.GONE);
         if (DownFwService.getState().equals(DownFwService.DownState.Finish)) {
-            this.progressBar.setVisibility(4);
+            this.progressBar.setVisibility(View.INVISIBLE);
             this.hostDownResult.setImageResource(R.drawable.host_down_update_sucess);
-            this.hostDownResult.setVisibility(0);
+            this.hostDownResult.setVisibility(View.VISIBLE);
             this.btnDownAgain.setText(R.string.host_down_fwname_finish);
-            this.btnDownAgain.setVisibility(0);
+            this.btnDownAgain.setVisibility(View.VISIBLE);
             String failString = getdownFail();
             if (!TextUtils.isEmpty(failString)) {
                 this.tv_fail.setText(failString + getString(R.string.host_down_fwname_failed));
-                this.tv_fail.setVisibility(0);
+                this.tv_fail.setVisibility(View.VISIBLE);
             }
             String successString = getdownSuccess();
             if (!TextUtils.isEmpty(successString)) {
                 this.tv_succeuss.setText(successString + getString(R.string.host_down_fwname_success));
-                this.tv_succeuss.setVisibility(0);
+                this.tv_succeuss.setVisibility(View.VISIBLE);
             }
-            this.tvDowning.setVisibility(4);
-            this.tv_downList.setVisibility(8);
-            this.rt_layout.setVisibility(0);
+            this.tvDowning.setVisibility(View.INVISIBLE);
+            this.tv_downList.setVisibility(View.GONE);
+            this.rt_layout.setVisibility(View.VISIBLE);
         } else if (DownFwService.getState().equals(DownFwService.DownState.DownFail)) {
             String tempString = String.format(getResources().getString(R.string.host_downed_firmware));
             this.tvDowning.setText(tempString);
             this.progressBar.setProgress(0);
-            this.progressBar.setVisibility(4);
+            this.progressBar.setVisibility(View.INVISIBLE);
             this.hostDownResult.setImageResource(R.drawable.host_down_update_fail);
-            this.hostDownResult.setVisibility(0);
-            this.btnDownAgain.setVisibility(0);
+            this.hostDownResult.setVisibility(View.VISIBLE);
+            this.btnDownAgain.setVisibility(View.VISIBLE);
             this.btnDownAgain.setText(R.string.host_try_down_fwname_again);
             String failString2 = getdownFail();
             if (!TextUtils.isEmpty(failString2)) {
                 this.tv_fail.setText(failString2 + getString(R.string.host_down_fwname_failed));
-                this.tv_fail.setVisibility(0);
+                this.tv_fail.setVisibility(View.VISIBLE);
             }
             String successString2 = getdownSuccess();
             if (!TextUtils.isEmpty(successString2)) {
                 this.tv_succeuss.setText(successString2 + getString(R.string.host_down_fwname_success));
-                this.tv_succeuss.setVisibility(0);
+                this.tv_succeuss.setVisibility(View.VISIBLE);
             }
-            this.tvDowning.setVisibility(4);
-            this.rt_layout.setVisibility(0);
-            this.tv_downList.setVisibility(8);
+            this.tvDowning.setVisibility(View.INVISIBLE);
+            this.rt_layout.setVisibility(View.VISIBLE);
+            this.tv_downList.setVisibility(View.GONE);
         } else if (DownFwService.getState().equals(DownFwService.DownState.UnStart)) {
-            this.progressBar.setVisibility(0);
-            this.btnDownAgain.setVisibility(8);
+            this.progressBar.setVisibility(View.VISIBLE);
+            this.btnDownAgain.setVisibility(View.GONE);
         } else if (DownFwService.getState().equals(DownFwService.DownState.Downing)) {
             this.hostDownResult.setImageResource(R.drawable.icon_firmware_down);
-            this.progressBar.setVisibility(0);
-            this.hostDownResult.setVisibility(0);
-            this.tvDowning.setVisibility(0);
-            this.tv_downList.setVisibility(0);
-            this.tvProgress.setVisibility(8);
+            this.progressBar.setVisibility(View.VISIBLE);
+            this.hostDownResult.setVisibility(View.VISIBLE);
+            this.tvDowning.setVisibility(View.VISIBLE);
+            this.tv_downList.setVisibility(View.VISIBLE);
+            this.tvProgress.setVisibility(View.GONE);
         } else {
-            this.tvDowning.setVisibility(4);
-            this.progressBar.setVisibility(0);
-            this.btnDownAgain.setVisibility(8);
+            this.tvDowning.setVisibility(View.INVISIBLE);
+            this.progressBar.setVisibility(View.VISIBLE);
+            this.btnDownAgain.setVisibility(View.GONE);
         }
     }
 
@@ -194,18 +194,18 @@ public class FindeNewFwDownActivity extends BaseActivity implements IFirmwareDow
                     FindeNewFwDownActivity.this.currTime = System.currentTimeMillis();
                     FindeNewFwDownActivity.this.isFirstDown = false;
                     FindeNewFwDownActivity.this.hasTry = true;
-                    FindeNewFwDownActivity.this.tvDowning.setVisibility(0);
+                    FindeNewFwDownActivity.this.tvDowning.setVisibility(View.VISIBLE);
                     DownFwService.checkingTaskCount = 0;
                     FindeNewFwDownActivity.this.intent = new Intent(FindeNewFwDownActivity.this, DownFwService.class);
                     FindeNewFwDownActivity.this.intent.putExtra("listDownloadFwSelectInfo", (Serializable) FindeNewFwDownActivity.this.mSelectList);
                     FindeNewFwDownActivity.this.startService(FindeNewFwDownActivity.this.intent);
                     FindeNewFwDownActivity.this.refreshTvDownFirmwareDetail();
-                    FindeNewFwDownActivity.this.tv_downList.setVisibility(0);
-                    FindeNewFwDownActivity.this.tvProgress.setVisibility(8);
-                    FindeNewFwDownActivity.this.progressBar.setVisibility(0);
+                    FindeNewFwDownActivity.this.tv_downList.setVisibility(View.VISIBLE);
+                    FindeNewFwDownActivity.this.tvProgress.setVisibility(View.GONE);
+                    FindeNewFwDownActivity.this.progressBar.setVisibility(View.VISIBLE);
                     FindeNewFwDownActivity.this.tv_fail.setText("");
-                    FindeNewFwDownActivity.this.tv_fail.setVisibility(8);
-                    FindeNewFwDownActivity.this.tv_succeuss.setVisibility(8);
+                    FindeNewFwDownActivity.this.tv_fail.setVisibility(View.GONE);
+                    FindeNewFwDownActivity.this.tv_succeuss.setVisibility(View.GONE);
                 }
             }
         });
@@ -242,12 +242,12 @@ public class FindeNewFwDownActivity extends BaseActivity implements IFirmwareDow
             } else {
                 String tempString = String.format(this.mContext.getString(R.string.host_downing_firmware), this.curFirmware) + " " + progress + "%";
                 this.tvDowning.setText(tempString);
-                this.tvDowning.setVisibility(0);
+                this.tvDowning.setVisibility(View.VISIBLE);
                 if (HostConstants.isForceUpdate(X9UpdateUtil.getDownList())) {
-                    this.btnDownAgain.setVisibility(4);
+                    this.btnDownAgain.setVisibility(View.INVISIBLE);
                 } else {
                     this.btnDownAgain.setText(R.string.host_try_down_fwname_stop);
-                    this.btnDownAgain.setVisibility(0);
+                    this.btnDownAgain.setVisibility(View.VISIBLE);
                 }
             }
         } else if (isResult == DownFwService.DownState.DownFail) {

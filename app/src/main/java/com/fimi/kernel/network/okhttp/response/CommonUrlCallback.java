@@ -17,11 +17,11 @@ import okhttp3.Response;
 
 public class CommonUrlCallback implements Callback {
     protected final int NETWORK_ERROR = -1;
-    private boolean isArray;
-    private boolean isGetCode;
     private final Class<?> mClass;
     private final DisposeDataListener mListener;
     private final Handler mDeliveryHandler = new Handler(Looper.getMainLooper());
+    private boolean isArray;
+    private boolean isGetCode;
 
     public CommonUrlCallback(DisposeDataHandle handle, boolean isGetCode) {
         this.isArray = false;

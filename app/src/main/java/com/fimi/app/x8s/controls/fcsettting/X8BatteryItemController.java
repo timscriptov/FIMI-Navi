@@ -31,6 +31,7 @@ import com.fimi.x8sdk.modulestate.StateManager;
 public class X8BatteryItemController extends AbsX8Controllers implements View.OnClickListener {
     private static final int SERIOUS_LOWPOWER_VALUE = 15;
     private static final String SP_UPDATE_CAP_TIP = "sp_update_cap_tip";
+    private final ViewStub stubItem;
     X8SingleCustomDialog updateDialog;
     private int COLOR_ABNORMAL_YELLOW;
     private int COLOR_LOW_TEMP_BLUE;
@@ -46,7 +47,6 @@ public class X8BatteryItemController extends AbsX8Controllers implements View.On
     private View rlItem;
     private X8ValueSeakBarView sbLowPowerWarning;
     private X8ValueSeakBarView sbLowPowerWarningSerious;
-    private final ViewStub stubItem;
     private SwitchButton swbLowLanding;
     private SwitchButton swbLowReturn;
     private X8TabHost tbLowPowerOperation;
@@ -243,7 +243,7 @@ public class X8BatteryItemController extends AbsX8Controllers implements View.On
                 }
             });
         }
-        this.rlItem.setVisibility(0);
+        this.rlItem.setVisibility(View.VISIBLE);
         this.swbLowReturn.setSwitchState(GlobalConfig.getInstance().isLowReturn());
         this.swbLowLanding.setSwitchState(GlobalConfig.getInstance().isLowLanding());
     }
@@ -303,7 +303,7 @@ public class X8BatteryItemController extends AbsX8Controllers implements View.On
     public void closeItem() {
         this.isShow = false;
         if (this.rlItem != null) {
-            this.rlItem.setVisibility(8);
+            this.rlItem.setVisibility(View.GONE);
         }
     }
 
@@ -330,10 +330,10 @@ public class X8BatteryItemController extends AbsX8Controllers implements View.On
             if (isNeedShowUpdateCapDialog()) {
                 showUpdateDialog();
             }
-            this.btnCapacityNotUpdate.setVisibility(0);
+            this.btnCapacityNotUpdate.setVisibility(View.VISIBLE);
             return;
         }
-        this.btnCapacityNotUpdate.setVisibility(8);
+        this.btnCapacityNotUpdate.setVisibility(View.GONE);
     }
 
     private void setTemperature(float temperature) {

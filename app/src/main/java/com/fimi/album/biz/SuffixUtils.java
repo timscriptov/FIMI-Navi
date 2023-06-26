@@ -7,15 +7,15 @@ import java.util.List;
 
 public class SuffixUtils {
     private static SuffixUtils mSuffixUtils;
+    private final List<String> videoSuffixList = new ArrayList();
+    private final List<String> photoSuffixList = new ArrayList();
+    private final List<String> videoThumSuffixList = new ArrayList();
     public String fileFormatRlv = ".RLV";
     public String fileFormatJpg = ".JPG";
     public String fileFormatMp4 = ".MP4";
     public String fileFormatThm = ".THM";
     String[] videoStrings = {this.fileFormatThm};
     String[] photoStrings = {".jpg", this.fileFormatJpg, ".png", "PNG"};
-    private final List<String> videoSuffixList = new ArrayList();
-    private final List<String> photoSuffixList = new ArrayList();
-    private final List<String> videoThumSuffixList = new ArrayList();
 
     private SuffixUtils() {
         this.videoSuffixList.addAll(Arrays.asList(this.videoStrings));

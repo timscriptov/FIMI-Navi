@@ -1,9 +1,10 @@
 package com.fimi.kernel.store.shared;
 
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import com.alibaba.fastjson.JSON;
-import com.fimi.kernel.security.SharePrefernceSec;
+import com.fimi.kernel.FimiAppContext;
 
 import java.util.List;
 
@@ -11,23 +12,8 @@ public class SPStoreManager implements IKeyValueStoreManager {
     private static SPStoreManager manager = null;
     private final SharedPreferences settings;
 
-    private SPStoreManager(String key_storeName) {
-        this.settings = SharePrefernceSec.getSharedPreferences(key_storeName);
-    }
-
     private SPStoreManager() {
-        this.settings = SharePrefernceSec.getSharedPreferences();
-    }
-
-    public static synchronized SPStoreManager getInstance(String key_storeName) {
-        SPStoreManager sPStoreManager;
-        synchronized (SPStoreManager.class) {
-            if (manager == null) {
-                manager = new SPStoreManager(key_storeName);
-            }
-            sPStoreManager = manager;
-        }
-        return sPStoreManager;
+        this.settings = PreferenceManager.getDefaultSharedPreferences(FimiAppContext.getContext());
     }
 
     public static synchronized SPStoreManager getInstance() {

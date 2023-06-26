@@ -20,10 +20,10 @@ import java.io.RandomAccessFile;
 
 
 public class X8MediaThumDownloadTask implements Runnable, MediaDataListener {
-    RandomAccessFile randomAccessFile;
-    short max_size = NTLMConstants.TARGET_INFORMATION_SUBBLOCK_DNS_DOMAIN_NAME_TYPE;
     private final OnDownloadListener listener;
     private final MediaModel model;
+    RandomAccessFile randomAccessFile;
+    short max_size = NTLMConstants.TARGET_INFORMATION_SUBBLOCK_DNS_DOMAIN_NAME_TYPE;
     private long finished = 0;
 
     public X8MediaThumDownloadTask(MediaModel model, OnDownloadListener listener) {
@@ -66,6 +66,19 @@ public class X8MediaThumDownloadTask implements Runnable, MediaDataListener {
             }
             HostLogBack.getInstance().writeLog("Alanqiu  ===============createNewFile:" + this.model.getThumFileUrl());
             sendCmd(new X8DownLoadCmd().downMediaFile((int) this.finished, NTLMConstants.TARGET_INFORMATION_SUBBLOCK_DNS_DOMAIN_NAME_TYPE, this.model.getThumFileUrl(), false));
+        }
+    }
+
+    @Override
+    public void mediaDataCallBack(byte[] data) {
+        if (data != null && data.length > 0) {
+            byte cmdType = data[0];
+            if (cmdType == 1) {
+                MediaFileDownLoadPacket downLoadPacket = new MediaFileDownLoadPacket();
+                downLoadPacket.unPacket(data);
+                this.downMediaFileLinstener.onProgress(downLoadPacket);
+                HostLogBack.getInstance().writeLog("Alanqiu  ===============Thum===mediaDataCallBack:" + downLoadPacket);
+            }
         }
     }    DownMediaFileLinstener downMediaFileLinstener = new DownMediaFileLinstener() {
         @Override
@@ -120,19 +133,6 @@ public class X8MediaThumDownloadTask implements Runnable, MediaDataListener {
         }
     };
 
-    @Override
-    public void mediaDataCallBack(byte[] data) {
-        if (data != null && data.length > 0) {
-            byte cmdType = data[0];
-            if (cmdType == 1) {
-                MediaFileDownLoadPacket downLoadPacket = new MediaFileDownLoadPacket();
-                downLoadPacket.unPacket(data);
-                this.downMediaFileLinstener.onProgress(downLoadPacket);
-                HostLogBack.getInstance().writeLog("Alanqiu  ===============Thum===mediaDataCallBack:" + downLoadPacket);
-            }
-        }
-    }
-
     public void removeMediaListener() {
         NoticeManager.getInstance().removeMediaListener(this);
     }
@@ -156,9 +156,9 @@ public class X8MediaThumDownloadTask implements Runnable, MediaDataListener {
         }
     }
 
+
+
     /* renamed from: com.fimi.app.x8s.ui.album.x8s.X8MediaThumDownloadTask$2 */
-
-
 
 
 }

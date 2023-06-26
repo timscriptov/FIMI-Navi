@@ -1,5 +1,6 @@
 package com.fimi.app.x8s.entity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
@@ -8,7 +9,6 @@ import android.os.Vibrator;
 import com.fimi.TcpClient;
 import com.fimi.app.x8s.controls.X8ErrorCodeController;
 import com.fimi.app.x8s.enums.X8ErrorCodeEnum;
-import com.fimi.app.x8s.interfaces.IX8ErrorTextIsFinishShow;
 import com.fimi.app.x8s.manager.X8ErrerCodeSpeakFlashManager;
 import com.fimi.x8sdk.entity.ErrorCodeBean;
 
@@ -20,16 +20,16 @@ public class X8ShowErrorCodeTask {
     private final Context context;
     private final X8ErrorCodeController errorCodeController;
     private final X8ErrerCodeSpeakFlashManager flashManager;
+    private final X8ErrorCodeEnum type;
+    private final Vibrator vibrator;
+    private final long[] pattern = {50, 200, 50, 200, 50, 200};
+    private final List<ErrorCodeBean.ActionBean> speakList = new ArrayList<>();
+    private final List<ErrorCodeBean.ActionBean> vibrateLList = new ArrayList<>();
     private boolean isShowTex;
     private ErrorCodeBean.ActionBean lastActionBean;
     private long lastTime;
     private volatile long startTime;
-    private final X8ErrorCodeEnum type;
-    private final Vibrator vibrator;
     private long speekId = 0;
-    private final long[] pattern = {50, 200, 50, 200, 50, 200};
-    private final List<ErrorCodeBean.ActionBean> speakList = new ArrayList();
-    private final List<ErrorCodeBean.ActionBean> vibrateLList = new ArrayList();
     private int state = 0;
 
     public X8ShowErrorCodeTask(Context context, X8ErrorCodeController errorCodeController, X8ErrorCodeEnum type, X8ErrerCodeSpeakFlashManager x8ErrerCodeSpeakFlashManager) {
@@ -37,7 +37,7 @@ public class X8ShowErrorCodeTask {
         this.errorCodeController = errorCodeController;
         this.type = type;
         this.flashManager = x8ErrerCodeSpeakFlashManager;
-        this.vibrator = (Vibrator) context.getSystemService("vibrator");
+        this.vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
     }
 
     public int getState() {
@@ -50,28 +50,23 @@ public class X8ShowErrorCodeTask {
 
     public void showText(List<X8ErrorCode> codeList) {
         this.isShowTex = true;
-        this.errorCodeController.showTextByCode(codeList, new IX8ErrorTextIsFinishShow() {
-            @Override
-            public void isFinish() {
-                X8ShowErrorCodeTask.this.flashManager.setStart(false);
-            }
-        });
+        this.errorCodeController.showTextByCode(codeList, () -> flashManager.setStart(false));
         this.mHandler.sendEmptyMessageDelayed(0, 3000L);
-    }    private final Handler mHandler = new Handler() {
+    }
+
+    public boolean isSpeaking(ErrorCodeBean.ActionBean bean) {
+        return this.speakList.contains(bean);
+    }    @SuppressLint("HandlerLeak")
+    private final Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == 0) {
-                X8ShowErrorCodeTask.this.isShowTex = false;
-                X8ShowErrorCodeTask.this.flashManager.nextRun(X8ShowErrorCodeTask.this.type);
-                return;
+                isShowTex = false;
+                flashManager.nextRun(X8ShowErrorCodeTask.this.type);
             }
         }
     };
-
-    public boolean isSpeaking(ErrorCodeBean.ActionBean bean) {
-        return this.speakList.contains(bean);
-    }
 
     public boolean isVibrating(ErrorCodeBean.ActionBean bean) {
         return this.vibrateLList.contains(bean);
@@ -91,7 +86,6 @@ public class X8ShowErrorCodeTask {
             if (hasErrorCode()) {
                 List<ErrorCodeBean.ActionBean> actionBeans = getAcitonBean();
                 List<X8ErrorCode> x8ErrorCodeList = new ArrayList<>();
-                x8ErrorCodeList.clear();
                 for (ErrorCodeBean.ActionBean actionBean : actionBeans) {
                     if (actionBean != null) {
                         this.state = 1;
@@ -110,7 +104,7 @@ public class X8ShowErrorCodeTask {
                             this.speekId = System.currentTimeMillis();
                             this.flashManager.speekText(text, this.speekId);
                         }
-                        if (this.lastActionBean != null && actionBean.getLabel() == this.lastActionBean.getLabel() && this.errorCodeController.currentMap.size() == 1 && actionBean.getInhibition() > 0) {
+                        if (this.lastActionBean != null && actionBean.getLabel().equals(this.lastActionBean.getLabel()) && this.errorCodeController.currentMap.size() == 1 && actionBean.getInhibition() > 0) {
                             if (this.startTime == 0) {
                                 this.startTime = System.currentTimeMillis();
                             }
@@ -148,11 +142,9 @@ public class X8ShowErrorCodeTask {
 
     public List<ErrorCodeBean.ActionBean> getAcitonBean() {
         if (this.type == X8ErrorCodeEnum.serious) {
-            List<ErrorCodeBean.ActionBean> actionBean = this.errorCodeController.getSeriousCode();
-            return actionBean;
+            return this.errorCodeController.getSeriousCode();
         }
-        List<ErrorCodeBean.ActionBean> actionBean2 = this.errorCodeController.getMediumCode();
-        return actionBean2;
+        return this.errorCodeController.getMediumCode();
     }
 
     public boolean isShow() {
@@ -189,8 +181,6 @@ public class X8ShowErrorCodeTask {
             this.vibrateLList.remove(actionBean);
         }
     }
-
-
 
 
 }

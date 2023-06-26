@@ -48,6 +48,13 @@ import router.Router;
 
 
 public class X8MainFcAllSettingControler extends AbsX8MenuBoxControllers implements View.OnClickListener {
+    private final View firstContentView;
+    private final IX8GimbalSettingListener gimbalSettingListener;
+    private final Activity mActivity;
+    private final IX8DroneStateListener mIX8DroneStateListener;
+    private final IX8GeneraModifyModeControllerListener modifyModeControllerListener;
+    private final View rlFcAllSetting;
+    private final View secondContentView;
     public IX8CalibrationListener mX8CalibrationListener;
     public IX8FcItemListener mX8FcItemListener;
     public IX8FirmwareUpgradeControllerListener mX8FwUpgradeCtrlListener;
@@ -60,19 +67,15 @@ public class X8MainFcAllSettingControler extends AbsX8MenuBoxControllers impleme
     private int contentViewTopMargin;
     private FcCtrlManager fcCtrlManager;
     private FcManager fcManager;
-    private final View firstContentView;
     private X8GimbalManager gimbalManager;
-    private final IX8GimbalSettingListener gimbalSettingListener;
     private boolean isCanClose;
     private boolean isfiveKeyOpen;
     private IX8FcAllSettingListener listener;
     private X8DoubleCustomDialog loginDialogRestart;
-    private final Activity mActivity;
     private AbsX8MenuBoxControllers mCurrentFirstController;
     private AbsX8MenuBoxControllers mCurrentSecondController;
     private CustomLoadManage mCustomLoadManage;
     private FirstMenu mFirstMenu;
-    private final IX8DroneStateListener mIX8DroneStateListener;
     private IX8GeneralItemControllerListerner mIX8GeneralItemControllerListerner;
     private SecondMenu mSecondMenu;
     private X8DroneCalibrationController mX8DroneCalibrationController;
@@ -80,11 +83,8 @@ public class X8MainFcAllSettingControler extends AbsX8MenuBoxControllers impleme
     private X8FcSettingMenuController mX8FcSettingMenuController;
     private X8FirmwareUpgradeController mX8FirmwareUpgradeController;
     private X8FrequencyPointController mX8FrequencyPointController;
-    private final IX8GeneraModifyModeControllerListener modifyModeControllerListener;
     private X8RCCalibrationController rcCalibrationController;
     private X8RCMatchCodeController rcMatchCodeController;
-    private final View rlFcAllSetting;
-    private final View secondContentView;
     private X8CloudCalibrationController x8CloudCalibrationController;
     private X8FcExpSettingController x8FcExpSettingController;
     private X8FcSensitivitySettingController x8FcSensitivitySettingController;
@@ -360,7 +360,7 @@ public class X8MainFcAllSettingControler extends AbsX8MenuBoxControllers impleme
 
     public synchronized void showAllSettingUi(X8FcAllSettingMenuEnum menu) {
         if (this.firstContentView != null && ((RelativeLayout) this.firstContentView).getChildCount() == 0) {
-            this.rlFcAllSetting.setVisibility(0);
+            this.rlFcAllSetting.setVisibility(View.VISIBLE);
             if (menu == X8FcAllSettingMenuEnum.DRONE_STATE) {
                 showDroneStateView();
             } else {
@@ -404,8 +404,8 @@ public class X8MainFcAllSettingControler extends AbsX8MenuBoxControllers impleme
     }
 
     public void showFcMenuView(X8FcAllSettingMenuEnum menu) {
-        this.firstContentView.setVisibility(0);
-        this.rlFcAllSetting.setVisibility(0);
+        this.firstContentView.setVisibility(View.VISIBLE);
+        this.rlFcAllSetting.setVisibility(View.VISIBLE);
         this.mX8FcSettingMenuController = new X8FcSettingMenuController(this.firstContentView);
         this.mX8FcSettingMenuController.setListener(this.mapVideoController, this.fcManager, this.fcCtrlManager, this.gimbalManager, this.mX8FcItemListener, this.mX8RcItemControllerListener, this.mIX8GeneralItemControllerListerner, this.gimbalSettingListener, this.coverListener);
         this.mX8FcSettingMenuController.switchMenu(menu);
@@ -415,8 +415,8 @@ public class X8MainFcAllSettingControler extends AbsX8MenuBoxControllers impleme
     }
 
     public void showDroneStateView() {
-        this.firstContentView.setVisibility(0);
-        this.rlFcAllSetting.setVisibility(0);
+        this.firstContentView.setVisibility(View.VISIBLE);
+        this.rlFcAllSetting.setVisibility(View.VISIBLE);
         this.mX8DroneInfoStateController = new X8DroneInfoStateController(this.firstContentView);
         this.mX8DroneInfoStateController.setListener(this.mIX8DroneStateListener);
         this.mCurrentFirstController = this.mX8DroneInfoStateController;
@@ -424,8 +424,8 @@ public class X8MainFcAllSettingControler extends AbsX8MenuBoxControllers impleme
     }
 
     public void showCampView() {
-        this.firstContentView.setVisibility(8);
-        this.secondContentView.setVisibility(0);
+        this.firstContentView.setVisibility(View.GONE);
+        this.secondContentView.setVisibility(View.VISIBLE);
         this.mX8DroneCalibrationController = new X8DroneCalibrationController(this.secondContentView);
         this.mX8DroneCalibrationController.setCalibrationListener(this.mX8CalibrationListener);
         this.mX8DroneCalibrationController.setFcCtrlManager(this.fcCtrlManager);
@@ -530,13 +530,13 @@ public class X8MainFcAllSettingControler extends AbsX8MenuBoxControllers impleme
         }
         clearAllFirstController();
         ((ViewGroup) this.firstContentView).removeAllViews();
-        this.firstContentView.setVisibility(8);
+        this.firstContentView.setVisibility(View.GONE);
         this.mFirstMenu = FirstMenu.IDLE;
     }
 
     public void showFiveKeyUi(int key, int curIndex) {
-        this.firstContentView.setVisibility(8);
-        this.secondContentView.setVisibility(0);
+        this.firstContentView.setVisibility(View.GONE);
+        this.secondContentView.setVisibility(View.VISIBLE);
         this.x8FiveKeyDefineController = new X8FiveKeyDefineController(this.secondContentView);
         this.x8FiveKeyDefineController.setCalibrationListener(this.mx8FiveKeyCalibrationListener);
         this.x8FiveKeyDefineController.showItem();
@@ -546,8 +546,8 @@ public class X8MainFcAllSettingControler extends AbsX8MenuBoxControllers impleme
     }
 
     public void showRcCalibrationUi() {
-        this.firstContentView.setVisibility(8);
-        this.secondContentView.setVisibility(0);
+        this.firstContentView.setVisibility(View.GONE);
+        this.secondContentView.setVisibility(View.VISIBLE);
         this.rcCalibrationController = new X8RCCalibrationController(this.secondContentView);
         this.rcCalibrationController.setFcCtrlManager(this.fcCtrlManager);
         this.rcCalibrationController.setIx8CalibrationListener(this.mx8RockerCalibrationListener);
@@ -557,8 +557,8 @@ public class X8MainFcAllSettingControler extends AbsX8MenuBoxControllers impleme
     }
 
     public void showRcMatchCodeView() {
-        this.firstContentView.setVisibility(8);
-        this.secondContentView.setVisibility(0);
+        this.firstContentView.setVisibility(View.GONE);
+        this.secondContentView.setVisibility(View.VISIBLE);
         this.rcMatchCodeController = new X8RCMatchCodeController(this.secondContentView);
         this.rcMatchCodeController.setIx8CalibrationListener(this.mx8RockerCalibrationListener);
         this.rcMatchCodeController.openUi();
@@ -567,8 +567,8 @@ public class X8MainFcAllSettingControler extends AbsX8MenuBoxControllers impleme
     }
 
     public void showRockerModeUi() {
-        this.firstContentView.setVisibility(8);
-        this.secondContentView.setVisibility(0);
+        this.firstContentView.setVisibility(View.GONE);
+        this.secondContentView.setVisibility(View.VISIBLE);
         this.x8RockerModeController = new X8RockerModeController(this.secondContentView, this.rcCtrlModelListener);
         this.x8RockerModeController.setCalibrationListener(this.mx8RockerCalibrationListener);
         this.x8RockerModeController.setFcCtrlManager(this.fcCtrlManager);
@@ -578,8 +578,8 @@ public class X8MainFcAllSettingControler extends AbsX8MenuBoxControllers impleme
     }
 
     public void showGimbalCalibarationUi() {
-        this.firstContentView.setVisibility(8);
-        this.secondContentView.setVisibility(0);
+        this.firstContentView.setVisibility(View.GONE);
+        this.secondContentView.setVisibility(View.VISIBLE);
         this.x8CloudCalibrationController = new X8CloudCalibrationController(this.secondContentView);
         this.x8CloudCalibrationController.setFcCtrlManager(this.fcCtrlManager);
         this.x8CloudCalibrationController.setIx8CalibrationListener(this.mX8CalibrationListener);
@@ -594,8 +594,8 @@ public class X8MainFcAllSettingControler extends AbsX8MenuBoxControllers impleme
     }
 
     public void setVersion() {
-        this.firstContentView.setVisibility(8);
-        this.secondContentView.setVisibility(0);
+        this.firstContentView.setVisibility(View.GONE);
+        this.secondContentView.setVisibility(View.VISIBLE);
         this.mX8FirmwareUpgradeController = new X8FirmwareUpgradeController(this.secondContentView);
         this.mX8FirmwareUpgradeController.setOnFirmwareClickListener(this.mX8FwUpgradeCtrlListener);
         this.mX8FirmwareUpgradeController.showItem();
@@ -604,8 +604,8 @@ public class X8MainFcAllSettingControler extends AbsX8MenuBoxControllers impleme
     }
 
     public void showModifyMode() {
-        this.firstContentView.setVisibility(8);
-        this.secondContentView.setVisibility(0);
+        this.firstContentView.setVisibility(View.GONE);
+        this.secondContentView.setVisibility(View.VISIBLE);
         this.x8ModifyModeController = new X8ModifyModeController(this.secondContentView);
         this.x8ModifyModeController.setFcCtrlManager(this.fcCtrlManager);
         this.x8ModifyModeController.setX8GimbalManager(this.gimbalManager);
@@ -635,8 +635,8 @@ public class X8MainFcAllSettingControler extends AbsX8MenuBoxControllers impleme
                             CustomLoadManage customLoadManage2 = this.mCustomLoadManage;
                             CustomLoadManage.dismiss();
                             e.printStackTrace();
-                            this.firstContentView.setVisibility(8);
-                            this.secondContentView.setVisibility(0);
+                            this.firstContentView.setVisibility(View.GONE);
+                            this.secondContentView.setVisibility(View.VISIBLE);
                             this.x8FlightLogListController = new X8FlightLogListController(this.secondContentView, this.mCustomLoadManage);
                             this.x8FlightLogListController.setModeControllerListener(this.modifyModeControllerListener);
                             this.x8FlightLogListController.showItem();
@@ -649,8 +649,8 @@ public class X8MainFcAllSettingControler extends AbsX8MenuBoxControllers impleme
                 }
             } catch (Exception e3) {
             }
-            this.firstContentView.setVisibility(8);
-            this.secondContentView.setVisibility(0);
+            this.firstContentView.setVisibility(View.GONE);
+            this.secondContentView.setVisibility(View.VISIBLE);
             this.x8FlightLogListController = new X8FlightLogListController(this.secondContentView, this.mCustomLoadManage);
             this.x8FlightLogListController.setModeControllerListener(this.modifyModeControllerListener);
             this.x8FlightLogListController.showItem();

@@ -25,6 +25,7 @@ import com.fimi.x8sdk.modulestate.StateManager;
 
 
 public class X8GimbalItemController extends AbsX8Controllers implements View.OnClickListener {
+    private final Context mContext;
     Button btnRestParams;
     ProgressBar pbRestsystemLoading;
     X8DoubleCustomDialog x8DoubleCustomDialog;
@@ -36,7 +37,6 @@ public class X8GimbalItemController extends AbsX8Controllers implements View.OnC
     private boolean isConnected;
     private boolean isRequested;
     private IX8GimbalSettingListener listener;
-    private final Context mContext;
     private View rlFcItem;
     private X8ValueSeakBarView sbPitchSpeed;
     private ViewStub stubFcItem;
@@ -111,7 +111,7 @@ public class X8GimbalItemController extends AbsX8Controllers implements View.OnC
             requestValue();
             initActions();
         }
-        this.rlFcItem.setVisibility(0);
+        this.rlFcItem.setVisibility(View.VISIBLE);
         this.isShow = true;
     }
 
@@ -149,7 +149,7 @@ public class X8GimbalItemController extends AbsX8Controllers implements View.OnC
     @Override
     public void closeItem() {
         if (this.rlFcItem != null) {
-            this.rlFcItem.setVisibility(8);
+            this.rlFcItem.setVisibility(View.GONE);
             this.isShow = false;
         }
     }

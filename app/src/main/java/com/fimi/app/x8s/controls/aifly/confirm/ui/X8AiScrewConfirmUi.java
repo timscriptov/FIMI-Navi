@@ -13,9 +13,9 @@ import com.fimi.app.x8s.tools.ImageUtils;
 
 
 public class X8AiScrewConfirmUi implements View.OnClickListener {
+    private final View contentView;
     private View btnOk;
     private CheckBox cbTip;
-    private final View contentView;
     private ImageView imgFlag;
     private View imgReturn;
     private X8MainAiFlyController listener;

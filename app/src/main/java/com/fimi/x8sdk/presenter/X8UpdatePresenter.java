@@ -44,6 +44,8 @@ public class X8UpdatePresenter extends BasePresenter implements IUpdateAction, U
     private final int WHAT_UPDATE_FINISH = 2;
     private final int WAIT_UPDATE_TIMEOUT = 3;
     private final int UPDATE_STATE_END = 255;
+    private final Context context;
+    private final List<FwInfo> fwInfos = new ArrayList();
     boolean startCheckUpdateTimeOut = false;
     UpdateState updateState = UpdateState.updateInit;
     volatile double offset = 0.0d;
@@ -52,7 +54,6 @@ public class X8UpdatePresenter extends BasePresenter implements IUpdateAction, U
     int cameraConnectedState = -1;
     boolean isCameraUpdate = false;
     private int aggregateProgress;
-    private final Context context;
     private List<UpdateCurrentProgressEntity> currentProgressEntityList;
     private byte[] fileBytes;
     private int fileProgress;
@@ -68,12 +69,8 @@ public class X8UpdatePresenter extends BasePresenter implements IUpdateAction, U
     private Thread updateThread;
     private int packNum = 0;
     private boolean updateFailure = false;
-    private final List<FwInfo> fwInfos = new ArrayList();
     private boolean hasAccumulate = false;
     private Timer checkUpdateTimeout = new Timer();
-    private boolean isLockOffset = false;
-    private int callbackOffset = 0;
-    private boolean waitSend = false;
     @SuppressLint({"HandlerLeak"})
     private final Handler handler = new Handler() {
         @Override
@@ -134,6 +131,9 @@ public class X8UpdatePresenter extends BasePresenter implements IUpdateAction, U
         public void onDeviceDisConnnect() {
         }
     };
+    private boolean isLockOffset = false;
+    private int callbackOffset = 0;
+    private boolean waitSend = false;
     private int cheackUpdateTimeOut = 0;
     private int updateTimeoutProgress = 0;
     private int updateTimeoutAddTime = 0;

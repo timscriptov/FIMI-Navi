@@ -27,10 +27,10 @@ import com.fimi.x8sdk.modulestate.StateManager;
 
 
 public class X8AiAerialPhotographExcuteController extends AbsX8AiController implements View.OnClickListener, X8DoubleCustomDialog.onDialogButtonClickListener {
+    private final X8sMainActivity activity;
     protected int MAX_WIDTH;
     protected boolean isShow;
     protected int width;
-    private final X8sMainActivity activity;
     private View blank;
     private Button btnOk;
     private X8DoubleCustomDialog dialog;
@@ -106,9 +106,9 @@ public class X8AiAerialPhotographExcuteController extends AbsX8AiController impl
             openNextUi(1);
         } else if (id == R.id.rl_flag_small) {
             if (this.tvFlag.getVisibility() == 0) {
-                this.tvFlag.setVisibility(8);
+                this.tvFlag.setVisibility(View.GONE);
             } else {
-                this.tvFlag.setVisibility(0);
+                this.tvFlag.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -154,19 +154,19 @@ public class X8AiAerialPhotographExcuteController extends AbsX8AiController impl
     }
 
     public void openNextUi(int type) {
-        this.nextRootView.setVisibility(0);
-        this.blank.setVisibility(0);
+        this.nextRootView.setVisibility(View.VISIBLE);
+        this.blank.setVisibility(View.VISIBLE);
         if (!this.isNextShow) {
             this.mX8AiAerialPhotographNextUi.setType(type);
             if (type == 1) {
-                this.vSensity.setVisibility(0);
-                this.vSetAngle.setVisibility(8);
+                this.vSensity.setVisibility(View.VISIBLE);
+                this.vSetAngle.setVisibility(View.GONE);
                 this.mX8AiAerialPhotographNextUi.setTitle(this.activity.getString(R.string.x8_ai_aerail_graph_next_title));
                 this.btnOk.setText(this.activity.getString(R.string.x8_save));
                 this.mX8AiAerialPhotographNextUi.setSensity();
             } else {
-                this.vSensity.setVisibility(8);
-                this.vSetAngle.setVisibility(0);
+                this.vSensity.setVisibility(View.GONE);
+                this.vSetAngle.setVisibility(View.VISIBLE);
                 this.mX8AiAerialPhotographNextUi.setTitle(this.activity.getString(R.string.x8_ai_heading_lock_update));
                 this.btnOk.setText(this.activity.getString(R.string.x8_ai_fly_lines_point_action_update));
             }
@@ -180,7 +180,7 @@ public class X8AiAerialPhotographExcuteController extends AbsX8AiController impl
     }
 
     public void closeNextUi() {
-        this.blank.setVisibility(8);
+        this.blank.setVisibility(View.GONE);
         if (this.isNextShow) {
             this.isNextShow = false;
             ObjectAnimator translationRight = ObjectAnimator.ofFloat(this.nextRootView, "translationX", 0.0f, this.width);
@@ -191,7 +191,7 @@ public class X8AiAerialPhotographExcuteController extends AbsX8AiController impl
                 // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
-                    X8AiAerialPhotographExcuteController.this.nextRootView.setVisibility(8);
+                    X8AiAerialPhotographExcuteController.this.nextRootView.setVisibility(View.GONE);
                 }
             });
         }

@@ -27,19 +27,19 @@ import com.fimi.x8sdk.dataparser.AckCloudParamsNew;
 
 public class X8GimbalXYZAdjustController extends AbsX8MenuBoxControllers implements View.OnClickListener {
     private final X8sMainActivity activity;
+    private final String defaultUnit;
+    private final float maxDefaultAdjustValue;
+    private final float minDefaultAdjustValue;
+    private final float valueOnFoot;
     Button btnCalibrate;
     Button x8BtnXyzAdjustExit;
     Button x8BtnXyzAdjustSave;
     private Button btnGet;
     private Button btnSave;
-    private final String defaultUnit;
     private IX8MainTopBarListener ix8MainTopBarListener;
     private IX8GimbalXYZAdjustListener listener;
     private Context mContext;
     private X8GimbalManager mX8GimbalManager;
-    private final float maxDefaultAdjustValue;
-    private final float minDefaultAdjustValue;
-    private final float valueOnFoot;
     private X8DoubleCustomDialog x8DoubleCustomDialog;
     private X8AiTipWithCloseView x8GimbalXYZAdiustTip;
     private X8SingleCustomDialog x8SingleCustomDialog;

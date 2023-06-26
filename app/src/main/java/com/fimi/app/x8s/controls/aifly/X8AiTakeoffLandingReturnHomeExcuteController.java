@@ -21,11 +21,12 @@ import com.fimi.x8sdk.modulestate.StateManager;
 
 
 public class X8AiTakeoffLandingReturnHomeExcuteController extends AbsX8AiController implements View.OnClickListener, X8DoubleCustomDialog.onDialogButtonClickListener {
+    private final Activity activity;
+    private final int type;
     protected int MAX_WIDTH;
     protected boolean isShow;
     protected int width;
     X8AiTLRState state;
-    private final Activity activity;
     private X8DoubleCustomDialog dialog;
     private FcManager fcManager;
     private View flagSmall;
@@ -33,7 +34,6 @@ public class X8AiTakeoffLandingReturnHomeExcuteController extends AbsX8AiControl
     private ImageView imgSmall;
     private IX8TLRListener listener;
     private TextView tvTakeLandReturn;
-    private final int type;
 
     public X8AiTakeoffLandingReturnHomeExcuteController(Activity activity, View rootView, int type) {
         super(rootView);
@@ -82,9 +82,9 @@ public class X8AiTakeoffLandingReturnHomeExcuteController extends AbsX8AiControl
             }
         } else if (id == R.id.rl_flag_small) {
             if (this.tvTakeLandReturn.getVisibility() == 0) {
-                this.tvTakeLandReturn.setVisibility(8);
+                this.tvTakeLandReturn.setVisibility(View.GONE);
             } else {
-                this.tvTakeLandReturn.setVisibility(0);
+                this.tvTakeLandReturn.setVisibility(View.VISIBLE);
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.fimi.app.x8s.manager;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
@@ -13,18 +14,18 @@ import com.fimi.x8sdk.entity.ErrorCodeBean;
 public class X8ErrerCodeSpeakFlashManager {
     private final Context context;
     private final X8ErrorCodeController errorCodeController;
-    private boolean isSpeek;
-    private boolean isStart;
     private final X8ShowErrorCodeTask mediumTask;
     private final X8ShowErrorCodeTask seriousTask;
+    private boolean isSpeek;
+    private boolean isStart;
     private long speekId;
+    @SuppressLint("HandlerLeak")
     private final Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == 1) {
-                X8ErrerCodeSpeakFlashManager.this.nextRunBySpeekEnd();
-                return;
+                nextRunBySpeekEnd();
             }
         }
     };

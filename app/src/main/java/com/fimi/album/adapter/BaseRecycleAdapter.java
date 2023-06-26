@@ -23,6 +23,10 @@ public abstract class BaseRecycleAdapter<T extends MediaModel> extends RecyclerV
     public static final int ITEMBODYTYPE = 32;
     public static final int ITEMHEADTYPE = 16;
     public static final String TAG = BaseRecycleAdapter.class.getName();
+    private final DataManager mdataManager = DataManager.obtain();
+    private final int headSpanCount = 4;
+    private final int bodySpanCount = 1;
+    private final int internalListBound = 2;
     protected Context context;
     protected INodataTip mINodataTip;
     protected Handler mainHandler;
@@ -30,10 +34,6 @@ public abstract class BaseRecycleAdapter<T extends MediaModel> extends RecyclerV
     private CopyOnWriteArrayList<T> modelList;
     private CopyOnWriteArrayList<T> modelNoHeadList;
     private HashMap<String, CopyOnWriteArrayList<T>> stateHashMap;
-    private final DataManager mdataManager = DataManager.obtain();
-    private final int headSpanCount = 4;
-    private final int bodySpanCount = 1;
-    private final int internalListBound = 2;
 
     public BaseRecycleAdapter(Context context, INodataTip mINodataTip) {
         initData();

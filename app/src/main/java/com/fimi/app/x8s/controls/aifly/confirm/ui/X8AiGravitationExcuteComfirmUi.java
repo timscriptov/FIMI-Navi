@@ -31,12 +31,18 @@ import com.fimi.x8sdk.modulestate.StateManager;
 public class X8AiGravitationExcuteComfirmUi implements View.OnClickListener {
     private final View contentView;
     private final X8sMainActivity activity;
+    private final CameraManager mCameraManager;
+    private final int LEVEL_MIN = 20;
+    private final int LEVEL_MAX = 30;
+    private final int LEVEL_MAX_PROGRESS = (this.LEVEL_MAX - this.LEVEL_MIN) * 10;
+    private final int HIGHT_MIN = 5;
+    private final int HIGHT_MAX = 10;
+    private final int HIGHT_MAX_PROGRESS = (this.HIGHT_MAX - this.HIGHT_MIN) * 20;
     private AckAiGetGravitationPrameter mAckAiGetGravitationPrameter;
     private Button mBtnExcuteAdvancedSetting;
     private Button mBtnExcuteDefault;
     private Button mBtnExcuteOk;
     private Button mBtnExcuteSave;
-    private final CameraManager mCameraManager;
     private ImageView mExcuteReturn;
     private TextView mExcuteTitle;
     private FcManager mFcManager;
@@ -50,16 +56,23 @@ public class X8AiGravitationExcuteComfirmUi implements View.OnClickListener {
     private X8SeekBarView mSbHeight;
     private X8SeekBarView mSbLevel;
     private TextView mTvHeight;
+    private final X8SeekBarView.SlideChangeListener seekBarHightListener = new X8SeekBarView.SlideChangeListener() {
+        @Override
+        public void onStart(X8SeekBarView slideView, int progress) {
+        }
+
+        @Override
+        public void onProgress(X8SeekBarView slideView, int progress) {
+            float levelValue = X8AiGravitationExcuteComfirmUi.this.HIGHT_MIN + (progress / 20);
+            String d = X8NumberUtil.getDistanceNumberString(levelValue, 0, true);
+            X8AiGravitationExcuteComfirmUi.this.mTvHeight.setText(d);
+        }
+
+        @Override
+        public void onStop(X8SeekBarView slideView, int progress) {
+        }
+    };
     private TextView mTvLevel;
-    private X8TabHost mXthRotate;
-    private X8TabHost mXthVidotape;
-    private final int LEVEL_MIN = 20;
-    private final int LEVEL_MAX = 30;
-    private final int LEVEL_MAX_PROGRESS = (this.LEVEL_MAX - this.LEVEL_MIN) * 10;
-    private final int HIGHT_MIN = 5;
-    private final int HIGHT_MAX = 10;
-    private final int HIGHT_MAX_PROGRESS = (this.HIGHT_MAX - this.HIGHT_MIN) * 20;
-    private ExcuteComfirmState mComfirmState = ExcuteComfirmState.MAIN;
     private final X8SeekBarView.SlideChangeListener seekBarLevelListener = new X8SeekBarView.SlideChangeListener() {
         @Override
         public void onStart(X8SeekBarView slideView, int progress) {
@@ -78,22 +91,9 @@ public class X8AiGravitationExcuteComfirmUi implements View.OnClickListener {
             X8AiGravitationExcuteComfirmUi.this.changeEllipse(levelValue);
         }
     };
-    private final X8SeekBarView.SlideChangeListener seekBarHightListener = new X8SeekBarView.SlideChangeListener() {
-        @Override
-        public void onStart(X8SeekBarView slideView, int progress) {
-        }
-
-        @Override
-        public void onProgress(X8SeekBarView slideView, int progress) {
-            float levelValue = X8AiGravitationExcuteComfirmUi.this.HIGHT_MIN + (progress / 20);
-            String d = X8NumberUtil.getDistanceNumberString(levelValue, 0, true);
-            X8AiGravitationExcuteComfirmUi.this.mTvHeight.setText(d);
-        }
-
-        @Override
-        public void onStop(X8SeekBarView slideView, int progress) {
-        }
-    };
+    private X8TabHost mXthRotate;
+    private X8TabHost mXthVidotape;
+    private ExcuteComfirmState mComfirmState = ExcuteComfirmState.MAIN;
 
     public X8AiGravitationExcuteComfirmUi(X8sMainActivity activity, View parent, CameraManager cameraManager) {
         this.activity = activity;
@@ -290,21 +290,21 @@ public class X8AiGravitationExcuteComfirmUi implements View.OnClickListener {
 
     private void returnExcuteSetting() {
         this.mComfirmState = ExcuteComfirmState.MAIN;
-        this.mRlExcuteSetting.setVisibility(0);
-        this.mBtnExcuteDefault.setVisibility(8);
-        this.mBtnExcuteSave.setVisibility(8);
-        this.mBtnExcuteOk.setVisibility(0);
-        this.mLlAdvancedSetting.setVisibility(8);
+        this.mRlExcuteSetting.setVisibility(View.VISIBLE);
+        this.mBtnExcuteDefault.setVisibility(View.GONE);
+        this.mBtnExcuteSave.setVisibility(View.GONE);
+        this.mBtnExcuteOk.setVisibility(View.VISIBLE);
+        this.mLlAdvancedSetting.setVisibility(View.GONE);
     }
 
     private void showAdvancedSetting() {
         this.mComfirmState = ExcuteComfirmState.ADVANCED;
-        this.mExcuteReturn.setVisibility(0);
-        this.mRlExcuteSetting.setVisibility(8);
-        this.mBtnExcuteDefault.setVisibility(0);
-        this.mBtnExcuteSave.setVisibility(0);
-        this.mBtnExcuteOk.setVisibility(8);
-        this.mLlAdvancedSetting.setVisibility(0);
+        this.mExcuteReturn.setVisibility(View.VISIBLE);
+        this.mRlExcuteSetting.setVisibility(View.GONE);
+        this.mBtnExcuteDefault.setVisibility(View.VISIBLE);
+        this.mBtnExcuteSave.setVisibility(View.VISIBLE);
+        this.mBtnExcuteOk.setVisibility(View.GONE);
+        this.mLlAdvancedSetting.setVisibility(View.VISIBLE);
         this.mTvHeight.setText(X8NumberUtil.getDistanceNumberString(this.HIGHT_MIN + (X8AiConfig.getInstance().getAiFlyGravitationHeight() / 20), 0, true));
         this.mSbHeight.setProgress(X8AiConfig.getInstance().getAiFlyGravitationHeight());
         this.mTvLevel.setText(X8NumberUtil.getDistanceNumberString(this.LEVEL_MIN + (X8AiConfig.getInstance().getAiFlyGravitationLevel() / 10), 0, true));

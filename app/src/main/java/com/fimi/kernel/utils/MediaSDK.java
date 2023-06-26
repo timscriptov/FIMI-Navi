@@ -6,8 +6,8 @@ import java.util.HashMap;
 
 
 public class MediaSDK {
-    private static MediaSDK mediaSDK = null;
     private static final HashMap mapDur = new HashMap();
+    private static MediaSDK mediaSDK = null;
 
     public static MediaSDK getInstance() {
         if (mediaSDK == null) {

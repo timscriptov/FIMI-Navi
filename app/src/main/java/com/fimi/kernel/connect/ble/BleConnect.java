@@ -33,6 +33,9 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 public class BleConnect extends BaseConnect implements IDataTransfer, IRetransmissionHandle, ITimerSendQueueHandle {
     private final int SEND_LEN = 20;
+    private final ResultListener gh2ResultListener;
+    private final IBleSendData mBleSendDataHandle;
+    private final Parser p = new Parser();
     public LinkedBlockingDeque<Object> cmdQuene = new LinkedBlockingDeque<>();
     public LinkedBlockingDeque<byte[]> cmdQuene2 = new LinkedBlockingDeque<>();
     public int[] cmds = {193, 201, 202, 203, 204};
@@ -42,15 +45,12 @@ public class BleConnect extends BaseConnect implements IDataTransfer, IRetransmi
     private BluetoothGattCharacteristic characterWrite;
     private Context context;
     private BluetoothDevice device;
-    private final ResultListener gh2ResultListener;
     private long lastTime;
-    private final IBleSendData mBleSendDataHandle;
     private CheckDeviceConnectThread mCheckDeviceConnectThread;
     private ReadThread mReadThread;
     private RetransmissionThread mRetransmissionThread;
     private TimerSendQueueThread mTimerSendQueueThread;
     private WriteThread mWriteThread;
-    private final Parser p = new Parser();
     private BaseConnect.DeviceConnectState mDeviceConnectState = BaseConnect.DeviceConnectState.IDEL;
 
     public BleConnect(IBleSendData mIBleSendData, ResultListener listener) {

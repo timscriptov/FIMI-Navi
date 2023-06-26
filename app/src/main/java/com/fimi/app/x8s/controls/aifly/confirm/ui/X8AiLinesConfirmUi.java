@@ -22,9 +22,9 @@ import com.fimi.app.x8s.ui.activity.X8sMainActivity;
 
 public class X8AiLinesConfirmUi extends AbsX8BaseConnectView implements View.OnClickListener {
     private final Activity activity;
+    private final View contentView;
     private View btnOk;
     private CheckBox cbTip;
-    private final View contentView;
     private ImageView imgFlag;
     private View imgReturn;
     private X8MainAiFlyController listener;
@@ -79,8 +79,8 @@ public class X8AiLinesConfirmUi extends AbsX8BaseConnectView implements View.OnC
         this.mTvCurveSettingPoint = rootView.findViewById(R.id.tv_ai_curve_setting_point);
         this.mTvFlyPoint = rootView.findViewById(R.id.tv_ai_fly_point);
         this.mTvHistory = rootView.findViewById(R.id.tv_ai_line_history);
-        this.vItemSelect.setVisibility(0);
-        this.vConfirm.setVisibility(8);
+        this.vItemSelect.setVisibility(View.VISIBLE);
+        this.vConfirm.setVisibility(View.GONE);
         this.tvTitle.setText(this.contentView.getContext().getString(R.string.x8_ai_fly_route));
         if (this.isConect) {
             setFcHeart(this.isInSky, this.isLowpower);
@@ -119,8 +119,8 @@ public class X8AiLinesConfirmUi extends AbsX8BaseConnectView implements View.OnC
             }
             this.menuIndex = 0;
             this.svTips.fullScroll(33);
-            this.vItemSelect.setVisibility(0);
-            this.vConfirm.setVisibility(8);
+            this.vItemSelect.setVisibility(View.VISIBLE);
+            this.vConfirm.setVisibility(View.GONE);
             this.tvTitle.setText(this.contentView.getContext().getString(R.string.x8_ai_fly_route));
         } else if (id == R.id.btn_ai_follow_confirm_ok) {
             if (this.menuIndex == 1) {
@@ -197,8 +197,8 @@ public class X8AiLinesConfirmUi extends AbsX8BaseConnectView implements View.OnC
     }
 
     public void onSelectItem(String title, String content1, String content2, String content3, String content4, int res) {
-        this.vItemSelect.setVisibility(8);
-        this.vConfirm.setVisibility(0);
+        this.vItemSelect.setVisibility(View.GONE);
+        this.vConfirm.setVisibility(View.VISIBLE);
         this.tvTitle.setText(title);
         this.imgFlag.setImageBitmap(ImageUtils.getBitmapByPath(this.contentView.getContext(), res));
         this.tvTip1.setText(content1);

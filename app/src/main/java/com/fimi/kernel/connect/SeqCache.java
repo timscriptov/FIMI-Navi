@@ -3,8 +3,8 @@ package com.fimi.kernel.connect;
 
 public class SeqCache {
     private final int MAX_LEN = 100;
-    private int index;
     private final int[] seqIndex = new int[100];
+    private int index;
 
     public void add2SeqCache(int seq) {
         int i = this.index;

@@ -25,6 +25,7 @@ public class FirmwareBuildPack implements IBuildPackInfo {
     public static final String PKG_NOCRC = DirectoryPath.getFwTempFilePath() + "/pgk_no_crc";
     public static final String PKG_UPDATE_FILE = DirectoryPath.getFirmwarePath() + "/all_chips.bin";
     public static final String PKG_CRC = DirectoryPath.getFwTempFilePath() + "/pgk_crc";
+    private final List<FwInfo> fws;
     MergFileListener listener;
     Handler mHandler = new Handler(Looper.getMainLooper()) {
         @Override
@@ -35,7 +36,6 @@ public class FirmwareBuildPack implements IBuildPackInfo {
             }
         }
     };
-    private final List<FwInfo> fws;
 
     public FirmwareBuildPack(MergFileListener listener, List<FwInfo> fws) {
         this.listener = listener;

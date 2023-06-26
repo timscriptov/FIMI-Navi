@@ -19,10 +19,10 @@ public class X8AccurateLandingController {
 
     public void onDroneConnected(boolean b) {
         if (!b) {
-            this.mTipBgView.setVisibility(8);
+            this.mTipBgView.setVisibility(View.GONE);
             this.mTipBgView.setClose(false);
         } else if (AckAccurateLandingState.isTimeOut()) {
-            this.mTipBgView.setVisibility(8);
+            this.mTipBgView.setVisibility(View.GONE);
             this.mTipBgView.setClose(false);
         } else if (!this.mTipBgView.isClose()) {
             if (StateManager.getInstance().getX8Drone().isAutoLandingCheckObj()) {
@@ -30,7 +30,7 @@ public class X8AccurateLandingController {
             } else {
                 this.mTipBgView.setTipText(this.root.getContext().getString(R.string.x8_accurate_check_obj0));
             }
-            this.mTipBgView.setVisibility(0);
+            this.mTipBgView.setVisibility(View.VISIBLE);
         }
     }
 }

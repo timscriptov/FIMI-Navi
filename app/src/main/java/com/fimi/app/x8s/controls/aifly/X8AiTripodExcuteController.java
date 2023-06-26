@@ -19,10 +19,10 @@ import com.fimi.x8sdk.modulestate.StateManager;
 
 
 public class X8AiTripodExcuteController extends AbsX8AiController implements View.OnClickListener, X8DoubleCustomDialog.onDialogButtonClickListener {
+    private final Activity activity;
     protected int MAX_WIDTH;
     protected boolean isShow;
     protected int width;
-    private final Activity activity;
     private X8DoubleCustomDialog dialog;
     private View flagSmall;
     private ImageView imgBack;
@@ -76,9 +76,9 @@ public class X8AiTripodExcuteController extends AbsX8AiController implements Vie
             showExitDialog();
         } else if (id == R.id.rl_flag_small) {
             if (this.tvFlag.getVisibility() == 0) {
-                this.tvFlag.setVisibility(8);
+                this.tvFlag.setVisibility(View.GONE);
             } else {
-                this.tvFlag.setVisibility(0);
+                this.tvFlag.setVisibility(View.VISIBLE);
             }
         }
     }

@@ -165,7 +165,7 @@ public class X8FcExpSettingController extends AbsX8MenuBoxControllers implements
     @Override
     public void showItem() {
         this.isShow = true;
-        this.contentView.setVisibility(0);
+        this.contentView.setVisibility(View.VISIBLE);
         getDroneState();
         if (this.isConect) {
             updateViewEnable(true, this.content_layout);
@@ -179,7 +179,7 @@ public class X8FcExpSettingController extends AbsX8MenuBoxControllers implements
     @Override
     public void closeItem() {
         this.isShow = false;
-        this.contentView.setVisibility(8);
+        this.contentView.setVisibility(View.GONE);
         defaultVal();
     }
 

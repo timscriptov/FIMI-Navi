@@ -1,6 +1,7 @@
 package com.fimi.app.x8s.ui.album.x8s;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.fimi.android.app.R;
 
@@ -44,7 +45,7 @@ public class X8CameraFragment extends X8MediaBaseFragment {
     }
 
     public void onDisConnect() {
-        this.rlMediaSelectBottom.setVisibility(8);
+        this.rlMediaSelectBottom.setVisibility(View.GONE);
         this.mBaseFragmentPresenter.setEnterSelectMode(false);
     }
 }

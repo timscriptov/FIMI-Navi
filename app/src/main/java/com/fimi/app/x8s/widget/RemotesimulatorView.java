@@ -20,6 +20,8 @@ import com.fimi.android.app.R;
 import com.fimi.app.x8s.tools.ConvertSize;
 
 public class RemotesimulatorView extends View {
+    private final int[] doughnutColors;
+    private final int midRemoteCenter;
     private float IndexLeft;
     private float IndexRight;
     private float IndexTop;
@@ -34,7 +36,6 @@ public class RemotesimulatorView extends View {
     private Context context;
     private int currentLeftRemoteIndex;
     private int currentRightRemoteIndex;
-    private final int[] doughnutColors;
     private boolean isBatteryPress;
     private boolean isLandPress;
     private boolean isReturnPress;
@@ -45,7 +46,6 @@ public class RemotesimulatorView extends View {
     private Matrix mMatrix;
     private int marginLeft;
     private int marginTop;
-    private final int midRemoteCenter;
     private Paint paint;
     private Paint paint1;
     private Rect rect;

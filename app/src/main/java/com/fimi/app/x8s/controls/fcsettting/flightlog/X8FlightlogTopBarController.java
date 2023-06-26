@@ -36,11 +36,11 @@ import org.greenrobot.eventbus.ThreadMode;
 
 
 public class X8FlightlogTopBarController extends AbsX8Controllers implements View.OnClickListener {
+    private final Activity mActivity;
     private ImageButton ibtnReturn;
     private boolean isCollect;
     private AutoFcSportStatePlayback lastState;
     private IX8FlightLogTopBarListener listener;
-    private final Activity mActivity;
     private CustomLoadManage mCustomLoadManage;
     private ImageView mIvDistance;
     private ImageView mIvFlyState;

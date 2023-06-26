@@ -131,7 +131,7 @@ public class X8FcSensitivitySettingController extends AbsX8MenuBoxControllers im
     @Override
     public void showItem() {
         this.isShow = true;
-        this.contentView.setVisibility(0);
+        this.contentView.setVisibility(View.VISIBLE);
         getDroneState();
         onDroneConnected(this.isConect);
     }
@@ -139,7 +139,7 @@ public class X8FcSensitivitySettingController extends AbsX8MenuBoxControllers im
     @Override
     public void closeItem() {
         this.isShow = false;
-        this.contentView.setVisibility(8);
+        this.contentView.setVisibility(View.GONE);
         defaultVal();
     }
 

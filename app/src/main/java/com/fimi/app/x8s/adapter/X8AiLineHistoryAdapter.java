@@ -8,6 +8,8 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.android.app.R;
 import com.fimi.kernel.store.sqlite.entity.X8AiLinePointInfo;
 import com.fimi.kernel.utils.DateUtil;
@@ -19,10 +21,10 @@ public class X8AiLineHistoryAdapter extends BaseAdapter implements AdapterView.O
     private final Context context;
     private final int defaultColor;
     private final List<X8AiLinePointInfo> mList;
-    private int select = -1;
     private final int selectColor;
+    private int select = -1;
 
-    public X8AiLineHistoryAdapter(Context context, List<X8AiLinePointInfo> mList) {
+    public X8AiLineHistoryAdapter(@NonNull Context context, List<X8AiLinePointInfo> mList) {
         this.context = context;
         this.mList = mList;
         this.defaultColor = context.getResources().getColor(R.color.white_90);

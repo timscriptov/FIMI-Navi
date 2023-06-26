@@ -33,14 +33,14 @@ import java.util.List;
 
 
 public class X8FirmwareUpgradeController extends AbsX8MenuBoxControllers implements View.OnClickListener {
-    boolean currentConnectedState;
     private final FirmwareUpgradeAdapter adapter;
-    private boolean availableUpgrades;
     private final ImageView imgReturn;
     private final ArrayList<VersionEntity> items;
-    private IX8FirmwareUpgradeControllerListener listener;
     private final RecyclerView mRecyclerList;
     private final TextView tvFirmwareUpgrade;
+    boolean currentConnectedState;
+    private boolean availableUpgrades;
+    private IX8FirmwareUpgradeControllerListener listener;
 
     public X8FirmwareUpgradeController(View rootView) {
         super(rootView);
@@ -92,14 +92,14 @@ public class X8FirmwareUpgradeController extends AbsX8MenuBoxControllers impleme
     @Override
     public void showItem() {
         super.showItem();
-        this.contentView.setVisibility(0);
+        this.contentView.setVisibility(View.VISIBLE);
         EventBus.getDefault().register(this);
     }
 
     @Override
     public void closeItem() {
         super.closeItem();
-        this.contentView.setVisibility(8);
+        this.contentView.setVisibility(View.GONE);
         EventBus.getDefault().unregister(this);
     }
 

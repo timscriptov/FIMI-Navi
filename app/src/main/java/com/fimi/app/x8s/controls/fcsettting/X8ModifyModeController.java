@@ -33,8 +33,9 @@ import com.fimi.x8sdk.modulestate.StateManager;
 
 
 public class X8ModifyModeController extends AbsX8MenuBoxControllers implements X8DoubleCustomDialog.onDialogButtonClickListener {
-    private X8AircraftCalibrationController aircraftCalibrationController;
     private final ApkVersionManager apkVersionManager;
+    private final Handler mHandler;
+    private X8AircraftCalibrationController aircraftCalibrationController;
     private ImageView back_btn;
     private RelativeLayout blackBoxLayout;
     private RelativeLayout blackBoxLogLayout;
@@ -53,7 +54,6 @@ public class X8ModifyModeController extends AbsX8MenuBoxControllers implements X
     private RelativeLayout mFormatStorage;
     private X8modifyGimbalSensorController mGimbalSensorController;
     private RelativeLayout mGimbalSensorLayout;
-    private final Handler mHandler;
     private ImageView mIvFormatStorage;
     private CustomLoadManage mLoadManage;
     private ProgressBar mPbFormat;
@@ -133,8 +133,8 @@ public class X8ModifyModeController extends AbsX8MenuBoxControllers implements X
         this.calibration_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                X8ModifyModeController.this.topLayout.setVisibility(8);
-                X8ModifyModeController.this.itemLayout.setVisibility(8);
+                X8ModifyModeController.this.topLayout.setVisibility(View.GONE);
+                X8ModifyModeController.this.itemLayout.setVisibility(View.GONE);
                 X8ModifyModeController.this.modeControllerListener.onOpen();
                 if (X8ModifyModeController.this.calibrationViewStub == null) {
                     X8ModifyModeController.this.calibrationViewStub = X8ModifyModeController.this.handleView.findViewById(R.id.x8_calibration_view);
@@ -146,8 +146,8 @@ public class X8ModifyModeController extends AbsX8MenuBoxControllers implements X
                 X8ModifyModeController.this.aircraftCalibrationController.setModeControllerListener(new IX8GeneraModifyModeControllerListener() {
                     @Override
                     public void returnBack() {
-                        X8ModifyModeController.this.topLayout.setVisibility(0);
-                        X8ModifyModeController.this.itemLayout.setVisibility(0);
+                        X8ModifyModeController.this.topLayout.setVisibility(View.VISIBLE);
+                        X8ModifyModeController.this.itemLayout.setVisibility(View.VISIBLE);
                     }
 
                     @Override
@@ -159,14 +159,14 @@ public class X8ModifyModeController extends AbsX8MenuBoxControllers implements X
                         X8ModifyModeController.this.modeControllerListener.onClose();
                     }
                 });
-                X8ModifyModeController.this.topLayout.setVisibility(8);
-                X8ModifyModeController.this.itemLayout.setVisibility(8);
+                X8ModifyModeController.this.topLayout.setVisibility(View.GONE);
+                X8ModifyModeController.this.itemLayout.setVisibility(View.GONE);
             }
         });
         this.back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                X8ModifyModeController.this.handleView.setVisibility(8);
+                X8ModifyModeController.this.handleView.setVisibility(View.GONE);
                 X8ModifyModeController.this.modeControllerListener.returnBack();
             }
         });
@@ -184,8 +184,8 @@ public class X8ModifyModeController extends AbsX8MenuBoxControllers implements X
                 X8ModifyModeController.this.mGimbalSensorController.setModeControllerListener(new IX8GeneraModifyModeControllerListener() {
                     @Override
                     public void returnBack() {
-                        X8ModifyModeController.this.topLayout.setVisibility(0);
-                        X8ModifyModeController.this.itemLayout.setVisibility(0);
+                        X8ModifyModeController.this.topLayout.setVisibility(View.VISIBLE);
+                        X8ModifyModeController.this.itemLayout.setVisibility(View.VISIBLE);
                     }
 
                     @Override
@@ -196,8 +196,8 @@ public class X8ModifyModeController extends AbsX8MenuBoxControllers implements X
                     public void onClose() {
                     }
                 });
-                X8ModifyModeController.this.topLayout.setVisibility(8);
-                X8ModifyModeController.this.itemLayout.setVisibility(8);
+                X8ModifyModeController.this.topLayout.setVisibility(View.GONE);
+                X8ModifyModeController.this.itemLayout.setVisibility(View.GONE);
             }
         });
         this.sensorLayout.setOnClickListener(new View.OnClickListener() {
@@ -213,8 +213,8 @@ public class X8ModifyModeController extends AbsX8MenuBoxControllers implements X
                 X8ModifyModeController.this.sensorController.setModeControllerListener(new IX8GeneraModifyModeControllerListener() {
                     @Override
                     public void returnBack() {
-                        X8ModifyModeController.this.topLayout.setVisibility(0);
-                        X8ModifyModeController.this.itemLayout.setVisibility(0);
+                        X8ModifyModeController.this.topLayout.setVisibility(View.VISIBLE);
+                        X8ModifyModeController.this.itemLayout.setVisibility(View.VISIBLE);
                     }
 
                     @Override
@@ -225,8 +225,8 @@ public class X8ModifyModeController extends AbsX8MenuBoxControllers implements X
                     public void onClose() {
                     }
                 });
-                X8ModifyModeController.this.topLayout.setVisibility(8);
-                X8ModifyModeController.this.itemLayout.setVisibility(8);
+                X8ModifyModeController.this.topLayout.setVisibility(View.GONE);
+                X8ModifyModeController.this.itemLayout.setVisibility(View.GONE);
             }
         });
         this.checkLayout.setOnClickListener(new View.OnClickListener() {
@@ -242,8 +242,8 @@ public class X8ModifyModeController extends AbsX8MenuBoxControllers implements X
         this.blackBoxLogLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                X8ModifyModeController.this.topLayout.setVisibility(8);
-                X8ModifyModeController.this.itemLayout.setVisibility(8);
+                X8ModifyModeController.this.topLayout.setVisibility(View.GONE);
+                X8ModifyModeController.this.itemLayout.setVisibility(View.GONE);
                 X8ModifyModeController.this.mX8BlackBoxController = new X8BlackBoxController(X8ModifyModeController.this.nextContentLayout, X8ModifyModeController.this);
                 X8ModifyModeController.this.modeControllerListener.onOpen();
             }
@@ -283,16 +283,16 @@ public class X8ModifyModeController extends AbsX8MenuBoxControllers implements X
 
     private void onFormatStorage() {
         this.mTvFormatTitle.setText(this.rootView.getContext().getString(R.string.x8_modify_format_storage1));
-        this.mIvFormatStorage.setVisibility(8);
-        this.mTvFormatDec.setVisibility(0);
-        this.mPbFormat.setVisibility(0);
+        this.mIvFormatStorage.setVisibility(View.GONE);
+        this.mTvFormatDec.setVisibility(View.VISIBLE);
+        this.mPbFormat.setVisibility(View.VISIBLE);
     }
 
     public void recoverFormatState() {
         this.mTvFormatTitle.setText(this.rootView.getContext().getString(R.string.x8_modify_format_storage));
-        this.mIvFormatStorage.setVisibility(0);
-        this.mTvFormatDec.setVisibility(8);
-        this.mPbFormat.setVisibility(8);
+        this.mIvFormatStorage.setVisibility(View.VISIBLE);
+        this.mTvFormatDec.setVisibility(View.GONE);
+        this.mPbFormat.setVisibility(View.GONE);
     }
 
     public void setFormatLogStorage() {
@@ -367,25 +367,25 @@ public class X8ModifyModeController extends AbsX8MenuBoxControllers implements X
                 ApkVersionManager apkVersionManager = X8ModifyModeController.this.apkVersionManager;
                 X8ModifyModeController.this.apkVersionManager.getClass();
                 if (apkVersionManager.isOpen("open_Formatted_memory")) {
-                    X8ModifyModeController.this.mFormatStorage.setVisibility(0);
+                    X8ModifyModeController.this.mFormatStorage.setVisibility(View.VISIBLE);
                 } else {
-                    X8ModifyModeController.this.mFormatStorage.setVisibility(8);
+                    X8ModifyModeController.this.mFormatStorage.setVisibility(View.GONE);
                 }
                 ApkVersionManager apkVersionManager2 = X8ModifyModeController.this.apkVersionManager;
                 X8ModifyModeController.this.apkVersionManager.getClass();
                 if (apkVersionManager2.isOpen("open_sixpoint_calibrate")) {
-                    X8ModifyModeController.this.x8AircraftCalibrationLayout.setVisibility(0);
+                    X8ModifyModeController.this.x8AircraftCalibrationLayout.setVisibility(View.VISIBLE);
                 } else {
-                    X8ModifyModeController.this.x8AircraftCalibrationLayout.setVisibility(8);
+                    X8ModifyModeController.this.x8AircraftCalibrationLayout.setVisibility(View.GONE);
                 }
             }
         });
-        this.handleView.setVisibility(0);
+        this.handleView.setVisibility(View.VISIBLE);
         if (this.sensorView != null) {
-            this.sensorView.setVisibility(8);
+            this.sensorView.setVisibility(View.GONE);
         }
-        this.topLayout.setVisibility(0);
-        this.itemLayout.setVisibility(0);
+        this.topLayout.setVisibility(View.VISIBLE);
+        this.itemLayout.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -421,8 +421,8 @@ public class X8ModifyModeController extends AbsX8MenuBoxControllers implements X
     }
 
     public void onBlackBoxBack() {
-        this.topLayout.setVisibility(0);
-        this.itemLayout.setVisibility(0);
+        this.topLayout.setVisibility(View.VISIBLE);
+        this.itemLayout.setVisibility(View.VISIBLE);
         this.modeControllerListener.onClose();
         this.mX8BlackBoxController = null;
         this.nextContentLayout.removeAllViews();

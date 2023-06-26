@@ -19,9 +19,9 @@ public class FiveKeyDefinePresenter extends BasePresenter implements IFiveKeyAct
     private final int CONTRASTRATIO_INDEX = 6;
     private final int CANCEL_PARAMETER_SETTING_INDEX = 9;
     private final CameraManager cameraManager;
+    private final IX8FiveKeyDefine ix8FiveKeyDefine;
     private boolean isFiveKeyContrastRatioAdd;
     private boolean isFiveKeySaturationAdd;
-    private final IX8FiveKeyDefine ix8FiveKeyDefine;
 
     public FiveKeyDefinePresenter(IX8FiveKeyDefine ix8FiveKeyDefine, CameraManager cameraManager) {
         this.ix8FiveKeyDefine = ix8FiveKeyDefine;

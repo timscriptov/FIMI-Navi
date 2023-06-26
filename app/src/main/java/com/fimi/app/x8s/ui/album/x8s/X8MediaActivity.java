@@ -5,7 +5,6 @@ import android.os.PersistableBundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
@@ -273,21 +272,21 @@ public class X8MediaActivity extends BaseActivity implements ISelectData, X8Medi
 
     @Override
     public void enterSelectMode() {
-        this.mRlTopBar.setVisibility(0);
+        this.mRlTopBar.setVisibility(View.VISIBLE);
         getX9MediaPresenter().enterSelectMode(true, true);
         LogUtil.i(TAG, "enterSelectMode: ");
     }
 
     @Override
     public void quitSelectMode() {
-        this.mRlTopBar.setVisibility(8);
+        this.mRlTopBar.setVisibility(View.GONE);
         this.mHackyViewPager.setScrollble(true);
         getX9MediaPresenter().enterSelectMode(false, false);
     }
 
     @Override
     public void deleteFile() {
-        this.mRlTopBar.setVisibility(8);
+        this.mRlTopBar.setVisibility(View.GONE);
         this.mHackyViewPager.setScrollble(true);
         getX9MediaPresenter().enterSelectMode(false, false);
     }
@@ -305,7 +304,7 @@ public class X8MediaActivity extends BaseActivity implements ISelectData, X8Medi
 
     @Override
     public void startDownload() {
-        this.mRlTopBar.setVisibility(8);
+        this.mRlTopBar.setVisibility(View.GONE);
         this.mHackyViewPager.setScrollble(true);
         getX9MediaPresenter().enterSelectMode(false, false);
     }
@@ -334,7 +333,7 @@ public class X8MediaActivity extends BaseActivity implements ISelectData, X8Medi
 
     @Override
     public void addSingleFile() {
-        this.mTvMediaSelect.setVisibility(0);
+        this.mTvMediaSelect.setVisibility(View.VISIBLE);
         getmX8LocalMediaFragment().noDataTipCallback(false);
     }
 
@@ -352,7 +351,7 @@ public class X8MediaActivity extends BaseActivity implements ISelectData, X8Medi
             if (this.mRlTopBar.getVisibility() == 0) {
                 getX9MediaPresenter().enterSelectMode(false, true);
                 this.mHackyViewPager.setScrollble(true);
-                this.mRlTopBar.setVisibility(8);
+                this.mRlTopBar.setVisibility(View.GONE);
                 return true;
             } else if (X8MediaFileDownloadManager.getInstance().hasDownloading()) {
                 showDialogTip();
@@ -385,9 +384,9 @@ public class X8MediaActivity extends BaseActivity implements ISelectData, X8Medi
 
     public void showSelectBtn() {
         if (this.mX8MediaPresenter.isModelListEmpty()) {
-            this.mTvMediaSelect.setVisibility(4);
+            this.mTvMediaSelect.setVisibility(View.INVISIBLE);
         } else {
-            this.mTvMediaSelect.setVisibility(0);
+            this.mTvMediaSelect.setVisibility(View.VISIBLE);
         }
     }
 

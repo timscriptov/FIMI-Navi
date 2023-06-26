@@ -47,10 +47,11 @@ import org.greenrobot.eventbus.EventBus;
 public class X8FlightLogListController extends AbsX8MenuBoxControllers implements IX8FlightLogListAction, IX8FlightlogRenameFile {
     private final int FLIGHT_DATA_REFRESH;
     private final int TEST_NET_WORK;
-    private X8DoubleCustomDialog dialog;
     private final FdsCount fdsCount;
-    private View handleView;
     private final Handler handler;
+    private final X8FlightLogListPresenter x8FlightLogListPresenter;
+    private X8DoubleCustomDialog dialog;
+    private View handleView;
     private ImageView imgDelete;
     private boolean isShowNotDNSDialog;
     private IX8GeneraModifyModeControllerListener modeControllerListener;
@@ -58,7 +59,6 @@ public class X8FlightLogListController extends AbsX8MenuBoxControllers implement
     private TextView tvNoFiles;
     private Button x8BtnPlayback;
     private X8FlightLogAdapter x8FlightLogAdapter;
-    private final X8FlightLogListPresenter x8FlightLogListPresenter;
     private X8IMUCustomDialog x8IMUCustomDialog;
     private ImageView x8ImgPlaybackReturn;
     private ImageView x8ImgPlaybackSyn;
@@ -89,7 +89,7 @@ public class X8FlightLogListController extends AbsX8MenuBoxControllers implement
                 switch (msg.what) {
                     case 0:
                         X8FlightLogListController.this.isShowNotDNSDialog = true;
-                        X8FlightLogListController.this.tvNoFiles.setVisibility(8);
+                        X8FlightLogListController.this.tvNoFiles.setVisibility(View.GONE);
                         X8FlightLogListController.this.imgDelete.setEnabled(true);
                         X8FlightLogListController.this.fdsCount.setComplete(msg.arg1);
                         X8FlightLogListController.this.fdsCount.setTotal(msg.arg2);
@@ -100,7 +100,7 @@ public class X8FlightLogListController extends AbsX8MenuBoxControllers implement
                         break;
                     case 1:
                         X8FlightLogListController.this.isShowNotDNSDialog = true;
-                        X8FlightLogListController.this.tvNoFiles.setVisibility(0);
+                        X8FlightLogListController.this.tvNoFiles.setVisibility(View.VISIBLE);
                         X8FlightLogListController.this.imgDelete.setEnabled(false);
                         X8FlightLogListController.this.x8FlightLogAdapter.clear();
                         X8FlightLogListController.this.x8TvPlaybackNumberValue.setText("0");
@@ -110,7 +110,7 @@ public class X8FlightLogListController extends AbsX8MenuBoxControllers implement
                     case 2:
                         X8FlightLogListController.this.isShowNotDNSDialog = true;
                         X8FlightLogListController.this.x8ViewAiAutoPhotoLoading.stopLoading();
-                        X8FlightLogListController.this.x8ViewAiAutoPhotoLoading.setVisibility(8);
+                        X8FlightLogListController.this.x8ViewAiAutoPhotoLoading.setVisibility(View.GONE);
                         break;
                     case 3:
                         X8FlightLogListController.this.testNetWorkOnSynProgress();
@@ -193,7 +193,7 @@ public class X8FlightLogListController extends AbsX8MenuBoxControllers implement
 
             @Override
             public void onRight() {
-                X8FlightLogListController.this.x8ViewAiAutoPhotoLoading.setVisibility(0);
+                X8FlightLogListController.this.x8ViewAiAutoPhotoLoading.setVisibility(View.VISIBLE);
                 X8FlightLogListController.this.x8ViewAiAutoPhotoLoading.playLoading();
                 X8FlightLogListController.this.deleteFile(X8FlightLogListController.this.dialog.x8CbSingDialog.isChecked());
             }
@@ -220,7 +220,7 @@ public class X8FlightLogListController extends AbsX8MenuBoxControllers implement
             @Override
             public void onRight() {
                 FdsManager.getInstance().stopAll();
-                X8FlightLogListController.this.handleView.setVisibility(8);
+                X8FlightLogListController.this.handleView.setVisibility(View.GONE);
                 X8FlightLogListController.this.x8IMUCustomDialog = null;
                 X8FlightLogListController.this.modeControllerListener.returnBack();
             }
@@ -251,15 +251,15 @@ public class X8FlightLogListController extends AbsX8MenuBoxControllers implement
             @Override
             public void onClick(View v) {
                 if (X8FlightLogListController.this.x8RlFlightLogListContent.getVisibility() == 0) {
-                    X8FlightLogListController.this.x8RlFlightLogListContent.setVisibility(8);
-                    X8FlightLogListController.this.x8PrlFlightLogListInfo.setVisibility(0);
+                    X8FlightLogListController.this.x8RlFlightLogListContent.setVisibility(View.GONE);
+                    X8FlightLogListController.this.x8PrlFlightLogListInfo.setVisibility(View.VISIBLE);
                     X8FlightLogListController.this.x8PrlFlightLogListInfo.animate().translationYBy(0.0f).setDuration(500L).setInterpolator(new BounceInterpolator());
                     X8FlightLogListController.this.x8ImgPlaybackReturn.setImageResource(R.drawable.x8_playback_return);
                 } else if (FdsManager.getInstance().hasUpload()) {
                     X8FlightLogListController.this.showUploadingEixtDialog();
                 } else {
                     X8FlightLogListController.this.x8FlightLogAdapter.unregisterEventBus();
-                    X8FlightLogListController.this.handleView.setVisibility(8);
+                    X8FlightLogListController.this.handleView.setVisibility(View.GONE);
                     X8FlightLogListController.this.x8IMUCustomDialog = null;
                     X8FlightLogListController.this.modeControllerListener.returnBack();
                 }
@@ -292,7 +292,7 @@ public class X8FlightLogListController extends AbsX8MenuBoxControllers implement
     @Override
     public void showItem() {
         super.showItem();
-        this.handleView.setVisibility(0);
+        this.handleView.setVisibility(View.VISIBLE);
     }
 
     @Override

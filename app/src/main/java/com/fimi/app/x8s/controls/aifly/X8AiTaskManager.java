@@ -114,6 +114,33 @@ public class X8AiTaskManager {
         }
     };
     private X8AiGravitationExcuteController mAiGravitation;
+    private final IX8AiGravitationExcuteControllerListener mIX8AiGravitationExcuteControllerListener = new IX8AiGravitationExcuteControllerListener() {
+        @Override
+        public void onAiGravitationBackClick() {
+            X8AiTaskManager.this.activity.onTaskBack();
+            X8AiTaskManager.this.removeAlls();
+            X8AiTaskManager.this.mAiGravitation = null;
+        }
+
+        @Override
+        public void onAiGravitationComplete(boolean showText) {
+            X8AiTaskManager.this.removeAlls();
+            X8AiTaskManager.this.activity.onTaskComplete(showText, X8AiTaskManager.this.activity.getString(R.string.x8_ai_fly_gravitation_complete));
+            X8AiTaskManager.this.mAiGravitation = null;
+        }
+
+        @Override
+        public void onAiGravitaionRunning() {
+            X8AiTaskManager.this.activity.onTaskRunning();
+        }
+
+        @Override
+        public void onAiGravitationInterrupt() {
+            X8AiTaskManager.this.removeAlls();
+            X8AiTaskManager.this.activity.onTaskComplete(true, X8AiTaskManager.this.activity.getString(R.string.x8_ai_fly_gravitation_interrupt));
+            X8AiTaskManager.this.mAiGravitation = null;
+        }
+    };
     private X8AiHeadLockExcuteController mAiHeadlock;
     public IX8AiHeadLockListener mIX8AiHeadLockListener = new IX8AiHeadLockListener() {
         @Override
@@ -175,6 +202,23 @@ public class X8AiTaskManager {
         }
     };
     private X8AiSarExcuteController mAiSar;
+    private final IX8AiSarListener mIX8AiSarListener = new IX8AiSarListener() {
+        @Override
+        public void onAiSarBackClick() {
+            X8AiTaskManager.this.mAiSar = null;
+        }
+
+        @Override
+        public void onAiSarRunning() {
+            X8AiTaskManager.this.activity.runFixedwing();
+        }
+
+        @Override
+        public void onAiSarComplete(boolean showText) {
+            X8AiTaskManager.this.removeAlls();
+            X8AiTaskManager.this.activity.onTaskComplete(showText, X8AiTaskManager.this.activity.getString(R.string.x8_ai_fly_sar_complete_tip));
+        }
+    };
     private X8AiScrewExcuteController mAiScrew;
     public IX8ScrewListener mIX8ScrewListener = new IX8ScrewListener() {
         @Override
@@ -218,6 +262,19 @@ public class X8AiTaskManager {
         }
     };
     private X8AiTakeoffLandingReturnHomeExcuteController mAiTLRController;
+    private final IX8TLRListener mX8TLRListener = new IX8TLRListener() {
+        @Override
+        public void onRunning() {
+            X8AiTaskManager.this.activity.onTaskRunning();
+        }
+
+        @Override
+        public void onComplete(String s, boolean showText) {
+            X8AiTaskManager.this.removeAlls();
+            X8AiTaskManager.this.activity.onTaskComplete(showText, s);
+            X8AiTaskManager.this.mAiTLRController = null;
+        }
+    };
     private X8AiTripodExcuteController mAiTripod;
     public IX8AiTripodListener mIX8AiTripodListener = new IX8AiTripodListener() {
         @Override
@@ -241,63 +298,6 @@ public class X8AiTaskManager {
     private FcManager mFcManager;
     private IX8AiStateListener mIX8AiStateListener;
     private int lastMode = 1;
-    private final IX8AiGravitationExcuteControllerListener mIX8AiGravitationExcuteControllerListener = new IX8AiGravitationExcuteControllerListener() {
-        @Override
-        public void onAiGravitationBackClick() {
-            X8AiTaskManager.this.activity.onTaskBack();
-            X8AiTaskManager.this.removeAlls();
-            X8AiTaskManager.this.mAiGravitation = null;
-        }
-
-        @Override
-        public void onAiGravitationComplete(boolean showText) {
-            X8AiTaskManager.this.removeAlls();
-            X8AiTaskManager.this.activity.onTaskComplete(showText, X8AiTaskManager.this.activity.getString(R.string.x8_ai_fly_gravitation_complete));
-            X8AiTaskManager.this.mAiGravitation = null;
-        }
-
-        @Override
-        public void onAiGravitaionRunning() {
-            X8AiTaskManager.this.activity.onTaskRunning();
-        }
-
-        @Override
-        public void onAiGravitationInterrupt() {
-            X8AiTaskManager.this.removeAlls();
-            X8AiTaskManager.this.activity.onTaskComplete(true, X8AiTaskManager.this.activity.getString(R.string.x8_ai_fly_gravitation_interrupt));
-            X8AiTaskManager.this.mAiGravitation = null;
-        }
-    };
-    private final IX8AiSarListener mIX8AiSarListener = new IX8AiSarListener() {
-        @Override
-        public void onAiSarBackClick() {
-            X8AiTaskManager.this.mAiSar = null;
-        }
-
-        @Override
-        public void onAiSarRunning() {
-            X8AiTaskManager.this.activity.runFixedwing();
-        }
-
-        @Override
-        public void onAiSarComplete(boolean showText) {
-            X8AiTaskManager.this.removeAlls();
-            X8AiTaskManager.this.activity.onTaskComplete(showText, X8AiTaskManager.this.activity.getString(R.string.x8_ai_fly_sar_complete_tip));
-        }
-    };
-    private final IX8TLRListener mX8TLRListener = new IX8TLRListener() {
-        @Override
-        public void onRunning() {
-            X8AiTaskManager.this.activity.onTaskRunning();
-        }
-
-        @Override
-        public void onComplete(String s, boolean showText) {
-            X8AiTaskManager.this.removeAlls();
-            X8AiTaskManager.this.activity.onTaskComplete(showText, s);
-            X8AiTaskManager.this.mAiTLRController = null;
-        }
-    };
 
     public X8AiTaskManager(View aiExcuteView, X8sMainActivity activity) {
         this.aiExcuteView = aiExcuteView;

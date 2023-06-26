@@ -24,12 +24,12 @@ import java.util.regex.Pattern;
 
 public class X8FlightLogFileSeachDeleteThread extends Thread {
     private final boolean deleteAll;
-    private int flightDurationNumber;
-    private float flightMileageNumber;
     private final Handler handler;
     private final boolean isSeach;
     private final boolean uploadSuccessfulAll;
     private final X8FlightLogAdapter x8FlightLogAdapter;
+    private int flightDurationNumber;
+    private float flightMileageNumber;
 
     public X8FlightLogFileSeachDeleteThread(X8FlightLogAdapter x8FlightLogAdapter, Handler handler, boolean seachOrDelete, boolean deleteAll, boolean uploadSuccessfulAll) {
         this.x8FlightLogAdapter = x8FlightLogAdapter;

@@ -56,7 +56,7 @@ public class X8GimbalAdvancedSetupController extends AbsX8MenuBoxControllers {
         this.btnReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                X8GimbalAdvancedSetupController.this.handleView.setVisibility(8);
+                X8GimbalAdvancedSetupController.this.handleView.setVisibility(View.GONE);
                 X8GimbalAdvancedSetupController.this.modeControllerListener.returnBack();
             }
         });
@@ -67,7 +67,7 @@ public class X8GimbalAdvancedSetupController extends AbsX8MenuBoxControllers {
                     @Override
                     public void onComplete(CmdResult cmdResult, Object o) {
                         if (cmdResult.isSuccess) {
-                            X8GimbalAdvancedSetupController.this.handleView.setVisibility(8);
+                            X8GimbalAdvancedSetupController.this.handleView.setVisibility(View.GONE);
                             X8GimbalAdvancedSetupController.this.ix8GimbalSettingListener.onGimbalXYZAdjust();
                         }
                     }

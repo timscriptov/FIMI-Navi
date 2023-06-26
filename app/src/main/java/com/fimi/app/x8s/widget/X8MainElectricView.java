@@ -17,10 +17,10 @@ import com.fimi.x8sdk.modulestate.StateManager;
 
 public class X8MainElectricView extends View {
 
+    private final Paint mPaint;
     float v;
     private int hightElectric;
     private int lowElectric;
-    private final Paint mPaint;
     private State mState;
     private int middleElectric;
     private int mostlowElectric;

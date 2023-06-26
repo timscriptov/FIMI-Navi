@@ -27,6 +27,16 @@ import com.fimi.libperson.presenter.ForgetIphonePasswordPresenter;
 
 public class ForgetIphonePasswordFragment extends BaseFragment implements IForgetIphonePasswordView {
     private static final String TAG = "ForgetIphonePasswordFra";
+    private final TextView.OnEditorActionListener mOnEditorActionListener = new TextView.OnEditorActionListener() {
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            if (actionId == 4 || actionId == 6 || (event != null && 66 == event.getKeyCode() && event.getAction() == 0)) {
+                AbAppUtil.closeSoftInput(ForgetIphonePasswordFragment.this.mContext);
+                return false;
+            }
+            return false;
+        }
+    };
     Button mBtnFiLoginIphone;
     EditText mEtFiAccount;
     EditText mEtFiVerification;
@@ -53,16 +63,6 @@ public class ForgetIphonePasswordFragment extends BaseFragment implements IForge
     private ForgetIphonePasswordPresenter mForgetIphonePasswordPresenter;
     private OnResetIphonePasswordListerner mListerner;
     private State mState = State.IPHONE;
-    private final TextView.OnEditorActionListener mOnEditorActionListener = new TextView.OnEditorActionListener() {
-        @Override
-        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-            if (actionId == 4 || actionId == 6 || (event != null && 66 == event.getKeyCode() && event.getAction() == 0)) {
-                AbAppUtil.closeSoftInput(ForgetIphonePasswordFragment.this.mContext);
-                return false;
-            }
-            return false;
-        }
-    };
 
     public void setIphone(String iphone) {
         if (this.mEtFiAccount != null) {
@@ -112,12 +112,12 @@ public class ForgetIphonePasswordFragment extends BaseFragment implements IForge
         this.mTvFiSelectCountry.setText(getResources().getString(R.string.libperson_service_china));
         this.mTvFiGetValidationCode.setTextColor(getResources().getColor(R.color.login_get_verfication_unclick));
         this.mTvFiGetValidationCode.setEnabled(false);
-        this.mIvNewPasswordUnified.setVisibility(8);
-        this.mIvNewPasswordAgainUnified.setVisibility(8);
-        this.mEtNewPassword.setVisibility(4);
-        this.mEtNewPasswordAgain.setVisibility(4);
-        this.mIvShowPassword.setVisibility(8);
-        this.mIvShowPasswordAgain.setVisibility(8);
+        this.mIvNewPasswordUnified.setVisibility(View.GONE);
+        this.mIvNewPasswordAgainUnified.setVisibility(View.GONE);
+        this.mEtNewPassword.setVisibility(View.INVISIBLE);
+        this.mEtNewPasswordAgain.setVisibility(View.INVISIBLE);
+        this.mIvShowPassword.setVisibility(View.GONE);
+        this.mIvShowPasswordAgain.setVisibility(View.GONE);
         this.mEtNewPassword.addTextChangedListener(new EditTextWatcher(this.mEtNewPassword));
         this.mEtNewPasswordAgain.addTextChangedListener(new EditTextWatcher(this.mEtNewPasswordAgain));
         this.mEtFiVerification.addTextChangedListener(new EditTextWatcher(this.mEtFiVerification));
@@ -256,26 +256,26 @@ public class ForgetIphonePasswordFragment extends BaseFragment implements IForge
 
     private void showState() {
         if (this.mState == State.IPHONE) {
-            this.mEtFiAccount.setVisibility(0);
-            this.mEtFiVerification.setVisibility(0);
-            this.mTvFiSelectCountry.setVisibility(0);
-            this.mView1.setVisibility(0);
-            this.mView2.setVisibility(0);
-            this.mTvFiAreaCode.setVisibility(0);
-            this.mTvFiGetValidationCode.setVisibility(0);
+            this.mEtFiAccount.setVisibility(View.VISIBLE);
+            this.mEtFiVerification.setVisibility(View.VISIBLE);
+            this.mTvFiSelectCountry.setVisibility(View.VISIBLE);
+            this.mView1.setVisibility(View.VISIBLE);
+            this.mView2.setVisibility(View.VISIBLE);
+            this.mTvFiAreaCode.setVisibility(View.VISIBLE);
+            this.mTvFiGetValidationCode.setVisibility(View.VISIBLE);
             this.mBtnFiLoginIphone.setText(R.string.login_btn_next);
-            this.mTvFiErrorHint.setVisibility(0);
-            this.mTvFiErrorHint.setVisibility(0);
-            this.mTvFiPasswordErrorHint.setVisibility(8);
-            this.mIvShowPasswordAgain.setVisibility(4);
-            this.mIvShowPassword.setVisibility(4);
-            this.mIvNewPasswordUnified.setVisibility(4);
-            this.mIvNewPasswordAgainUnified.setVisibility(4);
-            this.mEtNewPassword.setVisibility(4);
-            this.mEtNewPasswordAgain.setVisibility(4);
-            this.mVNpDivider.setVisibility(4);
-            this.mVNpDividerAgain.setVisibility(4);
-            this.mViewDivide.setVisibility(4);
+            this.mTvFiErrorHint.setVisibility(View.VISIBLE);
+            this.mTvFiErrorHint.setVisibility(View.VISIBLE);
+            this.mTvFiPasswordErrorHint.setVisibility(View.GONE);
+            this.mIvShowPasswordAgain.setVisibility(View.INVISIBLE);
+            this.mIvShowPassword.setVisibility(View.INVISIBLE);
+            this.mIvNewPasswordUnified.setVisibility(View.INVISIBLE);
+            this.mIvNewPasswordAgainUnified.setVisibility(View.INVISIBLE);
+            this.mEtNewPassword.setVisibility(View.INVISIBLE);
+            this.mEtNewPasswordAgain.setVisibility(View.INVISIBLE);
+            this.mVNpDivider.setVisibility(View.INVISIBLE);
+            this.mVNpDividerAgain.setVisibility(View.INVISIBLE);
+            this.mViewDivide.setVisibility(View.INVISIBLE);
             showClickState(DataValidatorUtil.isMobile(this.mEtFiAccount.getText().toString().trim()) && this.mEtFiVerification.getText().length() == 4);
             if (DataValidatorUtil.isMobile(this.mEtFiAccount.getText().toString())) {
                 Log.i(TAG, "showState: 1");
@@ -287,26 +287,26 @@ public class ForgetIphonePasswordFragment extends BaseFragment implements IForge
             this.mTvFiGetValidationCode.setTextColor(getResources().getColor(R.color.login_get_verfication_unclick));
             this.mTvFiGetValidationCode.setEnabled(false);
         } else if (this.mState == State.NEW_PASSWORD) {
-            this.mEtFiAccount.setVisibility(4);
-            this.mEtFiVerification.setVisibility(4);
-            this.mTvFiSelectCountry.setVisibility(4);
-            this.mView1.setVisibility(4);
-            this.mView2.setVisibility(4);
-            this.mTvFiAreaCode.setVisibility(4);
-            this.mTvFiGetValidationCode.setVisibility(4);
+            this.mEtFiAccount.setVisibility(View.INVISIBLE);
+            this.mEtFiVerification.setVisibility(View.INVISIBLE);
+            this.mTvFiSelectCountry.setVisibility(View.INVISIBLE);
+            this.mView1.setVisibility(View.INVISIBLE);
+            this.mView2.setVisibility(View.INVISIBLE);
+            this.mTvFiAreaCode.setVisibility(View.INVISIBLE);
+            this.mTvFiGetValidationCode.setVisibility(View.INVISIBLE);
             this.mTvFiGetValidationCode.setText(R.string.login_btn_verification);
-            this.mTvFiErrorHint.setVisibility(4);
+            this.mTvFiErrorHint.setVisibility(View.INVISIBLE);
             this.mBtnFiLoginIphone.setText(R.string.login_reset_password);
             this.mTvFiPasswordErrorHint.setText(R.string.login_input_password_hint);
             this.mTvFiPasswordErrorHint.setTextColor(getResources().getColor(R.color.forget_password_hint));
-            this.mTvFiPasswordErrorHint.setVisibility(0);
-            this.mViewDivide.setVisibility(0);
-            this.mIvShowPassword.setVisibility(0);
-            this.mIvShowPasswordAgain.setVisibility(0);
-            this.mEtNewPassword.setVisibility(0);
-            this.mEtNewPasswordAgain.setVisibility(0);
-            this.mVNpDivider.setVisibility(0);
-            this.mVNpDividerAgain.setVisibility(0);
+            this.mTvFiPasswordErrorHint.setVisibility(View.VISIBLE);
+            this.mViewDivide.setVisibility(View.VISIBLE);
+            this.mIvShowPassword.setVisibility(View.VISIBLE);
+            this.mIvShowPasswordAgain.setVisibility(View.VISIBLE);
+            this.mEtNewPassword.setVisibility(View.VISIBLE);
+            this.mEtNewPasswordAgain.setVisibility(View.VISIBLE);
+            this.mVNpDivider.setVisibility(View.VISIBLE);
+            this.mVNpDividerAgain.setVisibility(View.VISIBLE);
             setIvShowPassword(!this.mEtNewPasswordAgain.getText().toString().trim().equals(this.mEtNewPassword.getText().toString().trim()) || this.mEtNewPasswordAgain.getText().toString().length() < 8);
         }
     }
@@ -435,13 +435,13 @@ public class ForgetIphonePasswordFragment extends BaseFragment implements IForge
                     ForgetIphonePasswordFragment.this.mTvFiErrorHint.setText(null);
                 } else if (R.id.et_new_password == this.mEditText.getId()) {
                     if (ForgetIphonePasswordFragment.this.mEtNewPassword.getText().toString().trim().equals(ForgetIphonePasswordFragment.this.mEtNewPasswordAgain.getText().toString().trim()) && s.length() >= 8) {
-                        ForgetIphonePasswordFragment.this.mIvNewPasswordUnified.setVisibility(0);
-                        ForgetIphonePasswordFragment.this.mIvNewPasswordAgainUnified.setVisibility(0);
+                        ForgetIphonePasswordFragment.this.mIvNewPasswordUnified.setVisibility(View.VISIBLE);
+                        ForgetIphonePasswordFragment.this.mIvNewPasswordAgainUnified.setVisibility(View.VISIBLE);
                         ForgetIphonePasswordFragment.this.setIvShowPassword(false);
                         ForgetIphonePasswordFragment.this.showClickState(true);
                     } else {
-                        ForgetIphonePasswordFragment.this.mIvNewPasswordUnified.setVisibility(8);
-                        ForgetIphonePasswordFragment.this.mIvNewPasswordAgainUnified.setVisibility(8);
+                        ForgetIphonePasswordFragment.this.mIvNewPasswordUnified.setVisibility(View.GONE);
+                        ForgetIphonePasswordFragment.this.mIvNewPasswordAgainUnified.setVisibility(View.GONE);
                         ForgetIphonePasswordFragment.this.setIvShowPassword(true);
                         ForgetIphonePasswordFragment.this.showClickState(false);
                     }
@@ -449,13 +449,13 @@ public class ForgetIphonePasswordFragment extends BaseFragment implements IForge
                     ForgetIphonePasswordFragment.this.mTvFiPasswordErrorHint.setTextColor(ForgetIphonePasswordFragment.this.getResources().getColor(R.color.forget_password_hint));
                 } else if (R.id.et_new_password_again == this.mEditText.getId()) {
                     if (ForgetIphonePasswordFragment.this.mEtNewPassword.getText().toString().trim().equals(ForgetIphonePasswordFragment.this.mEtNewPasswordAgain.getText().toString().trim()) && s.length() >= 8) {
-                        ForgetIphonePasswordFragment.this.mIvNewPasswordUnified.setVisibility(0);
-                        ForgetIphonePasswordFragment.this.mIvNewPasswordAgainUnified.setVisibility(0);
+                        ForgetIphonePasswordFragment.this.mIvNewPasswordUnified.setVisibility(View.VISIBLE);
+                        ForgetIphonePasswordFragment.this.mIvNewPasswordAgainUnified.setVisibility(View.VISIBLE);
                         ForgetIphonePasswordFragment.this.setIvShowPassword(false);
                         ForgetIphonePasswordFragment.this.showClickState(true);
                     } else {
-                        ForgetIphonePasswordFragment.this.mIvNewPasswordUnified.setVisibility(8);
-                        ForgetIphonePasswordFragment.this.mIvNewPasswordAgainUnified.setVisibility(8);
+                        ForgetIphonePasswordFragment.this.mIvNewPasswordUnified.setVisibility(View.GONE);
+                        ForgetIphonePasswordFragment.this.mIvNewPasswordAgainUnified.setVisibility(View.GONE);
                         ForgetIphonePasswordFragment.this.setIvShowPassword(true);
                         ForgetIphonePasswordFragment.this.showClickState(false);
                     }

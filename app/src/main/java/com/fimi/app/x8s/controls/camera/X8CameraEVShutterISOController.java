@@ -41,6 +41,10 @@ public class X8CameraEVShutterISOController extends AbsX8Controllers implements 
     private final int TIME_INTERVAL;
     private final String defScale;
     private final String defaultIso;
+    private final CameraEVParamsAdatper isoAdatper;
+    private final Context mContext;
+    private final Map<String, String> paramMap;
+    private final CameraEVParamsAdatper shutterAdapter;
     private CameraManager cameraManager;
     private String curParam;
     private CurParamsJson curParamsJson;
@@ -49,18 +53,14 @@ public class X8CameraEVShutterISOController extends AbsX8Controllers implements 
     private TextView ev_reduct_btn;
     private boolean hasInit;
     private boolean isOkay;
-    private final CameraEVParamsAdatper isoAdatper;
     private List<String> isoOptions;
     private RecyclerView isoRecycler;
     private RelativeLayout isoView;
     private int iso_index;
     private LinearLayoutManager layoutManager;
-    private final Context mContext;
     private IX8CameraMainSetListener mainSetListener;
-    private final Map<String, String> paramMap;
     private X8RulerView rulerView;
     private String scaleValue;
-    private final CameraEVParamsAdatper shutterAdapter;
     private LinearLayoutManager shutterLayout;
     private List<String> shutterOptions;
     private RecyclerView shutterRecycler;
@@ -365,12 +365,12 @@ public class X8CameraEVShutterISOController extends AbsX8Controllers implements 
             updateViewEnable(this.tokenEnable, this.isoView, this.shutterView, this.isoRecycler, this.shutterRecycler);
             updateViewEnable(false, this.evView);
         }
-        this.shutterView.setVisibility(0);
+        this.shutterView.setVisibility(View.VISIBLE);
     }
 
     public void initRecordModle(boolean isAuto) {
         initPhotoModle(isAuto);
-        this.shutterView.setVisibility(8);
+        this.shutterView.setVisibility(View.GONE);
     }
 
     private void updateViewEnable(boolean enable, ViewGroup... parent) {

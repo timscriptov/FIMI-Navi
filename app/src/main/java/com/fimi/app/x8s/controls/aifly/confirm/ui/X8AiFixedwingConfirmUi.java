@@ -15,9 +15,9 @@ import com.fimi.app.x8s.tools.X8NumberUtil;
 
 
 public class X8AiFixedwingConfirmUi implements View.OnClickListener {
+    private final View contentView;
     private View btnOk;
     private CheckBox cbTip;
-    private final View contentView;
     private ImageView imgFlag;
     private View imgReturn;
     private X8MainAiFlyController listener;

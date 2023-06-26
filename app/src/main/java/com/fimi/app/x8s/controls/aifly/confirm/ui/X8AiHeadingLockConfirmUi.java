@@ -17,9 +17,9 @@ import com.fimi.x8sdk.modulestate.StateManager;
 
 
 public class X8AiHeadingLockConfirmUi implements View.OnClickListener {
+    private final View contentView;
     private Button btnOk;
     private CheckBox cbTip;
-    private final View contentView;
     private ImageView imgFlag;
     private ImageView imgLockAngle;
     private ImageView imgLockBg;
@@ -57,15 +57,15 @@ public class X8AiHeadingLockConfirmUi implements View.OnClickListener {
         this.imgLockBg.setImageBitmap(ImageUtils.getBitmapByPath(rootView.getContext(), R.drawable.x8_img_head_lock_bg));
         this.imgLockAngle.setImageBitmap(ImageUtils.getBitmapByPath(rootView.getContext(), R.drawable.x8_img_head_lock_arrow));
         if (this.isCourse) {
-            this.vCourse.setVisibility(0);
-            this.vAngle.setVisibility(8);
+            this.vCourse.setVisibility(View.VISIBLE);
+            this.vAngle.setVisibility(View.GONE);
             this.btnOk.setText(rootView.getContext().getString(R.string.x8_ai_fly_follow_ok));
             this.cbTip = rootView.findViewById(R.id.cb_ai_follow_confirm_ok);
             this.imgFlag.setImageBitmap(ImageUtils.getBitmapByPath(rootView.getContext(), R.drawable.x8_img_heading_lock_flag));
             return;
         }
-        this.vCourse.setVisibility(8);
-        this.vAngle.setVisibility(0);
+        this.vCourse.setVisibility(View.GONE);
+        this.vAngle.setVisibility(View.VISIBLE);
         this.btnOk.setText(rootView.getContext().getString(R.string.x8_ai_fly_follow_go));
         float angle = StateManager.getInstance().getX8Drone().getFcSportState().getDeviceAngle();
         this.tvAngle.setText(String.format(this.prex, Float.valueOf(angle)));
@@ -85,8 +85,8 @@ public class X8AiHeadingLockConfirmUi implements View.OnClickListener {
                 this.mX8MainAiFlyController.onCloseConfirmUi();
             } else if (this.index == 1) {
                 if (this.isCourse) {
-                    this.vCourse.setVisibility(0);
-                    this.vAngle.setVisibility(8);
+                    this.vCourse.setVisibility(View.VISIBLE);
+                    this.vAngle.setVisibility(View.GONE);
                     this.btnOk.setText(this.contentView.getContext().getString(R.string.x8_ai_fly_follow_ok));
                     this.index = 0;
                     return;
@@ -102,8 +102,8 @@ public class X8AiHeadingLockConfirmUi implements View.OnClickListener {
                     } else {
                         X8AiConfig.getInstance().setAiHeadingLock(true);
                     }
-                    this.vCourse.setVisibility(8);
-                    this.vAngle.setVisibility(0);
+                    this.vCourse.setVisibility(View.GONE);
+                    this.vAngle.setVisibility(View.VISIBLE);
                     this.btnOk.setText(this.contentView.getContext().getString(R.string.x8_ai_fly_follow_go));
                     this.index = 1;
                     return;

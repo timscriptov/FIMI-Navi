@@ -72,7 +72,7 @@ public class PersettingThirdAdapt extends BaseAdapter {
     }
 
     private void resetDefaultView(ViewHolder holder, ViewGroup.LayoutParams params) {
-        holder.mIvArrow.setVisibility(0);
+        holder.mIvArrow.setVisibility(View.VISIBLE);
         holder.mTvContent.setText("");
         params.height = (int) this.mContext.getResources().getDimension(R.dimen.person_setting_height);
         holder.mRlBg.setLayoutParams(params);

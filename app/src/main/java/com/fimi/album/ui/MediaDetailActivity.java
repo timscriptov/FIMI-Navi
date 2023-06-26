@@ -38,7 +38,7 @@ public class MediaDetailActivity extends BaseActivity {
     public void initData() {
         this.llHeadViewGroup = findViewById(R.id.shoto_top_tab_ll);
         this.rlHeadDirection = findViewById(R.id.media_select_bottom_rl);
-        this.rlHeadDirection.setVisibility(0);
+        this.rlHeadDirection.setVisibility(View.VISIBLE);
         this.viewpaper = findViewById(R.id.viewpaper);
         this.ibMediaBack = findViewById(R.id.media_back_btn);
         this.ibBottomDelete = findViewById(R.id.bottom_delete_ibtn);

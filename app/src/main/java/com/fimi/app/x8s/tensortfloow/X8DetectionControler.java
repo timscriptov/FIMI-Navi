@@ -7,6 +7,8 @@ import android.graphics.Matrix;
 import android.graphics.RectF;
 import android.os.SystemClock;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.TcpClient;
 import com.fimi.app.x8s.media.FimiH264Video;
 import com.fimi.app.x8s.media.OnX8VideoFrameBufferListener;
@@ -23,6 +25,11 @@ public class X8DetectionControler implements OnX8VideoFrameBufferListener {
     private static final int TF_OD_API_INPUT_SIZE = 300;
     private static final String TF_OD_API_LABELS_FILE = "file:///android_asset/coco_labels_list.txt";
     private static final String TF_OD_API_MODEL_FILE = "detect_ssd_new.mp3";
+    private final boolean TF_OD_API_IS_QUANTIZED = true;
+    private final boolean isLog = true;
+    private final int VIDEO_WIDTH = FimiAppContext.UI_HEIGHT;
+    private final int VIDEO_HEIGHT = FimiAppContext.UI_WIDTH;
+    private final int MAX_UNSIGNED_SHORT = 65535;
     int cropSize = 300;
     private int SIZE_HEIGHT;
     private int SIZE_WIDTH;
@@ -46,16 +53,11 @@ public class X8DetectionControler implements OnX8VideoFrameBufferListener {
     private int rectX;
     private int rectY;
     private TestOverlay testoverlay;
-    private final boolean TF_OD_API_IS_QUANTIZED = true;
-    private final boolean isLog = true;
     private Bitmap croppedBitmap = null;
     private String objTitle = "";
-    private final int VIDEO_WIDTH = FimiAppContext.UI_HEIGHT;
-    private final int VIDEO_HEIGHT = FimiAppContext.UI_WIDTH;
-    private final int MAX_UNSIGNED_SHORT = 65535;
     private boolean isFirst = true;
 
-    public void initView(Activity context, X8TrackOverlayView overlay, FimiH264Video mFimiH264Video, TestOverlay testoverlay, onDetectionListener listener) {
+    public void initView(Activity context, @NonNull X8TrackOverlayView overlay, @NonNull FimiH264Video mFimiH264Video, TestOverlay testoverlay, onDetectionListener listener) {
         this.context = context;
         this.overlay = overlay;
         this.testoverlay = testoverlay;
@@ -72,9 +74,9 @@ public class X8DetectionControler implements OnX8VideoFrameBufferListener {
         new Thread() {
             @Override
             public void run() {
-                if (X8DetectionControler.this.detector == null) {
+                if (detector == null) {
                     try {
-                        X8DetectionControler.this.detector = TFLiteObjectDetectionAPIModel.create(X8DetectionControler.this.context.getAssets(), X8DetectionControler.TF_OD_API_MODEL_FILE, X8DetectionControler.TF_OD_API_LABELS_FILE, 300, X8DetectionControler.this.TF_OD_API_IS_QUANTIZED);
+                        detector = TFLiteObjectDetectionAPIModel.create(context.getAssets(), TF_OD_API_MODEL_FILE, TF_OD_API_LABELS_FILE, 300, TF_OD_API_IS_QUANTIZED);
                     } catch (IOException e) {
                     }
                 }
@@ -145,7 +147,7 @@ public class X8DetectionControler implements OnX8VideoFrameBufferListener {
         return src;
     }
 
-    boolean RectOverlap(RectF r, RectF rOther) {
+    boolean RectOverlap(@NonNull RectF r, @NonNull RectF rOther) {
         return r.right > rOther.left && rOther.right > r.left && r.bottom > rOther.top && rOther.bottom > r.top;
     }
 
@@ -174,13 +176,11 @@ public class X8DetectionControler implements OnX8VideoFrameBufferListener {
             c = f;
             f = c;
         }
-        float scaleX = c / f;
-        return scaleX;
+        return (float) (c / f);
     }
 
     private float getScaleX1(int f, int c) {
-        float scaleX = c / f;
-        return scaleX;
+        return (float) (c / f);
     }
 
     public void runTf() {
@@ -298,7 +298,7 @@ public class X8DetectionControler implements OnX8VideoFrameBufferListener {
                     if (this.isLog) {
                         TcpClient.getIntance().sendLog(" getConfidence= " + result.getConfidence() + " 识别结果： " + location.toString() + "   ");
                     }
-                    if (location != null && result.getConfidence().floatValue() >= MINIMUM_CONFIDENCE_TF_OD_API && Math.abs(location.left) <= 290.0f && Math.abs(location.top) <= 290.0f && Math.abs(location.right) <= 350.0f && Math.abs(location.bottom) <= 350.0f) {
+                    if (location != null && result.getConfidence() >= MINIMUM_CONFIDENCE_TF_OD_API && Math.abs(location.left) <= 290.0f && Math.abs(location.top) <= 290.0f && Math.abs(location.right) <= 350.0f && Math.abs(location.bottom) <= 350.0f) {
                         int roiLeft = x1 + ((int) location.left);
                         int roiTop = y1 + ((int) location.top);
                         int roiRight = x1 + ((int) location.right);
@@ -323,7 +323,7 @@ public class X8DetectionControler implements OnX8VideoFrameBufferListener {
                         if (this.isLog) {
                             TcpClient.getIntance().sendLog(" 识别结果在Fpv坐标: " + objRoi + " --- " + overlapR + "         ===");
                         }
-                        if ((isDianXuan == 1 || (isDianXuan == 0 && overlapR))) {
+                        if (isDianXuan == 1 || (isDianXuan == 0 && overlapR)) {
                             bFound = true;
                             targetX = (int) objRoi.left;
                             targetY = (int) objRoi.top;
@@ -374,5 +374,4 @@ public class X8DetectionControler implements OnX8VideoFrameBufferListener {
 
         void onDetectionResult(int i, int i2, int i3, int i4, int i5);
     }
-
 }

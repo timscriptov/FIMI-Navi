@@ -7,6 +7,8 @@ public class Header {
     public static final int FLAG = 254;
     public static final int HEADERLEN = 20;
     public final int VERSION = 3;
+    private final byte startFlag = -2;
+    private final byte[] header = new byte[20];
     private int cfg;
     private int crcFrame;
     private int crcHeader;
@@ -21,9 +23,7 @@ public class Header {
     private byte subDestId;
     private byte subSrcId;
     private int type;
-    private final byte startFlag = -2;
     private byte version = 3;
-    private final byte[] header = new byte[20];
 
     public int getCrcHeader() {
         return this.crcHeader;

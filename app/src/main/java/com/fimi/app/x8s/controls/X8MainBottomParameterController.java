@@ -1,6 +1,8 @@
 package com.fimi.app.x8s.controls;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -8,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.core.internal.view.SupportMenu;
+import androidx.annotation.NonNull;
 
 import com.fimi.android.app.R;
 import com.fimi.app.x8s.controls.camera.CameraParamStatus;
@@ -32,12 +34,13 @@ public class X8MainBottomParameterController extends AbsX8Controllers {
     public final String VALUE_VIDEO_RESOLUTION_2K;
     public final String VALUE_VIDEO_RESOLUTION_4K;
     public final String VALUE_VIDEO_RESOLUTION_720P;
+    private final X8sMainActivity activity;
+    private final CurParamsJson paramsValue;
     AutoCameraStateADV cameraStateADV;
     int changeShowStatus;
     Handler mHandler;
     PercentRelativeLayout root_layout;
     String tfCardCapt;
-    private final X8sMainActivity activity;
     private Context context;
     private ImageView mImgColor;
     private ImageView mIvCloud;
@@ -53,8 +56,8 @@ public class X8MainBottomParameterController extends AbsX8Controllers {
     private TextView mTvRecord;
     private TextView mTvSDK;
     private TextView mTvShutter;
-    private final CurParamsJson paramsValue;
 
+    @SuppressLint("HandlerLeak")
     public X8MainBottomParameterController(View rootView, X8sMainActivity activity) {
         super(rootView);
         this.tfCardCapt = "";
@@ -63,13 +66,13 @@ public class X8MainBottomParameterController extends AbsX8Controllers {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                if (X8MainBottomParameterController.this.changeShowStatus == 0) {
-                    X8MainBottomParameterController.this.changeShowStatus = 1;
+                if (changeShowStatus == 0) {
+                    changeShowStatus = 1;
                 } else {
-                    X8MainBottomParameterController.this.changeShowStatus = 0;
+                    changeShowStatus = 0;
                 }
-                X8MainBottomParameterController.this.showTFCardStatus(X8MainBottomParameterController.this.changeShowStatus);
-                X8MainBottomParameterController.this.mHandler.sendEmptyMessageDelayed(0, 2000L);
+                showTFCardStatus(changeShowStatus);
+                mHandler.sendEmptyMessageDelayed(0, 2000L);
             }
         };
         this.VALUE_VIDEO_RESOLUTION_4K = "3840x2160";
@@ -86,14 +89,9 @@ public class X8MainBottomParameterController extends AbsX8Controllers {
         String text;
         if (this.cameraStateADV != null && StateManager.getInstance().getCamera() != null && StateManager.getInstance().getCamera().isConnect()) {
             switch (this.cameraStateADV.getInfo()) {
-                case 0:
-                    imgRes = R.drawable.x8_tf_card_nomal;
-                    textColor = -1;
-                    text = this.tfCardCapt;
-                    break;
                 case 1:
                     imgRes = R.drawable.x8_tf_card_low_fulling;
-                    textColor = -1;
+                    textColor = Color.WHITE;
                     if (changeShowStatus == 0) {
                         text = getString(R.string.x8_tf_low);
                         break;
@@ -102,8 +100,9 @@ public class X8MainBottomParameterController extends AbsX8Controllers {
                         break;
                     }
                 case 2:
+                case 6:
                     imgRes = R.drawable.x8_tf_card_exception;
-                    textColor = SupportMenu.CATEGORY_MASK;
+                    textColor = Color.RED;
                     if (changeShowStatus == 0 || this.tfCardCapt.equalsIgnoreCase(getString(R.string.x8_na))) {
                         text = getString(R.string.x8_tf_exception);
                     } else {
@@ -112,28 +111,20 @@ public class X8MainBottomParameterController extends AbsX8Controllers {
                     break;
                 case 3:
                     imgRes = R.drawable.x8_tf_card_no;
-                    textColor = SupportMenu.CATEGORY_MASK;
+                    textColor = Color.RED;
                     text = getString(R.string.x8_tf_no_exit);
                     break;
                 case 4:
                     imgRes = R.drawable.x8_tf_card_low_fulling;
-                    textColor = SupportMenu.CATEGORY_MASK;
+                    textColor = Color.RED;
                     text = this.tfCardCapt;
                     break;
                 case 5:
                     imgRes = R.drawable.x8_tf_fulled;
-                    textColor = SupportMenu.CATEGORY_MASK;
+                    textColor = Color.RED;
                     text = this.tfCardCapt;
                     break;
-                case 6:
-                    imgRes = R.drawable.x8_tf_card_exception;
-                    textColor = SupportMenu.CATEGORY_MASK;
-                    if (changeShowStatus == 0 || this.tfCardCapt.equalsIgnoreCase(getString(R.string.x8_na))) {
-                        text = getString(R.string.x8_tf_exception);
-                    } else {
-                        text = this.tfCardCapt;
-                    }
-                    break;
+                case 0:
                 default:
                     imgRes = R.drawable.x8_tf_card_nomal;
                     textColor = -1;
@@ -154,7 +145,7 @@ public class X8MainBottomParameterController extends AbsX8Controllers {
     public void initActions() {
     }
 
-    public void showSportState(GimbalState state) {
+    public void showSportState(@NonNull GimbalState state) {
         int pitchAngle = state.getPitchAngle();
         double angle = pitchAngle / 100.0d;
         String angleStr = NumberUtil.decimalPointStr(angle, 1) + "°";
@@ -182,7 +173,7 @@ public class X8MainBottomParameterController extends AbsX8Controllers {
     }
 
     @Override
-    public void initViews(View rootView) {
+    public void initViews(@NonNull View rootView) {
         this.context = rootView.getContext();
         this.handleView = rootView.findViewById(R.id.main_bottom_parameter);
         this.root_layout = (PercentRelativeLayout) this.handleView;
@@ -215,7 +206,7 @@ public class X8MainBottomParameterController extends AbsX8Controllers {
         }
     }
 
-    private void updateTFCardStorage(AutoCameraStateADV cameraStateADV) {
+    private void updateTFCardStorage(@NonNull AutoCameraStateADV cameraStateADV) {
         String freespace = NumberUtil.decimalPointStr((cameraStateADV.getFreeSpace() / 1024.0d) / 1024.0d, 1);
         String totalSpace = NumberUtil.decimalPointStr((cameraStateADV.getTotalSpace() / 1024.0d) / 1024.0d, 1);
         if (totalSpace.equals("0.0")) {
@@ -255,7 +246,7 @@ public class X8MainBottomParameterController extends AbsX8Controllers {
         }
     }
 
-    private void setColor(String paramValue) {
+    private void setColor(@NonNull String paramValue) {
         if (paramValue.equals("General")) {
             String paramValue2 = this.context.getResources().getString(R.string.x8_colours_general);
             this.mImgColor.setBackgroundResource(R.drawable.x8_main_bottom_camera_color);

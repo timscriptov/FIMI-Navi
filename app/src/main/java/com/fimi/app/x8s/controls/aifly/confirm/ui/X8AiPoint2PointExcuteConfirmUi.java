@@ -19,9 +19,13 @@ import com.fimi.x8sdk.modulestate.StateManager;
 
 
 public class X8AiPoint2PointExcuteConfirmUi implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
+    private final View contentView;
+    private final float MIN = 1.0f;
+    private final float MAX = 10.0f;
+    private final float DEFAULE_SPEED = 2.0f;
+    private final int MAX_PROGRESS = (int) ((this.MAX - this.MIN) * 10.0f);
     private float alt;
     private Button btnGo;
-    private final View contentView;
     private FcManager fcManager;
     private float height;
     private ImageView imgBack;
@@ -33,10 +37,6 @@ public class X8AiPoint2PointExcuteConfirmUi implements View.OnClickListener, See
     private TextView tvTime;
     private View vMinus;
     private View vPlus;
-    private final float MIN = 1.0f;
-    private final float MAX = 10.0f;
-    private final float DEFAULE_SPEED = 2.0f;
-    private final int MAX_PROGRESS = (int) ((this.MAX - this.MIN) * 10.0f);
     private int distance = 0;
 
     public X8AiPoint2PointExcuteConfirmUi(Activity activity, View parent) {

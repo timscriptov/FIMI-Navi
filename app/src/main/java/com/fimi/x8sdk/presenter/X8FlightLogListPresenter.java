@@ -32,17 +32,17 @@ import java.util.List;
 public class X8FlightLogListPresenter implements IDownProgress, IFdsCountListener, IFdsUiListener {
     public static List<String> fileNames = new ArrayList();
     private final Context context;
-    private FdsCount fdsCount;
-    private boolean isShow;
     private final IX8FlightLogListAction ix8FlightLogListAction;
-    private volatile float lastProgrss;
-    private volatile int progrssSum;
-    private long time;
-    private List<X8PlaybackLogEntity> x8PlaybackLogEntityList;
     private final List<X8FlightLogFile> x8FlightLogFiles = new ArrayList();
     private final List<X8FlightLogFile> x8FlightLogFilesTemp = new ArrayList();
     private final List<X8FlightLogFile> x8FlightLogFilesUpload = new ArrayList();
     private final List<X8PlaybackLogEntity> x8PlaybackLogEntitiesDownload = new ArrayList();
+    private FdsCount fdsCount;
+    private boolean isShow;
+    private volatile float lastProgrss;
+    private volatile int progrssSum;
+    private long time;
+    private List<X8PlaybackLogEntity> x8PlaybackLogEntityList;
     private boolean isUpDownload = false;
     private volatile float uploadProgrss = 0.0f;
 

@@ -28,6 +28,7 @@ public class X8RcItemController extends AbsX8Controllers implements View.OnClick
     public static final int FIVE_KEY_RIGHT = 3;
     public static final int FIVE_KEY_UP = 0;
     public static String[] FIVE_KEY_DATA_ARRAY = null;
+    private final Context mConext;
     int currAPModel;
     IX8RcRockerListener rcCtrlModelListener;
     private Button btnFiveKeyCenter;
@@ -40,7 +41,6 @@ public class X8RcItemController extends AbsX8Controllers implements View.OnClick
     private Button btnRockerMode;
     private FcCtrlManager fcCtrlManager;
     private IX8RcItemControllerListener listener;
-    private final Context mConext;
     private View rlFcItem;
     private ViewStub stubFcItem;
     private X8TabItem thApModule;
@@ -176,7 +176,7 @@ public class X8RcItemController extends AbsX8Controllers implements View.OnClick
             resetFiveKey();
             initActions();
         }
-        this.rlFcItem.setVisibility(0);
+        this.rlFcItem.setVisibility(View.VISIBLE);
         requestRcCtrlModeValue();
         this.isShow = true;
     }
@@ -245,7 +245,7 @@ public class X8RcItemController extends AbsX8Controllers implements View.OnClick
     @Override
     public void closeItem() {
         if (this.rlFcItem != null) {
-            this.rlFcItem.setVisibility(8);
+            this.rlFcItem.setVisibility(View.GONE);
             this.isShow = false;
         }
     }

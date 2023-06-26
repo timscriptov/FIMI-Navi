@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.RectF;
 import android.os.Trace;
 
+import androidx.annotation.NonNull;
+
 import org.tensorflow.Graph;
 import org.tensorflow.Operation;
 import org.tensorflow.contrib.android.TensorFlowInferenceInterface;
@@ -14,7 +16,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Vector;
@@ -22,12 +23,12 @@ import java.util.Vector;
 
 public class TensorFlowObjectDetectionAPIModel implements Classifier {
     private static final int MAX_RESULTS = 100;
+    private final Vector<String> labels = new Vector<>();
     private byte[] byteValues;
     private TensorFlowInferenceInterface inferenceInterface;
     private String inputName;
     private int inputSize;
     private int[] intValues;
-    private final Vector<String> labels = new Vector<>();
     private boolean logStats = false;
     private float[] outputClasses;
     private float[] outputLocations;
@@ -38,7 +39,8 @@ public class TensorFlowObjectDetectionAPIModel implements Classifier {
     private TensorFlowObjectDetectionAPIModel() {
     }
 
-    public static Classifier create(AssetManager assetManager, String modelFilename, String labelFilename, int inputSize) throws IOException {
+    @NonNull
+    public static Classifier create(@NonNull AssetManager assetManager, String modelFilename, @NonNull String labelFilename, int inputSize) throws IOException {
         TensorFlowObjectDetectionAPIModel d = new TensorFlowObjectDetectionAPIModel();
         String actualFilename = labelFilename.split("file:///android_asset/")[1];
         InputStream labelsInput = assetManager.open(actualFilename);
@@ -82,7 +84,7 @@ public class TensorFlowObjectDetectionAPIModel implements Classifier {
     }
 
     @Override
-    public List<Classifier.Recognition> recognizeImage(Bitmap bitmap) {
+    public List<Classifier.Recognition> recognizeImage(@NonNull Bitmap bitmap) {
         Trace.beginSection("recognizeImage");
         Trace.beginSection("preprocessBitmap");
         bitmap.getPixels(this.intValues, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
@@ -108,15 +110,10 @@ public class TensorFlowObjectDetectionAPIModel implements Classifier {
         this.inferenceInterface.fetch(this.outputNames[2], this.outputClasses);
         this.inferenceInterface.fetch(this.outputNames[3], this.outputNumDetections);
         Trace.endSection();
-        PriorityQueue<Classifier.Recognition> pq = new PriorityQueue<>(1, new Comparator<Classifier.Recognition>() {
-            @Override
-            public int compare(Classifier.Recognition lhs, Classifier.Recognition rhs) {
-                return Float.compare(rhs.getConfidence().floatValue(), lhs.getConfidence().floatValue());
-            }
-        });
+        PriorityQueue<Classifier.Recognition> pq = new PriorityQueue<>(1, (lhs, rhs) -> Float.compare(rhs.getConfidence(), lhs.getConfidence()));
         for (int i2 = 0; i2 < this.outputScores.length; i2++) {
             RectF detection = new RectF(this.outputLocations[(i2 * 4) + 1] * this.inputSize, this.outputLocations[i2 * 4] * this.inputSize, this.outputLocations[(i2 * 4) + 3] * this.inputSize, this.outputLocations[(i2 * 4) + 2] * this.inputSize);
-            pq.add(new Classifier.Recognition("" + ((int) this.outputClasses[i2]), this.labels.get((int) this.outputClasses[i2]), Float.valueOf(this.outputScores[i2]), detection));
+            pq.add(new Classifier.Recognition("" + ((int) this.outputClasses[i2]), this.labels.get((int) this.outputClasses[i2]), this.outputScores[i2], detection));
         }
         ArrayList<Classifier.Recognition> recognitions = new ArrayList<>();
         for (int i3 = 0; i3 < Math.min(pq.size(), 100); i3++) {

@@ -1,12 +1,14 @@
 package com.fimi.app.x8s.entity;
 
 
+import androidx.annotation.NonNull;
+
 public class X8AilinePrameter {
+    private final float DEFAULE_SPEED = 2.0f;
     private int autoRecorde;
     private int disconnectActioin;
     private int endAction;
     private int orientation;
-    private final float DEFAULE_SPEED = 2.0f;
     private float speed = this.DEFAULE_SPEED;
 
     public int getOrientation() {
@@ -49,6 +51,7 @@ public class X8AilinePrameter {
         this.autoRecorde = autoRecorde;
     }
 
+    @NonNull
     public String toString() {
         return "X8AilinePrameter{DEFAULE_SPEED=" + this.DEFAULE_SPEED + ", speed=" + this.speed + ", orientation=" + this.orientation + ", disconnectActioin=" + this.disconnectActioin + ", endAction=" + this.endAction + ", autoRecorde=" + this.autoRecorde + '}';
     }

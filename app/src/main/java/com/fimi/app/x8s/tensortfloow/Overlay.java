@@ -3,13 +3,14 @@ package com.fimi.app.x8s.tensortfloow;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import androidx.core.internal.view.SupportMenu;
+import androidx.annotation.NonNull;
 
 import com.fimi.kernel.FimiAppContext;
 
@@ -17,6 +18,8 @@ import com.fimi.kernel.FimiAppContext;
 
 public class Overlay extends View {
     private final String TAG;
+    private final int previewH;
+    private final int previewW;
     private int MAX_HEIGHT;
     private int MAX_WIDTH;
     private boolean enableCustomOverlay;
@@ -26,8 +29,6 @@ public class Overlay extends View {
     private boolean isTracking;
     private OverlayListener listener;
     private int lostColor;
-    private final int previewH;
-    private final int previewW;
     private int selectedColor;
     private int startX;
     private int startY;
@@ -46,7 +47,7 @@ public class Overlay extends View {
         this.isTracking = false;
         this.isLost = true;
         this.selectedColor = -15935891;
-        this.lostColor = SupportMenu.CATEGORY_MASK;
+        this.lostColor = Color.RED;
         this.viewW = 0;
         this.viewH = 0;
         this.startX = 0;
@@ -69,7 +70,7 @@ public class Overlay extends View {
         this.isTracking = false;
         this.isLost = true;
         this.selectedColor = -15935891;
-        this.lostColor = SupportMenu.CATEGORY_MASK;
+        this.lostColor = Color.RED;
         this.viewW = 0;
         this.viewH = 0;
         this.startX = 0;
@@ -94,7 +95,7 @@ public class Overlay extends View {
         this.isTracking = false;
         this.isLost = true;
         this.selectedColor = -15935891;
-        this.lostColor = SupportMenu.CATEGORY_MASK;
+        this.lostColor = Color.RED;
         this.viewW = 0;
         this.viewH = 0;
         this.startX = 0;
@@ -158,7 +159,7 @@ public class Overlay extends View {
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
+    public boolean onTouchEvent(@NonNull MotionEvent event) {
         if (event.getAction() == 0) {
             this.listener.onTouchActionDown();
             int x = (int) event.getX();

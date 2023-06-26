@@ -28,6 +28,7 @@ import java.util.TimerTask;
 public class X8UpdateCheckPresenter extends BasePresenter {
     private static final int CHECK_UPDATE = 1;
     private static final int CHECK_UPDATE_ERR = 2;
+    private final byte[] updateStates = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
     private AckUpdateRequest ackUpdateRequest;
     private AckUpdateSystemStatus ackUpdateSystemStatus;
     private Context context;
@@ -46,7 +47,6 @@ public class X8UpdateCheckPresenter extends BasePresenter {
     private boolean haveLockMotor = false;
     private Timer checkTimer = new Timer();
     private UpdateCheckState updateCheckState = UpdateCheckState.updateInit;
-    private final byte[] updateStates = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
 
     public X8UpdateCheckPresenter() {
         addNoticeListener();

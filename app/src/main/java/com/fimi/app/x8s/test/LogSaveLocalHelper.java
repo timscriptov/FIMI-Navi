@@ -54,8 +54,8 @@ public class LogSaveLocalHelper {
 
     public static class LogRunnable implements Runnable {
         private final String cmds;
-        private FileOutputStream fos;
         private final String mPid;
+        private FileOutputStream fos;
         private java.lang.Process mProcess;
         private BufferedReader mReader;
 

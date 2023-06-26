@@ -19,39 +19,34 @@ public class X8DroneInfoStatemManager {
         if (errorCodeHandler.getmX8ErrorCodeController() == null) {
             return false;
         }
-        boolean ret = errorCodeHandler.getmX8ErrorCodeController().isDroneStateErrorByLable(GPS);
-        return ret;
+        return errorCodeHandler.getmX8ErrorCodeController().isDroneStateErrorByLable(GPS);
     }
 
     public static boolean isCompassError() {
         if (errorCodeHandler.getmX8ErrorCodeController() == null) {
             return false;
         }
-        boolean ret = errorCodeHandler.getmX8ErrorCodeController().isDroneStateErrorByLable(COMPASS);
-        return ret;
+        return errorCodeHandler.getmX8ErrorCodeController().isDroneStateErrorByLable(COMPASS);
     }
 
     public static boolean isImuError() {
         if (errorCodeHandler.getmX8ErrorCodeController() == null) {
             return false;
         }
-        boolean ret = errorCodeHandler.getmX8ErrorCodeController().isDroneStateErrorByLable(IMU);
-        return ret;
+        return errorCodeHandler.getmX8ErrorCodeController().isDroneStateErrorByLable(IMU);
     }
 
     public static boolean isBatteryError() {
         if (errorCodeHandler.getmX8ErrorCodeController() == null) {
             return false;
         }
-        boolean ret = errorCodeHandler.getmX8ErrorCodeController().isDroneStateErrorByLable(BAT);
-        return ret;
+        return errorCodeHandler.getmX8ErrorCodeController().isDroneStateErrorByLable(BAT);
     }
 
     public static boolean isGcError() {
         if (errorCodeHandler.getmX8ErrorCodeController() == null) {
             return false;
         }
-        boolean ret = errorCodeHandler.getmX8ErrorCodeController().isDroneStateErrorByLable(GC);
-        return ret;
+        return errorCodeHandler.getmX8ErrorCodeController().isDroneStateErrorByLable(GC);
     }
 }

@@ -18,8 +18,7 @@ public class GpsPointTools {
         double sLng = Math.sin(0.5d * dLng2) * Math.sin(0.5d * dLng2);
         double cLat = Math.cos(0.0174532925d * lat0) * Math.cos(0.0174532925d * lat1);
         double sqVol = Math.sqrt((sLng * cLat) + sLat);
-        double distance = 2.0d * 6378137.0d * Math.asin(sqVol);
-        return distance;
+        return 2.0d * 6378137.0d * Math.asin(sqVol);
     }
 
     public double[][] gpsPointDrawArc(double latA, double lngA, double latB, double lngB, double latO, double lngO) {
@@ -94,7 +93,6 @@ public class GpsPointTools {
     }
 
     public double[] getSymmetryPoint(double latA, double lngA, double latO, double lngO) {
-        double[] point = {(2.0d * latO) - latA, (2.0d * lngO) - lngA};
-        return point;
+        return new double[]{(2.0d * latO) - latA, (2.0d * lngO) - lngA};
     }
 }

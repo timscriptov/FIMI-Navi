@@ -23,16 +23,16 @@ public class Gh2FolderDispater<T extends MediaModel> implements IHandlerCallback
     public static final int PHOTO = 2;
     public static final String TAG = Gh2FolderDispater.class.getName();
     public static final int VIDEO = 1;
-    public boolean isHadForEachFolder;
-    private IDateHandler mIDateHandler;
     private final SuffixUtils mSuffixUtils = SuffixUtils.obtain();
     private final String defaultFormatPattern = "yyyy.MM.dd HH:mm:ss";
-    private long videoCount = 0;
-    private long photoCount = 0;
     private final Handler otherHandler = HandlerManager.obtain().getHandlerInOtherThread(this);
     private final CopyOnWriteArrayList<T> localDataList = new CopyOnWriteArrayList<>();
     private final CopyOnWriteArrayList<T> localDataNoHeadList = new CopyOnWriteArrayList<>();
     private final LinkedHashMap<String, CopyOnWriteArrayList<T>> dataHash = new LinkedHashMap<>();
+    public boolean isHadForEachFolder;
+    private IDateHandler mIDateHandler;
+    private long videoCount = 0;
+    private long photoCount = 0;
 
     public void forEachFolder(String folderPath) {
         if (!this.isHadForEachFolder && !this.otherHandler.hasMessages(3)) {

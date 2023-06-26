@@ -108,13 +108,13 @@ public class X8FiveKeyDefineController extends AbsX8MenuBoxControllers implement
     @Override
     public void showItem() {
         this.isShow = true;
-        this.contentView.setVisibility(0);
+        this.contentView.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void closeItem() {
         this.isShow = false;
-        this.contentView.setVisibility(8);
+        this.contentView.setVisibility(View.GONE);
         defaultVal();
     }
 

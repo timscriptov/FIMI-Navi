@@ -24,10 +24,8 @@ public class CommonFileCallback implements Callback {
     protected final int NETWORK_ERROR = -1;
     protected final int IO_ERROR = -2;
     protected final String EMPTY_MSG = "";
-    DisposeDataHandle dataHandle;
     private final String mFilePath;
     private final DisposeDownloadListener mListener;
-    private int mProgress;
     private final Handler mDeliveryHandler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
@@ -37,6 +35,8 @@ public class CommonFileCallback implements Callback {
             }
         }
     };
+    DisposeDataHandle dataHandle;
+    private int mProgress;
 
     public CommonFileCallback(DisposeDataHandle handle) {
         this.mListener = (DisposeDownloadListener) handle.mListener;

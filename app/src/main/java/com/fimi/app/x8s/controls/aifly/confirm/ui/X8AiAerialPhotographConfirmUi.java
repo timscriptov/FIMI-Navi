@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.android.app.R;
 import com.fimi.app.x8s.config.X8AiConfig;
 import com.fimi.app.x8s.controls.X8MainAiFlyController;
@@ -13,15 +15,15 @@ import com.fimi.app.x8s.tools.ImageUtils;
 
 
 public class X8AiAerialPhotographConfirmUi implements View.OnClickListener {
+    private final View contentView;
     private View btnOk;
     private CheckBox cbTip;
-    private final View contentView;
     private ImageView imgFlag;
     private View imgReturn;
     private X8MainAiFlyController listener;
     private X8MainAiFlyController mX8MainAiFlyController;
 
-    public X8AiAerialPhotographConfirmUi(Activity activity, View parent) {
+    public X8AiAerialPhotographConfirmUi(@NonNull Activity activity, View parent) {
         this.contentView = activity.getLayoutInflater().inflate(R.layout.x8_ai_aerial_photograph_confirm_layout, (ViewGroup) parent, true);
         initViews(this.contentView);
         initActions();
@@ -31,7 +33,7 @@ public class X8AiAerialPhotographConfirmUi implements View.OnClickListener {
         this.mX8MainAiFlyController = mX8MainAiFlyController;
     }
 
-    public void initViews(View rootView) {
+    public void initViews(@NonNull View rootView) {
         this.imgReturn = rootView.findViewById(R.id.img_ai_follow_return);
         this.btnOk = rootView.findViewById(R.id.btn_ai_follow_confirm_ok);
         this.cbTip = rootView.findViewById(R.id.cb_ai_follow_confirm_ok);
@@ -45,7 +47,7 @@ public class X8AiAerialPhotographConfirmUi implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(@NonNull View v) {
         int id = v.getId();
         if (id == R.id.img_ai_follow_return) {
             this.mX8MainAiFlyController.onCloseConfirmUi();

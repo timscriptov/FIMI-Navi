@@ -24,11 +24,9 @@ public class X8MainPitchingAngle extends View {
     private final int MAX;
     private final int MAXPROGRESS;
     private final int MIN;
-    private OnProgressListener listener;
     private final int mBgColor;
     private final Rect mBounds;
     private final Paint mPaint;
-    private float mPercent;
     private final int mProgressColor;
     private final float mProgressMarginLeft;
     private final float mProgressWidth;
@@ -41,6 +39,8 @@ public class X8MainPitchingAngle extends View {
     private final float rectangleWidth;
     private final int textColor;
     private final float textSize;
+    private OnProgressListener listener;
+    private float mPercent;
 
     public X8MainPitchingAngle(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fimi.android.app.R;
@@ -35,20 +36,21 @@ public class CameraEVParamsAdatper extends RecyclerView.Adapter {
         notifyDataSetChanged();
     }
 
+    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View rootView = LayoutInflater.from(this.context).inflate(R.layout.x8_iso_recycler_item, parent, false);
         return new CameraParamsViewHolder(rootView);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         if ((holder instanceof CameraParamsViewHolder) && this.plist.size() > 0) {
             ((CameraParamsViewHolder) holder).initView(this.plist.get(position), this.isEnable);
             ((CameraParamsViewHolder) holder).upSelected(position == this.selectIndex);
             holder.itemView.setOnClickListener(v -> {
-                if (CameraEVParamsAdatper.this.isEnable && CameraEVParamsAdatper.this.listener != null) {
-                    CameraEVParamsAdatper.this.listener.updateParams(CameraEVParamsAdatper.this.paramKey, CameraEVParamsAdatper.this.plist.get(position));
+                if (isEnable && listener != null) {
+                    listener.updateParams(paramKey, plist.get(position));
                 }
             });
         }

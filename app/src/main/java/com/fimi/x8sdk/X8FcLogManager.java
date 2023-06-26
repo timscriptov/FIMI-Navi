@@ -125,6 +125,51 @@ public class X8FcLogManager {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void closeFileOutputStream() {
+        this.currentWriteFile = "";
+        this.isPreLandDown = true;
+        this.handler.removeMessages(0);
+        this.handler.removeMessages(2);
+        this.handler.removeMessages(3);
+        currentWrite = "";
+        this.isWriteFirst = false;
+        this.isWriteFlightPlaybackFirst = false;
+        if (this.fcOutputStream != null) {
+            try {
+                this.fcOutputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            this.fcOutputStream = null;
+        }
+        if (this.cmOutputStream != null) {
+            try {
+                this.cmOutputStream.close();
+            } catch (IOException e2) {
+                e2.printStackTrace();
+            }
+            this.cmOutputStream = null;
+        }
+        if (this.appLogOutputStream != null) {
+            try {
+                this.appLogOutputStream.close();
+            } catch (IOException e3) {
+                e3.printStackTrace();
+            }
+            this.appLogOutputStream = null;
+        }
+        if (this.flightPlaybackLogOutputStream != null) {
+            try {
+                this.flightPlaybackLogOutputStream.write(addFlightPlaybackDataDistance());
+                this.flightPlaybackLogOutputStream.close();
+            } catch (IOException e4) {
+                e4.printStackTrace();
+            }
+            this.flightPlaybackLogOutputStream = null;
+            this.autoFcSportState = null;
+        }
     }    Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
@@ -177,51 +222,6 @@ public class X8FcLogManager {
             }
         }
     };
-
-    public void closeFileOutputStream() {
-        this.currentWriteFile = "";
-        this.isPreLandDown = true;
-        this.handler.removeMessages(0);
-        this.handler.removeMessages(2);
-        this.handler.removeMessages(3);
-        currentWrite = "";
-        this.isWriteFirst = false;
-        this.isWriteFlightPlaybackFirst = false;
-        if (this.fcOutputStream != null) {
-            try {
-                this.fcOutputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            this.fcOutputStream = null;
-        }
-        if (this.cmOutputStream != null) {
-            try {
-                this.cmOutputStream.close();
-            } catch (IOException e2) {
-                e2.printStackTrace();
-            }
-            this.cmOutputStream = null;
-        }
-        if (this.appLogOutputStream != null) {
-            try {
-                this.appLogOutputStream.close();
-            } catch (IOException e3) {
-                e3.printStackTrace();
-            }
-            this.appLogOutputStream = null;
-        }
-        if (this.flightPlaybackLogOutputStream != null) {
-            try {
-                this.flightPlaybackLogOutputStream.write(addFlightPlaybackDataDistance());
-                this.flightPlaybackLogOutputStream.close();
-            } catch (IOException e4) {
-                e4.printStackTrace();
-            }
-            this.flightPlaybackLogOutputStream = null;
-            this.autoFcSportState = null;
-        }
-    }
 
     public void cmLogWrite(byte[] bytes, long l, float distance) {
         if (this.cmOutputStream != null && this.state == LogState.INSKY) {
@@ -441,6 +441,8 @@ public class X8FcLogManager {
         INSKY,
         ONGROUND
     }
+
+
 
 
 }

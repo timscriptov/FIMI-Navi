@@ -8,7 +8,11 @@ import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.android.app.R;
+
+import org.jetbrains.annotations.Contract;
 
 
 public class X8sNavigationBarUtils {
@@ -29,27 +33,30 @@ public class X8sNavigationBarUtils {
         }
     }
 
-    public static boolean isHWProportion(DisplayMetrics dm) {
+    @Contract(pure = true)
+    public static boolean isHWProportion(@NonNull DisplayMetrics dm) {
         if (dm.widthPixels == 0) {
             return true;
         }
         float scale = dm.heightPixels / (dm.widthPixels * 1.0f);
-        return scale <= 0.5625f;
+        return scale <= STANDARD_SCREEN_SCALE;
     }
 
+    @NonNull
+    @Contract(pure = true)
     public static float[] getRootHeightAndWidth(DisplayMetrics dm) {
         float[] hw = new float[2];
         if (isHWProportion(dm)) {
             hw[0] = dm.heightPixels;
-            hw[1] = dm.heightPixels / 0.5625f;
+            hw[1] = dm.heightPixels / STANDARD_SCREEN_SCALE;
         } else {
-            hw[0] = dm.widthPixels * 0.5625f;
+            hw[0] = dm.widthPixels * STANDARD_SCREEN_SCALE;
             hw[1] = dm.widthPixels;
         }
         return hw;
     }
 
-    public static boolean isPad(Context context) {
+    public static boolean isPad(@NonNull Context context) {
         return (context.getResources().getConfiguration().screenLayout & 15) >= 3;
     }
 }

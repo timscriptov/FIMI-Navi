@@ -57,10 +57,10 @@ public class ServiceAdapter extends BaseAdapter {
         ServiceItem itemBean = this.list.get(position);
         holder.mTvItemTitle.setText(this.context.getString(itemBean.getInfo()));
         if (itemBean.isSelect()) {
-            holder.mIvArrow.setVisibility(0);
+            holder.mIvArrow.setVisibility(View.VISIBLE);
             holder.mTvItemTitle.setTextColor(this.context.getResources().getColor(R.color.login_forget_password_frequently));
         } else {
-            holder.mIvArrow.setVisibility(4);
+            holder.mIvArrow.setVisibility(View.INVISIBLE);
             holder.mTvItemTitle.setTextColor(this.context.getResources().getColor(R.color.login_font_select));
         }
         return convertView;

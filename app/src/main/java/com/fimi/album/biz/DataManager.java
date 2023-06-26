@@ -10,8 +10,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class DataManager<T extends MediaModel> {
     private static DataManager mDataManager;
-    private ICameraDeviceDispater mCameraDispater;
     private final FolderDispater mFolderDispater = new FolderDispater();
+    private ICameraDeviceDispater mCameraDispater;
 
     private DataManager() {
     }

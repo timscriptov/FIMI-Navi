@@ -11,8 +11,8 @@ import com.fimi.app.x8s.tools.ImageUtils;
 
 
 public class X8AiTakeoffConfirmUi implements View.OnClickListener {
-    private View btnOk;
     private final View contentView;
+    private View btnOk;
     private ImageView imgFlag;
     private View imgReturn;
     private X8MainAiFlyController listener;

@@ -36,11 +36,12 @@ import com.fimi.x8sdk.modulestate.StateManager;
 
 
 public class X8AiD2PExcuteController extends AbsX8AiController implements View.OnClickListener, X8MainPitchingAngle.OnProgressListener, IX8MarkerListener, X8DoubleCustomDialog.onDialogButtonClickListener, X8AiTrackController.OnAiTrackControllerListener {
+    private final X8sMainActivity activity;
+    private final IX8NextViewListener mIX8NextViewListener;
     protected int MAX_WIDTH;
     protected boolean isNextShow;
     protected boolean isShow;
     protected int width;
-    private final X8sMainActivity activity;
     private View blank;
     private X8DoubleCustomDialog dialog;
     private View flagSmall;
@@ -50,7 +51,6 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
     private boolean isDraw;
     private IX8Point2PointExcuteConttrollerListener listener;
     private AiGetPointState mAiGetPointState;
-    private final IX8NextViewListener mIX8NextViewListener;
     private X8AiTipWithCloseView mTipBgView;
     private X8AiPoint2PointExcuteConfirmModule mX8AiFollowPoint2PointExcuteConfirmModule;
     private X8MapVideoController mapVideoController;
@@ -79,7 +79,7 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
                 X8AiD2PExcuteController.this.isDraw = true;
                 X8AiD2PExcuteController.this.setAiVcOpen();
                 X8AiD2PExcuteController.this.openVcToggle();
-                X8AiD2PExcuteController.this.mTipBgView.setVisibility(8);
+                X8AiD2PExcuteController.this.mTipBgView.setVisibility(View.GONE);
                 X8AiD2PExcuteController.this.closeNextUi(false);
                 X8AiD2PExcuteController.this.mapVideoController.getFimiMap().getAiPoint2PointManager().resetMapEvent();
                 X8AiD2PExcuteController.this.mapVideoController.getFimiMap().getAiPoint2PointManager().setRunning();
@@ -96,12 +96,12 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
     @Override
     public void onMarkerSelect(boolean onSelect, float altitude, MapPointLatLng mpl, boolean isClick) {
         if (onSelect) {
-            this.vHeight.setVisibility(0);
+            this.vHeight.setVisibility(View.VISIBLE);
             this.vHeight.setProcess(altitude);
             this.imgNext.setEnabled(true);
             return;
         }
-        this.vHeight.setVisibility(8);
+        this.vHeight.setVisibility(View.GONE);
         this.imgNext.setEnabled(true);
     }
 
@@ -186,9 +186,9 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
             }
         } else if (id == R.id.rl_flag_small) {
             if (this.tvP2PTip.getVisibility() == 0) {
-                this.tvP2PTip.setVisibility(8);
+                this.tvP2PTip.setVisibility(View.GONE);
             } else {
-                this.tvP2PTip.setVisibility(0);
+                this.tvP2PTip.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -209,18 +209,18 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
         this.imgVcToggle.setSelected(true);
         this.imgVcToggle.setOnClickListener(this);
         if (this.state == X8AiPointState.IDLE) {
-            this.imgNext.setVisibility(0);
-            this.imgVcToggle.setVisibility(8);
+            this.imgNext.setVisibility(View.VISIBLE);
+            this.imgVcToggle.setVisibility(View.GONE);
             this.mTipBgView.setTipText(getString(R.string.x8_ai_fly_follow_select_point));
-            this.mTipBgView.setVisibility(0);
+            this.mTipBgView.setVisibility(View.VISIBLE);
             this.mapVideoController.getFimiMap().getAiPoint2PointManager().setPoint2PointMarkerSelectListener(this);
             this.mapVideoController.getFimiMap().getAiPoint2PointManager().setOnMapClickListener();
         } else {
-            this.imgNext.setVisibility(8);
+            this.imgNext.setVisibility(View.GONE);
             setAiVcOpen();
             openVcToggle();
-            this.mTipBgView.setVisibility(8);
-            this.vHeight.setVisibility(8);
+            this.mTipBgView.setVisibility(View.GONE);
+            this.vHeight.setVisibility(View.GONE);
         }
         this.nextRootView = this.rootView.findViewById(R.id.x8_main_ai_point2point_next_content);
         this.blank = this.rootView.findViewById(R.id.x8_main_ai_point2point_next_blank);
@@ -248,14 +248,14 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
         this.mapVideoController.getFimiMap().setmX8AiItemMapListener(null);
         this.mapVideoController.getFimiMap().getAiPoint2PointManager().clearPoint2PointMarker();
         this.mapVideoController.getFimiMap().getAiPoint2PointManager().resetMapEvent();
-        this.imgVcToggle.setVisibility(8);
+        this.imgVcToggle.setVisibility(View.GONE);
         setAiVcClose();
         super.closeUi();
     }
 
     public void openNextUi() {
-        this.nextRootView.setVisibility(0);
-        this.blank.setVisibility(0);
+        this.nextRootView.setVisibility(View.VISIBLE);
+        this.blank.setVisibility(View.VISIBLE);
         closeIconByNextUi();
         this.mX8AiFollowPoint2PointExcuteConfirmModule.init(this.activity, this.nextRootView);
         if (this.mX8AiFollowPoint2PointExcuteConfirmModule != null) {
@@ -276,7 +276,7 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
     }
 
     public void closeNextUi(final boolean b) {
-        this.blank.setVisibility(8);
+        this.blank.setVisibility(View.GONE);
         if (this.isNextShow) {
             this.isNextShow = false;
             ObjectAnimator translationRight = ObjectAnimator.ofFloat(this.nextRootView, "translationX", 0.0f, this.width);
@@ -287,13 +287,13 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
                 // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
-                    X8AiD2PExcuteController.this.nextRootView.setVisibility(8);
+                    X8AiD2PExcuteController.this.nextRootView.setVisibility(View.GONE);
                     ((ViewGroup) X8AiD2PExcuteController.this.nextRootView).removeAllViews();
-                    X8AiD2PExcuteController.this.imgBack.setVisibility(0);
-                    X8AiD2PExcuteController.this.flagSmall.setVisibility(0);
+                    X8AiD2PExcuteController.this.imgBack.setVisibility(View.VISIBLE);
+                    X8AiD2PExcuteController.this.flagSmall.setVisibility(View.VISIBLE);
                     if (b) {
-                        X8AiD2PExcuteController.this.imgNext.setVisibility(0);
-                        X8AiD2PExcuteController.this.vHeight.setVisibility(0);
+                        X8AiD2PExcuteController.this.imgNext.setVisibility(View.VISIBLE);
+                        X8AiD2PExcuteController.this.vHeight.setVisibility(View.VISIBLE);
                     }
                 }
             });
@@ -467,27 +467,27 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
 
     public void openVcToggle() {
         if (this.mapVideoController.isFullVideo()) {
-            this.imgVcToggle.setVisibility(0);
+            this.imgVcToggle.setVisibility(View.VISIBLE);
         } else {
-            this.imgVcToggle.setVisibility(8);
+            this.imgVcToggle.setVisibility(View.GONE);
         }
     }
 
     public void switchMapVideo(boolean isVideo) {
         if (this.isDraw) {
             if (isVideo) {
-                this.imgVcToggle.setVisibility(8);
+                this.imgVcToggle.setVisibility(View.GONE);
             } else {
-                this.imgVcToggle.setVisibility(0);
+                this.imgVcToggle.setVisibility(View.VISIBLE);
             }
         }
     }
 
     public void closeIconByNextUi() {
-        this.imgNext.setVisibility(8);
-        this.imgBack.setVisibility(8);
-        this.flagSmall.setVisibility(8);
-        this.vHeight.setVisibility(8);
+        this.imgNext.setVisibility(View.GONE);
+        this.imgBack.setVisibility(View.GONE);
+        this.flagSmall.setVisibility(View.GONE);
+        this.vHeight.setVisibility(View.GONE);
     }
 
     public void sysAiVcCtrlMode() {

@@ -159,9 +159,9 @@ public class X8RCMatchCodeController extends AbsX8MenuBoxControllers implements 
         super.closeUi();
         if (this.matchStatus == MatchStatus.ideal) {
             this.matchStatus = MatchStatus.ideal;
-            this.idealView.setVisibility(0);
-            this.checkView.setVisibility(8);
-            this.rtView.setVisibility(8);
+            this.idealView.setVisibility(View.VISIBLE);
+            this.checkView.setVisibility(View.GONE);
+            this.rtView.setVisibility(View.GONE);
         }
     }
 

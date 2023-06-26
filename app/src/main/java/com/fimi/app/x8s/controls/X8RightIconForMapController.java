@@ -5,6 +5,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.TcpClient;
 import com.fimi.android.app.R;
 import com.fimi.app.x8s.entity.X8AiModeState;
@@ -95,7 +97,7 @@ public class X8RightIconForMapController extends AbsX8Controllers implements Vie
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(@NonNull View v) {
         int id = v.getId();
         if (id == this.imbAiFly.getId()) {
             this.activity.onAiFlyClick();
@@ -110,12 +112,10 @@ public class X8RightIconForMapController extends AbsX8Controllers implements Vie
             String m = this.root.getContext().getString(R.string.x8_switch_home2_drone_msg);
             X8DoubleCustomDialog dialog = new X8DoubleCustomDialog(this.root.getContext(), t, m, new X8DoubleCustomDialog.onDialogButtonClickListener() {
                 @Override
-                // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
                 public void onLeft() {
                 }
 
                 @Override
-                // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
                 public void onRight() {
                     X8MapGetCityManager.onSetHomeEvent(X8RightIconForMapController.this.activity, 0);
                 }
@@ -127,12 +127,10 @@ public class X8RightIconForMapController extends AbsX8Controllers implements Vie
             String m2 = this.root.getContext().getString(R.string.x8_switch_home2_phone_title);
             X8DoubleCustomDialog dialog2 = new X8DoubleCustomDialog(this.root.getContext(), t2, m2, new X8DoubleCustomDialog.onDialogButtonClickListener() {
                 @Override
-                // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
                 public void onLeft() {
                 }
 
                 @Override
-                // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
                 public void onRight() {
                     X8MapGetCityManager.onSetHomeEvent(X8RightIconForMapController.this.activity, 1);
                 }
@@ -174,47 +172,47 @@ public class X8RightIconForMapController extends AbsX8Controllers implements Vie
     }
 
     public void closeUiForTaskRunning() {
-        this.vTakeoffLandingAiFly.setVisibility(8);
+        this.vTakeoffLandingAiFly.setVisibility(View.GONE);
         boolean isShow = !this.activity.getmMapVideoController().isFullVideo();
-        this.imbLocation.setVisibility(!isShow ? 8 : 0);
-        this.vSetHomePoint.setVisibility(isShow ? 0 : 8);
+        this.imbLocation.setVisibility(!isShow ? View.GONE : View.VISIBLE);
+        this.vSetHomePoint.setVisibility(isShow ? View.VISIBLE : View.GONE);
     }
 
     public void openUiForSetting() {
-        this.vTakeoffLandingAiFly.setVisibility(1 == 0 ? 8 : 0);
+        this.vTakeoffLandingAiFly.setVisibility(1 == 0 ? View.GONE : View.VISIBLE);
         boolean isShow = !this.activity.getmMapVideoController().isFullVideo();
-        this.imbLocation.setVisibility(!isShow ? 8 : 0);
-        this.vSetHomePoint.setVisibility(isShow ? 0 : 8);
+        this.imbLocation.setVisibility(!isShow ? View.GONE : View.VISIBLE);
+        this.vSetHomePoint.setVisibility(isShow ? View.VISIBLE : View.GONE);
         TcpClient.getIntance().sendLog("openUiForSetting--->" + isShow);
     }
 
     public void openUiForTaskRunning() {
         if (this.mX8AiModeState.isAiModeStateIdle()) {
-            this.vTakeoffLandingAiFly.setVisibility(0);
+            this.vTakeoffLandingAiFly.setVisibility(View.VISIBLE);
         }
         boolean isShow = !this.activity.getmMapVideoController().isFullVideo();
-        this.imbLocation.setVisibility(!isShow ? 8 : 0);
-        this.vSetHomePoint.setVisibility(isShow ? 0 : 8);
+        this.imbLocation.setVisibility(!isShow ? View.GONE : View.VISIBLE);
+        this.vSetHomePoint.setVisibility(isShow ? View.VISIBLE : View.GONE);
     }
 
     public void showAll(boolean isShow) {
-        this.imbLocation.setVisibility(!isShow ? 8 : 0);
-        this.vSetHomePoint.setVisibility(!isShow ? 8 : 0);
-        this.vTakeoffLandingAiFly.setVisibility(isShow ? 0 : 8);
+        this.imbLocation.setVisibility(!isShow ? View.GONE : View.VISIBLE);
+        this.vSetHomePoint.setVisibility(!isShow ? View.GONE : View.VISIBLE);
+        this.vTakeoffLandingAiFly.setVisibility(isShow ? View.VISIBLE : View.GONE);
     }
 
     public void showTakeoffLanding() {
-        this.vTakeoffLandingAiFly.setVisibility(0);
+        this.vTakeoffLandingAiFly.setVisibility(View.VISIBLE);
     }
 
     public void showLocation() {
         boolean isShow = !this.activity.getmMapVideoController().isFullVideo();
-        this.imbLocation.setVisibility(!isShow ? 8 : 0);
-        this.vSetHomePoint.setVisibility(isShow ? 0 : 8);
+        this.imbLocation.setVisibility(!isShow ? View.GONE : View.VISIBLE);
+        this.vSetHomePoint.setVisibility(isShow ? View.VISIBLE : View.GONE);
     }
 
     public void showAiFlyIcon() {
-        this.vTakeoffLandingAiFly.setVisibility(0);
+        this.vTakeoffLandingAiFly.setVisibility(View.VISIBLE);
     }
 
     public void d() {
@@ -243,7 +241,7 @@ public class X8RightIconForMapController extends AbsX8Controllers implements Vie
                 }
             }
             if (this.isAiRunning) {
-                this.vTakeoffLandingAiFly.setVisibility(8);
+                this.vTakeoffLandingAiFly.setVisibility(View.GONE);
             }
             this.imgAiTakeLandOff.setEnabled(takeoffLanding);
         }

@@ -23,13 +23,13 @@ import com.fimi.x8sdk.dataparser.AutoFcBattery;
 
 
 public class X8FcSettingMenuController extends AbsX8MenuBoxControllers implements View.OnClickListener {
+    private final AbsX8Controllers[] itemControllers;
     X8MapVideoController mapVideoController;
     private ImageView imgBattery;
     private ImageView imgFc;
     private ImageView imgGenneal;
     private ImageView imgGimbal;
     private ImageView imgRc;
-    private final AbsX8Controllers[] itemControllers;
     private X8BatteryItemController mX8BatteryItemController;
     private X8FcItemController mX8FcItemController;
     private X8GeneralItemController mX8GeneralItemController;

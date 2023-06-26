@@ -62,8 +62,8 @@ public class X8ErrorCodeController extends AbsX8Controllers {
 
     private void initErrCodeDes() {
         LanguageModel model = GlobalConfig.getInstance().getLanguageModel();
-        InputStreamReader inputStream = null;
-        BufferedReader bufr = null;
+        InputStreamReader inputStream;
+        BufferedReader bufr;
         try {
             inputStream = "cn".equalsIgnoreCase(model.getInternalCoutry()) ? new InputStreamReader(this.rootView.getContext().getResources().getAssets().open("zh.txt")) :
                     "ko".equalsIgnoreCase(model.getInternalCoutry()) ? new InputStreamReader(this.rootView.getContext().getResources().getAssets().open("ko.txt")) :
@@ -85,35 +85,20 @@ public class X8ErrorCodeController extends AbsX8Controllers {
                         this.errCodeDesc.put(key + "", value);
                     }
                 } catch (IOException e) {
-                    e = e;
                     bufr = bufr2;
                     e.printStackTrace();
-                    if (inputStream != null) {
-                        IOUtils.closeQuietly(inputStream);
-                    }
-                    if (bufr != null) {
-                        IOUtils.closeQuietly(bufr);
-                        return;
-                    }
+                    IOUtils.closeQuietly(inputStream);
+                    IOUtils.closeQuietly(bufr);
                     return;
                 } catch (Throwable th) {
-                    th = th;
                     bufr = bufr2;
-                    if (inputStream != null) {
-                        IOUtils.closeQuietly(inputStream);
-                    }
-                    if (bufr != null) {
-                        IOUtils.closeQuietly(bufr);
-                    }
+                    IOUtils.closeQuietly(inputStream);
+                    IOUtils.closeQuietly(bufr);
                     throw th;
                 }
             }
-            if (inputStream != null) {
-                IOUtils.closeQuietly(inputStream);
-            }
-            if (bufr2 != null) {
-                IOUtils.closeQuietly(bufr2);
-            }
+            IOUtils.closeQuietly(inputStream);
+            IOUtils.closeQuietly(bufr2);
         } catch (Throwable th2) {
         }
     }

@@ -12,9 +12,9 @@ import java.net.URL;
 
 
 public class MediaThumDownloadTask implements Runnable {
-    private int finished = 0;
     private final OnDownloadListener listener;
     private final MediaModel model;
+    private int finished = 0;
 
     public MediaThumDownloadTask(MediaModel model, OnDownloadListener listener) {
         this.model = model;

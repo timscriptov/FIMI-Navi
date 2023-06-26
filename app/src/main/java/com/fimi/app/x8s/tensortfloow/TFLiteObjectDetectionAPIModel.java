@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.RectF;
 import android.os.Trace;
 
+import androidx.annotation.NonNull;
+
 import org.tensorflow.lite.Interpreter;
 
 import java.io.BufferedReader;
@@ -30,11 +32,11 @@ public class TFLiteObjectDetectionAPIModel implements Classifier {
     private static final float IMAGE_STD = 128.0f;
     private static final int NUM_DETECTIONS = 2;
     private static final int NUM_THREADS = 6;
+    private final Vector<String> labels = new Vector<>();
     private ByteBuffer imgData;
     private int inputSize;
     private int[] intValues;
     private boolean isModelQuantized;
-    private final Vector<String> labels = new Vector<>();
     private float[] numDetections;
     private float[][] outputClasses;
     private float[][][] outputLocations;
@@ -44,7 +46,7 @@ public class TFLiteObjectDetectionAPIModel implements Classifier {
     private TFLiteObjectDetectionAPIModel() {
     }
 
-    private static MappedByteBuffer loadModelFile(AssetManager assets, String modelFilename) throws IOException {
+    private static MappedByteBuffer loadModelFile(@NonNull AssetManager assets, String modelFilename) throws IOException {
         AssetFileDescriptor fileDescriptor = assets.openFd(modelFilename);
         FileInputStream inputStream = new FileInputStream(fileDescriptor.getFileDescriptor());
         FileChannel fileChannel = inputStream.getChannel();
@@ -53,7 +55,8 @@ public class TFLiteObjectDetectionAPIModel implements Classifier {
         return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength);
     }
 
-    public static Classifier create(AssetManager assetManager, String modelFilename, String labelFilename, int inputSize, boolean isQuantized) throws IOException {
+    @NonNull
+    public static Classifier create(@NonNull AssetManager assetManager, String modelFilename, @NonNull String labelFilename, int inputSize, boolean isQuantized) throws IOException {
         int numBytesPerChannel;
         TFLiteObjectDetectionAPIModel d = new TFLiteObjectDetectionAPIModel();
         String actualFilename = labelFilename.split("file:///android_asset/")[1];
@@ -91,7 +94,7 @@ public class TFLiteObjectDetectionAPIModel implements Classifier {
     }
 
     @Override
-    public List<Classifier.Recognition> recognizeImage(Bitmap bitmap) {
+    public List<Classifier.Recognition> recognizeImage(@NonNull Bitmap bitmap) {
         Trace.beginSection("recognizeImage");
         Trace.beginSection("preprocessBitmap");
         bitmap.getPixels(this.intValues, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
@@ -131,7 +134,7 @@ public class TFLiteObjectDetectionAPIModel implements Classifier {
             RectF detection = new RectF(this.outputLocations[0][i2][1] * this.inputSize, this.outputLocations[0][i2][0] * this.inputSize, this.outputLocations[0][i2][3] * this.inputSize, this.outputLocations[0][i2][2] * this.inputSize);
             int nClass = (int) this.outputClasses[0][i2];
             if (nClass >= 0 && nClass <= 90) {
-                recognitions.add(new Classifier.Recognition("" + i2, this.labels.get(nClass + 1), Float.valueOf(this.outputScores[0][i2]), detection));
+                recognitions.add(new Classifier.Recognition("" + i2, this.labels.get(nClass + 1), this.outputScores[0][i2], detection));
             }
         }
         Trace.endSection();

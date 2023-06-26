@@ -410,9 +410,9 @@ public class StickyListHeadersListView extends ListView {
                 if (wrapperViewChild.hasHeader()) {
                     View childHeader = wrapperViewChild.mHeader;
                     if (wrapperViewChild.getTop() < top) {
-                        childHeader.setVisibility(4);
+                        childHeader.setVisibility(View.INVISIBLE);
                     } else {
-                        childHeader.setVisibility(0);
+                        childHeader.setVisibility(View.VISIBLE);
                     }
                 }
             }

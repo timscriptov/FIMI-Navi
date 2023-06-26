@@ -22,12 +22,12 @@ import java.io.RandomAccessFile;
 
 
 public class X8MediaOriginalDownloadTask implements Runnable {
+    private final OnDownloadListener listener;
+    private final MediaModel model;
     int max_size = 1024;
     boolean isAwait = false;
     RandomAccessFile randomAccessFile = null;
     private MediaDownloadInfo downloadInfo;
-    private final OnDownloadListener listener;
-    private final MediaModel model;
     private long finished = 0;
 
     public X8MediaOriginalDownloadTask(MediaModel model, OnDownloadListener listener) {
@@ -75,6 +75,11 @@ public class X8MediaOriginalDownloadTask implements Runnable {
         if (cmd != null) {
             SessionManager.getInstance().sendCmd(cmd);
         }
+    }
+
+    public void sendStopDownload() {
+        sendCmd(new X8DownLoadCmd().downMediaFile((int) this.finished, (short) this.max_size, this.model.getFileUrl(), true));
+        HostLogBack.getInstance().writeLog("Alanqiu  ==================mediaDataCallBack:==停止下载===");
     }    MediaDataListener mediaDataListener = new MediaDataListener() {
         @Override
         public void mediaDataCallBack(byte[] data) {
@@ -128,11 +133,6 @@ public class X8MediaOriginalDownloadTask implements Runnable {
             }
         }
     };
-
-    public void sendStopDownload() {
-        sendCmd(new X8DownLoadCmd().downMediaFile((int) this.finished, (short) this.max_size, this.model.getFileUrl(), true));
-        HostLogBack.getInstance().writeLog("Alanqiu  ==================mediaDataCallBack:==停止下载===");
-    }
 
     public void removeMediaListener() {
         if (this.mediaDataListener != null) {

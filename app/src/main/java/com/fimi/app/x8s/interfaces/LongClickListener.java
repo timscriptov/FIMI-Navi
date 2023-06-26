@@ -4,11 +4,13 @@ import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+
 
 public abstract class LongClickListener implements View.OnTouchListener {
+    private final Handler handler = new Handler();
     private int viewId;
     private boolean isClickDown = false;
-    private final Handler handler = new Handler();
     private final Runnable longClickRunnable = new Runnable() {
         @Override
         public void run() {
@@ -24,7 +26,7 @@ public abstract class LongClickListener implements View.OnTouchListener {
     public abstract void onFingerUp(int i);
 
     @Override
-    public boolean onTouch(View v, MotionEvent event) {
+    public boolean onTouch(@NonNull View v, @NonNull MotionEvent event) {
         this.viewId = v.getId();
         int action = event.getAction();
         switch (action) {

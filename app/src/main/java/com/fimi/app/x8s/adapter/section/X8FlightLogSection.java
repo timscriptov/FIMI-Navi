@@ -2,7 +2,6 @@ package com.fimi.app.x8s.adapter.section;
 
 import com.fimi.x8sdk.entity.X8FlightLogFile;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -11,7 +10,6 @@ public class X8FlightLogSection extends AbsSection {
 
     public X8FlightLogSection(List<X8FlightLogFile> list, boolean hasHeader) {
         super(hasHeader);
-        this.list = new ArrayList();
         this.list = list;
     }
 

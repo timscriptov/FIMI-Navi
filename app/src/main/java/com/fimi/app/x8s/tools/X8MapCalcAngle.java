@@ -1,30 +1,34 @@
 package com.fimi.app.x8s.tools;
 
+import androidx.annotation.NonNull;
+
 import com.google.android.gms.maps.model.LatLng;
+
+import org.jetbrains.annotations.Contract;
 
 
 public class X8MapCalcAngle {
-    private double getSlope(LatLng fromPoint, LatLng toPoint) {
+    @Contract(pure = true)
+    private double getSlope(@NonNull LatLng fromPoint, @NonNull LatLng toPoint) {
         if (toPoint.longitude == fromPoint.longitude) {
             return Double.MAX_VALUE;
         }
         return (toPoint.latitude - fromPoint.latitude) / (toPoint.longitude - fromPoint.longitude);
     }
 
-    private float getSpecialAngle(LatLng fromPoint, LatLng toPoint) {
+    @Contract(pure = true)
+    private float getSpecialAngle(@NonNull LatLng fromPoint, @NonNull LatLng toPoint) {
         if (toPoint.latitude - fromPoint.latitude > 0.0d) {
             return 90.0f;
         }
         return 180.0f;
     }
 
-    private float toSceenAngle(double angle, LatLng fromPoint, LatLng toPoint) {
+    private float toSceenAngle(double angle, @NonNull LatLng fromPoint, @NonNull LatLng toPoint) {
         if (toPoint.longitude - fromPoint.longitude >= 0.0d) {
-            float a = (int) Math.round(90.0d - angle);
-            return a;
+            return (float) (int) Math.round(90.0d - angle);
         }
-        float a2 = (int) Math.round(180.0d + (90.0d - angle));
-        return a2;
+        return (float) (int) Math.round(180.0d + (90.0d - angle));
     }
 
     public float getAngle(LatLng fromPoint, LatLng toPoint) {
@@ -100,8 +104,7 @@ public class X8MapCalcAngle {
                 angle12 = (((tempAngle6 * 2.0f) / 3.0f) + angle22) % 360.0f;
             }
         }
-        float[] angleArray = {switchScreenAngle2DroneAngle(angle12), switchScreenAngle2DroneAngle(angle22)};
-        return angleArray;
+        return new float[]{switchScreenAngle2DroneAngle(angle12), switchScreenAngle2DroneAngle(angle22)};
     }
 
     public float switchScreenAngle2DroneAngle(float angle) {

@@ -68,7 +68,7 @@ public class UpdateContentAdapter extends BaseAdapter {
     }
 
 
-    private class ViewHold {
+    private static class ViewHold {
         TextView tvSyscontent;
         TextView tvSysname;
         TextView tvSysnameFlag;

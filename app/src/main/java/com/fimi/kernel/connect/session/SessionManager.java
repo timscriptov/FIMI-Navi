@@ -21,8 +21,6 @@ public class SessionManager {
     private final int DEVICE_CONNECT = 3;
     private final int DEVICE_DISCONNECT = 4;
     private final int DEVICE_CONNECT_ERROR = 5;
-    public boolean CONNECTION_SUCCEED = false;
-    private BaseConnect mSession;
     private final CopyOnWriteArrayList<IConnectResultListener> list = new CopyOnWriteArrayList<>();
     @SuppressLint("HandlerLeak")
     private final Handler mHanlder = new Handler() {
@@ -73,6 +71,8 @@ public class SessionManager {
             }
         }
     };
+    public boolean CONNECTION_SUCCEED = false;
+    private BaseConnect mSession;
 
     public static void initInstance() {
         getInstance();

@@ -190,11 +190,11 @@ public class X8FlightPlaybackActivity extends BaseActivity implements UpdateChan
             public void onClick(View view) {
                 if (X8FlightPlaybackActivity.this.x8RemoteSimulator.isShown()) {
                     X8FlightPlaybackActivity.this.changeViewBg(X8FlightPlaybackActivity.this.showMoreRemoteStatus, R.drawable.play_back_remote_more_bg);
-                    X8FlightPlaybackActivity.this.x8RemoteSimulator.setVisibility(8);
+                    X8FlightPlaybackActivity.this.x8RemoteSimulator.setVisibility(View.GONE);
                     return;
                 }
                 X8FlightPlaybackActivity.this.changeViewBg(X8FlightPlaybackActivity.this.showMoreRemoteStatus, R.drawable.x8_btn_playback_rc_end);
-                X8FlightPlaybackActivity.this.x8RemoteSimulator.setVisibility(0);
+                X8FlightPlaybackActivity.this.x8RemoteSimulator.setVisibility(View.VISIBLE);
             }
         });
         this.showMoreGpsStatus.setOnClickListener(new View.OnClickListener() {
@@ -209,11 +209,11 @@ public class X8FlightPlaybackActivity extends BaseActivity implements UpdateChan
             public void onClick(View view) {
                 if (X8FlightPlaybackActivity.this.x8DrontBatteryRl.isShown()) {
                     X8FlightPlaybackActivity.this.changeViewBg(X8FlightPlaybackActivity.this.showMoreBatteryStatus, R.drawable.play_back_battery_more_bg);
-                    X8FlightPlaybackActivity.this.x8DrontBatteryRl.setVisibility(8);
+                    X8FlightPlaybackActivity.this.x8DrontBatteryRl.setVisibility(View.GONE);
                     return;
                 }
                 X8FlightPlaybackActivity.this.changeViewBg(X8FlightPlaybackActivity.this.showMoreBatteryStatus, R.drawable.x8_btn_playback_battery_info_end);
-                X8FlightPlaybackActivity.this.x8DrontBatteryRl.setVisibility(0);
+                X8FlightPlaybackActivity.this.x8DrontBatteryRl.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -243,7 +243,7 @@ public class X8FlightPlaybackActivity extends BaseActivity implements UpdateChan
     @Override
     public void parseFileDateEnd(int totalTime, boolean isParseFileSucceed) {
         this.isParseFileSucceed = isParseFileSucceed;
-        this.x8ProgressLoading.setVisibility(8);
+        this.x8ProgressLoading.setVisibility(View.GONE);
         String totalTimeStr = TimerUtil.getInstance().stringForTime(totalTime, true);
         this.x8PlayBackTotalTime.setText("/" + totalTimeStr);
         this.x8SeebarPaly.setMax(totalTime);

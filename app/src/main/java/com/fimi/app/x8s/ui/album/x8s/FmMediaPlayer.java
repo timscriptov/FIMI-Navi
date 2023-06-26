@@ -16,10 +16,10 @@ public class FmMediaPlayer implements IFmMediaPlayer, IMediaPlayer.OnCompletionL
     public final int STATE_PAUSE = 2;
     public final int STATE_COMPLETE = 3;
     public final int STATE_DESTROY = 4;
-    String path;
     private final X8FmMediaInfo info;
     private final OnActivityHander listener;
     private final FimiVideoView mainVideo;
+    String path;
     private CustomMediaContoller mediaController;
     private int state = 0;
 

@@ -158,18 +158,18 @@ public abstract class BaseFragment extends Fragment implements INodataTip {
 
     public void showBottomDeleteView(boolean state) {
         if (state) {
-            this.rlMediaSelectBottom.setVisibility(0);
+            this.rlMediaSelectBottom.setVisibility(View.VISIBLE);
         } else {
-            this.rlMediaSelectBottom.setVisibility(8);
+            this.rlMediaSelectBottom.setVisibility(View.GONE);
         }
     }
 
     @Override
     public void noDataTipCallback(boolean isNodata) {
         if (isNodata) {
-            this.rlMediaNoDataTip.setVisibility(0);
+            this.rlMediaNoDataTip.setVisibility(View.VISIBLE);
         } else {
-            this.rlMediaNoDataTip.setVisibility(8);
+            this.rlMediaNoDataTip.setVisibility(View.GONE);
         }
     }
 }

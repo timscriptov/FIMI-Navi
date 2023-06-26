@@ -54,16 +54,22 @@ import java.util.List;
 
 public class X8AiLinesExcuteConfirmUi implements View.OnClickListener, SeekBar.OnSeekBarChangeListener, SwitchButton.OnSwitchListener, X8DoubleCustomDialog.onDialogButtonClickListener {
     private static final int CURVE_MODE = 3;
+    private final View contentView;
+    private final CameraManager mCameraManager;
+    private final X8sMainActivity mX8sMainActivity;
+    private final float MIN = 1.0f;
+    private final float MAX = 10.0f;
+    private final int MAX_PROGRESS = (int) ((this.MAX - this.MIN) * 10.0f);
+    private final SaveData mSaveData = new SaveData();
+    private final float DEFAULE_SPEED = 2.0f;
     boolean isInSky;
     int i = 4;
     private Button btnGo;
-    private final View contentView;
     private X8AiLinePointInfo dataByHistory;
     private X8DoubleCustomDialog dialog;
     private FcManager fcManager;
     private ImageView imgBack;
     private IX8NextViewListener listener;
-    private final CameraManager mCameraManager;
     private X8TabHost mCurveVidotape;
     private RelativeLayout mRlCurveVideotape;
     private SwitchButton mSbCurve;
@@ -72,7 +78,6 @@ public class X8AiLinesExcuteConfirmUi implements View.OnClickListener, SeekBar.O
     private TextView mTvLineFollowTitle;
     private X8AiLineExcuteController mX8AiLineExcuteController;
     private X8AilinePrameter mX8AilinePrameter;
-    private final X8sMainActivity mX8sMainActivity;
     private List<MapPointLatLng> mapPointList;
     private X8MapVideoController mapVideoController;
     private X8AiLineExcuteController.LineModel model;
@@ -87,13 +92,8 @@ public class X8AiLinesExcuteConfirmUi implements View.OnClickListener, SeekBar.O
     private TextView tvTime;
     private View vMinus;
     private View vPlus;
-    private final float MIN = 1.0f;
-    private final float MAX = 10.0f;
-    private final int MAX_PROGRESS = (int) ((this.MAX - this.MIN) * 10.0f);
     private float distance = 0.0f;
     private int successCount = 0;
-    private final SaveData mSaveData = new SaveData();
-    private final float DEFAULE_SPEED = 2.0f;
     private int aiLineMode = 0;
 
     public X8AiLinesExcuteConfirmUi(Activity activity, View parent, CameraManager cameraManager) {
@@ -216,20 +216,7 @@ public class X8AiLinesExcuteConfirmUi implements View.OnClickListener, SeekBar.O
         if (orientation != 0) {
             this.mapVideoController.getFimiMap().getAiLineManager().addSmallMarkerByMap(0);
         }
-    }    Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if (X8AiLinesExcuteConfirmUi.this.i < X8AiLinesExcuteConfirmUi.this.mapPointList.size()) {
-                X8AiLinesExcuteConfirmUi.this.mHandler.sendEmptyMessageDelayed(0, 2000L);
-                AbsAiLineManager aiLineManager = X8AiLinesExcuteConfirmUi.this.mapVideoController.getFimiMap().getAiLineManager();
-                X8AiLinesExcuteConfirmUi x8AiLinesExcuteConfirmUi = X8AiLinesExcuteConfirmUi.this;
-                int i = x8AiLinesExcuteConfirmUi.i;
-                x8AiLinesExcuteConfirmUi.i = i + 1;
-                aiLineManager.setAiLineIndexPoint(i);
-            }
-        }
-    };
+    }
 
     public void changeOrientationForVideo(int orientation) {
         float angle;
@@ -259,7 +246,20 @@ public class X8AiLinesExcuteConfirmUi implements View.OnClickListener, SeekBar.O
         } else {
             this.mapVideoController.getFimiMap().getAiLineManager().addOrUpdateSmallMarkerForVideo(2);
         }
-    }
+    }    Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (X8AiLinesExcuteConfirmUi.this.i < X8AiLinesExcuteConfirmUi.this.mapPointList.size()) {
+                X8AiLinesExcuteConfirmUi.this.mHandler.sendEmptyMessageDelayed(0, 2000L);
+                AbsAiLineManager aiLineManager = X8AiLinesExcuteConfirmUi.this.mapVideoController.getFimiMap().getAiLineManager();
+                X8AiLinesExcuteConfirmUi x8AiLinesExcuteConfirmUi = X8AiLinesExcuteConfirmUi.this;
+                int i = x8AiLinesExcuteConfirmUi.i;
+                x8AiLinesExcuteConfirmUi.i = i + 1;
+                aiLineManager.setAiLineIndexPoint(i);
+            }
+        }
+    };
 
     public void initAction() {
         this.imgBack.setOnClickListener(this);
@@ -607,19 +607,19 @@ public class X8AiLinesExcuteConfirmUi implements View.OnClickListener, SeekBar.O
         if (this.aiLineMode == 3) {
             this.tvTime.setText(this.contentView.getContext().getString(R.string.x8_ai_fly_lines_setting_curve_lessthan) + time + "S");
             this.mTvLineFollowTitle.setText(this.contentView.getContext().getString(R.string.x8_ai_fly_lines_curve));
-            this.mRlCurveVideotape.setVisibility(0);
+            this.mRlCurveVideotape.setVisibility(View.VISIBLE);
         } else if (this.aiLineMode == 0) {
             this.tvTime.setText("" + time + "S");
             this.mTvLineFollowTitle.setText(this.contentView.getContext().getString(R.string.x8_ai_fly_lines_straight));
-            this.mRlCurveVideotape.setVisibility(8);
+            this.mRlCurveVideotape.setVisibility(View.GONE);
         } else if (this.aiLineMode == 1) {
             this.tvTime.setText("" + time + "S");
             this.mTvLineFollowTitle.setText(this.contentView.getContext().getString(R.string.x8_ai_fly_lines_setting));
-            this.mRlCurveVideotape.setVisibility(8);
+            this.mRlCurveVideotape.setVisibility(View.GONE);
         } else if (this.aiLineMode == 2) {
             this.tvTime.setText("" + time + "S");
             this.mTvLineFollowTitle.setText(this.contentView.getContext().getString(R.string.x8_ai_fly_line_history));
-            this.mRlCurveVideotape.setVisibility(8);
+            this.mRlCurveVideotape.setVisibility(View.GONE);
         }
     }
 
@@ -702,8 +702,8 @@ public class X8AiLinesExcuteConfirmUi implements View.OnClickListener, SeekBar.O
 
     public void setPointSizeAndDistance(int aiLinePointSize, float aiLineDistance, List<MapPointLatLng> mapPointList, X8AiLineExcuteController.LineModel model) {
         if (this.aiLineMode == 3) {
-            this.mTvDistanceTitle.setVisibility(8);
-            this.tvDistance.setVisibility(8);
+            this.mTvDistanceTitle.setVisibility(View.GONE);
+            this.tvDistance.setVisibility(View.GONE);
         }
         setDistance(aiLineDistance);
         this.mapPointList = mapPointList;
@@ -711,9 +711,9 @@ public class X8AiLinesExcuteConfirmUi implements View.OnClickListener, SeekBar.O
         setViewValue();
         this.model = model;
         if (model == X8AiLineExcuteController.LineModel.VEDIO) {
-            this.tvOrientation2.setVisibility(0);
+            this.tvOrientation2.setVisibility(View.VISIBLE);
         } else {
-            this.tvOrientation1.setVisibility(0);
+            this.tvOrientation1.setVisibility(View.VISIBLE);
         }
         setDat();
     }
@@ -725,7 +725,7 @@ public class X8AiLinesExcuteConfirmUi implements View.OnClickListener, SeekBar.O
         int endEvent = this.mX8AilinePrameter.getEndAction();
         int autoRecord = this.mX8AilinePrameter.getAutoRecorde();
         if (this.model == X8AiLineExcuteController.LineModel.VEDIO) {
-            this.tvOrientation2.setVisibility(0);
+            this.tvOrientation2.setVisibility(View.VISIBLE);
             if (orientation == 0) {
                 this.tvOrientation2.setSelect(0);
             } else if (orientation == 1) {
@@ -734,7 +734,7 @@ public class X8AiLinesExcuteConfirmUi implements View.OnClickListener, SeekBar.O
                 this.tvOrientation2.setSelect(1);
             }
         } else {
-            this.tvOrientation1.setVisibility(0);
+            this.tvOrientation1.setVisibility(View.VISIBLE);
             TcpClient.getIntance().sendLog("orientation ......." + orientation);
             if (orientation == 0) {
                 this.tvOrientation1.setSelect(0);
@@ -854,7 +854,6 @@ public class X8AiLinesExcuteConfirmUi implements View.OnClickListener, SeekBar.O
         private SaveData() {
         }
     }
-
 
 
 

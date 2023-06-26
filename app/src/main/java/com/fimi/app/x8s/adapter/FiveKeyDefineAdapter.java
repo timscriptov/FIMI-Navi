@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fimi.android.app.R;
@@ -29,19 +30,19 @@ public class FiveKeyDefineAdapter extends RecyclerView.Adapter<FiveKeyDefineAdap
         this.colorBlue = context.getResources().getColor(R.color.x8_fc_all_setting_blue);
     }
 
+    @NonNull
     @Override
-    public FiveKeyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public FiveKeyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = this.inflater.inflate(R.layout.x8_main_rc_five_key_define_item, parent, false);
-        FiveKeyViewHolder holder = new FiveKeyViewHolder(view);
-        return holder;
+        return new FiveKeyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final FiveKeyViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final FiveKeyViewHolder holder, final int position) {
         if (this.arr.length - 1 == position) {
-            holder.btn.setVisibility(8);
+            holder.btn.setVisibility(View.GONE);
         } else {
-            holder.btn.setVisibility(0);
+            holder.btn.setVisibility(View.VISIBLE);
         }
         holder.btn.setText(this.arr[position]);
         if (position == this.selectIndex && StateManager.getInstance().getX8Drone().isConnect()) {
@@ -58,12 +59,9 @@ public class FiveKeyDefineAdapter extends RecyclerView.Adapter<FiveKeyDefineAdap
             holder.btn.setEnabled(true);
         }
         if (this.listener != null && this.selectIndex != position) {
-            holder.btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (!FiveKeyDefineAdapter.this.arr[FiveKeyDefineAdapter.this.selectIndex].equalsIgnoreCase(holder.btn.getText().toString())) {
-                        FiveKeyDefineAdapter.this.listener.onItemClicked(position);
-                    }
+            holder.btn.setOnClickListener(v -> {
+                if (!arr[selectIndex].equalsIgnoreCase(holder.btn.getText().toString())) {
+                    listener.onItemClicked(position);
                 }
             });
         }

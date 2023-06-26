@@ -16,12 +16,12 @@ import androidx.core.content.ContextCompat;
 import com.fimi.android.app.R;
 
 public class PlaneAngleSeekBar extends View {
+    private final RectF e;
     Drawable k;
     private int a;
     private int b;
     private int c;
     private float d;
-    private final RectF e;
     private Paint f;
     private float g;
     private int h;

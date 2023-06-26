@@ -11,11 +11,11 @@ import com.fimi.x8sdk.connect.IConnectHandler;
 
 
 public class UsbConnectThread extends Thread implements IConnectHandler {
+    private final IUSBStatusListener mIAoaConnectListener;
     UsbAccessory accessory;
     AOAConnect aoaConnect;
     DataChanel dataChanel = new DataChanel();
     Context mContext;
-    private final IUSBStatusListener mIAoaConnectListener;
 
     public UsbConnectThread(Context mContext, UsbAccessory accessory, IUSBStatusListener mIAoaConnectListener) {
         this.mContext = mContext;

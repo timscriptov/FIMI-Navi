@@ -21,13 +21,13 @@ import com.fimi.kernel.utils.AbViewUtil;
 public class X8MainTopReturnTimeView extends View {
     private static final String TAG = "X8TopReturnView";
     private final int SPACING;
+    private final Paint mPaint;
     private Bitmap mBpEmpty;
     private int mBpEmptySource;
     private Bitmap mBpFull;
     private int mBpFullSource;
     private Bitmap mBpMiddle;
     private int mBpMiddleSource;
-    private final Paint mPaint;
     private int percent;
 
     public X8MainTopReturnTimeView(Context context, @Nullable AttributeSet attrs) {

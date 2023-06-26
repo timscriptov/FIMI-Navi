@@ -26,9 +26,6 @@ public class NoticeManager implements IDataCallBack {
     private final int outMsg = 1;
     private final int jsonMsg = 3;
     private final int uiCallMsg = 2;
-    VideodDataListener listener;
-    UpdateDateListener updateDateListener;
-    private MediaDataListener mediaDataListener;
     private final CopyOnWriteArrayList<IDataCallBack> list = new CopyOnWriteArrayList<>();
     private final CopyOnWriteArrayList<MediaDataListener> mediaIist = new CopyOnWriteArrayList<>();
     private final CopyOnWriteArrayList<JsonListener> jsonListeners = new CopyOnWriteArrayList<>();
@@ -73,6 +70,9 @@ public class NoticeManager implements IDataCallBack {
             }
         }
     };
+    VideodDataListener listener;
+    UpdateDateListener updateDateListener;
+    private MediaDataListener mediaDataListener;
 
     public static void initInstance() {
         getInstance();

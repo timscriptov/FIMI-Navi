@@ -31,6 +31,7 @@ import com.fimi.x8sdk.modulestate.StateManager;
 
 public class X8AiGravitationExcuteController extends AbsX8AiController implements View.OnClickListener, X8DoubleCustomDialog.onDialogButtonClickListener, X8AiTrackController.OnAiTrackControllerListener {
     private final X8sMainActivity activity;
+    private final IX8NextViewListener mIX8NextViewListener;
     protected boolean isNextShow;
     private X8DoubleCustomDialog dialog;
     private ImageView imgBack;
@@ -44,7 +45,6 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
     private View mFlagBottom;
     private X8GravitationState mGravitationState;
     private IX8AiGravitationExcuteControllerListener mIX8AiGravitationExcuteControllerListener;
-    private final IX8NextViewListener mIX8NextViewListener;
     private ImageView mImSuroundBg;
     private View mNextBlank;
     private View mNextContent;
@@ -59,9 +59,9 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
             public void onBackClick() {
                 X8AiGravitationExcuteController.this.closeNextUi(true);
                 if (X8AiGravitationExcuteController.this.activity.getmMapVideoController().isFullVideo()) {
-                    X8AiGravitationExcuteController.this.mImSuroundBg.setVisibility(0);
+                    X8AiGravitationExcuteController.this.mImSuroundBg.setVisibility(View.VISIBLE);
                 } else {
-                    X8AiGravitationExcuteController.this.mImSuroundBg.setVisibility(8);
+                    X8AiGravitationExcuteController.this.mImSuroundBg.setVisibility(View.GONE);
                 }
             }
 
@@ -69,13 +69,13 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
             public void onExcuteClick() {
                 X8AiGravitationExcuteController.this.closeNextUi(false);
                 if (X8AiGravitationExcuteController.this.activity.getmMapVideoController().isFullVideo()) {
-                    X8AiGravitationExcuteController.this.mImSuroundBg.setVisibility(0);
+                    X8AiGravitationExcuteController.this.mImSuroundBg.setVisibility(View.VISIBLE);
                 } else {
-                    X8AiGravitationExcuteController.this.mImSuroundBg.setVisibility(8);
+                    X8AiGravitationExcuteController.this.mImSuroundBg.setVisibility(View.GONE);
                 }
-                X8AiGravitationExcuteController.this.imgNext.setVisibility(8);
+                X8AiGravitationExcuteController.this.imgNext.setVisibility(View.GONE);
                 X8AiGravitationExcuteController.this.mGravitationState = X8GravitationState.RUNNING;
-                X8AiGravitationExcuteController.this.tvTip.setVisibility(8);
+                X8AiGravitationExcuteController.this.tvTip.setVisibility(View.GONE);
                 X8AiGravitationExcuteController.this.mIX8AiGravitationExcuteControllerListener.onAiGravitaionRunning();
             }
 
@@ -136,21 +136,21 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
         this.imgNext.setEnabled(false);
         this.mExcuteConfirmModule = new X8AiGravitationExcuteConfirmModule();
         if (this.activity.getmMapVideoController().isFullVideo()) {
-            this.mImSuroundBg.setVisibility(0);
+            this.mImSuroundBg.setVisibility(View.VISIBLE);
         } else {
-            this.mImSuroundBg.setVisibility(8);
+            this.mImSuroundBg.setVisibility(View.GONE);
         }
         this.activity.getmMapVideoController().getFimiMap().onLocationGravitTrailEvent();
         this.activity.getmX8AiTrackController().setOnAiTrackControllerListener(this);
         this.activity.getmX8AiTrackController().openUi();
         if (this.mGravitationState == X8GravitationState.RUNNING) {
-            this.imgNext.setVisibility(8);
-            this.tvTip.setVisibility(8);
+            this.imgNext.setVisibility(View.GONE);
+            this.tvTip.setVisibility(View.GONE);
             this.mIX8AiGravitationExcuteControllerListener.onAiGravitaionRunning();
             getRunningParmeter();
         } else if (this.mGravitationState == X8GravitationState.IDLE) {
-            this.imgNext.setVisibility(0);
-            this.tvTip.setVisibility(0);
+            this.imgNext.setVisibility(View.VISIBLE);
+            this.tvTip.setVisibility(View.VISIBLE);
         }
         initActions();
         super.openUi();
@@ -177,7 +177,7 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
             }
         } else if (id == R.id.x8_main_ai_gravitation_next_blank) {
             closeNextUi(true);
-            this.mImSuroundBg.setVisibility(0);
+            this.mImSuroundBg.setVisibility(View.VISIBLE);
         }
     }
 
@@ -255,30 +255,30 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
                 // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
-                    X8AiGravitationExcuteController.this.mNextContent.setVisibility(8);
-                    X8AiGravitationExcuteController.this.mNextBlank.setVisibility(8);
+                    X8AiGravitationExcuteController.this.mNextContent.setVisibility(View.GONE);
+                    X8AiGravitationExcuteController.this.mNextBlank.setVisibility(View.GONE);
                     ((ViewGroup) X8AiGravitationExcuteController.this.mNextContent).removeAllViews();
-                    X8AiGravitationExcuteController.this.imgBack.setVisibility(0);
-                    X8AiGravitationExcuteController.this.mFlagBottom.setVisibility(0);
+                    X8AiGravitationExcuteController.this.imgBack.setVisibility(View.VISIBLE);
+                    X8AiGravitationExcuteController.this.mFlagBottom.setVisibility(View.VISIBLE);
                     if (isImgNextShow) {
-                        X8AiGravitationExcuteController.this.imgNext.setVisibility(0);
-                        X8AiGravitationExcuteController.this.tvTip.setVisibility(0);
+                        X8AiGravitationExcuteController.this.imgNext.setVisibility(View.VISIBLE);
+                        X8AiGravitationExcuteController.this.tvTip.setVisibility(View.VISIBLE);
                         return;
                     }
-                    X8AiGravitationExcuteController.this.imgNext.setVisibility(8);
-                    X8AiGravitationExcuteController.this.tvTip.setVisibility(8);
+                    X8AiGravitationExcuteController.this.imgNext.setVisibility(View.GONE);
+                    X8AiGravitationExcuteController.this.tvTip.setVisibility(View.GONE);
                 }
             });
         }
     }
 
     private void openNextUi() {
-        this.mNextBlank.setVisibility(0);
-        this.mNextContent.setVisibility(0);
-        this.tvTip.setVisibility(8);
-        this.mFlagBottom.setVisibility(8);
-        this.imgNext.setVisibility(8);
-        this.mImSuroundBg.setVisibility(8);
+        this.mNextBlank.setVisibility(View.VISIBLE);
+        this.mNextContent.setVisibility(View.VISIBLE);
+        this.tvTip.setVisibility(View.GONE);
+        this.mFlagBottom.setVisibility(View.GONE);
+        this.imgNext.setVisibility(View.GONE);
+        this.mImSuroundBg.setVisibility(View.GONE);
         this.mExcuteConfirmModule.init(this.activity, this.mNextContent, this.mCameraManager);
         this.mExcuteConfirmModule.setsetListener(this.mIX8NextViewListener, this.mFcManager);
         if (!this.isNextShow) {

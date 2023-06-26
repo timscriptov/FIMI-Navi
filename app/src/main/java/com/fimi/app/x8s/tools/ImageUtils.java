@@ -4,15 +4,18 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import androidx.annotation.NonNull;
+
 import java.lang.ref.SoftReference;
 import java.util.HashMap;
 import java.util.Map;
 
 
 public class ImageUtils {
-    private static final Map<String, SoftReference<Bitmap>> imageCache = new HashMap();
+    private static final Map<String, SoftReference<Bitmap>> imageCache = new HashMap<>();
 
-    public static SoftReference<Bitmap> addBitmapToCache(Context context, int res) {
+    @NonNull
+    public static SoftReference<Bitmap> addBitmapToCache(@NonNull Context context, int res) {
         Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), res);
         SoftReference<Bitmap> softBitmap = new SoftReference<>(bitmap);
         imageCache.put("" + res, softBitmap);

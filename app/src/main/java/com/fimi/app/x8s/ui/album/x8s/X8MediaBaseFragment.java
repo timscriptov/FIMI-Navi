@@ -146,11 +146,11 @@ public abstract class X8MediaBaseFragment extends BaseFragment implements INodat
         this.mRlDownload = view.findViewById(R.id.rl_download);
         this.mRlBottomBar = view.findViewById(R.id.rl_bottom_bar);
         if (!this.isCamera) {
-            this.mRlDownload.setVisibility(8);
+            this.mRlDownload.setVisibility(View.GONE);
         } else {
-            this.mRlDownload.setVisibility(0);
+            this.mRlDownload.setVisibility(View.VISIBLE);
         }
-        this.mRlBottomBar.setVisibility(8);
+        this.mRlBottomBar.setVisibility(View.GONE);
         FontUtil.changeFontLanTing(this.contextWeakReference.get().getAssets(), this.lbBottomDelect, this.mTvBottomDelete, this.mTvBottomDownload);
     }
 
@@ -263,19 +263,19 @@ public abstract class X8MediaBaseFragment extends BaseFragment implements INodat
                 setClickEnable(this.lbBottomDownload, false);
                 setClickEnable(this.lbBottomDelect, false);
             }
-            this.rlMediaSelectBottom.setVisibility(0);
+            this.rlMediaSelectBottom.setVisibility(View.VISIBLE);
             return;
         }
-        this.rlMediaSelectBottom.setVisibility(8);
+        this.rlMediaSelectBottom.setVisibility(View.GONE);
     }
 
     @Override
     public void noDataTipCallback(boolean isNodata) {
         if (this.rlMediaNoDataTip != null) {
             if (isNodata) {
-                this.rlMediaNoDataTip.setVisibility(0);
+                this.rlMediaNoDataTip.setVisibility(View.VISIBLE);
             } else {
-                this.rlMediaNoDataTip.setVisibility(8);
+                this.rlMediaNoDataTip.setVisibility(View.GONE);
             }
         }
     }

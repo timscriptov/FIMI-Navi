@@ -20,27 +20,27 @@ public class CustomMediaContoller {
     private static final int SET_VIEW_HIDE = 1;
     private static final int TIME_OUT = 3000;
     private final int SEEKBAR_TIME = 1000;
+    private final Context context;
+    private final View itemView;
+    private final IFmMediaPlayer mediaPlayer;
+    private final View view;
     private TextView allTime;
     private ImageView backBtn;
-    private final Context context;
     private long duration;
     private boolean isDragging;
     private boolean isShow;
     private boolean isShowContoller;
-    private final View itemView;
-    private final IFmMediaPlayer mediaPlayer;
     private ImageView miniPlay;
     private TextView name;
     private ImageView play;
     private SeekBar seekBar;
     private TextView time;
-    private final View view;
 
     public CustomMediaContoller(Context context, View view, IFmMediaPlayer meidaPlayer) {
         this.view = view;
         this.mediaPlayer = meidaPlayer;
         this.itemView = view.findViewById(R.id.media_contoller);
-        this.itemView.setVisibility(4);
+        this.itemView.setVisibility(View.INVISIBLE);
         this.isShow = false;
         this.isDragging = false;
         this.isShowContoller = true;
@@ -65,21 +65,7 @@ public class CustomMediaContoller {
     public void setNameAndDuration(String mediaName, String duration) {
         this.name.setText(mediaName);
         this.allTime.setText(duration);
-    }    private final Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case 1:
-                    CustomMediaContoller.this.hide();
-                    return;
-                case 2:
-                    CustomMediaContoller.this.setProgress();
-                    return;
-                default:
-            }
-        }
-    };
+    }
 
     private void initAction() {
         this.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -151,7 +137,21 @@ public class CustomMediaContoller {
                 CustomMediaContoller.this.mediaPlayer.onDestroy();
             }
         });
-    }
+    }    private final Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+                    CustomMediaContoller.this.hide();
+                    return;
+                case 2:
+                    CustomMediaContoller.this.setProgress();
+                    return;
+                default:
+            }
+        }
+    };
 
     public long setProgress() {
         if (this.isDragging) {
@@ -187,14 +187,14 @@ public class CustomMediaContoller {
     }
 
     public void start() {
-        this.play.setVisibility(8);
+        this.play.setVisibility(View.GONE);
         this.miniPlay.setImageResource(R.drawable.x8_btn_media_stop_selector);
         this.mediaPlayer.start();
     }
 
     public void pause() {
         this.miniPlay.setImageResource(R.drawable.x8_btn_media_play_selector);
-        this.play.setVisibility(0);
+        this.play.setVisibility(View.VISIBLE);
         this.mediaPlayer.pause();
         this.handler.removeMessages(2);
         this.handler.removeMessages(1);
@@ -212,7 +212,7 @@ public class CustomMediaContoller {
         if (this.isShow) {
             this.isShow = false;
             this.handler.removeMessages(1);
-            this.itemView.setVisibility(4);
+            this.itemView.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -224,7 +224,7 @@ public class CustomMediaContoller {
     public void show() {
         if (this.isShowContoller) {
             this.isShow = true;
-            this.itemView.setVisibility(0);
+            this.itemView.setVisibility(View.VISIBLE);
             show(3000);
         }
     }
@@ -233,7 +233,7 @@ public class CustomMediaContoller {
         this.isShowContoller = isShowContoller;
         if (isShowContoller) {
             this.isShow = true;
-            this.itemView.setVisibility(0);
+            this.itemView.setVisibility(View.VISIBLE);
         }
     }
 
@@ -242,9 +242,9 @@ public class CustomMediaContoller {
         this.play.setImageResource(R.drawable.album_btn_media_play_big_selector);
         this.miniPlay.setImageResource(R.drawable.x8_btn_media_play_selector);
         this.seekBar.setProgress(0);
-        this.play.setVisibility(0);
+        this.play.setVisibility(View.VISIBLE);
         this.handler.removeMessages(2);
-        this.itemView.setVisibility(0);
+        this.itemView.setVisibility(View.VISIBLE);
     }
 
     public void startSeekbar() {
@@ -256,7 +256,7 @@ public class CustomMediaContoller {
         this.play.setImageResource(R.drawable.album_btn_media_play_big_selector);
         this.miniPlay.setImageResource(R.drawable.x8_btn_media_play_selector);
         this.handler.removeMessages(2);
-        this.play.setVisibility(0);
+        this.play.setVisibility(View.VISIBLE);
     }
 
 

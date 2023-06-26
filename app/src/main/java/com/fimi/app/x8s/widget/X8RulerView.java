@@ -30,6 +30,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class X8RulerView extends View {
+    private final Map<Float, Float> pointMap;
+    private final ArrayList<Float> points;
+    private final int rulerTopGap;
+    private final int scaleGap;
+    private final int scaleNum;
     float lastMoveX;
     float moveX;
     float preTime;
@@ -49,13 +54,8 @@ public class X8RulerView extends View {
     private Bitmap minRuler;
     private float min_ruler_len;
     private Paint paint;
-    private final Map<Float, Float> pointMap;
-    private final ArrayList<Float> points;
     private Bitmap resultBmp;
     private int rulerHeight;
-    private final int rulerTopGap;
-    private final int scaleGap;
-    private final int scaleNum;
     private ValueAnimator valueAnimator;
     private int width;
 

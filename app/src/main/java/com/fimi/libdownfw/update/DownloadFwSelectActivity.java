@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -31,6 +30,8 @@ import java.util.List;
 
 
 public class DownloadFwSelectActivity extends BaseActivity implements DownloadFwSelectAdapter.SelectListener {
+    private final List<DownloadFwSelectInfo> infoList = new ArrayList();
+    private final List<UpfirewareDto> mUpfirewareDtoList = new ArrayList();
     long currTime = System.currentTimeMillis();
     private Button btnDown;
     private ImageView btnReturn;
@@ -39,8 +40,6 @@ public class DownloadFwSelectActivity extends BaseActivity implements DownloadFw
     private TextView tvHardWareSize;
     private View tv_title;
     private TextView tv_title2;
-    private final List<DownloadFwSelectInfo> infoList = new ArrayList();
-    private final List<UpfirewareDto> mUpfirewareDtoList = new ArrayList();
     private boolean isFirstDown = true;
 
     @Override
@@ -166,7 +165,7 @@ public class DownloadFwSelectActivity extends BaseActivity implements DownloadFw
                         double allFileSizeM = ((totalSize * 1.0d) / 1024.0d) / 1024.0d;
                         String tempString = NumberUtil.decimalPointStr(allFileSizeM, 2) + "M";
                         this.tvHardWareSize.setText(String.format(getString(R.string.downfw_update_firmware_detail), tempString));
-                        this.tvHardWareSize.setVisibility(0);
+                        this.tvHardWareSize.setVisibility(View.VISIBLE);
                     }
                 }
                 return;
@@ -174,7 +173,7 @@ public class DownloadFwSelectActivity extends BaseActivity implements DownloadFw
             return;
         }
         this.btnDown.setEnabled(false);
-        this.tvHardWareSize.setVisibility(8);
+        this.tvHardWareSize.setVisibility(View.GONE);
     }
 
     @Override

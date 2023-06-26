@@ -46,7 +46,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':router')
     implementation project(':zip')
-    implementation project(':securepreferences')
 
     implementation("com.davemorrissey.labs:subsampling-scale-image-view:3.10.0")
     implementation("org.apache.mina:mina-core:2.2.1")

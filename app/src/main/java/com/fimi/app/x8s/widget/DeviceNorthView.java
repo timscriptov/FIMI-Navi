@@ -9,8 +9,6 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.RotateDrawable;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewParent;
-import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 
@@ -21,11 +19,11 @@ import com.fimi.android.app.R;
  */
 public class DeviceNorthView extends View {
     public final Context mContext;
+    private final RectF e;
     private int a;
     private int mMin;
     private int mMax;
     private float mDensity;
-    private final RectF e;
     private Paint mCircle;
     private float north;
     private int h;

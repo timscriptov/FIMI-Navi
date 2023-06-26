@@ -36,10 +36,10 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     public static final String TAG = "CrashHandler";
     private static final String CRASH_LOG_FILEPATH = "/FimiLogger/CrashLogger/";
     private static CrashHandler instance;
-    private Context mContext;
-    private Thread.UncaughtExceptionHandler mDefaultHandler;
     private final Map<String, String> infos = new HashMap();
     private final DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+    private Context mContext;
+    private Thread.UncaughtExceptionHandler mDefaultHandler;
 
     private CrashHandler() {
     }

@@ -23,31 +23,9 @@ import com.fimi.x8sdk.modulestate.StateManager;
 
 public class X8AiAutoPhotoExcuteConfirmUi implements View.OnClickListener, SwitchButton.OnSwitchListener {
     private final int angle;
-    private View btnOk;
     private final View contentView;
-    private float currentDroneHeight;
-    private int distanceMax;
-    private FcManager fcManager;
-    private View imgReturn;
-    private int item;
-    private IX8NextViewListener listener;
     private final Activity mActivity;
     private final int mType;
-    private X8MainAiFlyController mX8MainAiFlyController;
-    private X8SeekBarView sbDistance;
-    private X8SeekBarView sbSpeed;
-    private SwitchButton swbAutoReturn;
-    private TextView tvContent;
-    private TextView tvDistance;
-    private TextView tvSpeed;
-    private TextView tvTime;
-    private TextView tvTitle;
-    private View vDistanceMinus;
-    private View vDistancePlus;
-    private View vSpeedMinus;
-    private View vSpeedPlus;
-    private int verticalMax;
-    private X8AiAutoPhototExcuteController x8AiAutoPhototExcuteController;
     private final float SPEED_MIN = 1.0f;
     private final float SPEED_MAX = 10.0f;
     private final int SPEED_MAX_PROGRESS = (int) ((this.SPEED_MAX - this.SPEED_MIN) * 10.0f);
@@ -58,6 +36,22 @@ public class X8AiAutoPhotoExcuteConfirmUi implements View.OnClickListener, Switc
     private final float DISTANCE_DEFALOUT = 30.0f - this.DISTANCE_MIN;
     private final float DISTANCE_VERTIIVAL_MAX = 120.0f;
     private final int DISTANCE_VERTIIVAL_MAX_PROGRESS = (int) ((this.DISTANCE_VERTIIVAL_MAX - this.DISTANCE_MIN) * 10.0f);
+    private View btnOk;
+    private float currentDroneHeight;
+    private int distanceMax;
+    private FcManager fcManager;
+    private View imgReturn;
+    private int item;
+    private IX8NextViewListener listener;
+    private X8MainAiFlyController mX8MainAiFlyController;
+    private X8SeekBarView sbDistance;
+    private X8SeekBarView sbSpeed;
+    private SwitchButton swbAutoReturn;
+    private TextView tvContent;
+    private TextView tvDistance;
+    private TextView tvSpeed;
+    private TextView tvTime;
+    private TextView tvTitle;
     private final X8SeekBarView.SlideChangeListener speedListener = new X8SeekBarView.SlideChangeListener() {
         @Override
         public void onStart(X8SeekBarView slideView, int progress) {
@@ -98,6 +92,12 @@ public class X8AiAutoPhotoExcuteConfirmUi implements View.OnClickListener, Switc
         public void onStop(X8SeekBarView slideView, int progress) {
         }
     };
+    private View vDistanceMinus;
+    private View vDistancePlus;
+    private View vSpeedMinus;
+    private View vSpeedPlus;
+    private int verticalMax;
+    private X8AiAutoPhototExcuteController x8AiAutoPhototExcuteController;
 
     public X8AiAutoPhotoExcuteConfirmUi(Activity activity, View parent, int type, int angle) {
         this.mActivity = activity;

@@ -14,9 +14,9 @@ public class X8FixedEditText extends EditText {
     public static final int ERROR_OTHERS = 3;
     public static final int ERROR_OVER_LIMIT = 1;
     final String TAG;
+    private final Context context;
     private int MAX;
     private int MIN;
-    private final Context context;
     private String fixedText;
     private OnInputChangedListener listener;
 

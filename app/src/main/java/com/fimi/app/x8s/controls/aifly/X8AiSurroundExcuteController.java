@@ -39,10 +39,11 @@ import com.fimi.x8sdk.modulestate.StateManager;
 
 public class X8AiSurroundExcuteController extends AbsX8AiController implements View.OnClickListener, X8DoubleCustomDialog.onDialogButtonClickListener, X8AiTrackController.OnAiTrackControllerListener, X8FollowSpeedContainerView.OnSendSpeedListener {
     private static final int MIN = 0;
+    private final X8sMainActivity activity;
+    private final IX8NextViewListener mIX8NextViewListener;
     protected int MAX_WIDTH;
     protected boolean isNextShow;
     protected int width;
-    private final X8sMainActivity activity;
     private View blank;
     private X8DoubleCustomDialog dialog;
     private FcManager fcManager;
@@ -62,7 +63,6 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
     private IX8AiSurroundExcuteControllerListener listener;
     private double log;
     private double log1;
-    private final IX8NextViewListener mIX8NextViewListener;
     private TextView mTvRadius;
     private X8AiSuroundState mX8AiSuroundState;
     private X8AiSurroundToPointExcuteConfirmModule mX8AiSurroundToPointExcuteConfirmModule;
@@ -97,10 +97,10 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
                 X8AiSurroundExcuteController.this.isDraw = true;
                 X8AiSurroundExcuteController.this.isGetPoint = true;
                 X8AiSurroundExcuteController.this.isGetSpeed = true;
-                X8AiSurroundExcuteController.this.imgSuroundBg.setVisibility(8);
+                X8AiSurroundExcuteController.this.imgSuroundBg.setVisibility(View.GONE);
                 X8AiSurroundExcuteController.this.mX8AiSuroundState = X8AiSuroundState.RUNNING;
-                X8AiSurroundExcuteController.this.tvTip.setVisibility(8);
-                X8AiSurroundExcuteController.this.vSpeed.setVisibility(0);
+                X8AiSurroundExcuteController.this.tvTip.setVisibility(View.GONE);
+                X8AiSurroundExcuteController.this.vSpeed.setVisibility(View.VISIBLE);
                 X8AiSurroundExcuteController.this.setAiVcOpen();
                 X8AiSurroundExcuteController.this.openVcToggle();
                 X8AiSurroundExcuteController.this.activity.getmMapVideoController().getFimiMap().getAiSurroundManager().setAiSurroundCircle(X8AiSurroundExcuteController.this.lastLat, X8AiSurroundExcuteController.this.lastLog, X8AiSurroundExcuteController.this.radius);
@@ -175,7 +175,7 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
                 }
             } else if (this.mX8AiSuroundState != X8AiSuroundState.SET_TAKE_OFF_POINT && this.mX8AiSuroundState == X8AiSuroundState.SET_PARAMETER) {
                 openNextUi();
-                this.vRadiusBg.setVisibility(8);
+                this.vRadiusBg.setVisibility(View.GONE);
             }
         } else if (id == R.id.x8_main_ai_ai_surround_next_blank) {
             closeNextUiFromNext(true);
@@ -187,9 +187,9 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
             }
         } else if (id == R.id.rl_flag_small) {
             if (this.tvP2PTip.getVisibility() == 0) {
-                this.tvP2PTip.setVisibility(8);
+                this.tvP2PTip.setVisibility(View.GONE);
             } else {
-                this.tvP2PTip.setVisibility(0);
+                this.tvP2PTip.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -227,12 +227,12 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
         });
         if (this.mX8AiSuroundState != X8AiSuroundState.IDLE) {
             this.isDraw = false;
-            this.imgSuroundBg.setVisibility(8);
-            this.tvPoint.setVisibility(8);
-            this.mTvRadius.setVisibility(8);
-            this.tvTip.setVisibility(8);
+            this.imgSuroundBg.setVisibility(View.GONE);
+            this.tvPoint.setVisibility(View.GONE);
+            this.mTvRadius.setVisibility(View.GONE);
+            this.tvTip.setVisibility(View.GONE);
         } else {
-            this.vRadiusBg.setVisibility(8);
+            this.vRadiusBg.setVisibility(View.GONE);
             this.tvTip.showTip();
             this.isDraw = true;
         }
@@ -257,8 +257,8 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
     }
 
     public void openNextUi() {
-        this.nextRootView.setVisibility(0);
-        this.blank.setVisibility(0);
+        this.nextRootView.setVisibility(View.VISIBLE);
+        this.blank.setVisibility(View.VISIBLE);
         closeIconByNextUi();
         this.mX8AiSurroundToPointExcuteConfirmModule.init(this.activity, this.nextRootView, this.radius);
         if (this.mX8AiSurroundToPointExcuteConfirmModule != null) {
@@ -274,7 +274,7 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
     }
 
     public void closeNextUi(final boolean b) {
-        this.blank.setVisibility(8);
+        this.blank.setVisibility(View.GONE);
         if (this.isNextShow) {
             this.isNextShow = false;
             ObjectAnimator translationRight = ObjectAnimator.ofFloat(this.nextRootView, "translationX", 0.0f, this.width);
@@ -285,12 +285,12 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
                 // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
-                    X8AiSurroundExcuteController.this.nextRootView.setVisibility(8);
+                    X8AiSurroundExcuteController.this.nextRootView.setVisibility(View.GONE);
                     ((ViewGroup) X8AiSurroundExcuteController.this.nextRootView).removeAllViews();
-                    X8AiSurroundExcuteController.this.imgBack.setVisibility(0);
-                    X8AiSurroundExcuteController.this.flagSmall.setVisibility(0);
+                    X8AiSurroundExcuteController.this.imgBack.setVisibility(View.VISIBLE);
+                    X8AiSurroundExcuteController.this.flagSmall.setVisibility(View.VISIBLE);
                     if (b) {
-                        X8AiSurroundExcuteController.this.tvPoint.setVisibility(0);
+                        X8AiSurroundExcuteController.this.tvPoint.setVisibility(View.VISIBLE);
                     }
                 }
             });
@@ -308,16 +308,16 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
         this.tvPoint.setText(this.activity.getString(R.string.x8_ai_fly_follow_surround_set_takeoff_point));
         this.tvTip.setTipText(this.activity.getString(R.string.x8_ai_surround_select_point2));
         this.mTvRadius.setText(String.format(this.activity.getString(R.string.x8_ai_surround_radius), X8NumberUtil.getDistanceNumberString(0.0f, 0, true)));
-        this.vRadiusBg.setVisibility(0);
+        this.vRadiusBg.setVisibility(View.VISIBLE);
         this.mX8AiSuroundState = X8AiSuroundState.SET_CIRCLE_POINT;
         this.activity.getmMapVideoController().getFimiMap().getAiSurroundManager().setAiSurroundMark(this.lastLat, this.lastLog);
     }
 
     private void setTakeOffPoint() {
         if (this.isSetCircle) {
-            this.vRadiusBg.setVisibility(8);
-            this.tvPoint.setVisibility(8);
-            this.imgBack.setVisibility(8);
+            this.vRadiusBg.setVisibility(View.GONE);
+            this.tvPoint.setVisibility(View.GONE);
+            this.imgBack.setVisibility(View.GONE);
             openNextUi();
             return;
         }
@@ -336,9 +336,9 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
                 if (cmdResult.isSuccess()) {
                     X8AiSurroundExcuteController.this.activity.getmMapVideoController().getFimiMap().getAiSurroundManager().setAiSurroundCircle(X8AiSurroundExcuteController.this.lastLat, X8AiSurroundExcuteController.this.lastLog, X8AiSurroundExcuteController.this.radius);
                     X8AiSurroundExcuteController.this.openNextUi();
-                    X8AiSurroundExcuteController.this.vRadiusBg.setVisibility(8);
-                    X8AiSurroundExcuteController.this.tvPoint.setVisibility(8);
-                    X8AiSurroundExcuteController.this.imgBack.setVisibility(8);
+                    X8AiSurroundExcuteController.this.vRadiusBg.setVisibility(View.GONE);
+                    X8AiSurroundExcuteController.this.tvPoint.setVisibility(View.GONE);
+                    X8AiSurroundExcuteController.this.imgBack.setVisibility(View.GONE);
                     X8AiSurroundExcuteController.this.isSetCircle = true;
                     return;
                 }
@@ -395,7 +395,7 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
 
     public void closeNextUiFromNext(boolean b) {
         closeNextUi(b);
-        this.vRadiusBg.setVisibility(0);
+        this.vRadiusBg.setVisibility(View.VISIBLE);
         this.tvPoint.setText(this.activity.getString(R.string.x8_ai_fly_follow_surround_mext));
         this.mX8AiSuroundState = X8AiSuroundState.SET_PARAMETER;
     }
@@ -438,13 +438,13 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
             if (this.mX8AiSuroundState != X8AiSuroundState.RUNNING) {
                 this.imgSuroundBg.setVisibility(sightFlag ? 8 : 0);
             } else {
-                this.imgSuroundBg.setVisibility(8);
+                this.imgSuroundBg.setVisibility(View.GONE);
             }
             if (this.mX8AiSuroundState == X8AiSuroundState.RUNNING) {
                 if (sightFlag) {
-                    this.imgVcToggle.setVisibility(8);
+                    this.imgVcToggle.setVisibility(View.GONE);
                 } else {
-                    this.imgVcToggle.setVisibility(0);
+                    this.imgVcToggle.setVisibility(View.VISIBLE);
                 }
             }
         }
@@ -591,7 +591,7 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
                 this.isDraw = true;
                 this.activity.getmMapVideoController().getFimiMap().getAiSurroundManager().setAiSurroundMark(this.lat, this.log);
                 this.activity.getmMapVideoController().getFimiMap().getAiSurroundManager().setAiSurroundCircle(this.lat, this.log, this.r);
-                this.vSpeed.setVisibility(0);
+                this.vSpeed.setVisibility(View.VISIBLE);
             }
         } else if (this.isDraw && this.isGetPoint && this.isGetSpeed && this.mX8AiSuroundState == X8AiSuroundState.RUNNING && (runState = StateManager.getInstance().getX8Drone().getAiSurroundState()) != null) {
             if (runState.getStates() != 0) {
@@ -622,16 +622,16 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
 
     public void openVcToggle() {
         if (this.activity.getmMapVideoController().isFullVideo()) {
-            this.imgVcToggle.setVisibility(0);
+            this.imgVcToggle.setVisibility(View.VISIBLE);
         } else {
-            this.imgVcToggle.setVisibility(8);
+            this.imgVcToggle.setVisibility(View.GONE);
         }
     }
 
     public void closeIconByNextUi() {
-        this.tvPoint.setVisibility(8);
-        this.imgBack.setVisibility(8);
-        this.flagSmall.setVisibility(8);
+        this.tvPoint.setVisibility(View.GONE);
+        this.imgBack.setVisibility(View.GONE);
+        this.flagSmall.setVisibility(View.GONE);
     }
 
     public void sysAiVcCtrlMode() {

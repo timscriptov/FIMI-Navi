@@ -67,14 +67,14 @@ public final class FimiMediaPlayer extends AbstractMediaPlayer {
     private static final int MEDIA_SET_VIDEO_SIZE = 5;
     private static final int MEDIA_TIMED_TEXT = 99;
     private static final String TAG = FimiMediaPlayer.class.getName();
-    private static FimiMediaPlayer fimiMediaPlayer;
-    private static RtspServiceListener serviceListener;
     private static final FimiLibLoader sLocalLibLoader = new FimiLibLoader() {
         @Override
         public void loadLibrary(String libName) throws UnsatisfiedLinkError, SecurityException {
             System.loadLibrary(libName);
         }
     };
+    private static FimiMediaPlayer fimiMediaPlayer;
+    private static RtspServiceListener serviceListener;
     private static volatile boolean mIsLibLoaded = false;
     private static volatile boolean mIsNativeInitialized = false;
     private String mDataSource;

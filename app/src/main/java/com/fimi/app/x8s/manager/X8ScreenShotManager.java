@@ -1,5 +1,6 @@
 package com.fimi.app.x8s.manager;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
@@ -7,8 +8,9 @@ import android.graphics.Bitmap;
 import android.util.DisplayMetrics;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.android.app.R;
-import com.fimi.app.x8s.interfaces.IFimiShotResult;
 import com.fimi.app.x8s.ui.activity.X8sMainActivity;
 import com.fimi.kernel.utils.DateUtil;
 import com.fimi.kernel.utils.DirectoryPath;
@@ -29,6 +31,7 @@ public class X8ScreenShotManager {
     private X8ShotAsyncTask mFpvShotTask;
     private X8ShotAsyncTask mMapShotTask;
 
+    @NonNull
     public static String saveScreenBitmap(Activity activity) {
         Bitmap bitmap = screenShot(activity);
         File file = new File(DirectoryPath.getX8LocalSar() + "/" + DateUtil.getStringByFormat(System.currentTimeMillis(), DateUtil.dateFormatYYMMDDHHMMSS) + ".jpeg");
@@ -69,7 +72,7 @@ public class X8ScreenShotManager {
         }
     }
 
-    public static Bitmap screenShot(Activity activity) {
+    public static Bitmap screenShot(@NonNull Activity activity) {
         View view = activity.getWindow().getDecorView();
         view.setDrawingCacheEnabled(true);
         view.buildDrawingCache();
@@ -82,22 +85,20 @@ public class X8ScreenShotManager {
         return ret;
     }
 
-    public static float[] getDeviceDisplaySize(Context context) {
+    public static float[] getDeviceDisplaySize(@NonNull Context context) {
         Resources resources = context.getResources();
         DisplayMetrics dm = resources.getDisplayMetrics();
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-        float[] size = {width, height};
-        return size;
+        return new float[]{width, height};
     }
 
-    public static int getStatusBarHeight(Context context) {
-        int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", SyndicatedSdkImpressionEvent.CLIENT_NAME);
+    public static int getStatusBarHeight(@NonNull Context context) {
+        @SuppressLint("InternalInsetResource") int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", SyndicatedSdkImpressionEvent.CLIENT_NAME);
         if (resourceId <= 0) {
             return 0;
         }
-        int height = context.getResources().getDimensionPixelSize(resourceId);
-        return height;
+        return context.getResources().getDimensionPixelSize(resourceId);
     }
 
     public static boolean isEmptyBitmap(Bitmap src) {
@@ -106,21 +107,15 @@ public class X8ScreenShotManager {
 
     public void starThread(final X8sMainActivity activity) {
         isBusy = true;
-        this.mMapShotTask = new X8ShotAsyncTask(activity, new IFimiShotResult() {
-            @Override
-            public void onShotResult(Bitmap btp) {
-                activity.getmMapVideoController().setMapShot(btp);
-                X8ScreenShotManager.this.isMapShotSuccess = true;
-            }
+        this.mMapShotTask = new X8ShotAsyncTask(activity, btp -> {
+            activity.getmMapVideoController().setMapShot(btp);
+            X8ScreenShotManager.this.isMapShotSuccess = true;
         }, 0);
         this.mMapShotTask.execute("");
-        this.mFpvShotTask = new X8ShotAsyncTask(activity, new IFimiShotResult() {
-            @Override
-            public void onShotResult(Bitmap btp) {
-                activity.getmMapVideoController().setFpvShot(btp);
-                X8ScreenShotManager.this.isFpvShotSuccess = true;
-                X8ScreenShotManager.this.isShotSave(activity);
-            }
+        this.mFpvShotTask = new X8ShotAsyncTask(activity, btp -> {
+            activity.getmMapVideoController().setFpvShot(btp);
+            X8ScreenShotManager.this.isFpvShotSuccess = true;
+            X8ScreenShotManager.this.isShotSave(activity);
         }, 1);
         this.mFpvShotTask.execute("");
     }

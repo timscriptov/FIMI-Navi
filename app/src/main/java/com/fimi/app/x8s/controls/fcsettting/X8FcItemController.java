@@ -401,11 +401,11 @@ public class X8FcItemController extends AbsX8Controllers implements View.OnClick
                 this.vsbRTHeightLimit.setEnabled(true);
                 this.vsbRTHeightLimit.setEnableClick(true);
                 this.vsbRTHeightLimit.setImgMenuVisiable(0);
-                this.vsbRTHeightLimit.setVisibility(0);
+                this.vsbRTHeightLimit.setVisibility(View.VISIBLE);
                 this.vsbFlyHeightLimit.setEnabled(true);
                 this.vsbFlyHeightLimit.setEnableClick(true);
                 this.vsbFlyHeightLimit.setImgMenuVisiable(0);
-                this.vsbFlyHeightLimit.setVisibility(0);
+                this.vsbFlyHeightLimit.setVisibility(View.VISIBLE);
                 viewEnabled(this.llFeelingSetting, true);
                 resetView();
                 this.swbNoviceMode.setSwitchState(false);
@@ -420,11 +420,11 @@ public class X8FcItemController extends AbsX8Controllers implements View.OnClick
         this.vsbRTHeightLimit.setEnabled(true);
         this.vsbRTHeightLimit.setEnableClick(true);
         this.vsbRTHeightLimit.setImgMenuVisiable(0);
-        this.vsbRTHeightLimit.setVisibility(0);
+        this.vsbRTHeightLimit.setVisibility(View.VISIBLE);
         this.vsbFlyHeightLimit.setEnabled(true);
         this.vsbFlyHeightLimit.setEnableClick(true);
         this.vsbFlyHeightLimit.setImgMenuVisiable(0);
-        this.vsbFlyHeightLimit.setVisibility(0);
+        this.vsbFlyHeightLimit.setVisibility(View.VISIBLE);
         viewEnabled(this.llFeelingSetting, true);
         if (StateManager.getInstance().getX8Drone().isSportMode()) {
             resetViewBySport();
@@ -581,7 +581,8 @@ public class X8FcItemController extends AbsX8Controllers implements View.OnClick
                 int currentMode = StateManager.getInstance().getX8Drone().getTaskMode();
                 if (currentMode == X8Task.VCM_RTH.ordinal()) {
                     this.vsbRTHeightLimit.setEnableClick(false);
-                } else this.vsbRTHeightLimit.setEnableClick(this.swbNoviceMode != null && !this.swbNoviceMode.getToggleOn());
+                } else
+                    this.vsbRTHeightLimit.setEnableClick(this.swbNoviceMode != null && !this.swbNoviceMode.getToggleOn());
             }
             boolean isOngroud = StateManager.getInstance().getX8Drone().isOnGround();
             Button button = this.x8FcResetParams;
@@ -632,7 +633,7 @@ public class X8FcItemController extends AbsX8Controllers implements View.OnClick
         }
         this.isShow = true;
         switchUnity();
-        this.rlFcItem.setVisibility(0);
+        this.rlFcItem.setVisibility(View.VISIBLE);
         getDroneState();
         if (this.isConect) {
             if (StateManager.getInstance().getX8Drone().getFcSingal() != null) {
@@ -797,7 +798,7 @@ public class X8FcItemController extends AbsX8Controllers implements View.OnClick
     @Override
     public void closeItem() {
         if (this.rlFcItem != null) {
-            this.rlFcItem.setVisibility(8);
+            this.rlFcItem.setVisibility(View.GONE);
             this.isShow = false;
             reuqestUiValue();
             requestNewHand();
@@ -1145,11 +1146,11 @@ public class X8FcItemController extends AbsX8Controllers implements View.OnClick
         this.vsbRTHeightLimit.setEnabled(true);
         this.vsbRTHeightLimit.setEnableClick(true);
         this.vsbRTHeightLimit.setImgMenuVisiable(0);
-        this.vsbRTHeightLimit.setVisibility(0);
+        this.vsbRTHeightLimit.setVisibility(View.VISIBLE);
         this.vsbFlyHeightLimit.setEnabled(true);
         this.vsbFlyHeightLimit.setEnableClick(true);
         this.vsbFlyHeightLimit.setImgMenuVisiable(0);
-        this.vsbFlyHeightLimit.setVisibility(0);
+        this.vsbFlyHeightLimit.setVisibility(View.VISIBLE);
         viewEnabled(this.llFeelingSetting, true);
         if (StateManager.getInstance().getX8Drone().getFlyDistance() > 0.0f) {
             if (StateManager.getInstance().getX8Drone().getFlyDistance() > 5000.0f) {

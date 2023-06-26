@@ -99,12 +99,12 @@ import com.fimi.x8sdk.rtp.X8Rtp;
 
 
 public class FmLinkDataChanel implements IDataChanel {
-    IRetransmissionHandle retransmissionHandle;
-    ITimerSendQueueHandle timerSendQueueHandle;
-    boolean isResponse = false;
     private final Parser4 p = new Parser4();
     private final ConnectStatusManager statusManager = new ConnectStatusManager();
     private final SeqCache mSeqCache = new SeqCache();
+    IRetransmissionHandle retransmissionHandle;
+    ITimerSendQueueHandle timerSendQueueHandle;
+    boolean isResponse = false;
 
     @Override
     public void forwardData(byte[] buffer) {

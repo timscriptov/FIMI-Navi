@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fimi.android.app.R;
@@ -16,11 +17,11 @@ import java.util.List;
 
 public class X8AiLinePointValueAdapter extends RecyclerView.Adapter<X8AiLinePointValueAdapter.X8AiPointValueViewHolder> {
     private final LayoutInflater inflater;
-    private boolean isAll;
     private final List<X8AiLinePointEntity> list;
+    private final int type;
+    private boolean isAll;
     private OnItemClickListener listener;
     private int selectIndex = -1;
-    private final int type;
 
     public X8AiLinePointValueAdapter(Context context, List<X8AiLinePointEntity> list, int type) {
         this.list = list;
@@ -36,15 +37,15 @@ public class X8AiLinePointValueAdapter extends RecyclerView.Adapter<X8AiLinePoin
         this.isAll = all;
     }
 
+    @NonNull
     @Override
-    public X8AiPointValueViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public X8AiPointValueViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = this.inflater.inflate(R.layout.x8_ai_line_point_value_item, parent, false);
-        X8AiPointValueViewHolder holder = new X8AiPointValueViewHolder(view);
-        return holder;
+        return new X8AiPointValueViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(X8AiPointValueViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull X8AiPointValueViewHolder holder, int position) {
         if (this.type == 0) {
             onSigleSelect(holder, position);
             setSigleListener(holder);
@@ -68,27 +69,24 @@ public class X8AiLinePointValueAdapter extends RecyclerView.Adapter<X8AiLinePoin
 
     public void setSigleListener(X8AiPointValueViewHolder holder) {
         if (this.listener != null) {
-            holder.root.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    boolean isSelect = true;
-                    int pos = ((Integer) v.getTag()).intValue();
-                    if (pos == X8AiLinePointValueAdapter.this.selectIndex) {
-                        isSelect = false;
-                    }
-                    X8AiLinePointValueAdapter.this.listener.onItemClicked(pos, X8AiLinePointValueAdapter.this.selectIndex, isSelect);
-                    if (isSelect) {
-                        X8AiLinePointValueAdapter.this.selectIndex = pos;
-                    } else {
-                        X8AiLinePointValueAdapter.this.selectIndex = -1;
-                    }
+            holder.root.setOnClickListener(v -> {
+                boolean isSelect = true;
+                int pos = (Integer) v.getTag();
+                if (pos == selectIndex) {
+                    isSelect = false;
+                }
+                listener.onItemClicked(pos, selectIndex, isSelect);
+                if (isSelect) {
+                    selectIndex = pos;
+                } else {
+                    selectIndex = -1;
                 }
             });
         }
     }
 
-    public void onSigleSelect(X8AiPointValueViewHolder holder, int position) {
-        holder.root.setTag(Integer.valueOf(position));
+    public void onSigleSelect(@NonNull X8AiPointValueViewHolder holder, int position) {
+        holder.root.setTag(position);
         holder.btn.setText("" + this.list.get(position).getnPos());
         int state = this.list.get(position).getState();
         if (state == 0) {
@@ -98,8 +96,8 @@ public class X8AiLinePointValueAdapter extends RecyclerView.Adapter<X8AiLinePoin
         }
     }
 
-    public void onMulSelect(X8AiPointValueViewHolder holder, int position) {
-        holder.root.setTag(Integer.valueOf(position));
+    public void onMulSelect(@NonNull X8AiPointValueViewHolder holder, int position) {
+        holder.root.setTag(position);
         holder.btn.setText("" + this.list.get(position).getnPos());
         int state = this.list.get(position).getState();
         if (state == 0) {
@@ -119,16 +117,13 @@ public class X8AiLinePointValueAdapter extends RecyclerView.Adapter<X8AiLinePoin
 
     public void setMulListener(X8AiPointValueViewHolder holder, final int state) {
         if (this.listener != null) {
-            holder.root.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    boolean isSelect = true;
-                    int pos = ((Integer) v.getTag()).intValue();
-                    if (state == 1) {
-                        isSelect = false;
-                    }
-                    X8AiLinePointValueAdapter.this.listener.onItemClicked(pos, X8AiLinePointValueAdapter.this.selectIndex, isSelect);
+            holder.root.setOnClickListener(v -> {
+                boolean isSelect = true;
+                int pos = (Integer) v.getTag();
+                if (state == 1) {
+                    isSelect = false;
                 }
+                listener.onItemClicked(pos, selectIndex, isSelect);
             });
         }
     }

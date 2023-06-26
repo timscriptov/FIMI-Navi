@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fimi.TcpClient;
@@ -59,12 +58,18 @@ import java.util.List;
 
 
 public class X8AiLineExcuteController extends AbsX8AiController implements View.OnClickListener, IX8MarkerListener, X8DoubleCustomDialog.onDialogButtonClickListener, X8AiTrackController.OnAiTrackControllerListener {
+    private final X8sMainActivity activity;
+    private final IX8NextViewListener mIX8NextViewListener;
+    private final List<AckGetAiLinePoint> mInterestList;
+    private final List<AckGetAiLinePoint> mList;
+    private final List<AckGetAiLinePointsAction> mListAtions;
+    private final X8AilinePrameter mX8AilinePrameter;
+    private final int mode;
     protected int MAX_WIDTH;
     protected boolean isNextShow;
     protected boolean isShow;
     protected int width;
     int i;
-    private final X8sMainActivity activity;
     private View blank;
     private int count;
     private int countAction;
@@ -86,17 +91,11 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
     private AiLineGetPointState mAiLineGetPointState;
     private CameraManager mCameraManager;
     private X8BaseModule mCurrentModule;
-    private final IX8NextViewListener mIX8NextViewListener;
-    private final List<AckGetAiLinePoint> mInterestList;
-    private final List<AckGetAiLinePoint> mList;
-    private final List<AckGetAiLinePointsAction> mListAtions;
     private X8AiTipWithCloseView mTipBgView;
     private X8AiLineInterestPointController mX8AiLineInterestPointController;
     private X8AiLinesExcuteConfirmModule mX8AiLinesExcuteConfirmModule;
     private X8AiLinesPointValueModule mX8AiLinesPointValueModule;
-    private final X8AilinePrameter mX8AilinePrameter;
     private X8AiLineState mX8LineState;
-    private final int mode;
     private LineModel model;
     private View nextRootView;
     private View rlAdd;
@@ -128,13 +127,13 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
             @Override
             public void onExcuteClick() {
                 X8AiLineExcuteController.this.closeNextUi(false);
-                X8AiLineExcuteController.this.imgEdit.setVisibility(8);
-                X8AiLineExcuteController.this.imgDelete.setVisibility(8);
-                X8AiLineExcuteController.this.rlAdd.setVisibility(8);
-                X8AiLineExcuteController.this.mTipBgView.setVisibility(8);
+                X8AiLineExcuteController.this.imgEdit.setVisibility(View.GONE);
+                X8AiLineExcuteController.this.imgDelete.setVisibility(View.GONE);
+                X8AiLineExcuteController.this.rlAdd.setVisibility(View.GONE);
+                X8AiLineExcuteController.this.mTipBgView.setVisibility(View.GONE);
                 X8AiLineExcuteController.this.mX8LineState = X8AiLineState.RUNNING;
-                X8AiLineExcuteController.this.imgHistory.setVisibility(8);
-                X8AiLineExcuteController.this.flagSmall.setVisibility(0);
+                X8AiLineExcuteController.this.imgHistory.setVisibility(View.GONE);
+                X8AiLineExcuteController.this.flagSmall.setVisibility(View.VISIBLE);
                 X8Application.enableGesture = true;
                 if (X8AiLineExcuteController.this.mX8AilinePrameter.getOrientation() == 0) {
                     X8AiLineExcuteController.this.setAiVcOpen();
@@ -208,7 +207,7 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
             this.imgNext.setEnabled(true);
         }
         if (this.model == LineModel.VEDIO) {
-            this.rlAdd.setVisibility(0);
+            this.rlAdd.setVisibility(View.VISIBLE);
             if (size == 0) {
                 this.tvAdd.setText("");
                 this.imgAdd.setBackgroundResource(R.drawable.x8_img_ai_line_add_selector);
@@ -274,7 +273,7 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
                     break;
             }
             String s = String.format(getString(R.string.x8_ai_fly_point_to_point_action), Integer.valueOf(index)) + msg;
-            this.tvActionTip.setVisibility(0);
+            this.tvActionTip.setVisibility(View.VISIBLE);
             this.tvActionTip.setText(s);
         }
     }
@@ -377,7 +376,7 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
             float height = StateManager.getInstance().getX8Drone().getHeight();
             float angle = StateManager.getInstance().getX8Drone().getDeviceAngle();
             this.activity.getmMapVideoController().getFimiMap().getAiLineManager().setAiLineMark(latitude, longitude, height, angle);
-            this.rlAdd.setVisibility(0);
+            this.rlAdd.setVisibility(View.VISIBLE);
         } else if (id == R.id.img_ai_line_delete) {
             if (this.model == LineModel.VEDIO) {
                 if (this.activity.getmMapVideoController().getFimiMap().getAiLineManager().getMapPointList().size() > 0) {
@@ -398,9 +397,9 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
             }
         } else if (id == R.id.rl_flag_small) {
             if (this.tvP2PTip.getVisibility() == 0) {
-                this.tvP2PTip.setVisibility(8);
+                this.tvP2PTip.setVisibility(View.GONE);
             } else {
-                this.tvP2PTip.setVisibility(0);
+                this.tvP2PTip.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -428,28 +427,28 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
     public void changeModelView() {
         if (this.model == LineModel.MAP) {
             if (this.lineId != 0) {
-                this.mTipBgView.setVisibility(8);
-                this.rlAdd.setVisibility(8);
+                this.mTipBgView.setVisibility(View.GONE);
+                this.rlAdd.setVisibility(View.GONE);
                 this.activity.getmMapVideoController().getFimiMap().getAiLineManager().setOnMapClickValid(false);
                 this.activity.getmMapVideoController().getFimiMap().getAiLineManager().setOnMarkerClickValid(false);
-                this.imgDelete.setVisibility(8);
-                this.imgAdd.setVisibility(8);
-                this.imgEdit.setVisibility(8);
+                this.imgDelete.setVisibility(View.GONE);
+                this.imgAdd.setVisibility(View.GONE);
+                this.imgEdit.setVisibility(View.GONE);
                 this.mX8AiLineInterestPointController.showView(false);
                 this.imgNext.setEnabled(true);
                 return;
             }
-            this.rlAdd.setVisibility(8);
+            this.rlAdd.setVisibility(View.GONE);
             this.activity.getmMapVideoController().getFimiMap().getAiLineManager().setOnMapClickValid(true);
             this.activity.getmMapVideoController().getFimiMap().getAiLineManager().setOnMarkerClickValid(true);
             this.mX8AiLineInterestPointController.showView(true);
         } else if (this.model == LineModel.VEDIO) {
-            this.rlAdd.setVisibility(0);
+            this.rlAdd.setVisibility(View.VISIBLE);
             this.activity.getmMapVideoController().getFimiMap().getAiLineManager().setOnMapClickValid(false);
             this.activity.getmMapVideoController().getFimiMap().getAiLineManager().setOnMarkerClickValid(true);
-            this.imgDelete.setVisibility(0);
-            this.imgAdd.setVisibility(0);
-            this.imgEdit.setVisibility(8);
+            this.imgDelete.setVisibility(View.VISIBLE);
+            this.imgAdd.setVisibility(View.VISIBLE);
+            this.imgEdit.setVisibility(View.GONE);
             this.mX8AiLineInterestPointController.showView(false);
         } else {
             if (this.model == LineModel.HISTORY) {
@@ -485,7 +484,7 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
         this.flagSmall = this.handleView.findViewById(R.id.rl_flag_small);
         this.tvFlag = this.handleView.findViewById(R.id.tv_task_tip);
         this.flagSmall.setOnClickListener(this);
-        this.flagSmall.setVisibility(8);
+        this.flagSmall.setVisibility(View.GONE);
         this.nextRootView = this.rootView.findViewById(R.id.x8_main_ai_line_point_value_content);
         this.blank = this.rootView.findViewById(R.id.x8_main_ai_line_next_blank);
         this.mX8AiLinesExcuteConfirmModule = new X8AiLinesExcuteConfirmModule();
@@ -506,68 +505,68 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
         if (this.mX8LineState == X8AiLineState.IDLE) {
             if (this.mode == 0) {
                 this.mX8AilinePrameter.setOrientation(0);
-                this.imgNext.setVisibility(0);
-                this.imgDelete.setVisibility(0);
+                this.imgNext.setVisibility(View.VISIBLE);
+                this.imgDelete.setVisibility(View.VISIBLE);
                 if (this.activity.getmMapVideoController().getFimiMap().getAiLineManager().getMapPointList().size() <= 0) {
                     this.imgEdit.setEnabled(false);
                     this.imgDelete.setBackgroundResource(R.drawable.x8_img_ai_line_delete2);
                     this.imgDelete.setAlpha(0.2f);
                 }
-                this.imgEdit.setVisibility(0);
-                this.mTipBgView.setVisibility(0);
+                this.imgEdit.setVisibility(View.VISIBLE);
+                this.mTipBgView.setVisibility(View.VISIBLE);
                 this.mTipBgView.setTipText(getString(R.string.x8_ai_fly_lines_map_select_tip));
                 this.mTipBgView.showTip();
                 this.imgNext.setEnabled(false);
-                this.rlAdd.setVisibility(8);
-                view.findViewById(R.id.img_interest_point).setVisibility(0);
-                view.findViewById(R.id.tv_tip).setVisibility(0);
+                this.rlAdd.setVisibility(View.GONE);
+                view.findViewById(R.id.img_interest_point).setVisibility(View.VISIBLE);
+                view.findViewById(R.id.tv_tip).setVisibility(View.VISIBLE);
                 this.activity.getmMapVideoController().getFimiMap().getAiLineManager().setOnMapClickListener();
                 this.activity.getmMapVideoController().getFimiMap().getAiLineManager().setOnMapClickValid(true);
                 this.activity.getmMapVideoController().getFimiMap().getAiLineManager().setOnMarkerClickValid(true);
             } else if (this.mode == 1) {
                 this.mX8AilinePrameter.setOrientation(1);
-                this.imgNext.setVisibility(0);
-                this.imgDelete.setVisibility(0);
+                this.imgNext.setVisibility(View.VISIBLE);
+                this.imgDelete.setVisibility(View.VISIBLE);
                 if (this.activity.getmMapVideoController().getFimiMap().getAiLineManager().getMapPointList().size() <= 0) {
                     this.imgEdit.setEnabled(false);
                     this.imgDelete.setBackgroundResource(R.drawable.x8_img_ai_line_delete2);
                     this.imgDelete.setAlpha(0.2f);
                 }
-                this.mTipBgView.setVisibility(0);
-                this.rlAdd.setVisibility(0);
+                this.mTipBgView.setVisibility(View.VISIBLE);
+                this.rlAdd.setVisibility(View.VISIBLE);
                 this.mTipBgView.setTipText(getString(R.string.x8_ai_fly_lines_vedio_select_tip));
                 this.mTipBgView.showTip();
                 this.imgNext.setEnabled(false);
-                this.imgEdit.setVisibility(8);
+                this.imgEdit.setVisibility(View.GONE);
                 this.activity.getmMapVideoController().getFimiMap().getAiLineManager().setOnMapClickListener();
                 this.activity.getmMapVideoController().getFimiMap().getAiLineManager().setOnMapClickValid(false);
                 this.activity.getmMapVideoController().getFimiMap().getAiLineManager().setOnMarkerClickValid(true);
             } else if (this.mode == 2) {
-                this.imgNext.setVisibility(0);
-                this.rlAdd.setVisibility(8);
-                this.imgDelete.setVisibility(8);
-                this.imgEdit.setVisibility(8);
-                this.mTipBgView.setVisibility(8);
-                this.imgVcToggle.setVisibility(8);
-                this.imgHistory.setVisibility(0);
+                this.imgNext.setVisibility(View.VISIBLE);
+                this.rlAdd.setVisibility(View.GONE);
+                this.imgDelete.setVisibility(View.GONE);
+                this.imgEdit.setVisibility(View.GONE);
+                this.mTipBgView.setVisibility(View.GONE);
+                this.imgVcToggle.setVisibility(View.GONE);
+                this.imgHistory.setVisibility(View.VISIBLE);
                 historyUirendering();
             } else if (this.mode == 3) {
                 this.mX8AilinePrameter.setOrientation(0);
-                this.imgNext.setVisibility(0);
-                this.imgDelete.setVisibility(0);
+                this.imgNext.setVisibility(View.VISIBLE);
+                this.imgDelete.setVisibility(View.VISIBLE);
                 if (this.activity.getmMapVideoController().getFimiMap().getAiLineManager().getMapPointList().size() <= 0) {
                     this.imgEdit.setEnabled(false);
                     this.imgDelete.setBackgroundResource(R.drawable.x8_img_ai_line_delete2);
                     this.imgDelete.setAlpha(0.2f);
                 }
-                this.imgEdit.setVisibility(0);
-                this.mTipBgView.setVisibility(0);
+                this.imgEdit.setVisibility(View.VISIBLE);
+                this.mTipBgView.setVisibility(View.VISIBLE);
                 this.mTipBgView.setTipText(getString(R.string.x8_ai_fly_lines_map_select_tip));
                 this.mTipBgView.showTip();
                 this.imgNext.setEnabled(false);
-                this.rlAdd.setVisibility(8);
-                view.findViewById(R.id.img_interest_point).setVisibility(0);
-                view.findViewById(R.id.tv_tip).setVisibility(0);
+                this.rlAdd.setVisibility(View.GONE);
+                view.findViewById(R.id.img_interest_point).setVisibility(View.VISIBLE);
+                view.findViewById(R.id.tv_tip).setVisibility(View.VISIBLE);
                 this.activity.getmMapVideoController().getFimiMap().getAiLineManager().setOnMapClickListener();
                 this.activity.getmMapVideoController().getFimiMap().getAiLineManager().setOnMapClickValid(true);
                 this.activity.getmMapVideoController().getFimiMap().getAiLineManager().setOnMarkerClickValid(true);
@@ -576,12 +575,12 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
             setMode();
             return;
         }
-        this.imgNext.setVisibility(8);
-        this.rlAdd.setVisibility(8);
-        this.imgDelete.setVisibility(8);
-        this.imgEdit.setVisibility(8);
-        this.mTipBgView.setVisibility(8);
-        this.tvActionTip.setVisibility(8);
+        this.imgNext.setVisibility(View.GONE);
+        this.rlAdd.setVisibility(View.GONE);
+        this.imgDelete.setVisibility(View.GONE);
+        this.imgEdit.setVisibility(View.GONE);
+        this.mTipBgView.setVisibility(View.GONE);
+        this.tvActionTip.setVisibility(View.GONE);
         this.isDraw = false;
     }
 
@@ -621,28 +620,28 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
         if (this.handleView != null && this.isShow) {
             if (this.mX8LineState != X8AiLineState.IDLE && this.mX8AilinePrameter.getOrientation() == 0) {
                 if (sightFlag) {
-                    this.imgVcToggle.setVisibility(8);
+                    this.imgVcToggle.setVisibility(View.GONE);
                 } else {
-                    this.imgVcToggle.setVisibility(0);
+                    this.imgVcToggle.setVisibility(View.VISIBLE);
                 }
             }
             if (this.mX8LineState == X8AiLineState.IDLE) {
                 if (!sightFlag) {
                     if (this.mode == 1) {
-                        this.imgDelete.setVisibility(0);
-                        this.imgAdd.setVisibility(0);
-                        this.tvAdd.setVisibility(0);
-                        this.imgEdit.setVisibility(8);
+                        this.imgDelete.setVisibility(View.VISIBLE);
+                        this.imgAdd.setVisibility(View.VISIBLE);
+                        this.tvAdd.setVisibility(View.VISIBLE);
+                        this.imgEdit.setVisibility(View.GONE);
                     } else if (this.mode == 0) {
                         this.mX8AiLineInterestPointController.showView(false);
                     } else if (this.mode == 3) {
                         this.mX8AiLineInterestPointController.showView(false);
                     }
                 } else if (this.mode == 1) {
-                    this.imgDelete.setVisibility(8);
-                    this.imgAdd.setVisibility(8);
-                    this.tvAdd.setVisibility(8);
-                    this.imgEdit.setVisibility(0);
+                    this.imgDelete.setVisibility(View.GONE);
+                    this.imgAdd.setVisibility(View.GONE);
+                    this.tvAdd.setVisibility(View.GONE);
+                    this.imgEdit.setVisibility(View.VISIBLE);
                 } else if (this.mode == 0) {
                     this.mX8AiLineInterestPointController.showView(true);
                 } else if (this.mode == 3) {
@@ -670,8 +669,8 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
     }
 
     public void openNextUi() {
-        this.nextRootView.setVisibility(0);
-        this.blank.setVisibility(0);
+        this.nextRootView.setVisibility(View.VISIBLE);
+        this.blank.setVisibility(View.VISIBLE);
         this.mX8AiLinesExcuteConfirmModule.init(this.activity, this.nextRootView, this.mCameraManager);
         this.mX8AiLinesExcuteConfirmModule.setAiLineExcuteMode(this.mode);
         this.mX8AiLinesExcuteConfirmModule.setListener(this.mIX8NextViewListener, this.fcManager, this.activity.getmMapVideoController(), this.mX8AilinePrameter, this);
@@ -688,8 +687,8 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
     }
 
     public void closeNextUi(final boolean b) {
-        this.blank.setVisibility(8);
-        this.imgBack.setVisibility(0);
+        this.blank.setVisibility(View.GONE);
+        this.imgBack.setVisibility(View.VISIBLE);
         if (this.isNextShow) {
             this.isNextShow = false;
             ObjectAnimator translationRight = ObjectAnimator.ofFloat(this.nextRootView, "translationX", 0.0f, this.width);
@@ -700,11 +699,11 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
                 // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
-                    X8AiLineExcuteController.this.nextRootView.setVisibility(8);
+                    X8AiLineExcuteController.this.nextRootView.setVisibility(View.GONE);
                     ((ViewGroup) X8AiLineExcuteController.this.nextRootView).removeAllViews();
-                    X8AiLineExcuteController.this.imgBack.setVisibility(0);
+                    X8AiLineExcuteController.this.imgBack.setVisibility(View.VISIBLE);
                     if (b) {
-                        X8AiLineExcuteController.this.imgNext.setVisibility(0);
+                        X8AiLineExcuteController.this.imgNext.setVisibility(View.VISIBLE);
                     }
                 }
             });
@@ -894,8 +893,8 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
 
     public void openPointValue(MapPointLatLng mpl) {
         if (mpl != null) {
-            this.nextRootView.setVisibility(0);
-            this.blank.setVisibility(0);
+            this.nextRootView.setVisibility(View.VISIBLE);
+            this.blank.setVisibility(View.VISIBLE);
             closeIconByNextUi();
             this.mX8AiLinesPointValueModule.init(this.activity, this.nextRootView, this.mode, mpl, this.activity.getmMapVideoController(), this);
             this.mCurrentModule = this.mX8AiLinesPointValueModule;
@@ -911,10 +910,10 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
 
     public void historyUi2NextUi(X8AiLinePointInfo lineInfo) {
         ((ViewGroup) this.nextRootView).removeAllViews();
-        this.nextRootView.setVisibility(0);
-        this.blank.setVisibility(0);
-        this.imgBack.setVisibility(8);
-        this.imgNext.setVisibility(8);
+        this.nextRootView.setVisibility(View.VISIBLE);
+        this.blank.setVisibility(View.VISIBLE);
+        this.imgBack.setVisibility(View.GONE);
+        this.imgNext.setVisibility(View.GONE);
         this.mX8AiLinesExcuteConfirmModule.init(this.activity, this.nextRootView);
         this.mX8AiLinesExcuteConfirmModule.setListener(this.mIX8NextViewListener, this.fcManager, this.activity.getmMapVideoController(), this.mX8AilinePrameter, null);
         this.mX8AiLinesExcuteConfirmModule.setParentLevel(1);
@@ -1123,16 +1122,16 @@ public class X8AiLineExcuteController extends AbsX8AiController implements View.
 
     public void openVcToggle() {
         if (this.activity.getmMapVideoController().isFullVideo()) {
-            this.imgVcToggle.setVisibility(0);
+            this.imgVcToggle.setVisibility(View.VISIBLE);
         } else {
-            this.imgVcToggle.setVisibility(8);
+            this.imgVcToggle.setVisibility(View.GONE);
         }
     }
 
     public void closeIconByNextUi() {
-        this.imgNext.setVisibility(8);
-        this.imgBack.setVisibility(8);
-        this.flagSmall.setVisibility(8);
+        this.imgNext.setVisibility(View.GONE);
+        this.imgBack.setVisibility(View.GONE);
+        this.flagSmall.setVisibility(View.GONE);
     }
 
     public void showMaxSaveDialog() {

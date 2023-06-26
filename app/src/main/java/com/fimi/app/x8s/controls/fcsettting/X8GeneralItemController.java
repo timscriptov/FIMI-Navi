@@ -50,15 +50,15 @@ public class X8GeneralItemController extends AbsX8Controllers {
             @Override
             // com.fimi.app.x8s.controls.fcsettting.X8RestSystemController.OnRestSystemListener
             public void onStart() {
-                X8GeneralItemController.this.btnRestParams.setVisibility(8);
-                X8GeneralItemController.this.pbResetParams.setVisibility(0);
+                X8GeneralItemController.this.btnRestParams.setVisibility(View.GONE);
+                X8GeneralItemController.this.pbResetParams.setVisibility(View.VISIBLE);
             }
 
             @Override
             // com.fimi.app.x8s.controls.fcsettting.X8RestSystemController.OnRestSystemListener
             public void onFinish() {
-                X8GeneralItemController.this.btnRestParams.setVisibility(0);
-                X8GeneralItemController.this.pbResetParams.setVisibility(8);
+                X8GeneralItemController.this.btnRestParams.setVisibility(View.VISIBLE);
+                X8GeneralItemController.this.pbResetParams.setVisibility(View.GONE);
                 if (X8GeneralItemController.this.mListerner != null) {
                     X8GeneralItemController.this.mListerner.switchMapStyle(Constants.X8_GENERAL_MAP_STYLE_NORMAL);
                     X8GeneralItemController.this.mThMap.setSelect(0);
@@ -216,7 +216,7 @@ public class X8GeneralItemController extends AbsX8Controllers {
         }
         this.isShow = true;
         setViewEnable(true);
-        this.rlFcItem.setVisibility(0);
+        this.rlFcItem.setVisibility(View.VISIBLE);
     }
 
     public void setViewEnable(boolean b) {
@@ -238,7 +238,7 @@ public class X8GeneralItemController extends AbsX8Controllers {
     public void closeItem() {
         if (this.rlFcItem != null) {
             this.isShow = false;
-            this.rlFcItem.setVisibility(8);
+            this.rlFcItem.setVisibility(View.GONE);
         }
     }
 

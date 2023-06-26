@@ -2,6 +2,7 @@ package com.fimi.app.x8s.controls;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.Context;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -9,6 +10,8 @@ import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 
 import com.fimi.android.app.R;
 import com.fimi.app.x8s.interfaces.AbsX8Controllers;
@@ -80,7 +83,7 @@ public class X8MainTopBarController extends AbsX8Controllers implements View.OnC
     }
 
     @Override
-    public void initViews(View rootView) {
+    public void initViews(@NonNull View rootView) {
         this.handleView = rootView.findViewById(R.id.main_top_bars);
         this.mX8MainReturnTimeTextView = rootView.findViewById(R.id.x8_return_time_text_view);
         this.mX8MainElectricView = rootView.findViewById(R.id.electric_view);
@@ -127,7 +130,7 @@ public class X8MainTopBarController extends AbsX8Controllers implements View.OnC
     public void defaultVal() {
         if (this.isShowDisconnectLatlng) {
             this.mTvDisconnectLatlng.setText(this.mCurrentLat + "," + this.mCurrentLng);
-            this.mTvDisconnectLatlng.setVisibility(0);
+            this.mTvDisconnectLatlng.setVisibility(View.VISIBLE);
         }
         this.mX8MainTopCenterView.defaultVal();
         this.mX8MainElectricView.setPercent(0);
@@ -138,15 +141,15 @@ public class X8MainTopBarController extends AbsX8Controllers implements View.OnC
         this.mIvHight.setBackgroundResource(R.drawable.x8_main_fly_hight_unconnect);
         this.mTvVs.setText(R.string.x8_na);
         this.mTvHs.setText(R.string.x8_na);
-        this.tvConnectState.setVisibility(0);
+        this.tvConnectState.setVisibility(View.VISIBLE);
         this.tvConnectState.setText(R.string.x8_fly_status_unconnect);
         this.mX8MainPowerView.setPercent(0);
         this.mIvFlyState.setBackgroundResource(R.drawable.x8_main_fly_state_unconnect);
-        this.mIvTopCenterModeHelp.setVisibility(8);
-        this.mIvTopCenterMode.setVisibility(8);
-        this.mIvCenterHighightView.setVisibility(8);
-        this.mIvCenterHighightHelp.setVisibility(8);
-        this.mIvCenterHighightHelpInfo.setVisibility(8);
+        this.mIvTopCenterModeHelp.setVisibility(View.GONE);
+        this.mIvTopCenterMode.setVisibility(View.GONE);
+        this.mIvCenterHighightView.setVisibility(View.GONE);
+        this.mIvCenterHighightHelp.setVisibility(View.GONE);
+        this.mIvCenterHighightHelpInfo.setVisibility(View.GONE);
         stopFlick(this.mIvCenterHighightView);
         this.mX8MainReturnTimeTextView.setStrTime(getString(R.string.x8_na));
         this.mTvHightUnit.setText("");
@@ -165,15 +168,15 @@ public class X8MainTopBarController extends AbsX8Controllers implements View.OnC
         this.mIvHight.setBackgroundResource(R.drawable.x8_main_fly_hight_unconnect);
         this.mTvVs.setText(R.string.x8_na);
         this.mTvHs.setText(R.string.x8_na);
-        this.tvConnectState.setVisibility(0);
+        this.tvConnectState.setVisibility(View.VISIBLE);
         this.tvConnectState.setText(R.string.x8_fly_status_unconnect);
         this.mX8MainPowerView.setPercent(0);
         this.mIvFlyState.setBackgroundResource(R.drawable.x8_main_fly_state_unconnect);
-        this.mIvCenterHighightView.setVisibility(8);
-        this.mIvCenterHighightHelp.setVisibility(8);
-        this.mIvCenterHighightHelpInfo.setVisibility(8);
-        this.mIvTopCenterModeHelp.setVisibility(8);
-        this.mIvTopCenterMode.setVisibility(8);
+        this.mIvCenterHighightView.setVisibility(View.GONE);
+        this.mIvCenterHighightHelp.setVisibility(View.GONE);
+        this.mIvCenterHighightHelpInfo.setVisibility(View.GONE);
+        this.mIvTopCenterModeHelp.setVisibility(View.GONE);
+        this.mIvTopCenterMode.setVisibility(View.GONE);
         stopFlick(this.mIvCenterHighightView);
         this.mX8MainReturnTimeTextView.setStrTime(getString(R.string.x8_na));
         this.mTvHightUnit.setText("");
@@ -181,19 +184,19 @@ public class X8MainTopBarController extends AbsX8Controllers implements View.OnC
         this.mTvSpeedUnit.setText("");
         if (this.isShowDisconnectLatlng) {
             this.mTvDisconnectLatlng.setText(this.mCurrentLat + "," + this.mCurrentLng);
-            this.mTvDisconnectLatlng.setVisibility(0);
+            this.mTvDisconnectLatlng.setVisibility(View.VISIBLE);
         }
         this.ctrlType = 0;
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(@NonNull View v) {
         int id = v.getId();
         if (id == R.id.x8_ibtn_setting) {
             this.listener.onSettingClick();
         } else if (id == R.id.x8_ibtn_return) {
             this.listener.onMainReback();
-            this.mTvDisconnectLatlng.setVisibility(8);
+            this.mTvDisconnectLatlng.setVisibility(View.GONE);
             this.isShowDisconnectLatlng = false;
         } else if (id == R.id.x8_drone_info_state) {
             this.listener.onDroneInfoStateClick();
@@ -205,7 +208,7 @@ public class X8MainTopBarController extends AbsX8Controllers implements View.OnC
     }
 
     private void clipbroadLatlng() {
-        ClipboardManager clipboardManager = (ClipboardManager) this.mX8sMainActivity.getSystemService("clipboard");
+        ClipboardManager clipboardManager = (ClipboardManager) this.mX8sMainActivity.getSystemService(Context.CLIPBOARD_SERVICE);
         clipboardManager.setPrimaryClip(ClipData.newPlainText(null, this.mTvDisconnectLatlng.getText()));
         X8ToastUtil.showToast(this.mX8sMainActivity, this.mX8sMainActivity.getApplicationContext().getString(R.string.x8_fly_status_disconnect_copy_latlng_of_clip), 0);
     }
@@ -215,7 +218,7 @@ public class X8MainTopBarController extends AbsX8Controllers implements View.OnC
         this.mX8MainTopCenterView.setListener(listener);
     }
 
-    public void onFcHeart(AutoFcHeart fcHeart, boolean isLowPower) {
+    public void onFcHeart(@NonNull AutoFcHeart fcHeart, boolean isLowPower) {
         if (fcHeart.getCtrlType() != this.ctrlType) {
             this.ctrlType = fcHeart.getCtrlType();
             if (this.ctrlType == 1) {
@@ -225,52 +228,52 @@ public class X8MainTopBarController extends AbsX8Controllers implements View.OnC
         if (fcHeart.getCtrlType() == 1) {
             if (this.isReadyGo) {
                 this.mIvTopCenterMode.setBackgroundResource(R.drawable.x8_top_center_highight_atti_big_1);
-                this.mIvTopCenterModeHelp.setVisibility(0);
-                this.mIvTopCenterMode.setVisibility(0);
-                this.tvConnectState.setVisibility(4);
-                this.mIvFlyState.setVisibility(4);
-                this.mIvCenterHighightHelp.setVisibility(4);
+                this.mIvTopCenterModeHelp.setVisibility(View.VISIBLE);
+                this.mIvTopCenterMode.setVisibility(View.VISIBLE);
+                this.tvConnectState.setVisibility(View.INVISIBLE);
+                this.mIvFlyState.setVisibility(View.INVISIBLE);
+                this.mIvCenterHighightHelp.setVisibility(View.INVISIBLE);
             } else {
-                this.mIvTopCenterModeHelp.setVisibility(4);
-                this.mIvTopCenterMode.setVisibility(4);
-                this.tvConnectState.setVisibility(0);
-                this.mIvFlyState.setVisibility(0);
+                this.mIvTopCenterModeHelp.setVisibility(View.INVISIBLE);
+                this.mIvTopCenterMode.setVisibility(View.INVISIBLE);
+                this.tvConnectState.setVisibility(View.VISIBLE);
+                this.mIvFlyState.setVisibility(View.VISIBLE);
                 this.mIvFlyState.setBackgroundResource(R.drawable.x8_main_atti_mode);
-                this.mIvCenterHighightHelp.setVisibility(0);
+                this.mIvCenterHighightHelp.setVisibility(View.VISIBLE);
             }
-            this.mIvCenterHighightView.setVisibility(0);
-            this.mIvCenterHighightHelpInfo.setVisibility(0);
+            this.mIvCenterHighightView.setVisibility(View.VISIBLE);
+            this.mIvCenterHighightHelpInfo.setVisibility(View.VISIBLE);
         } else if (fcHeart.getCtrlType() == 2) {
-            this.mIvFlyState.setVisibility(0);
+            this.mIvFlyState.setVisibility(View.VISIBLE);
             this.mIvFlyState.setBackgroundResource(R.drawable.x8_main_gps_mode);
-            this.tvConnectState.setVisibility(0);
-            this.mIvTopCenterModeHelp.setVisibility(8);
-            this.mIvTopCenterMode.setVisibility(8);
-            this.mIvCenterHighightView.setVisibility(8);
-            this.mIvCenterHighightHelp.setVisibility(8);
-            this.mIvCenterHighightHelpInfo.setVisibility(8);
+            this.tvConnectState.setVisibility(View.VISIBLE);
+            this.mIvTopCenterModeHelp.setVisibility(View.GONE);
+            this.mIvTopCenterMode.setVisibility(View.GONE);
+            this.mIvCenterHighightView.setVisibility(View.GONE);
+            this.mIvCenterHighightHelp.setVisibility(View.GONE);
+            this.mIvCenterHighightHelpInfo.setVisibility(View.GONE);
             stopFlick(this.mIvCenterHighightView);
         } else if (fcHeart.getCtrlType() == 3) {
             if (this.isReadyGo) {
                 this.mIvTopCenterMode.setBackgroundResource(R.drawable.x8_top_center_highight_vpu_big_1);
-                this.mIvTopCenterModeHelp.setVisibility(0);
-                this.mIvTopCenterMode.setVisibility(0);
-                this.tvConnectState.setVisibility(4);
-                this.mIvFlyState.setVisibility(4);
-                this.mIvCenterHighightHelp.setVisibility(4);
+                this.mIvTopCenterModeHelp.setVisibility(View.VISIBLE);
+                this.mIvTopCenterMode.setVisibility(View.VISIBLE);
+                this.tvConnectState.setVisibility(View.INVISIBLE);
+                this.mIvFlyState.setVisibility(View.INVISIBLE);
+                this.mIvCenterHighightHelp.setVisibility(View.INVISIBLE);
             } else {
-                this.mIvTopCenterModeHelp.setVisibility(4);
-                this.mIvTopCenterMode.setVisibility(4);
-                this.tvConnectState.setVisibility(0);
-                this.mIvFlyState.setVisibility(0);
+                this.mIvTopCenterModeHelp.setVisibility(View.INVISIBLE);
+                this.mIvTopCenterMode.setVisibility(View.INVISIBLE);
+                this.tvConnectState.setVisibility(View.VISIBLE);
+                this.mIvFlyState.setVisibility(View.VISIBLE);
                 this.mIvFlyState.setBackgroundResource(R.drawable.x8_main_vpu_mode);
-                this.mIvCenterHighightHelp.setVisibility(0);
+                this.mIvCenterHighightHelp.setVisibility(View.VISIBLE);
             }
-            this.mIvCenterHighightView.setVisibility(0);
-            this.mIvCenterHighightHelpInfo.setVisibility(0);
+            this.mIvCenterHighightView.setVisibility(View.VISIBLE);
+            this.mIvCenterHighightHelpInfo.setVisibility(View.VISIBLE);
             stopFlick(this.mIvCenterHighightView);
         } else {
-            this.tvConnectState.setVisibility(0);
+            this.tvConnectState.setVisibility(View.VISIBLE);
             stopFlick(this.mIvCenterHighightView);
         }
     }
@@ -279,7 +282,7 @@ public class X8MainTopBarController extends AbsX8Controllers implements View.OnC
         this.mX8MainPowerView.setPercent(percent);
     }
 
-    public void onConnectedState(ConectState state) {
+    public void onConnectedState(@NonNull ConectState state) {
         if (state.isConnectDrone()) {
             DroneState droneState = StateManager.getInstance().getX8Drone();
             if (droneState.isOnGround()) {
@@ -309,7 +312,7 @@ public class X8MainTopBarController extends AbsX8Controllers implements View.OnC
                 this.isReadyGo = false;
                 setTvConnectState(R.string.x8_fly_status_landing);
             }
-            this.mTvDisconnectLatlng.setVisibility(8);
+            this.mTvDisconnectLatlng.setVisibility(View.GONE);
             this.isShowDisconnectLatlng = true;
             return;
         }
@@ -336,7 +339,7 @@ public class X8MainTopBarController extends AbsX8Controllers implements View.OnC
         this.vLandingReturnView.setPercent(autoFcBattery.getLandingCapacity(), autoFcBattery.getRhtCapacity(), autoFcBattery.getTotalCapacity(), percent);
     }
 
-    public void showSportState(AutoFcSportState state) {
+    public void showSportState(@NonNull AutoFcSportState state) {
         this.mIvDistance.setBackgroundResource(R.drawable.x8_main_fly_distance);
         this.mIvHight.setBackgroundResource(R.drawable.x8_main_fly_hight);
         this.mTvHight.setText(X8NumberUtil.getDistanceNumberNoPrexString(state.getHeight(), 1));
@@ -370,7 +373,6 @@ public class X8MainTopBarController extends AbsX8Controllers implements View.OnC
         if (this.ctrlType == 1) {
             this.x8SingleCustomDialog = new X8SingleCustomDialog(this.handleView.getContext(), getString(R.string.x8_fly_status_atti_title), getString(R.string.x8_fly_status_atti_message), getString(R.string.x8_fly_status_atti_comfire), false, new X8SingleCustomDialog.onDialogButtonClickListener() {
                 @Override
-                // com.fimi.app.x8s.widget.X8SingleCustomDialog.onDialogButtonClickListener
                 public void onSingleButtonClick() {
                 }
             });
@@ -379,7 +381,6 @@ public class X8MainTopBarController extends AbsX8Controllers implements View.OnC
         } else if (this.ctrlType == 3) {
             this.x8SingleCustomDialog = new X8SingleCustomDialog(this.handleView.getContext(), getString(R.string.x8_fly_status_vpu_title), getString(R.string.x8_fly_status_vpu_message), getString(R.string.x8_fly_status_vpu_comfire), false, new X8SingleCustomDialog.onDialogButtonClickListener() {
                 @Override
-                // com.fimi.app.x8s.widget.X8SingleCustomDialog.onDialogButtonClickListener
                 public void onSingleButtonClick() {
                     X8MainTopBarController.this.x8SingleCustomDialog.dismiss();
                 }
@@ -397,7 +398,9 @@ public class X8MainTopBarController extends AbsX8Controllers implements View.OnC
             alphaAnimation.setRepeatCount(-1);
             alphaAnimation.setRepeatMode(2);
             this.isStartFlick = true;
-            view.startAnimation(alphaAnimation);
+            if (view != null) {
+                view.startAnimation(alphaAnimation);
+            }
         }
     }
 

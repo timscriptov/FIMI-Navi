@@ -290,20 +290,20 @@ public class X8RCCalibrationController extends AbsX8MenuBoxControllers implement
     private void gotoModel(RcStatus rcStatus) {
         if (this.curStatus != rcStatus) {
             this.curStatus = rcStatus;
-            this.rc_layout.setVisibility(0);
-            this.rt_layout.setVisibility(8);
-            this.leftMidTop.setVisibility(8);
-            this.leftMidBottom.setVisibility(8);
-            this.leftMidLeft.setVisibility(8);
-            this.leftMidRight.setVisibility(8);
-            this.rightMidTop.setVisibility(8);
-            this.rightMidRight.setVisibility(8);
-            this.rightMidBottom.setVisibility(8);
-            this.rightMidLeft.setVisibility(8);
-            this.leftDownRoller.setVisibility(8);
-            this.leftUpRoller.setVisibility(8);
-            this.cali_btn.setVisibility(8);
-            this.errorTip.setVisibility(8);
+            this.rc_layout.setVisibility(View.VISIBLE);
+            this.rt_layout.setVisibility(View.GONE);
+            this.leftMidTop.setVisibility(View.GONE);
+            this.leftMidBottom.setVisibility(View.GONE);
+            this.leftMidLeft.setVisibility(View.GONE);
+            this.leftMidRight.setVisibility(View.GONE);
+            this.rightMidTop.setVisibility(View.GONE);
+            this.rightMidRight.setVisibility(View.GONE);
+            this.rightMidBottom.setVisibility(View.GONE);
+            this.rightMidLeft.setVisibility(View.GONE);
+            this.leftDownRoller.setVisibility(View.GONE);
+            this.leftUpRoller.setVisibility(View.GONE);
+            this.cali_btn.setVisibility(View.GONE);
+            this.errorTip.setVisibility(View.GONE);
             if (this.curStatus == RcStatus.error) {
                 this.control_layout.setBackground(new BitmapDrawable(ImageUtils.getBitmapByPath(this.control_layout.getContext(), R.drawable.x8_rc_unable_bg)));
             } else if (rcStatus == RcStatus.rollerModel) {
@@ -312,12 +312,12 @@ public class X8RCCalibrationController extends AbsX8MenuBoxControllers implement
                 this.control_layout.setBackground(new BitmapDrawable(ImageUtils.getBitmapByPath(this.control_layout.getContext(), R.drawable.x8_rc_roller_bg)));
             }
             if (rcStatus == RcStatus.ideal) {
-                this.leftDownRoller.setVisibility(0);
-                this.leftUpRoller.setVisibility(0);
+                this.leftDownRoller.setVisibility(View.VISIBLE);
+                this.leftUpRoller.setVisibility(View.VISIBLE);
                 this.tipTV.setText(getString(R.string.x8_rc_lead_tip));
                 this.cali_btn.setEnabled(true);
                 this.cali_btn.setAlpha(1.0f);
-                this.cali_btn.setVisibility(0);
+                this.cali_btn.setVisibility(View.VISIBLE);
                 this.leftClips.clear();
                 this.rightClips.clear();
                 this.lefMidView.setType(this.leftClips);
@@ -328,20 +328,20 @@ public class X8RCCalibrationController extends AbsX8MenuBoxControllers implement
                 this.leftDownRoller.clean();
             } else if (rcStatus == RcStatus.joyModel) {
                 this.tipTV.setText(getString(R.string.x8_rc_joy_tip));
-                this.leftMidTop.setVisibility(0);
-                this.leftMidBottom.setVisibility(0);
-                this.leftMidLeft.setVisibility(0);
-                this.leftMidRight.setVisibility(0);
+                this.leftMidTop.setVisibility(View.VISIBLE);
+                this.leftMidBottom.setVisibility(View.VISIBLE);
+                this.leftMidLeft.setVisibility(View.VISIBLE);
+                this.leftMidRight.setVisibility(View.VISIBLE);
                 this.lefMidView.setAlpha(1.0f);
                 this.rightMidView.setAlpha(1.0f);
-                this.rightMidTop.setVisibility(0);
-                this.rightMidRight.setVisibility(0);
-                this.rightMidBottom.setVisibility(0);
-                this.rightMidLeft.setVisibility(0);
+                this.rightMidTop.setVisibility(View.VISIBLE);
+                this.rightMidRight.setVisibility(View.VISIBLE);
+                this.rightMidBottom.setVisibility(View.VISIBLE);
+                this.rightMidLeft.setVisibility(View.VISIBLE);
             } else if (rcStatus == RcStatus.rollerModel) {
                 this.tipTV.setText(getString(R.string.x8_rc_roller_tip));
-                this.leftDownRoller.setVisibility(0);
-                this.leftUpRoller.setVisibility(0);
+                this.leftDownRoller.setVisibility(View.VISIBLE);
+                this.leftUpRoller.setVisibility(View.VISIBLE);
                 this.leftClips.clear();
                 this.rightClips.clear();
                 this.lefMidView.setAlpha(0.4f);
@@ -358,31 +358,31 @@ public class X8RCCalibrationController extends AbsX8MenuBoxControllers implement
                 if (this.fcCtrlManager != null) {
                     this.fcCtrlManager.rcCalibration(4, this);
                 }
-                this.rc_layout.setVisibility(8);
-                this.rt_layout.setVisibility(0);
+                this.rc_layout.setVisibility(View.GONE);
+                this.rt_layout.setVisibility(View.VISIBLE);
                 this.rtImage.setImageResource(R.drawable.x8_calibration_success_icon);
                 this.rtTip.setText(getString(R.string.x8_compass_result_success));
                 this.rtBtn.setText(R.string.x8_compass_reuslt_success_confirm);
             } else if (rcStatus == RcStatus.fail) {
-                this.rt_layout.setVisibility(0);
-                this.rc_layout.setVisibility(8);
+                this.rt_layout.setVisibility(View.VISIBLE);
+                this.rc_layout.setVisibility(View.GONE);
                 this.rtTip.setText(getString(R.string.x8_compass_result_failed));
                 this.rtBtn.setText(R.string.x8_compass_reuslt_failed_confirm);
                 this.rtImage.setImageResource(R.drawable.x8_calibration_fail_icon);
                 this.errorTip.setText(getString(R.string.x8_compass_result_failed_tip));
-                this.errorTip.setVisibility(0);
+                this.errorTip.setVisibility(View.VISIBLE);
             } else if (rcStatus == RcStatus.conBroken) {
-                this.rt_layout.setVisibility(0);
-                this.rc_layout.setVisibility(8);
+                this.rt_layout.setVisibility(View.VISIBLE);
+                this.rc_layout.setVisibility(View.GONE);
                 this.rtImage.setImageResource(R.drawable.x8_calibration_fail_icon);
                 this.rtTip.setText(getString(R.string.x8_compass_result_failed));
                 this.rtBtn.setText(R.string.x8_compass_reuslt_failed_confirm);
                 this.errorTip.setText(getString(R.string.x8_rc_calibration_tip));
-                this.errorTip.setVisibility(0);
+                this.errorTip.setVisibility(View.VISIBLE);
                 this.rtBtn.setEnabled(true);
                 this.rtBtn.setAlpha(1.0f);
             } else if (rcStatus == RcStatus.error) {
-                this.cali_btn.setVisibility(0);
+                this.cali_btn.setVisibility(View.VISIBLE);
                 this.cali_btn.setEnabled(false);
                 this.cali_btn.setAlpha(0.6f);
             }
@@ -533,10 +533,10 @@ public class X8RCCalibrationController extends AbsX8MenuBoxControllers implement
         this.downRoller = false;
         this.leftMidResult = 0;
         this.rightMidResult = 0;
-        this.cali_btn.setVisibility(0);
-        this.rc_layout.setVisibility(0);
-        this.rt_layout.setVisibility(8);
-        this.errorTip.setVisibility(8);
+        this.cali_btn.setVisibility(View.VISIBLE);
+        this.rc_layout.setVisibility(View.VISIBLE);
+        this.rt_layout.setVisibility(View.GONE);
+        this.errorTip.setVisibility(View.GONE);
         gotoModel(this.rcStatus);
         this.cali_btn.setEnabled(false);
         this.cali_btn.setAlpha(0.6f);

@@ -6,7 +6,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -47,7 +46,6 @@ public class LibPersonAboutActivity extends BasePersonActivity implements Bitmap
     private ListView mLvMainSetting;
     private PersettingThirdAdapt mPersettingThirdAdapt;
     private List<PersonSetting> mThirdPersonSettings;
-    private TitleView mTitleView;
     private final AdapterView.OnItemClickListener mThirdListerner = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -61,6 +59,7 @@ public class LibPersonAboutActivity extends BasePersonActivity implements Bitmap
             }
         }
     };
+    private TitleView mTitleView;
 
     @Override
     public void setStatusBarColor() {

@@ -16,6 +16,7 @@ import java.util.concurrent.Future;
 
 
 public class X8FlightLogFile extends X8FdsFile {
+    private final String[] zipFileSuffix = {X8FcLogManager.FLIGHT_PLAYBACK};
     private long dateSecond;
     private FdsUploadTask fdsUploadTask;
     private File file;
@@ -30,7 +31,6 @@ public class X8FlightLogFile extends X8FdsFile {
     private String fileLogCollectState = "1";
     private String flightMileage = "0.0";
     private int flightDuration = 0;
-    private final String[] zipFileSuffix = {X8FcLogManager.FLIGHT_PLAYBACK};
 
     public String getShowLen() {
         return this.showLen;

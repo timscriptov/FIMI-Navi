@@ -49,11 +49,11 @@ public class X8CameraFragmentPrensenter<T extends MediaModel> extends X8BaseMedi
     private static final String TAG = "X8CameraFragmentPrensenter";
     private final int defaultBound;
     private final Handler durationHandler;
-    private X8CameraFragmentPrensenter<T>.LocalFileDeleteReceiver mLocalFileDeleteReceiver;
     private final X8MediaThumDownloadManager mMediaDownloadManager;
     private final OnDownloadUiListener mOnDownloadUiListener;
     private final OnDownloadUiListener mOnOriginalDownloadUiListener;
     private final Handler mainHandler;
+    private X8CameraFragmentPrensenter<T>.LocalFileDeleteReceiver mLocalFileDeleteReceiver;
 
     public X8CameraFragmentPrensenter(RecyclerView mRecyclerView, X8sPanelRecycleAdapter mPanelRecycleAdapter, ISelectData mISelectData, Context context) {
         super(mRecyclerView, mPanelRecycleAdapter, mISelectData, context, true);
@@ -130,8 +130,8 @@ public class X8CameraFragmentPrensenter<T extends MediaModel> extends X8BaseMedi
             @Override
             public void onViewRecycled(RecyclerView.ViewHolder holder) {
                 if (holder instanceof BodyRecycleViewHolder mBodyRecycleViewHolder) {
-                    mBodyRecycleViewHolder.tvDuringdate.setVisibility(8);
-                    mBodyRecycleViewHolder.ivSelect.setVisibility(8);
+                    mBodyRecycleViewHolder.tvDuringdate.setVisibility(View.GONE);
+                    mBodyRecycleViewHolder.ivSelect.setVisibility(View.GONE);
                 }
             }
         });
@@ -226,9 +226,9 @@ public class X8CameraFragmentPrensenter<T extends MediaModel> extends X8BaseMedi
             }
         });
         if (this.isEnterSelectMode) {
-            holder.mBtnAllSelect.setVisibility(0);
+            holder.mBtnAllSelect.setVisibility(View.VISIBLE);
         } else {
-            holder.mBtnAllSelect.setVisibility(8);
+            holder.mBtnAllSelect.setVisibility(View.GONE);
         }
     }
 
@@ -299,12 +299,12 @@ public class X8CameraFragmentPrensenter<T extends MediaModel> extends X8BaseMedi
                     holder.mIvVideoFlag.setImageResource(R.drawable.x8_ablumn_normal_vedio_mark);
                     holder.tvDuringdate.setTag(currentFilePath);
                     if (!TextUtils.isEmpty(mediaModel.getVideoDuration())) {
-                        holder.tvDuringdate.setVisibility(0);
+                        holder.tvDuringdate.setVisibility(View.VISIBLE);
                         holder.tvDuringdate.setText(mediaModel.getVideoDuration());
                     }
                 } else {
                     holder.mIvVideoFlag.setImageResource(R.drawable.x8_ablumn_normal_photo_mark);
-                    holder.tvDuringdate.setVisibility(4);
+                    holder.tvDuringdate.setVisibility(View.INVISIBLE);
                 }
                 if (this.isEnterSelectMode) {
                     if (mediaModel.isSelect()) {
@@ -345,14 +345,14 @@ public class X8CameraFragmentPrensenter<T extends MediaModel> extends X8BaseMedi
                         showDownloadImg(holder, false);
                     }
                     if (mediaModel.isDownLoadOriginalFile()) {
-                        holder.mIvDownloaded.setVisibility(0);
+                        holder.mIvDownloaded.setVisibility(View.VISIBLE);
                     } else {
-                        holder.mIvDownloaded.setVisibility(8);
+                        holder.mIvDownloaded.setVisibility(View.GONE);
                     }
                     if (mediaModel.getFileSize() > 0) {
                         holder.mFileSize.setText(ByteUtil.getNetFileSizeDescription(mediaModel.getFileSize()));
                     } else {
-                        holder.mFileSize.setVisibility(8);
+                        holder.mFileSize.setVisibility(View.GONE);
                     }
                     holder.mDownloadStateView.setOnClickListener(new View.OnClickListener() {
                         @Override

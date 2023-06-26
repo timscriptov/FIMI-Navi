@@ -31,14 +31,14 @@ import java.util.Map;
 
 
 public class X8CameraItemArrayController extends AbsX8Controllers implements JsonUiCallBackListener, PhotoArrayParamsAdapter.PhotoArrayItemClickListener {
+    private final CameraManager cameraManager;
+    private final SubParamItemListener listener;
     Map<String, String> keyMap;
     List<String> paramList;
     X8CameraParamsValue x8CameraParamsValue;
     private PhotoArrayParamsAdapter arrayParamsAdapter;
-    private final CameraManager cameraManager;
     private Context context;
     private GridLayoutManager layoutManager;
-    private final SubParamItemListener listener;
     private String paramKey;
     private String paramValue;
     private List<String> params;
@@ -60,9 +60,9 @@ public class X8CameraItemArrayController extends AbsX8Controllers implements Jso
                 this.arrayParamsAdapter.updateData(this.params, null, this.paramKey, 0);
             }
         } else if (paramType.equals(CameraJsonCollection.KEY_RECORD_MODE)) {
-            this.x8RgCameraResolution.setVisibility(8);
+            this.x8RgCameraResolution.setVisibility(View.GONE);
         } else {
-            this.x8RgCameraResolution.setVisibility(8);
+            this.x8RgCameraResolution.setVisibility(View.GONE);
         }
         this.paramKey = paramType;
     }
@@ -111,7 +111,7 @@ public class X8CameraItemArrayController extends AbsX8Controllers implements Jso
     }
 
     public void setRgCameraResolutionVisibility() {
-        this.x8RgCameraResolution.setVisibility(8);
+        this.x8RgCameraResolution.setVisibility(View.GONE);
     }
 
     @Override

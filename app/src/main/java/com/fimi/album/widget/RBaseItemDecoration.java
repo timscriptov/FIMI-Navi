@@ -13,9 +13,9 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 
 public class RBaseItemDecoration extends RecyclerView.ItemDecoration {
+    private final Paint mPaint = new Paint(1);
     private Drawable mDivider;
     private int mDividerHeight;
-    private final Paint mPaint = new Paint(1);
 
     public RBaseItemDecoration(Context context, int dividerHeight, int dividerColor) {
         this.mDividerHeight = 2;

@@ -15,10 +15,10 @@ import com.fimi.android.app.R;
 public class X8MainReturnTimeTextView extends View {
 
     private static final String TAG = "X8MainReturnTimeTextVie";
-    private float fontSize;
     private final Paint mPaint;
     private final Paint mPaintStrock;
     private final Paint mPaintText;
+    private float fontSize;
     private String mStrTime;
     private int percent;
     private float photoWidth;

@@ -8,7 +8,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -57,13 +56,6 @@ public class PersonSettingNewActivity extends BasePersonActivity implements Bitm
     private PersettingFourAdapt mPersettingFourAdapt;
     private PersettingSecondAdapt mPersettingSecondAdapt;
     private List<PersonSetting> mSecondPersonSettings;
-    private List<PersonSetting> mThirdPersonSettings;
-    private TitleView mTitleView;
-    private TextView mTvId;
-    private TextView mTvName;
-    private RelativeLayout rlLoginNow;
-    private RelativeLayout rlPersonTitle;
-    private boolean isRequestNewVersion = false;
     private final AdapterView.OnItemClickListener mSecondListerner = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -75,6 +67,13 @@ public class PersonSettingNewActivity extends BasePersonActivity implements Bitm
             }
         }
     };
+    private List<PersonSetting> mThirdPersonSettings;
+    private TitleView mTitleView;
+    private TextView mTvId;
+    private TextView mTvName;
+    private RelativeLayout rlLoginNow;
+    private RelativeLayout rlPersonTitle;
+    private boolean isRequestNewVersion = false;
     private final AdapterView.OnItemClickListener mFourListerner = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

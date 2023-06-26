@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.view.View;
 import android.view.animation.Interpolator;
 
+import androidx.annotation.NonNull;
 import androidx.core.view.ViewCompat;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class YoYo {
     private final int repeatTimes;
     private final View target;
 
-    private YoYo(AnimationComposer animationComposer) {
+    private YoYo(@NonNull AnimationComposer animationComposer) {
         this.animator = animationComposer.animator;
         this.duration = animationComposer.duration;
         this.delay = animationComposer.delay;
@@ -41,6 +42,7 @@ public class YoYo {
         this.target = animationComposer.target;
     }
 
+    @NonNull
     public static AnimationComposer with(BaseViewAnimator animator) {
         return new AnimationComposer(animator);
     }
@@ -97,9 +99,9 @@ public class YoYo {
 
     public static final class AnimationComposer {
         private final BaseViewAnimator animator;
+        private final List<Animator.AnimatorListener> callbacks = new ArrayList<>();
         private Interpolator interpolator;
         private View target;
-        private final List<Animator.AnimatorListener> callbacks = new ArrayList();
         private long duration = 1000;
         private long delay = 0;
         private boolean repeat = false;
@@ -165,7 +167,6 @@ public class YoYo {
         public AnimationComposer onStart(final AnimatorCallback callback) {
             this.callbacks.add(new EmptyAnimatorListener() {
                 @Override
-                // com.fimi.app.x8s.anim.YoYo.EmptyAnimatorListener, android.animation.Animator.AnimatorListener
                 public void onAnimationStart(Animator animation) {
                     callback.call(animation);
                 }
@@ -176,7 +177,6 @@ public class YoYo {
         public AnimationComposer onEnd(final AnimatorCallback callback) {
             this.callbacks.add(new EmptyAnimatorListener() {
                 @Override
-                // com.fimi.app.x8s.anim.YoYo.EmptyAnimatorListener, android.animation.Animator.AnimatorListener
                 public void onAnimationEnd(Animator animation) {
                     callback.call(animation);
                 }
@@ -187,7 +187,6 @@ public class YoYo {
         public AnimationComposer onCancel(final AnimatorCallback callback) {
             this.callbacks.add(new EmptyAnimatorListener() {
                 @Override
-                // com.fimi.app.x8s.anim.YoYo.EmptyAnimatorListener, android.animation.Animator.AnimatorListener
                 public void onAnimationCancel(Animator animation) {
                     callback.call(animation);
                 }
@@ -198,7 +197,6 @@ public class YoYo {
         public AnimationComposer onRepeat(final AnimatorCallback callback) {
             this.callbacks.add(new EmptyAnimatorListener() {
                 @Override
-                // com.fimi.app.x8s.anim.YoYo.EmptyAnimatorListener, android.animation.Animator.AnimatorListener
                 public void onAnimationRepeat(Animator animation) {
                     callback.call(animation);
                 }
@@ -206,6 +204,7 @@ public class YoYo {
             return this;
         }
 
+        @NonNull
         public YoYoString playOn(View target) {
             this.target = target;
             return new YoYoString(new YoYo(this).play(), this.target);

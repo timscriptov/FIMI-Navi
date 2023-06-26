@@ -1,6 +1,7 @@
 package com.fimi.album.presenter;
 
 import android.app.Activity;
+import android.view.View;
 
 import com.fimi.album.biz.DataManager;
 import com.fimi.album.entity.MediaModel;
@@ -28,7 +29,7 @@ public class MediaPresenter<T extends Activity> implements IDateHandler {
         HandlerManager.obtain().getHandlerInMainThread().post(new Runnable() {
             @Override
             public void run() {
-                MediaPresenter.this.mMediaActivity.getmProgressBar().setVisibility(8);
+                MediaPresenter.this.mMediaActivity.getmProgressBar().setVisibility(View.GONE);
             }
         });
         onStartReshAdapter();
@@ -41,7 +42,7 @@ public class MediaPresenter<T extends Activity> implements IDateHandler {
     public void forEachFile(String folderPath) {
         File file = new File(folderPath);
         if (file.exists()) {
-            this.mMediaActivity.getmProgressBar().setVisibility(0);
+            this.mMediaActivity.getmProgressBar().setVisibility(View.VISIBLE);
             this.mDataManager.forEachFolder(file.getAbsolutePath());
         }
     }

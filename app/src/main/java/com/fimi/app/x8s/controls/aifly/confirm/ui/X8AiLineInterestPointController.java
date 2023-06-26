@@ -11,10 +11,10 @@ import com.fimi.android.app.R;
 
 public class X8AiLineInterestPointController {
     private final RelativeLayout group;
-    private OnInterestTouchUp listener;
     private final TextView textView;
-    private ImageView tmpView;
     private final ImageView view;
+    private OnInterestTouchUp listener;
+    private ImageView tmpView;
 
     public X8AiLineInterestPointController(RelativeLayout group, ImageView view, TextView textView) {
         this.group = group;
@@ -57,12 +57,12 @@ public class X8AiLineInterestPointController {
     public void showView(boolean b) {
         if (this.view != null && this.textView != null) {
             if (b) {
-                this.view.setVisibility(0);
-                this.textView.setVisibility(0);
+                this.view.setVisibility(View.VISIBLE);
+                this.textView.setVisibility(View.VISIBLE);
                 return;
             }
-            this.view.setVisibility(8);
-            this.textView.setVisibility(8);
+            this.view.setVisibility(View.GONE);
+            this.textView.setVisibility(View.GONE);
         }
     }
 

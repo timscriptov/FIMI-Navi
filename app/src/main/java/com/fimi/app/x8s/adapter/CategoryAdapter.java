@@ -2,6 +2,7 @@ package com.fimi.app.x8s.adapter;
 
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -21,6 +22,7 @@ public class CategoryAdapter extends FragmentStatePagerAdapter {
         this.fragments = fragmentList;
     }
 
+    @NonNull
     @Override
     public Fragment getItem(int position) {
         if (this.fragments == null) {
@@ -37,13 +39,14 @@ public class CategoryAdapter extends FragmentStatePagerAdapter {
         return this.fragments.size();
     }
 
+    @NonNull
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
         return super.instantiateItem(container, position);
     }
 
     @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         super.destroyItem(container, position, object);
     }
 }

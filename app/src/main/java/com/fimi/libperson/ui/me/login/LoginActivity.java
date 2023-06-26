@@ -73,12 +73,12 @@ public class LoginActivity extends BaseActivity implements IThirdLoginView, Bitm
         this.rlFimiLogin = findViewById(R.id.rl_fimi_login);
         FontUtil.changeFontLanTing(getAssets(), this.mBtnLogin, this.mBtnRegister, this.mTvRegion, this.mTvNoLogin);
         if (Constants.productType == ProductEnum.X8S) {
-            this.mTvNoLogin.setVisibility(0);
+            this.mTvNoLogin.setVisibility(View.VISIBLE);
         } else {
             Constants.isRefreshMainView = true;
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) this.rlFimiLogin.getLayoutParams();
             layoutParams.bottomMargin = DensityUtil.dip2px(this, 150.0f);
-            this.mTvNoLogin.setVisibility(8);
+            this.mTvNoLogin.setVisibility(View.GONE);
         }
         this.mLoginPresenter = new ThirdLoginPresenter(this);
         this.mLargeView = findViewById(R.id.large_view);

@@ -29,11 +29,11 @@ import java.util.List;
 
 
 public class GglMapAiPoint2PointManager extends AbsAiPoint2PointManager implements GoogleMap.OnMapClickListener, GoogleMap.OnMarkerClickListener {
-    boolean isFollow;
-    List<LatLng> latLngs = new ArrayList();
     private final Context context;
     private final GglMapLocationManager gglMapLocationManager;
     private final GoogleMap googleMap;
+    boolean isFollow;
+    List<LatLng> latLngs = new ArrayList();
     private Circle limitCircle;
     private MapPointLatLng mp;
     private IX8MarkerListener point2PointMarkerSelectListener;

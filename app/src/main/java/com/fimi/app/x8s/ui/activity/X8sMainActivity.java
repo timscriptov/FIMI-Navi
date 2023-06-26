@@ -758,7 +758,6 @@ public class X8sMainActivity extends X8BaseActivity implements ConnectListener, 
         this.mX8MainBallProgress = findViewById(R.id.plane_pitching_progress);
         this.mX8MainPlaneAngleSeekBar = findViewById(R.id.plane_angle_seek_bar);
         mX8MainPoseBallContainer = findViewById(R.id.pose_ball_container);
-
         this.mMapVideoController = new X8MapVideoController(this.mainRootView, savedInstanceState, this);
         this.mMapVideoController.setListener(this.mIX8MapVideoControllerListerner);
         this.mMapVideoController.setListener(this.mainTopBarListener);

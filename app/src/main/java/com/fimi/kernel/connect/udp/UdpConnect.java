@@ -32,6 +32,9 @@ public class UdpConnect extends BaseConnect implements IDataTransfer, IRetransmi
     private static DatagramPacket packetRcv;
     private static DatagramPacket packetSend;
     private static DatagramSocket socket = null;
+    private final SocketOption socketOption;
+    private final ResultListener x9Listener;
+    private final byte[] msgRcv = new byte[1024];
     public LinkedBlockingDeque<Object> cmdQuene = new LinkedBlockingDeque<>();
     InetAddress hostAddress;
     boolean isWait = false;
@@ -41,10 +44,7 @@ public class UdpConnect extends BaseConnect implements IDataTransfer, IRetransmi
     private TimerSendQueueThread mTimerSendQueueThread;
     private ReadThread readThread;
     private SendThread sendThread;
-    private final SocketOption socketOption;
-    private final ResultListener x9Listener;
     private boolean udpLife = true;
-    private final byte[] msgRcv = new byte[1024];
 
     public UdpConnect(DatagramSocket socket2, SocketOption option, ResultListener listener) throws UnknownHostException {
         this.hostAddress = null;

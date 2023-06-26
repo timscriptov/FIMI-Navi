@@ -22,21 +22,21 @@ import java.util.List;
 
 public class X8CustomChartView extends View {
     final String TAG;
-    GestureDetector.OnGestureListener onGestureListener;
     private final double MAX_VALUE;
     private final double MIN_VALUE;
+    private final List<Integer> dataList;
+    private final int[] label;
+    private final int verticalMinDistance;
+    GestureDetector.OnGestureListener onGestureListener;
     private Bitmap backgroundBitmap;
     private Paint bitmapPaint;
     private double curValue;
-    private final List<Integer> dataList;
     private GestureDetector gestureDetector;
     private boolean isEnable;
     private boolean isValueChanged;
-    private final int[] label;
     private float lastData;
     private OnSeekChangedListener listener;
     private Paint paintCurve;
-    private final int verticalMinDistance;
     private int xPoint;
     private int xScale;
     private int yPoint;

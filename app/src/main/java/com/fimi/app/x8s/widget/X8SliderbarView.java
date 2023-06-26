@@ -20,22 +20,22 @@ import org.slf4j.Marker;
 
 public class X8SliderbarView extends View {
     private static final String TAG = "ScaleView";
-    int refreshCount;
     private final int MAX_VALUE;
     private final int MIN_VALUE;
-    private float currentX;
     private final int duration;
-    private boolean isDrag;
-    private boolean isInit;
     private final Paint mLinePaint;
     private final Paint mMaxRoundPaint;
     private final Paint mMinRoundPaint;
-    private OnScaleViewChangeListener mOnScaleViewChangeListener;
     private final Paint mPaint;
-    private int mProgress;
     private final Bitmap mRoundBmp;
     private final Paint mScaleTextPaint;
     private final float radius;
+    int refreshCount;
+    private float currentX;
+    private boolean isDrag;
+    private boolean isInit;
+    private OnScaleViewChangeListener mOnScaleViewChangeListener;
+    private int mProgress;
     private boolean refreshProgress;
     private int scaleCount;
     private float scaleHeight;

@@ -1,9 +1,9 @@
 package com.fimi.app.x8s.manager;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.android.app.R;
 import com.fimi.app.x8s.ui.activity.X8sMainActivity;
-import com.fimi.kernel.dataparser.usb.CmdResult;
-import com.fimi.kernel.dataparser.usb.UiCallBackListener;
 import com.fimi.network.BaseManager;
 import com.fimi.widget.X8ToastUtil;
 import com.fimi.x8sdk.modulestate.StateManager;
@@ -12,7 +12,7 @@ import com.fimi.x8sdk.modulestate.StateManager;
 public class X8MapGetCityManager extends BaseManager {
     public static String locality = "";
 
-    public static void onSetHomeEvent(final X8sMainActivity activity, final int type) {
+    public static void onSetHomeEvent(@NonNull final X8sMainActivity activity, final int type) {
         double lat;
         double lng;
         if (activity.getmMapVideoController().getFimiMap().hasHomeInfo()) {
@@ -31,18 +31,15 @@ public class X8MapGetCityManager extends BaseManager {
                     lng = latLng[1];
                 }
             }
-            activity.getFcManager().setHomePoint(h, lat, lng, type, accuracy, new UiCallBackListener() {
-                @Override
-                public void onComplete(CmdResult cmdResult, Object o) {
-                    if (cmdResult.isSuccess()) {
-                        if (type != 0) {
-                            X8ToastUtil.showToast(activity, activity.getString(R.string.x8_general_return_person), 0);
-                        } else {
-                            X8ToastUtil.showToast(activity, activity.getString(R.string.x8_general_return_drone), 0);
-                        }
-                    } else if (o == null) {
-                        X8ToastUtil.showToast(activity, activity.getString(R.string.x8_general_return_failed), 0);
+            activity.getFcManager().setHomePoint(h, lat, lng, type, accuracy, (cmdResult, o) -> {
+                if (cmdResult.isSuccess()) {
+                    if (type != 0) {
+                        X8ToastUtil.showToast(activity, activity.getString(R.string.x8_general_return_person), 0);
+                    } else {
+                        X8ToastUtil.showToast(activity, activity.getString(R.string.x8_general_return_drone), 0);
                     }
+                } else if (o == null) {
+                    X8ToastUtil.showToast(activity, activity.getString(R.string.x8_general_return_failed), 0);
                 }
             });
         }

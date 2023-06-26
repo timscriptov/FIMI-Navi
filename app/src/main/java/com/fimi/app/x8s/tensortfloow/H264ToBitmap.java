@@ -2,10 +2,15 @@ package com.fimi.app.x8s.tensortfloow;
 
 import android.graphics.Bitmap;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
+
+import org.jetbrains.annotations.Contract;
 
 
 public class H264ToBitmap {
+    @Nullable
     public static Bitmap rgb2Bitmap(byte[] data, int width, int height) {
         int[] colors = convertByteToColor(data);
         if (colors == null) {
@@ -14,7 +19,9 @@ public class H264ToBitmap {
         return Bitmap.createBitmap(colors, 0, width, width, height, Bitmap.Config.ARGB_8888);
     }
 
-    public static int[] convertByteToColor(byte[] data) {
+    @Nullable
+    @Contract(pure = true)
+    public static int[] convertByteToColor(@NonNull byte[] data) {
         int size = data.length;
         if (size == 0) {
             return null;

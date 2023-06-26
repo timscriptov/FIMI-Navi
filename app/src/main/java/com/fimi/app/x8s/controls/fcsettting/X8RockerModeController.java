@@ -183,7 +183,7 @@ public class X8RockerModeController extends AbsX8MenuBoxControllers implements V
     @Override
     public void showItem() {
         this.isShow = true;
-        this.contentView.setVisibility(0);
+        this.contentView.setVisibility(View.VISIBLE);
         requestDefaultValue();
         getDroneState();
         onRcConnected(this.isRcConnect);
@@ -192,7 +192,7 @@ public class X8RockerModeController extends AbsX8MenuBoxControllers implements V
     @Override
     public void closeItem() {
         this.isShow = false;
-        this.contentView.setVisibility(8);
+        this.contentView.setVisibility(View.GONE);
         defaultVal();
     }
 

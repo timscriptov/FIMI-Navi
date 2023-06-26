@@ -40,6 +40,16 @@ import router.Router;
 
 
 public class RegisterActivity extends BasePersonActivity implements IRegisterView {
+    private final TextView.OnEditorActionListener mOnEditorActionListener = new TextView.OnEditorActionListener() {
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            if (actionId == 4 || actionId == 6 || (event != null && 66 == event.getKeyCode() && event.getAction() == 0)) {
+                AbAppUtil.closeSoftInput(RegisterActivity.this.mContext);
+                return false;
+            }
+            return false;
+        }
+    };
     Button mBtnRegisterEmail;
     Button mBtnRegisterPhone;
     CheckBox mCbEmailSelectService;
@@ -70,16 +80,6 @@ public class RegisterActivity extends BasePersonActivity implements IRegisterVie
     boolean isEmail = false;
     private boolean isCheckEmail = false;
     private boolean isCheckPhone = false;
-    private final TextView.OnEditorActionListener mOnEditorActionListener = new TextView.OnEditorActionListener() {
-        @Override
-        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-            if (actionId == 4 || actionId == 6 || (event != null && 66 == event.getKeyCode() && event.getAction() == 0)) {
-                AbAppUtil.closeSoftInput(RegisterActivity.this.mContext);
-                return false;
-            }
-            return false;
-        }
-    };
 
     @Override
     public void setStatusBarColor() {
@@ -162,8 +162,8 @@ public class RegisterActivity extends BasePersonActivity implements IRegisterVie
         this.mTitleView.setTvTitle("");
         this.mTvTitleNmae.setText(getString(R.string.login_register_main_phone_title));
         this.mTitleView.setTvRightVisible(0);
-        this.mRlIphone.setVisibility(0);
-        this.mRlEmail.setVisibility(4);
+        this.mRlIphone.setVisibility(View.VISIBLE);
+        this.mRlEmail.setVisibility(View.INVISIBLE);
         this.mEtAccount.addTextChangedListener(new EditTextWatcher(this.mEtAccount));
         this.mEtEmailAccount.addTextChangedListener(new EditTextWatcher(this.mEtEmailAccount));
         this.mEtEmailPassword.addTextChangedListener(new EditTextWatcher(this.mEtEmailPassword));
@@ -189,10 +189,10 @@ public class RegisterActivity extends BasePersonActivity implements IRegisterVie
                     RegisterActivity.this.isEmail = false;
                     RegisterActivity.this.mTitleView.setTvRightText(RegisterActivity.this.getString(R.string.login_email_title));
                     RegisterActivity.this.mTvTitleNmae.setText(R.string.login_register_main_phone_title);
-                    RegisterActivity.this.mBtnRegisterPhone.setVisibility(0);
-                    RegisterActivity.this.mBtnRegisterEmail.setVisibility(8);
-                    RegisterActivity.this.mRlEmail.setVisibility(4);
-                    RegisterActivity.this.mRlIphone.setVisibility(0);
+                    RegisterActivity.this.mBtnRegisterPhone.setVisibility(View.VISIBLE);
+                    RegisterActivity.this.mBtnRegisterEmail.setVisibility(View.GONE);
+                    RegisterActivity.this.mRlEmail.setVisibility(View.INVISIBLE);
+                    RegisterActivity.this.mRlIphone.setVisibility(View.VISIBLE);
                     if (!RegisterActivity.this.isCheckPhone) {
                         RegisterActivity.this.registerBtnIsClick(false);
                         return;
@@ -207,13 +207,14 @@ public class RegisterActivity extends BasePersonActivity implements IRegisterVie
                 RegisterActivity.this.isEmail = true;
                 RegisterActivity.this.mTitleView.setTvRightText(RegisterActivity.this.getString(R.string.login_iphone_title));
                 RegisterActivity.this.mTvTitleNmae.setText(R.string.login_register_main_email_title);
-                RegisterActivity.this.mRlEmail.setVisibility(0);
-                RegisterActivity.this.mRlIphone.setVisibility(4);
-                RegisterActivity.this.mBtnRegisterPhone.setVisibility(8);
-                RegisterActivity.this.mBtnRegisterEmail.setVisibility(0);
+                RegisterActivity.this.mRlEmail.setVisibility(View.VISIBLE);
+                RegisterActivity.this.mRlIphone.setVisibility(View.INVISIBLE);
+                RegisterActivity.this.mBtnRegisterPhone.setVisibility(View.GONE);
+                RegisterActivity.this.mBtnRegisterEmail.setVisibility(View.VISIBLE);
                 if (!RegisterActivity.this.isCheckEmail) {
                     RegisterActivity.this.registerBtnIsClick(false);
-                } else RegisterActivity.this.registerBtnIsClick(RegisterActivity.this.mEtEmailPassword.getText().length() >= 8 && RegisterActivity.this.mEtEmailPassword.getText().length() <= 16);
+                } else
+                    RegisterActivity.this.registerBtnIsClick(RegisterActivity.this.mEtEmailPassword.getText().length() >= 8 && RegisterActivity.this.mEtEmailPassword.getText().length() <= 16);
             }
         });
         this.mIvShowPassword.setOnClickListener(new View.OnClickListener() {
@@ -282,7 +283,8 @@ public class RegisterActivity extends BasePersonActivity implements IRegisterVie
                 RegisterActivity.this.isCheckPhone = isChecked;
                 if (!RegisterActivity.this.isCheckPhone) {
                     RegisterActivity.this.registerBtnIsClick(false);
-                } else RegisterActivity.this.registerBtnIsClick(RegisterActivity.this.mEtGetVelidationCode.getText().length() == 4);
+                } else
+                    RegisterActivity.this.registerBtnIsClick(RegisterActivity.this.mEtGetVelidationCode.getText().length() == 4);
             }
         });
         this.mTvSelectCountry.setOnClickListener(new View.OnClickListener() {
@@ -315,7 +317,7 @@ public class RegisterActivity extends BasePersonActivity implements IRegisterVie
     @Override
     public void getCodeResult(boolean isSuccess, String errMsg) {
         if (!isSuccess) {
-            this.mTvErrorHint.setVisibility(0);
+            this.mTvErrorHint.setVisibility(View.VISIBLE);
             this.mTvErrorHint.setText(errMsg);
             return;
         }
@@ -351,7 +353,7 @@ public class RegisterActivity extends BasePersonActivity implements IRegisterVie
             Intent it = Router.invoke(this, "activity://app.main");
             readyGoThenKillAllActivity(it);
         } else if (errMsg != null) {
-            this.mTvErrorHint.setVisibility(0);
+            this.mTvErrorHint.setVisibility(View.VISIBLE);
             this.mTvErrorHint.setText(errMsg);
         }
     }
@@ -363,7 +365,7 @@ public class RegisterActivity extends BasePersonActivity implements IRegisterVie
             Intent it = Router.invoke(this, "activity://app.main");
             readyGoThenKillAllActivity(it);
         } else if (errMsg != null) {
-            this.mTvEmailErrorHint.setVisibility(0);
+            this.mTvEmailErrorHint.setVisibility(View.VISIBLE);
             this.mTvEmailErrorHint.setText(errMsg);
         }
     }
@@ -529,12 +531,14 @@ public class RegisterActivity extends BasePersonActivity implements IRegisterVie
             if (R.id.et_password == this.mEditText.getId()) {
                 if (!RegisterActivity.this.isCheckPhone) {
                     RegisterActivity.this.registerBtnIsClick(false);
-                } else RegisterActivity.this.registerBtnIsClick(s.length() >= 8 && RegisterActivity.this.mEtGetVelidationCode.getText().length() == 4);
+                } else
+                    RegisterActivity.this.registerBtnIsClick(s.length() >= 8 && RegisterActivity.this.mEtGetVelidationCode.getText().length() == 4);
             }
             if (R.id.et_verification == this.mEditText.getId()) {
                 if (!RegisterActivity.this.isCheckPhone) {
                     RegisterActivity.this.registerBtnIsClick(false);
-                } else RegisterActivity.this.registerBtnIsClick(s.length() == 4 && RegisterActivity.this.mEtIphonePassword.getText().length() >= 8);
+                } else
+                    RegisterActivity.this.registerBtnIsClick(s.length() == 4 && RegisterActivity.this.mEtIphonePassword.getText().length() >= 8);
             }
         }
     }

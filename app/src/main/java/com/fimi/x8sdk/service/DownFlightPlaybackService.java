@@ -57,6 +57,10 @@ public class DownFlightPlaybackService extends Service {
             downFirmware();
         }
         return super.onStartCommand(intent, flags, startId);
+    }
+
+    public synchronized void startCheckingTask() {
+        checkingTaskCount++;
     }    public DisposeDataHandle dataHandle = new DisposeDataHandle(new DisposeDownloadListener() {
         @Override
         public void onProgress(int progrss, int currentLength) {
@@ -118,10 +122,6 @@ public class DownFlightPlaybackService extends Service {
             DownFlightPlaybackService.this.downFirmware();
         }
     });
-
-    public synchronized void startCheckingTask() {
-        checkingTaskCount++;
-    }
 
     public void downFirmware() {
         if (this.needDownDto != null && this.needDownDto.size() >= 1 && checkingTaskCount < this.needDownDto.size()) {

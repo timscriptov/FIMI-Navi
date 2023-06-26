@@ -2,6 +2,8 @@ package com.fimi.app.x8s.controls;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.android.app.R;
 import com.fimi.app.x8s.controls.aifly.X8AiTaskManager;
 import com.fimi.app.x8s.interfaces.IRightRollerMoveListener;
@@ -15,6 +17,8 @@ import java.util.List;
 
 
 public class RightRollerController {
+    private final List<String> x8EVOptions = Arrays.asList(CameraJsonCollection.rulerValues);
+    private final List<String> x8IsoOptions;
     X8AiTaskManager aiTaskManager;
     CameraManager cameraManager;
     Context context;
@@ -22,10 +26,8 @@ public class RightRollerController {
     int isoIndex;
     X8MainBottomParameterController mX8MainBottomParameterController;
     IRightRollerMoveListener rightRollerMoveListener;
-    private final List<String> x8EVOptions = Arrays.asList(CameraJsonCollection.rulerValues);
-    private final List<String> x8IsoOptions;
 
-    public RightRollerController(CameraManager cameraManager, X8AiTaskManager aiTaskManager, Context context, X8MainBottomParameterController mX8MainBottomParameterController, IRightRollerMoveListener rightRollerMoveListener) {
+    public RightRollerController(CameraManager cameraManager, X8AiTaskManager aiTaskManager, @NonNull Context context, X8MainBottomParameterController mX8MainBottomParameterController, IRightRollerMoveListener rightRollerMoveListener) {
         this.cameraManager = cameraManager;
         this.aiTaskManager = aiTaskManager;
         this.context = context;
@@ -92,11 +94,10 @@ public class RightRollerController {
         return deControl == null || !deControl.equalsIgnoreCase(CameraJsonCollection.KEY_DE_CONTROL_MANUAL);
     }
 
-    public int getListIndex(List<String> x8EVOptions, String text) {
+    public int getListIndex(@NonNull List<String> x8EVOptions, String text) {
         for (int i = 0; i < x8EVOptions.size(); i++) {
             if (text.equalsIgnoreCase(x8EVOptions.get(i))) {
-                int index = i;
-                return index;
+                return i;
             }
         }
         return -1;

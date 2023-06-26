@@ -2,6 +2,7 @@ package com.fimi.app.x8s.ui.presenter;
 
 import android.app.Activity;
 import android.os.Handler;
+import android.view.View;
 
 import com.fimi.album.biz.DataManager;
 import com.fimi.album.biz.X9HandleType;
@@ -24,9 +25,12 @@ import java.lang.ref.WeakReference;
 
 public class X8MediaPresenter<T extends Activity> implements IDateHandler {
     private final String TAG = "X8MediaPresenter";
+    private final X8MediaActivity mMediaActivity;
+    private final WeakReference<T> weakReference;
+    private final DataManager<MediaModel> mDataManager = DataManager.obtain();
+    private final ICameraDeviceDispater mCameraDispater = new X8CameraDispater();
     Handler handler = new Handler();
     private IMediaCameraConnected iMediaCameraConnected;
-    private final X8MediaActivity mMediaActivity;
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
@@ -36,10 +40,7 @@ public class X8MediaPresenter<T extends Activity> implements IDateHandler {
             }
         }
     };
-    private final WeakReference<T> weakReference;
-    private final DataManager<MediaModel> mDataManager = DataManager.obtain();
     private boolean isFirstEnterCamera = true;
-    private final ICameraDeviceDispater mCameraDispater = new X8CameraDispater();
 
     public X8MediaPresenter(T activity) {
         this.weakReference = new WeakReference<>(activity);
@@ -218,7 +219,7 @@ public class X8MediaPresenter<T extends Activity> implements IDateHandler {
         this.mMediaActivity.getmX8CameraFragment().noDataTipCallback(true);
         this.mMediaActivity.getmX8CameraFragment().reshAdapter();
         this.mMediaActivity.showSelectBtn();
-        this.mMediaActivity.getRlTopBar().setVisibility(8);
+        this.mMediaActivity.getRlTopBar().setVisibility(View.GONE);
         this.mMediaActivity.getmX8CameraFragment().onDisConnect();
     }
 

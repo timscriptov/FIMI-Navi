@@ -53,15 +53,9 @@ import me.relex.photodraweeview.OnPhotoTapListener;
 
 
 public class X8MediaDetailPresenter<T extends X8MediaDetailActivity> implements IViewpaper, OnPhotoTapListener {
-    protected String perfix = "file://";
     private final int defaultDisplayHeight;
     private final int defaultDisplayWidth;
-    private ViewGroup mCacheContainer;
-    private int mCurrentPosition;
     private final X8MediaDetailActivity mMediaActivity;
-    private MediaModel mediaModel;
-    private CopyOnWriteArrayList<? extends MediaModel> modelList;
-    private MediaDetialViewHolder viewHolder;
     private final ViewPager viewPaper;
     private final WeakReference<T> weakReference;
     private final DataManager<MediaModel> mDataManager = DataManager.obtain();
@@ -76,17 +70,23 @@ public class X8MediaDetailPresenter<T extends X8MediaDetailActivity> implements 
             LogUtil.i("media", "onPersonalSendTimeOut: ");
         }
     };
+    protected String perfix = "file://";
+    private ViewGroup mCacheContainer;
+    private int mCurrentPosition;
+    private MediaModel mediaModel;
+    private CopyOnWriteArrayList<? extends MediaModel> modelList;
+    private MediaDetialViewHolder viewHolder;
     private OnDownloadUiListener mOnOriginalDownloadUiListener = new OnDownloadUiListener() {
         @Override
         public void onProgress(MediaModel model, int progrss) {
             if (X9HandleType.isCameraView() && X8MediaDetailPresenter.this.isCurrentModel(model)) {
                 model.setProgress(progrss);
                 if (X8MediaDetailPresenter.this.mMediaActivity.topBarShowing()) {
-                    X8MediaDetailPresenter.this.mMediaActivity.getRlSelectBottom().setVisibility(8);
-                    X8MediaDetailPresenter.this.mMediaActivity.getRlDownloadBottom().setVisibility(0);
+                    X8MediaDetailPresenter.this.mMediaActivity.getRlSelectBottom().setVisibility(View.GONE);
+                    X8MediaDetailPresenter.this.mMediaActivity.getRlDownloadBottom().setVisibility(View.VISIBLE);
                 } else {
-                    X8MediaDetailPresenter.this.mMediaActivity.getRlSelectBottom().setVisibility(8);
-                    X8MediaDetailPresenter.this.mMediaActivity.getRlDownloadBottom().setVisibility(8);
+                    X8MediaDetailPresenter.this.mMediaActivity.getRlSelectBottom().setVisibility(View.GONE);
+                    X8MediaDetailPresenter.this.mMediaActivity.getRlDownloadBottom().setVisibility(View.GONE);
                 }
                 X8MediaDetailPresenter.this.mMediaActivity.getBtnStart().setText(R.string.media_detail_cancle);
                 X8MediaDetailPresenter.this.mMediaActivity.getTvPercent().setText(model.getProgress() + "%");
@@ -102,9 +102,9 @@ public class X8MediaDetailPresenter<T extends X8MediaDetailActivity> implements 
             LocalBroadcastManager.getInstance(X8MediaDetailPresenter.this.mMediaActivity).sendBroadcast(intent);
             if (X9HandleType.isCameraView() && X8MediaDetailPresenter.this.isCurrentModel(model)) {
                 model.setProgress(0);
-                X8MediaDetailPresenter.this.mMediaActivity.getRlDownloadBottom().setVisibility(8);
-                X8MediaDetailPresenter.this.mMediaActivity.getRlSelectBottom().setVisibility(0);
-                X8MediaDetailPresenter.this.mMediaActivity.getRlDownload().setVisibility(8);
+                X8MediaDetailPresenter.this.mMediaActivity.getRlDownloadBottom().setVisibility(View.GONE);
+                X8MediaDetailPresenter.this.mMediaActivity.getRlSelectBottom().setVisibility(View.VISIBLE);
+                X8MediaDetailPresenter.this.mMediaActivity.getRlDownload().setVisibility(View.GONE);
                 X8MediaDetailPresenter.this.initItemData(X8MediaDetailPresenter.this.viewHolder, model, true);
             }
         }
@@ -168,43 +168,43 @@ public class X8MediaDetailPresenter<T extends X8MediaDetailActivity> implements 
             this.mMediaActivity.getPhotoText().setText(mediaModel.getName());
             if (X9HandleType.isCameraView()) {
                 if (mediaModel.isDownLoadOriginalFile()) {
-                    this.mMediaActivity.getRlDownloadBottom().setVisibility(8);
-                    this.mMediaActivity.getRlDownload().setVisibility(8);
+                    this.mMediaActivity.getRlDownloadBottom().setVisibility(View.GONE);
+                    this.mMediaActivity.getRlDownload().setVisibility(View.GONE);
                     if (this.mMediaActivity.topBarShowing()) {
-                        this.mMediaActivity.getRlSelectBottom().setVisibility(0);
+                        this.mMediaActivity.getRlSelectBottom().setVisibility(View.VISIBLE);
                     } else {
-                        this.mMediaActivity.getRlSelectBottom().setVisibility(8);
+                        this.mMediaActivity.getRlSelectBottom().setVisibility(View.GONE);
                     }
                 } else if (this.mMediaActivity.topBarShowing()) {
-                    this.mMediaActivity.getRlDownload().setVisibility(0);
+                    this.mMediaActivity.getRlDownload().setVisibility(View.VISIBLE);
                     this.mMediaActivity.getTvFileName().setText(mediaModel.getName());
                     if (mediaModel.isDownloading()) {
-                        this.mMediaActivity.getRlSelectBottom().setVisibility(8);
-                        this.mMediaActivity.getRlDownloadBottom().setVisibility(0);
+                        this.mMediaActivity.getRlSelectBottom().setVisibility(View.GONE);
+                        this.mMediaActivity.getRlDownloadBottom().setVisibility(View.VISIBLE);
                         this.mMediaActivity.getTvPercent().setText(mediaModel.getProgress() + "%");
                         this.mMediaActivity.getBtnStart().setText(R.string.media_detail_cancle);
                     } else {
-                        this.mMediaActivity.getRlSelectBottom().setVisibility(0);
-                        this.mMediaActivity.getRlDownloadBottom().setVisibility(8);
+                        this.mMediaActivity.getRlSelectBottom().setVisibility(View.VISIBLE);
+                        this.mMediaActivity.getRlDownloadBottom().setVisibility(View.GONE);
                     }
                 } else {
-                    this.mMediaActivity.getRlSelectBottom().setVisibility(8);
-                    this.mMediaActivity.getRlDownloadBottom().setVisibility(8);
+                    this.mMediaActivity.getRlSelectBottom().setVisibility(View.GONE);
+                    this.mMediaActivity.getRlDownloadBottom().setVisibility(View.GONE);
                 }
                 initDownload(mediaModel);
             } else {
-                this.mMediaActivity.getRlDownload().setVisibility(8);
-                this.mMediaActivity.getRlDownloadBottom().setVisibility(8);
+                this.mMediaActivity.getRlDownload().setVisibility(View.GONE);
+                this.mMediaActivity.getRlDownloadBottom().setVisibility(View.GONE);
                 if (this.mMediaActivity.topBarShowing()) {
-                    this.mMediaActivity.getRlSelectBottom().setVisibility(0);
+                    this.mMediaActivity.getRlSelectBottom().setVisibility(View.VISIBLE);
                 } else {
-                    this.mMediaActivity.getRlSelectBottom().setVisibility(8);
+                    this.mMediaActivity.getRlSelectBottom().setVisibility(View.GONE);
                 }
             }
             if (mediaModel.isVideo()) {
-                this.mMediaActivity.getBtnPlayMax().setVisibility(0);
+                this.mMediaActivity.getBtnPlayMax().setVisibility(View.VISIBLE);
             } else {
-                this.mMediaActivity.getBtnPlayMax().setVisibility(8);
+                this.mMediaActivity.getBtnPlayMax().setVisibility(View.GONE);
             }
         }
     }
@@ -241,7 +241,7 @@ public class X8MediaDetailPresenter<T extends X8MediaDetailActivity> implements 
         } else {
             fileUrl = this.perfix + mediaModel.getThumLocalFilePath();
         }
-        mMediaDetialViewHolder.mProgressBar.setVisibility(0);
+        mMediaDetialViewHolder.mProgressBar.setVisibility(View.VISIBLE);
         mMediaDetialViewHolder.mPhotoDraweeView.setOnPhotoTapListener(this);
         if (isReload) {
             ImagePipeline imagePipeline = Fresco.getImagePipeline();
@@ -254,7 +254,7 @@ public class X8MediaDetailPresenter<T extends X8MediaDetailActivity> implements 
             // com.fimi.album.biz.FrescoControllerListener, com.facebook.drawee.controller.ControllerListener
             public void onFailure(String id, Throwable throwable) {
                 super.onFailure(id, throwable);
-                mMediaDetialViewHolder.mProgressBar.setVisibility(8);
+                mMediaDetialViewHolder.mProgressBar.setVisibility(View.GONE);
                 HostLogBack.getInstance().writeLog("Alanqiu  ===========initItemData onFailure:" + isReload + "mediaModel:" + mediaModel);
             }
 
@@ -263,7 +263,7 @@ public class X8MediaDetailPresenter<T extends X8MediaDetailActivity> implements 
             public void onFinalImageSet(String id, ImageInfo imageInfo, Animatable animatable) {
                 super.onFinalImageSet(id, imageInfo, animatable);
                 HostLogBack.getInstance().writeLog("Alanqiu  ===========initItemData:" + isReload + "mediaModel:" + mediaModel);
-                mMediaDetialViewHolder.mProgressBar.setVisibility(8);
+                mMediaDetialViewHolder.mProgressBar.setVisibility(View.GONE);
                 mMediaDetialViewHolder.mPhotoDraweeView.update(imageInfo.getWidth(), imageInfo.getHeight());
             }
         });

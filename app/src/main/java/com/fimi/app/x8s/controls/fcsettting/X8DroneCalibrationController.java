@@ -127,12 +127,12 @@ public class X8DroneCalibrationController extends AbsX8MenuBoxControllers implem
 
     @Override
     public void defaultVal() {
-        this.rlCalibration.setVisibility(0);
+        this.rlCalibration.setVisibility(View.VISIBLE);
         this.rlCalibration.setEnabled(false);
-        this.rlResult.setVisibility(8);
+        this.rlResult.setVisibility(View.GONE);
         this.tvTip.setText(getString(R.string.x8_compass_calibartion_horizontal));
-        this.tvTip1.setVisibility(0);
-        this.btnStart.setVisibility(8);
+        this.tvTip1.setVisibility(View.VISIBLE);
+        this.btnStart.setVisibility(View.GONE);
     }
 
     @Override
@@ -149,19 +149,19 @@ public class X8DroneCalibrationController extends AbsX8MenuBoxControllers implem
 
     public void restart() {
         this.tvTip.setText(getString(R.string.x8_compass_calibartion_tip));
-        this.tvTip1.setVisibility(8);
-        this.btnStart.setVisibility(0);
-        this.rlCalibration.setVisibility(0);
-        this.rlResult.setVisibility(8);
+        this.tvTip1.setVisibility(View.GONE);
+        this.btnStart.setVisibility(View.VISIBLE);
+        this.rlCalibration.setVisibility(View.VISIBLE);
+        this.rlResult.setVisibility(View.GONE);
     }
 
     @Override
     public void showItem() {
         this.isShow = true;
         this.tvTip.setText(getString(R.string.x8_compass_calibartion_tip));
-        this.tvTip1.setVisibility(8);
-        this.btnStart.setVisibility(0);
-        this.contentView.setVisibility(0);
+        this.tvTip1.setVisibility(View.GONE);
+        this.btnStart.setVisibility(View.VISIBLE);
+        this.contentView.setVisibility(View.VISIBLE);
         getDroneState();
         onDroneConnected(this.isConect);
         this.listener.onOpen();
@@ -171,7 +171,7 @@ public class X8DroneCalibrationController extends AbsX8MenuBoxControllers implem
     public void closeItem() {
         if (this.mGaliStete == GaliStete.IDLE || this.mGaliStete == GaliStete.DISCONNECT_FAILED) {
             this.isShow = false;
-            this.contentView.setVisibility(8);
+            this.contentView.setVisibility(View.GONE);
             defaultVal();
             this.mTimeHandler.removeMessages(0);
             this.listener.onClose();
@@ -198,18 +198,18 @@ public class X8DroneCalibrationController extends AbsX8MenuBoxControllers implem
     }
 
     public void switch2Horizontal() {
-        this.rlCalibration.setVisibility(0);
-        this.rlResult.setVisibility(8);
+        this.rlCalibration.setVisibility(View.VISIBLE);
+        this.rlResult.setVisibility(View.GONE);
         this.tvTip.setText(getString(R.string.x8_compass_calibartion_horizontal));
         this.tvTip1.setText(getString(R.string.x8_compass_calibartion_horizontal_tip));
-        this.tvTip1.setVisibility(0);
-        this.btnStart.setVisibility(8);
+        this.tvTip1.setVisibility(View.VISIBLE);
+        this.btnStart.setVisibility(View.GONE);
         this.imgFlag.setImageBitmap(ImageUtils.getBitmapByPath(this.rootView.getContext(), R.drawable.x8_img_camp_h));
     }
 
     public void onResultFaild() {
-        this.rlCalibration.setVisibility(8);
-        this.rlResult.setVisibility(0);
+        this.rlCalibration.setVisibility(View.GONE);
+        this.rlResult.setVisibility(View.VISIBLE);
         this.imgResult.setImageResource(R.drawable.x8_img_drone_calibartion_failed);
         this.tvResultTip.setText(getString(R.string.x8_compass_result_failed));
         this.tvResultTip1.setText(getString(R.string.x8_compass_result_failed_tip));
@@ -218,8 +218,8 @@ public class X8DroneCalibrationController extends AbsX8MenuBoxControllers implem
     }
 
     public void onResultSuccess() {
-        this.rlCalibration.setVisibility(8);
-        this.rlResult.setVisibility(0);
+        this.rlCalibration.setVisibility(View.GONE);
+        this.rlResult.setVisibility(View.VISIBLE);
         this.imgResult.setImageResource(R.drawable.x8_img_drone_calibartion_success);
         this.tvResultTip.setText(getString(R.string.x8_compass_result_success));
         this.tvResultTip1.setText(getString(R.string.x8_compass_result_success_tip));

@@ -16,9 +16,10 @@ public class FdsManager implements IFdsUploadListener {
     private static final int DOWNLOAD_STOP = 3;
     private static final int DOWNLOAD_SUCCESS = 1;
     private static final FdsManager fdsManager = new FdsManager();
+    private final List<IFdsFileModel> dataAll = new ArrayList();
+    private final ExecutorService executorService = Executors.newFixedThreadPool(1);
     private IFdsCountListener countListener;
     private IFdsUiListener uiListener;
-    private final List<IFdsFileModel> dataAll = new ArrayList();
     private final Handler mHanler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -42,7 +43,6 @@ public class FdsManager implements IFdsUploadListener {
             }
         }
     };
-    private final ExecutorService executorService = Executors.newFixedThreadPool(1);
 
     public static FdsManager getInstance() {
         return fdsManager;

@@ -33,6 +33,8 @@ import java.util.List;
 
 
 public class X8MainCameraSettingController extends AbsX8MenuBoxControllers implements View.OnClickListener {
+    private final Context context;
+    private final X8CameraParamsValue paramsValue;
     public JsonUiCallBackListener jsonUiCallBackListener;
     String curParam;
     String[] strings;
@@ -41,7 +43,6 @@ public class X8MainCameraSettingController extends AbsX8MenuBoxControllers imple
     private CameraManager cameraManager;
     private X8CameraOtherSettingController cameraOtherController;
     private View cameraSettingblank;
-    private final Context context;
     private MenuMode curMenu;
     private CameraParamStatus.CameraModelStatus curMode;
     private X8CameraEVShutterISOController evShutterISOController;
@@ -53,7 +54,6 @@ public class X8MainCameraSettingController extends AbsX8MenuBoxControllers imple
     private ViewStub otherSettingStub;
     private View otherSettingView;
     private View paramView;
-    private final X8CameraParamsValue paramsValue;
     private List<String> photoModeOptions;
     private List<String> recordModeOptions;
     private ImageView recordSetting;
@@ -153,13 +153,13 @@ public class X8MainCameraSettingController extends AbsX8MenuBoxControllers imple
         this.camerSetting = rootView.findViewById(R.id.camera_setting_btn);
         this.recordSetting = rootView.findViewById(R.id.record_setting_btn);
         this.otherSetting = rootView.findViewById(R.id.other_setting_btn);
-        this.cameraSettingblank.setVisibility(0);
+        this.cameraSettingblank.setVisibility(View.VISIBLE);
         View view = this.otherSettingStub.inflate();
         View isoView = this.x8ISOViewStub.inflate();
         View modeView = this.modleStub.inflate();
         if (this.otherSettingView == null) {
             this.otherSettingView = view.findViewById(R.id.rl_main_camera_otherSetting_layout);
-            this.otherSettingView.setVisibility(8);
+            this.otherSettingView.setVisibility(View.GONE);
         }
         if (this.paramView == null) {
             this.paramView = isoView.findViewById(R.id.camera_params_setting);
@@ -221,7 +221,7 @@ public class X8MainCameraSettingController extends AbsX8MenuBoxControllers imple
 
     public void showCameraSettingUI() {
         enableGesture(false);
-        this.rlCameraSetting.setVisibility(0);
+        this.rlCameraSetting.setVisibility(View.VISIBLE);
         menuSelect(this.curMenu);
         if (!this.isShow) {
             this.isShow = true;
@@ -260,7 +260,7 @@ public class X8MainCameraSettingController extends AbsX8MenuBoxControllers imple
                 // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
-                    X8MainCameraSettingController.this.rlCameraSetting.setVisibility(8);
+                    X8MainCameraSettingController.this.rlCameraSetting.setVisibility(View.GONE);
                     X8MainCameraSettingController.this.curMenu = MenuMode.normal;
                     if (X8MainCameraSettingController.this.evShutterISOController != null) {
                         X8MainCameraSettingController.this.evShutterISOController.setCurModle();

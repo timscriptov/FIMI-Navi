@@ -17,9 +17,9 @@ public class X8CameraInterestMeteringController extends AbsX8MenuBoxControllers 
     private final int DELAYED_TIME;
     private final int MSG_LOCK_EV;
     private final int MSG_METERING;
-    private CameraManager cameraManager;
     @SuppressLint({"HandlerLeak"})
     private final Handler handler;
+    private CameraManager cameraManager;
     private int interestMeteringIndex;
     private boolean isLockEv;
     private int leftX;
@@ -38,7 +38,7 @@ public class X8CameraInterestMeteringController extends AbsX8MenuBoxControllers 
                 super.handleMessage(msg);
                 int msgID = msg.what;
                 if (msgID == 1) {
-                    X8CameraInterestMeteringController.this.x8IvInterestMetering.setVisibility(8);
+                    X8CameraInterestMeteringController.this.x8IvInterestMetering.setVisibility(View.GONE);
                 } else if (msgID == 2) {
                     X8CameraInterestMeteringController.this.x8IvInterestMetering.setAlpha(0.5f);
                 }
@@ -55,7 +55,7 @@ public class X8CameraInterestMeteringController extends AbsX8MenuBoxControllers 
         int id = view.getId();
         if (id == R.id.x8_iv_interest_metering) {
             if (this.isLockEv) {
-                this.x8IvInterestMetering.setVisibility(8);
+                this.x8IvInterestMetering.setVisibility(View.GONE);
                 this.isLockEv = false;
                 this.handler.removeMessages(2);
                 return;
@@ -105,7 +105,7 @@ public class X8CameraInterestMeteringController extends AbsX8MenuBoxControllers 
         params.topMargin = this.topY;
         params.leftMargin = this.leftX;
         this.x8IvInterestMetering.setLayoutParams(params);
-        this.x8IvInterestMetering.setVisibility(0);
+        this.x8IvInterestMetering.setVisibility(View.VISIBLE);
         this.x8IvInterestMetering.setAlpha(1.0f);
         this.x8IvInterestMetering.setImageResource(R.drawable.x8_camera_interest_metering);
         this.handler.sendEmptyMessageDelayed(1, 5000L);

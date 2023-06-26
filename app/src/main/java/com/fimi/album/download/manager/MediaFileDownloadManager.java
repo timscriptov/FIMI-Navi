@@ -25,12 +25,11 @@ public class MediaFileDownloadManager<T extends MediaModel> implements OnDownloa
     private static final int DOWNLOAD_SUCCESS = 1;
     private static final String TAG = "MediaFileDownloadManage";
     private static final MediaFileDownloadManager mMediaFileDownloadManager = new MediaFileDownloadManager();
-    private OnDownloadUiListener mUiDownloadListener;
-    private IMediaFileDownloadObserver observer;
     private final List<MediaModel> data = new ArrayList();
     private final List<MediaModel> dataAll = new ArrayList();
     private final List<MediaModel> dataResult = new ArrayList();
-    private int mLastPos = -1;
+    private final ExecutorService executorService = Executors.newFixedThreadPool(3);
+    private OnDownloadUiListener mUiDownloadListener;
     private final Handler mHanler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -54,7 +53,8 @@ public class MediaFileDownloadManager<T extends MediaModel> implements OnDownloa
             }
         }
     };
-    private final ExecutorService executorService = Executors.newFixedThreadPool(3);
+    private IMediaFileDownloadObserver observer;
+    private int mLastPos = -1;
 
     public static MediaFileDownloadManager getInstance() {
         return mMediaFileDownloadManager;

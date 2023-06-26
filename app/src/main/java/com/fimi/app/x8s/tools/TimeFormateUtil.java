@@ -1,7 +1,13 @@
 package com.fimi.app.x8s.tools;
 
 
+import androidx.annotation.NonNull;
+
+import org.jetbrains.annotations.Contract;
+
 public class TimeFormateUtil {
+    @NonNull
+    @Contract(pure = true)
     public static String getRecordTime(int time) {
         if (time == 0) {
             return "00:00";
@@ -29,51 +35,41 @@ public class TimeFormateUtil {
         }
     }
 
+    @NonNull
+    @Contract(pure = true)
     public static String getRecordTime(int hour, int min, int second) {
         if (hour <= 0) {
             if (min > 0) {
                 if (min < 10) {
                     if (second >= 10) {
-                        String recordTime = "0" + min + ":" + second;
-                        return recordTime;
+                        return "0" + min + ":" + second;
                     }
-                    String recordTime2 = "0" + min + ":0" + second;
-                    return recordTime2;
+                    return "0" + min + ":0" + second;
                 } else if (second >= 10) {
-                    String recordTime3 = min + ":" + second;
-                    return recordTime3;
+                    return min + ":" + second;
                 } else {
-                    String recordTime4 = min + ":0" + second;
-                    return recordTime4;
+                    return min + ":0" + second;
                 }
             } else if (second >= 10) {
-                String recordTime5 = "00:" + second;
-                return recordTime5;
+                return "00:" + second;
             } else {
-                String recordTime6 = "00:0" + second;
-                return recordTime6;
+                return "00:0" + second;
             }
         } else if (min > 0) {
             if (min < 10) {
                 if (second >= 10) {
-                    String recordTime7 = hour + ":0" + min + ":" + second;
-                    return recordTime7;
+                    return hour + ":0" + min + ":" + second;
                 }
-                String recordTime8 = hour + ":0" + min + ":0" + second;
-                return recordTime8;
+                return hour + ":0" + min + ":0" + second;
             } else if (second >= 10) {
-                String recordTime9 = hour + ":" + min + ":" + second;
-                return recordTime9;
+                return hour + ":" + min + ":" + second;
             } else {
-                String recordTime10 = hour + ":" + min + ":0" + second;
-                return recordTime10;
+                return hour + ":" + min + ":0" + second;
             }
         } else if (second >= 10) {
-            String recordTime11 = hour + ":00:" + second;
-            return recordTime11;
+            return hour + ":00:" + second;
         } else {
-            String recordTime12 = hour + ":00:0" + second;
-            return recordTime12;
+            return hour + ":00:0" + second;
         }
     }
 

@@ -33,7 +33,6 @@ public class DownloadApkService extends Service {
     DownloadManager downloadManager = new DownloadManager();
     private Notification notification;
     private NotificationManager notificationManager;
-    private String path;
     private final Handler handler = new Handler() {
         private int nPos = 0;
 
@@ -61,6 +60,7 @@ public class DownloadApkService extends Service {
             }
         }
     };
+    private String path;
     public DisposeDataHandle dataHandle = new DisposeDataHandle(new DisposeDownloadListener() {
         @Override
         public void onProgress(int progrss, int currentLength) {

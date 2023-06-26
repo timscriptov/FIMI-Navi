@@ -10,8 +10,8 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 
 public class RetransmissionUsbThread extends Thread {
-    public LinkedBlockingDeque<BaseCommand> mListReSend = new LinkedBlockingDeque<>();
     private final IDataTransfer mDataTransfer;
+    public LinkedBlockingDeque<BaseCommand> mListReSend = new LinkedBlockingDeque<>();
     private boolean isLoop = true;
 
     public RetransmissionUsbThread(IDataTransfer mDataTransfer) {

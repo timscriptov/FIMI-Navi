@@ -19,6 +19,9 @@ import java.util.TimerTask;
 
 public class FermiSystemMediaPlayer implements IFermiMediaPlayer, SurfaceHolder.Callback, SeekBar.OnSeekBarChangeListener {
     private final Context context;
+    private final List<OnPlayerStateChangedListener> onPlayerStateChangedListenerArray = new ArrayList();
+    private final Timer timer = new Timer();
+    private final Handler handler = new InnerHandler();
     private String dataSourceUrl;
     private boolean isAutoPlay;
     private OnMediaSizeChangedListener onMediaSizeChangedListener;
@@ -28,9 +31,6 @@ public class FermiSystemMediaPlayer implements IFermiMediaPlayer, SurfaceHolder.
     private MediaPlayer player = null;
     private int startPosition = 0;
     private boolean ischanging = false;
-    private final List<OnPlayerStateChangedListener> onPlayerStateChangedListenerArray = new ArrayList();
-    private final Timer timer = new Timer();
-    private final Handler handler = new InnerHandler();
     private final TimerTask timerTask = new TimerTask() {
         @Override
         public void run() {

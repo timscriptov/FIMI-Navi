@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fimi.android.app.R;
@@ -16,8 +17,8 @@ import com.fimi.x8sdk.command.CameraJsonCollection;
 
 
 public class PhotoSubParamsAdapter extends RecyclerView.Adapter {
-    SubParamsViewHolder subParamsViewHolderTwo;
     private final Context context;
+    SubParamsViewHolder subParamsViewHolderTwo;
     private SubParamItemListener paramListener;
     private PhotoSubParamItemEntity subEntity;
     private int option_index = -1;
@@ -32,16 +33,15 @@ public class PhotoSubParamsAdapter extends RecyclerView.Adapter {
         this.paramListener = paramListener;
     }
 
+    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == 1) {
             View subView = LayoutInflater.from(this.context).inflate(R.layout.x8_iso_recycler_item_title, parent, false);
-            RecyclerView.ViewHolder viewHolder = new CameraParamsTitleViewHolder(subView);
-            return viewHolder;
+            return new CameraParamsTitleViewHolder(subView);
         }
         View subView2 = LayoutInflater.from(this.context).inflate(R.layout.x8_photo_sub_param_list_item, parent, false);
-        RecyclerView.ViewHolder viewHolder2 = new SubParamsViewHolder(subView2, this.paramListener);
-        return viewHolder2;
+        return new SubParamsViewHolder(subView2, this.paramListener);
     }
 
     public void updateData(PhotoSubParamItemEntity entity) {
@@ -52,7 +52,7 @@ public class PhotoSubParamsAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof final SubParamsViewHolder subParamsViewHolder) {
             this.subParamsViewHolderTwo = subParamsViewHolder;
             subParamsViewHolder.initItemData(this.subEntity, position, this.isEnable, this.option_index);
@@ -70,48 +70,42 @@ public class PhotoSubParamsAdapter extends RecyclerView.Adapter {
                 holder.itemView.setEnabled(false);
                 holder.itemView.setAlpha(0.4f);
             }
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (PhotoSubParamsAdapter.this.paramListener != null && PhotoSubParamsAdapter.this.isEnable && !subParamsViewHolder.isRecordingUnclickableItem(PhotoSubParamsAdapter.this.subEntity.getTitleName()) && !subParamsViewHolder.isDelayedPhotographyUnclickableItem(PhotoSubParamsAdapter.this.subEntity.getTitleName())) {
-                        String paramKey = PhotoSubParamsAdapter.this.subEntity.getParamKey();
-                        if (paramKey != null && !"".equals(paramKey)) {
-                            if (paramKey.equals("video_resolution")) {
-                                if (((SubParamsViewHolder) holder).getContentLayout().getChildCount() <= 0) {
-                                    PhotoSubParamsAdapter.this.paramListener.checkResolutionDetailParam(PhotoSubParamsAdapter.this.subEntity.getTitleName(), PhotoSubParamsAdapter.this.subEntity.getOptions().get(position), PhotoSubParamsAdapter.this.subEntity.getParamValue(), position, subParamsViewHolder);
-                                } else {
-                                    ((SubParamsViewHolder) holder).getContentLayout().removeAllViews();
-                                    return;
-                                }
-                            } else if (paramKey.equals("capture_mode") && position != 1) {
-                                if (((SubParamsViewHolder) holder).getContentLayout().getChildCount() <= 0) {
-                                    PhotoSubParamsAdapter.this.paramListener.checkResolutionDetailParam(PhotoSubParamsAdapter.this.subEntity.getTitleName(), PhotoSubParamsAdapter.this.subEntity.getOptions().get(position), PhotoSubParamsAdapter.this.subEntity.getParamValue(), position, subParamsViewHolder);
-                                } else {
-                                    ((SubParamsViewHolder) holder).getContentLayout().removeAllViews();
-                                    return;
-                                }
-                            } else if (!paramKey.equals(CameraJsonCollection.KEY_RECORD_MODE) || position == 1) {
-                                PhotoSubParamsAdapter.this.paramListener.checkDetailParam(PhotoSubParamsAdapter.this.subEntity.getTitleName(), PhotoSubParamsAdapter.this.subEntity.getOptions().get(position), position, subParamsViewHolder);
-                            } else if (((SubParamsViewHolder) holder).getContentLayout().getChildCount() <= 0) {
-                                PhotoSubParamsAdapter.this.paramListener.checkResolutionDetailParam(PhotoSubParamsAdapter.this.subEntity.getTitleName(), PhotoSubParamsAdapter.this.subEntity.getOptions().get(position), PhotoSubParamsAdapter.this.subEntity.getParamValue(), position, subParamsViewHolder);
+            holder.itemView.setOnClickListener(v -> {
+                if (paramListener != null && isEnable && !subParamsViewHolder.isRecordingUnclickableItem(subEntity.getTitleName()) && !subParamsViewHolder.isDelayedPhotographyUnclickableItem(subEntity.getTitleName())) {
+                    String paramKey = subEntity.getParamKey();
+                    if (paramKey != null && !"".equals(paramKey)) {
+                        if (paramKey.equals("video_resolution")) {
+                            if (((SubParamsViewHolder) holder).getContentLayout().getChildCount() <= 0) {
+                                paramListener.checkResolutionDetailParam(subEntity.getTitleName(), subEntity.getOptions().get(position), subEntity.getParamValue(), position, subParamsViewHolder);
                             } else {
                                 ((SubParamsViewHolder) holder).getContentLayout().removeAllViews();
                                 return;
                             }
+                        } else if (paramKey.equals("capture_mode") && position != 1) {
+                            if (((SubParamsViewHolder) holder).getContentLayout().getChildCount() <= 0) {
+                                paramListener.checkResolutionDetailParam(subEntity.getTitleName(), subEntity.getOptions().get(position), subEntity.getParamValue(), position, subParamsViewHolder);
+                            } else {
+                                ((SubParamsViewHolder) holder).getContentLayout().removeAllViews();
+                                return;
+                            }
+                        } else if (!paramKey.equals(CameraJsonCollection.KEY_RECORD_MODE) || position == 1) {
+                            paramListener.checkDetailParam(subEntity.getTitleName(), subEntity.getOptions().get(position), position, subParamsViewHolder);
+                        } else if (((SubParamsViewHolder) holder).getContentLayout().getChildCount() <= 0) {
+                            paramListener.checkResolutionDetailParam(subEntity.getTitleName(), subEntity.getOptions().get(position), subEntity.getParamValue(), position, subParamsViewHolder);
+                        } else {
+                            ((SubParamsViewHolder) holder).getContentLayout().removeAllViews();
+                            return;
                         }
-                        PhotoSubParamsAdapter.this.option_index = position;
                     }
+                    option_index = position;
                 }
             });
         } else if (holder instanceof CameraParamsTitleViewHolder paramsViewHolder) {
             paramsViewHolder.initView(this.subEntity.getTitleName());
             if (position == 0) {
-                holder.itemView.findViewById(R.id.item_back_btn).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (PhotoSubParamsAdapter.this.paramListener != null) {
-                            PhotoSubParamsAdapter.this.paramListener.gotoParentItem();
-                        }
+                holder.itemView.findViewById(R.id.item_back_btn).setOnClickListener(v -> {
+                    if (paramListener != null) {
+                        paramListener.gotoParentItem();
                     }
                 });
             }

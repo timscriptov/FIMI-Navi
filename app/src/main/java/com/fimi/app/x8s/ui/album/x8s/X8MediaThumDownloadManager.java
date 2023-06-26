@@ -17,10 +17,11 @@ import java.util.concurrent.Executors;
 
 public class X8MediaThumDownloadManager implements OnDownloadListener, IMediaDownload {
     private static final X8MediaThumDownloadManager x8MediaThumDownloadManager = new X8MediaThumDownloadManager();
+    private final List<MediaModel> data = new ArrayList();
+    private final ExecutorService executorService = Executors.newFixedThreadPool(1);
     public boolean isDownload;
     private int index;
     private OnDownloadUiListener mUiDownloadListener;
-    private final List<MediaModel> data = new ArrayList();
     private final Handler mHanler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -41,7 +42,6 @@ public class X8MediaThumDownloadManager implements OnDownloadListener, IMediaDow
             }
         }
     };
-    private final ExecutorService executorService = Executors.newFixedThreadPool(1);
 
     public static X8MediaThumDownloadManager getInstance() {
         return x8MediaThumDownloadManager;

@@ -7,19 +7,19 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.android.app.R;
 import com.fimi.app.x8s.manager.X8FpvManager;
 import com.fimi.host.HostConstants;
 import com.fimi.host.LocalFwEntity;
 import com.fimi.kernel.Constants;
-import com.fimi.kernel.animutils.IOUtils;
 import com.fimi.kernel.base.BaseActivity;
 import com.fimi.kernel.base.EventMessage;
 import com.fimi.kernel.utils.FontUtil;
 import com.fimi.kernel.utils.StatusBarUtil;
 import com.fimi.widget.DownRoundProgress;
 import com.fimi.x8sdk.controller.UpdateManager;
-import com.fimi.x8sdk.ivew.IX8UpdateProgressView;
 import com.fimi.x8sdk.modulestate.StateManager;
 import com.fimi.x8sdk.process.RelayProcess;
 import com.fimi.x8sdk.update.UpdateUtil;
@@ -79,67 +79,58 @@ public class X8UpdatingActivity extends BaseActivity {
 
     @Override
     public void doTrans() {
-        this.btnReconnect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                X8FpvManager.isUpdateing = false;
-                X8UpdatingActivity.this.finish();
-            }
+        this.btnReconnect.setOnClickListener(view -> {
+            X8FpvManager.isUpdateing = false;
+            finish();
         });
-        this.updateManager.setOnUpdateProgress(new IX8UpdateProgressView() {
-            @Override
-            public void showUpdateProgress(boolean isSuccess, int progress, final List<FwInfo> dtos, String name) {
-                String tempString;
-                if (!isSuccess) {
-                    X8UpdatingActivity.this.btnReconnect.setVisibility(0);
-                    X8UpdatingActivity.this.btnReconnect.setText(R.string.x8_update_connect);
-                    X8UpdatingActivity.this.imgUpdateResult.setVisibility(0);
-                    X8UpdatingActivity.this.tvUpdateWarnming.setVisibility(4);
-                    X8UpdatingActivity.this.tvUpdating.setText(name);
-                    X8UpdatingActivity.this.x8sTvUpdatingProgress.setVisibility(8);
-                } else if (100 != progress || dtos == null) {
-                    X8UpdatingActivity.this.downRoundProgress.setProgress(progress);
-                    if (name == null) {
-                        tempString = X8UpdatingActivity.this.getString(R.string.x8_update_hint_one);
-                    } else {
-                        tempString = String.format(X8UpdatingActivity.this.getString(R.string.x8_updating), name);
-                    }
-                    X8UpdatingActivity.this.tvUpdating.setText(tempString);
-                    X8UpdatingActivity.this.x8sTvUpdatingProgress.setText(progress + "%");
-                    if (X8UpdatingActivity.this.btnReconnect.getVisibility() == 0) {
-                        X8UpdatingActivity.this.btnReconnect.setVisibility(8);
-                        X8UpdatingActivity.this.tvUpdateWarnming.setText(X8UpdatingActivity.this.getString(R.string.x8_update_warning));
-                    }
+        this.updateManager.setOnUpdateProgress((isSuccess, progress, dtos, name) -> {
+            String tempString;
+            if (!isSuccess) {
+                btnReconnect.setVisibility(View.VISIBLE);
+                btnReconnect.setText(R.string.x8_update_connect);
+                imgUpdateResult.setVisibility(View.VISIBLE);
+                tvUpdateWarnming.setVisibility(View.INVISIBLE);
+                tvUpdating.setText(name);
+                x8sTvUpdatingProgress.setVisibility(View.GONE);
+            } else if (100 != progress || dtos == null) {
+                downRoundProgress.setProgress(progress);
+                if (name == null) {
+                    tempString = getString(R.string.x8_update_hint_one);
                 } else {
-                    X8UpdatingActivity.this.btnReconnect.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            HostConstants.clearLocalFwEntitys();
-                            RelayProcess.getRelayProcess().getAllVersion();
-                            X8UpdatingActivity.this.btnReconnect.setVisibility(0);
-                            X8UpdatingActivity.this.btnReconnect.setText(R.string.x8_update_success);
-                            X8UpdatingActivity.this.tvUpdateWarnming.setVisibility(4);
-                            X8UpdatingActivity.this.x8sTvUpdatingProgress.setVisibility(8);
-                            X8UpdatingActivity.this.updateResult(dtos);
-                            X8UpdatingActivity.this.imgUpdateResult.setVisibility(0);
-                        }
-                    }, 10000L);
+                    tempString = String.format(getString(R.string.x8_updating), name);
                 }
+                tvUpdating.setText(tempString);
+                x8sTvUpdatingProgress.setText(progress + "%");
+                if (btnReconnect.getVisibility() == View.VISIBLE) {
+                    btnReconnect.setVisibility(View.GONE);
+                    tvUpdateWarnming.setText(getString(R.string.x8_update_warning));
+                }
+            } else {
+                btnReconnect.postDelayed(() -> {
+                    HostConstants.clearLocalFwEntitys();
+                    RelayProcess.getRelayProcess().getAllVersion();
+                    btnReconnect.setVisibility(View.VISIBLE);
+                    btnReconnect.setText(R.string.x8_update_success);
+                    tvUpdateWarnming.setVisibility(View.INVISIBLE);
+                    x8sTvUpdatingProgress.setVisibility(View.GONE);
+                    updateResult(dtos);
+                    imgUpdateResult.setVisibility(View.VISIBLE);
+                }, 10000L);
             }
         });
     }
 
-    public void updateResult(List<FwInfo> dtos) {
-        StringBuffer sucessSb = new StringBuffer();
-        StringBuffer failedSb = new StringBuffer();
+    public void updateResult(@NonNull List<FwInfo> dtos) {
+        StringBuilder sucessSb = new StringBuilder();
+        StringBuilder failedSb = new StringBuilder();
         boolean hasFailed = false;
         for (FwInfo dto : dtos) {
             if ("0".equalsIgnoreCase(dto.getUpdateResult())) {
-                sucessSb.append(dto.getSysName() + "、");
+                sucessSb.append(dto.getSysName()).append("、");
                 HostConstants.saveLocalFirmware(new LocalFwEntity(dto.getTypeId(), dto.getModelId(), dto.getSoftwareVer(), ""));
             }
             if ("1".equalsIgnoreCase(dto.getUpdateResult())) {
-                failedSb.append(dto.getSysName() + EventsFilesManager.ROLL_OVER_FILE_NAME_SEPARATOR + dto.getErrorCode() + "、");
+                failedSb.append(dto.getSysName()).append(EventsFilesManager.ROLL_OVER_FILE_NAME_SEPARATOR).append(dto.getErrorCode()).append("、");
             }
         }
         if (!TextUtils.isEmpty(sucessSb.toString())) {
@@ -152,7 +143,7 @@ public class X8UpdatingActivity extends BaseActivity {
         }
         StringBuilder info = new StringBuilder();
         if (!TextUtils.isEmpty(failedSb.toString())) {
-            info.append(failedSb + IOUtils.LINE_SEPARATOR_UNIX);
+            info.append(failedSb).append("\n");
             hasFailed = true;
         }
         if (!TextUtils.isEmpty(sucessSb.toString())) {
@@ -160,10 +151,10 @@ public class X8UpdatingActivity extends BaseActivity {
         }
         if (hasFailed) {
             this.imgUpdateResult.setImageResource(R.drawable.x8s_update_error_4);
-            this.x8TvUpdateFailureHint.setVisibility(0);
+            this.x8TvUpdateFailureHint.setVisibility(View.VISIBLE);
         } else {
             this.imgUpdateResult.setImageResource(R.drawable.x8_img_updating_success);
-            this.x8TvUpdateFailureHint.setVisibility(8);
+            this.x8TvUpdateFailureHint.setVisibility(View.GONE);
         }
         if (hasFailed) {
             this.tvUpdating.setText(info.toString());
@@ -171,7 +162,7 @@ public class X8UpdatingActivity extends BaseActivity {
             this.tvUpdating.setText(info.toString());
         }
         this.downRoundProgress.setProgress(100);
-        EventBus.getDefault().post(new EventMessage(Constants.X8_UPDATE_EVENT_KEY, ""));
+        EventBus.getDefault().post(new EventMessage<>(Constants.X8_UPDATE_EVENT_KEY, ""));
     }
 
     @Override

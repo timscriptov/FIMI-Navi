@@ -15,19 +15,19 @@ import com.fimi.android.app.R;
 
 public class X8FollowSpeedView extends View {
     private final int cursorColor;
+    private final int lineBgColor;
+    private final int progessColor;
     private int cursorH;
     private int cursorW;
     private boolean isClick;
     private boolean isInit;
     private boolean isRight;
     private boolean isSet;
-    private final int lineBgColor;
     private int lineH;
     private OnChangeListener listener;
     private Paint paint;
     private int panding;
     private float pos;
-    private final int progessColor;
     private RectF rectF;
     private int s;
     private int thumW;

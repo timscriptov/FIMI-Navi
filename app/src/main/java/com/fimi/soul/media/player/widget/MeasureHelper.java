@@ -6,6 +6,7 @@ import java.lang.ref.WeakReference;
 
 
 public final class MeasureHelper {
+    private final WeakReference<View> mWeakView;
     private int mCurrentAspectRatio = 0;
     private int mMeasuredHeight;
     private int mMeasuredWidth;
@@ -14,7 +15,6 @@ public final class MeasureHelper {
     private int mVideoSarDen;
     private int mVideoSarNum;
     private int mVideoWidth;
-    private final WeakReference<View> mWeakView;
 
     public MeasureHelper(View view) {
         this.mWeakView = new WeakReference<>(view);

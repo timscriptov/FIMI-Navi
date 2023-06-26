@@ -2,21 +2,23 @@ package com.fimi.app.x8s.media;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 
 public class H264Packet {
+    private final IH264DataListener ih264DataListener;
     int len = 0;
     int index = 0;
     int MAX_SHORT = 65535;
     int lastSeq = -1;
     byte[] h264Frame = new byte[1048576];
-    private final IH264DataListener ih264DataListener;
     private int seq;
 
     public H264Packet(IH264DataListener ih264DataListener) {
         this.ih264DataListener = ih264DataListener;
     }
 
-    public void onPacket(byte[] data) {
+    public void onPacket(@NonNull byte[] data) {
         byte[] buffer = new byte[1024];
         this.len = data.length;
         if (this.len >= 14) {

@@ -20,9 +20,9 @@ import java.net.URL;
 
 
 public class DownloadTask implements Runnable {
-    private int finished = 0;
     private final FileInfo info;
     private final OnDownloadListener listener;
+    private int finished = 0;
 
     public DownloadTask(FileInfo info, OnDownloadListener listener) {
         this.info = info;

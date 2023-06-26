@@ -20,14 +20,16 @@ import com.fimi.x8sdk.modulestate.StateManager;
 
 
 public class X8AiSurroundToPointExcuteConfirmUi implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
+    private final View contentView;
+    private final int r;
+    private final float MIN = 1.0f;
+    private final float DEFAULE_SPEED = 2.0f;
     private float MAX;
     private int MAX_PROGRESS;
     private Button btnGo;
-    private final View contentView;
     private FcManager fcManager;
     private ImageView imgBack;
     private IX8NextViewListener listener;
-    private final int r;
     private SeekBar sbSeekBar;
     private TextView tvOrientation1;
     private TextView tvOrientation2;
@@ -38,9 +40,7 @@ public class X8AiSurroundToPointExcuteConfirmUi implements View.OnClickListener,
     private View vMinus;
     private View vPlus;
     private X8AiSurroundExcuteController x8AiSurroundExcuteController;
-    private final float MIN = 1.0f;
     private double perimeter = 0.0d;
-    private final float DEFAULE_SPEED = 2.0f;
 
     public X8AiSurroundToPointExcuteConfirmUi(Activity activity, View parent, float radius) {
         this.MAX = 8.0f;

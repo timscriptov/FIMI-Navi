@@ -89,6 +89,10 @@ public class X8IMUCheckController {
             return;
         }
         this.mHandler.sendEmptyMessageDelayed(0, 1000L);
+    }
+
+    public void stopCheckIMUChck() {
+        removeCheckIMUMessage();
     }    Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -112,10 +116,6 @@ public class X8IMUCheckController {
         }
     };
 
-    public void stopCheckIMUChck() {
-        removeCheckIMUMessage();
-    }
-
     public void removeCheckIMUMessage() {
         if (this.mHandler != null) {
             this.mHandler.removeMessages(0);
@@ -129,7 +129,6 @@ public class X8IMUCheckController {
 
         void startCheck();
     }
-
 
 
 

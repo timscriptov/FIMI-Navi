@@ -1,22 +1,18 @@
 package com.fimi.app.x8s.controls;
 
-import android.content.DialogInterface;
-
 import com.fimi.android.app.R;
 import com.fimi.app.x8s.tools.X8NumberUtil;
 import com.fimi.app.x8s.widget.X8DoubleCustomDialog;
 import com.fimi.app.x8s.widget.X8TLRDialog;
-import com.fimi.kernel.dataparser.usb.CmdResult;
-import com.fimi.kernel.dataparser.usb.UiCallBackListener;
 import com.fimi.x8sdk.dataparser.AutoFcSportState;
 import com.fimi.x8sdk.modulestate.StateManager;
 
 
 public class X8TLRDialogManager {
+    private final X8RightIconForMapController x8RightIconForMapController;
     private X8TLRDialog mX8LandingDialog;
     private X8TLRDialog mX8ReturnDialog;
     private X8TLRDialog mX8TakeOffDialog;
-    private final X8RightIconForMapController x8RightIconForMapController;
 
     public X8TLRDialogManager(X8RightIconForMapController x8RightIconForMapController) {
         this.x8RightIconForMapController = x8RightIconForMapController;
@@ -44,15 +40,10 @@ public class X8TLRDialogManager {
 
             @Override
             public void onRight() {
-                X8TLRDialogManager.this.onRetureHomeClick();
+                onRetureHomeClick();
             }
         });
-        this.mX8ReturnDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                X8TLRDialogManager.this.mX8ReturnDialog = null;
-            }
-        });
+        this.mX8ReturnDialog.setOnDismissListener(dialog -> mX8ReturnDialog = null);
         this.mX8ReturnDialog.setCanceledOnTouchOutside(false);
         this.mX8ReturnDialog.show();
     }
@@ -71,15 +62,10 @@ public class X8TLRDialogManager {
 
             @Override
             public void onRight() {
-                X8TLRDialogManager.this.onTakeOffClick();
+                onTakeOffClick();
             }
         });
-        this.mX8TakeOffDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                X8TLRDialogManager.this.mX8TakeOffDialog = null;
-            }
-        });
+        this.mX8TakeOffDialog.setOnDismissListener(dialog -> mX8TakeOffDialog = null);
         this.mX8TakeOffDialog.setCanceledOnTouchOutside(false);
         this.mX8TakeOffDialog.show();
     }
@@ -92,15 +78,10 @@ public class X8TLRDialogManager {
 
             @Override
             public void onRight() {
-                X8TLRDialogManager.this.onLandingClick();
+                onLandingClick();
             }
         });
-        this.mX8LandingDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                X8TLRDialogManager.this.mX8LandingDialog = null;
-            }
-        });
+        this.mX8LandingDialog.setOnDismissListener(dialog -> mX8LandingDialog = null);
         this.mX8LandingDialog.setCanceledOnTouchOutside(false);
         this.mX8LandingDialog.show();
     }
@@ -123,31 +104,22 @@ public class X8TLRDialogManager {
     }
 
     public void onRetureHomeClick() {
-        this.x8RightIconForMapController.getActivity().getFcManager().setAiRetureHome(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                }
+        this.x8RightIconForMapController.getActivity().getFcManager().setAiRetureHome((cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
             }
         });
     }
 
     public void onTakeOffClick() {
-        this.x8RightIconForMapController.getActivity().getFcManager().takeOff(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                }
+        this.x8RightIconForMapController.getActivity().getFcManager().takeOff((cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
             }
         });
     }
 
     public void onLandingClick() {
-        this.x8RightIconForMapController.getActivity().getFcManager().land(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                }
+        this.x8RightIconForMapController.getActivity().getFcManager().land((cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
             }
         });
     }

@@ -47,12 +47,12 @@ import router.Router;
 
 public class HostMainPresenter implements IDownProgress {
     static List<UpfirewareDto> list = new ArrayList();
+    private final Context mContext;
     DialogManager dialogManager;
     IFirmwareDownView iFirmwareDownView;
     boolean isProviderEnabled;
     int position = 0;
     private LocationManager lm;
-    private final Context mContext;
     private IProductControllers productControler;
 
     public HostMainPresenter(Context mContext, IFirmwareDownView iFirmwareDownView) {

@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.android.app.R;
 import com.fimi.app.x8s.config.X8AiConfig;
 import com.fimi.app.x8s.controls.aifly.confirm.module.X8AiAerialPhotographConfirmModule;
@@ -32,8 +34,6 @@ import com.fimi.app.x8s.enums.X8AiFlyMenuEnum;
 import com.fimi.app.x8s.interfaces.AbsX8MenuBoxControllers;
 import com.fimi.app.x8s.interfaces.IX8AiFlyListener;
 import com.fimi.app.x8s.ui.activity.X8sMainActivity;
-import com.fimi.kernel.dataparser.usb.CmdResult;
-import com.fimi.kernel.dataparser.usb.UiCallBackListener;
 import com.fimi.x8sdk.controller.FcCtrlManager;
 import com.fimi.x8sdk.controller.FcManager;
 import com.fimi.x8sdk.dataparser.AutoFcHeart;
@@ -113,7 +113,7 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
     }
 
     @Override
-    public void initViews(View rootView) {
+    public void initViews(@NonNull View rootView) {
         this.rlAiFly = rootView.findViewById(R.id.x8_rl_main_ai_fly);
         this.aiFlyBlank = rootView.findViewById(R.id.x8_rl_main_ai_fly_blank);
         this.contentView = rootView.findViewById(R.id.rl_main_ai_fly_content);
@@ -198,20 +198,10 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
             default:
                 return;
             case AI_LANDING:
-                onCloseConfirmUi();
-                return;
             case AI_RETURN:
-                onCloseConfirmUi();
-                return;
             case AI_FOLLOW_CONFIRM:
-                onCloseConfirmUi();
-                return;
             case AI_POINT2POINT_CONFIRM:
-                onCloseConfirmUi();
-                return;
             case AI_SURROUNDPOINT_CONFIRM:
-                onCloseConfirmUi();
-                return;
             case AI_AUTO_PHOTO_CONFIRM:
                 onCloseConfirmUi();
                 return;
@@ -221,7 +211,7 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(@NonNull View v) {
         int id = v.getId();
         if (id == R.id.img_ai_take_land_off) {
             openTakeOffOrLandingUi();
@@ -315,7 +305,7 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
                 this.imgAiSrcew.setOnClickListener(this);
                 this.imgAiSar.setOnClickListener(this);
             }
-            this.rlAiFlyItems.setVisibility(0);
+            this.rlAiFlyItems.setVisibility(View.VISIBLE);
         }
         if (this.isConect) {
             onFcHeart(null, this.isLowpower);
@@ -326,7 +316,7 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
 
     public void closeAiUi(boolean isShowOther, boolean isShowRightIcon) {
         this.menuState = X8AiFlyMenuEnum.ALL_ITEMS;
-        this.aiFlyBlank.setVisibility(8);
+        this.aiFlyBlank.setVisibility(View.GONE);
         if (this.isShow) {
             this.isShow = false;
             ObjectAnimator translationRight = ObjectAnimator.ofFloat(this.contentView, "translationX", 0.0f, this.width);
@@ -334,12 +324,11 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
             translationRight.start();
             translationRight.addListener(new AnimatorListenerAdapter() {
                 @Override
-                // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
-                    X8MainAiFlyController.this.rlAiFly.setVisibility(4);
-                    X8MainAiFlyController.this.svAiItems.fullScroll(33);
-                    X8MainAiFlyController.this.onCloseConfirmUi();
+                    rlAiFly.setVisibility(View.INVISIBLE);
+                    svAiItems.fullScroll(33);
+                    onCloseConfirmUi();
                 }
             });
         }
@@ -356,25 +345,22 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
     public void showAiUi() {
         getCameraSetting(false);
         getDroneState();
-        this.rlAiFly.setVisibility(0);
-        this.aiFlyBlank.setVisibility(0);
+        this.rlAiFly.setVisibility(View.VISIBLE);
+        this.aiFlyBlank.setVisibility(View.VISIBLE);
         initAllItems();
         if (!this.isShow) {
             Log.i("zdy", "showAiUi...........");
             this.isShow = true;
             if (this.width == 0) {
                 this.contentView.setAlpha(0.0f);
-                this.contentView.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        X8MainAiFlyController.this.contentView.setAlpha(1.0f);
-                        X8MainAiFlyController.this.MAX_WIDTH = X8MainAiFlyController.this.rlAiFly.getWidth();
-                        X8MainAiFlyController.this.width = X8MainAiFlyController.this.contentView.getWidth();
-                        X8MainAiFlyController.this.contentView.getHeight();
-                        ObjectAnimator animatorY = ObjectAnimator.ofFloat(X8MainAiFlyController.this.contentView, "translationX", X8MainAiFlyController.this.width, 0.0f);
-                        animatorY.setDuration(300L);
-                        animatorY.start();
-                    }
+                this.contentView.post(() -> {
+                    contentView.setAlpha(1.0f);
+                    MAX_WIDTH = rlAiFly.getWidth();
+                    width = contentView.getWidth();
+                    contentView.getHeight();
+                    ObjectAnimator animatorY = ObjectAnimator.ofFloat(contentView, "translationX", width, 0.0f);
+                    animatorY.setDuration(300L);
+                    animatorY.start();
                 });
                 return;
             }
@@ -385,8 +371,8 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
     }
 
     public void openAiFollowConfirmContent() {
-        this.rlAiFlyItems.setVisibility(4);
-        this.confirmContent.setVisibility(0);
+        this.rlAiFlyItems.setVisibility(View.INVISIBLE);
+        this.confirmContent.setVisibility(View.VISIBLE);
         this.mX8AiFollowConfirmModule.init(this.activity, this.confirmContent);
         this.mX8AiFollowConfirmModule.setListener(this);
         this.menuState = X8AiFlyMenuEnum.AI_FOLLOW_CONFIRM;
@@ -394,8 +380,8 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
 
     public void openPoint2PointConfirmContent() {
         if (X8AiConfig.getInstance().isAiP2PCourse()) {
-            this.rlAiFlyItems.setVisibility(4);
-            this.confirmContent.setVisibility(0);
+            this.rlAiFlyItems.setVisibility(View.INVISIBLE);
+            this.confirmContent.setVisibility(View.VISIBLE);
             this.mX8AiPoint2PointConfirmModule.init(this.activity, this.confirmContent);
             this.mX8AiPoint2PointConfirmModule.setListener(this);
             this.menuState = X8AiFlyMenuEnum.AI_POINT2POINT_CONFIRM;
@@ -405,8 +391,8 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
     }
 
     public void openAiHeadingLock() {
-        this.rlAiFlyItems.setVisibility(4);
-        this.confirmContent.setVisibility(0);
+        this.rlAiFlyItems.setVisibility(View.INVISIBLE);
+        this.confirmContent.setVisibility(View.VISIBLE);
         this.mX8AiHeadingLockConfirmModule.init(this.activity, this.confirmContent);
         this.mX8AiHeadingLockConfirmModule.setListener(this);
         this.menuState = X8AiFlyMenuEnum.AI_HEADINGLOCK;
@@ -418,8 +404,8 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
 
     public void openAiFixedwing() {
         if (X8AiConfig.getInstance().isAiFixedwingCourse()) {
-            this.rlAiFlyItems.setVisibility(4);
-            this.confirmContent.setVisibility(0);
+            this.rlAiFlyItems.setVisibility(View.INVISIBLE);
+            this.confirmContent.setVisibility(View.VISIBLE);
             this.mX8AiFixedwingConfirmModule.init(this.activity, this.confirmContent);
             this.mX8AiFixedwingConfirmModule.setListener(this);
             this.menuState = X8AiFlyMenuEnum.AI_FIXEDWING;
@@ -434,8 +420,8 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
 
     public void openAiTtipod() {
         if (X8AiConfig.getInstance().isAiTripodCourse()) {
-            this.rlAiFlyItems.setVisibility(4);
-            this.confirmContent.setVisibility(0);
+            this.rlAiFlyItems.setVisibility(View.INVISIBLE);
+            this.confirmContent.setVisibility(View.VISIBLE);
             this.mX8AiTtipodConfirmModule.init(this.activity, this.confirmContent);
             this.mX8AiTtipodConfirmModule.setListener(this);
             this.menuState = X8AiFlyMenuEnum.AI_TTIPOD;
@@ -450,8 +436,8 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
 
     public void openAiScrew() {
         if (X8AiConfig.getInstance().isAiScrew()) {
-            this.rlAiFlyItems.setVisibility(4);
-            this.confirmContent.setVisibility(0);
+            this.rlAiFlyItems.setVisibility(View.INVISIBLE);
+            this.confirmContent.setVisibility(View.VISIBLE);
             this.mX8AiScrewComnfirmModule.init(this.activity, this.confirmContent);
             this.mX8AiScrewComnfirmModule.setListener(this);
             this.menuState = X8AiFlyMenuEnum.AI_SCREW;
@@ -467,8 +453,8 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
 
     public void openAiSar() {
         if (X8AiConfig.getInstance().isAiSar()) {
-            this.rlAiFlyItems.setVisibility(4);
-            this.confirmContent.setVisibility(0);
+            this.rlAiFlyItems.setVisibility(View.INVISIBLE);
+            this.confirmContent.setVisibility(View.VISIBLE);
             this.mX8AiSarConfirmModule.init(this.activity, this.confirmContent);
             this.mX8AiSarConfirmModule.setListener(this);
             this.menuState = X8AiFlyMenuEnum.AI_SAR;
@@ -484,8 +470,8 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
 
     public void openAiAerialPhotograph() {
         if (X8AiConfig.getInstance().isAiAerialPhotographCourse()) {
-            this.rlAiFlyItems.setVisibility(4);
-            this.confirmContent.setVisibility(0);
+            this.rlAiFlyItems.setVisibility(View.INVISIBLE);
+            this.confirmContent.setVisibility(View.VISIBLE);
             this.mX8AiAerialPhotographConfirmModule.init(this.activity, this.confirmContent);
             this.mX8AiAerialPhotographConfirmModule.setListener(this);
             this.menuState = X8AiFlyMenuEnum.AI_AERIALPHOTOGRAPH;
@@ -666,21 +652,15 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
         if (this.fcManager != null) {
             DroneState droneState = StateManager.getInstance().getX8Drone();
             if (droneState.isInSky()) {
-                this.fcManager.land(new UiCallBackListener() {
-                    @Override
-                    public void onComplete(CmdResult cmdResult, Object o) {
-                        if (cmdResult.isSuccess()) {
-                            X8MainAiFlyController.this.closeAiUi(true, false);
-                        }
+                this.fcManager.land((cmdResult, o) -> {
+                    if (cmdResult.isSuccess()) {
+                        closeAiUi(true, false);
                     }
                 });
             } else {
-                this.fcManager.takeOff(new UiCallBackListener() {
-                    @Override
-                    public void onComplete(CmdResult cmdResult, Object o) {
-                        if (cmdResult.isSuccess()) {
-                            X8MainAiFlyController.this.closeAiUi(true, false);
-                        }
+                this.fcManager.takeOff((cmdResult, o) -> {
+                    if (cmdResult.isSuccess()) {
+                        closeAiUi(true, false);
                     }
                 });
             }
@@ -692,13 +672,10 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
     }
 
     public void setAiVcOpen(final int type) {
-        this.fcManager.setAiVcOpen(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                    X8MainAiFlyController.this.listener.onAiFollowConfirmClick(type);
-                    X8MainAiFlyController.this.closeAiUi(false, false);
-                }
+        this.fcManager.setAiVcOpen((cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
+                listener.onAiFollowConfirmClick(type);
+                closeAiUi(false, false);
             }
         });
     }
@@ -710,8 +687,8 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
 
     public void openSurroundPointUi() {
         if (X8AiConfig.getInstance().isAiSurroundCourse()) {
-            this.rlAiFlyItems.setVisibility(4);
-            this.confirmContent.setVisibility(0);
+            this.rlAiFlyItems.setVisibility(View.INVISIBLE);
+            this.confirmContent.setVisibility(View.VISIBLE);
             this.mX8AiSurroundToPointConfirmModule.init(this.activity, this.confirmContent);
             this.mX8AiSurroundToPointConfirmModule.setListener(this);
             this.menuState = X8AiFlyMenuEnum.AI_SURROUNDPOINT_CONFIRM;
@@ -722,8 +699,8 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
 
     public void openGravitationUi() {
         if (X8AiConfig.getInstance().isAiFlyGravitation()) {
-            this.rlAiFlyItems.setVisibility(4);
-            this.confirmContent.setVisibility(0);
+            this.rlAiFlyItems.setVisibility(View.INVISIBLE);
+            this.confirmContent.setVisibility(View.VISIBLE);
             this.mX8AiGravitationConfirmModule.init(this.activity, this.confirmContent);
             this.mX8AiGravitationConfirmModule.setListener(this);
             this.menuState = X8AiFlyMenuEnum.AI_FLY_GRAVITATION;
@@ -738,49 +715,49 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
     }
 
     public void openLinesUi() {
-        this.rlAiFlyItems.setVisibility(4);
-        this.confirmContent.setVisibility(0);
+        this.rlAiFlyItems.setVisibility(View.INVISIBLE);
+        this.confirmContent.setVisibility(View.VISIBLE);
         this.mX8AiLinesConfirmModule.init(this.activity, this.confirmContent);
         this.mX8AiLinesConfirmModule.setListener(this);
         this.menuState = X8AiFlyMenuEnum.AI_LINE_CONFIRM;
     }
 
     public void openAutoPhotoUi() {
-        this.rlAiFlyItems.setVisibility(4);
-        this.confirmContent.setVisibility(0);
+        this.rlAiFlyItems.setVisibility(View.INVISIBLE);
+        this.confirmContent.setVisibility(View.VISIBLE);
         this.mX8AiAutoPhotoConfirmModule.init(this.activity, this.confirmContent);
         this.mX8AiAutoPhotoConfirmModule.setListener(this);
         this.menuState = X8AiFlyMenuEnum.AI_AUTO_PHOTO_CONFIRM;
     }
 
     public void openTakeoffUi() {
-        this.rlAiFlyItems.setVisibility(4);
-        this.confirmContent.setVisibility(0);
+        this.rlAiFlyItems.setVisibility(View.INVISIBLE);
+        this.confirmContent.setVisibility(View.VISIBLE);
         this.mX8AiTakeoffConfirmModule.init(this.activity, this.confirmContent);
         this.mX8AiTakeoffConfirmModule.setListener(this);
         this.menuState = X8AiFlyMenuEnum.AI_TAKE_OFF;
     }
 
     public void openLandingUi() {
-        this.rlAiFlyItems.setVisibility(4);
-        this.confirmContent.setVisibility(0);
+        this.rlAiFlyItems.setVisibility(View.INVISIBLE);
+        this.confirmContent.setVisibility(View.VISIBLE);
         this.mX8AiLandingConfirmModule.init(this.activity, this.confirmContent);
         this.mX8AiLandingConfirmModule.setListener(this);
         this.menuState = X8AiFlyMenuEnum.AI_LANDING;
     }
 
     public void openReturnUi() {
-        this.rlAiFlyItems.setVisibility(4);
-        this.confirmContent.setVisibility(0);
+        this.rlAiFlyItems.setVisibility(View.INVISIBLE);
+        this.confirmContent.setVisibility(View.VISIBLE);
         this.mX8AiReturnConfirmModule.init(this.activity, this.confirmContent);
         this.mX8AiReturnConfirmModule.setListener(this, this.mFcCtrlManager);
         this.menuState = X8AiFlyMenuEnum.AI_RETURN;
     }
 
     public void onCloseConfirmUi() {
-        this.confirmContent.setVisibility(8);
+        this.confirmContent.setVisibility(View.GONE);
         ((ViewGroup) this.confirmContent).removeAllViews();
-        this.rlAiFlyItems.setVisibility(0);
+        this.rlAiFlyItems.setVisibility(View.VISIBLE);
         this.menuState = X8AiFlyMenuEnum.ALL_ITEMS;
     }
 
@@ -794,13 +771,10 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
     }
 
     public void setAiVcOpenForAutoPhoto(final int type) {
-        this.fcManager.setAiVcOpen(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                    X8MainAiFlyController.this.listener.onAiAutoPhotoConfirmClick(type);
-                    X8MainAiFlyController.this.closeAiUi(false, false);
-                }
+        this.fcManager.setAiVcOpen((cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
+                listener.onAiAutoPhotoConfirmClick(type);
+                closeAiUi(false, false);
             }
         });
     }
@@ -816,12 +790,9 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
     }
 
     public void onRetureHomeClick() {
-        this.fcManager.setAiRetureHome(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                    X8MainAiFlyController.this.closeAiUi(true, false);
-                }
+        this.fcManager.setAiRetureHome((cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
+                closeAiUi(true, false);
             }
         });
     }
@@ -837,49 +808,37 @@ public class X8MainAiFlyController extends AbsX8MenuBoxControllers implements Vi
     }
 
     public void setFixedwingType() {
-        this.mFcCtrlManager.setEnableFixwing(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                    X8MainAiFlyController.this.closeAiUi(true, false);
-                    X8MainAiFlyController.this.listener.onShowTakeoffLanding();
-                }
+        this.mFcCtrlManager.setEnableFixwing((cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
+                closeAiUi(true, false);
+                listener.onShowTakeoffLanding();
             }
         });
     }
 
     public void setHeadlockType() {
-        this.mFcCtrlManager.setEnableHeadingFree(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                    X8MainAiFlyController.this.closeAiUi(true, false);
-                    X8MainAiFlyController.this.listener.onShowTakeoffLanding();
-                }
+        this.mFcCtrlManager.setEnableHeadingFree((cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
+                closeAiUi(true, false);
+                listener.onShowTakeoffLanding();
             }
         });
     }
 
     public void setTripodType() {
-        this.mFcCtrlManager.setEnableTripod(1, new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                    X8MainAiFlyController.this.closeAiUi(true, false);
-                    X8MainAiFlyController.this.listener.onShowTakeoffLanding();
-                }
+        this.mFcCtrlManager.setEnableTripod(1, (cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
+                closeAiUi(true, false);
+                listener.onShowTakeoffLanding();
             }
         });
     }
 
     public void setAerailShotType() {
-        this.mFcCtrlManager.setEnableAerailShot(1, new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                    X8MainAiFlyController.this.closeAiUi(true, false);
-                    X8MainAiFlyController.this.listener.onShowTakeoffLanding();
-                }
+        this.mFcCtrlManager.setEnableAerailShot(1, (cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
+                closeAiUi(true, false);
+                listener.onShowTakeoffLanding();
             }
         });
     }

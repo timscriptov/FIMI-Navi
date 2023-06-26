@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -77,12 +76,7 @@ public class X8UpdateDetailActivity extends BaseActivity implements IUpdateCheck
 
     @Override
     public void doTrans() {
-        this.x8IvUpdateDetailReturn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                X8UpdateDetailActivity.this.finish();
-            }
-        });
+        this.x8IvUpdateDetailReturn.setOnClickListener(view -> finish());
     }
 
     @Override

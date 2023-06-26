@@ -2,6 +2,8 @@ package com.fimi.app.x8s.tools;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.android.app.R;
 import com.fimi.kernel.utils.NumberUtil;
 import com.fimi.x8sdk.common.GlobalConfig;
@@ -22,6 +24,7 @@ public class X8NumberUtil {
         prexSpeed = context.getResources().getString(R.string.x8_unit_speed_en);
     }
 
+    @NonNull
     public static String getDistanceNumberString(float decimal, int number, boolean toUpperCase) {
         if (GlobalConfig.getInstance().isShowmMtric()) {
             if (toUpperCase) {
@@ -35,6 +38,7 @@ public class X8NumberUtil {
         }
     }
 
+    @NonNull
     public static String getSpeedNumberString(float decimal, int number, boolean toUpperCase) {
         if (GlobalConfig.getInstance().isShowmMtric()) {
             if (toUpperCase) {
@@ -48,10 +52,12 @@ public class X8NumberUtil {
         }
     }
 
+    @NonNull
     public static String getDistanceNumberNoPrexString(float decimal, int number) {
         return GlobalConfig.getInstance().isShowmMtric() ? NumberUtil.decimalPointStr(decimal, number) + "" : NumberUtil.decimalPointStr(UnityUtil.meterToFoot(decimal), 1) + "";
     }
 
+    @NonNull
     public static String getSpeedNumberNoPrexString(float decimal, int number) {
         return GlobalConfig.getInstance().isShowmMtric() ? NumberUtil.decimalPointStr(decimal, number) + "" : NumberUtil.decimalPointStr(UnityUtil.msToMph(decimal), 1) + "";
     }
@@ -64,10 +70,12 @@ public class X8NumberUtil {
         return prexSpeed;
     }
 
+    @NonNull
     public static String getPrexDistanceUppercase() {
         return prexDistance.toUpperCase();
     }
 
+    @NonNull
     public static String getPrexSpeedUppercase() {
         return prexSpeed.toUpperCase();
     }

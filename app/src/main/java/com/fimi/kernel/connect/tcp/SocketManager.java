@@ -12,11 +12,11 @@ import java.net.Socket;
 
 public class SocketManager {
     private static SocketManager socketNetworkManager = null;
+    private final SocketOption socketOption = new SocketOption();
     private DataInputStream inFromServer;
     private DataOutputStream outToServer;
     private Socket socket = null;
     private boolean isServerPortException = false;
-    private final SocketOption socketOption = new SocketOption();
 
     public static synchronized SocketManager getInstance() {
         SocketManager socketManager;

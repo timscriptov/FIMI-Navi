@@ -10,14 +10,14 @@ import java.util.List;
 
 
 public class DownloadFwSelectInfo implements Serializable, Cloneable {
+    private final List<UpfirewareDto> mUpfirewareDtoList = new ArrayList();
+    private final StringBuffer detailBuffer = new StringBuffer();
     private long fileSize;
     private boolean isForceSign;
     private ProductEnum product;
     private String title;
-    private final List<UpfirewareDto> mUpfirewareDtoList = new ArrayList();
     private boolean isSelect = true;
     private int index = 0;
-    private final StringBuffer detailBuffer = new StringBuffer();
 
     public String getTitle() {
         return this.title;

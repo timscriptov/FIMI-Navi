@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.fimi.android.app.R;
@@ -20,9 +19,9 @@ import java.util.List;
 
 
 public class X8AiLinesHistoryUi implements View.OnClickListener {
+    private final View contentView;
     private X8AiLineHistoryAdapter adapter;
     private Button btnNext;
-    private final View contentView;
     private X8AiLineExcuteController controller;
     private ListView lv;
 

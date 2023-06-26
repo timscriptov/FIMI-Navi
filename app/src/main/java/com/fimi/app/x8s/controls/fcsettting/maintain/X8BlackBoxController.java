@@ -30,20 +30,20 @@ import com.fimi.widget.X8ToastUtil;
 
 
 public class X8BlackBoxController implements IFdsUiListener, IFdsCountListener {
-    private Button btnUploadToggle;
     private final View contentView;
     private final FdsCount fdsCount = new FdsCount();
-    private ImageView imgDelete;
-    private ImageView imgReturn;
     private final X8ModifyModeController listener;
     private final X8B2oxAdapter mX8B2oxAdapter;
+    private Button btnUploadToggle;
+    private ImageView imgDelete;
+    private ImageView imgReturn;
     private TextView tvNoFiles;
     private RelativeLayout x8ProgressLoading;
     public Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            X8BlackBoxController.this.x8ProgressLoading.setVisibility(8);
+            X8BlackBoxController.this.x8ProgressLoading.setVisibility(View.GONE);
             switch (msg.what) {
                 case 0:
                     X8BlackBoxController.this.imgDelete.setEnabled(true);
@@ -53,12 +53,12 @@ public class X8BlackBoxController implements IFdsUiListener, IFdsCountListener {
                     X8BlackBoxController.this.fdsCount.setTotal(msg.arg2);
                     return;
                 case 1:
-                    X8BlackBoxController.this.tvNoFiles.setVisibility(0);
+                    X8BlackBoxController.this.tvNoFiles.setVisibility(View.VISIBLE);
                     X8BlackBoxController.this.imgDelete.setEnabled(false);
                     X8BlackBoxController.this.btnUploadToggle.setEnabled(false);
                     return;
                 case 2:
-                    X8BlackBoxController.this.tvNoFiles.setVisibility(0);
+                    X8BlackBoxController.this.tvNoFiles.setVisibility(View.VISIBLE);
                     X8BlackBoxController.this.imgDelete.setEnabled(false);
                     X8BlackBoxController.this.btnUploadToggle.setEnabled(false);
                     X8BlackBoxController.this.mX8B2oxAdapter.clear();

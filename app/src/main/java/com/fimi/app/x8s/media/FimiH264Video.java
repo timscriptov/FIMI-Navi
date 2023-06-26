@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.view.ViewCompat;
 
@@ -39,12 +40,12 @@ public class FimiH264Video extends RelativeLayout implements IFrameDataListener,
     private static final int VIDEO_WIDTH = FimiAppContext.UI_HEIGHT;
     private static final int VIDEO_HEIGHT = FimiAppContext.UI_WIDTH;
     private final int FrameRate;
+    private final SurfaceCallback mSurfaceCallback;
     private View blackView;
     private IFimiFpvShot fpvShotCallback;
     private int mCurrentState;
     private H264Decoder mH264Decoder;
     private IFrameDataListener mIFrameDataListener;
-    private final SurfaceCallback mSurfaceCallback;
     private int mTargetState;
     private int mVideoHeight;
     private int mVideoWidth;
@@ -130,15 +131,15 @@ public class FimiH264Video extends RelativeLayout implements IFrameDataListener,
 
     public void showGridLine(int type) {
         if (Constants.isFactoryApp()) {
-            this.mX8Camera9GridView.setVisibility(0);
+            this.mX8Camera9GridView.setVisibility(View.VISIBLE);
             this.mX8Camera9GridView.setType(1);
         } else if (type == 0) {
-            this.mX8Camera9GridView.setVisibility(8);
+            this.mX8Camera9GridView.setVisibility(View.GONE);
         } else if (type == 3) {
-            this.mX8Camera9GridView.setVisibility(0);
+            this.mX8Camera9GridView.setVisibility(View.VISIBLE);
             this.mX8Camera9GridView.setType(1);
         } else if (type == 2) {
-            this.mX8Camera9GridView.setVisibility(0);
+            this.mX8Camera9GridView.setVisibility(View.VISIBLE);
             this.mX8Camera9GridView.setType(2);
         }
     }
@@ -179,9 +180,9 @@ public class FimiH264Video extends RelativeLayout implements IFrameDataListener,
 
     public void showVideoBg(boolean b) {
         if (b && StateManager.getInstance().getCamera().getToken() >= 0) {
-            this.blackView.setVisibility(8);
+            this.blackView.setVisibility(View.GONE);
         } else {
-            this.blackView.setVisibility(0);
+            this.blackView.setVisibility(View.VISIBLE);
         }
     }
 
@@ -278,7 +279,7 @@ public class FimiH264Video extends RelativeLayout implements IFrameDataListener,
         }
 
         @Override
-        public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
+        public void onSurfaceTextureAvailable(@NonNull SurfaceTexture surface, int width, int height) {
             Log.i("istep", ".....surfaceCreated......." + surface.hashCode());
             FimiH264Video.this.openVideo(surface);
         }

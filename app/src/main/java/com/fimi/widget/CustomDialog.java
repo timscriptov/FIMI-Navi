@@ -221,17 +221,17 @@ public class CustomDialog extends Dialog {
                 textPaint.setFakeBoldText(true);
                 textView.setText(this.title);
             } else {
-                layout.findViewById(R.id.tv_title).setVisibility(8);
-                layout.findViewById(R.id.tv_content).setVisibility(8);
-                layout.findViewById(R.id.tv_content_sigle).setVisibility(0);
+                layout.findViewById(R.id.tv_title).setVisibility(View.GONE);
+                layout.findViewById(R.id.tv_content).setVisibility(View.GONE);
+                layout.findViewById(R.id.tv_content_sigle).setVisibility(View.VISIBLE);
             }
             dialog.setContentView(layout);
             if (this.isSingle) {
-                layout.findViewById(R.id.rl_double).setVisibility(4);
-                layout.findViewById(R.id.btn_single).setVisibility(0);
+                layout.findViewById(R.id.rl_double).setVisibility(View.INVISIBLE);
+                layout.findViewById(R.id.btn_single).setVisibility(View.VISIBLE);
             } else {
-                layout.findViewById(R.id.rl_double).setVisibility(0);
-                layout.findViewById(R.id.btn_single).setVisibility(4);
+                layout.findViewById(R.id.rl_double).setVisibility(View.VISIBLE);
+                layout.findViewById(R.id.btn_single).setVisibility(View.INVISIBLE);
             }
             if (this.clickOutIsCancle) {
                 dialog.setCanceledOnTouchOutside(false);

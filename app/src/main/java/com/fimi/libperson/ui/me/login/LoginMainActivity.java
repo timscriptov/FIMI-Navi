@@ -34,6 +34,16 @@ import router.Router;
 
 
 public class LoginMainActivity extends BasePersonActivity implements ILoginView, ForgetPasswordFragment.OnResetPasswordListerner, ForgetIphonePasswordFragment.OnResetIphonePasswordListerner {
+    private final TextView.OnEditorActionListener mOnEditorActionListener = new TextView.OnEditorActionListener() {
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            if (actionId == 4 || actionId == 6 || (event != null && 66 == event.getKeyCode() && event.getAction() == 0)) {
+                AbAppUtil.closeSoftInput(LoginMainActivity.this.mContext);
+                return false;
+            }
+            return false;
+        }
+    };
     LoginPresenter loginPresenter;
     Button mBtnLoginEmail;
     Button mBtnLoginIphone;
@@ -62,16 +72,6 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
     private boolean isShowPassword = false;
     private boolean isShowIphonePassword = false;
     private boolean isMainLand = true;
-    private final TextView.OnEditorActionListener mOnEditorActionListener = new TextView.OnEditorActionListener() {
-        @Override
-        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-            if (actionId == 4 || actionId == 6 || (event != null && 66 == event.getKeyCode() && event.getAction() == 0)) {
-                AbAppUtil.closeSoftInput(LoginMainActivity.this.mContext);
-                return false;
-            }
-            return false;
-        }
-    };
 
     @Override
     public void setStatusBarColor() {
@@ -140,8 +140,8 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
         this.mTvTitleNmae.setText(getString(R.string.login_login_main_phone_title));
         this.mTitleView.setTvRightVisible(0);
         this.mTitleView.setTvTitle("");
-        this.mRlIphone.setVisibility(0);
-        this.mRlEmail.setVisibility(8);
+        this.mRlIphone.setVisibility(View.VISIBLE);
+        this.mRlEmail.setVisibility(View.GONE);
         this.loginPresenter = new LoginPresenter(this);
         this.mEtAccount.addTextChangedListener(new EditTextWatcher(this.mEtAccount));
         this.mEtEmailAccount.addTextChangedListener(new EditTextWatcher(this.mEtEmailAccount));
@@ -231,10 +231,10 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
                 LoginMainActivity.this.fragmentManager.beginTransaction().show(LoginMainActivity.this.mForgetPasswordFragment).commitAllowingStateLoss();
                 LoginMainActivity.this.mForgetPasswordFragment.setEmailAddress(LoginMainActivity.this.mEtEmailAccount.getText().toString().trim());
                 LoginMainActivity.this.mTitleView.setTvRightVisible(4);
-                LoginMainActivity.this.mBtnLoginEmail.setVisibility(4);
-                LoginMainActivity.this.mBtnLoginIphone.setVisibility(4);
-                LoginMainActivity.this.mEtEmailPassword.setVisibility(4);
-                LoginMainActivity.this.mEtEmailAccount.setVisibility(4);
+                LoginMainActivity.this.mBtnLoginEmail.setVisibility(View.INVISIBLE);
+                LoginMainActivity.this.mBtnLoginIphone.setVisibility(View.INVISIBLE);
+                LoginMainActivity.this.mEtEmailPassword.setVisibility(View.INVISIBLE);
+                LoginMainActivity.this.mEtEmailAccount.setVisibility(View.INVISIBLE);
                 AbAppUtil.closeSoftInput(LoginMainActivity.this.mContext);
             }
         });
@@ -244,10 +244,10 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
                 LoginMainActivity.this.fragmentManager.beginTransaction().show(LoginMainActivity.this.mForgetIphonePasswordFragment).commitAllowingStateLoss();
                 LoginMainActivity.this.mForgetIphonePasswordFragment.setIphone(LoginMainActivity.this.mEtAccount.getText().toString().trim());
                 LoginMainActivity.this.mTitleView.setTvRightVisible(4);
-                LoginMainActivity.this.mBtnLoginEmail.setVisibility(4);
-                LoginMainActivity.this.mBtnLoginIphone.setVisibility(4);
-                LoginMainActivity.this.mEtAccount.setVisibility(4);
-                LoginMainActivity.this.mEtPassword.setVisibility(4);
+                LoginMainActivity.this.mBtnLoginEmail.setVisibility(View.INVISIBLE);
+                LoginMainActivity.this.mBtnLoginIphone.setVisibility(View.INVISIBLE);
+                LoginMainActivity.this.mEtAccount.setVisibility(View.INVISIBLE);
+                LoginMainActivity.this.mEtPassword.setVisibility(View.INVISIBLE);
                 AbAppUtil.closeSoftInput(LoginMainActivity.this.mContext);
             }
         });
@@ -261,9 +261,9 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
                             LoginMainActivity.this.fragmentManager.beginTransaction().hide(LoginMainActivity.this.mForgetIphonePasswordFragment).commit();
                             LoginMainActivity.this.mTvTitleNmae.setText(LoginMainActivity.this.getString(R.string.login_login_main_phone_title));
                             LoginMainActivity.this.mTitleView.setTvRightVisible(0);
-                            LoginMainActivity.this.mBtnLoginIphone.setVisibility(0);
-                            LoginMainActivity.this.mEtAccount.setVisibility(0);
-                            LoginMainActivity.this.mEtPassword.setVisibility(0);
+                            LoginMainActivity.this.mBtnLoginIphone.setVisibility(View.VISIBLE);
+                            LoginMainActivity.this.mEtAccount.setVisibility(View.VISIBLE);
+                            LoginMainActivity.this.mEtPassword.setVisibility(View.VISIBLE);
                             return;
                         }
                         LoginMainActivity.this.mForgetIphonePasswordFragment.setBack();
@@ -277,9 +277,9 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
                     if (LoginMainActivity.this.isMainLand) {
                         LoginMainActivity.this.mTitleView.setTvRightVisible(0);
                     }
-                    LoginMainActivity.this.mEtEmailPassword.setVisibility(0);
-                    LoginMainActivity.this.mEtEmailAccount.setVisibility(0);
-                    LoginMainActivity.this.mBtnLoginEmail.setVisibility(0);
+                    LoginMainActivity.this.mEtEmailPassword.setVisibility(View.VISIBLE);
+                    LoginMainActivity.this.mEtEmailAccount.setVisibility(View.VISIBLE);
+                    LoginMainActivity.this.mBtnLoginEmail.setVisibility(View.VISIBLE);
                 } else {
                     LoginMainActivity.this.mForgetPasswordFragment.setBack();
                 }
@@ -311,9 +311,9 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
                     if (this.isMainLand) {
                         this.mTitleView.setTvRightVisible(0);
                     }
-                    this.mBtnLoginEmail.setVisibility(0);
-                    this.mEtEmailPassword.setVisibility(0);
-                    this.mEtEmailAccount.setVisibility(0);
+                    this.mBtnLoginEmail.setVisibility(View.VISIBLE);
+                    this.mEtEmailPassword.setVisibility(View.VISIBLE);
+                    this.mEtEmailAccount.setVisibility(View.VISIBLE);
                     return false;
                 }
                 this.mForgetPasswordFragment.setBack();
@@ -324,9 +324,9 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
                     this.fragmentManager.beginTransaction().hide(this.mForgetIphonePasswordFragment).commit();
                     this.mTvTitleNmae.setText(getString(R.string.login_login_main_phone_title));
                     this.mTitleView.setTvRightVisible(0);
-                    this.mBtnLoginIphone.setVisibility(0);
-                    this.mEtAccount.setVisibility(0);
-                    this.mEtPassword.setVisibility(0);
+                    this.mBtnLoginIphone.setVisibility(View.VISIBLE);
+                    this.mEtAccount.setVisibility(View.VISIBLE);
+                    this.mEtPassword.setVisibility(View.VISIBLE);
                     return false;
                 }
                 this.mForgetIphonePasswordFragment.setBack();
@@ -348,9 +348,9 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
         if (this.isMainLand) {
             this.mTitleView.setTvRightVisible(0);
         }
-        this.mBtnLoginEmail.setVisibility(0);
-        this.mEtEmailPassword.setVisibility(0);
-        this.mEtEmailAccount.setVisibility(0);
+        this.mBtnLoginEmail.setVisibility(View.VISIBLE);
+        this.mEtEmailPassword.setVisibility(View.VISIBLE);
+        this.mEtEmailAccount.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -359,15 +359,15 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
         this.mForgetIphonePasswordFragment.setState(ForgetIphonePasswordFragment.State.IPHONE);
         this.mTvTitleNmae.setText(getString(R.string.login_login_main_phone_title));
         this.mTitleView.setTvRightVisible(0);
-        this.mBtnLoginIphone.setVisibility(0);
-        this.mEtAccount.setVisibility(0);
-        this.mEtPassword.setVisibility(0);
+        this.mBtnLoginIphone.setVisibility(View.VISIBLE);
+        this.mEtAccount.setVisibility(View.VISIBLE);
+        this.mEtPassword.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void getCodeResult(boolean isSuccess, String errMsg) {
         if (!isSuccess) {
-            this.mTvErrorHint.setVisibility(0);
+            this.mTvErrorHint.setVisibility(View.VISIBLE);
             this.mTvErrorHint.setText(errMsg);
         }
     }
@@ -378,7 +378,7 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
             Intent it = Router.invoke(this, "activity://app.main");
             readyGoThenKillAllActivity(it);
         } else if (errMsg != null) {
-            this.mTvErrorHint.setVisibility(0);
+            this.mTvErrorHint.setVisibility(View.VISIBLE);
             this.mTvErrorHint.setText(errMsg);
         }
     }
@@ -390,7 +390,7 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
             Intent it = Router.invoke(this, "activity://app.main");
             readyGoThenKillAllActivity(it);
         } else if (errMsg != null) {
-            this.mTvEmailErrorHint.setVisibility(0);
+            this.mTvEmailErrorHint.setVisibility(View.VISIBLE);
             this.mTvEmailErrorHint.setText(errMsg);
         }
     }
@@ -428,14 +428,14 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
     public void showEmail(boolean isEmail) {
         if (isEmail) {
             this.isEmail = true;
-            this.mTvForgetHint.setVisibility(0);
-            this.mTvForgetIphoneHint.setVisibility(8);
+            this.mTvForgetHint.setVisibility(View.VISIBLE);
+            this.mTvForgetIphoneHint.setVisibility(View.GONE);
             this.mTitleView.setTvRightText(getString(R.string.login_iphone_title));
             this.mTvTitleNmae.setText(getString(R.string.login_login_main_email_title));
-            this.mBtnLoginEmail.setVisibility(0);
-            this.mBtnLoginIphone.setVisibility(4);
-            this.mRlEmail.setVisibility(0);
-            this.mRlIphone.setVisibility(8);
+            this.mBtnLoginEmail.setVisibility(View.VISIBLE);
+            this.mBtnLoginIphone.setVisibility(View.INVISIBLE);
+            this.mRlEmail.setVisibility(View.VISIBLE);
+            this.mRlIphone.setVisibility(View.GONE);
             if (this.mEtEmailPassword.getText().length() >= 8 && this.mEtEmailPassword.getText().length() <= 16) {
                 loginBtnIsClick(true);
                 return;
@@ -447,12 +447,12 @@ public class LoginMainActivity extends BasePersonActivity implements ILoginView,
         this.isEmail = false;
         this.mTitleView.setTvRightText(getString(R.string.login_email_title));
         this.mTvTitleNmae.setText(getString(R.string.login_login_main_phone_title));
-        this.mBtnLoginEmail.setVisibility(4);
-        this.mBtnLoginIphone.setVisibility(0);
-        this.mRlEmail.setVisibility(8);
-        this.mRlIphone.setVisibility(0);
-        this.mTvForgetHint.setVisibility(8);
-        this.mTvForgetIphoneHint.setVisibility(0);
+        this.mBtnLoginEmail.setVisibility(View.INVISIBLE);
+        this.mBtnLoginIphone.setVisibility(View.VISIBLE);
+        this.mRlEmail.setVisibility(View.GONE);
+        this.mRlIphone.setVisibility(View.VISIBLE);
+        this.mTvForgetHint.setVisibility(View.GONE);
+        this.mTvForgetIphoneHint.setVisibility(View.VISIBLE);
         this.mTvForgetHint.setTextColor(getResources().getColor(R.color.login_forget_password));
         loginBtnIsClick(this.mEtPassword.getText().length() == 4);
     }

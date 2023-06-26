@@ -124,12 +124,12 @@ public class X8CameraOtherSettingController extends AbsX8Controllers implements 
                 this.tvLinesSettingNineLines.setOnClickListener(this);
                 this.tvLinesSettingDiagonalAndNine.setOnClickListener(this);
             }
-            this.x8LinesSettingDetailView.setVisibility(0);
-            this.x8OtherSettingMainLayout.setVisibility(8);
+            this.x8LinesSettingDetailView.setVisibility(View.VISIBLE);
+            this.x8OtherSettingMainLayout.setVisibility(View.GONE);
             setLinesSelect();
         } else if (i == R.id.img_return) {
-            this.x8LinesSettingDetailView.setVisibility(8);
-            this.x8OtherSettingMainLayout.setVisibility(0);
+            this.x8LinesSettingDetailView.setVisibility(View.GONE);
+            this.x8OtherSettingMainLayout.setVisibility(View.VISIBLE);
             this.tvCurrLinesSetting.setText(getCurrLinesSettingStr());
             SPStoreManager.getInstance().saveInt(Constants.X8_GLINE_LINE_OPTION, this.linesSelectIdx);
             GlobalConfig.getInstance().setGridLine(this.linesSelectIdx);

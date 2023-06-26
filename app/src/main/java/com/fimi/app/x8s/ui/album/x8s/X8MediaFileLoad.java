@@ -33,13 +33,6 @@ import java.util.Locale;
 
 
 public class X8MediaFileLoad<T extends MediaModel> implements IMediaFileLoad, MediaDataListener {
-    public SuffixUtils mSuffixUtils = SuffixUtils.obtain();
-    X8MediaFileInfo downingFileInfo;
-    RandomAccessFile randomAccessFile;
-    List<VideoThumInfo> thumInfos = new ArrayList();
-    long fileLength = 0;
-    boolean isAwait = false;
-    X8FileInfo info = new X8FileInfo();
     private final List<MediaModel> listData;
     private final OnX8MediaFileListener listener;
     private final String X8_MEDIA_DES = "media.xml";
@@ -49,7 +42,6 @@ public class X8MediaFileLoad<T extends MediaModel> implements IMediaFileLoad, Me
     public final String thumPath = this.rootPath + "/thum";
     public final String orginPath = this.rootPath + "/orgin";
     public final String tempPath = this.rootPath + "/temp";
-    private short max_size = NTLMConstants.TARGET_INFORMATION_SUBBLOCK_DNS_DOMAIN_NAME_TYPE;
     private final boolean isErr = false;
     private final Handler mHandler = new Handler() {
         @Override
@@ -66,6 +58,14 @@ public class X8MediaFileLoad<T extends MediaModel> implements IMediaFileLoad, Me
             }
         }
     };
+    public SuffixUtils mSuffixUtils = SuffixUtils.obtain();
+    X8MediaFileInfo downingFileInfo;
+    RandomAccessFile randomAccessFile;
+    List<VideoThumInfo> thumInfos = new ArrayList();
+    long fileLength = 0;
+    boolean isAwait = false;
+    X8FileInfo info = new X8FileInfo();
+    private short max_size = NTLMConstants.TARGET_INFORMATION_SUBBLOCK_DNS_DOMAIN_NAME_TYPE;
     DownMediaFileLinstener fileLinstener = new DownMediaFileLinstener() {
         @Override
         public void onSartFile() {

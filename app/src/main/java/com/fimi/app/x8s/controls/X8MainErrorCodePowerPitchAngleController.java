@@ -2,6 +2,8 @@ package com.fimi.app.x8s.controls;
 
 import android.view.View;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.android.app.R;
 import com.fimi.app.x8s.interfaces.AbsX8Controllers;
 import com.fimi.x8sdk.entity.X8ErrorCodeInfo;
@@ -21,7 +23,7 @@ public class X8MainErrorCodePowerPitchAngleController extends AbsX8Controllers {
     }
 
     @Override
-    public void initViews(View rootView) {
+    public void initViews(@NonNull View rootView) {
         this.handleView = rootView.findViewById(R.id.main_left_tools);
         this.mX8ErrorCodeController = new X8ErrorCodeController(rootView);
         if (this.mX8ErrorCodeController != null) {

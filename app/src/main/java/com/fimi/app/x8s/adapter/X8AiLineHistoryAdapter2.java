@@ -106,38 +106,38 @@ public class X8AiLineHistoryAdapter2 extends RecyclerView.Adapter<X8AiLineHistor
         holder.rlSaveFlag.setTag(info);
         holder.rlSaveFlag.setOnClickListener(view -> {
             X8AiLinePointInfo info1 = (X8AiLinePointInfo) view.getTag();
-            if (X8AiLineHistoryAdapter2.this.type != 0) {
-                if (X8AiLineHistoryAdapter2.this.type == 1 && info1.getSaveFlag() == 1) {
-                    X8AiLineHistoryAdapter2.this.showCancleDialog(info1, position);
+            if (type != 0) {
+                if (type == 1 && info1.getSaveFlag() == 1) {
+                    showCancleDialog(info1, position);
                 }
             } else if (info1.getSaveFlag() == 1) {
                 info1.setSaveFlag(0);
                 X8AiLinePointInfoHelper.getIntance().updatelineSaveFlag(0, info1.getId());
-                if (X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener != null) {
-                    X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener.onItemChange(X8AiLineHistoryAdapter2.this.list.get(position).getId(), 0, position);
+                if (mX8AiLineSelectListener != null) {
+                    mX8AiLineSelectListener.onItemChange(list.get(position).getId(), 0, position);
                 }
-                X8AiLineHistoryAdapter2.this.notifyItemChanged(position);
+                notifyItemChanged(position);
             } else if (info1.getSaveFlag() == 0) {
-                int size = X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener.favoritesCapacity();
+                int size = mX8AiLineSelectListener.favoritesCapacity();
                 if (size == 20) {
-                    X8AiLineHistoryAdapter2.this.showMaxSaveDialog();
+                    showMaxSaveDialog();
                     return;
                 }
                 info1.setSaveFlag(1);
                 X8AiLinePointInfoHelper.getIntance().updatelineSaveFlag(1, info1.getId());
-                if (X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener != null) {
-                    X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener.onItemChange(X8AiLineHistoryAdapter2.this.list.get(position).getId(), 1, position);
-                    X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener.addLineItem(X8AiLineHistoryAdapter2.this.list.get(position));
+                if (mX8AiLineSelectListener != null) {
+                    mX8AiLineSelectListener.onItemChange(list.get(position).getId(), 1, position);
+                    mX8AiLineSelectListener.addLineItem(list.get(position));
                 }
-                X8AiLineHistoryAdapter2.this.notifyItemChanged(position);
+                notifyItemChanged(position);
                 if (info1.getName() != null && info1.getName().equals("")) {
-                    X8AiLineHistoryAdapter2.this.showEditorDialog(position, info1);
+                    showEditorDialog(position, info1);
                 }
             }
         });
         holder.rlRootView.setOnClickListener(v -> {
-            if (X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener != null) {
-                X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener.onSelectId(X8AiLineHistoryAdapter2.this.list.get(position).getId(), X8AiLineHistoryAdapter2.this.type);
+            if (mX8AiLineSelectListener != null) {
+                mX8AiLineSelectListener.onSelectId(list.get(position).getId(), type);
             }
         });
     }
@@ -177,12 +177,12 @@ public class X8AiLineHistoryAdapter2 extends RecyclerView.Adapter<X8AiLineHistor
             public void onRight() {
                 info.setSaveFlag(0);
                 X8AiLinePointInfoHelper.getIntance().updatelineSaveFlag(0, info.getId());
-                if (X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener != null) {
-                    X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener.onItemChange(X8AiLineHistoryAdapter2.this.list.get(index).getId(), 0, index);
+                if (mX8AiLineSelectListener != null) {
+                    mX8AiLineSelectListener.onItemChange(list.get(index).getId(), 0, index);
                 }
-                X8AiLineHistoryAdapter2.this.list.remove(info);
-                X8AiLineHistoryAdapter2.this.notifyItemRemoved(index);
-                X8AiLineHistoryAdapter2.this.notifyItemRangeChanged(index, X8AiLineHistoryAdapter2.this.list.size() - index);
+                list.remove(info);
+                notifyItemRemoved(index);
+                notifyItemRangeChanged(index, list.size() - index);
             }
         });
         dialog.show();
@@ -200,7 +200,7 @@ public class X8AiLineHistoryAdapter2 extends RecyclerView.Adapter<X8AiLineHistor
 
             @Override
             public void onRight() {
-                X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener.goFavorites();
+                mX8AiLineSelectListener.goFavorites();
             }
         });
         dialogMax.show();
@@ -222,10 +222,10 @@ public class X8AiLineHistoryAdapter2 extends RecyclerView.Adapter<X8AiLineHistor
             public void onCenter(String text) {
                 info1.setName(text);
                 X8AiLinePointInfoHelper.getIntance().updateLineName(text, info1.getId());
-                if (X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener != null) {
-                    X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener.onItemChange(X8AiLineHistoryAdapter2.this.list.get(positon).getId(), 1, positon);
+                if (mX8AiLineSelectListener != null) {
+                    mX8AiLineSelectListener.onItemChange(list.get(positon).getId(), 1, positon);
                 }
-                X8AiLineHistoryAdapter2.this.notifyItemChanged(positon);
+                notifyItemChanged(positon);
             }
 
             @Override
@@ -233,10 +233,10 @@ public class X8AiLineHistoryAdapter2 extends RecyclerView.Adapter<X8AiLineHistor
                 if (!text.equals("")) {
                     info1.setName(text);
                     X8AiLinePointInfoHelper.getIntance().updateLineName(text, info1.getId());
-                    if (X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener != null) {
-                        X8AiLineHistoryAdapter2.this.mX8AiLineSelectListener.onItemChange(X8AiLineHistoryAdapter2.this.list.get(positon).getId(), 1, positon);
+                    if (mX8AiLineSelectListener != null) {
+                        mX8AiLineSelectListener.onItemChange(list.get(positon).getId(), 1, positon);
                     }
-                    X8AiLineHistoryAdapter2.this.notifyItemChanged(positon);
+                    notifyItemChanged(positon);
                 }
             }
         });

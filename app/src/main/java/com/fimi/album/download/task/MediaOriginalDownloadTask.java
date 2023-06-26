@@ -19,10 +19,10 @@ import java.net.URL;
 
 
 public class MediaOriginalDownloadTask implements Runnable {
-    private MediaDownloadInfo downloadInfo;
-    private long finished = 0;
     private final OnDownloadListener listener;
     private final MediaModel model;
+    private MediaDownloadInfo downloadInfo;
+    private long finished = 0;
 
     public MediaOriginalDownloadTask(MediaModel model, OnDownloadListener listener) {
         this.model = model;

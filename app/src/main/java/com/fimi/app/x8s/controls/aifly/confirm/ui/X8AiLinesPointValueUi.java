@@ -31,12 +31,21 @@ import java.util.List;
 
 
 public class X8AiLinesPointValueUi implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
+    private final View contentView;
+    private final X8AiLineExcuteController controller;
+    private final boolean isShowMetric;
+    private final MapPointLatLng mapPointLatLng;
+    private final X8MapVideoController mapVideoController;
+    private final int mode;
+    private final String suffix;
+    private final View[] arraysView = new View[7];
+    private final int MAX = 120;
+    private final int MIN = 5;
+    private final int SB_MAX = this.MAX - this.MIN;
     int count = 0;
     private X8AiLinePointValueAdapter adapter;
     private Button btnAll;
     private Button btnOk;
-    private final View contentView;
-    private final X8AiLineExcuteController controller;
     private ImageView img4xSlow;
     private ImageView img5sPhoto;
     private ImageView imgHover;
@@ -44,17 +53,12 @@ public class X8AiLinesPointValueUi implements View.OnClickListener, SeekBar.OnSe
     private ImageView imgOnePhoto;
     private ImageView imgRecord;
     private ImageView imgThreePhoto;
-    private final boolean isShowMetric;
     private List<X8AiLinePointEntity> mEntityList;
     private RecyclerView mRecyclerView;
-    private final MapPointLatLng mapPointLatLng;
-    private final X8MapVideoController mapVideoController;
     private View minus;
-    private final int mode;
     private View plus;
     private TextView pos;
     private SeekBar sbValue;
-    private final String suffix;
     private X8TabHost tabRorate;
     private TextView tvBindPoint;
     private TextView tvDvOrientation;
@@ -67,11 +71,7 @@ public class X8AiLinesPointValueUi implements View.OnClickListener, SeekBar.OnSe
     private View vOnePhoto;
     private View vRecord;
     private View vThreePhoto;
-    private final View[] arraysView = new View[7];
     private int index = 0;
-    private final int MAX = 120;
-    private final int MIN = 5;
-    private final int SB_MAX = this.MAX - this.MIN;
 
     public X8AiLinesPointValueUi(Activity activity, View rootView, int mode, MapPointLatLng mpl, X8MapVideoController mapVideoController, X8AiLineExcuteController controller) {
         this.mode = mode;
@@ -168,7 +168,7 @@ public class X8AiLinesPointValueUi implements View.OnClickListener, SeekBar.OnSe
                     }
                 });
                 if (this.controller.getOration() == 1) {
-                    view.findViewById(R.id.rl_rorate).setVisibility(0);
+                    view.findViewById(R.id.rl_rorate).setVisibility(View.VISIBLE);
                     return;
                 } else {
                     view.findViewById(R.id.rl_rorate).setVisibility(View.GONE);
@@ -343,8 +343,8 @@ public class X8AiLinesPointValueUi implements View.OnClickListener, SeekBar.OnSe
     public void lablesInterestEvent() {
         List<MapPointLatLng> list = this.mapVideoController.getFimiMap().getAiLineManager().getMapPointList();
         if (list.size() == 0) {
-            this.tvBindPoint.setVisibility(8);
-            this.btnAll.setVisibility(8);
+            this.tvBindPoint.setVisibility(View.GONE);
+            this.btnAll.setVisibility(View.GONE);
             return;
         }
         this.mEntityList = new ArrayList();
@@ -424,7 +424,7 @@ public class X8AiLinesPointValueUi implements View.OnClickListener, SeekBar.OnSe
         List<MapPointLatLng> list = this.mapVideoController.getFimiMap().getAiLineManager().getInterestPointList();
         this.mEntityList = new ArrayList();
         if (list.size() == 0) {
-            this.tvBindPoint.setVisibility(8);
+            this.tvBindPoint.setVisibility(View.GONE);
             return;
         }
         int selectIndex = -1;

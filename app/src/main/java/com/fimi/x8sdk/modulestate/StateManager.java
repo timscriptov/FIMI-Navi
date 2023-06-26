@@ -35,6 +35,13 @@ public class StateManager {
     private static final int RIGHT_ROLLER = 4;
     private static final int VC_TRACKING = 2;
     private static final StateManager stateManager = new StateManager();
+    private final CameraState camera = new CameraState();
+    private final RelayState relayState = new RelayState();
+    private final GimbalState gimbalState = new GimbalState();
+    private final NfzState mNfzState = new NfzState();
+    private final VersionState mVersionState = new VersionState();
+    private final ErrorCodeState mErrorCodeState = new ErrorCodeState();
+    private final RCMatchState rcMatchState = new RCMatchState();
     IX8PanoramicInformationListener ix8PanoramicInformationListener;
     IX8ErrorCodeListener mX8ErrorCodeListener;
     IX8PowerListener powerListener;
@@ -56,14 +63,7 @@ public class StateManager {
     private AckRightRoller ackRightRoller;
     private boolean is4KResolution;
     private DroneState droneState = new DroneState();
-    private final CameraState camera = new CameraState();
-    private final RelayState relayState = new RelayState();
-    private final GimbalState gimbalState = new GimbalState();
-    private final NfzState mNfzState = new NfzState();
-    private final VersionState mVersionState = new VersionState();
     private ConectState conectState = new ConectState();
-    private final ErrorCodeState mErrorCodeState = new ErrorCodeState();
-    private final RCMatchState rcMatchState = new RCMatchState();
     Handler mHandler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {

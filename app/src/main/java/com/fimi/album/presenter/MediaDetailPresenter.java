@@ -33,15 +33,15 @@ import me.relex.photodraweeview.OnPhotoTapListener;
 
 
 public class MediaDetailPresenter<T extends MediaDetailActivity> implements IViewpaper, OnPhotoTapListener {
-    protected String perfix = "file://";
-    private ViewGroup cacheContainer;
     private final int defaultDisplayHeight;
     private final int defaultDisplayWidth;
     private final MediaDetailActivity mMediaActivity;
-    private CopyOnWriteArrayList<? extends MediaModel> modelList;
     private final ViewPager viewPaper;
     private final WeakReference<T> weakReference;
     private final DataManager<MediaModel> mDataManager = DataManager.obtain();
+    protected String perfix = "file://";
+    private ViewGroup cacheContainer;
+    private CopyOnWriteArrayList<? extends MediaModel> modelList;
 
     public MediaDetailPresenter(T activity, ViewPager viewPaper) {
         this.weakReference = new WeakReference<>(activity);
@@ -92,21 +92,21 @@ public class MediaDetailPresenter<T extends MediaDetailActivity> implements IVie
         } else {
             fileUrl = mediaModel.getFileUrl();
         }
-        mMediaDetialViewHolder.mProgressBar.setVisibility(0);
+        mMediaDetialViewHolder.mProgressBar.setVisibility(View.VISIBLE);
         mMediaDetialViewHolder.mPhotoDraweeView.setOnPhotoTapListener(this);
         FrescoUtils.displayPhoto(mMediaDetialViewHolder.mPhotoDraweeView, fileUrl, this.defaultDisplayWidth, this.defaultDisplayHeight, new FrescoControllerListener() {
             @Override
             // com.fimi.album.biz.FrescoControllerListener, com.facebook.drawee.controller.ControllerListener
             public void onFailure(String id, Throwable throwable) {
                 super.onFailure(id, throwable);
-                mMediaDetialViewHolder.mProgressBar.setVisibility(8);
+                mMediaDetialViewHolder.mProgressBar.setVisibility(View.GONE);
             }
 
             @Override
             // com.fimi.album.biz.FrescoControllerListener, com.facebook.drawee.controller.ControllerListener
             public void onFinalImageSet(String id, ImageInfo imageInfo, Animatable animatable) {
                 super.onFinalImageSet(id, imageInfo, animatable);
-                mMediaDetialViewHolder.mProgressBar.setVisibility(8);
+                mMediaDetialViewHolder.mProgressBar.setVisibility(View.GONE);
                 mMediaDetialViewHolder.mPhotoDraweeView.update(imageInfo.getWidth(), imageInfo.getHeight());
             }
         });
@@ -144,14 +144,14 @@ public class MediaDetailPresenter<T extends MediaDetailActivity> implements IVie
     @Override
     public void onPhotoTap(View view, float x, float y) {
         if (this.mMediaActivity.getLlHeadViewGroup().isShown()) {
-            this.mMediaActivity.getLlHeadViewGroup().setVisibility(8);
+            this.mMediaActivity.getLlHeadViewGroup().setVisibility(View.GONE);
         } else {
-            this.mMediaActivity.getLlHeadViewGroup().setVisibility(0);
+            this.mMediaActivity.getLlHeadViewGroup().setVisibility(View.VISIBLE);
         }
         if (this.mMediaActivity.getRlHeadDirection().isShown()) {
-            this.mMediaActivity.getRlHeadDirection().setVisibility(8);
+            this.mMediaActivity.getRlHeadDirection().setVisibility(View.GONE);
         } else {
-            this.mMediaActivity.getRlHeadDirection().setVisibility(0);
+            this.mMediaActivity.getRlHeadDirection().setVisibility(View.VISIBLE);
         }
     }
 

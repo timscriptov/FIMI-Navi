@@ -26,22 +26,22 @@ import com.fimi.x8sdk.jsonResult.CameraParamsJson;
 
 
 public class X8CameraSubParamsController extends AbsX8Controllers implements SubParamItemListener, JsonUiCallBackListener {
+    private final boolean canScroller;
+    private final ScrollLinearLayoutManager layoutManager;
+    private final PhotoSubParamsAdapter paramsAdapter;
+    private final X8CameraParamsValue paramsValue;
     int index;
     String key;
     String optionName;
     String value;
     private CameraManager cameraManager;
-    private final boolean canScroller;
     private String contrast;
     private String curParam;
     private SubParamsViewHolder holder;
     private boolean isForbid;
-    private final ScrollLinearLayoutManager layoutManager;
     private Context mContext;
     private IX8CameraMainSetListener mainSetListener;
     private CameraParamListener paramListener;
-    private final PhotoSubParamsAdapter paramsAdapter;
-    private final X8CameraParamsValue paramsValue;
     private RecyclerView recyclerView;
     private String saturation;
     private PhotoSubParamItemEntity subParam;

@@ -28,7 +28,6 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +36,7 @@ import java.util.Map;
 public class X8FlightLogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final Context context;
     private final IX8FlightlogRenameFile mIX8FlightlogRenameFile;
-    private final Map<String, X8FlightLogSection> sections = new LinkedHashMap();
+    private final Map<String, X8FlightLogSection> sections = new LinkedHashMap<>();
     X8FlightLogSection section;
     private X8FlightLogFile furrentFile;
     private String playbackDistance;
@@ -55,8 +54,8 @@ public class X8FlightLogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void ecentBusUI(EventMessage eventMessage) {
-        if (eventMessage != null && eventMessage.getKey() == Constants.X8_FLIGHTLOG_EVENT_KEY) {
-            boolean isCollect = ((Boolean) eventMessage.getMessage()).booleanValue();
+        if (eventMessage != null && eventMessage.getKey().equals(Constants.X8_FLIGHTLOG_EVENT_KEY)) {
+            boolean isCollect = (Boolean) eventMessage.getMessage();
             if (isCollect) {
                 this.furrentFile.setFileLogCollectState("0");
                 renameCollectFile(this.furrentFile, this.furrentFile.isFileLogCollect());
@@ -86,8 +85,9 @@ public class X8FlightLogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         return this.sections.get("");
     }
 
+    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == 0) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.x8_flight_log_header_layout, parent, false);
             return new X8B2oxHeaderViewHolder(view);
@@ -100,7 +100,7 @@ public class X8FlightLogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         int currentPos = 0;
         for (Map.Entry<String, X8FlightLogSection> entry : this.sections.entrySet()) {
             X8FlightLogSection section = entry.getValue();
@@ -112,7 +112,7 @@ public class X8FlightLogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
     }
 
-    private void onBindContentViewHolder(RecyclerView.ViewHolder holder, int positionSection, int position1, X8FlightLogSection section) {
+    private void onBindContentViewHolder(RecyclerView.ViewHolder holder, int positionSection, int position1, @NonNull X8FlightLogSection section) {
         final X8FlightLogFile file = section.getList().get(positionSection);
         this.section = section;
         ((X8B2oxViewHolder) holder).x8FlightlogItmeDate.setText(file.getNameShow());
@@ -126,14 +126,12 @@ public class X8FlightLogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             ((X8B2oxViewHolder) holder).x8FlightlogItemMileage.setText(file.getFlightMileage() + "m");
         }
         ((X8B2oxViewHolder) holder).x8FlightlogItemTime.setText(TimerUtil.getInstance().stringForTime(file.getFlightDuration(), false));
-        int i = R.drawable.x8_img_upload_success;
         switch (file.getState()) {
             case IDLE:
                 ((X8B2oxViewHolder) holder).mImgSaveFlag.setBackgroundResource(0);
                 break;
             case SUCCESS:
-                int resId = R.drawable.x8_img_playback_syn_end;
-                ((X8B2oxViewHolder) holder).mImgSaveFlag.setBackgroundResource(resId);
+                ((X8B2oxViewHolder) holder).mImgSaveFlag.setBackgroundResource(R.drawable.x8_img_playback_syn_end);
                 ((X8B2oxViewHolder) holder).mImgSaveFlag.clearAnimation();
                 ((X8B2oxViewHolder) holder).mImgSaveFlag.setOnClickListener(null);
                 break;
@@ -144,10 +142,10 @@ public class X8FlightLogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             ((X8B2oxViewHolder) holder).x8IvFlightlogCollect.setVisibility(View.INVISIBLE);
         }
         ((X8B2oxViewHolder) holder).rlRootView.setOnClickListener(view -> {
-            X8FlightLogAdapter.this.furrentFile = file;
-            Intent intent = new Intent(X8FlightLogAdapter.this.context, X8FlightPlaybackActivity.class);
+            furrentFile = file;
+            Intent intent = new Intent(context, X8FlightPlaybackActivity.class);
             intent.putExtra(Constants.X8_FLIGHTLOG_PATH, file.getPlaybackFile().getAbsolutePath());
-            X8FlightLogAdapter.this.context.startActivity(intent);
+            context.startActivity(intent);
         });
     }
 
@@ -197,15 +195,12 @@ public class X8FlightLogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     public void sort(List<X8FlightLogFile> list) {
-        Collections.sort(list, new Comparator<>() {
-            @Override
-            public int compare(X8FlightLogFile arg0, X8FlightLogFile arg1) {
-                int a = Integer.parseInt(arg1.getFileLogCollectState()) - Integer.parseInt(arg0.getFileLogCollectState());
-                if (a != 0) {
-                    return a < 0 ? 1 : -1;
-                }
-                return arg1.getPlaybackFile().getName().compareTo(arg0.getPlaybackFile().getName());
+        Collections.sort(list, (arg0, arg1) -> {
+            int a = Integer.parseInt(arg1.getFileLogCollectState()) - Integer.parseInt(arg0.getFileLogCollectState());
+            if (a != 0) {
+                return a < 0 ? 1 : -1;
             }
+            return arg1.getPlaybackFile().getName().compareTo(arg0.getPlaybackFile().getName());
         });
     }
 
@@ -253,7 +248,7 @@ public class X8FlightLogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         this.playbackTotalTime = playbackTotalTime;
     }
 
-    public class X8B2oxViewHolder extends RecyclerView.ViewHolder {
+    public static class X8B2oxViewHolder extends RecyclerView.ViewHolder {
         private final ImageView mImgSaveFlag;
         private final ImageView x8IvFlightlogCollect;
         public View rlRootView;
@@ -274,7 +269,7 @@ public class X8FlightLogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
     }
 
-    public class X8B2oxHeaderViewHolder extends RecyclerView.ViewHolder {
+    public static class X8B2oxHeaderViewHolder extends RecyclerView.ViewHolder {
         public View rlRootView;
 
         public X8B2oxHeaderViewHolder(View itemView) {

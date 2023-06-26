@@ -54,7 +54,7 @@ public class X8FiveKeyHintController extends AbsX8MenuBoxControllers implements 
     public void closeUi() {
         super.closeUi();
         this.isShow = false;
-        this.parentView.setVisibility(8);
+        this.parentView.setVisibility(View.GONE);
         if (this.fiveKeyDefineManager != null) {
             this.fiveKeyDefineManager.restoreUpDownKey(false);
         }
@@ -64,7 +64,7 @@ public class X8FiveKeyHintController extends AbsX8MenuBoxControllers implements 
     public void openUi() {
         super.openUi();
         this.isShow = true;
-        this.parentView.setVisibility(0);
+        this.parentView.setVisibility(View.VISIBLE);
         String fiveKeyShowTypeStr = this.tvFiveKeyShowType.getText().toString();
         if (fiveKeyShowTypeStr.contains(getString(R.string.x8_camera_contrast))) {
             this.fiveKeyDefineManager.isSetCameraContrast();

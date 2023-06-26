@@ -8,7 +8,6 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Looper;
 import android.util.Log;
 
 import com.fimi.android.app.R;
@@ -38,17 +37,17 @@ import java.util.List;
 
 
 public class GglMapLocationManager extends LocationCallback implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+    private final Context context;
+    private final LocationRequest locationRequest;
+    private final MarkerOptions markerOptions;
+    private final List<LatLng> latLngs = new ArrayList();
     Marker locationMarker;
     GoogleApiClient mGoogleApiClient;
     GoogleMap mGoogleMap;
     private float accuracy;
-    private final Context context;
     private Marker deviceMarker;
     private Polyline flyPolyLine;
     private Marker home;
-    private final LocationRequest locationRequest;
-    private final MarkerOptions markerOptions;
-    private final List<LatLng> latLngs = new ArrayList();
     private int state = 0;
 
     @SuppressLint({"RestrictedApi"})

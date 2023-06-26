@@ -52,6 +52,15 @@ public abstract class X8BaseMediaFragmentPresenter<T extends MediaModel> impleme
     private final String TAG = "X9BaseMediaFragmentPren";
     private final int RESH_NOTIFY = 888;
     private final int RESH_DELETE_NOTIFY = 887;
+    private final IPersonalDataCallBack personalDataCallBack = new IPersonalDataCallBack() {
+        @Override
+        public void onPersonalDataCallBack(int groupId, int cmdId, ILinkMessage message) {
+        }
+
+        @Override
+        public void onPersonalSendTimeOut(int groupId, int cmdId, BaseCommand bcd) {
+        }
+    };
     protected Context context;
     protected boolean isCamera;
     protected boolean isEnterSelectMode;
@@ -83,15 +92,6 @@ public abstract class X8BaseMediaFragmentPresenter<T extends MediaModel> impleme
                 }
                 CustomLoadManage.dismiss();
             }
-        }
-    };
-    private final IPersonalDataCallBack personalDataCallBack = new IPersonalDataCallBack() {
-        @Override
-        public void onPersonalDataCallBack(int groupId, int cmdId, ILinkMessage message) {
-        }
-
-        @Override
-        public void onPersonalSendTimeOut(int groupId, int cmdId, BaseCommand bcd) {
         }
     };
 
@@ -136,15 +136,15 @@ public abstract class X8BaseMediaFragmentPresenter<T extends MediaModel> impleme
         }
         BodyRecycleViewHolder bodyRecycleViewHolder = (BodyRecycleViewHolder) holder;
         if (state == 0 && bodyRecycleViewHolder.mDownloadStateView.getVisibility() == 0) {
-            bodyRecycleViewHolder.ivSelect.setVisibility(0);
-            bodyRecycleViewHolder.mIvDownloadMask.setVisibility(8);
-            bodyRecycleViewHolder.mIvSelectMask.setVisibility(0);
+            bodyRecycleViewHolder.ivSelect.setVisibility(View.VISIBLE);
+            bodyRecycleViewHolder.mIvDownloadMask.setVisibility(View.GONE);
+            bodyRecycleViewHolder.mIvSelectMask.setVisibility(View.VISIBLE);
         } else if (state == 0) {
-            bodyRecycleViewHolder.ivSelect.setVisibility(0);
-            bodyRecycleViewHolder.mIvSelectMask.setVisibility(0);
+            bodyRecycleViewHolder.ivSelect.setVisibility(View.VISIBLE);
+            bodyRecycleViewHolder.mIvSelectMask.setVisibility(View.VISIBLE);
         } else {
-            bodyRecycleViewHolder.ivSelect.setVisibility(8);
-            bodyRecycleViewHolder.mIvSelectMask.setVisibility(8);
+            bodyRecycleViewHolder.ivSelect.setVisibility(View.GONE);
+            bodyRecycleViewHolder.mIvSelectMask.setVisibility(View.GONE);
         }
     }
 
@@ -166,13 +166,13 @@ public abstract class X8BaseMediaFragmentPresenter<T extends MediaModel> impleme
         holder.mDownloadStateView.setVisibility(isShow ? 0 : 8);
         holder.mTvDownloadState.setVisibility(isShow ? 0 : 8);
         if (isShow && holder.ivSelect.getVisibility() == 0) {
-            holder.mIvSelectMask.setVisibility(0);
-            holder.mIvDownloadMask.setVisibility(8);
+            holder.mIvSelectMask.setVisibility(View.VISIBLE);
+            holder.mIvDownloadMask.setVisibility(View.GONE);
         } else if (isShow) {
-            holder.mIvSelectMask.setVisibility(8);
-            holder.mIvDownloadMask.setVisibility(0);
+            holder.mIvSelectMask.setVisibility(View.GONE);
+            holder.mIvDownloadMask.setVisibility(View.VISIBLE);
         } else {
-            holder.mIvDownloadMask.setVisibility(8);
+            holder.mIvDownloadMask.setVisibility(View.GONE);
         }
     }
 

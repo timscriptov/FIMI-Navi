@@ -19,9 +19,9 @@ import java.net.URL;
 
 
 public class MediaOriginalDownloadTask2 implements Runnable {
-    private int finished = 0;
     private final OnDownloadListener listener;
     private final MediaModel model;
+    private int finished = 0;
 
     public MediaOriginalDownloadTask2(MediaModel model, OnDownloadListener listener) {
         this.model = model;

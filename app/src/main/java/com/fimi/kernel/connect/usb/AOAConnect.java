@@ -35,6 +35,8 @@ import java.io.IOException;
 import java.util.concurrent.LinkedBlockingDeque;
 
 public class AOAConnect extends BaseConnect implements IDataTransfer, IRetransmissionHandle, ITimerSendQueueHandle, IRetransmissionJsonHandle, IRetransmissionUsbHandle {
+    private final IUSBStatusListener mIAoaConnectListener;
+    private final boolean mPermissionRequestPending = false;
     FileInputStream inputStream;
     UsbAccessory mAccessory;
     Context mContext;
@@ -48,12 +50,10 @@ public class AOAConnect extends BaseConnect implements IDataTransfer, IRetransmi
     LinkedBlockingDeque<Object> dataQue = new LinkedBlockingDeque<>();
     boolean isWait = false;
     private boolean isAoaDeviceConecect;
-    private final IUSBStatusListener mIAoaConnectListener;
     private RetransmissionJsonThread retransmissionJsonThread;
     private RetransmissionThread retransmissionThread;
     private RetransmissionUsbThread retransmissionUsbThread;
     private TimerSendQueueThread timerSendQueueThread;
-    private final boolean mPermissionRequestPending = false;
     private boolean isConnect = false;
     private X8JsonCmdDeque mX8JsonCmdDeque = new X8JsonCmdDeque(this);
 

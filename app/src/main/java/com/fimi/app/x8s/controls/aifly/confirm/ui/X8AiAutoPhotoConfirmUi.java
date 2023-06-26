@@ -15,9 +15,9 @@ import com.fimi.app.x8s.tools.ImageUtils;
 
 
 public class X8AiAutoPhotoConfirmUi implements View.OnClickListener {
+    private final View contentView;
     private View btnOk;
     private CheckBox cbTip;
-    private final View contentView;
     private ImageView imgFlag;
     private View imgReturn;
     private X8MainAiFlyController listener;
@@ -56,8 +56,8 @@ public class X8AiAutoPhotoConfirmUi implements View.OnClickListener {
         this.vItem2 = rootView.findViewById(R.id.rl_ai_photo2);
         this.tvPhoto1 = rootView.findViewById(R.id.tv_ai_photo1);
         this.tvPhoto2 = rootView.findViewById(R.id.tv_ai_photo2);
-        this.vItemSelect.setVisibility(0);
-        this.vConfirm.setVisibility(8);
+        this.vItemSelect.setVisibility(View.VISIBLE);
+        this.vConfirm.setVisibility(View.GONE);
         this.tvTitle.setText(this.contentView.getContext().getString(R.string.x8_ai_fly_auto_photo));
         this.imgFlag = rootView.findViewById(R.id.img_auto_photo_flag);
     }
@@ -79,8 +79,8 @@ public class X8AiAutoPhotoConfirmUi implements View.OnClickListener {
             }
             this.menuIndex = 0;
             this.svTips.fullScroll(33);
-            this.vItemSelect.setVisibility(0);
-            this.vConfirm.setVisibility(8);
+            this.vItemSelect.setVisibility(View.VISIBLE);
+            this.vConfirm.setVisibility(View.GONE);
             this.tvTitle.setText(this.contentView.getContext().getString(R.string.x8_ai_fly_auto_photo));
         } else if (id == R.id.btn_ai_follow_confirm_ok) {
             if (this.menuIndex == 1) {
@@ -113,8 +113,8 @@ public class X8AiAutoPhotoConfirmUi implements View.OnClickListener {
     }
 
     public void onSelectItem(String title, String content, int res) {
-        this.vItemSelect.setVisibility(8);
-        this.vConfirm.setVisibility(0);
+        this.vItemSelect.setVisibility(View.GONE);
+        this.vConfirm.setVisibility(View.VISIBLE);
         this.tvTitle.setText(title);
         this.tvContentTip1.setText(content);
         this.imgFlag.setImageBitmap(ImageUtils.getBitmapByPath(this.contentView.getContext(), res));

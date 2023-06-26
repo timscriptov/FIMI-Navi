@@ -16,7 +16,6 @@ public class FcErrProcess {
     private static final int WHATID_SEND_VC_ERRCODE = 1;
     private static final FcErrProcess fcErrProcess = new FcErrProcess();
     List<ErrcodeListener> listenerList = new ArrayList();
-    List<ErrCodeEntity> errCodeEntities = new ArrayList();
     private final Handler mHandler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
@@ -42,6 +41,7 @@ public class FcErrProcess {
             }
         }
     };
+    List<ErrCodeEntity> errCodeEntities = new ArrayList();
 
     public static FcErrProcess getFcErrProcess() {
         return fcErrProcess;

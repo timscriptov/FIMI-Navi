@@ -16,17 +16,17 @@ import com.fimi.kernel.utils.DensityUtil;
 import org.apache.mina.proxy.handlers.http.ntlm.NTLMConstants;
 
 public class X8SeekBarView extends View {
+    private final float dpLineH;
+    private final float dpMaginW;
+    private final float dpR;
+    private final float dpThumpW;
+    private final float dph;
     private int bgColor;
     private float cicleR;
     private float cicleX;
     private float cicleY;
     private float downX;
     private float downY;
-    private final float dpLineH;
-    private final float dpMaginW;
-    private final float dpR;
-    private final float dpThumpW;
-    private final float dph;
     private float endX;
     private float endY;
     private int h;

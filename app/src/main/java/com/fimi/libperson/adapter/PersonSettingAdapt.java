@@ -72,31 +72,31 @@ public class PersonSettingAdapt extends BaseAdapter {
             } else if (positionIndex == State.VERSION_UPDATE) {
                 if (this.mList.get(getSettingPosition(State.VERSION_UPDATE)).getIsOPen().booleanValue()) {
                     if (this.mList.get(getSettingPosition(State.VERSION_UPDATE)).isDisplayTv()) {
-                        holder.mTvContent.setVisibility(0);
+                        holder.mTvContent.setVisibility(View.VISIBLE);
                     } else {
-                        holder.mTvContent.setVisibility(4);
+                        holder.mTvContent.setVisibility(View.INVISIBLE);
                     }
                 }
                 holder.mTvItemTitle.setText(R.string.person_setting_version_update);
             } else if (positionIndex == State.CLEAN_CACHE) {
                 holder.mTvItemTitle.setText(R.string.person_setting_clean_cache);
-                holder.mTvContent.setVisibility(0);
+                holder.mTvContent.setVisibility(View.VISIBLE);
                 holder.mTvContent.setText(this.mList.get(getSettingPosition(State.CLEAN_CACHE)).getContent());
             } else if (positionIndex == State.GO_TO_APP_STORE) {
                 holder.mTvItemTitle.setText(R.string.person_setting_go_to_app_store);
             } else if (positionIndex == State.USER_AGREEMENT) {
-                holder.mViewDivide.setVisibility(8);
+                holder.mViewDivide.setVisibility(View.GONE);
                 holder.mTvItemTitle.setText(R.string.person_setting_user_agreement);
             } else if (positionIndex == State.USER_PRIVACY) {
                 holder.mTvItemTitle.setText(R.string.person_setting_user_privacy);
             } else if (positionIndex == State.SERVICE) {
-                holder.mViewDivide.setVisibility(8);
+                holder.mViewDivide.setVisibility(View.GONE);
                 holder.mTvItemTitle.setText(R.string.person_setting_service);
             } else if (positionIndex == State.LANGUAGE) {
                 holder.mTvItemTitle.setText(R.string.person_setting_language);
             } else if (positionIndex == State.BLACK1 || positionIndex == State.BLACK2) {
-                holder.mViewDivide.setVisibility(8);
-                holder.mIvArrow.setVisibility(8);
+                holder.mViewDivide.setVisibility(View.GONE);
+                holder.mIvArrow.setVisibility(View.GONE);
                 ViewGroup.LayoutParams params = convertView.getLayoutParams();
                 params.height = (int) this.mContext.getResources().getDimension(R.dimen.person_setting_height1);
                 holder.mRlBg.setLayoutParams(params);
@@ -107,8 +107,8 @@ public class PersonSettingAdapt extends BaseAdapter {
     }
 
     private void resetDefaultView(ViewHolder holder, ViewGroup.LayoutParams params) {
-        holder.mViewDivide.setVisibility(0);
-        holder.mIvArrow.setVisibility(0);
+        holder.mViewDivide.setVisibility(View.VISIBLE);
+        holder.mIvArrow.setVisibility(View.VISIBLE);
         holder.mTvContent.setText("");
         params.height = (int) this.mContext.getResources().getDimension(R.dimen.person_setting_height);
         holder.mRlBg.setLayoutParams(params);

@@ -13,8 +13,8 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 public class RetransmissionThread extends Thread {
     private final int sleepTime = 500;
-    public LinkedBlockingDeque<BaseCommand> mListReSend = new LinkedBlockingDeque<>();
     private final IDataTransfer mDataTransfer;
+    public LinkedBlockingDeque<BaseCommand> mListReSend = new LinkedBlockingDeque<>();
     private boolean isLoop = true;
 
     public RetransmissionThread(IDataTransfer mDataTransfer) {

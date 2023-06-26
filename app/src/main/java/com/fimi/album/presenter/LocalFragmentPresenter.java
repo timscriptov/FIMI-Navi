@@ -28,8 +28,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class LocalFragmentPresenter<T extends MediaModel> extends BaseFragmentPresenter implements IHandlerCallback {
     private final int defaultBound;
     private final Handler durationHandler;
-    private GridLayoutManager mGridLayoutManager;
     private final Handler mainHandler;
+    private GridLayoutManager mGridLayoutManager;
 
     public LocalFragmentPresenter(RecyclerView mRecyclerView, PanelRecycleAdapter mPanelRecycleAdapter, ISelectData mISelectData, Context context) {
         super(mRecyclerView, mPanelRecycleAdapter, mISelectData, context);
@@ -48,8 +48,8 @@ public class LocalFragmentPresenter<T extends MediaModel> extends BaseFragmentPr
             @Override
             public void onViewRecycled(RecyclerView.ViewHolder holder) {
                 if (holder instanceof BodyRecycleViewHolder mBodyRecycleViewHolder) {
-                    mBodyRecycleViewHolder.tvDuringdate.setVisibility(8);
-                    mBodyRecycleViewHolder.ivSelect.setVisibility(8);
+                    mBodyRecycleViewHolder.tvDuringdate.setVisibility(View.GONE);
+                    mBodyRecycleViewHolder.ivSelect.setVisibility(View.GONE);
                 }
             }
         });
@@ -177,11 +177,11 @@ public class LocalFragmentPresenter<T extends MediaModel> extends BaseFragmentPr
                 if (mediaModel.isVideo()) {
                     holder.tvDuringdate.setTag(currentFilePath);
                     if (!TextUtils.isEmpty(mediaModel.getVideoDuration())) {
-                        holder.tvDuringdate.setVisibility(0);
+                        holder.tvDuringdate.setVisibility(View.VISIBLE);
                         holder.tvDuringdate.setText(mediaModel.getVideoDuration());
                     }
                 } else {
-                    holder.tvDuringdate.setVisibility(8);
+                    holder.tvDuringdate.setVisibility(View.GONE);
                 }
                 if (this.isEnterSelectMode) {
                     if (mediaModel.isSelect()) {

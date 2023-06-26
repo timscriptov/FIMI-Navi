@@ -4,29 +4,29 @@ import android.app.Activity;
 import android.graphics.Canvas;
 import android.graphics.RectF;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.TcpClient;
 import com.fimi.app.x8s.X8Application;
 import com.fimi.app.x8s.enums.X8VcErrorCode;
 import com.fimi.app.x8s.media.FimiH264Video;
 import com.fimi.app.x8s.tensortfloow.X8DetectionControler;
 import com.fimi.app.x8s.widget.X8TrackOverlayView;
-import com.fimi.kernel.dataparser.usb.CmdResult;
-import com.fimi.kernel.dataparser.usb.UiCallBackListener;
 import com.fimi.x8sdk.controller.X8VcManager;
 import com.fimi.x8sdk.dataparser.AutoVcTracking;
 
 
 public class X8AiTrackController implements X8DetectionControler.onDetectionListener, X8TrackOverlayView.OverlayListener {
+    private final X8DetectionControler mX8DetectionControler = new X8DetectionControler();
     boolean isLog;
     private FimiH264Video fimiH264Video;
     private boolean isShow;
     private boolean isTou;
     private OnAiTrackControllerListener listener;
-    private final X8DetectionControler mX8DetectionControler = new X8DetectionControler();
     private X8VcManager vcManager;
     private X8TrackOverlayView viewTrackOverlay;
 
-    public void init(Activity activity, X8MapVideoController mMapVideoController) {
+    public void init(Activity activity, @NonNull X8MapVideoController mMapVideoController) {
         this.fimiH264Video = mMapVideoController.getVideoView();
         this.viewTrackOverlay = this.fimiH264Video.getX8AiTrackContainterView().getViewTrackOverlay();
         this.mX8DetectionControler.initView(activity, this.viewTrackOverlay, this.fimiH264Video, null, this);
@@ -52,31 +52,28 @@ public class X8AiTrackController implements X8DetectionControler.onDetectionList
     }
 
     public void sendRectF(int x, int y, int w, int h, int classfier) {
-        this.vcManager.setVcRectF(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                    if (cmdResult.getErrCode() == 0) {
-                        if (X8AiTrackController.this.isLog) {
-                            TcpClient.getIntance().sendLog("Vc选中目标成功");
-                        }
-                        X8AiTrackController.this.viewTrackOverlay.setSelectError(false);
-                        X8AiTrackController.this.listener.setGoEnabled(true);
-                        return;
+        this.vcManager.setVcRectF((cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
+                if (cmdResult.getErrCode() == 0) {
+                    if (isLog) {
+                        TcpClient.getIntance().sendLog("Vc选中目标成功");
                     }
-                    if (X8AiTrackController.this.isLog) {
-                        TcpClient.getIntance().sendLog("Vc选中目标错误");
-                    }
-                    X8AiTrackController.this.listener.setGoEnabled(false);
-                    X8AiTrackController.this.viewTrackOverlay.setSelectError(true);
+                    viewTrackOverlay.setSelectError(false);
+                    listener.setGoEnabled(true);
                     return;
                 }
-                if (X8AiTrackController.this.isLog) {
-                    TcpClient.getIntance().sendLog("Vc选中目标超时");
+                if (isLog) {
+                    TcpClient.getIntance().sendLog("Vc选中目标错误");
                 }
-                X8AiTrackController.this.listener.setGoEnabled(false);
-                X8AiTrackController.this.viewTrackOverlay.setSelectError(true);
+                listener.setGoEnabled(false);
+                viewTrackOverlay.setSelectError(true);
+                return;
             }
+            if (isLog) {
+                TcpClient.getIntance().sendLog("Vc选中目标超时");
+            }
+            listener.setGoEnabled(false);
+            viewTrackOverlay.setSelectError(true);
         }, x, y, w, h, classfier);
     }
 

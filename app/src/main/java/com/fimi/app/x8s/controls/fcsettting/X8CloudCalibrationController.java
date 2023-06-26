@@ -263,9 +263,9 @@ public class X8CloudCalibrationController extends AbsX8MenuBoxControllers implem
     }
 
     public void showCalibrateFailed(AckCloudCaliState caliState) {
-        this.checkView.setVisibility(8);
-        this.idealView.setVisibility(8);
-        this.rtView.setVisibility(0);
+        this.checkView.setVisibility(View.GONE);
+        this.idealView.setVisibility(View.GONE);
+        this.rtView.setVisibility(View.VISIBLE);
         this.imgResult.setImageBitmap(ImageUtils.getBitmapByPath(this.rootView.getContext(), R.drawable.x8_calibration_fail_icon));
         this.tvRt.setText(this.context.getResources().getString(R.string.x8_compass_result_failed));
         if (caliState.isTempeOverErr()) {
@@ -291,7 +291,7 @@ public class X8CloudCalibrationController extends AbsX8MenuBoxControllers implem
         } else {
             this.tvRtTip.setText(this.context.getResources().getString(R.string.x8_compass_result_failed_tip));
         }
-        this.tvRtTip.setVisibility(0);
+        this.tvRtTip.setVisibility(View.VISIBLE);
         this.rtBtn.setText(this.context.getResources().getString(R.string.x8_compass_reuslt_failed_confirm));
     }
 
@@ -354,9 +354,9 @@ public class X8CloudCalibrationController extends AbsX8MenuBoxControllers implem
     public void showStatusView(GimbalStatus status) {
         if (status != this.curStatus) {
             this.curStatus = status;
-            this.idealView.setVisibility(0);
-            this.checkView.setVisibility(8);
-            this.rtView.setVisibility(8);
+            this.idealView.setVisibility(View.VISIBLE);
+            this.checkView.setVisibility(View.GONE);
+            this.rtView.setVisibility(View.GONE);
             if (status == GimbalStatus.ideal) {
                 this.tv_tip.setText(this.context.getResources().getString(R.string.x8_cloud_gimbal_error_1));
                 this.cloudView.setImageBitmap(ImageUtils.getBitmapByPath(this.rootView.getContext(), R.drawable.x8_cloud_unable_icon));
@@ -364,23 +364,23 @@ public class X8CloudCalibrationController extends AbsX8MenuBoxControllers implem
                 this.btnStart.setAlpha(0.6f);
             } else if (status != GimbalStatus.fail) {
                 if (status == GimbalStatus.finish) {
-                    this.idealView.setVisibility(8);
-                    this.rtView.setVisibility(0);
+                    this.idealView.setVisibility(View.GONE);
+                    this.rtView.setVisibility(View.VISIBLE);
                     this.imgResult.setImageBitmap(ImageUtils.getBitmapByPath(this.rootView.getContext(), R.drawable.x8_calibration_success_icon));
                     this.tvRt.setText(this.context.getResources().getString(R.string.x8_compass_result_success));
-                    this.tvRtTip.setVisibility(8);
+                    this.tvRtTip.setVisibility(View.GONE);
                     this.rtBtn.setText(this.context.getResources().getString(R.string.x8_compass_reuslt_success_confirm));
                 } else if (status == GimbalStatus.doing) {
-                    this.checkView.setVisibility(0);
-                    this.idealView.setVisibility(8);
+                    this.checkView.setVisibility(View.VISIBLE);
+                    this.idealView.setVisibility(View.GONE);
                     this.checkTip.setTextColor(this.rootView.getResources().getColor(R.color.white_100));
                     this.checkTip.setText(this.context.getResources().getString(R.string.x8_cloud_gimbal_tip_2));
                 } else if (status == GimbalStatus.conBroken) {
-                    this.idealView.setVisibility(8);
-                    this.rtView.setVisibility(0);
+                    this.idealView.setVisibility(View.GONE);
+                    this.rtView.setVisibility(View.VISIBLE);
                     this.imgResult.setImageDrawable(this.context.getResources().getDrawable(R.drawable.x8_calibration_fail_icon));
                     this.tvRt.setText(this.context.getResources().getString(R.string.x8_compass_result_failed));
-                    this.tvRtTip.setVisibility(0);
+                    this.tvRtTip.setVisibility(View.VISIBLE);
                     this.tvRtTip.setText(this.context.getResources().getString(R.string.x8_cloud_gimbal_error_4));
                     this.rtBtn.setText(this.context.getResources().getString(R.string.x8_compass_reuslt_failed_confirm));
                 }

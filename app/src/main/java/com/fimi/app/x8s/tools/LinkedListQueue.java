@@ -33,11 +33,11 @@ public class LinkedListQueue<T> {
         this.linkedList.clear();
     }
 
-    public LinkedList getLinkedList() {
+    public LinkedList<T> getLinkedList() {
         return this.linkedList;
     }
 
-    public void setLinkedList(LinkedList linkedList) {
+    public void setLinkedList(LinkedList<T> linkedList) {
         this.linkedList = linkedList;
     }
 }

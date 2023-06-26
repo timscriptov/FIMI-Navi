@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.os.Environment;
 
+import androidx.annotation.NonNull;
 import androidx.core.view.MotionEventCompat;
 
 import java.io.File;
@@ -143,11 +144,13 @@ public class ImageUtils {
                     i++;
                 }
             }
+//            TODO
 //            j++;
 //            yp2 = yp;
         }
     }
 
+    @NonNull
     public static Matrix getTransformationMatrix(int srcWidth, int srcHeight, int dstWidth, int dstHeight, int applyRotation, boolean maintainAspectRatio) {
         Matrix matrix = new Matrix();
         if (applyRotation != 0) {

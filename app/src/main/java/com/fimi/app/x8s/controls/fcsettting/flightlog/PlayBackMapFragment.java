@@ -45,6 +45,7 @@ public class PlayBackMapFragment extends SupportMapFragment implements GoogleMap
     private static final PatternItem DASH = new Dash(20.0f);
     private static final PatternItem GAP = new Gap(20.0f);
     private static final List<PatternItem> PATTERN_POLYLINE_DOTTED = Arrays.asList(GAP, DASH);
+    private final List<Circle> listCircle = new CopyOnWriteArrayList();
     protected GoogleMap mMap;
     private Circle circleb;
     private Circle circlemid;
@@ -53,7 +54,6 @@ public class PlayBackMapFragment extends SupportMapFragment implements GoogleMap
     private Polyline dronePolyline;
     private Marker homeMarker;
     private boolean isChangeCamera = true;
-    private final List<Circle> listCircle = new CopyOnWriteArrayList();
     private volatile List<LatLng> listDronePoint;
     private UpdateChangeMapTypeInterface mUpdateChangeMapTypeInterface;
     private SharedPreferences sharepre;

@@ -25,14 +25,8 @@ public class FolderDispater<T extends MediaModel> implements IHandlerCallback {
     public static final String ORIGINAL_PATH = "original_path";
     public static final String TAG = FolderDispater.class.getName();
     public static final String THUMBNAIL_PATH = "thumbnail_path";
-    public boolean isHadForEachFolder;
-    public boolean isHadForEachFolderPhoto;
-    public boolean isHadForEachFolderVideo;
-    private IDateHandler mIDateHandler;
     private final SuffixUtils mSuffixUtils = SuffixUtils.obtain();
     private final String defaultFormatPattern = "yyyy.MM.dd HH:mm:ss";
-    private long videoCount = 0;
-    private long photoCount = 0;
     private final Handler otherHandler = HandlerManager.obtain().getHandlerInOtherThread(this);
     private final CopyOnWriteArrayList<T> localDataList = new CopyOnWriteArrayList<>();
     private final CopyOnWriteArrayList<T> localPhotoDataList = new CopyOnWriteArrayList<>();
@@ -43,6 +37,12 @@ public class FolderDispater<T extends MediaModel> implements IHandlerCallback {
     private final LinkedHashMap<String, CopyOnWriteArrayList<T>> dataHash = new LinkedHashMap<>();
     private final LinkedHashMap<String, CopyOnWriteArrayList<T>> dataHashPhoto = new LinkedHashMap<>();
     private final LinkedHashMap<String, CopyOnWriteArrayList<T>> dataHashVideo = new LinkedHashMap<>();
+    public boolean isHadForEachFolder;
+    public boolean isHadForEachFolderPhoto;
+    public boolean isHadForEachFolderVideo;
+    private IDateHandler mIDateHandler;
+    private long videoCount = 0;
+    private long photoCount = 0;
 
     public void forEachFolder(String folderPath) {
         if (!this.isHadForEachFolder && !this.otherHandler.hasMessages(3)) {

@@ -43,6 +43,11 @@ public class X8AOATestPresenter extends BasePresenter {
 
     public boolean isRunning() {
         return this.isRunning;
+    }
+
+    public void startReceivedData() {
+        byte[] data = {-1, -1, -1, -1, 0, 0, 0, 10, 0, 1};
+        sendCmd(new AoaTestColletion().getTestContent(data));
     }    Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -54,11 +59,6 @@ public class X8AOATestPresenter extends BasePresenter {
             }
         }
     };
-
-    public void startReceivedData() {
-        byte[] data = {-1, -1, -1, -1, 0, 0, 0, 10, 0, 1};
-        sendCmd(new AoaTestColletion().getTestContent(data));
-    }
 
     public void sendContent(final String content, boolean isLoop, final long time) {
         this.isInterrupt = isLoop;

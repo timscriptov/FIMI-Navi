@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 public class RecyclerDividerItemDecoration extends RecyclerView.ItemDecoration {
     public static final int HORIZONTAL_LIST = 0;
     public static final int VERTICAL_LIST = 1;
+    private final Paint mPaint;
     private int mDividerHeight;
     private int mOrientation;
-    private final Paint mPaint;
 
     public RecyclerDividerItemDecoration(@NonNull Context context, int orientation, int dividerHeight, int dividerColor) {
         this.mDividerHeight = 2;

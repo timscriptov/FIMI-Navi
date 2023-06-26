@@ -2,11 +2,11 @@ package com.fimi.app.x8s.media;
 
 
 public class H264Frame {
+    private final byte[] data = new byte[1048576];
     private int index;
     private boolean isFirstFrame;
     private boolean isFrame;
     private State state = State.a1;
-    private final byte[] data = new byte[1048576];
 
     public void onSeqErrorReset() {
         if (!this.isFirstFrame) {
@@ -40,43 +40,38 @@ public class H264Frame {
 
     public boolean parse(byte b) {
         this.isFrame = false;
-        byte[] bArr = this.data;
         int i = this.index;
         this.index = i + 1;
-        bArr[i] = b;
+        this.data[i] = b;
         switch (this.state) {
             case a1:
                 if (b == 0) {
                     this.state = State.a2;
-                    break;
                 } else {
                     reset();
-                    break;
                 }
+                break;
             case a2:
                 if (b == 0) {
                     this.state = State.a3;
-                    break;
                 } else {
                     reset();
-                    break;
                 }
+                break;
             case a3:
                 if (b == 0) {
                     this.state = State.B1;
-                    break;
                 } else {
                     reset();
-                    break;
                 }
+                break;
             case B1:
                 if (b == 1) {
                     this.state = State.pload;
-                    break;
                 } else {
                     reset();
-                    break;
                 }
+                break;
             case pload:
                 if (b == 0) {
                     this.state = State.a4;
@@ -86,27 +81,24 @@ public class H264Frame {
             case a4:
                 if (b == 0) {
                     this.state = State.a5;
-                    break;
                 } else {
                     this.state = State.pload;
-                    break;
                 }
+                break;
             case a5:
                 if (b == 0) {
                     this.state = State.a6;
-                    break;
                 } else {
                     this.state = State.pload;
-                    break;
                 }
+                break;
             case a6:
                 if (b == 1) {
                     this.isFrame = true;
-                    break;
                 } else {
                     this.state = State.pload;
-                    break;
                 }
+                break;
         }
         return this.isFrame;
     }

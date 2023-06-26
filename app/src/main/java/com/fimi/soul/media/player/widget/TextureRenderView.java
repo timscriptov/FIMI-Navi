@@ -183,12 +183,12 @@ public class TextureRenderView extends TextureView implements IRenderView {
 
 
     public static final class SurfaceCallback implements TextureView.SurfaceTextureListener {
+        private final Map<IRenderView.IRenderCallback, Object> mRenderCallbackMap = new ConcurrentHashMap();
+        private final WeakReference<TextureRenderView> mWeakRenderView;
         private int mHeight;
         private boolean mIsFormatChanged;
         private boolean mOwnSurfaceTecture = true;
-        private final Map<IRenderView.IRenderCallback, Object> mRenderCallbackMap = new ConcurrentHashMap();
         private SurfaceTexture mSurfaceTexture;
-        private final WeakReference<TextureRenderView> mWeakRenderView;
         private int mWidth;
 
         public SurfaceCallback(@NonNull TextureRenderView renderView) {

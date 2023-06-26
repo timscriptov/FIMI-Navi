@@ -13,10 +13,10 @@ import com.fimi.x8sdk.listener.ConnectStatusListener;
 
 public class ConnectAOAManager {
     private static final String ACTION_USB_PERMISSION = "com.google.android.DemoKit.action.USB_PERMISSION";
+    private final PendingIntent mPermissionIntent;
     Context mContext;
     UsbManager usbManager;
     boolean isRequestPermission = false;
-    private final PendingIntent mPermissionIntent;
     private volatile boolean mConnected = false;
 
     public ConnectAOAManager(Context mContext) {

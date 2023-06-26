@@ -20,12 +20,16 @@ import com.fimi.x8sdk.modulestate.StateManager;
 
 
 public class X8AiReturnConfirmUi implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
+    private final View contentView;
+    private final int MIN = 0;
+    private final int accuracy = 10;
+    private final float seekBarMax = 120.0f * this.accuracy;
+    private final float seekBarMin = 30.0f * this.accuracy;
     float temp = 0.0f;
     int res = 0;
     int tmpRes = 0;
     private int MAX;
     private View btnOk;
-    private final View contentView;
     private ImageView imgFlag;
     private View imgReturn;
     private X8MainAiFlyController listener;
@@ -38,10 +42,6 @@ public class X8AiReturnConfirmUi implements View.OnClickListener, SeekBar.OnSeek
     private View rlPlus;
     private TextView tvCuurentHeight;
     private TextView tvHeight;
-    private final int MIN = 0;
-    private final int accuracy = 10;
-    private final float seekBarMax = 120.0f * this.accuracy;
-    private final float seekBarMin = 30.0f * this.accuracy;
 
     public X8AiReturnConfirmUi(Activity activity, View parent) {
         this.MAX = 0;

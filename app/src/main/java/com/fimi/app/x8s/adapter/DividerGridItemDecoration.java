@@ -7,6 +7,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -16,32 +17,30 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
     private static final int[] ATTRS = {16843284};
     private final Drawable mDivider;
 
-    public DividerGridItemDecoration(Context context) {
+    public DividerGridItemDecoration(@NonNull Context context) {
         TypedArray a = context.obtainStyledAttributes(ATTRS);
         this.mDivider = a.getDrawable(0);
         a.recycle();
     }
 
     @Override
-    public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+    public void onDraw(@NonNull Canvas c, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
         drawHorizontal(c, parent);
         drawVertical(c, parent);
     }
 
-    private int getSpanCount(RecyclerView parent) {
+    private int getSpanCount(@NonNull RecyclerView parent) {
         RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
         if (layoutManager instanceof GridLayoutManager) {
-            int spanCount = ((GridLayoutManager) layoutManager).getSpanCount();
-            return spanCount;
+            return ((GridLayoutManager) layoutManager).getSpanCount();
         } else if (!(layoutManager instanceof StaggeredGridLayoutManager)) {
             return -1;
         } else {
-            int spanCount2 = ((StaggeredGridLayoutManager) layoutManager).getSpanCount();
-            return spanCount2;
+            return ((StaggeredGridLayoutManager) layoutManager).getSpanCount();
         }
     }
 
-    public void drawHorizontal(Canvas c, RecyclerView parent) {
+    public void drawHorizontal(Canvas c, @NonNull RecyclerView parent) {
         int childCount = parent.getChildCount();
         for (int i = 0; i < childCount; i++) {
             View child = parent.getChildAt(i);
@@ -55,7 +54,7 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
         }
     }
 
-    public void drawVertical(Canvas c, RecyclerView parent) {
+    public void drawVertical(Canvas c, @NonNull RecyclerView parent) {
         int childCount = parent.getChildCount();
         for (int i = 0; i < childCount; i++) {
             View child = parent.getChildAt(i);
@@ -69,7 +68,7 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
         }
     }
 
-    private boolean isLastColum(RecyclerView parent, int pos, int spanCount, int childCount) {
+    private boolean isLastColum(@NonNull RecyclerView parent, int pos, int spanCount, int childCount) {
         RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
         if (layoutManager instanceof GridLayoutManager) {
             return (pos + 1) % spanCount == 0;
@@ -82,7 +81,7 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
         return false;
     }
 
-    private boolean isLastRaw(RecyclerView parent, int pos, int spanCount, int childCount) {
+    private boolean isLastRaw(@NonNull RecyclerView parent, int pos, int spanCount, int childCount) {
         RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
         if (layoutManager instanceof GridLayoutManager) {
             return pos >= childCount - (childCount % spanCount);
@@ -96,7 +95,7 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     @Override
-    public void getItemOffsets(Rect outRect, int itemPosition, RecyclerView parent) {
+    public void getItemOffsets(@NonNull Rect outRect, int itemPosition, @NonNull RecyclerView parent) {
         int spanCount = getSpanCount(parent);
         int childCount = parent.getAdapter().getItemCount();
         if (isLastRaw(parent, itemPosition, spanCount, childCount)) {

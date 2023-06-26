@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.android.app.R;
 import com.fimi.app.x8s.controls.camera.CameraParamStatus;
 import com.fimi.app.x8s.entity.X8AiModeState;
@@ -19,8 +21,6 @@ import com.fimi.app.x8s.widget.X8ModuleSwitcher;
 import com.fimi.app.x8s.widget.X8ShutterImageView;
 import com.fimi.host.HostLogBack;
 import com.fimi.kernel.Constants;
-import com.fimi.kernel.dataparser.usb.CmdResult;
-import com.fimi.kernel.dataparser.usb.UiCallBackListener;
 import com.fimi.kernel.utils.AbAppUtil;
 import com.fimi.widget.StrokeTextView;
 import com.fimi.widget.X8ToastUtil;
@@ -28,7 +28,6 @@ import com.fimi.x8sdk.cmdsenum.PanoramaPhotographType;
 import com.fimi.x8sdk.command.FcCollection;
 import com.fimi.x8sdk.controller.CameraManager;
 import com.fimi.x8sdk.controller.FcCtrlManager;
-import com.fimi.x8sdk.dataparser.AckPanoramaPhotographType;
 import com.fimi.x8sdk.dataparser.AutoCameraStateADV;
 import com.fimi.x8sdk.entity.X8CameraParamsValue;
 import com.fimi.x8sdk.jsonResult.CurParamsJson;
@@ -39,11 +38,12 @@ import com.fimi.x8sdk.rtp.X8Rtp;
 
 
 public class X8MainRightMenuController extends AbsX8Controllers implements View.OnClickListener {
+    private final X8sMainActivity activity;
+    private final X8AiModeState mX8AiModeState;
     public IX8PanoramicInformationListener ix8PanoramicInformationListener;
     AutoCameraStateADV autoCameraStateADV;
     CameraManager cameraManager;
     CameraParamStatus.CameraModelStatus curMode;
-    private final X8sMainActivity activity;
     private CameraState cameraState;
     private Context context;
     private int curModeType;
@@ -54,7 +54,6 @@ public class X8MainRightMenuController extends AbsX8Controllers implements View.
     private X8ModuleSwitcher imbSwitchPhotoVideo;
     private ImageView mIvHotDot;
     private StrokeTextView mTvRecordTime;
-    private final X8AiModeState mX8AiModeState;
     private IX8MainRightMenuListener mainRightMenuListener;
     private IX8CameraPersonLacationListener personLacationListener;
     private boolean pivTake;
@@ -64,26 +63,20 @@ public class X8MainRightMenuController extends AbsX8Controllers implements View.
     public X8MainRightMenuController(View rootView, X8sMainActivity activity, X8AiModeState mX8AiModeState) {
         super(rootView);
         this.pivTake = false;
-        this.ix8PanoramicInformationListener = new IX8PanoramicInformationListener() {
-            @Override
-            public void onPanoramicInformationChange(AckPanoramaPhotographType ackPanoramaPhotographType) {
-                HostLogBack.getInstance().writeLog("Alanqiu  ============reponseCmd:" + ackPanoramaPhotographType.toString());
-                if (ackPanoramaPhotographType.getCurrentNum() >= 1) {
-                    if (ackPanoramaPhotographType.getCurrentNum() >= ackPanoramaPhotographType.getTotalNum()) {
-                        X8MainRightMenuController.this.tvPanoramaNumber.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                X8MainRightMenuController.this.tvPanoramaNumber.setVisibility(8);
-                                StateManager.getInstance().getCamera().setTakingPanoramicPhotos(false);
-                            }
-                        }, 3000L);
-                    }
-                    if (!X8MainRightMenuController.this.getPanoramicStart()) {
-                        StateManager.getInstance().getCamera().setTakingPanoramicPhotos(true);
-                        X8MainRightMenuController.this.tvPanoramaNumber.setVisibility(0);
-                    }
-                    X8MainRightMenuController.this.tvPanoramaNumber.setText(String.format(X8MainRightMenuController.this.getString(R.string.x8_panorama_number), Byte.valueOf(ackPanoramaPhotographType.getCurrentNum()), Byte.valueOf(ackPanoramaPhotographType.getTotalNum())));
+        this.ix8PanoramicInformationListener = ackPanoramaPhotographType -> {
+            HostLogBack.getInstance().writeLog("Alanqiu  ============reponseCmd:" + ackPanoramaPhotographType.toString());
+            if (ackPanoramaPhotographType.getCurrentNum() >= 1) {
+                if (ackPanoramaPhotographType.getCurrentNum() >= ackPanoramaPhotographType.getTotalNum()) {
+                    tvPanoramaNumber.postDelayed(() -> {
+                        tvPanoramaNumber.setVisibility(View.GONE);
+                        StateManager.getInstance().getCamera().setTakingPanoramicPhotos(false);
+                    }, 3000L);
                 }
+                if (!getPanoramicStart()) {
+                    StateManager.getInstance().getCamera().setTakingPanoramicPhotos(true);
+                    tvPanoramaNumber.setVisibility(View.VISIBLE);
+                }
+                tvPanoramaNumber.setText(String.format(getString(R.string.x8_panorama_number), ackPanoramaPhotographType.getCurrentNum(), ackPanoramaPhotographType.getTotalNum()));
             }
         };
         this.activity = activity;
@@ -91,7 +84,7 @@ public class X8MainRightMenuController extends AbsX8Controllers implements View.
     }
 
     @Override
-    public void initViews(View rootView) {
+    public void initViews(@NonNull View rootView) {
         this.context = rootView.getContext();
         this.handleView = rootView.findViewById(R.id.main_right_menu);
         this.imbCameraTools = rootView.findViewById(R.id.imb_camera_tools);
@@ -129,7 +122,7 @@ public class X8MainRightMenuController extends AbsX8Controllers implements View.
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(@NonNull View v) {
         int id = v.getId();
         if (id == this.imbCameraTools.getId()) {
             this.mainRightMenuListener.onCameraSettingClick();
@@ -165,19 +158,9 @@ public class X8MainRightMenuController extends AbsX8Controllers implements View.
         boolean isConnect = StateManager.getInstance().getCamera().isConnect();
         if (isConnect) {
             if (CameraParamStatus.modelStatus == CameraParamStatus.CameraModelStatus.takePhoto) {
-                this.cameraManager.swithVideoMode(new UiCallBackListener() {
-                    @Override
-                    public void onComplete(CmdResult cmdResult, Object o) {
-                        X8MainRightMenuController.this.mainRightMenuListener.onCameraSwitching();
-                    }
-                });
+                this.cameraManager.swithVideoMode((cmdResult, o) -> mainRightMenuListener.onCameraSwitching());
             } else {
-                this.cameraManager.swithPhotoMode(new UiCallBackListener() {
-                    @Override
-                    public void onComplete(CmdResult cmdResult, Object o) {
-                        X8MainRightMenuController.this.mainRightMenuListener.onCameraSwitching();
-                    }
-                });
+                this.cameraManager.swithPhotoMode((cmdResult, o) -> mainRightMenuListener.onCameraSwitching());
             }
         } else if (this.imbSwitchPhotoVideo.getCurrentIndex() == 0) {
             this.imbSwitchPhotoVideo.setCurrentIndex(1);
@@ -205,21 +188,15 @@ public class X8MainRightMenuController extends AbsX8Controllers implements View.
     private void takePhoto() {
         if (this.autoCameraStateADV.getMode() == 20) {
             if (StateManager.getInstance().getCamera().isTakingPanoramicPhotos()) {
-                this.fcCtrlManager.setPanoramaPhotographState(new UiCallBackListener() {
-                    @Override
-                    public void onComplete(CmdResult cmdResult, Object o) {
-                        if (cmdResult.isSuccess) {
-                            X8MainRightMenuController.this.tvPanoramaNumber.setVisibility(8);
-                        }
-                        StateManager.getInstance().getCamera().setTakingPanoramicPhotos(false);
+                this.fcCtrlManager.setPanoramaPhotographState((cmdResult, o) -> {
+                    if (cmdResult.isSuccess) {
+                        tvPanoramaNumber.setVisibility(View.GONE);
                     }
+                    StateManager.getInstance().getCamera().setTakingPanoramicPhotos(false);
                 }, FcCollection.MSG_ID_SET_PANORAMA_PHOTOGRAPH_STOP);
                 return;
             } else if (StateManager.getInstance().getX8Drone().isInSky()) {
-                this.fcCtrlManager.setPanoramaPhotographType(new UiCallBackListener() {
-                    @Override
-                    public void onComplete(CmdResult cmdResult, Object o) {
-                    }
+                this.fcCtrlManager.setPanoramaPhotographType((cmdResult, o) -> {
                 }, Constants.panoramaType + 1);
                 return;
             } else {
@@ -227,45 +204,36 @@ public class X8MainRightMenuController extends AbsX8Controllers implements View.
                 return;
             }
         }
-        this.cameraManager.takePhoto(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                X8MainRightMenuController.this.imbPhotoVideo.setClickable(true);
-                if (!cmdResult.isSuccess()) {
-                    String rtpCamera = X8Rtp.getRtpStringCamera(X8MainRightMenuController.this.rootView.getContext(), cmdResult.getmMsgRpt());
-                    if (!rtpCamera.equals("")) {
-                        X8ToastUtil.showToast(X8MainRightMenuController.this.rootView.getContext(), rtpCamera, 1);
-                    }
+        this.cameraManager.takePhoto((cmdResult, o) -> {
+            imbPhotoVideo.setClickable(true);
+            if (!cmdResult.isSuccess()) {
+                String rtpCamera = X8Rtp.getRtpStringCamera(rootView.getContext(), cmdResult.getmMsgRpt());
+                if (!rtpCamera.equals("")) {
+                    X8ToastUtil.showToast(rootView.getContext(), rtpCamera, 1);
                 }
             }
         });
     }
 
     private void startRecord() {
-        this.cameraManager.startVideo(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                X8MainRightMenuController.this.imbPhotoVideo.setClickable(true);
-                if (!cmdResult.isSuccess()) {
-                    String rtpCamera = X8Rtp.getRtpStringCamera(X8MainRightMenuController.this.rootView.getContext(), cmdResult.getmMsgRpt());
-                    if (!rtpCamera.equals("")) {
-                        X8ToastUtil.showToast(X8MainRightMenuController.this.rootView.getContext(), rtpCamera, 1);
-                        return;
-                    }
+        this.cameraManager.startVideo((cmdResult, o) -> {
+            imbPhotoVideo.setClickable(true);
+            if (!cmdResult.isSuccess()) {
+                String rtpCamera = X8Rtp.getRtpStringCamera(rootView.getContext(), cmdResult.getmMsgRpt());
+                if (!rtpCamera.equals("")) {
+                    X8ToastUtil.showToast(rootView.getContext(), rtpCamera, 1);
                     return;
                 }
-                X8MainRightMenuController.this.checkCameraParam();
+                return;
             }
+            checkCameraParam();
         });
     }
 
     private void stopRecord() {
-        this.cameraManager.stopVideo(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                    X8MainRightMenuController.this.imbMedia.setBackgroundResource(R.drawable.x8_main_btn_media_select);
-                }
+        this.cameraManager.stopVideo((cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
+                imbMedia.setBackgroundResource(R.drawable.x8_main_btn_media_select);
             }
         });
     }
@@ -283,12 +251,12 @@ public class X8MainRightMenuController extends AbsX8Controllers implements View.
 
     public void showCameraView(boolean isShow) {
         if (!this.mX8AiModeState.isAiModeStateReady()) {
-            this.handleView.setVisibility(isShow ? 0 : 8);
+            this.handleView.setVisibility(isShow ? View.VISIBLE : View.GONE);
         }
     }
 
     public void switchByCloseFullScreen(boolean isFullVideo) {
-        this.handleView.setVisibility(isFullVideo ? 0 : 8);
+        this.handleView.setVisibility(isFullVideo ? View.VISIBLE : View.GONE);
     }
 
     public void showCameraState(AutoCameraStateADV cameraStateADV) {
@@ -377,8 +345,8 @@ public class X8MainRightMenuController extends AbsX8Controllers implements View.
                 if (this.curMode != CameraParamStatus.modelStatus) {
                     this.curMode = CameraParamStatus.modelStatus;
                     this.imbSwitchPhotoVideo.setCurrentIndex(1);
-                    this.mIvHotDot.setVisibility(0);
-                    this.mTvRecordTime.setVisibility(0);
+                    this.mIvHotDot.setVisibility(View.VISIBLE);
+                    this.mTvRecordTime.setVisibility(View.VISIBLE);
                     this.imbPhotoVideo.setCurrentIndex(1, 1);
                     if (this.mainRightMenuListener != null) {
                         this.mainRightMenuListener.turnCameraModel();
@@ -395,12 +363,12 @@ public class X8MainRightMenuController extends AbsX8Controllers implements View.
                     }
                 }
             } else if (!this.autoCameraStateADV.isDelayedPhotography() && !getPanoramicStart()) {
-                if (!this.imbSwitchPhotoVideo.isClickable() && this.mIvHotDot.getVisibility() == 0) {
+                if (!this.imbSwitchPhotoVideo.isClickable() && this.mIvHotDot.getVisibility() == View.VISIBLE) {
                     this.imbSwitchPhotoVideo.setCurrentIndex(1);
                     this.imbSwitchPhotoVideo.setClickable(true);
                 }
-                this.mIvHotDot.setVisibility(8);
-                this.mTvRecordTime.setVisibility(8);
+                this.mIvHotDot.setVisibility(View.GONE);
+                this.mTvRecordTime.setVisibility(View.GONE);
                 this.imbMedia.setBackgroundResource(R.drawable.x8_main_btn_media_select);
                 this.pivTake = false;
                 if (!this.pivTake) {
@@ -476,12 +444,12 @@ public class X8MainRightMenuController extends AbsX8Controllers implements View.
         if (!b && CameraParamStatus.modelStatus == CameraParamStatus.CameraModelStatus.recording) {
             this.imbPhotoVideo.setCurrentIndex(1, 0);
             this.curModeType = 32;
-            this.mIvHotDot.setVisibility(8);
-            this.mTvRecordTime.setVisibility(8);
+            this.mIvHotDot.setVisibility(View.GONE);
+            this.mTvRecordTime.setVisibility(View.GONE);
             this.curMode = CameraParamStatus.CameraModelStatus.ideal;
         }
         if (!b && getPanoramicStart()) {
-            this.tvPanoramaNumber.setVisibility(8);
+            this.tvPanoramaNumber.setVisibility(View.GONE);
         }
     }
 

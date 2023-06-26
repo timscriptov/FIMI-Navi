@@ -35,11 +35,11 @@ public class GglMapAiSurroundManager extends AbsAiSurroundManager {
     private static final PatternItem DASH = new Dash(20.0f);
     private static final PatternItem GAP = new Gap(20.0f);
     private static final List<PatternItem> PATTERN_POLYLINE_DOTTED = Arrays.asList(GAP, DASH);
-    List<LatLng> latLngs = new ArrayList();
-    MapPointLatLng mp;
     private final Context context;
     private final GglMapLocationManager gglMapLocationManager;
     private final GoogleMap googleMap;
+    List<LatLng> latLngs = new ArrayList();
+    MapPointLatLng mp;
     private Circle limitCircle;
     private Polyline line;
     private Polygon mPolygon;

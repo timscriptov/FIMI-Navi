@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListAdapter;
 
 import com.fimi.android.app.R;
 import com.fimi.kernel.base.BaseActivity;
@@ -30,13 +29,13 @@ public class CountrySelectListActivity extends BaseActivity implements StickyLis
     public static final byte REGISTER_REQUEST_CODE = 2;
     public static final String SELECT_COUNTRY_AREO_CODE = "select_country_areo_code";
     private static final String TAG = CountrySelectListActivity.class.getSimpleName();
+    private final List<SortModel> mSourceDateFilterList = new ArrayList();
     CountryLetterSortAdapter mAdapter;
     StickyListHeadersListView mStickyLV;
     private CharacterParser mCharacterParser;
     private EditText mEtSearch;
     private ImageButton mIbtnDeleteSearch;
     private LetterSideBar mLetterSideBar;
-    private final List<SortModel> mSourceDateFilterList = new ArrayList();
     private List<SortModel> mSourceDateList;
     private TitleView mTitleView;
 
@@ -108,7 +107,7 @@ public class CountrySelectListActivity extends BaseActivity implements StickyLis
             }
         });
         this.mEtSearch = findViewById(R.id.et_cs_search);
-        this.mEtSearch.setVisibility(0);
+        this.mEtSearch.setVisibility(View.VISIBLE);
         this.mEtSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i2, int i1, int i22) {
@@ -138,10 +137,10 @@ public class CountrySelectListActivity extends BaseActivity implements StickyLis
             public void afterTextChanged(Editable editable) {
                 if (editable.length() > 0) {
                     if (R.id.et_cs_search == CountrySelectListActivity.this.mEtSearch.getId()) {
-                        CountrySelectListActivity.this.mIbtnDeleteSearch.setVisibility(0);
+                        CountrySelectListActivity.this.mIbtnDeleteSearch.setVisibility(View.VISIBLE);
                     }
                 } else if (R.id.et_cs_search == CountrySelectListActivity.this.mEtSearch.getId()) {
-                    CountrySelectListActivity.this.mIbtnDeleteSearch.setVisibility(8);
+                    CountrySelectListActivity.this.mIbtnDeleteSearch.setVisibility(View.GONE);
                 }
             }
         });

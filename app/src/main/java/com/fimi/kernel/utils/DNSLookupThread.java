@@ -5,8 +5,8 @@ import java.net.UnknownHostException;
 
 
 public class DNSLookupThread extends Thread {
-    private InetAddress addr;
     private final String hostname;
+    private InetAddress addr;
 
     public DNSLookupThread(String hostname) {
         this.hostname = hostname;

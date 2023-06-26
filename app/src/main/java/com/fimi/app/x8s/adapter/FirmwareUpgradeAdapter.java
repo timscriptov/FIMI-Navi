@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fimi.android.app.R;
@@ -31,7 +32,7 @@ public class FirmwareUpgradeAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         this.context = parent.getContext();
         View view = LayoutInflater.from(this.context).inflate(viewType == 0 ? R.layout.x8_main_general_fw_upgrade_item_normal : R.layout.x8_main_general_fw_upgrade_item_end, parent, false);
         if (viewType == 0) {
@@ -41,7 +42,7 @@ public class FirmwareUpgradeAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof FmNormalViewHolder holder1) {
             VersionEntity item = this.list.get(position);
             if (item.getVersionName() != null) {
@@ -50,7 +51,7 @@ public class FirmwareUpgradeAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             if (item.getVersionCode() != null) {
                 holder1.tvVersionCode.setText(item.getVersionCode());
             }
-            holder1.tvUpdate.setVisibility(item.hasNewVersion() ? 0 : 8);
+            holder1.tvUpdate.setVisibility(item.hasNewVersion() ? View.VISIBLE : View.GONE);
             holder1.tvVersionName.setTextColor(this.context.getResources().getColor(item.hasNewVersion() ? R.color.x8_fc_all_setting_blue : R.color.white_100));
         }
     }

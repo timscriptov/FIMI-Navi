@@ -1,10 +1,10 @@
 package com.fimi.app.x8s.map;
 
-import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 
 import com.fimi.app.x8s.enums.NoFlyZoneEnum;
@@ -72,8 +72,7 @@ public class GglMap extends AbsFimiMap implements OnMapReadyCallback {
         if (!this.isInit || this.gglMapLocationManager == null) {
             return 0.0f;
         }
-        float accuracy = this.gglMapLocationManager.getAccuracy();
-        return accuracy;
+        return this.gglMapLocationManager.getAccuracy();
     }
 
     @Override
@@ -93,7 +92,7 @@ public class GglMap extends AbsFimiMap implements OnMapReadyCallback {
     }
 
     @Override
-    public void onCreate(View rootView, Bundle savedInstanceState) {
+    public void onCreate(@NonNull View rootView, Bundle savedInstanceState) {
         this.mapView = new MapView(rootView.getContext());
         this.mapView.onCreate(savedInstanceState);
         this.mapView.setEnabled(true);
@@ -139,12 +138,10 @@ public class GglMap extends AbsFimiMap implements OnMapReadyCallback {
         if (this.isInit) {
             if (mapStyle == Constants.X8_GENERAL_MAP_STYLE_NORMAL) {
                 GoogleMap googleMap = this.googleMap;
-                GoogleMap googleMap2 = this.googleMap;
                 googleMap.setMapType(1);
             } else if (mapStyle == Constants.X8_GENERAL_MAP_STYLE_SATELLITE) {
-                GoogleMap googleMap3 = this.googleMap;
-                GoogleMap googleMap4 = this.googleMap;
-                googleMap3.setMapType(2);
+                GoogleMap googleMap = this.googleMap;
+                googleMap.setMapType(2);
             }
         }
     }
@@ -155,7 +152,7 @@ public class GglMap extends AbsFimiMap implements OnMapReadyCallback {
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(@NonNull GoogleMap googleMap) {
         this.googleMap = googleMap;
         this.noFlyZone = new GglMapNoFlyZone(googleMap);
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(this.BEIJING, 21.0f));
@@ -393,12 +390,7 @@ public class GglMap extends AbsFimiMap implements OnMapReadyCallback {
     }
 
     @Override
-    public void snapshot(final IFimiOnSnapshotReady callBack) {
-        this.googleMap.snapshot(new GoogleMap.SnapshotReadyCallback() {
-            @Override
-            public void onSnapshotReady(Bitmap bitmap) {
-                callBack.onSnapshotReady(bitmap);
-            }
-        });
+    public void snapshot(@NonNull final IFimiOnSnapshotReady callBack) {
+        this.googleMap.snapshot(callBack::onSnapshotReady);
     }
 }

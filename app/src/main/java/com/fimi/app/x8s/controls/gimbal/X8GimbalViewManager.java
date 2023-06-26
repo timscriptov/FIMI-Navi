@@ -12,25 +12,19 @@ import com.fimi.app.x8s.ui.activity.X8sMainActivity;
 
 
 public class X8GimbalViewManager {
-    private final X8sMainActivity activity;
-    private X8GimbalHorizontalTrimController mX8GimbalHorizontalTrimController;
     private final View mainShowView;
-    private X8GimbalXYZAdjustController x8GimbalXYZAdjustController;
-    private final IX8GimbalHorizontalTrimListener mIX8GimbalHorizontalTrimListener = new IX8GimbalHorizontalTrimListener() {
-        @Override
-        public void onSettingReady(float value) {
-            X8GimbalViewManager.this.mX8GimbalHorizontalTrimController.closeUi();
-            X8GimbalViewManager.this.mX8GimbalHorizontalTrimController.onSettingReady();
-            X8GimbalViewManager.this.activity.getX8MainFcAllSettingControler().showAllSettingUi(X8FcAllSettingMenuEnum.GIMBAL_ITEM);
-            X8GimbalViewManager.this.activity.showTopByGimbalHorizontalTrim();
-        }
+    private X8sMainActivity activity;
+    private X8GimbalHorizontalTrimController mX8GimbalHorizontalTrimController;
+    private final IX8GimbalHorizontalTrimListener mIX8GimbalHorizontalTrimListener = value -> {
+        mX8GimbalHorizontalTrimController.closeUi();
+        mX8GimbalHorizontalTrimController.onSettingReady();
+        activity.getX8MainFcAllSettingControler().showAllSettingUi(X8FcAllSettingMenuEnum.GIMBAL_ITEM);
+        activity.showTopByGimbalHorizontalTrim();
     };
-    private final IX8GimbalXYZAdjustListener ix8GimbalXYZAdjustListener = new IX8GimbalXYZAdjustListener() {
-        @Override
-        public void gimbalXYZAdjustExit() {
-            X8GimbalViewManager.this.x8GimbalXYZAdjustController.closeUi();
-            X8GimbalViewManager.this.activity.appFullSceen(false);
-        }
+    private X8GimbalXYZAdjustController x8GimbalXYZAdjustController;
+    private final IX8GimbalXYZAdjustListener ix8GimbalXYZAdjustListener = () -> {
+        x8GimbalXYZAdjustController.closeUi();
+        activity.appFullSceen(false);
     };
 
     public X8GimbalViewManager(View mainShowView, X8sMainActivity activity) {

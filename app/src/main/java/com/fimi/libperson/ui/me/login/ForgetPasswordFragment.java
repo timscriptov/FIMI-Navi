@@ -80,13 +80,13 @@ public class ForgetPasswordFragment extends BaseFragment implements IForgetPassw
         this.mIvShowPassword = view.findViewById(R.id.iv_show_password);
         this.mIvShowPasswordAgain = view.findViewById(R.id.iv_show_password_again);
         FontUtil.changeFontLanTing(getActivity().getAssets(), this.mTvEmailaddress, this.mTvFpHint, this.mEtFpEmailAccount, this.mEtNewPasswordAgain, this.mEtNewPassword, this.mEtInputVerficationCode, this.mBtnVerfication, this.mTvTitleSubNmae);
-        this.mIvNewPasswordUnified.setVisibility(8);
-        this.mIvNewPasswordAgainUnified.setVisibility(8);
-        this.mTvEmailaddress.setVisibility(4);
-        this.mEtNewPassword.setVisibility(4);
-        this.mEtNewPasswordAgain.setVisibility(4);
-        this.mViewDivide.setVisibility(4);
-        this.mEtInputVerficationCode.setVisibility(4);
+        this.mIvNewPasswordUnified.setVisibility(View.GONE);
+        this.mIvNewPasswordAgainUnified.setVisibility(View.GONE);
+        this.mTvEmailaddress.setVisibility(View.INVISIBLE);
+        this.mEtNewPassword.setVisibility(View.INVISIBLE);
+        this.mEtNewPasswordAgain.setVisibility(View.INVISIBLE);
+        this.mViewDivide.setVisibility(View.INVISIBLE);
+        this.mEtInputVerficationCode.setVisibility(View.INVISIBLE);
         this.mEtFpEmailAccount.addTextChangedListener(new EditTextWatcher(this.mEtFpEmailAccount));
         this.mEtInputVerficationCode.addTextChangedListener(new EditTextWatcher(this.mEtInputVerficationCode));
         this.mEtNewPassword.addTextChangedListener(new EditTextWatcher(this.mEtNewPassword));
@@ -211,54 +211,54 @@ public class ForgetPasswordFragment extends BaseFragment implements IForgetPassw
 
     private void showState() {
         if (this.mState == State.EMAIL) {
-            this.mEtFpEmailAccount.setVisibility(0);
-            this.mEtInputVerficationCode.setVisibility(4);
-            this.mTvEmailaddress.setVisibility(8);
+            this.mEtFpEmailAccount.setVisibility(View.VISIBLE);
+            this.mEtInputVerficationCode.setVisibility(View.INVISIBLE);
+            this.mTvEmailaddress.setVisibility(View.GONE);
             this.mTvEmailaddress.setText("");
-            this.mEtNewPassword.setVisibility(4);
-            this.mEtNewPasswordAgain.setVisibility(4);
-            this.mViewDivide.setVisibility(4);
-            this.mBtnSendEmail.setVisibility(0);
-            this.mBtnVerfication.setVisibility(8);
-            this.mIvNewPasswordUnified.setVisibility(8);
-            this.mIvNewPasswordAgainUnified.setVisibility(8);
+            this.mEtNewPassword.setVisibility(View.INVISIBLE);
+            this.mEtNewPasswordAgain.setVisibility(View.INVISIBLE);
+            this.mViewDivide.setVisibility(View.INVISIBLE);
+            this.mBtnSendEmail.setVisibility(View.VISIBLE);
+            this.mBtnVerfication.setVisibility(View.GONE);
+            this.mIvNewPasswordUnified.setVisibility(View.GONE);
+            this.mIvNewPasswordAgainUnified.setVisibility(View.GONE);
             this.mTvFpHint.setTextColor(getResources().getColor(R.color.forget_password_hint));
             this.mTvFpHint.setText(getSpannableString());
-            this.mTvFpVerficationHint.setVisibility(8);
-            this.mTvFpHint.setVisibility(0);
+            this.mTvFpVerficationHint.setVisibility(View.GONE);
+            this.mTvFpHint.setVisibility(View.VISIBLE);
             setIvShowPassword(false);
             showClickState(DataValidatorUtil.isEmail(this.mEtFpEmailAccount.getText().toString().trim()));
         } else if (this.mState == State.VERIFICATION_CODE) {
-            this.mEtFpEmailAccount.setVisibility(4);
-            this.mEtInputVerficationCode.setVisibility(0);
-            this.mTvEmailaddress.setVisibility(0);
+            this.mEtFpEmailAccount.setVisibility(View.INVISIBLE);
+            this.mEtInputVerficationCode.setVisibility(View.VISIBLE);
+            this.mTvEmailaddress.setVisibility(View.VISIBLE);
             this.mTvEmailaddress.setText(this.mEmailAddressStr);
-            this.mEtNewPassword.setVisibility(4);
-            this.mViewDivide.setVisibility(0);
-            this.mEtNewPasswordAgain.setVisibility(4);
+            this.mEtNewPassword.setVisibility(View.INVISIBLE);
+            this.mViewDivide.setVisibility(View.VISIBLE);
+            this.mEtNewPasswordAgain.setVisibility(View.INVISIBLE);
             this.mBtnVerfication.setText(R.string.login_ensure);
-            this.mBtnSendEmail.setVisibility(8);
-            this.mBtnVerfication.setVisibility(0);
-            this.mIvNewPasswordUnified.setVisibility(8);
-            this.mIvNewPasswordAgainUnified.setVisibility(8);
+            this.mBtnSendEmail.setVisibility(View.GONE);
+            this.mBtnVerfication.setVisibility(View.VISIBLE);
+            this.mIvNewPasswordUnified.setVisibility(View.GONE);
+            this.mIvNewPasswordAgainUnified.setVisibility(View.GONE);
             this.mTvFpVerficationHint.setText(getEmailVerficationSpannableString());
-            this.mTvFpVerficationHint.setVisibility(0);
-            this.mTvFpHint.setVisibility(8);
+            this.mTvFpVerficationHint.setVisibility(View.VISIBLE);
+            this.mTvFpHint.setVisibility(View.GONE);
             setIvShowPassword(false);
             showBtnVerficationClickState(this.mEtInputVerficationCode.getText().length() == 6);
         } else if (this.mState == State.NEW_PASSWORD) {
-            this.mEtFpEmailAccount.setVisibility(4);
-            this.mEtInputVerficationCode.setVisibility(4);
-            this.mTvEmailaddress.setVisibility(8);
-            this.mEtNewPassword.setVisibility(0);
-            this.mViewDivide.setVisibility(0);
-            this.mEtNewPasswordAgain.setVisibility(0);
+            this.mEtFpEmailAccount.setVisibility(View.INVISIBLE);
+            this.mEtInputVerficationCode.setVisibility(View.INVISIBLE);
+            this.mTvEmailaddress.setVisibility(View.GONE);
+            this.mEtNewPassword.setVisibility(View.VISIBLE);
+            this.mViewDivide.setVisibility(View.VISIBLE);
+            this.mEtNewPasswordAgain.setVisibility(View.VISIBLE);
             this.mBtnVerfication.setText(R.string.login_reset_password);
-            this.mBtnSendEmail.setVisibility(8);
-            this.mBtnVerfication.setVisibility(0);
+            this.mBtnSendEmail.setVisibility(View.GONE);
+            this.mBtnVerfication.setVisibility(View.VISIBLE);
             showClickState(false);
-            this.mTvFpVerficationHint.setVisibility(0);
-            this.mTvFpHint.setVisibility(8);
+            this.mTvFpVerficationHint.setVisibility(View.VISIBLE);
+            this.mTvFpHint.setVisibility(View.GONE);
             setIvShowPassword(true);
             showBtnVerficationClickState(this.mEtNewPasswordAgain.getText().toString().trim().equals(this.mEtNewPassword.getText().toString().trim()) && this.mEtNewPasswordAgain.getText().toString().length() >= 8);
         }
@@ -391,13 +391,13 @@ public class ForgetPasswordFragment extends BaseFragment implements IForgetPassw
                     ForgetPasswordFragment.this.mTvFpVerficationHint.setText(ForgetPasswordFragment.this.getEmailVerficationSpannableString());
                 } else if (R.id.et_new_password == this.mEditText.getId()) {
                     if (ForgetPasswordFragment.this.mEtNewPassword.getText().toString().trim().equals(ForgetPasswordFragment.this.mEtNewPasswordAgain.getText().toString().trim()) && s.length() >= 8) {
-                        ForgetPasswordFragment.this.mIvNewPasswordUnified.setVisibility(0);
-                        ForgetPasswordFragment.this.mIvNewPasswordAgainUnified.setVisibility(0);
+                        ForgetPasswordFragment.this.mIvNewPasswordUnified.setVisibility(View.VISIBLE);
+                        ForgetPasswordFragment.this.mIvNewPasswordAgainUnified.setVisibility(View.VISIBLE);
                         ForgetPasswordFragment.this.setIvShowPassword(false);
                         ForgetPasswordFragment.this.showBtnVerficationClickState(true);
                     } else {
-                        ForgetPasswordFragment.this.mIvNewPasswordUnified.setVisibility(8);
-                        ForgetPasswordFragment.this.mIvNewPasswordAgainUnified.setVisibility(8);
+                        ForgetPasswordFragment.this.mIvNewPasswordUnified.setVisibility(View.GONE);
+                        ForgetPasswordFragment.this.mIvNewPasswordAgainUnified.setVisibility(View.GONE);
                         ForgetPasswordFragment.this.setIvShowPassword(true);
                         ForgetPasswordFragment.this.showBtnVerficationClickState(false);
                     }
@@ -405,13 +405,13 @@ public class ForgetPasswordFragment extends BaseFragment implements IForgetPassw
                     ForgetPasswordFragment.this.mTvFpHint.setTextColor(ForgetPasswordFragment.this.getResources().getColor(R.color.forget_password_hint));
                 } else if (R.id.et_new_password_again == this.mEditText.getId()) {
                     if (ForgetPasswordFragment.this.mEtNewPasswordAgain.getText().toString().trim().equals(ForgetPasswordFragment.this.mEtNewPassword.getText().toString().trim()) && s.length() >= 8) {
-                        ForgetPasswordFragment.this.mIvNewPasswordUnified.setVisibility(0);
-                        ForgetPasswordFragment.this.mIvNewPasswordAgainUnified.setVisibility(0);
+                        ForgetPasswordFragment.this.mIvNewPasswordUnified.setVisibility(View.VISIBLE);
+                        ForgetPasswordFragment.this.mIvNewPasswordAgainUnified.setVisibility(View.VISIBLE);
                         ForgetPasswordFragment.this.setIvShowPassword(false);
                         ForgetPasswordFragment.this.showBtnVerficationClickState(true);
                     } else {
-                        ForgetPasswordFragment.this.mIvNewPasswordUnified.setVisibility(8);
-                        ForgetPasswordFragment.this.mIvNewPasswordAgainUnified.setVisibility(8);
+                        ForgetPasswordFragment.this.mIvNewPasswordUnified.setVisibility(View.GONE);
+                        ForgetPasswordFragment.this.mIvNewPasswordAgainUnified.setVisibility(View.GONE);
                         ForgetPasswordFragment.this.setIvShowPassword(true);
                         ForgetPasswordFragment.this.showBtnVerficationClickState(false);
                     }

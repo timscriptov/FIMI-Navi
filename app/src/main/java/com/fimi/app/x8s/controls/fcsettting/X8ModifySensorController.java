@@ -127,7 +127,7 @@ public class X8ModifySensorController extends AbsX8MenuBoxControllers {
         this.back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                X8ModifySensorController.this.handleView.setVisibility(8);
+                X8ModifySensorController.this.handleView.setVisibility(View.GONE);
                 X8ModifySensorController.this.modeControllerListener.returnBack();
                 X8ModifySensorController.this.closeItem();
             }
@@ -263,7 +263,7 @@ public class X8ModifySensorController extends AbsX8MenuBoxControllers {
     @Override
     public void showItem() {
         super.showItem();
-        this.handleView.setVisibility(0);
+        this.handleView.setVisibility(View.VISIBLE);
         this.mHandler.sendEmptyMessageDelayed(0, 10L);
     }
 

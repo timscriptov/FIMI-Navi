@@ -30,10 +30,11 @@ public class X8AircraftCalibrationController extends AbsX8MenuBoxControllers imp
     private final int SECOND_DIR_STEP;
     private final int SIXTH_DIR_STEP;
     private final int THRID_DIR_STEP;
+    private final boolean[] indicatorArray;
+    private final Handler mHandler;
     private ImageView back_btn;
     private X8DoubleCustomDialog dialog;
     private FcCtrlManager fcManager;
-    private final boolean[] indicatorArray;
     private boolean isCaltAccSixPoint;
     private boolean isResetCalit;
     private boolean isShowCalibrationStart;
@@ -49,7 +50,6 @@ public class X8AircraftCalibrationController extends AbsX8MenuBoxControllers imp
     private ViewStub mDisconnectViewStub;
     private ViewStub mFailureViewStub;
     private GaliStete mGaliStete;
-    private final Handler mHandler;
     private ImageView mIvCalibrationStepPicture;
     private ViewStub mPreViewStub;
     private ViewStub mSuccessedViewStub;
@@ -392,19 +392,19 @@ public class X8AircraftCalibrationController extends AbsX8MenuBoxControllers imp
         this.mTvCalibrationTitle = this.handleView.findViewById(R.id.tv_calibration_title);
         this.mPreViewStub = this.handleView.findViewById(R.id.vs_aircraft_calibration_pre);
         this.mCalibrationPreView = this.mPreViewStub.inflate();
-        this.mCalibrationPreView.setVisibility(8);
+        this.mCalibrationPreView.setVisibility(View.GONE);
         this.mDisconnectViewStub = this.handleView.findViewById(R.id.vs_aircraft_calibration_disconnect);
         this.mCalibrationDisconnectView = this.mDisconnectViewStub.inflate();
-        this.mCalibrationDisconnectView.setVisibility(0);
+        this.mCalibrationDisconnectView.setVisibility(View.VISIBLE);
         this.mViewStepStub = this.handleView.findViewById(R.id.vs_aircraft_calibration_step);
         this.mCalibrationStepView = this.mViewStepStub.inflate();
-        this.mCalibrationStepView.setVisibility(8);
+        this.mCalibrationStepView.setVisibility(View.GONE);
         this.mFailureViewStub = this.handleView.findViewById(R.id.vs_aircraft_calibration_failure);
         this.mCalibrationFailureView = this.mFailureViewStub.inflate();
-        this.mCalibrationFailureView.setVisibility(8);
+        this.mCalibrationFailureView.setVisibility(View.GONE);
         this.mSuccessedViewStub = this.handleView.findViewById(R.id.vs_aircraft_calibration_successed);
         this.mCalibrationSuccessedView = this.mSuccessedViewStub.inflate();
-        this.mCalibrationSuccessedView.setVisibility(8);
+        this.mCalibrationSuccessedView.setVisibility(View.GONE);
         this.mBtnStartCalibration = this.handleView.findViewById(R.id.btn_start_calibration_toggle);
         this.mBtnFailureCalibration = this.handleView.findViewById(R.id.btn_failure_calibration_toggle);
         this.mBtnSuccessCalibration = this.handleView.findViewById(R.id.btn_success_calibration_toggle);
@@ -493,14 +493,14 @@ public class X8AircraftCalibrationController extends AbsX8MenuBoxControllers imp
     @Override
     public void showItem() {
         super.showItem();
-        this.handleView.setVisibility(0);
+        this.handleView.setVisibility(View.VISIBLE);
         getDroneState();
         onDroneConnected(this.isConect);
         this.mHandler.sendEmptyMessageDelayed(0, 10L);
     }
 
     public void quitItem() {
-        this.handleView.setVisibility(8);
+        this.handleView.setVisibility(View.GONE);
         this.modeControllerListener.returnBack();
         this.modeControllerListener.onClose();
         for (int i = 0; i < this.indicatorArray.length; i++) {
@@ -521,110 +521,110 @@ public class X8AircraftCalibrationController extends AbsX8MenuBoxControllers imp
 
     public void handleCalibrationStart() {
         this.mTvCalibrationTitle.setText(getIdString(R.string.x8_modify_aircraft_calibration));
-        this.mCalibrationPreView.setVisibility(0);
-        this.mCalibrationDisconnectView.setVisibility(8);
-        this.mCalibrationStepView.setVisibility(8);
-        this.mCalibrationFailureView.setVisibility(8);
-        this.mCalibrationSuccessedView.setVisibility(8);
+        this.mCalibrationPreView.setVisibility(View.VISIBLE);
+        this.mCalibrationDisconnectView.setVisibility(View.GONE);
+        this.mCalibrationStepView.setVisibility(View.GONE);
+        this.mCalibrationFailureView.setVisibility(View.GONE);
+        this.mCalibrationSuccessedView.setVisibility(View.GONE);
     }
 
     public void handleCalibrationDisconnect() {
         this.mTvCalibrationTitle.setText(getIdString(R.string.x8_modify_aircraft_calibration));
-        this.mCalibrationPreView.setVisibility(8);
-        this.mCalibrationDisconnectView.setVisibility(0);
+        this.mCalibrationPreView.setVisibility(View.GONE);
+        this.mCalibrationDisconnectView.setVisibility(View.VISIBLE);
         this.mTvCalibrationDisconnectionDescribe.setText(getIdString(R.string.x8_modify_start_calibration_describe2));
-        this.mCalibrationStepView.setVisibility(8);
-        this.mCalibrationFailureView.setVisibility(8);
-        this.mCalibrationSuccessedView.setVisibility(8);
+        this.mCalibrationStepView.setVisibility(View.GONE);
+        this.mCalibrationFailureView.setVisibility(View.GONE);
+        this.mCalibrationSuccessedView.setVisibility(View.GONE);
     }
 
     private void handleInsky() {
         this.mTvCalibrationTitle.setText(getIdString(R.string.x8_modify_aircraft_calibration));
-        this.mCalibrationPreView.setVisibility(8);
-        this.mCalibrationDisconnectView.setVisibility(0);
+        this.mCalibrationPreView.setVisibility(View.GONE);
+        this.mCalibrationDisconnectView.setVisibility(View.VISIBLE);
         this.mTvCalibrationDisconnectionDescribe.setText(getIdString(R.string.x8_modify_start_calibration_describe4));
-        this.mCalibrationStepView.setVisibility(8);
-        this.mCalibrationFailureView.setVisibility(8);
-        this.mCalibrationSuccessedView.setVisibility(8);
+        this.mCalibrationStepView.setVisibility(View.GONE);
+        this.mCalibrationFailureView.setVisibility(View.GONE);
+        this.mCalibrationSuccessedView.setVisibility(View.GONE);
     }
 
     private void handleCalibrationStep1() {
         this.mTvCalibrationTitle.setText(getIdString(R.string.x8_modify_aircraft_calibration3));
-        this.mCalibrationPreView.setVisibility(8);
-        this.mCalibrationDisconnectView.setVisibility(8);
-        this.mCalibrationStepView.setVisibility(0);
+        this.mCalibrationPreView.setVisibility(View.GONE);
+        this.mCalibrationDisconnectView.setVisibility(View.GONE);
+        this.mCalibrationStepView.setVisibility(View.VISIBLE);
         this.mIvCalibrationStepPicture.setImageBitmap(ImageUtils.getBitmapByPath(this.rootView.getContext(), R.drawable.x8_calibrate_drone_step1));
-        this.mCalibrationFailureView.setVisibility(8);
-        this.mCalibrationSuccessedView.setVisibility(8);
+        this.mCalibrationFailureView.setVisibility(View.GONE);
+        this.mCalibrationSuccessedView.setVisibility(View.GONE);
     }
 
     private void handleCalibrationStep2() {
         this.mTvCalibrationTitle.setText(getIdString(R.string.x8_modify_aircraft_calibration4));
-        this.mCalibrationPreView.setVisibility(8);
-        this.mCalibrationDisconnectView.setVisibility(8);
-        this.mCalibrationStepView.setVisibility(0);
+        this.mCalibrationPreView.setVisibility(View.GONE);
+        this.mCalibrationDisconnectView.setVisibility(View.GONE);
+        this.mCalibrationStepView.setVisibility(View.VISIBLE);
         this.mIvCalibrationStepPicture.setImageBitmap(ImageUtils.getBitmapByPath(this.rootView.getContext(), R.drawable.x8_calibrate_drone_step2));
-        this.mCalibrationFailureView.setVisibility(8);
-        this.mCalibrationSuccessedView.setVisibility(8);
+        this.mCalibrationFailureView.setVisibility(View.GONE);
+        this.mCalibrationSuccessedView.setVisibility(View.GONE);
     }
 
     private void handleCalibrationStep3() {
         this.mTvCalibrationTitle.setText(getIdString(R.string.x8_modify_aircraft_calibration5));
-        this.mCalibrationPreView.setVisibility(8);
-        this.mCalibrationDisconnectView.setVisibility(8);
-        this.mCalibrationStepView.setVisibility(0);
+        this.mCalibrationPreView.setVisibility(View.GONE);
+        this.mCalibrationDisconnectView.setVisibility(View.GONE);
+        this.mCalibrationStepView.setVisibility(View.VISIBLE);
         this.mIvCalibrationStepPicture.setImageBitmap(ImageUtils.getBitmapByPath(this.rootView.getContext(), R.drawable.x8_calibrate_drone_step3));
-        this.mCalibrationFailureView.setVisibility(8);
-        this.mCalibrationSuccessedView.setVisibility(8);
+        this.mCalibrationFailureView.setVisibility(View.GONE);
+        this.mCalibrationSuccessedView.setVisibility(View.GONE);
     }
 
     private void handleCalibrationStep4() {
         this.mTvCalibrationTitle.setText(getIdString(R.string.x8_modify_aircraft_calibration6));
-        this.mCalibrationPreView.setVisibility(8);
-        this.mCalibrationDisconnectView.setVisibility(8);
-        this.mCalibrationStepView.setVisibility(0);
+        this.mCalibrationPreView.setVisibility(View.GONE);
+        this.mCalibrationDisconnectView.setVisibility(View.GONE);
+        this.mCalibrationStepView.setVisibility(View.VISIBLE);
         this.mIvCalibrationStepPicture.setImageBitmap(ImageUtils.getBitmapByPath(this.rootView.getContext(), R.drawable.x8_calibrate_drone_step4));
-        this.mCalibrationFailureView.setVisibility(8);
-        this.mCalibrationSuccessedView.setVisibility(8);
+        this.mCalibrationFailureView.setVisibility(View.GONE);
+        this.mCalibrationSuccessedView.setVisibility(View.GONE);
     }
 
     private void handleCalibrationStep5() {
         this.mTvCalibrationTitle.setText(getIdString(R.string.x8_modify_aircraft_calibration2));
-        this.mCalibrationPreView.setVisibility(8);
-        this.mCalibrationDisconnectView.setVisibility(8);
-        this.mCalibrationStepView.setVisibility(0);
+        this.mCalibrationPreView.setVisibility(View.GONE);
+        this.mCalibrationDisconnectView.setVisibility(View.GONE);
+        this.mCalibrationStepView.setVisibility(View.VISIBLE);
         this.mIvCalibrationStepPicture.setImageBitmap(ImageUtils.getBitmapByPath(this.rootView.getContext(), R.drawable.x8_calibrate_drone_step5));
-        this.mCalibrationFailureView.setVisibility(8);
-        this.mCalibrationSuccessedView.setVisibility(8);
+        this.mCalibrationFailureView.setVisibility(View.GONE);
+        this.mCalibrationSuccessedView.setVisibility(View.GONE);
     }
 
     private void handleCalibrationStep6() {
         this.mTvCalibrationTitle.setText(getIdString(R.string.x8_modify_aircraft_calibration1));
-        this.mCalibrationPreView.setVisibility(8);
-        this.mCalibrationDisconnectView.setVisibility(8);
-        this.mCalibrationStepView.setVisibility(0);
+        this.mCalibrationPreView.setVisibility(View.GONE);
+        this.mCalibrationDisconnectView.setVisibility(View.GONE);
+        this.mCalibrationStepView.setVisibility(View.VISIBLE);
         this.mIvCalibrationStepPicture.setImageBitmap(ImageUtils.getBitmapByPath(this.rootView.getContext(), R.drawable.x8_calibrate_drone_step6));
-        this.mCalibrationFailureView.setVisibility(8);
-        this.mCalibrationSuccessedView.setVisibility(8);
+        this.mCalibrationFailureView.setVisibility(View.GONE);
+        this.mCalibrationSuccessedView.setVisibility(View.GONE);
     }
 
     private void handleCalibrationHorizonal() {
         this.mTvCalibrationTitle.setText(getIdString(R.string.x8_modify_aircraft_calibration_horizonal));
-        this.mCalibrationPreView.setVisibility(8);
-        this.mCalibrationDisconnectView.setVisibility(8);
-        this.mCalibrationStepView.setVisibility(0);
+        this.mCalibrationPreView.setVisibility(View.GONE);
+        this.mCalibrationDisconnectView.setVisibility(View.GONE);
+        this.mCalibrationStepView.setVisibility(View.VISIBLE);
         this.mIvCalibrationStepPicture.setImageBitmap(ImageUtils.getBitmapByPath(this.rootView.getContext(), R.drawable.x8_calibrate_drone_step6));
-        this.mCalibrationFailureView.setVisibility(8);
-        this.mCalibrationSuccessedView.setVisibility(8);
+        this.mCalibrationFailureView.setVisibility(View.GONE);
+        this.mCalibrationSuccessedView.setVisibility(View.GONE);
     }
 
     public void handleCalibrationFailure(int point) {
         this.mTvCalibrationTitle.setText(getIdString(R.string.x8_modify_aircraft_calibration));
-        this.mCalibrationPreView.setVisibility(8);
-        this.mCalibrationDisconnectView.setVisibility(8);
-        this.mCalibrationStepView.setVisibility(8);
-        this.mCalibrationFailureView.setVisibility(0);
-        this.mCalibrationSuccessedView.setVisibility(8);
+        this.mCalibrationPreView.setVisibility(View.GONE);
+        this.mCalibrationDisconnectView.setVisibility(View.GONE);
+        this.mCalibrationStepView.setVisibility(View.GONE);
+        this.mCalibrationFailureView.setVisibility(View.VISIBLE);
+        this.mCalibrationSuccessedView.setVisibility(View.GONE);
         if (point == 1) {
             this.mTvCalibrationFailureDescribe.setText(getIdString(R.string.x8_modify_aircraft_calibration1_failure));
         } else if (point == 2) {
@@ -646,11 +646,11 @@ public class X8AircraftCalibrationController extends AbsX8MenuBoxControllers imp
 
     public void handleCalibrationSuccessed() {
         this.mTvCalibrationTitle.setText(getIdString(R.string.x8_modify_aircraft_calibration));
-        this.mCalibrationPreView.setVisibility(8);
-        this.mCalibrationDisconnectView.setVisibility(8);
-        this.mCalibrationStepView.setVisibility(8);
-        this.mCalibrationFailureView.setVisibility(8);
-        this.mCalibrationSuccessedView.setVisibility(0);
+        this.mCalibrationPreView.setVisibility(View.GONE);
+        this.mCalibrationDisconnectView.setVisibility(View.GONE);
+        this.mCalibrationStepView.setVisibility(View.GONE);
+        this.mCalibrationFailureView.setVisibility(View.GONE);
+        this.mCalibrationSuccessedView.setVisibility(View.VISIBLE);
     }
 
     private void showCalibrationIndicator(AckGetCaliState ackGetCaliState, int i) {

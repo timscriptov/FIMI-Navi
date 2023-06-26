@@ -44,7 +44,7 @@ public class X8DoubleCustomDialog extends X8sBaseDialog {
         super(context, R.style.fimisdk_custom_dialog);
         setContentView(R.layout.x8_double_dialog_custom);
         this.x8CbSingDialog = findViewById(R.id.x8_cb_sing_dialog);
-        this.x8CbSingDialog.setVisibility(8);
+        this.x8CbSingDialog.setVisibility(View.GONE);
         if (title != null) {
             TextView tvTitle = findViewById(R.id.tv_title);
             tvTitle.setText(title);
@@ -72,7 +72,7 @@ public class X8DoubleCustomDialog extends X8sBaseDialog {
         super(context, R.style.fimisdk_custom_dialog);
         setContentView(R.layout.x8_double_dialog_custom);
         this.x8CbSingDialog = findViewById(R.id.x8_cb_sing_dialog);
-        this.x8CbSingDialog.setVisibility(8);
+        this.x8CbSingDialog.setVisibility(View.GONE);
         if (title != null) {
             TextView tvTitle = findViewById(R.id.tv_title);
             tvTitle.setText(title);

@@ -35,10 +35,11 @@ import com.fimi.x8sdk.modulestate.StateManager;
 
 
 public class X8AiScrewExcuteController extends AbsX8AiController implements View.OnClickListener, X8DoubleCustomDialog.onDialogButtonClickListener {
+    private final X8sMainActivity activity;
+    private final IX8NextViewListener mIX8NextViewListener;
     protected int MAX_WIDTH;
     protected boolean isShow;
     protected int width;
-    private final X8sMainActivity activity;
     private View blank;
     private double currentLat;
     private double currentLog;
@@ -59,7 +60,6 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
     private IX8ScrewListener listener;
     private FcCtrlManager mFcCtrlManager;
     private FcManager mFcManager;
-    private final IX8NextViewListener mIX8NextViewListener;
     private TextView mTvRadius;
     private X8AiScrewNextModule mX8AiScrewNextModule;
     private View nextRootView;
@@ -87,9 +87,9 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
             @Override
             public void onExcuteClick() {
                 X8AiScrewExcuteController.this.closeNextUi(false);
-                X8AiScrewExcuteController.this.imgSuroundBg.setVisibility(8);
-                X8AiScrewExcuteController.this.vRadiusBg.setVisibility(8);
-                X8AiScrewExcuteController.this.tvTip.setVisibility(8);
+                X8AiScrewExcuteController.this.imgSuroundBg.setVisibility(View.GONE);
+                X8AiScrewExcuteController.this.vRadiusBg.setVisibility(View.GONE);
+                X8AiScrewExcuteController.this.tvTip.setVisibility(View.GONE);
                 X8AiScrewExcuteController.this.state = ScrewState.RUNNING;
                 X8AiScrewExcuteController.this.listener.onAiScrewRunning();
             }
@@ -180,9 +180,9 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
             this.state = ScrewState.SETDOT;
         } else if (id == R.id.rl_flag_small) {
             if (this.tvP2PTip.getVisibility() == 0) {
-                this.tvP2PTip.setVisibility(8);
+                this.tvP2PTip.setVisibility(View.GONE);
             } else {
-                this.tvP2PTip.setVisibility(0);
+                this.tvP2PTip.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -203,10 +203,10 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
         this.flagSmall = this.handleView.findViewById(R.id.rl_flag_small);
         this.flagSmall.setOnClickListener(this);
         if (this.state != ScrewState.IDLE) {
-            this.imgSuroundBg.setVisibility(8);
-            this.tvPoint.setVisibility(8);
-            this.mTvRadius.setVisibility(8);
-            this.tvTip.setVisibility(8);
+            this.imgSuroundBg.setVisibility(View.GONE);
+            this.tvPoint.setVisibility(View.GONE);
+            this.mTvRadius.setVisibility(View.GONE);
+            this.tvTip.setVisibility(View.GONE);
         }
         this.prex = this.activity.getString(R.string.x8_ai_fly_screw_hight_distance);
         this.nextRootView = this.rootView.findViewById(R.id.x8_main_ai_screw_next_content);
@@ -230,8 +230,8 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
     }
 
     public void openNextUi() {
-        this.nextRootView.setVisibility(0);
-        this.blank.setVisibility(0);
+        this.nextRootView.setVisibility(View.VISIBLE);
+        this.blank.setVisibility(View.VISIBLE);
         closeIconByNextUi();
         this.mX8AiScrewNextModule.init(this.activity, this.nextRootView);
         if (this.mX8AiScrewNextModule != null) {
@@ -259,7 +259,7 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
     }
 
     public void closeNextUi(final boolean b) {
-        this.blank.setVisibility(8);
+        this.blank.setVisibility(View.GONE);
         if (this.isNextShow) {
             this.isNextShow = false;
             ObjectAnimator translationRight = ObjectAnimator.ofFloat(this.nextRootView, "translationX", 0.0f, this.width);
@@ -270,12 +270,12 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
                 // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
-                    X8AiScrewExcuteController.this.nextRootView.setVisibility(8);
+                    X8AiScrewExcuteController.this.nextRootView.setVisibility(View.GONE);
                     ((ViewGroup) X8AiScrewExcuteController.this.nextRootView).removeAllViews();
-                    X8AiScrewExcuteController.this.imgBack.setVisibility(0);
-                    X8AiScrewExcuteController.this.flagSmall.setVisibility(0);
+                    X8AiScrewExcuteController.this.imgBack.setVisibility(View.VISIBLE);
+                    X8AiScrewExcuteController.this.flagSmall.setVisibility(View.VISIBLE);
                     if (b) {
-                        X8AiScrewExcuteController.this.tvPoint.setVisibility(0);
+                        X8AiScrewExcuteController.this.tvPoint.setVisibility(View.VISIBLE);
                     }
                 }
             });
@@ -358,7 +358,7 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
             if (this.state != ScrewState.RUNNING) {
                 this.imgSuroundBg.setVisibility(sightFlag ? 8 : 0);
             } else {
-                this.imgSuroundBg.setVisibility(8);
+                this.imgSuroundBg.setVisibility(View.GONE);
             }
         }
     }
@@ -386,7 +386,7 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
                     d = "<font color='#F22121'>" + X8NumberUtil.getDistanceNumberString(intD, 1, false) + "</font>";
                 }
                 if (this.vRadiusBg.getVisibility() != 0) {
-                    this.vRadiusBg.setVisibility(0);
+                    this.vRadiusBg.setVisibility(View.VISIBLE);
                 }
                 String s = String.format(this.prex, h, d);
                 this.mTvRadius.setText(Html.fromHtml(s));
@@ -506,9 +506,9 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
     }
 
     public void closeIconByNextUi() {
-        this.tvPoint.setVisibility(8);
-        this.imgBack.setVisibility(8);
-        this.flagSmall.setVisibility(8);
+        this.tvPoint.setVisibility(View.GONE);
+        this.imgBack.setVisibility(View.GONE);
+        this.flagSmall.setVisibility(View.GONE);
     }
 
     public void sysAiVcCtrlMode() {

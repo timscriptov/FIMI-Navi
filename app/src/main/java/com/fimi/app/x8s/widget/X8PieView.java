@@ -23,19 +23,19 @@ import java.text.DecimalFormat;
 import java.util.Random;
 
 public class X8PieView extends View {
+    private final Rect dataTextBound;
+    private final Random random;
     private int centerX;
     private int centerY;
     private float circleWidth;
     private int[] colors;
     private Paint dataPaint;
-    private final Rect dataTextBound;
     private int dataTextColor;
     private float dataTextSize;
     private Paint mArcPaint;
     private String[] names;
     private int[] numbers;
     private float radius;
-    private final Random random;
     private RectF rectF;
     private int sum;
 

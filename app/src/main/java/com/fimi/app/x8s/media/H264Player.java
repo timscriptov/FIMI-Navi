@@ -1,5 +1,6 @@
 package com.fimi.app.x8s.media;
 
+import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Message;
 import android.view.Surface;
@@ -11,13 +12,13 @@ public class H264Player {
     private static final int FPS = 60;
     private static final int VIDEO_HEIGHT = 720;
     private static final int VIDEO_WIDTH = 1280;
+    private final IFrameDataListener mIFrameDataListener;
+    private final FimiMediaPlayer mFimiMediaPlayer = new FimiMediaPlayer();
     private int count;
     private int currentStartIndex;
     private Thread mDecodeThread;
     private H264StreamParseThread mH264StreamParseThread;
-    private final IFrameDataListener mIFrameDataListener;
     private boolean mStopFlag;
-    private final FimiMediaPlayer mFimiMediaPlayer = new FimiMediaPlayer();
 
     public H264Player(IFrameDataListener listener) {
         this.mIFrameDataListener = listener;
@@ -32,33 +33,28 @@ public class H264Player {
 
     public void decodeBuffer(byte[] data, int length) {
         this.mFimiMediaPlayer.decodeBuffer(data, length);
-    }    Handler mHandler = new Handler() {
+    }
+
+    public void deInitDecode() {
+        this.mFimiMediaPlayer.deInitDecode();
+    }    @SuppressLint("HandlerLeak")
+    Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == 0) {
                 H264Player.this.countFps();
                 H264Player.this.mHandler.sendEmptyMessageDelayed(0, 1000L);
-                return;
             }
         }
     };
-
-    public void deInitDecode() {
-        this.mFimiMediaPlayer.deInitDecode();
-    }
 
     public void start() {
         this.mFimiMediaPlayer.setMediaDecType(0);
         this.mFimiMediaPlayer.setTddMode(1);
         this.mFimiMediaPlayer.start();
         this.count = this.mFimiMediaPlayer.getFpsIndex();
-        this.mH264StreamParseThread = new H264StreamParseThread(new IH264DataListener() {
-            @Override
-            public void onH264Frame(byte[] data) {
-                H264Player.this.mFimiMediaPlayer.addBufferData(data, 0, data.length);
-            }
-        });
+        this.mH264StreamParseThread = new H264StreamParseThread(data -> mFimiMediaPlayer.addBufferData(data, 0, data.length));
         this.mH264StreamParseThread.start();
         this.mHandler.sendEmptyMessageDelayed(0, 1000L);
     }
@@ -97,8 +93,6 @@ public class H264Player {
     public int getLostSeq() {
         return this.mFimiMediaPlayer.getH264FrameLostSeq();
     }
-
-
 
 
 }

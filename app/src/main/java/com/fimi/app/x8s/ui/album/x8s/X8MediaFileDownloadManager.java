@@ -27,16 +27,14 @@ public class X8MediaFileDownloadManager<T extends MediaModel> implements OnDownl
     private static final int DOWNLOAD_SUCCESS = 1;
     private static final String TAG = "MediaFileDownloadManage";
     private static final X8MediaFileDownloadManager mMediaFileDownloadManager = new X8MediaFileDownloadManager();
+    private final List<MediaModel> data = new ArrayList();
+    private final List<MediaModel> dataAll = new ArrayList();
+    private final List<MediaModel> dataResult = new ArrayList();
+    private final ExecutorService executorService = Executors.newFixedThreadPool(1);
     public HashMap<String, X8MediaOriginalDownloadTask> taskHashMap = new HashMap<>();
     private int index;
     private boolean isDownload;
     private OnDownloadUiListener mUiDownloadListener;
-    private IMediaFileDownloadObserver observer;
-    private final List<MediaModel> data = new ArrayList();
-    private final List<MediaModel> dataAll = new ArrayList();
-    private final List<MediaModel> dataResult = new ArrayList();
-    private int mLastPos = -1;
-    private final ExecutorService executorService = Executors.newFixedThreadPool(1);
     private final Handler mHanler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -64,6 +62,8 @@ public class X8MediaFileDownloadManager<T extends MediaModel> implements OnDownl
             }
         }
     };
+    private IMediaFileDownloadObserver observer;
+    private int mLastPos = -1;
 
     public static X8MediaFileDownloadManager getInstance() {
         return mMediaFileDownloadManager;

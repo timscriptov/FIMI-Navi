@@ -62,8 +62,8 @@ public class X8MainAiFollowConfirmController extends AbsX8MenuBoxControllers imp
 
     @Override
     public void openUi() {
-        this.mainLayout.setVisibility(0);
-        this.blank.setVisibility(0);
+        this.mainLayout.setVisibility(View.VISIBLE);
+        this.blank.setVisibility(View.VISIBLE);
         this.currentModule.init(this.activity, this.contentView);
         if (!this.isShow) {
             Log.i("zdy", "showAiUi...........");
@@ -91,7 +91,7 @@ public class X8MainAiFollowConfirmController extends AbsX8MenuBoxControllers imp
     }
 
     public void closeAiUi() {
-        this.blank.setVisibility(8);
+        this.blank.setVisibility(View.GONE);
         if (this.isShow) {
             Log.i("zdy", "closeAiUi...........");
             this.isShow = false;
@@ -103,7 +103,7 @@ public class X8MainAiFollowConfirmController extends AbsX8MenuBoxControllers imp
                 // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
-                    X8MainAiFollowConfirmController.this.mainLayout.setVisibility(4);
+                    X8MainAiFollowConfirmController.this.mainLayout.setVisibility(View.INVISIBLE);
                     ((ViewGroup) X8MainAiFollowConfirmController.this.contentView).removeAllViews();
                 }
             });

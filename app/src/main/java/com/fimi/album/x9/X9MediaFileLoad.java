@@ -24,12 +24,6 @@ import java.util.List;
 
 
 public class X9MediaFileLoad<T extends MediaModel> implements IMediaFileLoad {
-    String urlThumPrex = "http://192.168.40.1:8000/FIMI_PHOTO/.thumbnails/";
-    String urlPrex = "http://192.168.40.1:8000/FIMI_PHOTO/";
-    String thumPath = Environment.getExternalStorageDirectory().getPath() + "/MiDroneMini/cache";
-    String imagePath = DirectoryPath.getX9LocalMedia();
-    String xmlUrl = "http://192.168.40.1:8000/FIMI_PHOTO/MediaFileList.xml";
-    String xmlPath = Environment.getExternalStorageDirectory().getPath() + "/MiDroneMini";
     private final List<MediaModel> listData;
     private final OnX9MediaFileListener listener;
     private final Handler mHandler = new Handler() {
@@ -50,6 +44,12 @@ public class X9MediaFileLoad<T extends MediaModel> implements IMediaFileLoad {
     private final FileLoader mFileLoader = new FileLoader();
     private final Dom4jManager mDom4jManager = new Dom4jManager();
     private final FileInfo info = new FileInfo();
+    String urlThumPrex = "http://192.168.40.1:8000/FIMI_PHOTO/.thumbnails/";
+    String urlPrex = "http://192.168.40.1:8000/FIMI_PHOTO/";
+    String thumPath = Environment.getExternalStorageDirectory().getPath() + "/MiDroneMini/cache";
+    String imagePath = DirectoryPath.getX9LocalMedia();
+    String xmlUrl = "http://192.168.40.1:8000/FIMI_PHOTO/MediaFileList.xml";
+    String xmlPath = Environment.getExternalStorageDirectory().getPath() + "/MiDroneMini";
 
     public X9MediaFileLoad(OnX9MediaFileListener listener, List<MediaModel> listData) {
         this.listener = listener;

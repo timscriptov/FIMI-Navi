@@ -11,6 +11,7 @@ import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fimi.android.app.R;
@@ -33,8 +34,8 @@ import router.Router;
 
 public class X8B2oxAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final Context context;
+    private final Map<String, X8B2oxSection> sections = new LinkedHashMap<>();
     private X8DoubleCustomDialog loginDialogRestart;
-    private final Map<String, X8B2oxSection> sections = new LinkedHashMap();
 
     public X8B2oxAdapter(Context context) {
         this.context = context;
@@ -44,8 +45,9 @@ public class X8B2oxAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         this.sections.put(title, section);
     }
 
+    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == 0) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.x8_black_box_header_layout, parent, false);
             return new X8B2oxHeaderViewHolder(view);
@@ -58,7 +60,7 @@ public class X8B2oxAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         int currentPos = 0;
         for (Map.Entry<String, X8B2oxSection> entry : this.sections.entrySet()) {
             X8B2oxSection section = entry.getValue();
@@ -78,7 +80,6 @@ public class X8B2oxAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         final X8B2oxFile file = section.getList().get(positionSection);
         ((X8B2oxViewHolder) holder).mTvItemTitle1.setText(file.getNameShow());
         ((X8B2oxViewHolder) holder).mTvItemTitle3.setText(file.getShowLen());
-        int i = R.drawable.x8_img_upload_success;
         switch (file.getState()) {
             case IDLE:
                 int resId = R.drawable.x8_img_upload_idel;
@@ -99,53 +100,45 @@ public class X8B2oxAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 }
                 break;
             case SUCCESS:
-                int resId4 = R.drawable.x8_img_upload_success;
-                ((X8B2oxViewHolder) holder).mImgSaveFlag.setBackgroundResource(resId4);
+                ((X8B2oxViewHolder) holder).mImgSaveFlag.setBackgroundResource(R.drawable.x8_img_upload_success);
                 ((X8B2oxViewHolder) holder).mImgSaveFlag.clearAnimation();
                 ((X8B2oxViewHolder) holder).rlSaveFlag.setOnClickListener(null);
                 break;
             case FAILED:
-                int resId5 = R.drawable.x8_img_upload_restart;
-                ((X8B2oxViewHolder) holder).mImgSaveFlag.setBackgroundResource(resId5);
+                ((X8B2oxViewHolder) holder).mImgSaveFlag.setBackgroundResource(R.drawable.x8_img_upload_restart);
                 ((X8B2oxViewHolder) holder).mImgSaveFlag.clearAnimation();
                 break;
             case STOP:
-                int resId6 = R.drawable.x8_img_upload_idel;
-                ((X8B2oxViewHolder) holder).mImgSaveFlag.setBackgroundResource(resId6);
+                ((X8B2oxViewHolder) holder).mImgSaveFlag.setBackgroundResource(R.drawable.x8_img_upload_idel);
                 ((X8B2oxViewHolder) holder).mImgSaveFlag.clearAnimation();
                 break;
         }
         if (file.getState() != FdsUploadState.IDLE && file.getState() != FdsUploadState.STOP && file.getState() != FdsUploadState.FAILED) {
             return;
         }
-        ((X8B2oxViewHolder) holder).rlSaveFlag.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!DNSLookupThread.isDSNSuceess()) {
-                    X8ToastUtil.showToast(X8B2oxAdapter.this.context, X8B2oxAdapter.this.context.getString(R.string.x8_fds_connect_internet), 0);
-                } else if (HostConstants.getUserDetail().getFimiId() != null && !HostConstants.getUserDetail().getFimiId().equals("")) {
-                    file.setSectionPostion(positionSection);
-                    file.setItemPostion(position1);
-                    FdsManager.getInstance().startDownload(file);
-                    X8B2oxAdapter.this.notifyItemChanged(position1);
-                } else {
-                    X8B2oxAdapter.this.loginDialogRestart = new X8DoubleCustomDialog(X8B2oxAdapter.this.context, X8B2oxAdapter.this.context.getString(R.string.x8_modify_black_box_login_title), X8B2oxAdapter.this.context.getString(R.string.x8_modify_black_box_login_content), X8B2oxAdapter.this.context.getString(R.string.x8_modify_black_box_login_go), new X8DoubleCustomDialog.onDialogButtonClickListener() {
-                        @Override
-                        // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
-                        public void onLeft() {
-                            X8B2oxAdapter.this.loginDialogRestart.dismiss();
-                        }
+        ((X8B2oxViewHolder) holder).rlSaveFlag.setOnClickListener(v -> {
+            if (!DNSLookupThread.isDSNSuceess()) {
+                X8ToastUtil.showToast(context, context.getString(R.string.x8_fds_connect_internet), 0);
+            } else if (HostConstants.getUserDetail().getFimiId() != null && !HostConstants.getUserDetail().getFimiId().equals("")) {
+                file.setSectionPostion(positionSection);
+                file.setItemPostion(position1);
+                FdsManager.getInstance().startDownload(file);
+                notifyItemChanged(position1);
+            } else {
+                loginDialogRestart = new X8DoubleCustomDialog(context, context.getString(R.string.x8_modify_black_box_login_title), context.getString(R.string.x8_modify_black_box_login_content), context.getString(R.string.x8_modify_black_box_login_go), new X8DoubleCustomDialog.onDialogButtonClickListener() {
+                    @Override
+                    public void onLeft() {
+                        loginDialogRestart.dismiss();
+                    }
 
-                        @Override
-                        // com.fimi.app.x8s.widget.X8DoubleCustomDialog.onDialogButtonClickListener
-                        public void onRight() {
-                            SPStoreManager.getInstance().saveInt(Constants.SP_PERSON_USER_TYPE, Constants.UserType.Ideal.ordinal());
-                            Intent intent = Router.invoke(X8B2oxAdapter.this.context, "activity://app.SplashActivity");
-                            X8B2oxAdapter.this.context.startActivity(intent);
-                        }
-                    });
-                    X8B2oxAdapter.this.loginDialogRestart.show();
-                }
+                    @Override
+                    public void onRight() {
+                        SPStoreManager.getInstance().saveInt(Constants.SP_PERSON_USER_TYPE, Constants.UserType.Ideal.ordinal());
+                        Intent intent = Router.invoke(context, "activity://app.SplashActivity");
+                        context.startActivity(intent);
+                    }
+                });
+                loginDialogRestart.show();
             }
         });
     }
@@ -216,13 +209,13 @@ public class X8B2oxAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
 
-    public class X8B2oxViewHolder extends RecyclerView.ViewHolder {
+    public static class X8B2oxViewHolder extends RecyclerView.ViewHolder {
+        private final ImageView mImgSaveFlag;
+        private final View rlSaveFlag;
         public TextView mTvItemTitle1;
         public TextView mTvItemTitle2;
         public TextView mTvItemTitle3;
         public View rlRootView;
-        private final ImageView mImgSaveFlag;
-        private final View rlSaveFlag;
 
 
         public X8B2oxViewHolder(View itemView) {
@@ -236,7 +229,7 @@ public class X8B2oxAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
-    public class X8B2oxHeaderViewHolder extends RecyclerView.ViewHolder {
+    public static class X8B2oxHeaderViewHolder extends RecyclerView.ViewHolder {
         public View rlRootView;
         public TextView tvTitle;
 

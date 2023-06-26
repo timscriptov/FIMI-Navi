@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fimi.android.app.R;
@@ -27,11 +28,11 @@ public class PhotoArrayParamsAdapter extends RecyclerView.Adapter {
         this.pList = mlist;
     }
 
+    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View parentView = LayoutInflater.from(this.context).inflate(R.layout.x8_photo_array_param_list_item, parent, false);
-        RecyclerView.ViewHolder viewHolder = new CameraArrayParamsViewHolder(parentView);
-        return viewHolder;
+        return new CameraArrayParamsViewHolder(parentView);
     }
 
     public void updateData(List<String> uplist, Map<String, String> map, String paramKey, int selected_index) {
@@ -54,17 +55,14 @@ public class PhotoArrayParamsAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof CameraArrayParamsViewHolder) {
             ((CameraArrayParamsViewHolder) holder).initView(this.pList.get(position), this.keyMap);
             ((CameraArrayParamsViewHolder) holder).upSelected(position == this.select_position);
         }
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (PhotoArrayParamsAdapter.this.itemClickListener != null) {
-                    PhotoArrayParamsAdapter.this.itemClickListener.onItemClickListener(PhotoArrayParamsAdapter.this.paramKey, PhotoArrayParamsAdapter.this.pList.get(position));
-                }
+        holder.itemView.setOnClickListener(v -> {
+            if (itemClickListener != null) {
+                itemClickListener.onItemClickListener(paramKey, pList.get(position));
             }
         });
     }
