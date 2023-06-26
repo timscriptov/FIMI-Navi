@@ -16,3 +16,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "FIMI Navi"
 include ':app'
+include ':router'
+include ':zip'

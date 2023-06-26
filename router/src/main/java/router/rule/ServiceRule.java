@@ -6,7 +6,7 @@ import router.exception.ServiceNotRouteException;
 public class ServiceRule extends BaseIntentRule<Service> {
     public static final String SERVICE_SCHEME = "service://";
 
-    @Override // router.rule.BaseIntentRule
+    @Override
     public void throwException(String pattern) {
         throw new ServiceNotRouteException(pattern);
     }

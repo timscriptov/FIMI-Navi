@@ -1,9 +1,13 @@
 package router;
 
 import android.content.Context;
+
+import androidx.annotation.NonNull;
+
 import router.rule.Rule;
 
 public class Router {
+    @NonNull
     public static RouterInternal addRule(String scheme, Rule rule) {
         RouterInternal router2 = RouterInternal.get();
         router2.addRule(scheme, rule);

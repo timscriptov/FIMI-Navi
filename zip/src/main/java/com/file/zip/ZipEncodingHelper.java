@@ -2,8 +2,6 @@ package com.file.zip;
 
 import androidx.annotation.NonNull;
 
-import com.fimi.x8sdk.command.FcCollection;
-
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
@@ -35,7 +33,7 @@ public abstract class ZipEncodingHelper {
         se.put("IBM850", cp850);
         se.put("ibm850", cp850);
         simpleEncodings = Collections.unmodifiableMap(se);
-        HEX_DIGITS = new byte[]{48, 49, 50, 51, 52, 53, FcCollection.MSG_LOCK_MOTOR_STATE, 55, FcCollection.MSG_SET_AUTO_PHOTO_EXCUTE, FcCollection.MSG_SET_AUTO_PHOTO_PAUSE, FcCollection.MSG_SET_SURROUND_PAUSE, FcCollection.MSG_SET_SURROUND_RESUME, FcCollection.MSG_SET_SURROUND_EXIT, FcCollection.MSG_SET_SURROUND_CIRCLE_DOT, FcCollection.MSG_GET_SURROUND_CIRCLE_DOT, FcCollection.MSG_SET_SURROUND_SPEED};
+        HEX_DIGITS = new byte[]{48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70};
         UTF8_ZIP_ENCODING = new FallbackZipEncoding("UTF8");
     }
 
@@ -54,7 +52,7 @@ public abstract class ZipEncodingHelper {
 
     public static void appendSurrogate(@NonNull ByteBuffer bb, char c) {
         bb.put((byte) 37);
-        bb.put(FcCollection.MSG_SET_FOLLOW_MODLE);
+        bb.put((byte) 85);
         bb.put(HEX_DIGITS[(c >> '\f') & 15]);
         bb.put(HEX_DIGITS[(c >> '\b') & 15]);
         bb.put(HEX_DIGITS[(c >> 4) & 15]);

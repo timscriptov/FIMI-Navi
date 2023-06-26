@@ -6,7 +6,7 @@ import router.exception.ActivityNotRouteException;
 public class ActivityRule extends BaseIntentRule<Activity> {
     public static final String ACTIVITY_SCHEME = "activity://";
 
-    @Override // router.rule.BaseIntentRule
+    @Override
     public void throwException(String pattern) {
         throw new ActivityNotRouteException(pattern);
     }

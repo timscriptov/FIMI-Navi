@@ -2,8 +2,6 @@ package com.file.zip;
 
 import androidx.annotation.NonNull;
 
-import com.fimi.kernel.animutils.IOUtils;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -275,7 +273,7 @@ public class ZipEntry extends java.util.zip.ZipEntry implements Cloneable {
 
     public void setName(String name) {
         if (name != null && getPlatform() == 0 && name.indexOf("/") == -1) {
-            name = name.replace('\\', IOUtils.DIR_SEPARATOR_UNIX);
+            name = name.replace('\\', '/');
         }
         this.name = name;
     }

@@ -44,6 +44,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':router')
+    implementation project(':zip')
+
     implementation("com.davemorrissey.labs:subsampling-scale-image-view:3.10.0")
     implementation("org.apache.mina:mina-core:2.2.1")
     implementation("org.jdom:jdom2:2.0.6")
@@ -51,7 +54,7 @@ dependencies {
     implementation("org.greenrobot:eventbus:3.1.1")
     implementation("org.greenrobot:greendao:3.1.1")
     implementation("com.amap.api:location:6.3.0")
-
+    implementation("com.readystatesoftware.systembartint:systembartint:1.0.3")
     implementation("com.twitter.sdk.android:twitter:3.1.0")
 
     implementation("org.tensorflow:tensorflow-android:1.13.1")

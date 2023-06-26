@@ -1,6 +1,9 @@
 package router;
 
 import android.content.Context;
+
+import androidx.annotation.Nullable;
+
 import java.util.HashMap;
 import java.util.Set;
 import router.exception.NotRouteException;
@@ -11,7 +14,7 @@ import router.rule.ServiceRule;
 
 public class RouterInternal {
     private static RouterInternal sInstance;
-    private HashMap<String, Rule> mRules = new HashMap<>();
+    private final HashMap<String, Rule> mRules = new HashMap<>();
 
     private RouterInternal() {
         initDefaultRouter();
@@ -39,13 +42,13 @@ public class RouterInternal {
         return this;
     }
 
+    @Nullable
     private <T, V> Rule<T, V> getRule(String pattern) {
         HashMap<String, Rule> rules = this.mRules;
         Set<String> keySet = rules.keySet();
         for (String scheme : keySet) {
             if (pattern.startsWith(scheme)) {
-                Rule<T, V> rule = rules.get(scheme);
-                return rule;
+                return (Rule<T, V>) rules.get(scheme);
             }
         }
         return null;

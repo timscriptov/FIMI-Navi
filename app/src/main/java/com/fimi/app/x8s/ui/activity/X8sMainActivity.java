@@ -321,7 +321,7 @@ public class X8sMainActivity extends X8BaseActivity implements ConnectListener, 
         public void initCameraParams(@NonNull JSONObject rt) {
             CameraCurParamsJson curParamsJson = JSON.parseObject(rt.toString(), new TypeReference<>() {
             }, new Feature[0]);
-            if (curParamsJson != null && curParamsJson != null) {
+            if (curParamsJson != null) {
                 mX8MainBottomParameterController.initCameraParam(curParamsJson);
             }
         }

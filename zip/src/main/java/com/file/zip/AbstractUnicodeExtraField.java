@@ -2,9 +2,8 @@ package com.file.zip;
 
 import androidx.annotation.NonNull;
 
-import com.fimi.kernel.connect.tcp.SocketOption;
-
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.zip.CRC32;
 import java.util.zip.ZipException;
 
@@ -20,11 +19,7 @@ public abstract class AbstractUnicodeExtraField implements ZipExtraField {
         CRC32 crc32 = new CRC32();
         crc32.update(bytes, off, len);
         this.nameCRC32 = crc32.getValue();
-        try {
-            this.unicodeName = text.getBytes(SocketOption.DEFAULT_CHARSET);
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException("FATAL: UTF-8 encoding not supported.", e);
-        }
+        this.unicodeName = text.getBytes(StandardCharsets.UTF_8);
     }
 
     public AbstractUnicodeExtraField(String text, byte[] bytes) {

@@ -5,16 +5,16 @@ import android.content.Intent;
 import java.util.HashMap;
 
 public abstract class BaseIntentRule<T> implements Rule<T, Intent> {
-    private HashMap<String, Class<T>> mIntentRules = new HashMap<>();
+    private final HashMap<String, Class<T>> mIntentRules = new HashMap<>();
 
     public abstract void throwException(String str);
 
-    @Override // router.rule.Rule
+    @Override
     public void router(String pattern, Class<T> klass) {
         this.mIntentRules.put(pattern, klass);
     }
 
-    @Override // router.rule.Rule
+    @Override
     public Intent invoke(Context ctx, String pattern) {
         Class<T> klass = this.mIntentRules.get(pattern);
         if (klass == null) {
@@ -23,7 +23,7 @@ public abstract class BaseIntentRule<T> implements Rule<T, Intent> {
         return new Intent(ctx, (Class<?>) klass);
     }
 
-    @Override // router.rule.Rule
+    @Override
     public boolean resolveRule(String pattern) {
         return this.mIntentRules.get(pattern) != null;
     }
