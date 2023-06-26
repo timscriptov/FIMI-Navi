@@ -196,20 +196,7 @@ public class X8AiSarExcuteController extends AbsX8AiController implements View.O
                 ononDroneDisconnectedTaskComplete();
             }
             if (b && this.tvTime != null && (position = this.activity.getmMapVideoController().getFimiMap().getDevicePosition()) != null) {
-//                this.tvLatlng.setText("" + position[0] + "," + position[1]);
-                TextView textView = this.tvLatlng;
-                double[] skTarget = WGS84ToSK42.WGS84ToSK42Meters(position[0], position[1], 0.0d);
-                textView.setText("X:" + ((int) skTarget[0]) + ", Y:" + ((int) skTarget[1]));
-                DeviceNorthView deviceNorthView = this.activity.mX8MainDeviceNorthView;
-                if (deviceNorthView != null) {
-                    double[] skTarget2 = WGS84ToSK42.WGS84ToSK42MetersWithShift(position[0], position[1], 0.0d, deviceNorthView.aircraftAzimuth, deviceNorthView.distance);
-                    String oldText = textView.getText().toString();
-                    if (oldText.isEmpty()) {
-                        textView.setText("✜ X:" + ((int) skTarget2[0]) + ", Y:" + ((int) skTarget2[1]));
-                    } else {
-                        textView.setText(oldText + "\n✜ X:" + ((int) skTarget2[0]) + ", Y:" + ((int) skTarget2[1]));
-                    }
-                }
+                this.tvLatlng.setText("" + position[0] + "," + position[1]);
                 this.tvTime.setText(DateUtil.getStringByFormat(System.currentTimeMillis(), "yyyyMMdd HH:mm:ss"));
             }
         }

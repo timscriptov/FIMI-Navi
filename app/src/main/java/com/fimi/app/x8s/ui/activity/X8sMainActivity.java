@@ -1175,27 +1175,18 @@ public class X8sMainActivity extends X8BaseActivity implements ConnectListener, 
     public void showSportState(@NonNull AutoFcSportState state) {
         int orientation = (int) this.mX8MainPlaneAngleSeekBar.a(state.getLongitude(), state.getLatitude());
         this.mX8MainPlaneAngleSeekBar.setPlaneOrientation(orientation);
-
-
         this.mX8MainTopBarController.showSportState(state);
         if (this.mMapVideoController.getFimiMap().isMapInit()) {
             this.mMapVideoController.getFimiMap().addDeviceLocation(state.getLatitude(), state.getLongitude());
             this.fcManager.getNoFlyNormal((cmdResult, o) -> {
             });
-            final double longitude = state.getLongitude();
-            this.mMapVideoController.getFimiMap().addFlyPolyline(state.getLatitude(), longitude);
+            this.mMapVideoController.getFimiMap().addFlyPolyline(state.getLatitude(), state.getLongitude());
             final float angle = state.getDeviceAngle();
             this.mMapVideoController.getFimiMap().chaneDeviceAngle(angle);
             if (this.mMapVideoController.isFullVideo()) {
                 this.mMapVideoController.getFimiMap().moveCameraByDevice();
             }
-
-            PlaneAngleSeekBar planeAngleSeekBar = mX8MainPlaneAngleSeekBar;
-            planeAngleSeekBar.setHeadOrientation((int) angle);
-
-            mX8MainDeviceNorthView.setBankAngle(longitude);
-            mX8MainDeviceNorthView.setAircraft(state.getHeadingAngle());
-            mX8MainDeviceNorthView.setAircraftAzimuth((int) angle);
+            mX8MainPlaneAngleSeekBar.setHeadOrientation((int) angle);
         }
         this.mX8AiTaskManager.showAiView();
         this.mX8AiTaskManager.showSportState(state);

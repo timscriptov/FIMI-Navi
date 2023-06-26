@@ -12,9 +12,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.facebook.imageutils.JfifUtil;
-import com.fimi.kernel.connect.tcp.SocketOption;
-
+import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.SecureRandom;
@@ -117,7 +115,7 @@ public class SecurePreferencesOld implements SharedPreferences {
             generator.init(256, random);
         } catch (Exception e) {
             try {
-                generator.init(JfifUtil.MARKER_SOFn, random);
+                generator.init(192, random);
             } catch (Exception e2) {
                 generator.init(128, random);
             }
@@ -131,7 +129,7 @@ public class SecurePreferencesOld implements SharedPreferences {
             try {
                 Cipher cipher = Cipher.getInstance(AES_KEY_ALG, PROVIDER);
                 cipher.init(1, new SecretKeySpec(sKey, AES_KEY_ALG));
-                return encode(cipher.doFinal(cleartext.getBytes(SocketOption.DEFAULT_CHARSET)));
+                return encode(cipher.doFinal(cleartext.getBytes(StandardCharsets.UTF_8)));
             } catch (Exception e) {
                 if (sLoggingEnabled) {
                     Log.w(TAG, "encrypt", e);
@@ -148,7 +146,7 @@ public class SecurePreferencesOld implements SharedPreferences {
             try {
                 Cipher cipher = Cipher.getInstance(AES_KEY_ALG, PROVIDER);
                 cipher.init(2, new SecretKeySpec(sKey, AES_KEY_ALG));
-                return new String(cipher.doFinal(decode(ciphertext)), SocketOption.DEFAULT_CHARSET);
+                return new String(cipher.doFinal(decode(ciphertext)), StandardCharsets.UTF_8);
             } catch (Exception e) {
                 if (sLoggingEnabled) {
                     Log.w(TAG, "decrypt", e);

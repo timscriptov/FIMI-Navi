@@ -4,6 +4,7 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
         maven { url 'https://jcenter.bintray.com' }
+        maven { url 'https://jitpack.io' }
     }
 }
 dependencyResolutionManagement {
@@ -12,9 +13,11 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven { url 'https://jcenter.bintray.com' }
+        maven { url 'https://jitpack.io' }
     }
 }
 rootProject.name = "FIMI Navi"
 include ':app'
 include ':router'
 include ':zip'
+include ':securepreferences'

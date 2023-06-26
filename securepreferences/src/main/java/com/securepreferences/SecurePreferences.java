@@ -13,10 +13,10 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.fimi.kernel.connect.tcp.SocketOption;
 import com.tozny.crypto.android.AesCbcWithIntegrity;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -114,10 +114,10 @@ public class SecurePreferences implements SharedPreferences {
     public static String hashPrefKey(@NonNull String prefKey) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] bytes = prefKey.getBytes(SocketOption.DEFAULT_CHARSET);
+            byte[] bytes = prefKey.getBytes(StandardCharsets.UTF_8);
             digest.update(bytes, 0, bytes.length);
             return Base64.encodeToString(digest.digest(), 2);
-        } catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException e) {
             if (sLoggingEnabled) {
                 Log.w(TAG, "Problem generating hash", e);
             }
