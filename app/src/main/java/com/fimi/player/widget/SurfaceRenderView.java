@@ -170,12 +170,12 @@ public class SurfaceRenderView extends SurfaceView implements IRenderView {
 
 
     public static final class SurfaceCallback implements SurfaceHolder.Callback {
+        private final Map<IRenderView.IRenderCallback, Object> mRenderCallbackMap = new ConcurrentHashMap();
+        private final WeakReference<SurfaceRenderView> mWeakSurfaceView;
         private int mFormat;
         private int mHeight;
         private boolean mIsFormatChanged;
-        private final Map<IRenderView.IRenderCallback, Object> mRenderCallbackMap = new ConcurrentHashMap();
         private SurfaceHolder mSurfaceHolder;
-        private final WeakReference<SurfaceRenderView> mWeakSurfaceView;
         private int mWidth;
 
         public SurfaceCallback(@NonNull SurfaceRenderView surfaceView) {

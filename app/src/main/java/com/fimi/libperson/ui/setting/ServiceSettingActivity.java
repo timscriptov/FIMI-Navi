@@ -3,7 +3,6 @@ package com.fimi.libperson.ui.setting;
 import android.content.DialogInterface;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.fimi.android.app.R;
@@ -27,6 +26,7 @@ import java.util.List;
 
 
 public class ServiceSettingActivity extends BasePersonActivity implements AdapterView.OnItemClickListener, BitmapLoadTaskInstance.OnLoadListener {
+    private final int mCountryType = -1;
     private ServiceAdapter adapter;
     private DialogManager dialogManager;
     private BitmapLoadTaskInstance mBitmapLoadTaskInstance;
@@ -36,7 +36,6 @@ public class ServiceSettingActivity extends BasePersonActivity implements Adapte
     private TitleView mTitleView;
     private int serviceID;
     private List<ServiceItem> serviceItems;
-    private final int mCountryType = -1;
     private boolean isSetting = false;
 
     @Override

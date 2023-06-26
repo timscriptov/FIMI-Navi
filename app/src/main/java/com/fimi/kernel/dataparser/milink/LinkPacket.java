@@ -6,12 +6,12 @@ import java.io.Serializable;
 
 
 public class LinkPacket implements Serializable {
+    private final Header mHeader = new Header();
     public LinkPayload payload = new LinkPayload();
     byte[] msg;
     private int MsgId;
     private int msgGroupId;
     private IPersonalDataCallBack personalDataCallBack;
-    private final Header mHeader = new Header();
 
     public IPersonalDataCallBack getPersonalDataCallBack() {
         return this.personalDataCallBack;

@@ -7,12 +7,12 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 
 public class CmdSession {
+    private final BaseConnect connect;
+    private final long startTime = System.currentTimeMillis();
     public int sendCount;
     public int seq;
     public LinkedBlockingDeque<Object> cmdQue = new LinkedBlockingDeque<>();
     private BaseCommand cmd;
-    private final BaseConnect connect;
-    private final long startTime = System.currentTimeMillis();
 
     public CmdSession(BaseCommand cmd, BaseConnect connect) {
         this.cmd = cmd;

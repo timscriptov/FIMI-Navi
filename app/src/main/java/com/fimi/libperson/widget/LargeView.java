@@ -19,17 +19,17 @@ public class LargeView extends View {
     private static final String TAG = "LargeView";
     private static final int sHeight = 1920;
     private static final int sWidth = 1080;
-    private Bitmap bitmap;
-    private boolean bitmapIsCached;
     private final Paint bitmapPaint;
     private final long duration;
+    private final Matrix matrix;
+    private final PointF vTranslate;
+    private Bitmap bitmap;
+    private boolean bitmapIsCached;
     private boolean isFirst;
     private boolean isUp;
     private boolean mReady;
-    private final Matrix matrix;
     private float scale;
     private long startTime;
-    private final PointF vTranslate;
 
     public LargeView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);

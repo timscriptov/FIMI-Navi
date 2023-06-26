@@ -6,9 +6,9 @@ import com.fimi.kernel.dataparser.usb.UiCallBackListener;
 
 
 public class LinkPacket4 {
-    byte[] sendCmd;
     private final Header4 header4 = new Header4();
     private final LinkPayLoad4 payLoad4 = new LinkPayLoad4();
+    byte[] sendCmd;
     private IPersonalDataCallBack personalDataCallBack;
     private UiCallBackListener uiCallBack;
 

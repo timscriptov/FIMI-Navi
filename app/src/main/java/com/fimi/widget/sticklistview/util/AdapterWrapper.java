@@ -18,9 +18,6 @@ public class AdapterWrapper extends BaseAdapter implements StickyListHeadersAdap
     final StickyListHeadersAdapter mDelegate;
     private final Context mContext;
     private final List<View> mHeaderCache = new LinkedList();
-    private Drawable mDivider;
-    private int mDividerHeight;
-    private OnHeaderClickListener mOnHeaderClickListener;
     private final DataSetObserver mDataSetObserver = new DataSetObserver() {
         @Override
         public void onInvalidated() {
@@ -33,6 +30,9 @@ public class AdapterWrapper extends BaseAdapter implements StickyListHeadersAdap
             AdapterWrapper.super.notifyDataSetChanged();
         }
     };
+    private Drawable mDivider;
+    private int mDividerHeight;
+    private OnHeaderClickListener mOnHeaderClickListener;
 
     public AdapterWrapper(Context context, @NonNull StickyListHeadersAdapter delegate) {
         this.mContext = context;

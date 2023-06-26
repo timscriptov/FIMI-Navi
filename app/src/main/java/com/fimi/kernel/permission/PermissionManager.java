@@ -29,12 +29,12 @@ public class PermissionManager {
     private static final int REQUEST_BLUETOOTH_ADMIN = 6;
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static final String[] permissionsArray = {"android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.ACCESS_FINE_LOCATION"};
+    private static final String[] PERMISSIONS_INTERNET = {"android.permission.INTERNET", "android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"};
+    private static final List<String> permissionsList = new ArrayList();
     public static String[] PERMISSIONS_COARSE_LOCATION = {"android.permission.ACCESS_COARSE_LOCATION"};
     public static String[] PERMISSIONS_EXTERNAL_STORAGE = {"android.permission.READ_EXTERNAL_STORAGE", "android.permission.WRITE_EXTERNAL_STORAGE"};
     public static String[] PERMISSIONS_CAMERA = {"android.permission.CAMERA", "android.permission.RECORD_AUDIO"};
     public static String[] PERMISSIONS_RECORD_AUDIO = {"android.permission.RECORD_AUDIO"};
-    private static final String[] PERMISSIONS_INTERNET = {"android.permission.INTERNET", "android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"};
-    private static final List<String> permissionsList = new ArrayList();
 
     public static void requestStoragePermissions() {
         int permission = ActivityCompat.checkSelfPermission(BaseAppManager.getInstance().getForwardActivity(), "android.permission.WRITE_EXTERNAL_STORAGE");

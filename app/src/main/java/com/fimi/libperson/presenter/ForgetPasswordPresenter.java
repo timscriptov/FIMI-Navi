@@ -14,8 +14,8 @@ import com.fimi.network.entity.RestPswDto;
 
 
 public class ForgetPasswordPresenter {
-    Context mContext;
     private final IForgetPasswordView mIForgetPasswordView;
+    Context mContext;
 
     public ForgetPasswordPresenter(IForgetPasswordView IForgetPasswordView, Context context) {
         this.mIForgetPasswordView = IForgetPasswordView;

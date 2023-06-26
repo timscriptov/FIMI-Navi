@@ -20,11 +20,11 @@ import java.util.List;
 
 public class AppInitService extends Service {
     private static final int PROGRESS_MAX = 100;
+    private final int checkingTaskCount = 0;
     List<UpfirewareDto> needDownDto;
     OauthPresenter oauthPresenter;
     FwManager x9FwManager = new FwManager();
     DownloadManager downloadManager = new DownloadManager();
-    private final int checkingTaskCount = 0;
 
     @Override
     public void onCreate() {

@@ -94,22 +94,7 @@ public class RegisterPrenster {
                 }
             }));
         }
-    }    private final Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if (msg.what == 1) {
-                Log.d(RegisterPrenster.TAG, "handleMessage: " + RegisterPrenster.this.mSeconds);
-                if (RegisterPrenster.this.mSeconds != 0) {
-                    RegisterPrenster.this.iRegisterView.updateSeconds(false, RegisterPrenster.this.mSeconds);
-                    RegisterPrenster.access$010(RegisterPrenster.this);
-                    RegisterPrenster.this.mHandler.sendEmptyMessageDelayed(1, 1000L);
-                    return;
-                }
-                RegisterPrenster.this.iRegisterView.updateSeconds(true, 0);
-            }
-        }
-    };
+    }
 
     public void registerByEmail(final String email, String pwd, String comfirmPwd) {
         if (TextUtils.isEmpty(email)) {
@@ -140,7 +125,22 @@ public class RegisterPrenster {
                 }
             }));
         }
-    }
+    }    private final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == 1) {
+                Log.d(RegisterPrenster.TAG, "handleMessage: " + RegisterPrenster.this.mSeconds);
+                if (RegisterPrenster.this.mSeconds != 0) {
+                    RegisterPrenster.this.iRegisterView.updateSeconds(false, RegisterPrenster.this.mSeconds);
+                    RegisterPrenster.access$010(RegisterPrenster.this);
+                    RegisterPrenster.this.mHandler.sendEmptyMessageDelayed(1, 1000L);
+                    return;
+                }
+                RegisterPrenster.this.iRegisterView.updateSeconds(true, 0);
+            }
+        }
+    };
 
     public void getFwDetail() {
         FwManager x9FwManager = new FwManager();

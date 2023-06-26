@@ -57,6 +57,10 @@ public class DownFwService extends Service {
             downFirmware();
         }
         return super.onStartCommand(intent, flags, startId);
+    }
+
+    public synchronized void startCheckingTask() {
+        checkingTaskCount++;
     }    public DisposeDataHandle dataHandle = new DisposeDataHandle(new DisposeDownloadListener() {
         @Override
         public void onProgress(int progrss, int currentLength) {
@@ -107,10 +111,6 @@ public class DownFwService extends Service {
         }
     });
 
-    public synchronized void startCheckingTask() {
-        checkingTaskCount++;
-    }
-
     public void downFirmware() {
         if (this.needDownDto != null && this.needDownDto.size() >= 1 && checkingTaskCount < this.needDownDto.size()) {
             UpfirewareDto upfirewareDto = this.needDownDto.get(checkingTaskCount);
@@ -143,7 +143,6 @@ public class DownFwService extends Service {
         DownFail,
         StopDown
     }
-
 
 
 

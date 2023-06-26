@@ -20,8 +20,8 @@ public class ForgetIphonePasswordPresenter {
     private static final String TAG = "ForgetIphonePasswordPre";
     private static final int TIMER = 2;
     private static final int sUPDATE_TIME = 1000;
-    Context mContext;
     private final IForgetIphonePasswordView mIForgetPasswordView;
+    Context mContext;
     private int mSeconds = 60;
 
     public ForgetIphonePasswordPresenter(IForgetIphonePasswordView IForgetPasswordView, Context context) {
@@ -87,23 +87,7 @@ public class ForgetIphonePasswordPresenter {
                 ForgetIphonePasswordPresenter.this.mIForgetPasswordView.sendVerfication(false, ForgetIphonePasswordPresenter.this.mContext.getString(R.string.network_exception));
             }
         }));
-    }    private final Handler mForgetIphoneHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            Log.i(ForgetIphonePasswordPresenter.TAG, "handleMessage: " + msg.what + ",mSecond:" + ForgetIphonePasswordPresenter.this.mSeconds);
-            if (msg.what == 2) {
-                Log.d(ForgetIphonePasswordPresenter.TAG, "handleMessage: " + ForgetIphonePasswordPresenter.this.mSeconds);
-                if (ForgetIphonePasswordPresenter.this.mSeconds == 0) {
-                    ForgetIphonePasswordPresenter.this.mIForgetPasswordView.updateSeconds(true, 0);
-                    return;
-                }
-                ForgetIphonePasswordPresenter.this.mIForgetPasswordView.updateSeconds(false, ForgetIphonePasswordPresenter.this.mSeconds);
-                ForgetIphonePasswordPresenter.access$010(ForgetIphonePasswordPresenter.this);
-                ForgetIphonePasswordPresenter.this.mForgetIphoneHandler.sendEmptyMessageDelayed(2, 1000L);
-            }
-        }
-    };
+    }
 
     public void inputPassword(String iphone, String code, String password, String confirmPassword) {
         if (!password.equals(confirmPassword)) {
@@ -132,7 +116,23 @@ public class ForgetIphonePasswordPresenter {
                 ForgetIphonePasswordPresenter.this.mIForgetPasswordView.resetPassword(false, ForgetIphonePasswordPresenter.this.mContext.getString(R.string.network_exception));
             }
         }));
-    }
+    }    private final Handler mForgetIphoneHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Log.i(ForgetIphonePasswordPresenter.TAG, "handleMessage: " + msg.what + ",mSecond:" + ForgetIphonePasswordPresenter.this.mSeconds);
+            if (msg.what == 2) {
+                Log.d(ForgetIphonePasswordPresenter.TAG, "handleMessage: " + ForgetIphonePasswordPresenter.this.mSeconds);
+                if (ForgetIphonePasswordPresenter.this.mSeconds == 0) {
+                    ForgetIphonePasswordPresenter.this.mIForgetPasswordView.updateSeconds(true, 0);
+                    return;
+                }
+                ForgetIphonePasswordPresenter.this.mIForgetPasswordView.updateSeconds(false, ForgetIphonePasswordPresenter.this.mSeconds);
+                ForgetIphonePasswordPresenter.access$010(ForgetIphonePasswordPresenter.this);
+                ForgetIphonePasswordPresenter.this.mForgetIphoneHandler.sendEmptyMessageDelayed(2, 1000L);
+            }
+        }
+    };
 
     public void setStopTime() {
         if (this.mForgetIphoneHandler != null) {

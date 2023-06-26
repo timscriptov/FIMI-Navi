@@ -19,8 +19,8 @@ public class RoundProgressBar extends View {
     public static final int STROKE = 0;
     private final int style;
     private final boolean textIsDisplayable;
-    private int max;
     private final Paint paint;
+    private int max;
     private int progress;
     private int roundColor;
     private int roundProgressColor;

@@ -38,8 +38,8 @@ import java.util.Map;
 public class ThirdLoginPresenter {
     private static final int DELAY = 50000;
     private static final int sUPDATE_PROGRESS = 1;
+    private final ThirdLoginManager mThirdLoginManager = ThirdLoginManager.getInstance();
     IThirdLoginView loginView;
-    Context mContext;
     private final Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -49,7 +49,7 @@ public class ThirdLoginPresenter {
             }
         }
     };
-    private final ThirdLoginManager mThirdLoginManager = ThirdLoginManager.getInstance();
+    Context mContext;
 
     public ThirdLoginPresenter(IThirdLoginView loginView) {
         this.loginView = loginView;
