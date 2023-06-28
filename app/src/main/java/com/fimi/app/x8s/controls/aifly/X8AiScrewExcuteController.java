@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.android.app.R;
 import com.fimi.app.x8s.X8Application;
 import com.fimi.app.x8s.controls.aifly.confirm.module.X8AiScrewNextModule;
@@ -81,17 +83,17 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
         this.mIX8NextViewListener = new IX8NextViewListener() {
             @Override
             public void onBackClick() {
-                X8AiScrewExcuteController.this.closeNextUi(true);
+                closeNextUi(true);
             }
 
             @Override
             public void onExcuteClick() {
-                X8AiScrewExcuteController.this.closeNextUi(false);
-                X8AiScrewExcuteController.this.imgSuroundBg.setVisibility(View.GONE);
-                X8AiScrewExcuteController.this.vRadiusBg.setVisibility(View.GONE);
-                X8AiScrewExcuteController.this.tvTip.setVisibility(View.GONE);
+                closeNextUi(false);
+                imgSuroundBg.setVisibility(View.GONE);
+                vRadiusBg.setVisibility(View.GONE);
+                tvTip.setVisibility(View.GONE);
                 X8AiScrewExcuteController.this.state = ScrewState.RUNNING;
-                X8AiScrewExcuteController.this.listener.onAiScrewRunning();
+                listener.onAiScrewRunning();
             }
 
             @Override
@@ -146,7 +148,7 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(@NonNull View v) {
         int id = v.getId();
         if (id == R.id.img_ai_follow_back) {
             if (this.state != ScrewState.RUNNING) {
@@ -179,7 +181,7 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
             closeNextUi(true);
             this.state = ScrewState.SETDOT;
         } else if (id == R.id.rl_flag_small) {
-            if (this.tvP2PTip.getVisibility() == 0) {
+            if (this.tvP2PTip.getVisibility() == View.VISIBLE) {
                 this.tvP2PTip.setVisibility(View.GONE);
             } else {
                 this.tvP2PTip.setVisibility(View.VISIBLE);
@@ -244,13 +246,11 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
             animatorY.setDuration(300L);
             animatorY.addListener(new AnimatorListenerAdapter() {
                 @Override
-                // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
                 }
 
                 @Override
-                // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationStart(Animator animation) {
                 }
             });
@@ -267,15 +267,14 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
             translationRight.start();
             translationRight.addListener(new AnimatorListenerAdapter() {
                 @Override
-                // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
-                    X8AiScrewExcuteController.this.nextRootView.setVisibility(View.GONE);
-                    ((ViewGroup) X8AiScrewExcuteController.this.nextRootView).removeAllViews();
-                    X8AiScrewExcuteController.this.imgBack.setVisibility(View.VISIBLE);
-                    X8AiScrewExcuteController.this.flagSmall.setVisibility(View.VISIBLE);
+                    nextRootView.setVisibility(View.GONE);
+                    ((ViewGroup) nextRootView).removeAllViews();
+                    imgBack.setVisibility(View.VISIBLE);
+                    flagSmall.setVisibility(View.VISIBLE);
                     if (b) {
-                        X8AiScrewExcuteController.this.tvPoint.setVisibility(View.VISIBLE);
+                        tvPoint.setVisibility(View.VISIBLE);
                     }
                 }
             });
@@ -343,12 +342,9 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
     }
 
     public void sendExiteCmd() {
-        this.mFcManager.setScrewExite(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                    X8AiScrewExcuteController.this.taskExit();
-                }
+        this.mFcManager.setScrewExite((cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
+                taskExit();
             }
         });
     }
@@ -356,7 +352,7 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
     public void switchMapVideo(boolean sightFlag) {
         if (this.handleView != null && this.isShow) {
             if (this.state != ScrewState.RUNNING) {
-                this.imgSuroundBg.setVisibility(sightFlag ? 8 : 0);
+                this.imgSuroundBg.setVisibility(sightFlag ? View.GONE : View.VISIBLE);
             } else {
                 this.imgSuroundBg.setVisibility(View.GONE);
             }
@@ -385,7 +381,7 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
                 } else {
                     d = "<font color='#F22121'>" + X8NumberUtil.getDistanceNumberString(intD, 1, false) + "</font>";
                 }
-                if (this.vRadiusBg.getVisibility() != 0) {
+                if (this.vRadiusBg.getVisibility() != View.VISIBLE) {
                     this.vRadiusBg.setVisibility(View.VISIBLE);
                 }
                 String s = String.format(this.prex, h, d);
@@ -453,55 +449,41 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
     }
 
     public void getPoint() {
-        this.mFcManager.getAiSurroundCiclePoint(new UiCallBackListener<AckGetAiSurroundPoint>() {
-            @Override
-            public void onComplete(CmdResult cmdResult, AckGetAiSurroundPoint ackGetAiSurroundPoint) {
-                if (!cmdResult.isSuccess()) {
-                    X8AiScrewExcuteController.this.isGetPoint = false;
-                    return;
-                }
-                X8AiScrewExcuteController.this.lastLat = ackGetAiSurroundPoint.getDeviceLatitude();
-                X8AiScrewExcuteController.this.lastLog = ackGetAiSurroundPoint.getDeviceLongitude();
-                X8AiScrewExcuteController.this.currentLat = ackGetAiSurroundPoint.getDeviceLatitudeTakeoff();
-                X8AiScrewExcuteController.this.currentLog = ackGetAiSurroundPoint.getDeviceLongitudeTakeoff();
-                X8AiScrewExcuteController.this.activity.getmMapVideoController().getFimiMap().getAiSurroundManager().setAiSurroundMark(X8AiScrewExcuteController.this.lastLat, X8AiScrewExcuteController.this.lastLog);
-                X8AiScrewExcuteController.this.r = Math.round(X8AiScrewExcuteController.this.activity.getmMapVideoController().getFimiMap().getAiSurroundManager().getSurroundRadius(X8AiScrewExcuteController.this.lastLat, X8AiScrewExcuteController.this.lastLog, X8AiScrewExcuteController.this.currentLat, X8AiScrewExcuteController.this.currentLog));
-                X8AiScrewExcuteController.this.isGetPoint = true;
+        this.mFcManager.getAiSurroundCiclePoint((UiCallBackListener<AckGetAiSurroundPoint>) (cmdResult, ackGetAiSurroundPoint) -> {
+            if (!cmdResult.isSuccess()) {
+                isGetPoint = false;
+                return;
             }
+            lastLat = ackGetAiSurroundPoint.getDeviceLatitude();
+            lastLog = ackGetAiSurroundPoint.getDeviceLongitude();
+            currentLat = ackGetAiSurroundPoint.getDeviceLatitudeTakeoff();
+            currentLog = ackGetAiSurroundPoint.getDeviceLongitudeTakeoff();
+            activity.getmMapVideoController().getFimiMap().getAiSurroundManager().setAiSurroundMark(X8AiScrewExcuteController.this.lastLat, X8AiScrewExcuteController.this.lastLog);
+            r = Math.round(X8AiScrewExcuteController.this.activity.getmMapVideoController().getFimiMap().getAiSurroundManager().getSurroundRadius(X8AiScrewExcuteController.this.lastLat, X8AiScrewExcuteController.this.lastLog, X8AiScrewExcuteController.this.currentLat, X8AiScrewExcuteController.this.currentLog));
+            isGetPoint = true;
         });
     }
 
     public void getMaxDistance() {
-        this.mFcManager.getScrewPrameter(new UiCallBackListener<AckAiScrewPrameter>() {
-            @Override
-            public void onComplete(CmdResult cmdResult, AckAiScrewPrameter ackAiScrewPrameter) {
-                if (cmdResult.isSuccess()) {
-                    X8AiScrewExcuteController.this.isGetDistance = true;
-                    X8AiScrewExcuteController.this.distance = ackAiScrewPrameter.getDistance();
-                    return;
-                }
-                X8AiScrewExcuteController.this.isGetDistance = false;
+        this.mFcManager.getScrewPrameter((UiCallBackListener<AckAiScrewPrameter>) (cmdResult, ackAiScrewPrameter) -> {
+            if (cmdResult.isSuccess()) {
+                isGetDistance = true;
+                distance = ackAiScrewPrameter.getDistance();
+                return;
             }
+            isGetDistance = false;
         });
     }
 
     public void getSpeed() {
-        this.mFcManager.getAiSurroundSpeed(new UiCallBackListener<AckAiSurrounds>() {
-            @Override
-            public void onComplete(CmdResult cmdResult, AckAiSurrounds o) {
-                if (cmdResult.isSuccess()) {
-                    X8AiScrewExcuteController.this.isGetSpeed = true;
-                    o.getSpeed();
-                    if (o.getSpeed() > 0) {
-                        X8AiScrewExcuteController.this.cw = true;
-                        return;
-                    } else {
-                        X8AiScrewExcuteController.this.cw = false;
-                        return;
-                    }
-                }
-                X8AiScrewExcuteController.this.isGetSpeed = false;
+        this.mFcManager.getAiSurroundSpeed((UiCallBackListener<AckAiSurrounds>) (cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
+                isGetSpeed = true;
+                o.getSpeed();
+                cw = o.getSpeed() > 0;
+                return;
             }
+            isGetSpeed = false;
         });
     }
 
@@ -515,10 +497,7 @@ public class X8AiScrewExcuteController extends AbsX8AiController implements View
         if (this.state != ScrewState.RUNNING) {
             if (this.timeSend == 0) {
                 this.timeSend = 1;
-                this.activity.getFcManager().sysCtrlMode2AiVc(new UiCallBackListener() {
-                    @Override
-                    public void onComplete(CmdResult cmdResult, Object o) {
-                    }
+                this.activity.getFcManager().sysCtrlMode2AiVc((cmdResult, o) -> {
                 }, X8Task.VCM_SPIRAL.ordinal());
                 return;
             }

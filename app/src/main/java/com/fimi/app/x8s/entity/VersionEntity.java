@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.fimi.android.app.R;
 import com.fimi.x8sdk.dataparser.AckVersion;
-import com.twitter.sdk.android.core.internal.scribe.EventsFilesManager;
 
 
 public class VersionEntity {
@@ -26,7 +25,7 @@ public class VersionEntity {
         if (version != null) {
             String dt = version.getVersionDetails();
             if (dt != null) {
-                String[] split = dt.split(EventsFilesManager.ROLL_OVER_FILE_NAME_SEPARATOR);
+                String[] split = dt.split("_");
                 if (split.length > 0) {
                     dt = split[split.length - 1];
                 }

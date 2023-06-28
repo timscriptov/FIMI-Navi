@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.android.app.R;
 import com.fimi.app.x8s.X8Application;
 import com.fimi.app.x8s.controls.X8AiTrackController;
@@ -86,25 +88,25 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
         this.mIX8NextViewListener = new IX8NextViewListener() {
             @Override
             public void onBackClick() {
-                X8AiSurroundExcuteController.this.closeNextUiFromNext(true);
+                closeNextUiFromNext(true);
             }
 
             @Override
             public void onExcuteClick() {
-                X8AiSurroundExcuteController.this.closeNextUi(false);
-                X8AiSurroundExcuteController.this.lat = X8AiSurroundExcuteController.this.lastLat;
-                X8AiSurroundExcuteController.this.log = X8AiSurroundExcuteController.this.lastLog;
-                X8AiSurroundExcuteController.this.isDraw = true;
-                X8AiSurroundExcuteController.this.isGetPoint = true;
-                X8AiSurroundExcuteController.this.isGetSpeed = true;
-                X8AiSurroundExcuteController.this.imgSuroundBg.setVisibility(View.GONE);
-                X8AiSurroundExcuteController.this.mX8AiSuroundState = X8AiSuroundState.RUNNING;
-                X8AiSurroundExcuteController.this.tvTip.setVisibility(View.GONE);
-                X8AiSurroundExcuteController.this.vSpeed.setVisibility(View.VISIBLE);
-                X8AiSurroundExcuteController.this.setAiVcOpen();
-                X8AiSurroundExcuteController.this.openVcToggle();
+                closeNextUi(false);
+                lat =lastLat;
+                log = lastLog;
+              isDraw = true;
+           isGetPoint = true;
+              isGetSpeed = true;
+              imgSuroundBg.setVisibility(View.GONE);
+                mX8AiSuroundState = X8AiSuroundState.RUNNING;
+             tvTip.setVisibility(View.GONE);
+           vSpeed.setVisibility(View.VISIBLE);
+            setAiVcOpen();
+             openVcToggle();
                 X8AiSurroundExcuteController.this.activity.getmMapVideoController().getFimiMap().getAiSurroundManager().setAiSurroundCircle(X8AiSurroundExcuteController.this.lastLat, X8AiSurroundExcuteController.this.lastLog, X8AiSurroundExcuteController.this.radius);
-                X8AiSurroundExcuteController.this.listener.onSurroundRunning();
+               listener.onSurroundRunning();
             }
 
             @Override
@@ -150,7 +152,7 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(@NonNull View v) {
         int id = v.getId();
         if (id == R.id.img_ai_follow_back) {
             if (this.mX8AiSuroundState == X8AiSuroundState.RUNNING) {
@@ -186,7 +188,7 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
                 setAiVcClose();
             }
         } else if (id == R.id.rl_flag_small) {
-            if (this.tvP2PTip.getVisibility() == 0) {
+            if (this.tvP2PTip.getVisibility() == View.VISIBLE) {
                 this.tvP2PTip.setVisibility(View.GONE);
             } else {
                 this.tvP2PTip.setVisibility(View.VISIBLE);
@@ -219,12 +221,7 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
         this.mX8AiSurroundToPointExcuteConfirmModule = new X8AiSurroundToPointExcuteConfirmModule();
         initActions();
         this.activity.getmX8AiTrackController().setOnAiTrackControllerListener(this);
-        this.activity.getmMapVideoController().getFimiMap().setmX8AiItemMapListener(new IX8AiItemMapListener() {
-            @Override
-            public X8AiMapItem getCurrentItem() {
-                return X8AiMapItem.AI_SURROUND;
-            }
-        });
+        this.activity.getmMapVideoController().getFimiMap().setmX8AiItemMapListener(() -> X8AiMapItem.AI_SURROUND);
         if (this.mX8AiSuroundState != X8AiSuroundState.IDLE) {
             this.isDraw = false;
             this.imgSuroundBg.setVisibility(View.GONE);
@@ -282,15 +279,14 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
             translationRight.start();
             translationRight.addListener(new AnimatorListenerAdapter() {
                 @Override
-                // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
-                    X8AiSurroundExcuteController.this.nextRootView.setVisibility(View.GONE);
-                    ((ViewGroup) X8AiSurroundExcuteController.this.nextRootView).removeAllViews();
-                    X8AiSurroundExcuteController.this.imgBack.setVisibility(View.VISIBLE);
-                    X8AiSurroundExcuteController.this.flagSmall.setVisibility(View.VISIBLE);
+                 nextRootView.setVisibility(View.GONE);
+                    ((ViewGroup)nextRootView).removeAllViews();
+                imgBack.setVisibility(View.VISIBLE);
+                  flagSmall.setVisibility(View.VISIBLE);
                     if (b) {
-                        X8AiSurroundExcuteController.this.tvPoint.setVisibility(View.VISIBLE);
+                     tvPoint.setVisibility(View.VISIBLE);
                     }
                 }
             });
@@ -330,20 +326,17 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
             return;
         }
         this.mX8AiSuroundState = X8AiSuroundState.SET_TAKE_OFF_POINT;
-        this.fcManager.setAiSurroundCiclePoint(this.lastLog, this.lastLat, alt, log, lat, alt, 1, new UiCallBackListener<AckNormalCmds>() {
-            @Override
-            public void onComplete(CmdResult cmdResult, AckNormalCmds o) {
-                if (cmdResult.isSuccess()) {
-                    X8AiSurroundExcuteController.this.activity.getmMapVideoController().getFimiMap().getAiSurroundManager().setAiSurroundCircle(X8AiSurroundExcuteController.this.lastLat, X8AiSurroundExcuteController.this.lastLog, X8AiSurroundExcuteController.this.radius);
-                    X8AiSurroundExcuteController.this.openNextUi();
-                    X8AiSurroundExcuteController.this.vRadiusBg.setVisibility(View.GONE);
-                    X8AiSurroundExcuteController.this.tvPoint.setVisibility(View.GONE);
-                    X8AiSurroundExcuteController.this.imgBack.setVisibility(View.GONE);
-                    X8AiSurroundExcuteController.this.isSetCircle = true;
-                    return;
-                }
-                X8AiSurroundExcuteController.this.mX8AiSuroundState = X8AiSuroundState.SET_CIRCLE_POINT;
+        this.fcManager.setAiSurroundCiclePoint(this.lastLog, this.lastLat, alt, log, lat, alt, 1, (UiCallBackListener<AckNormalCmds>) (cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
+               activity.getmMapVideoController().getFimiMap().getAiSurroundManager().setAiSurroundCircle(X8AiSurroundExcuteController.this.lastLat, X8AiSurroundExcuteController.this.lastLog, X8AiSurroundExcuteController.this.radius);
+                openNextUi();
+               vRadiusBg.setVisibility(View.GONE);
+            tvPoint.setVisibility(View.GONE);
+             imgBack.setVisibility(View.GONE);
+               isSetCircle = true;
+                return;
             }
+            mX8AiSuroundState = X8AiSuroundState.SET_CIRCLE_POINT;
         });
     }
 
@@ -383,12 +376,9 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
     }
 
     public void sendExiteCmd() {
-        this.fcManager.setAiSurroundExite(new UiCallBackListener<AckNormalCmds>() {
-            @Override
-            public void onComplete(CmdResult cmdResult, AckNormalCmds o) {
-                if (cmdResult.isSuccess()) {
-                    X8AiSurroundExcuteController.this.taskExit();
-                }
+        this.fcManager.setAiSurroundExite((UiCallBackListener<AckNormalCmds>) (cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
+                taskExit();
             }
         });
     }
@@ -408,35 +398,32 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
     }
 
     public void getPoint() {
-        this.fcManager.getAiSurroundCiclePoint(new UiCallBackListener<AckGetAiSurroundPoint>() {
-            @Override
-            public void onComplete(CmdResult cmdResult, AckGetAiSurroundPoint ackGetAiSurroundPoint) {
-                if (!cmdResult.isSuccess()) {
-                    X8AiSurroundExcuteController.this.isGetPoint = false;
-                    return;
-                }
-                X8AiSurroundExcuteController.this.lat = ackGetAiSurroundPoint.getDeviceLatitude();
-                X8AiSurroundExcuteController.this.log = ackGetAiSurroundPoint.getDeviceLongitude();
-                X8AiSurroundExcuteController.this.lat1 = ackGetAiSurroundPoint.getDeviceLatitudeTakeoff();
-                X8AiSurroundExcuteController.this.log1 = ackGetAiSurroundPoint.getDeviceLongitudeTakeoff();
-                AutoAiSurroundState runState = StateManager.getInstance().getX8Drone().getAiSurroundState();
-                X8AiSurroundExcuteController.this.r = runState.getRadius() / 10.0f;
-                if (X8AiSurroundExcuteController.this.r == 0.0f) {
-                }
-                int max = (int) (Math.sqrt(Math.round(X8AiSurroundExcuteController.this.r) * 1.5d) * 10.0d);
-                if (max > 100) {
-                    max = 100;
-                }
-                X8AiSurroundExcuteController.this.vSpeed.setMaxMin(max, X8AiSurroundExcuteController.MIN, 1);
-                X8AiSurroundExcuteController.this.isGetPoint = true;
+        this.fcManager.getAiSurroundCiclePoint((UiCallBackListener<AckGetAiSurroundPoint>) (cmdResult, ackGetAiSurroundPoint) -> {
+            if (!cmdResult.isSuccess()) {
+                isGetPoint = false;
+                return;
             }
+          lat = ackGetAiSurroundPoint.getDeviceLatitude();
+           log = ackGetAiSurroundPoint.getDeviceLongitude();
+           lat1 = ackGetAiSurroundPoint.getDeviceLatitudeTakeoff();
+            log1 = ackGetAiSurroundPoint.getDeviceLongitudeTakeoff();
+            AutoAiSurroundState runState = StateManager.getInstance().getX8Drone().getAiSurroundState();
+            r = runState.getRadius() / 10.0f;
+            if (r == 0.0f) {
+            }
+            int max = (int) (Math.sqrt(Math.round(r) * 1.5d) * 10.0d);
+            if (max > 100) {
+                max = 100;
+            }
+            vSpeed.setMaxMin(max, X8AiSurroundExcuteController.MIN, 1);
+            isGetPoint = true;
         });
     }
 
     public void switchMapVideo(boolean sightFlag) {
         if (this.handleView != null && this.isShow) {
             if (this.mX8AiSuroundState != X8AiSuroundState.RUNNING) {
-                this.imgSuroundBg.setVisibility(sightFlag ? 8 : 0);
+                this.imgSuroundBg.setVisibility(sightFlag ? View.GONE : View.VISIBLE);
             } else {
                 this.imgSuroundBg.setVisibility(View.GONE);
             }
@@ -473,35 +460,26 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
     }
 
     public void setAiVcNotityFc() {
-        this.fcManager.setAiVcNotityFc(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                }
+        this.fcManager.setAiVcNotityFc((cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
             }
         });
     }
 
     public void setAiVcOpen() {
-        this.fcManager.setAiVcOpen(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                    X8AiSurroundExcuteController.this.imgVcToggle.setSelected(true);
-                    X8AiSurroundExcuteController.this.activity.getmX8AiTrackController().openUi();
-                }
+        this.fcManager.setAiVcOpen((cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
+                imgVcToggle.setSelected(true);
+                activity.getmX8AiTrackController().openUi();
             }
         });
     }
 
     public void setAiVcClose() {
-        this.fcManager.setAiVcClose(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                    X8AiSurroundExcuteController.this.imgVcToggle.setSelected(false);
-                    X8AiSurroundExcuteController.this.activity.getmX8AiTrackController().closeUi();
-                }
+        this.fcManager.setAiVcClose((cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
+              imgVcToggle.setSelected(false);
+                activity.getmX8AiTrackController().closeUi();
             }
         });
     }
@@ -536,27 +514,21 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
     }
 
     public void getSpeed() {
-        this.fcManager.getAiSurroundSpeed(new UiCallBackListener<AckAiSurrounds>() {
-            @Override
-            public void onComplete(CmdResult cmdResult, AckAiSurrounds o) {
-                if (!cmdResult.isSuccess()) {
-                    X8AiSurroundExcuteController.this.isGetSpeed = false;
-                    return;
-                }
-                X8AiSurroundExcuteController.this.speed = o.getSpeed();
-                X8AiSurroundExcuteController.this.vSpeed.setSpeed2(X8AiSurroundExcuteController.this.speed);
-                X8AiSurroundExcuteController.this.isGetSpeed = true;
+        this.fcManager.getAiSurroundSpeed((UiCallBackListener<AckAiSurrounds>) (cmdResult, o) -> {
+            if (!cmdResult.isSuccess()) {
+                isGetSpeed = false;
+                return;
             }
+         speed = o.getSpeed();
+          vSpeed.setSpeed2(X8AiSurroundExcuteController.this.speed);
+           isGetSpeed = true;
         });
     }
 
     @Override
     public void onSendSpeed(int speed) {
-        this.fcManager.setAiSurroundSpeed(speed, new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                }
+        this.fcManager.setAiSurroundSpeed(speed, (cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
             }
         });
     }
@@ -638,10 +610,7 @@ public class X8AiSurroundExcuteController extends AbsX8AiController implements V
         if (this.mX8AiSuroundState == X8AiSuroundState.IDLE || this.mX8AiSuroundState == X8AiSuroundState.SET_CIRCLE_POINT || this.mX8AiSuroundState == X8AiSuroundState.SET_TAKE_OFF_POINT || this.mX8AiSuroundState == X8AiSuroundState.SET_PARAMETER) {
             if (this.timeSend == 0) {
                 this.timeSend = 1;
-                this.activity.getFcManager().sysCtrlMode2AiVc(new UiCallBackListener() {
-                    @Override
-                    public void onComplete(CmdResult cmdResult, Object o) {
-                    }
+                this.activity.getFcManager().sysCtrlMode2AiVc((cmdResult, o) -> {
                 }, X8Task.VCM_INTEREST_POINT.ordinal());
                 return;
             }

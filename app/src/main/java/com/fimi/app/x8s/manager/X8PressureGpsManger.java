@@ -65,9 +65,9 @@ public class X8PressureGpsManger {
         @Override
         public void run() {
             TcpClient.getIntance().sendLog("定时任务执行" + X8PressureGpsInfo.getInstance().toString() + X8PressureGpsManger.this.fcManager);
-            if (X8PressureGpsManger.this.fcManager != null) {
-                X8PressureGpsManger.this.sendPressure();
-                X8PressureGpsManger.this.sendGps();
+            if (fcManager != null) {
+                sendPressure();
+                sendGps();
             }
         }
     }

@@ -39,258 +39,258 @@ public class X8AiTaskManager {
     public IX8AerialGraphListener mIX8AerialGraphListener = new IX8AerialGraphListener() {
         @Override
         public void onAerialGraphBackClick() {
-            X8AiTaskManager.this.mAiAerailShot = null;
+            mAiAerailShot = null;
         }
 
         @Override
         public void onAerialGraphRunning() {
-            X8AiTaskManager.this.activity.runFixedwing();
+            activity.runFixedwing();
         }
 
         @Override
         public void onAerialGraphComplete(boolean showText) {
-            X8AiTaskManager.this.removeAlls();
-            X8AiTaskManager.this.activity.onTaskComplete(showText, X8AiTaskManager.this.activity.getString(R.string.x8_ai_aerail_graph_complete));
+            removeAlls();
+           activity.onTaskComplete(showText, activity.getString(R.string.x8_ai_aerail_graph_complete));
         }
     };
     private X8AiAutoPhototExcuteController mAiAutoPhoto;
     public IX8AiAutoPhotoExcuteControllerListener mX8AiAutoPhotoExcuteControllerListener = new IX8AiAutoPhotoExcuteControllerListener() {
         @Override
         public void onAutoPhotoBackClick() {
-            X8AiTaskManager.this.activity.onTaskBack();
-            X8AiTaskManager.this.removeAlls();
-            X8AiTaskManager.this.mAiAutoPhoto = null;
+          activity.onTaskBack();
+          removeAlls();
+        mAiAutoPhoto = null;
         }
 
         @Override
         public void onAutoPhotoRunning() {
-            X8AiTaskManager.this.activity.onTaskRunning();
+            activity.onTaskRunning();
         }
 
         @Override
         public void onAutoPhotoComplete(boolean showText) {
-            X8AiTaskManager.this.removeAlls();
-            X8AiTaskManager.this.activity.onTaskComplete(showText, X8AiTaskManager.this.activity.getString(R.string.x8_ai_auto_photo_compelete_tip));
-            X8AiTaskManager.this.mAiAutoPhoto = null;
+          removeAlls();
+           activity.onTaskComplete(showText, activity.getString(R.string.x8_ai_auto_photo_compelete_tip));
+           mAiAutoPhoto = null;
         }
     };
     private X8AiFixedwingExcuteController mAiFixedwing;
     public IX8AiFixedwingListener mIX8AiFixedwingListener = new IX8AiFixedwingListener() {
         @Override
         public void onFixedwingBackClick() {
-            X8AiTaskManager.this.mAiFixedwing = null;
+            mAiFixedwing = null;
         }
 
         @Override
         public void onFixedwingRunning() {
-            X8AiTaskManager.this.activity.runFixedwing();
+            activity.runFixedwing();
         }
 
         @Override
         public void onFixedwingComplete(boolean showText) {
-            X8AiTaskManager.this.removeAlls();
-            X8AiTaskManager.this.activity.onTaskComplete(showText, X8AiTaskManager.this.activity.getString(R.string.x8_ai_fixedwing_complete));
+            removeAlls();
+            activity.onTaskComplete(showText, activity.getString(R.string.x8_ai_fixedwing_complete));
         }
     };
     private X8AiFollowExcuteController mAiFollow;
     public IX8AiFollowExcuteListener mX8AiFollowExcuteListener = new IX8AiFollowExcuteListener() {
         @Override
         public void onAiFollowRunning() {
-            X8AiTaskManager.this.activity.onTaskRunning();
+            activity.onTaskRunning();
         }
 
         @Override
         public void onComplete(String s, boolean showText) {
-            X8AiTaskManager.this.removeAlls();
-            X8AiTaskManager.this.activity.onTaskComplete(showText, s);
-            X8AiTaskManager.this.mAiFollow = null;
+           removeAlls();
+          activity.onTaskComplete(showText, s);
+            mAiFollow = null;
         }
 
         @Override
         public void onAiFollowExcuteBackClick() {
-            X8AiTaskManager.this.activity.onTaskBack();
-            X8AiTaskManager.this.removeAlls();
-            X8AiTaskManager.this.mAiFollow = null;
+           activity.onTaskBack();
+           removeAlls();
+         mAiFollow = null;
         }
     };
     private X8AiGravitationExcuteController mAiGravitation;
     private final IX8AiGravitationExcuteControllerListener mIX8AiGravitationExcuteControllerListener = new IX8AiGravitationExcuteControllerListener() {
         @Override
         public void onAiGravitationBackClick() {
-            X8AiTaskManager.this.activity.onTaskBack();
-            X8AiTaskManager.this.removeAlls();
-            X8AiTaskManager.this.mAiGravitation = null;
+           activity.onTaskBack();
+         removeAlls();
+           mAiGravitation = null;
         }
 
         @Override
         public void onAiGravitationComplete(boolean showText) {
-            X8AiTaskManager.this.removeAlls();
-            X8AiTaskManager.this.activity.onTaskComplete(showText, X8AiTaskManager.this.activity.getString(R.string.x8_ai_fly_gravitation_complete));
-            X8AiTaskManager.this.mAiGravitation = null;
+            removeAlls();
+            activity.onTaskComplete(showText, activity.getString(R.string.x8_ai_fly_gravitation_complete));
+            mAiGravitation = null;
         }
 
         @Override
         public void onAiGravitaionRunning() {
-            X8AiTaskManager.this.activity.onTaskRunning();
+            activity.onTaskRunning();
         }
 
         @Override
         public void onAiGravitationInterrupt() {
-            X8AiTaskManager.this.removeAlls();
-            X8AiTaskManager.this.activity.onTaskComplete(true, X8AiTaskManager.this.activity.getString(R.string.x8_ai_fly_gravitation_interrupt));
-            X8AiTaskManager.this.mAiGravitation = null;
+            removeAlls();
+            activity.onTaskComplete(true, activity.getString(R.string.x8_ai_fly_gravitation_interrupt));
+            mAiGravitation = null;
         }
     };
     private X8AiHeadLockExcuteController mAiHeadlock;
     public IX8AiHeadLockListener mIX8AiHeadLockListener = new IX8AiHeadLockListener() {
         @Override
         public void onAiHeadLockBackClick() {
-            X8AiTaskManager.this.mAiHeadlock = null;
+            mAiHeadlock = null;
         }
 
         @Override
         public void onAiHeadLockRunning() {
-            X8AiTaskManager.this.activity.runFixedwing();
+            activity.runFixedwing();
         }
 
         @Override
         public void onAiHeadLockComplete(boolean showText) {
-            X8AiTaskManager.this.removeAlls();
-            X8AiTaskManager.this.activity.onTaskComplete(showText, X8AiTaskManager.this.activity.getString(R.string.x8_ai_heading_lock_complete));
+            removeAlls();
+            activity.onTaskComplete(showText, activity.getString(R.string.x8_ai_heading_lock_complete));
         }
     };
     private X8AiLineExcuteController mAiLine;
     public IX8AiLineExcuteControllerListener mIX8AiLineExcuteControllerListener = new IX8AiLineExcuteControllerListener() {
         @Override
         public void onLineBackClick() {
-            X8AiTaskManager.this.activity.onTaskBack();
-            X8AiTaskManager.this.removeAlls();
-            X8AiTaskManager.this.mAiLine = null;
+            activity.onTaskBack();
+            removeAlls();
+            mAiLine = null;
         }
 
         @Override
         public void onLineRunning() {
-            X8AiTaskManager.this.activity.onTaskRunning();
+            activity.onTaskRunning();
         }
 
         @Override
         public void onLineComplete(boolean showText) {
-            X8AiTaskManager.this.removeAlls();
-            X8AiTaskManager.this.activity.onTaskComplete(showText, X8AiTaskManager.this.activity.getString(R.string.x8_ai_fly_line_compelete_tip));
-            X8AiTaskManager.this.mAiLine = null;
+            removeAlls();
+            activity.onTaskComplete(showText, activity.getString(R.string.x8_ai_fly_line_compelete_tip));
+            mAiLine = null;
         }
     };
     private X8AiD2PExcuteController mAiPoint2Point;
     public IX8Point2PointExcuteConttrollerListener mIX8Point2PointExcuteConttrollerListener = new IX8Point2PointExcuteConttrollerListener() {
         @Override
         public void onPoint2PointBackClick() {
-            X8AiTaskManager.this.activity.onTaskBack();
-            X8AiTaskManager.this.removeAlls();
-            X8AiTaskManager.this.mAiPoint2Point = null;
+            activity.onTaskBack();
+            removeAlls();
+            mAiPoint2Point = null;
         }
 
         @Override
         public void onPoint2PointRunning() {
-            X8AiTaskManager.this.activity.onTaskRunning();
+            activity.onTaskRunning();
         }
 
         @Override
         public void onPoint2PointComplete(boolean showText) {
-            X8AiTaskManager.this.removeAlls();
-            X8AiTaskManager.this.activity.onTaskComplete(showText, X8AiTaskManager.this.activity.getString(R.string.x8_ai_fly_follow_point_to_point_complete));
-            X8AiTaskManager.this.mAiPoint2Point = null;
+            removeAlls();
+            activity.onTaskComplete(showText, activity.getString(R.string.x8_ai_fly_follow_point_to_point_complete));
+            mAiPoint2Point = null;
         }
     };
     private X8AiSarExcuteController mAiSar;
     private final IX8AiSarListener mIX8AiSarListener = new IX8AiSarListener() {
         @Override
         public void onAiSarBackClick() {
-            X8AiTaskManager.this.mAiSar = null;
+            mAiSar = null;
         }
 
         @Override
         public void onAiSarRunning() {
-            X8AiTaskManager.this.activity.runFixedwing();
+            activity.runFixedwing();
         }
 
         @Override
         public void onAiSarComplete(boolean showText) {
-            X8AiTaskManager.this.removeAlls();
-            X8AiTaskManager.this.activity.onTaskComplete(showText, X8AiTaskManager.this.activity.getString(R.string.x8_ai_fly_sar_complete_tip));
+            removeAlls();
+            activity.onTaskComplete(showText, activity.getString(R.string.x8_ai_fly_sar_complete_tip));
         }
     };
     private X8AiScrewExcuteController mAiScrew;
     public IX8ScrewListener mIX8ScrewListener = new IX8ScrewListener() {
         @Override
         public void onAiScrewBackClick() {
-            X8AiTaskManager.this.activity.onTaskBack();
-            X8AiTaskManager.this.removeAlls();
-            X8AiTaskManager.this.mAiScrew = null;
+            activity.onTaskBack();
+            removeAlls();
+            mAiScrew = null;
         }
 
         @Override
         public void onAiScrewRunning() {
-            X8AiTaskManager.this.activity.onTaskRunning();
+            activity.onTaskRunning();
         }
 
         @Override
         public void onAiScrewComplete(boolean showText) {
-            X8AiTaskManager.this.removeAlls();
-            X8AiTaskManager.this.activity.onTaskComplete(showText, X8AiTaskManager.this.activity.getString(R.string.x8_ai_fly_screw_complete));
-            X8AiTaskManager.this.mAiScrew = null;
+            removeAlls();
+            activity.onTaskComplete(showText, activity.getString(R.string.x8_ai_fly_screw_complete));
+            mAiScrew = null;
         }
     };
     private X8AiSurroundExcuteController mAiSurround;
     public IX8AiSurroundExcuteControllerListener mIX8AiSurroundExcuteControllerListener = new IX8AiSurroundExcuteControllerListener() {
         @Override
         public void onSurroundBackClick() {
-            X8AiTaskManager.this.activity.onTaskBack();
-            X8AiTaskManager.this.removeAlls();
-            X8AiTaskManager.this.mAiSurround = null;
+            activity.onTaskBack();
+            removeAlls();
+            mAiSurround = null;
         }
 
         @Override
         public void onSurroundRunning() {
-            X8AiTaskManager.this.activity.onTaskRunning();
+            activity.onTaskRunning();
         }
 
         @Override
         public void onSurroundComplete(boolean showText) {
-            X8AiTaskManager.this.removeAlls();
-            X8AiTaskManager.this.activity.onTaskComplete(showText, X8AiTaskManager.this.activity.getString(R.string.x8_ai_fly_follow_surround_compelete_tip));
-            X8AiTaskManager.this.mAiSurround = null;
+            removeAlls();
+            activity.onTaskComplete(showText, activity.getString(R.string.x8_ai_fly_follow_surround_compelete_tip));
+            mAiSurround = null;
         }
     };
     private X8AiTakeoffLandingReturnHomeExcuteController mAiTLRController;
     private final IX8TLRListener mX8TLRListener = new IX8TLRListener() {
         @Override
         public void onRunning() {
-            X8AiTaskManager.this.activity.onTaskRunning();
+            activity.onTaskRunning();
         }
 
         @Override
         public void onComplete(String s, boolean showText) {
-            X8AiTaskManager.this.removeAlls();
-            X8AiTaskManager.this.activity.onTaskComplete(showText, s);
-            X8AiTaskManager.this.mAiTLRController = null;
+            removeAlls();
+            activity.onTaskComplete(showText, s);
+            mAiTLRController = null;
         }
     };
     private X8AiTripodExcuteController mAiTripod;
     public IX8AiTripodListener mIX8AiTripodListener = new IX8AiTripodListener() {
         @Override
         public void onAiTripodBackClick() {
-            X8AiTaskManager.this.mAiTripod = null;
+            mAiTripod = null;
         }
 
         @Override
         public void onAiTripodRunning() {
-            X8AiTaskManager.this.activity.runFixedwing();
+            activity.runFixedwing();
         }
 
         @Override
         public void onAiTripodComplete(boolean showText) {
-            X8AiTaskManager.this.removeAlls();
-            X8AiTaskManager.this.activity.onTaskComplete(showText, X8AiTaskManager.this.activity.getString(R.string.x8_ai_tripod_complete));
+            removeAlls();
+            activity.onTaskComplete(showText, activity.getString(R.string.x8_ai_tripod_complete));
         }
     };
     private CameraManager mCameraManager;
@@ -449,11 +449,9 @@ public class X8AiTaskManager {
     public void cancleLastMode(int mode, int currentMode) {
         switch (mode) {
             case 2:
-                if (this.mAiTLRController != null) {
-                    this.mAiTLRController.cancleByModeChange(currentMode);
-                }
-                setX8AiState(false);
-                return;
+            case 8:
+            case 9:
+            case 7:
             case 3:
                 if (this.mAiTLRController != null) {
                     this.mAiTLRController.cancleByModeChange(currentMode);
@@ -478,24 +476,6 @@ public class X8AiTaskManager {
                 }
                 setX8AiState(false);
                 return;
-            case 7:
-                if (this.mAiTLRController != null) {
-                    this.mAiTLRController.cancleByModeChange(currentMode);
-                }
-                setX8AiState(false);
-                return;
-            case 8:
-                if (this.mAiTLRController != null) {
-                    this.mAiTLRController.cancleByModeChange(currentMode);
-                }
-                setX8AiState(false);
-                return;
-            case 9:
-                if (this.mAiTLRController != null) {
-                    this.mAiTLRController.cancleByModeChange(currentMode);
-                }
-                setX8AiState(false);
-                return;
             case 10:
                 if (this.mAiAutoPhoto != null) {
                     this.mAiAutoPhoto.cancleByModeChange(currentMode);
@@ -512,6 +492,7 @@ public class X8AiTaskManager {
             case 14:
             case 15:
             case 17:
+            case 16:
             default:
                 setX8AiState(false);
                 return;
@@ -519,9 +500,6 @@ public class X8AiTaskManager {
                 if (this.mAiFixedwing != null) {
                     this.mAiFixedwing.cancleByModeChange();
                 }
-                setX8AiState(false);
-                return;
-            case 16:
                 setX8AiState(false);
                 return;
             case 18:
@@ -740,12 +718,7 @@ public class X8AiTaskManager {
 
     public void updateSarValue() {
         if (this.mAiSar != null) {
-            this.aiExcuteView.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    X8AiTaskManager.this.mAiSar.setProgress();
-                }
-            }, 500L);
+            this.aiExcuteView.postDelayed(() -> mAiSar.setProgress(), 500L);
         }
     }
 

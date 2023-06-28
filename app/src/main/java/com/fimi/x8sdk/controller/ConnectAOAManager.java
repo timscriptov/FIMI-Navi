@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.hardware.usb.UsbAccessory;
 import android.hardware.usb.UsbManager;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.x8sdk.connect.CommunicationManager;
 import com.fimi.x8sdk.connect.ConnectType;
 import com.fimi.x8sdk.listener.ConnectStatusListener;
@@ -19,8 +21,7 @@ public class ConnectAOAManager {
     boolean isRequestPermission = false;
     private volatile boolean mConnected = false;
 
-    public ConnectAOAManager(Context mContext) {
-        this.mContext = mContext;
+    public ConnectAOAManager(@NonNull Context mContext) {
         this.mContext = mContext;
         this.usbManager = (UsbManager) mContext.getSystemService(Context.USB_SERVICE);
         this.mPermissionIntent = PendingIntent.getBroadcast(mContext, 0, new Intent(ACTION_USB_PERMISSION), 0);
@@ -63,6 +64,4 @@ public class ConnectAOAManager {
     }
 
     ConnectStatusListener.IEngineCallback callback = this.callback;
-
-
 }

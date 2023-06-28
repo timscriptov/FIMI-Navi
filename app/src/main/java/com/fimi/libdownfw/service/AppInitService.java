@@ -33,18 +33,8 @@ public class AppInitService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        ThreadUtils.execute(new Runnable() {
-            @Override
-            public void run() {
-                SPStoreManager.getInstance();
-            }
-        });
-        ThreadUtils.execute(new Runnable() {
-            @Override
-            public void run() {
-                AppInitService.this.getOuthVerification();
-            }
-        });
+        ThreadUtils.execute(SPStoreManager::getInstance);
+        ThreadUtils.execute(AppInitService.this::getOuthVerification);
         return super.onStartCommand(intent, flags, startId);
     }
 

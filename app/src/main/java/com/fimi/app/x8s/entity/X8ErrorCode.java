@@ -1,5 +1,7 @@
 package com.fimi.app.x8s.entity;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.app.x8s.enums.X8ErrorCodeEnum;
 
 
@@ -77,6 +79,7 @@ public class X8ErrorCode {
         this.speakStr = speakStr;
     }
 
+    @NonNull
     public String toString() {
         return "X8ErrorCode{level=" + this.level + ", title='" + this.title + "'" + ", detail='" + this.detail + "'" + ", bgId=" + this.bgId + ", titleImgId=" + this.titleImgId + ", speakStr='" + this.speakStr + "'" + ", isShow=" + this.isShow + '}';
     }

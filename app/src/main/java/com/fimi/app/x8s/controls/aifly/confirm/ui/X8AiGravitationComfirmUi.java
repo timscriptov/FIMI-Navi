@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.android.app.R;
 import com.fimi.app.x8s.config.X8AiConfig;
 import com.fimi.app.x8s.controls.X8MainAiFlyController;
@@ -20,7 +22,7 @@ public class X8AiGravitationComfirmUi implements View.OnClickListener {
     private View mImgReturn;
     private X8MainAiFlyController mX8MainAiFlyController;
 
-    public X8AiGravitationComfirmUi(Activity activity, View parent) {
+    public X8AiGravitationComfirmUi(@NonNull Activity activity, View parent) {
         this.contentView = activity.getLayoutInflater().inflate(R.layout.x8_ai_gravitation_comfirm_layout, (ViewGroup) parent, true);
         initViews(this.contentView);
         initActions();
@@ -31,7 +33,7 @@ public class X8AiGravitationComfirmUi implements View.OnClickListener {
         this.mBtnOk.setOnClickListener(this);
     }
 
-    private void initViews(View contentView) {
+    private void initViews(@NonNull View contentView) {
         this.mImgReturn = contentView.findViewById(R.id.img_ai_fly_gravitation_return);
         this.mBtnOk = contentView.findViewById(R.id.btn_ai_gravitation_confirm_ok);
         this.mCbTip = contentView.findViewById(R.id.cb_ai_gravitation_confirm_ok);
@@ -40,7 +42,7 @@ public class X8AiGravitationComfirmUi implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(@NonNull View view) {
         int i = view.getId();
         if (i == R.id.img_ai_fly_gravitation_return) {
             this.mX8MainAiFlyController.onCloseConfirmUi();

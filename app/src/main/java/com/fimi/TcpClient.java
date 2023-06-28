@@ -36,7 +36,9 @@ public class TcpClient extends Thread {
                     while (!this.isLoop) {
                         if (this.cmdQuene.size() > 0) {
                             String str = this.cmdQuene.poll();
-                            this.out.write(str.getBytes());
+                            if (str != null) {
+                                this.out.write(str.getBytes());
+                            }
                         } else {
                             sendSignal();
                         }

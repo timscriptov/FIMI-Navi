@@ -1209,7 +1209,7 @@
     <string name="register_title">Register</string>
     <string name="register_verify_code_not_null">Verification code cannot be left blank</string>
     <string name="share_cancle">Отмена</string>
-    <string name="splash_copyright_2017_2018fimi_all_rights_reserved">Copyright © 2018-2019 Fimi，All Rights Reserved.</string>
+    <string name="splash_copyright_2017_2018fimi_all_rights_reserved">Copyright © 2018–2019 Fimi，All Rights Reserved.</string>
     <string name="splash_icon">splash_icon</string>
     <string name="str_main_device_title">Device Menu</string>
     <string name="uemng_facebook_app_id">@string/facebook_app_id_x9</string>
@@ -1321,7 +1321,6 @@
     <string name="baidu_secret_key_x8">3aad7c538037c232f8601337b1fbf61f</string>
     <string name="baidu_secret_key_x9">3aad7c538037c232f8601337b1fbf61f</string>
     <string name="bottom_sheet_behavior">android.support.design.widget.BottomSheetBehavior</string>
-    <string name="character_counter_pattern">%1$d / %2$d</string>
     <string name="res_0x7f08058d_com_twitter_sdk_android_consumer_key">o0vz32f1hg2vcfInXaZsEaFr3</string>
     <string name="res_0x7f08058e_com_twitter_sdk_android_consumer_secret">xxoA58zhcwkxK80u6LMqYRdj1kgVZFJNXljYbM2w01wmJRsq5M</string>
     <string name="date_today">今天</string>
@@ -1343,11 +1342,6 @@
     <string name="login_cancel">Отмена</string>
     <string name="login_man">Man</string>
     <string name="login_woman">Woman</string>
-    <string name="password_toggle_content_description">Toggle password visibility</string>
-    <string name="path_password_eye">M12,4.5C7,4.5 2.73,7.61 1,12c1.73,4.39 6,7.5 11,7.5s9.27,-3.11 11,-7.5c-1.73,-4.39 -6,-7.5 -11,-7.5zM12,17c-2.76,0 -5,-2.24 -5,-5s2.24,-5 5,-5 5,2.24 5,5 -2.24,5 -5,5zM12,9c-1.66,0 -3,1.34 -3,3s1.34,3 3,3 3,-1.34 3,-3 -1.34,-3 -3,-3z</string>
-    <string name="path_password_eye_mask_strike_through">M2,4.27 L19.73,22 L22.27,19.46 L4.54,1.73 L4.54,1 L23,1 L23,23 L1,23 L1,4.27 Z</string>
-    <string name="path_password_eye_mask_visible">M2,4.27 L2,4.27 L4.54,1.73 L4.54,1.73 L4.54,1 L23,1 L23,23 L1,23 L1,4.27 Z</string>
-    <string name="path_password_strike_through">M3.27,4.27 L19.74,20.74</string>
     <string name="twitter_CONSUMER_KEY">CONSUMER_KEY</string>
     <string name="twitter_CONSUMER_SECRET">CONSUMER_SECRET</string>
     <string name="uemng_facebook_app_id_gh2">59b896ba1c5dd03915000025</string>

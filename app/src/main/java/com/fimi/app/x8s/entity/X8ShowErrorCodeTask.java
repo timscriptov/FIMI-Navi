@@ -6,6 +6,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Vibrator;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.TcpClient;
 import com.fimi.app.x8s.controls.X8ErrorCodeController;
 import com.fimi.app.x8s.enums.X8ErrorCodeEnum;
@@ -32,7 +34,7 @@ public class X8ShowErrorCodeTask {
     private long speekId = 0;
     private int state = 0;
 
-    public X8ShowErrorCodeTask(Context context, X8ErrorCodeController errorCodeController, X8ErrorCodeEnum type, X8ErrerCodeSpeakFlashManager x8ErrerCodeSpeakFlashManager) {
+    public X8ShowErrorCodeTask(@NonNull Context context, X8ErrorCodeController errorCodeController, X8ErrorCodeEnum type, X8ErrerCodeSpeakFlashManager x8ErrerCodeSpeakFlashManager) {
         this.context = context;
         this.errorCodeController = errorCodeController;
         this.type = type;
@@ -181,6 +183,4 @@ public class X8ShowErrorCodeTask {
             this.vibrateLList.remove(actionBean);
         }
     }
-
-
 }

@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.android.app.R;
 import com.fimi.app.x8s.X8Application;
 import com.fimi.app.x8s.interfaces.AbsX8AiController;
@@ -76,7 +78,7 @@ public class X8AiFixedwingExcuteController extends AbsX8AiController implements 
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(@NonNull View v) {
         int id = v.getId();
         if (id == R.id.img_ai_follow_back) {
             showExitDialog();
@@ -194,12 +196,9 @@ public class X8AiFixedwingExcuteController extends AbsX8AiController implements 
     }
 
     public void setTypeDisEnable() {
-        this.mFcCtrlManager.setDisenableFixwing(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                    X8AiFixedwingExcuteController.this.taskExit();
-                }
+        this.mFcCtrlManager.setDisenableFixwing((cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
+                taskExit();
             }
         });
     }

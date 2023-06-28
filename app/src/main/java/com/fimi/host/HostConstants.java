@@ -3,6 +3,8 @@ package com.fimi.host;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.alibaba.fastjson.JSON;
 import com.fimi.host.Entity.DownloadFwSelectInfo;
 import com.fimi.host.common.ProductEnum;
@@ -107,7 +109,6 @@ public class HostConstants {
     public static void saveLocalFirmware(LocalFwEntity entity) {
         if (entity != null) {
             List<LocalFwEntity> cacheList = getLocalFwEntitys();
-            ArrayList arrayList = new ArrayList();
             LocalFwEntity remove = null;
             Iterator<LocalFwEntity> it = cacheList.iterator();
             while (true) {
@@ -124,11 +125,11 @@ public class HostConstants {
                 cacheList.remove(remove);
             }
             cacheList.add(entity);
-            arrayList.addAll(cacheList);
-            SPStoreManager.getInstance().saveListObject(SP_KEY_LOCAL_FIRMWARE_DETAIL, arrayList);
+            SPStoreManager.getInstance().saveListObject(SP_KEY_LOCAL_FIRMWARE_DETAIL, new ArrayList<>(cacheList));
         }
     }
 
+    @NonNull
     public static List<LocalFwEntity> getLocalFwEntitys() {
         List<LocalFwEntity> localFwEntityList = SPStoreManager.getInstance().getListObject(SP_KEY_LOCAL_FIRMWARE_DETAIL, LocalFwEntity.class);
         if (localFwEntityList == null) {
@@ -138,18 +139,16 @@ public class HostConstants {
     }
 
     public static void clearLocalFwEntitys() {
-        SPStoreManager.getInstance().saveListObject(SP_KEY_LOCAL_FIRMWARE_DETAIL, new ArrayList());
+        SPStoreManager.getInstance().saveListObject(SP_KEY_LOCAL_FIRMWARE_DETAIL, new ArrayList<>());
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:419:0x011b, code lost:
-        r19.add(r20);
-     */
+    @NonNull
     public static List<UpfirewareDto> getNeedDownFw() {
         boolean isDownZone;
         boolean isDownZone2;
         List<UpfirewareDto> netFws = getFirmwareDetail();
         if (netFws == null) {
-            return new ArrayList();
+            return new ArrayList<>();
         }
         List<UpfirewareDto> zoneFws = new ArrayList<>();
         List<UpfirewareDto> normalFws = new ArrayList<>();
@@ -161,8 +160,8 @@ public class HostConstants {
             }
         }
         Log.i("moweiru", "zoneFws:" + zoneFws.size() + ";normalFws:" + normalFws.size());
-        ArrayList<UpfirewareDto> arrayList = new ArrayList();
-        ArrayList<UpfirewareDto> arrayList2 = new ArrayList();
+        ArrayList<UpfirewareDto> arrayList = new ArrayList<>();
+        ArrayList<UpfirewareDto> arrayList2 = new ArrayList<>();
         List<LocalFwEntity> localFws = getLocalFwEntitys();
         List<UpfirewareDto> needDownFw = new ArrayList<>();
         if (netFws != null && netFws.size() > 0) {
@@ -232,6 +231,7 @@ public class HostConstants {
         return lastDownFw;
     }
 
+    @NonNull
     public static List<UpfirewareDto> getNeedDownFw(boolean isWifiAuto, List<DownloadFwSelectInfo> selectList) {
         List<UpfirewareDto> list = new ArrayList<>();
         list.addAll(getNeedDownFw());
@@ -283,6 +283,7 @@ public class HostConstants {
         return false;
     }
 
+    @NonNull
     public static List<UpfirewareDto> getDownFinishedFw() {
         List<UpfirewareDto> downFinishedFw = new ArrayList<>();
         List<UpfirewareDto> netFws = getFirmwareDetail();
@@ -297,6 +298,7 @@ public class HostConstants {
         return downFinishedFw;
     }
 
+    @NonNull
     public static List<UpfirewareDto> getDownZoneFinishedFw() {
         List<UpfirewareDto> downFinishedFw = new ArrayList<>();
         List<UpfirewareDto> netFws = getZoneFirmwareDetail();
@@ -315,6 +317,7 @@ public class HostConstants {
         SPStoreManager.getInstance().saveObject(SP_KEY_USER_DETAIL, userjson);
     }
 
+    @NonNull
     public static UserDto getUserDetail() {
         String userDtoStr = SPStoreManager.getInstance().getString(SP_KEY_USER_DETAIL);
         if (TextUtils.isEmpty(userDtoStr)) {
@@ -337,6 +340,7 @@ public class HostConstants {
         SPStoreManager.getInstance().removeKey(SP_KEY_USER_INFO_EMAIL_OR_IPHONE);
     }
 
+    @NonNull
     public static List<DownloadFwSelectInfo> getDownloadFwSelectInfoList() {
         ProductEnum[] values;
         List<DownloadFwSelectInfo> infoList = new ArrayList<>();
@@ -352,7 +356,7 @@ public class HostConstants {
         return infoList;
     }
 
-    public static void iteratorProductList(UpfirewareDto dto, List<DownloadFwSelectInfo> infoList) {
+    public static void iteratorProductList(UpfirewareDto dto, @NonNull List<DownloadFwSelectInfo> infoList) {
         for (DownloadFwSelectInfo info : infoList) {
             if (info.getProduct() == ProductEnum.GH2) {
                 if ((dto.getType() == 3 && dto.getModel() == 5) || (dto.getType() == 8 && dto.getModel() == 5)) {
@@ -371,7 +375,7 @@ public class HostConstants {
         }
     }
 
-    public static boolean isX8sFireware(UpfirewareDto dto) {
+    public static boolean isX8sFireware(@NonNull UpfirewareDto dto) {
         if (dto.getType() == 0 && dto.getModel() == 3) {
             return true;
         }
@@ -405,7 +409,7 @@ public class HostConstants {
         return dto.getType() == 13 && dto.getModel() == 1;
     }
 
-    public static boolean iteratorProductSelectList(UpfirewareDto dto, List<DownloadFwSelectInfo> infoList) {
+    public static boolean iteratorProductSelectList(UpfirewareDto dto, @NonNull List<DownloadFwSelectInfo> infoList) {
         for (DownloadFwSelectInfo info : infoList) {
             if (info.getProduct() == ProductEnum.GH2) {
                 if ((dto.getType() == 3 && dto.getModel() == 5) || (dto.getType() == 8 && dto.getModel() == 5)) {
@@ -422,7 +426,7 @@ public class HostConstants {
         return false;
     }
 
-    private static void updateDownloadFwSelectInfo(UpfirewareDto dto, DownloadFwSelectInfo info) {
+    private static void updateDownloadFwSelectInfo(@NonNull UpfirewareDto dto, DownloadFwSelectInfo info) {
         if ("2".equals(dto.getForceSign())) {
             info.setForceSign(true);
         }
@@ -471,10 +475,10 @@ public class HostConstants {
         SPStoreManager.getInstance().saveInt(SP_KEY_HAND_VERSION, cloudVersion);
     }
 
-    public void initDataUrl(int[] ints) {
+    public void initDataUrl(@NonNull int[] ints) {
         urlDatas = new HashMap();
         for (int i = 0; ints.length < i; i++) {
-            urlDatas.put(Integer.valueOf(ints[i]), "");
+            urlDatas.put(ints[i], "");
         }
     }
 }

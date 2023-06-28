@@ -2,6 +2,5 @@
 <resources>
     <usb-accessory
         manufacturer="Beijing FIMI Technology Limited"
-        model="RCX6A"
-        version="V020SP11B160602R101" />
+        model="RCX6A" />
 </resources>

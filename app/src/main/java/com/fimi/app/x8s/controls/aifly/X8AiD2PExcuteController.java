@@ -11,6 +11,8 @@ import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.android.app.R;
 import com.fimi.app.x8s.X8Application;
 import com.fimi.app.x8s.controls.X8AiTrackController;
@@ -70,19 +72,19 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
         this.mIX8NextViewListener = new IX8NextViewListener() {
             @Override
             public void onBackClick() {
-                X8AiD2PExcuteController.this.closeNextUi(true);
+                closeNextUi(true);
             }
 
             @Override
             public void onExcuteClick() {
                 X8AiD2PExcuteController.this.state = X8AiPointState.RUNNING;
-                X8AiD2PExcuteController.this.isDraw = true;
-                X8AiD2PExcuteController.this.setAiVcOpen();
-                X8AiD2PExcuteController.this.openVcToggle();
-                X8AiD2PExcuteController.this.mTipBgView.setVisibility(View.GONE);
-                X8AiD2PExcuteController.this.closeNextUi(false);
-                X8AiD2PExcuteController.this.mapVideoController.getFimiMap().getAiPoint2PointManager().resetMapEvent();
-                X8AiD2PExcuteController.this.mapVideoController.getFimiMap().getAiPoint2PointManager().setRunning();
+                isDraw = true;
+                setAiVcOpen();
+                openVcToggle();
+                mTipBgView.setVisibility(View.GONE);
+                closeNextUi(false);
+                mapVideoController.getFimiMap().getAiPoint2PointManager().resetMapEvent();
+                mapVideoController.getFimiMap().getAiPoint2PointManager().setRunning();
             }
 
             @Override
@@ -158,7 +160,7 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(@NonNull View v) {
         int id = v.getId();
         if (id == R.id.img_ai_follow_back) {
             if (this.state == X8AiPointState.RUNNING || this.state == X8AiPointState.RUNNING2) {
@@ -226,12 +228,7 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
         this.blank = this.rootView.findViewById(R.id.x8_main_ai_point2point_next_blank);
         this.mX8AiFollowPoint2PointExcuteConfirmModule = new X8AiPoint2PointExcuteConfirmModule();
         this.vHeight.setOnProgressListener(this);
-        this.mapVideoController.getFimiMap().setmX8AiItemMapListener(new IX8AiItemMapListener() {
-            @Override
-            public X8AiMapItem getCurrentItem() {
-                return X8AiMapItem.AI_POINT_TO_POINT;
-            }
-        });
+        this.mapVideoController.getFimiMap().setmX8AiItemMapListener(() -> X8AiMapItem.AI_POINT_TO_POINT);
         this.activity.getmX8AiTrackController().setOnAiTrackControllerListener(this);
         this.imgNext.setOnClickListener(this);
         this.imgBack.setOnClickListener(this);
@@ -287,13 +284,13 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
                 // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
-                    X8AiD2PExcuteController.this.nextRootView.setVisibility(View.GONE);
-                    ((ViewGroup) X8AiD2PExcuteController.this.nextRootView).removeAllViews();
-                    X8AiD2PExcuteController.this.imgBack.setVisibility(View.VISIBLE);
-                    X8AiD2PExcuteController.this.flagSmall.setVisibility(View.VISIBLE);
+                    nextRootView.setVisibility(View.GONE);
+                    ((ViewGroup) nextRootView).removeAllViews();
+                    imgBack.setVisibility(View.VISIBLE);
+                    flagSmall.setVisibility(View.VISIBLE);
                     if (b) {
-                        X8AiD2PExcuteController.this.imgNext.setVisibility(View.VISIBLE);
-                        X8AiD2PExcuteController.this.vHeight.setVisibility(View.VISIBLE);
+                        imgNext.setVisibility(View.VISIBLE);
+                        vHeight.setVisibility(View.VISIBLE);
                     }
                 }
             });
@@ -325,17 +322,14 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
     }
 
     public void getPoint() {
-        this.activity.getFcManager().getAiFollowPoint(new UiCallBackListener<AckGetAiPoint>() {
-            @Override
-            public void onComplete(CmdResult cmdResult, AckGetAiPoint ackGetAiPoint) {
-                if (cmdResult.isSuccess() && ackGetAiPoint.getfLatLng() != null) {
-                    X8AiD2PExcuteController.this.mapVideoController.getFimiMap().getAiPoint2PointManager().setMarkerByDevice(ackGetAiPoint.getfLatLng().latitude, ackGetAiPoint.getfLatLng().longitude, ackGetAiPoint.getAltitude());
-                    X8AiD2PExcuteController.this.mAiGetPointState = AiGetPointState.END;
-                    X8AiD2PExcuteController.this.isDraw = true;
-                    return;
-                }
-                X8AiD2PExcuteController.this.mAiGetPointState = AiGetPointState.IDLE;
+        this.activity.getFcManager().getAiFollowPoint((UiCallBackListener<AckGetAiPoint>) (cmdResult, ackGetAiPoint) -> {
+            if (cmdResult.isSuccess() && ackGetAiPoint.getfLatLng() != null) {
+                mapVideoController.getFimiMap().getAiPoint2PointManager().setMarkerByDevice(ackGetAiPoint.getfLatLng().latitude, ackGetAiPoint.getfLatLng().longitude, ackGetAiPoint.getAltitude());
+                mAiGetPointState = AiGetPointState.END;
+                isDraw = true;
+                return;
             }
+            mAiGetPointState = AiGetPointState.IDLE;
         });
     }
 
@@ -357,12 +351,9 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
     }
 
     public void p2pTaskExite() {
-        this.activity.getFcManager().setAiFollowPoint2PointExite(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                    X8AiD2PExcuteController.this.onTaskComplete(false);
-                }
+        this.activity.getFcManager().setAiFollowPoint2PointExite((cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
+                onTaskComplete(false);
             }
         });
     }
@@ -396,35 +387,26 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
     }
 
     public void setAiVcOpen() {
-        this.activity.getFcManager().setAiVcOpen(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                    X8AiD2PExcuteController.this.imgVcToggle.setSelected(true);
-                    X8AiD2PExcuteController.this.activity.getmX8AiTrackController().openUi();
-                }
+        this.activity.getFcManager().setAiVcOpen((cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
+                imgVcToggle.setSelected(true);
+                activity.getmX8AiTrackController().openUi();
             }
         });
     }
 
     public void setAiVcClose() {
-        this.activity.getFcManager().setAiVcClose(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                    X8AiD2PExcuteController.this.imgVcToggle.setSelected(false);
-                    X8AiD2PExcuteController.this.activity.getmX8AiTrackController().closeUi();
-                }
+        this.activity.getFcManager().setAiVcClose((cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
+                imgVcToggle.setSelected(false);
+                activity.getmX8AiTrackController().closeUi();
             }
         });
     }
 
     public void setAiVcNotityFc() {
-        this.activity.getFcManager().setAiVcNotityFc(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                }
+        this.activity.getFcManager().setAiVcNotityFc((cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
             }
         });
     }
@@ -494,10 +476,7 @@ public class X8AiD2PExcuteController extends AbsX8AiController implements View.O
         if (this.state == X8AiPointState.IDLE) {
             if (this.timeSend == 0) {
                 this.timeSend = 1;
-                this.activity.getFcManager().sysCtrlMode2AiVc(new UiCallBackListener() {
-                    @Override
-                    public void onComplete(CmdResult cmdResult, Object o) {
-                    }
+                this.activity.getFcManager().sysCtrlMode2AiVc((cmdResult, o) -> {
                 }, X8Task.VCM_FLY_TO.ordinal());
                 return;
             }

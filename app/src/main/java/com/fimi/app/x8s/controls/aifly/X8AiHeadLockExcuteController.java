@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.android.app.R;
 import com.fimi.app.x8s.X8Application;
 import com.fimi.app.x8s.interfaces.AbsX8AiController;
@@ -85,7 +87,7 @@ public class X8AiHeadLockExcuteController extends AbsX8AiController implements V
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(@NonNull View v) {
         int id = v.getId();
         if (id == R.id.img_ai_follow_back) {
             showExitDialog();
@@ -128,7 +130,7 @@ public class X8AiHeadLockExcuteController extends AbsX8AiController implements V
         this.flagSmall.setOnClickListener(this);
         this.tvAngle = this.rootView.findViewById(R.id.tv_lock_angle);
         this.prex = this.rootView.getContext().getString(R.string.x8_ai_heading_lock_tip3);
-        this.tvAngle.setText(String.format(this.prex, Float.valueOf(60.0f)));
+        this.tvAngle.setText(String.format(this.prex, 60.0f));
         this.imgLockAngle.setRotation(60.0f);
         super.openUi();
     }
@@ -161,7 +163,6 @@ public class X8AiHeadLockExcuteController extends AbsX8AiController implements V
             translationRight.start();
             translationRight.addListener(new AnimatorListenerAdapter() {
                 @Override
-                // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
                     X8AiHeadLockExcuteController.this.nextRootView.setVisibility(View.GONE);
@@ -229,30 +230,24 @@ public class X8AiHeadLockExcuteController extends AbsX8AiController implements V
         }
     }
 
-    public void showSportState(AutoFcSportState state) {
+    public void showSportState(@NonNull AutoFcSportState state) {
         float angle = state.getDeviceAngle();
-        this.tvAngle.setText(String.format(this.prex, Float.valueOf(angle)));
+        this.tvAngle.setText(String.format(this.prex, angle));
         this.imgLockAngle.setRotation(angle);
     }
 
     public void setTypeEnable() {
-        this.mFcCtrlManager.setDisenableHeadingFree(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                    X8AiHeadLockExcuteController.this.taskExit();
-                }
+        this.mFcCtrlManager.setDisenableHeadingFree((cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
+                taskExit();
             }
         });
     }
 
     public void updateHead() {
-        this.mFcCtrlManager.setUpdateHeadingFree(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                    X8AiHeadLockExcuteController.this.closeNextUi();
-                }
+        this.mFcCtrlManager.setUpdateHeadingFree((cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
+                closeNextUi();
             }
         });
     }

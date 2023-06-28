@@ -94,11 +94,10 @@ public class X8MainBottomParameterController extends AbsX8Controllers {
                     textColor = Color.WHITE;
                     if (changeShowStatus == 0) {
                         text = getString(R.string.x8_tf_low);
-                        break;
                     } else {
                         text = this.tfCardCapt;
-                        break;
                     }
+                    break;
                 case 2:
                 case 6:
                     imgRes = R.drawable.x8_tf_card_exception;
@@ -127,7 +126,7 @@ public class X8MainBottomParameterController extends AbsX8Controllers {
                 case 0:
                 default:
                     imgRes = R.drawable.x8_tf_card_nomal;
-                    textColor = -1;
+                    textColor = Color.WHITE;
                     text = this.tfCardCapt;
                     break;
             }
@@ -282,7 +281,8 @@ public class X8MainBottomParameterController extends AbsX8Controllers {
         }
     }
 
-    private String replaceEv(String ev) {
+    @NonNull
+    private String replaceEv(@NonNull String ev) {
         if (ev.contains("EV")) {
             return ev.replace("EV", "");
         }

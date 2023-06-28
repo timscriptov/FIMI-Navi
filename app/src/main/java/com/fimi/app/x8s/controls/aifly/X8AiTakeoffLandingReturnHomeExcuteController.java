@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.android.app.R;
 import com.fimi.app.x8s.X8Application;
 import com.fimi.app.x8s.enums.X8AiTLRState;
@@ -74,14 +76,14 @@ public class X8AiTakeoffLandingReturnHomeExcuteController extends AbsX8AiControl
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(@NonNull View v) {
         int id = v.getId();
         if (id == R.id.img_ai_follow_back) {
             if (this.state == X8AiTLRState.RUNING) {
                 showExitDialog();
             }
         } else if (id == R.id.rl_flag_small) {
-            if (this.tvTakeLandReturn.getVisibility() == 0) {
+            if (this.tvTakeLandReturn.getVisibility() == View.VISIBLE) {
                 this.tvTakeLandReturn.setVisibility(View.GONE);
             } else {
                 this.tvTakeLandReturn.setVisibility(View.VISIBLE);
@@ -175,62 +177,47 @@ public class X8AiTakeoffLandingReturnHomeExcuteController extends AbsX8AiControl
     public void taskExit() {
         this.state = X8AiTLRState.STOP;
         if (this.type == 2) {
-            this.fcManager.takeOffExit(new UiCallBackListener() {
-                @Override
-                public void onComplete(CmdResult cmdResult, Object o) {
-                    if (cmdResult.isSuccess()) {
-                        X8AiTakeoffLandingReturnHomeExcuteController.this.state = X8AiTLRState.WAIT_EXIT;
-                        return;
-                    }
-                    X8AiTakeoffLandingReturnHomeExcuteController.this.state = X8AiTLRState.RUNING;
+            this.fcManager.takeOffExit((cmdResult, o) -> {
+                if (cmdResult.isSuccess()) {
+                  state = X8AiTLRState.WAIT_EXIT;
+                    return;
                 }
+        state = X8AiTLRState.RUNING;
             });
         } else if (this.type == 3) {
-            this.fcManager.landExit(new UiCallBackListener() {
-                @Override
-                public void onComplete(CmdResult cmdResult, Object o) {
-                    if (cmdResult.isSuccess()) {
-                        X8AiTakeoffLandingReturnHomeExcuteController.this.state = X8AiTLRState.WAIT_EXIT;
-                        return;
-                    }
-                    X8AiTakeoffLandingReturnHomeExcuteController.this.state = X8AiTLRState.RUNING;
+            this.fcManager.landExit((cmdResult, o) -> {
+                if (cmdResult.isSuccess()) {
+             state = X8AiTLRState.WAIT_EXIT;
+                    return;
                 }
+              state = X8AiTLRState.RUNING;
             });
         } else if (this.type == 7) {
-            this.fcManager.setAiRetureHomeExite(new UiCallBackListener() {
-                @Override
-                public void onComplete(CmdResult cmdResult, Object o) {
-                    if (cmdResult.isSuccess()) {
-                        X8AiTakeoffLandingReturnHomeExcuteController.this.state = X8AiTLRState.WAIT_EXIT;
-                        return;
-                    }
-                    X8AiTakeoffLandingReturnHomeExcuteController.this.state = X8AiTLRState.RUNING;
-                    if (cmdResult.getmMsgRpt() == 50) {
-                        X8ToastUtil.showToast(X8AiTakeoffLandingReturnHomeExcuteController.this.rootView.getContext(), X8AiTakeoffLandingReturnHomeExcuteController.this.getString(R.string.x8_ai_fly_return_home_error), 0);
-                    }
+            this.fcManager.setAiRetureHomeExite((cmdResult, o) -> {
+                if (cmdResult.isSuccess()) {
+                 state = X8AiTLRState.WAIT_EXIT;
+                    return;
+                }
+              state = X8AiTLRState.RUNING;
+                if (cmdResult.getmMsgRpt() == 50) {
+                    X8ToastUtil.showToast(rootView.getContext(), getString(R.string.x8_ai_fly_return_home_error), 0);
                 }
             });
         } else if (this.type == 8) {
-            this.fcManager.setAiRetureHomeExite(new UiCallBackListener() {
-                @Override
-                public void onComplete(CmdResult cmdResult, Object o) {
-                    if (cmdResult.isSuccess()) {
-                        X8AiTakeoffLandingReturnHomeExcuteController.this.state = X8AiTLRState.WAIT_EXIT;
-                        return;
-                    }
-                    X8AiTakeoffLandingReturnHomeExcuteController.this.state = X8AiTLRState.RUNING;
+            this.fcManager.setAiRetureHomeExite((cmdResult, o) -> {
+                if (cmdResult.isSuccess()) {
+                    state = X8AiTLRState.WAIT_EXIT;
+                    return;
                 }
+              state = X8AiTLRState.RUNING;
             });
         } else if (this.type == 9) {
-            this.fcManager.setAiRetureHomeExite(new UiCallBackListener() {
-                @Override
-                public void onComplete(CmdResult cmdResult, Object o) {
-                    if (cmdResult.isSuccess()) {
-                        X8AiTakeoffLandingReturnHomeExcuteController.this.state = X8AiTLRState.WAIT_EXIT;
-                        return;
-                    }
-                    X8AiTakeoffLandingReturnHomeExcuteController.this.state = X8AiTLRState.RUNING;
+            this.fcManager.setAiRetureHomeExite((cmdResult, o) -> {
+                if (cmdResult.isSuccess()) {
+                   state = X8AiTLRState.WAIT_EXIT;
+                    return;
                 }
+               state = X8AiTLRState.RUNING;
             });
         }
     }

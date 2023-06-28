@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.TcpClient;
 import com.fimi.android.app.R;
 import com.fimi.app.x8s.X8Application;
@@ -57,26 +59,26 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
         this.mIX8NextViewListener = new IX8NextViewListener() {
             @Override
             public void onBackClick() {
-                X8AiGravitationExcuteController.this.closeNextUi(true);
-                if (X8AiGravitationExcuteController.this.activity.getmMapVideoController().isFullVideo()) {
-                    X8AiGravitationExcuteController.this.mImSuroundBg.setVisibility(View.VISIBLE);
+                closeNextUi(true);
+                if (activity.getmMapVideoController().isFullVideo()) {
+                    mImSuroundBg.setVisibility(View.VISIBLE);
                 } else {
-                    X8AiGravitationExcuteController.this.mImSuroundBg.setVisibility(View.GONE);
+                    mImSuroundBg.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onExcuteClick() {
-                X8AiGravitationExcuteController.this.closeNextUi(false);
-                if (X8AiGravitationExcuteController.this.activity.getmMapVideoController().isFullVideo()) {
-                    X8AiGravitationExcuteController.this.mImSuroundBg.setVisibility(View.VISIBLE);
+                closeNextUi(false);
+                if (activity.getmMapVideoController().isFullVideo()) {
+                    mImSuroundBg.setVisibility(View.VISIBLE);
                 } else {
-                    X8AiGravitationExcuteController.this.mImSuroundBg.setVisibility(View.GONE);
+                    mImSuroundBg.setVisibility(View.GONE);
                 }
-                X8AiGravitationExcuteController.this.imgNext.setVisibility(View.GONE);
-                X8AiGravitationExcuteController.this.mGravitationState = X8GravitationState.RUNNING;
-                X8AiGravitationExcuteController.this.tvTip.setVisibility(View.GONE);
-                X8AiGravitationExcuteController.this.mIX8AiGravitationExcuteControllerListener.onAiGravitaionRunning();
+                imgNext.setVisibility(View.GONE);
+                mGravitationState = X8GravitationState.RUNNING;
+                tvTip.setVisibility(View.GONE);
+                mIX8AiGravitationExcuteControllerListener.onAiGravitaionRunning();
             }
 
             @Override
@@ -165,7 +167,7 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(@NonNull View view) {
         int id = view.getId();
         if (id == R.id.img_ai_gravitation_follow_next) {
             openNextUi();
@@ -202,40 +204,31 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
     }
 
     private void getRunningParmeter() {
-        this.mFcManager.getGravitationPrameter(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess) {
-                    X8AiGravitationExcuteController.this.drawEllipse((AckAiGetGravitationPrameter) o);
-                }
+        this.mFcManager.getGravitationPrameter((cmdResult, o) -> {
+            if (cmdResult.isSuccess) {
+                drawEllipse((AckAiGetGravitationPrameter) o);
             }
         });
     }
 
-    public void drawEllipse(AckAiGetGravitationPrameter prameter) {
+    public void drawEllipse(@NonNull AckAiGetGravitationPrameter prameter) {
         this.activity.getmMapVideoController().getFimiMap().getAiSurroundManager().addEllipse(prameter.getStartLat(), prameter.getStartLng(), prameter.getHorizontalDistance(), 90.0f + prameter.getStartNosePoint());
     }
 
     private void getRunningDisconnectParmeter() {
-        this.mFcManager.getGravitationPrameter(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess) {
-                    X8AiGravitationExcuteController.this.mGravitationState = X8GravitationState.RUNNING;
-                    X8AiGravitationExcuteController.this.drawEllipse((AckAiGetGravitationPrameter) o);
-                }
+        this.mFcManager.getGravitationPrameter((cmdResult, o) -> {
+            if (cmdResult.isSuccess) {
+                mGravitationState = X8GravitationState.RUNNING;
+                drawEllipse((AckAiGetGravitationPrameter) o);
             }
         });
     }
 
     private void getIdleParmeter() {
-        this.mFcManager.getGravitationPrameter(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess) {
-                    X8AiGravitationExcuteController.this.mAckAiGetGravitationPrameter = (AckAiGetGravitationPrameter) o;
-                    X8AiGravitationExcuteController.this.drawIdleEllipse();
-                }
+        this.mFcManager.getGravitationPrameter((cmdResult, o) -> {
+            if (cmdResult.isSuccess) {
+                mAckAiGetGravitationPrameter = (AckAiGetGravitationPrameter) o;
+                drawIdleEllipse();
             }
         });
     }
@@ -252,21 +245,20 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
             translationRight.start();
             translationRight.addListener(new AnimatorListenerAdapter() {
                 @Override
-                // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
-                    X8AiGravitationExcuteController.this.mNextContent.setVisibility(View.GONE);
-                    X8AiGravitationExcuteController.this.mNextBlank.setVisibility(View.GONE);
-                    ((ViewGroup) X8AiGravitationExcuteController.this.mNextContent).removeAllViews();
-                    X8AiGravitationExcuteController.this.imgBack.setVisibility(View.VISIBLE);
-                    X8AiGravitationExcuteController.this.mFlagBottom.setVisibility(View.VISIBLE);
+                    mNextContent.setVisibility(View.GONE);
+                    mNextBlank.setVisibility(View.GONE);
+                    ((ViewGroup) mNextContent).removeAllViews();
+                    imgBack.setVisibility(View.VISIBLE);
+                    mFlagBottom.setVisibility(View.VISIBLE);
                     if (isImgNextShow) {
-                        X8AiGravitationExcuteController.this.imgNext.setVisibility(View.VISIBLE);
-                        X8AiGravitationExcuteController.this.tvTip.setVisibility(View.VISIBLE);
+                        imgNext.setVisibility(View.VISIBLE);
+                        tvTip.setVisibility(View.VISIBLE);
                         return;
                     }
-                    X8AiGravitationExcuteController.this.imgNext.setVisibility(View.GONE);
-                    X8AiGravitationExcuteController.this.tvTip.setVisibility(View.GONE);
+                    imgNext.setVisibility(View.GONE);
+                    tvTip.setVisibility(View.GONE);
                 }
             });
         }
@@ -301,7 +293,7 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
 
     public void switchMapVideo(boolean sightFlag) {
         if (this.handleView != null) {
-            this.mImSuroundBg.setVisibility(sightFlag ? 8 : 0);
+            this.mImSuroundBg.setVisibility(sightFlag ? View.GONE : View.VISIBLE);
         }
     }
 
@@ -322,20 +314,17 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
     }
 
     private void closeGravitationing() {
-        this.mFcManager.setAiVcClose(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                    X8AiGravitationExcuteController.this.closeUi();
-                    X8AiGravitationExcuteController.this.mGravitationState = X8GravitationState.IDLE;
-                    if (X8AiGravitationExcuteController.this.mIX8AiGravitationExcuteControllerListener != null) {
-                        X8AiGravitationExcuteController.this.mIX8AiGravitationExcuteControllerListener.onAiGravitationBackClick();
-                        return;
-                    }
+        this.mFcManager.setAiVcClose((cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
+                closeUi();
+                mGravitationState = X8GravitationState.IDLE;
+                if (mIX8AiGravitationExcuteControllerListener != null) {
+                    mIX8AiGravitationExcuteControllerListener.onAiGravitationBackClick();
                     return;
                 }
-                TcpClient.getIntance().sendLog("setAiVcClose error" + cmdResult.getErrDes());
+                return;
             }
+            TcpClient.getIntance().sendLog("setAiVcClose error" + cmdResult.getErrDes());
         });
     }
 
@@ -345,32 +334,26 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
 
     @Override
     public void onRight() {
-        this.mFcManager.setAiVcClose(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                    if (X8AiGravitationExcuteController.this.mGravitationState == X8GravitationState.RUNNING) {
-                        X8AiGravitationExcuteController.this.exitGravitation();
-                        return;
-                    }
+        this.mFcManager.setAiVcClose((cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
+                if (mGravitationState == X8GravitationState.RUNNING) {
+                    exitGravitation();
                     return;
                 }
-                TcpClient.getIntance().sendLog("setAiVcClose error" + cmdResult.getErrDes());
+                return;
             }
+            TcpClient.getIntance().sendLog("setAiVcClose error" + cmdResult.getErrDes());
         });
     }
 
     public void exitGravitation() {
-        this.mFcManager.setGravitationExite(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (!cmdResult.isSuccess) {
-                    X8ToastUtil.showToast(X8AiGravitationExcuteController.this.handleView.getContext(), cmdResult.getErrDes(), 0);
-                } else {
-                    X8AiGravitationExcuteController.this.mGravitationState = X8GravitationState.IDLE;
-                }
-                X8AiGravitationExcuteController.this.onTaskComplete(false);
+        this.mFcManager.setGravitationExite((cmdResult, o) -> {
+            if (!cmdResult.isSuccess) {
+                X8ToastUtil.showToast(handleView.getContext(), cmdResult.getErrDes(), 0);
+            } else {
+                mGravitationState = X8GravitationState.IDLE;
             }
+            onTaskComplete(false);
         });
     }
 
@@ -397,11 +380,8 @@ public class X8AiGravitationExcuteController extends AbsX8AiController implement
     }
 
     public void setAiVcOpen() {
-        this.mFcManager.setAiVcOpen(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                }
+        this.mFcManager.setAiVcOpen((cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
             }
         });
     }

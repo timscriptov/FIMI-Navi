@@ -246,20 +246,7 @@ public class X8AiLinesExcuteConfirmUi implements View.OnClickListener, SeekBar.O
         } else {
             this.mapVideoController.getFimiMap().getAiLineManager().addOrUpdateSmallMarkerForVideo(2);
         }
-    }    Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if (X8AiLinesExcuteConfirmUi.this.i < X8AiLinesExcuteConfirmUi.this.mapPointList.size()) {
-                X8AiLinesExcuteConfirmUi.this.mHandler.sendEmptyMessageDelayed(0, 2000L);
-                AbsAiLineManager aiLineManager = X8AiLinesExcuteConfirmUi.this.mapVideoController.getFimiMap().getAiLineManager();
-                X8AiLinesExcuteConfirmUi x8AiLinesExcuteConfirmUi = X8AiLinesExcuteConfirmUi.this;
-                int i = x8AiLinesExcuteConfirmUi.i;
-                x8AiLinesExcuteConfirmUi.i = i + 1;
-                aiLineManager.setAiLineIndexPoint(i);
-            }
-        }
-    };
+    }
 
     public void initAction() {
         this.imgBack.setOnClickListener(this);
@@ -283,7 +270,20 @@ public class X8AiLinesExcuteConfirmUi implements View.OnClickListener, SeekBar.O
                 X8AiLinesExcuteConfirmUi.this.mX8AilinePrameter.setAutoRecorde(1);
             }
         });
-    }
+    }    Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (X8AiLinesExcuteConfirmUi.this.i < X8AiLinesExcuteConfirmUi.this.mapPointList.size()) {
+                X8AiLinesExcuteConfirmUi.this.mHandler.sendEmptyMessageDelayed(0, 2000L);
+                AbsAiLineManager aiLineManager = X8AiLinesExcuteConfirmUi.this.mapVideoController.getFimiMap().getAiLineManager();
+                X8AiLinesExcuteConfirmUi x8AiLinesExcuteConfirmUi = X8AiLinesExcuteConfirmUi.this;
+                int i = x8AiLinesExcuteConfirmUi.i;
+                x8AiLinesExcuteConfirmUi.i = i + 1;
+                aiLineManager.setAiLineIndexPoint(i);
+            }
+        }
+    };
 
     @Override
     public void onClick(View v) {

@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.android.app.R;
 import com.fimi.app.x8s.X8Application;
 import com.fimi.app.x8s.controls.aifly.confirm.ui.X8AiAerialPhotographNextUi;
@@ -92,7 +94,7 @@ public class X8AiAerialPhotographExcuteController extends AbsX8AiController impl
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(@NonNull View v) {
         int id = v.getId();
         if (id == R.id.img_ai_follow_back) {
             showExitDialog();
@@ -105,7 +107,7 @@ public class X8AiAerialPhotographExcuteController extends AbsX8AiController impl
         } else if (id == R.id.img_edit) {
             openNextUi(1);
         } else if (id == R.id.rl_flag_small) {
-            if (this.tvFlag.getVisibility() == 0) {
+            if (this.tvFlag.getVisibility() == View.VISIBLE) {
                 this.tvFlag.setVisibility(View.GONE);
             } else {
                 this.tvFlag.setVisibility(View.VISIBLE);
@@ -135,7 +137,7 @@ public class X8AiAerialPhotographExcuteController extends AbsX8AiController impl
         this.flagSmall.setOnClickListener(this);
         this.tvAngle = this.rootView.findViewById(R.id.tv_lock_angle);
         this.prex = this.rootView.getContext().getString(R.string.x8_ai_heading_lock_tip3);
-        this.tvAngle.setText(String.format(this.prex, Float.valueOf(60.0f)));
+        this.tvAngle.setText(String.format(this.prex, 60.0f));
         this.imgLockAngle.setRotation(60.0f);
         this.listener.onAerialGraphRunning();
         this.imgBack.setOnClickListener(this);
@@ -203,15 +205,9 @@ public class X8AiAerialPhotographExcuteController extends AbsX8AiController impl
 
     public void setFcManager(FcCtrlManager fcManager) {
         this.mFcCtrlManager = fcManager;
-        this.mFcCtrlManager.getBrakeSens(new UiCallBackListener<AckGetSensitivity>() {
-            @Override
-            public void onComplete(CmdResult cmdResult, AckGetSensitivity sensitivity) {
-            }
+        this.mFcCtrlManager.getBrakeSens((UiCallBackListener<AckGetSensitivity>) (cmdResult, sensitivity) -> {
         });
-        this.mFcCtrlManager.getYawTrip(new UiCallBackListener<AckGetSensitivity>() {
-            @Override
-            public void onComplete(CmdResult cmdResult, AckGetSensitivity sensitivity) {
-            }
+        this.mFcCtrlManager.getYawTrip((UiCallBackListener<AckGetSensitivity>) (cmdResult, sensitivity) -> {
         });
     }
 
@@ -269,19 +265,16 @@ public class X8AiAerialPhotographExcuteController extends AbsX8AiController impl
         }
     }
 
-    public void showSportState(AutoFcSportState state) {
+    public void showSportState(@NonNull AutoFcSportState state) {
         float angle = state.getDeviceAngle();
-        this.tvAngle.setText(String.format(this.prex, Float.valueOf(angle)));
+        this.tvAngle.setText(String.format(this.prex, angle));
         this.imgLockAngle.setRotation(angle);
     }
 
     public void setTypeEnable() {
-        this.mFcCtrlManager.setEnableAerailShot(0, new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                    X8AiAerialPhotographExcuteController.this.taskExit();
-                }
+        this.mFcCtrlManager.setEnableAerailShot(0, (cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
+                taskExit();
             }
         });
     }
@@ -289,20 +282,14 @@ public class X8AiAerialPhotographExcuteController extends AbsX8AiController impl
     public void setSensity() {
         final int braking = this.mX8AiAerialPhotographNextUi.getBrakingSensity();
         final int yaw = this.mX8AiAerialPhotographNextUi.getYawSensity();
-        this.mFcCtrlManager.setBrakeSens(new UiCallBackListener<Object>() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object resp) {
-                if (cmdResult.isSuccess()) {
-                    StateManager.getInstance().getX8Drone().setFcBrakeSenssity(braking);
-                }
+        this.mFcCtrlManager.setBrakeSens((UiCallBackListener<Object>) (cmdResult, resp) -> {
+            if (cmdResult.isSuccess()) {
+                StateManager.getInstance().getX8Drone().setFcBrakeSenssity(braking);
             }
         }, braking, braking);
-        this.mFcCtrlManager.setYawSensitivity(new UiCallBackListener<Object>() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object respCode) {
-                if (cmdResult.isSuccess()) {
-                    StateManager.getInstance().getX8Drone().setFcYAWSenssity(yaw);
-                }
+        this.mFcCtrlManager.setYawSensitivity((UiCallBackListener<Object>) (cmdResult, respCode) -> {
+            if (cmdResult.isSuccess()) {
+                StateManager.getInstance().getX8Drone().setFcYAWSenssity(yaw);
             }
         }, yaw);
     }

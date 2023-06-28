@@ -3,6 +3,7 @@ package com.fimi.app.x8s.controls.aifly;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
@@ -74,8 +75,8 @@ public class X8AiAutoPhototExcuteController extends AbsX8AiController implements
 
             @Override
             public void onExcuteClick() {
-                X8AiAutoPhototExcuteController.this.closeNextUi(false);
-                X8AiAutoPhototExcuteController.this.mX8AiAutoPhotoExcuteConfirmModule.startAiAutoPhoto(X8AiAutoPhototExcuteController.this);
+                closeNextUi(false);
+                mX8AiAutoPhotoExcuteConfirmModule.startAiAutoPhoto(X8AiAutoPhototExcuteController.this);
             }
 
             @Override
@@ -85,12 +86,6 @@ public class X8AiAutoPhototExcuteController extends AbsX8AiController implements
         this.activity = activity;
         this.state = state;
         this.type = type;
-    }
-
-    static /* synthetic */ int access$110(X8AiAutoPhototExcuteController x0) {
-        int i = x0.count;
-        x0.count = i - 1;
-        return i;
     }
 
     @Override
@@ -150,7 +145,7 @@ public class X8AiAutoPhototExcuteController extends AbsX8AiController implements
         } else if (id == R.id.x8_main_ai_auto_photo_next_blank) {
             closeNextUi(true);
         } else if (id == R.id.rl_flag_small) {
-            if (this.tvP2PTip.getVisibility() == 0) {
+            if (this.tvP2PTip.getVisibility() == View.VISIBLE) {
                 this.tvP2PTip.setVisibility(View.GONE);
             } else {
                 this.tvP2PTip.setVisibility(View.VISIBLE);
@@ -423,26 +418,24 @@ public class X8AiAutoPhototExcuteController extends AbsX8AiController implements
     }
 
 
+    @SuppressLint("HandlerLeak")
     public class TimeHandler extends Handler {
-        private TimeHandler() {
-        }
-
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == 1) {
-                if (X8AiAutoPhototExcuteController.this.count >= 0) {
-                    if (X8AiAutoPhototExcuteController.this.count != 0) {
-                        X8AiAutoPhototExcuteController.this.tvTime.setText("" + X8AiAutoPhototExcuteController.access$110(X8AiAutoPhototExcuteController.this));
+                if (count >= 0) {
+                    if (count != 0) {
+                        count--;
+                        tvTime.setText("" + count);
                     } else {
-                        X8AiAutoPhototExcuteController.access$110(X8AiAutoPhototExcuteController.this);
-                        X8AiAutoPhototExcuteController.this.tvTime.setText("GO");
+                        count--;
+                        tvTime.setText("GO");
                     }
                     sendEmptyMessageDelayed(1, 1000L);
                     return;
                 }
-                X8AiAutoPhototExcuteController.this.tvTime.setVisibility(View.GONE);
-                return;
+                tvTime.setVisibility(View.GONE);
             }
         }
     }

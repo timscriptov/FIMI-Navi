@@ -42,6 +42,7 @@
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
+
     <application
         android:name="com.fimi.app.base.HostApplication"
         android:hardwareAccelerated="true"
@@ -51,6 +52,7 @@
         android:networkSecurityConfig="@xml/network_config"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <meta-data
             android:name="channel"
             android:value="xiaomi" />
@@ -61,6 +63,7 @@
         <activity
             android:name="com.fimi.app.ui.SplashActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name="com.fimi.app.ui.FimiAoaSplashActivity"
             android:exported="true"
@@ -76,6 +79,7 @@
                 android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED"
                 android:resource="@xml/accessory_filter" />
         </activity>
+
         <activity
             android:name="com.fimi.app.ui.main.HostNewMainActivity"
             android:configChanges="keyboardHidden|layoutDirection|locale|mcc|mnc|orientation|screenSize"
@@ -95,38 +99,47 @@
         <activity
             android:name="com.fimi.libperson.ui.me.login.LoginMainActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name="com.fimi.libperson.ui.me.login.LoginActivity"
             android:configChanges="keyboardHidden|layoutDirection|locale|mcc|mnc|orientation|screenSize"
             android:launchMode="singleTop"
             android:screenOrientation="userPortrait" />
+
         <activity
             android:name="com.fimi.libperson.ui.me.register.RegisterActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name="com.fimi.libperson.ui.setting.LibPersonAboutActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+
         <activity
             android:name="com.fimi.libperson.ui.setting.LibPersonRightApplyActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+
         <activity
             android:name="com.fimi.libperson.ui.setting.PersonSettingNewActivity"
             android:configChanges="layoutDirection|locale"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+
         <activity
             android:name="com.fimi.libperson.ui.me.countryselect.CountrySelectListActivity"
             android:screenOrientation="userPortrait"
             android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name="com.fimi.libperson.ui.web.UserProtocolWebViewActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name="com.fimi.libperson.ui.setting.LanguageSettingActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+
         <activity
             android:name="com.fimi.libperson.ui.setting.ServiceSettingActivity"
             android:launchMode="singleTop"
@@ -139,20 +152,18 @@
                 <action android:name="android.intent.action.LOCALE_CHANGED" />
             </intent-filter>
         </receiver>
+
         <service android:name="com.fimi.libdownfw.service.AppInitService" />
 
         <activity
             android:name="com.fimi.libdownfw.update.DownloadFwSelectActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name="com.fimi.libdownfw.update.FindeNewFwDownActivity"
             android:configChanges="orientation|screenSize"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-
-        <uses-library
-            android:name="org.apache.http.legacy"
-            android:required="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -226,32 +237,6 @@
             android:name="com.xiaomi.account.openauth.AuthorizeActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize"
             android:screenOrientation="portrait" />
-        <activity
-            android:name="com.twitter.sdk.android.tweetui.PlayerActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:theme="@style/MediaTheme" />
-        <activity
-            android:name="com.twitter.sdk.android.tweetui.GalleryActivity"
-            android:theme="@style/MediaTheme" />
-        <activity
-            android:name="com.twitter.sdk.android.tweetcomposer.ComposerActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize|stateVisible" />
-
-        <service
-            android:name="com.twitter.sdk.android.tweetcomposer.TweetUploadService"
-            android:enabled="true"
-            android:exported="false" />
-
-        <activity
-            android:name="com.twitter.sdk.android.core.identity.OAuthActivity"
-            android:configChanges="orientation|screenSize"
-            android:excludeFromRecents="true"
-            android:exported="false" />
-        <activity
-            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-            android:exported="false"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <activity
             android:name="com.fimi.album.ui.MediaActivity"
@@ -259,36 +244,19 @@
             android:launchMode="singleTop"
             android:screenOrientation="sensorLandscape"
             android:theme="@style/NoActionBar" />
+
         <activity
             android:name="com.fimi.album.ui.MediaDetailActivity"
             android:configChanges="orientation|screenLayout|screenSize"
             android:screenOrientation="sensorLandscape"
             android:theme="@style/NoActionBar" />
+
         <activity
             android:name="com.fimi.album.ui.VideoPlayActivity"
             android:configChanges="orientation|screenLayout|screenSize"
             android:screenOrientation="sensorLandscape"
             android:theme="@style/NoActionBar" />
 
-        <meta-data
-            android:name="android.support.VERSION"
-            android:value="26.1.0" />
-        <meta-data
-            android:name="android.arch.lifecycle.VERSION"
-            android:value="27.0.0-SNAPSHOT" />
-
-        <activity
-            android:name="com.github.moduth.blockcanary.ui.DisplayActivity"
-            android:enabled="false"
-            android:exported="true"
-            android:icon="@drawable/block_canary_icon"
-            android:label="@string/block_canary_display_activity_label"
-            android:taskAffinity="com.github.moduth.blockcanary"
-            android:theme="@style/block_canary_BlockCanary.Base">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
+
 </manifest>

@@ -35,7 +35,7 @@ public class ConnectRcManager {
     public synchronized void connectRC(Context mContext) {
         if (!this.isTryConnect) {
             this.isTryConnect = true;
-            UsbManager usbManager = (UsbManager) mContext.getSystemService("usb");
+            UsbManager usbManager = (UsbManager) mContext.getSystemService(Context.USB_SERVICE);
             this.mPermissionIntent = PendingIntent.getBroadcast(mContext, 0, new Intent(ACTION_USB_PERMISSION), 0);
             if (usbManager != null) {
                 UsbAccessory[] accessories = usbManager.getAccessoryList();

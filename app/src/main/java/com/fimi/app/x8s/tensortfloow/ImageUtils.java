@@ -10,8 +10,6 @@ public class ImageUtils {
     public static Matrix getTransformationMatrix(int srcWidth, int srcHeight, int dstWidth, int dstHeight, int applyRotation, boolean maintainAspectRatio) {
         Matrix matrix = new Matrix();
         if (applyRotation != 0) {
-            if (applyRotation % 90 != 0) {
-            }
             matrix.postTranslate((-srcWidth) / 2.0f, (-srcHeight) / 2.0f);
             matrix.postRotate(applyRotation);
         }

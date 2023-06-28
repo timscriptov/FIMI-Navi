@@ -767,9 +767,7 @@ public final class FimiMediaPlayer extends AbstractMediaPlayer {
                     return null;
                 }
                 FimiMediaCodecInfo bestCodec = candidateCodecList.get(0);
-                Iterator<FimiMediaCodecInfo> it = candidateCodecList.iterator();
-                while (it.hasNext()) {
-                    FimiMediaCodecInfo codec = it.next();
+                for (FimiMediaCodecInfo codec : candidateCodecList) {
                     if (codec.mRank > bestCodec.mRank) {
                         bestCodec = codec;
                     }

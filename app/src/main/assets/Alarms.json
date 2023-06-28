@@ -127,7 +127,7 @@
             "OffsetBit": 7,
             "Severity": 2,
             "Text": 80,
-            "Speak": 80,
+            "Speak": 83,
             "Vibrate": true,
             "Label": "BAT",
             "IsInFlight": true
@@ -161,7 +161,7 @@
             "OffsetBit": 10,
             "Severity": 2,
             "Text": 110,
-            "Speak": 110,
+            "Speak": 112,
             "Vibrate": true,
             "IsInFlight": true
         },
@@ -289,7 +289,7 @@
             "OffsetBit": 25,
             "Severity": 2,
             "Text": 230,
-            "Speak": 230,
+            "Speak": 232,
             "Vibrate": true,
             "Label": "BAT",
             "IsInFlight": true
@@ -307,7 +307,7 @@
             "OffsetBit": 26,
             "Severity": 2,
             "Text": 240,
-            "Speak": 240,
+            "Speak": 242,
             "Vibrate": true,
             "Label": "BAT",
             "IsInFlight": true
@@ -332,7 +332,7 @@
             "OffsetBit": 28,
             "Severity": 2,
             "Text": 260,
-            "Speak": 260,
+            "Speak": 263,
             "Vibrate": true,
             "Label": "BAT",
             "IsInFlight": true
@@ -448,7 +448,7 @@
             "OffsetBit": 6,
             "Severity": 1,
             "Text": 360,
-            "Speak": 360,
+            "Speak": 362,
             "Vibrate": true,
             "IsInFlight": true
         },
@@ -514,7 +514,7 @@
             "OffsetBit": 8,
             "Severity": 2,
             "Text": 380,
-            "Speak": 380,
+            "Speak": 382,
             "Vibrate": true,
             "IsInFlight": true
         },
@@ -531,7 +531,7 @@
             "OffsetBit": 9,
             "Severity": 2,
             "Text": 390,
-            "Speak": 390,
+            "Speak": 392,
             "IsInFlight": true
         },
         {
@@ -555,7 +555,7 @@
             "OffsetBit": 11,
             "Severity": 2,
             "Text": 410,
-            "Speak": 410,
+            "Speak": 411,
             "Vibrate": true,
             "IsInFlight": true
         },
@@ -615,7 +615,7 @@
             "OffsetBit": 15,
             "Severity": 2,
             "Text": 451,
-            "Speak": 451,
+            "Speak": 453,
             "Vibrate": true,
             "IsInFlight": true,
             "FlightPhase": [
@@ -638,7 +638,7 @@
             "OffsetBit": 16,
             "Severity": 2,
             "Text": 460,
-            "Speak": 460,
+            "Speak": 463,
             "IsInFlight": true,
             "FlightPhase": [
                 {
@@ -652,7 +652,7 @@
             "OffsetBit": 16,
             "Severity": 2,
             "Text": 461,
-            "Speak": 461,
+            "Speak": 462,
             "IsInFlight": true,
             "FlightPhase": [
                 {
@@ -721,7 +721,7 @@
             "OffsetBit": 23,
             "Severity": 2,
             "Text": 530,
-            "Speak": 530,
+            "Speak": 532,
             "Vibrate": true,
             "Label": "BAT",
             "IsInFlight": true
@@ -782,6 +782,13 @@
         },
         {
             "GroupID": "FCS-B",
+            "OffsetBit": 30,
+            "Severity": 1,
+            "Text": 600,
+            "IsInFlight": true
+        },
+        {
+            "GroupID": "FCS-B",
             "OffsetBit": 31,
             "Severity": 1,
             "Text": 610,
@@ -808,7 +815,7 @@
             "OffsetBit": 2,
             "Severity": 2,
             "Text": 640,
-            "Speak": 640,
+            "Speak": 643,
             "IsInFlight": true
         },
         {
@@ -816,7 +823,7 @@
             "OffsetBit": 2,
             "Severity": 1,
             "Text": 641,
-            "Speak": 641,
+            "Speak": 642,
             "IsInFlight": false
         },
         {
@@ -1211,7 +1218,7 @@
             "OffsetBit": 22,
             "Severity": 2,
             "Text": 690,
-            "Speak": 690,
+            "Speak": 692,
             "Vibrate": true,
             "IsInFlight": true
         },
@@ -1228,7 +1235,7 @@
             "OffsetBit": 24,
             "Severity": 2,
             "Text": 690,
-            "Speak": 690,
+            "Speak": 692,
             "Vibrate": true,
             "IsInFlight": true,
             "ConditionBits": [
@@ -1259,7 +1266,7 @@
             "OffsetBit": 25,
             "Severity": 2,
             "Text": 700,
-            "Speak": 700,
+            "Speak": 702,
             "Vibrate": true,
             "IsInFlight": true
         },
@@ -1273,6 +1280,37 @@
         },
         {
             "GroupID": "FCS-C",
+            "OffsetBit": 26,
+            "Severity": 2,
+            "Text": 720,
+            "Speak": 720,
+            "IsInFlight": false
+        },
+        {
+            "GroupID": "FCS-C",
+            "OffsetBit": 27,
+            "Severity": 2,
+            "Text": 721,
+            "Speak": 721,
+            "IsInFlight": true
+        },
+        {
+            "GroupID": "FCS-C",
+            "OffsetBit": 27,
+            "Severity": 2,
+            "Text": 722,
+            "Speak": 722,
+            "IsInFlight": false
+        },
+        {
+            "GroupID": "FCS-C",
+            "OffsetBit": 28,
+            "Severity": 1,
+            "Text": 730,
+            "IsInFlight": true
+        },
+        {
+            "GroupID": "FCS-C",
             "OffsetBit": 29,
             "Severity": 1,
             "Text": 850,
@@ -1283,7 +1321,7 @@
             "OffsetBit": 30,
             "Severity": 2,
             "Text": 860,
-            "Speak": 860,
+            "Speak": 862,
             "Vibrate": true,
             "IsInFlight": true
         },
@@ -1299,6 +1337,45 @@
             "OffsetBit": 31,
             "Severity": 1,
             "Text": 880,
+            "IsInFlight": true
+        },
+        {
+            "GroupID": "FCS-D",
+            "OffsetBit": 0,
+            "Severity": 2,
+            "Text": 890,
+            "Speak": 890,
+            "IsInFlight": false
+        },
+        {
+            "GroupID": "FCS-D",
+            "OffsetBit": 0,
+            "Severity": 2,
+            "Text": 640,
+            "Speak": 643,
+            "IsInFlight": true
+        },
+        {
+            "GroupID": "FCS-D",
+            "OffsetBit": 1,
+            "Severity": 2,
+            "Text": 891,
+            "Speak": 891,
+            "IsInFlight": false
+        },
+        {
+            "GroupID": "FCS-D",
+            "OffsetBit": 10,
+            "Severity": 2,
+            "Text": 900,
+            "IsInFlight": false
+        },
+        {
+            "GroupID": "FCS-D",
+            "OffsetBit": 1,
+            "Severity": 2,
+            "Text": 640,
+            "Speak": 643,
             "IsInFlight": true
         },
         {
@@ -1362,7 +1439,7 @@
             "Value": 1,
             "Severity": 1,
             "Text": 1000,
-            "Speak": 1000,
+            "Speak": 1001,
             "Vibrate": true,
             "IsInFlight": true
         },
@@ -1405,7 +1482,7 @@
             "Value": 4,
             "Severity": 2,
             "Text": 1030,
-            "Speak": 1030,
+            "Speak": 1032,
             "Vibrate": true,
             "IsInFlight": true
         },
@@ -1422,7 +1499,7 @@
             "OffsetBit": 0,
             "Severity": 2,
             "Text": 2000,
-            "Speak": 2000,
+            "Speak": 2002,
             "Vibrate": true,
             "IsInFlight": true
         },
@@ -1439,7 +1516,7 @@
             "OffsetBit": 1,
             "Severity": 2,
             "Text": 2000,
-            "Speak": 2000,
+            "Speak": 2002,
             "Vibrate": true,
             "IsInFlight": true,
             "ConditionBits": [
@@ -1487,7 +1564,7 @@
             "OffsetBit": 3,
             "Severity": 2,
             "Text": 2020,
-            "Speak": 2020,
+            "Speak": 2022,
             "Vibrate": true,
             "IsInFlight": true
         },

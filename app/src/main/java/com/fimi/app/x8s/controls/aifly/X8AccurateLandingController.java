@@ -2,6 +2,8 @@ package com.fimi.app.x8s.controls.aifly;
 
 import android.view.View;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.android.app.R;
 import com.fimi.app.x8s.widget.X8AiTipWithCloseView;
 import com.fimi.x8sdk.dataparser.AckAccurateLandingState;
@@ -12,7 +14,7 @@ public class X8AccurateLandingController {
     private final X8AiTipWithCloseView mTipBgView;
     private final View root;
 
-    public X8AccurateLandingController(View root) {
+    public X8AccurateLandingController(@NonNull View root) {
         this.root = root;
         this.mTipBgView = root.findViewById(R.id.v_accurate_landing_tip);
     }

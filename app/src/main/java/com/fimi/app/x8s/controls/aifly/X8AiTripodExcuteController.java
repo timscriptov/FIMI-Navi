@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.android.app.R;
 import com.fimi.app.x8s.X8Application;
 import com.fimi.app.x8s.interfaces.AbsX8AiController;
@@ -70,12 +72,12 @@ public class X8AiTripodExcuteController extends AbsX8AiController implements Vie
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(@NonNull View v) {
         int id = v.getId();
         if (id == R.id.img_ai_follow_back) {
             showExitDialog();
         } else if (id == R.id.rl_flag_small) {
-            if (this.tvFlag.getVisibility() == 0) {
+            if (this.tvFlag.getVisibility() == View.VISIBLE) {
                 this.tvFlag.setVisibility(View.GONE);
             } else {
                 this.tvFlag.setVisibility(View.VISIBLE);
@@ -162,12 +164,9 @@ public class X8AiTripodExcuteController extends AbsX8AiController implements Vie
     }
 
     public void setTypeEnable() {
-        this.mFcCtrlManager.setEnableTripod(0, new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                    X8AiTripodExcuteController.this.taskExit();
-                }
+        this.mFcCtrlManager.setEnableTripod(0, (cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
+              taskExit();
             }
         });
     }

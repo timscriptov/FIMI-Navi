@@ -57,10 +57,9 @@ public class X8ScreenShotManager {
         if (isEmptyBitmap(src)) {
             return false;
         }
-        boolean ret = false;
         try {
             OutputStream os = new BufferedOutputStream(new FileOutputStream(file));
-            ret = src.compress(format, 100, os);
+            boolean ret = src.compress(format, 100, os);
             if (recycle && !src.isRecycled()) {
                 src.recycle();
                 return ret;
@@ -68,7 +67,7 @@ public class X8ScreenShotManager {
             return ret;
         } catch (IOException e) {
             e.printStackTrace();
-            return ret;
+            return false;
         }
     }
 
@@ -85,6 +84,7 @@ public class X8ScreenShotManager {
         return ret;
     }
 
+    @NonNull
     public static float[] getDeviceDisplaySize(@NonNull Context context) {
         Resources resources = context.getResources();
         DisplayMetrics dm = resources.getDisplayMetrics();
@@ -94,7 +94,7 @@ public class X8ScreenShotManager {
     }
 
     public static int getStatusBarHeight(@NonNull Context context) {
-        @SuppressLint("InternalInsetResource") int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", SyndicatedSdkImpressionEvent.CLIENT_NAME);
+        @SuppressLint({"InternalInsetResource", "DiscouragedApi"}) int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", SyndicatedSdkImpressionEvent.CLIENT_NAME);
         if (resourceId <= 0) {
             return 0;
         }
@@ -109,13 +109,13 @@ public class X8ScreenShotManager {
         isBusy = true;
         this.mMapShotTask = new X8ShotAsyncTask(activity, btp -> {
             activity.getmMapVideoController().setMapShot(btp);
-            X8ScreenShotManager.this.isMapShotSuccess = true;
+            isMapShotSuccess = true;
         }, 0);
         this.mMapShotTask.execute("");
         this.mFpvShotTask = new X8ShotAsyncTask(activity, btp -> {
             activity.getmMapVideoController().setFpvShot(btp);
-            X8ScreenShotManager.this.isFpvShotSuccess = true;
-            X8ScreenShotManager.this.isShotSave(activity);
+            isFpvShotSuccess = true;
+            isShotSave(activity);
         }, 1);
         this.mFpvShotTask.execute("");
     }

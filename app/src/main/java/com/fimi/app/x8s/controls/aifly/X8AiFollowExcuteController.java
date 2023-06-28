@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.fimi.TcpClient;
 import com.fimi.android.app.R;
 import com.fimi.app.x8s.controls.X8AiTrackController;
@@ -50,7 +52,6 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
 
     public X8AiFollowExcuteController(X8sMainActivity activity, View rootView, X8AiFollowState state, int type) {
         super(rootView);
-        this.mX8AiFollowState = X8AiFollowState.IDLE;
         this.isShowGo = false;
         this.timeSend = 0;
         this.mX8AiFollowState = state;
@@ -74,7 +75,7 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
         }
     }
 
-    public void initViewStubViews(View view) {
+    public void initViewStubViews(@NonNull View view) {
         this.imgGo = view.findViewById(R.id.img_ai_follow_go);
         this.imgBack = view.findViewById(R.id.img_ai_follow_back);
         this.tvTitle = view.findViewById(R.id.tv_title);
@@ -156,14 +157,14 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(@NonNull View v) {
         int id = v.getId();
         if (id == R.id.img_ai_follow_go) {
             onGoClick();
         } else if (id == R.id.img_ai_follow_back) {
             showExitDialog();
         } else if (id == R.id.rl_flag_small) {
-            if (this.tvTitle.getVisibility() == 0) {
+            if (this.tvTitle.getVisibility() == View.VISIBLE) {
                 this.tvTitle.setVisibility(View.GONE);
             } else {
                 this.tvTitle.setVisibility(View.VISIBLE);
@@ -229,19 +230,16 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
     }
 
     public void setAiVcNotityFc() {
-        this.activity.getFcManager().setAiVcNotityFc(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                TcpClient.getIntance().sendLog("----->...setAiVcNotityFc..." + cmdResult.getErrDes());
-                if (cmdResult.isSuccess()) {
-                }
+        this.activity.getFcManager().setAiVcNotityFc((cmdResult, o) -> {
+            TcpClient.getIntance().sendLog("----->...setAiVcNotityFc..." + cmdResult.getErrDes());
+            if (cmdResult.isSuccess()) {
             }
         });
     }
 
     @Override
     public void onTracking() {
-        if (this.isShow && this.isTou && this.isShowGo && this.imgGo.getVisibility() == 0) {
+        if (this.isShow && this.isTou && this.isShowGo && this.imgGo.getVisibility() == View.VISIBLE) {
             this.imgGo.setVisibility(View.INVISIBLE);
         }
     }
@@ -251,71 +249,59 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
     }
 
     public void doFollow() {
-        this.activity.getFcManager().setFollowExcute(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                    X8AiFollowExcuteController.this.listener.onAiFollowRunning();
-                    X8AiFollowExcuteController.this.mTipBgView.setVisibility(View.GONE);
-                    X8AiFollowExcuteController.this.activity.getmMapVideoController().resetShow();
-                    X8AiFollowExcuteController.this.mX8AiFollowState = X8AiFollowState.RUNNING;
-                    X8AiFollowExcuteController.this.isShowGo = true;
-                    TcpClient.getIntance().sendLog("..setFollowExcute.. " + X8AiFollowExcuteController.this.isShowGo + cmdResult.getErrDes());
-                    return;
-                }
-                TcpClient.getIntance().sendLog("..onGoClick.. " + X8AiFollowExcuteController.this.isShowGo + cmdResult.getErrDes());
+        this.activity.getFcManager().setFollowExcute((cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
+                listener.onAiFollowRunning();
+                mTipBgView.setVisibility(View.GONE);
+                activity.getmMapVideoController().resetShow();
+                mX8AiFollowState = X8AiFollowState.RUNNING;
+                isShowGo = true;
+                TcpClient.getIntance().sendLog("..setFollowExcute.. " + isShowGo + cmdResult.getErrDes());
+                return;
             }
+            TcpClient.getIntance().sendLog("..onGoClick.. " + isShowGo + cmdResult.getErrDes());
         });
     }
 
     public void setModle(final int mode) {
-        this.activity.getFcManager().setAiFollowModle(mode, new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                TcpClient.getIntance().sendLog("..setModle.. " + cmdResult.getErrDes() + " mode=" + X8AiFollowExcuteController.this.type);
-                if (cmdResult.isSuccess()) {
-                    if (X8AiFollowExcuteController.this.isSwitchMode) {
-                        X8AiFollowExcuteController.this.type = mode;
-                        X8AiFollowExcuteController.this.isSwitchMode = false;
-                        X8AiFollowExcuteController.this.setTitle();
-                        if (mode != 2) {
-                            X8AiFollowExcuteController.this.vSpeedContainer.setVisibility(View.GONE);
-                            return;
-                        }
+        this.activity.getFcManager().setAiFollowModle(mode, (cmdResult, o) -> {
+            TcpClient.getIntance().sendLog("..setModle.. " + cmdResult.getErrDes() + " mode=" + X8AiFollowExcuteController.this.type);
+            if (cmdResult.isSuccess()) {
+                if (isSwitchMode) {
+                    type = mode;
+                    isSwitchMode = false;
+                    setTitle();
+                    if (mode != 2) {
+                        vSpeedContainer.setVisibility(View.GONE);
                         return;
                     }
-                    X8AiFollowExcuteController.this.doFollow();
+                    return;
                 }
+                doFollow();
             }
         });
     }
 
     public void getFollowMode() {
-        this.activity.getFcManager().getAiFollowModle(new UiCallBackListener<AckGetAiFollowMode>() {
-            @Override
-            public void onComplete(CmdResult cmdResult, AckGetAiFollowMode ackGetAiFollowMode) {
-                if (cmdResult.isSuccess()) {
-                    X8AiFollowExcuteController.this.isGetMode = true;
-                    TcpClient.getIntance().sendLog("..getFollowMode.. " + cmdResult.getErrDes() + " mode=" + ackGetAiFollowMode.getMode());
-                    X8AiFollowExcuteController.this.type = ackGetAiFollowMode.getMode();
-                    X8AiFollowExcuteController.this.setTitle();
-                    X8AiFollowExcuteController.this.vModeImtes.findIndexByMode(X8AiFollowExcuteController.this.type);
-                    return;
-                }
-                TcpClient.getIntance().sendLog(" ..getFollowMode..  " + cmdResult.getErrDes());
+        this.activity.getFcManager().getAiFollowModle((UiCallBackListener<AckGetAiFollowMode>) (cmdResult, ackGetAiFollowMode) -> {
+            if (cmdResult.isSuccess()) {
+                isGetMode = true;
+                TcpClient.getIntance().sendLog("..getFollowMode.. " + cmdResult.getErrDes() + " mode=" + ackGetAiFollowMode.getMode());
+                type = ackGetAiFollowMode.getMode();
+                setTitle();
+                vModeImtes.findIndexByMode(X8AiFollowExcuteController.this.type);
+                return;
             }
+            TcpClient.getIntance().sendLog(" ..getFollowMode..  " + cmdResult.getErrDes());
         });
     }
 
     public void getFollowSpeed() {
-        this.activity.getFcManager().getAiFollowSpeed(new UiCallBackListener<AckAiFollowGetSpeed>() {
-            @Override
-            public void onComplete(CmdResult cmdResult, AckAiFollowGetSpeed o) {
-                if (cmdResult.isSuccess()) {
-                    X8AiFollowExcuteController.this.isGetSpeed = true;
-                    TcpClient.getIntance().sendLog("..getFollowSpeed.. " + cmdResult.getErrDes() + " speed=" + o.getSpeed());
-                    X8AiFollowExcuteController.this.vSpeedContainer.setSpeed(o.getSpeed());
-                }
+        this.activity.getFcManager().getAiFollowSpeed((UiCallBackListener<AckAiFollowGetSpeed>) (cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
+                isGetSpeed = true;
+                TcpClient.getIntance().sendLog("..getFollowSpeed.. " + cmdResult.getErrDes() + " speed=" + o.getSpeed());
+                vSpeedContainer.setSpeed(o.getSpeed());
             }
         });
     }
@@ -402,40 +388,31 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
     }
 
     public void sendExiteCmd() {
-        this.activity.getFcManager().setAiVcClose(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                    TcpClient.getIntance().sendLog("setAiVcClose success  " + cmdResult.getErrDes() + X8AiFollowExcuteController.this.mX8AiFollowState);
-                    if (X8AiFollowExcuteController.this.mX8AiFollowState != X8AiFollowState.RUNNING) {
-                        X8AiFollowExcuteController.this.taskExit();
-                        return;
-                    }
+        this.activity.getFcManager().setAiVcClose((cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
+                TcpClient.getIntance().sendLog("setAiVcClose success  " + cmdResult.getErrDes() + mX8AiFollowState);
+                if (mX8AiFollowState != X8AiFollowState.RUNNING) {
+                    taskExit();
                     return;
                 }
-                TcpClient.getIntance().sendLog("setAiVcClose error" + cmdResult.getErrDes());
+                return;
             }
+            TcpClient.getIntance().sendLog("setAiVcClose error" + cmdResult.getErrDes());
         });
     }
 
     public void setAiVcCloseByTaskModeChange() {
-        this.activity.getFcManager().setAiVcClose(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                TcpClient.getIntance().sendLog("setAiVcCloseByTaskModeChange   " + cmdResult.getErrDes());
-            }
+        this.activity.getFcManager().setAiVcClose((cmdResult, o) -> {
+            TcpClient.getIntance().sendLog("setAiVcCloseByTaskModeChange   " + cmdResult.getErrDes());
         });
     }
 
     public void setFollowExit(int mode) {
-        this.activity.getFcManager().setFollowExit(new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                if (cmdResult.isSuccess()) {
-                    TcpClient.getIntance().sendLog("退出跟随 success  " + cmdResult.getErrDes());
-                } else {
-                    TcpClient.getIntance().sendLog("退出跟随失败  " + cmdResult.getErrDes());
-                }
+        this.activity.getFcManager().setFollowExit((cmdResult, o) -> {
+            if (cmdResult.isSuccess()) {
+                TcpClient.getIntance().sendLog("退出跟随 success  " + cmdResult.getErrDes());
+            } else {
+                TcpClient.getIntance().sendLog("退出跟随失败  " + cmdResult.getErrDes());
             }
         });
     }
@@ -450,10 +427,10 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
             if (this.mX8AiFollowState == X8AiFollowState.RUNNING) {
                 if (!this.isGetMode) {
                     getFollowMode();
-                } else if (this.vModeImtes.getVisibility() != 0) {
+                } else if (this.vModeImtes.getVisibility() != View.VISIBLE) {
                     this.vModeImtes.setVisibility(View.VISIBLE);
                 }
-                if (this.isGetSpeed && this.isGetMode && this.type == 2 && this.vSpeedContainer.getVisibility() != 0) {
+                if (this.isGetSpeed && this.isGetMode && this.type == 2 && this.vSpeedContainer.getVisibility() != View.VISIBLE) {
                     this.vSpeedContainer.setVisibility(View.VISIBLE);
                 }
             } else {
@@ -478,12 +455,9 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
     }
 
     public void setFollowSpeed(final int speed) {
-        this.activity.getFcManager().setAiFollowSpeed(speed, new UiCallBackListener() {
-            @Override
-            public void onComplete(CmdResult cmdResult, Object o) {
-                TcpClient.getIntance().sendLog("..setFollowSpeed.. " + cmdResult.getErrDes() + " speed=" + speed);
-                if (cmdResult.isSuccess()) {
-                }
+        this.activity.getFcManager().setAiFollowSpeed(speed, (cmdResult, o) -> {
+            TcpClient.getIntance().sendLog("..setFollowSpeed.. " + cmdResult.getErrDes() + " speed=" + speed);
+            if (cmdResult.isSuccess()) {
             }
         });
     }
@@ -503,10 +477,7 @@ public class X8AiFollowExcuteController extends AbsX8AiController implements Vie
         if (this.mX8AiFollowState != X8AiFollowState.RUNNING) {
             if (this.timeSend == 0) {
                 this.timeSend = 1;
-                this.activity.getFcManager().sysCtrlMode2AiVc(new UiCallBackListener() {
-                    @Override
-                    public void onComplete(CmdResult cmdResult, Object o) {
-                    }
+                this.activity.getFcManager().sysCtrlMode2AiVc((cmdResult, o) -> {
                 }, X8Task.VCM_FOLLOW.ordinal());
                 return;
             }
