@@ -239,7 +239,6 @@ public class X8DetectionControler implements OnX8VideoFrameBufferListener {
                 if (this.isLog) {
                     TcpClient.getIntance().sendLog("选框屏幕坐标：-<" + roiRect + "->    ");
                 }
-                try {
                     RectF roiRect2 = new RectF(x1, y1, x2, y2);
                     try {
                         if (this.isLog) {
@@ -250,7 +249,6 @@ public class X8DetectionControler implements OnX8VideoFrameBufferListener {
                         canvas.drawBitmap(roibitmap, this.frameToCropTransform, null);
                         roibitmap.recycle();
                     } catch (Exception e) {
-                        e = e;
                         e.printStackTrace();
                         TcpClient.getIntance().sendLog("roiRect " + e);
                         long startTime = SystemClock.uptimeMillis();
@@ -275,8 +273,6 @@ public class X8DetectionControler implements OnX8VideoFrameBufferListener {
                         this.isRev = false;
                         this.isFirstWaiting = false;
                     }
-                } catch (Exception e2) {
-                }
                 long startTime2 = SystemClock.uptimeMillis();
                 List<Classifier.Recognition> results2 = this.detector.recognizeImage(this.croppedBitmap);
                 this.lastProcessingTimeMs = SystemClock.uptimeMillis() - startTime2;

@@ -2,7 +2,6 @@ package com.fimi.soul.media.player;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaCodecInfo;
@@ -20,6 +19,9 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.fimi.soul.media.player.annotations.AccessedByNative;
 import com.fimi.soul.media.player.annotations.CalledByNative;
@@ -65,12 +67,7 @@ public final class FimiMediaPlayer extends AbstractMediaPlayer {
     private static final int MEDIA_SET_VIDEO_SIZE = 5;
     private static final int MEDIA_TIMED_TEXT = 99;
     private static final String TAG = FimiMediaPlayer.class.getName();
-    private static final FimiLibLoader sLocalLibLoader = new FimiLibLoader() {
-        @Override
-        public void loadLibrary(String libName) throws UnsatisfiedLinkError, SecurityException {
-            System.loadLibrary(libName);
-        }
-    };
+    private static final FimiLibLoader sLocalLibLoader = System::loadLibrary;
     private static FimiMediaPlayer fimiMediaPlayer;
     private static volatile boolean mIsLibLoaded = false;
     private static volatile boolean mIsNativeInitialized = false;
@@ -150,7 +147,7 @@ public final class FimiMediaPlayer extends AbstractMediaPlayer {
     @CalledByNative
     private static void postEventFromNative(Object weakThiz, int what, int arg1, int arg2, Object obj) {
         FimiMediaPlayer mp;
-        if (weakThiz != null && (mp = (FimiMediaPlayer) ((WeakReference) weakThiz).get()) != null) {
+        if (weakThiz != null && (mp = (FimiMediaPlayer) ((WeakReference<?>) weakThiz).get()) != null) {
             if (what == 200 && arg1 == 2) {
                 mp.start();
             }
@@ -161,11 +158,12 @@ public final class FimiMediaPlayer extends AbstractMediaPlayer {
         }
     }
 
+    @Nullable
     @CalledByNative
-    private static String onControlResolveSegmentUrl(Object weakThiz, int segment) {
+    private static String onControlResolveSegmentUrl(@Nullable Object weakThiz, int segment) {
         OnControlMessageListener listener;
-        DebugLog.ifmt(TAG, "onControlResolveSegmentUrl %d", Integer.valueOf(segment));
-        if (weakThiz == null || !(weakThiz instanceof WeakReference)) {
+        DebugLog.ifmt(TAG, "onControlResolveSegmentUrl %d", segment);
+        if (!(weakThiz instanceof WeakReference)) {
             return null;
         }
         WeakReference<FimiMediaPlayer> weakPlayer = (WeakReference) weakThiz;
@@ -179,8 +177,8 @@ public final class FimiMediaPlayer extends AbstractMediaPlayer {
     @CalledByNative
     private static boolean onNativeInvoke(Object weakThiz, int what, Bundle args) {
         OnNativeInvokeListener listener;
-        DebugLog.ifmt(TAG, "onNativeInvoke %d", Integer.valueOf(what));
-        if (weakThiz == null || !(weakThiz instanceof WeakReference)) {
+        DebugLog.ifmt(TAG, "onNativeInvoke %d", what);
+        if (!(weakThiz instanceof WeakReference)) {
             return false;
         }
         WeakReference<FimiMediaPlayer> weakPlayer = (WeakReference) weakThiz;
@@ -193,7 +191,7 @@ public final class FimiMediaPlayer extends AbstractMediaPlayer {
 
     @CalledByNative
     private static String onSelectCodec(Object weakThiz, String mimeType, int profile, int level) {
-        if (weakThiz == null || !(weakThiz instanceof WeakReference)) {
+        if (!(weakThiz instanceof WeakReference)) {
             return null;
         }
         WeakReference<FimiMediaPlayer> weakPlayer = (WeakReference) weakThiz;
@@ -292,7 +290,7 @@ public final class FimiMediaPlayer extends AbstractMediaPlayer {
                 this.mEventHandler = null;
             }
         }
-        native_setup(new WeakReference(this));
+        native_setup(new WeakReference<>(this));
     }
 
     @Override
@@ -325,7 +323,7 @@ public final class FimiMediaPlayer extends AbstractMediaPlayer {
 
     @Override
     @TargetApi(14)
-    public void setDataSource(Context context, Uri uri, Map<String, String> headers) throws IOException, IllegalArgumentException, SecurityException, IllegalStateException {
+    public void setDataSource(Context context, @NonNull Uri uri, Map<String, String> headers) throws IOException, IllegalArgumentException, SecurityException, IllegalStateException {
         String scheme = uri.getScheme();
         if ("file".equals(scheme)) {
             setDataSource(uri.getPath());
@@ -334,37 +332,22 @@ public final class FimiMediaPlayer extends AbstractMediaPlayer {
         } else {
             AssetFileDescriptor fd = null;
             try {
-                ContentResolver resolver = context.getContentResolver();
-                AssetFileDescriptor fd2 = resolver.openAssetFileDescriptor(uri, "r");
-                if (fd2 == null) {
-                    if (fd2 != null) {
-                        fd2.close();
-                        return;
+                fd = context.getContentResolver().openAssetFileDescriptor(uri, "r");
+                if (fd != null) {
+                    if (fd.getDeclaredLength() < 0) {
+                        setDataSource(fd.getFileDescriptor());
+                    } else {
+                        setDataSource(fd.getFileDescriptor(), fd.getStartOffset(), fd.getDeclaredLength());
                     }
-                    return;
                 }
-                if (fd2.getDeclaredLength() < 0) {
-                    setDataSource(fd2.getFileDescriptor());
-                } else {
-                    setDataSource(fd2.getFileDescriptor(), fd2.getStartOffset(), fd2.getDeclaredLength());
-                }
-                if (fd2 != null) {
-                    fd2.close();
-                }
-            } catch (IOException e) {
-                if (0 != 0) {
-                    fd.close();
-                }
-                Log.d(TAG, "Couldn't open file on client side, trying server side");
-                setDataSource(uri.toString(), headers);
-            } catch (SecurityException e2) {
-                if (0 != 0) {
+            } catch (IOException | SecurityException e) {
+                if (fd != null) {
                     fd.close();
                 }
                 Log.d(TAG, "Couldn't open file on client side, trying server side");
                 setDataSource(uri.toString(), headers);
             } catch (Throwable th) {
-                if (0 != 0) {
+                if (fd != null) {
                     fd.close();
                 }
                 throw th;
@@ -408,22 +391,17 @@ public final class FimiMediaPlayer extends AbstractMediaPlayer {
     public void setDataSource(FileDescriptor fd) throws IOException, IllegalArgumentException, IllegalStateException {
         if (Build.VERSION.SDK_INT < 12) {
             try {
-                Field f = fd.getClass().getDeclaredField("descriptor");
+                @SuppressLint("DiscouragedPrivateApi") Field f = fd.getClass().getDeclaredField("descriptor");
                 f.setAccessible(true);
                 int native_fd = f.getInt(fd);
                 _setDataSourceFd(native_fd);
                 return;
-            } catch (IllegalAccessException e) {
+            } catch (IllegalAccessException | NoSuchFieldException e) {
                 throw new RuntimeException(e);
-            } catch (NoSuchFieldException e2) {
-                throw new RuntimeException(e2);
             }
         }
-        ParcelFileDescriptor pfd = ParcelFileDescriptor.dup(fd);
-        try {
+        try (ParcelFileDescriptor pfd = ParcelFileDescriptor.dup(fd)) {
             _setDataSourceFd(pfd.getFd());
-        } finally {
-            pfd.close();
         }
     }
 
@@ -547,6 +525,7 @@ public final class FimiMediaPlayer extends AbstractMediaPlayer {
         this.mVideoHeight = 0;
     }
 
+    @NonNull
     @Override
     public MediaInfo getMediaInfo() {
         MediaInfo mediaInfo = new MediaInfo();
@@ -765,7 +744,7 @@ public final class FimiMediaPlayer extends AbstractMediaPlayer {
             String[] types;
             FimiMediaCodecInfo candidate;
             if (Build.VERSION.SDK_INT >= 16 && !TextUtils.isEmpty(mimeType)) {
-                Log.i(FimiMediaPlayer.TAG, String.format(Locale.US, "onSelectCodec: mime=%s, profile=%d, level=%d", mimeType, Integer.valueOf(profile), Integer.valueOf(level)));
+                Log.i(FimiMediaPlayer.TAG, String.format(Locale.US, "onSelectCodec: mime=%s, profile=%d, level=%d", mimeType, profile, level));
                 ArrayList<FimiMediaCodecInfo> candidateCodecList = new ArrayList<>();
                 int numCodecs = MediaCodecList.getCodecCount();
                 for (int i = 0; i < numCodecs; i++) {
@@ -777,7 +756,7 @@ public final class FimiMediaPlayer extends AbstractMediaPlayer {
                                 Log.d(FimiMediaPlayer.TAG, String.format(Locale.US, "    mime: %s", type));
                                 if (type.equalsIgnoreCase(mimeType) && (candidate = FimiMediaCodecInfo.setupCandidate(codecInfo, mimeType)) != null) {
                                     candidateCodecList.add(candidate);
-                                    Log.i(FimiMediaPlayer.TAG, String.format(Locale.US, "candidate codec: %s rank=%d", codecInfo.getName(), Integer.valueOf(candidate.mRank)));
+                                    Log.i(FimiMediaPlayer.TAG, String.format(Locale.US, "candidate codec: %s rank=%d", codecInfo.getName(), candidate.mRank));
                                     candidate.dumpProfileLevels(mimeType);
                                 }
                             }
@@ -799,7 +778,7 @@ public final class FimiMediaPlayer extends AbstractMediaPlayer {
                     Log.w(FimiMediaPlayer.TAG, String.format(Locale.US, "unaccetable codec: %s", bestCodec.mCodecInfo.getName()));
                     return null;
                 }
-                Log.i(FimiMediaPlayer.TAG, String.format(Locale.US, "selected codec: %s rank=%d", bestCodec.mCodecInfo.getName(), Integer.valueOf(bestCodec.mRank)));
+                Log.i(FimiMediaPlayer.TAG, String.format(Locale.US, "selected codec: %s rank=%d", bestCodec.mCodecInfo.getName(), bestCodec.mRank));
                 return bestCodec.mCodecInfo.getName();
             }
             return null;
